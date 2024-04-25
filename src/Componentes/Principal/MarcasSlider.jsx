@@ -1,15 +1,14 @@
 import React from 'react';
-import redondos from '../assets/logo-redondos.png'; // Importa todos tus logotipos aquí
+import redondos from '../../assets/logo-lacruz.png'
 
 function MarcasSlider() {
   const logos = [redondos, redondos, redondos, redondos, redondos, redondos, redondos, redondos, redondos]; // Agrega todos tus logotipos aquí
 
   return (
-    <div className="py-8 overflow-hidden">
-      <h1 className="text-center text-2xl font-bold mb-6">Nuestros clientes</h1>
-      <div className="flex items-center space-x-8 animate-marquee" style={{ width: `${logos.length * 120}px` }}>
+    <div className="py-8 overflow-hidden mt-4">
+      <div className="flex items-center space-x-8 animate-marquee" style={{ width: `${logos.length * 30}px` }}>
         {logos.map((logo, index) => (
-          <img key={index} src={logo} alt={`Logo ${index}`} className="h-20" />
+          <img key={index} src={logo} alt={`Logo ${index}`} className="h-24" />
         ))}
       </div>
       <style>

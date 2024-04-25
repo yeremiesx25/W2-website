@@ -8,7 +8,11 @@ module.exports = withMT( {
   theme: {
     extend: {
       colors: {
-        primarycolor: '#3864FF',
+        primarycolor: '#407BFF',
+        primarytext: '#061C3D',
+        secundarycolor: '#407BFF',
+        bgsecundary: '#F7F7FB',
+        colorgreen: '#01C29E'
       },
       fontFamily: {
         'dmsans': ['"DM Sans", sans-serif']
