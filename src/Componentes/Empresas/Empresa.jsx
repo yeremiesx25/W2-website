@@ -2,7 +2,7 @@ import React from 'react'
 
 function Empresa() {
   return (
-    <div>Empresa</div>
+    <div>Empresaaaaaaaaaa</div>
   )
 }
 
