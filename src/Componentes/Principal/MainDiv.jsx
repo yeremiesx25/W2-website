@@ -16,7 +16,7 @@ import Faq from './Faq'
 function MainDiv() {
   return (
     <div style={{ minHeight: '740px', backgroundImage:`url(${Fondo2})`}}
-    className='flex items-center justify-center bg-no-repeat text-center flex-col font-dmsans bg-contain pt-24'>
+    className='flex items-center justify-center bg-no-repeat text-center flex-col font-dmsans bg-cover pt-24'>
       <h2 
   style={{ animation: 'fade-in 1s ease-in' }}
   className='text-5xl md:text-6xl font-bold text-primarycolor text-center'>Potenciamos talentos </h2>
@@ -44,12 +44,6 @@ function MainDiv() {
         style={{ animation: 'fade-in 2s ease-in' }}
         className='w-40 h-12  text-primarytext font-semibold rounded-xl  hover:bg-gray-100  transition-colors duration-500 mr-2 ml-2 mb-8'>Empezar</motion.button>
       </div>
-      <Hero />
-      <MarcasSlider/>
-      <Counts />
-      <Dirigido/>
-      <Testimonio/>
-      <Faq/>
     </div>
   )
 }
