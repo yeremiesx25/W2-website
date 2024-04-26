@@ -16,7 +16,7 @@ function Header() {
           <Link to="/" href="/" className='p-1 rounded-lg hover:text-primarycolor hover:bg-slate-100 transition all duration-300'><li>Inicio</li></Link>
           <Link to="/Empresas" href="/Empresas" className='p-1 rounded-lg hover:text-primarycolor hover:bg-slate-100 transition all duration-300'><li>Empresas</li></Link>
           <Link href="" className='p-1 rounded-lg hover:text-primarycolor hover:bg-slate-100 transition all duration-300'><li>Candidatos</li></Link>
-          <Link href="" className='p-1 rounded-lg hover:text-primarycolor hover:bg-slate-100 transition all duration-300'><li>Prácticas</li></Link>
+          <Link to="/Prácticas" href="" className='p-1 rounded-lg hover:text-primarycolor hover:bg-slate-100 transition all duration-300'><li>Prácticas</li></Link>
         </ul>
       </nav>
       <button style={{height: "40px"}} className='w-32 bg-primarycolor text-white font-semibold rounded-xl hover:border-2 hover:border-primarycolor hover:bg-white  hover:text-primarycolor transition-colors duration-500 hidden md:block'>Contáctanos</button>

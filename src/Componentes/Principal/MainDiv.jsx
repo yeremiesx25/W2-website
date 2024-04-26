@@ -26,7 +26,7 @@ function MainDiv() {
 
       <p
       style={{ animation: 'fade-in 2s ease-in', maxWidth: '600px' }}
-      className='font-regular text-gray-700  p-4'
+      className='font-regular text-gray-700 text-xl  p-4'
       >Potenciamos tu éxito empresarial con soluciones de gestión humana y tecnología de vanguardia, incluso sin un departamento de recursos humanos.</p>
       <div className='flex flex-wrap justify-center'>
         <motion.button 

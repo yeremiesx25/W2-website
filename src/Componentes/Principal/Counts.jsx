@@ -9,7 +9,7 @@ function Counts() {
     style={{height: '320px'}}
     >
         <div className='bg-white shadow rounded-lg flex items-center justify-around flex-wrap'
-        style={{height: '256px', width: '1100px'}}
+        style={{height: '200px', width: '1100px'}}  
         >
             <div className='flex w-32 h-32 flex-col items-center justify-center text-center'>
                 <IncrementingNumber finalNumber={7} label="Años en el mercado" tiempo ="400" />    
@@ -21,7 +21,7 @@ function Counts() {
                 <IncrementingNumber finalNumber={128} label="Trabajos desarrollados" tiempo ="10" />
             </div>
             <div className='flex w-32 h-32 flex-col items-center justify-center text-center'>
-                <IncrementingNumber finalNumber={4589} label="Vacanets cubiertas" tiempo =".00001" />
+                <IncrementingNumber finalNumber={4589} label="Vacantes cubiertas" tiempo =".00001" />
             </div>
         </div>
     </div>

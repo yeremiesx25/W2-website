@@ -11,6 +11,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Empresa from './Componentes/Empresas/Empresa'
 import Power from './Componentes/Power/HeaderPower'
 import Header from './Componentes/Principal/Header'
+import Practicantes from './Componentes/Practicantes/Practicantes';
+
 function App() {
 
   return (
@@ -21,6 +23,7 @@ function App() {
       <Route path="/" element={<MainDiv/>} />
       <Route path="/Empresas" element={<Empresa />} />
       <Route path="/Power" element={<Power />} />
+      <Route path="/Prácticas" element={<Practicantes />} />
     </Routes>
     </BrowserRouter>
       

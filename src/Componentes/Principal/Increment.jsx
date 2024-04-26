@@ -16,7 +16,7 @@ const IncrementingNumber = ({ finalNumber, label, tiempo }) => {
   }, [number, finalNumber]);
 
   return (
-    <div className='flex w-32 h-32 flex-col items-center justify-center text-center'>
+    <div className='flex w-28 h-28 flex-col items-center justify-center text-center'>
       <h3 className='text-4xl font-bold'>{number}<span className='text-primarycolor'>+</span></h3>
       <h4 className='font-medium text-gray-700'>{label}</h4>
     </div>

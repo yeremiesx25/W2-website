@@ -5,7 +5,8 @@ function MarcasSlider() {
   
 
   return (
-    <div class="slider">
+    <div class="slider font-dmsans">
+        <h2 className='text-3xl font-semibold'>Empresas que confían en nosotros</h2>
         <div class="slide-track">
             <div class="slide">
                 <img src={redondos} alt=""/>
