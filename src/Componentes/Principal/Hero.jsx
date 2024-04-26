@@ -4,7 +4,7 @@ import { motion } from "framer-motion"
 
 function Hero() {
   return (
-        <div className='bg-secundarycolor rounded-xl flex justify-center items-center flex-wrap-reverse md:w-3/4 p-4 mr-2 ml-2' style={{ maxWidth: '1000px', minHeight: '437px' }}>
+        <div className='bg-secundarycolor rounded-xl flex justify-center items-center flex-wrap-reverse md:w-3/4 p-4 mr-2 ml-2 self-center' style={{ maxWidth: '1000px', minHeight: '437px' }}>
             <div className='w-full md:w-3/4 lg:w-1/2 h-full flex items-center justify-center flex-col'>
                 {/* Texto con ajustes responsivos */}
                         <motion.h2 
