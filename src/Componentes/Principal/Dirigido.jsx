@@ -39,6 +39,8 @@ function Dirigido() {
               scale: 1.1,
               transition: { duration: .2 },
             }}
+            whileTap={{ scale: 0.9 }}
+            whileInView={{ opacity: 1 }}
             className='bg-secundarycolor rounded-lg flex flex-col items-center justify-center text-center mb-4'
             style={{width:'300px', height: '400px'}}>
                 <img src={imgpostulantes} alt="" />
@@ -57,6 +59,8 @@ function Dirigido() {
               scale: 1.1,
               transition: { duration: .2 },
             }}
+            whileTap={{ scale: 0.9 }}
+            whileInView={{ opacity: 1 }}
             className='bg-colorgreen rounded-lg flex flex-col items-center justify-center text-center mb-4'
             style={{width:'300px', height: '400px'}}>
                 <img src={imgpracticantes} alt="" />
