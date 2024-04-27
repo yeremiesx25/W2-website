@@ -8,7 +8,7 @@ module.exports = withMT( {
   theme: {
     extend: {
       colors: {
-        primarycolor: '#407BFF',
+        primarycolor: '#3346FF',
         primarytext: '#061C3D',
         secundarycolor: '#407BFF',
         bgsecundary: '#F7F7FB',

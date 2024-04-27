@@ -6,7 +6,6 @@ import './App.css'
 import MainDiv from './Componentes/Principal/MainDiv'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Home from './Componentes/Principal/Home'
-import Header from './Componentes/Empresas/Header'
 
 function App() {
 
