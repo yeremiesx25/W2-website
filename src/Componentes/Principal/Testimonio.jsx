@@ -5,9 +5,9 @@ import redondos from '../../assets/logo-lacruz.png';
 
 function Testimonio() {
   return (
-    <section class="bg-gray-900 text-white py-16">
+    <section class="bg-gray-50 text-primarytext py-16">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 class="text-4xl font-bold mb-8">What our users are saying</h2>
+        <h2 class="text-4xl font-bold mb-8">Lo que dicen nuestros clientes</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <div class="bg-white shadow rounded-lg p-8">
                 <p class="text-gray-700 mb-4">"This app has been a game changer for me! I highly recommend it to anyone

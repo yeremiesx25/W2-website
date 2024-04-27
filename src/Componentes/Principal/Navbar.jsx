@@ -86,8 +86,14 @@ function Navbar() {
             >
               Postulantes
             </a>
-            <button className="bg-primarycolor hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg mt-2">
+            <a
+              href="/"
+              className="text-gray-800 hover:text-gray-600 block px-3 py-2 rounded-md text-base font-medium"
+            >
               Practicantes
+            </a>
+            <button className="bg-primarycolor hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg mt-2">
+              Contáctanos
             </button>
           </div>
         </div>
