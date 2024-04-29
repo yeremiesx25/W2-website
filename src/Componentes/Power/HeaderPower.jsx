@@ -1,5 +1,5 @@
 import React from 'react'
-
+import {Link}from 'react-router-dom'
 function HeaderPower() {
   return (
 <header className="bg-primarytext text-gray-50 font-dmsans"
@@ -13,13 +13,20 @@ style={{height: '78px'}}
         </div>
 
         {/* Opciones de navegación */}
-        <nav>
-          <ul className="flex w-96 text-sm justify-around">
-            <li className="text-gray-300 hover:text-white">Inicio</li>
-            <li className="text-gray-300 hover:text-white">Servicios</li>
-            <li className="text-gray-300 hover:text-white">Contacto</li>
-          </ul>
-        </nav>
+          <div className="flex w-96 text-sm justify-around">
+          <Link to="/" className="text-gray-300 hover:text-white">
+              Inicio
+          </Link>
+          <Link to="/Empresas" className="text-gray-300 hover:text-white">
+              Empresas
+          </Link>
+          <Link to="/Power" className="text-gray-300 hover:text-white">
+              Power
+          </Link>
+          <Link to="/Practicantes" className="text-gray-300 hover:text-white">
+              Practicantes
+          </Link>
+          </div>
 
         {/* Botones de login y registro */}
         <div className="flex items-center">

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import {Link}from 'react-router-dom'
 import logo from '../../assets/Logo horizontal W2 Black.png'
 function Navbar() {
   const [showMenu, setShowMenu] = useState(false);
@@ -13,24 +14,24 @@ function Navbar() {
         <div className="flex items-center justify-between h-16">
           {/* Logo o título */}
           <div className="flex-shrink-0">
-            <a href="/" className="text-lg font-bold text-gray-800">
+            <Link to="/" className="text-lg font-bold text-gray-800">
               <img className='w-32 h-28' src={logo} alt="" />
-            </a>
+            </Link>
           </div>
           {/* Navegación de escritorio */}
           <div className="hidden md:flex md:items-center md:space-x-6">
-            <a href="/" className="text-gray-800 hover:text-gray-600">
+            <Link to="/" className="text-gray-800 hover:text-gray-600">
               Inicio
-            </a>
-            <a href="/" className="text-gray-800 hover:text-gray-600">
+            </Link>
+            <Link to="/Empresas" className="text-gray-800 hover:text-gray-600">
               Empresas
-            </a>
-            <a href="/" className="text-gray-800 hover:text-gray-600">
-              Postulantes
-            </a>
-            <a href="/" className="text-gray-800 hover:text-gray-600">
+            </Link>
+            <Link to="/Power" className="text-gray-800 hover:text-gray-600">
+              Power
+            </Link>
+            <Link to="/Practicantes" className="text-gray-800 hover:text-gray-600">
               Practicantes
-            </a>
+            </Link>
             <button className="bg-primarycolor hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-xl">
               Contáctanos
             </button>
@@ -68,30 +69,30 @@ function Navbar() {
       {showMenu && (
         <div className="md:hidden bg-white">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <a
-              href="/"
+            <Link
+              to="/"
               className="text-gray-800 hover:text-gray-600 block px-3 py-2 rounded-md text-base font-medium"
             >
               Inicio
-            </a>
-            <a
-              href="/"
+            </Link>
+            <Link
+              to="/Empresas"
               className="text-gray-800 hover:text-gray-600 block px-3 py-2 rounded-md text-base font-medium"
             >
               Empresas
-            </a>
-            <a
-              href="/"
+            </Link>
+            <Link
+              to="/Power"
               className="text-gray-800 hover:text-gray-600 block px-3 py-2 rounded-md text-base font-medium"
             >
-              Postulantes
-            </a>
-            <a
-              href="/"
+              Power
+            </Link>
+            <Link
+              to="/Practicantes"
               className="text-gray-800 hover:text-gray-600 block px-3 py-2 rounded-md text-base font-medium"
             >
               Practicantes
-            </a>
+            </Link>
             <button className="bg-primarycolor hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg mt-2">
               Contáctanos
             </button>

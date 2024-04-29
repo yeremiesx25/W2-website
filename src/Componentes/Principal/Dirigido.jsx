@@ -8,15 +8,25 @@ import { motion } from "framer-motion"
 function Dirigido() {
   return (
     <div>
-      <div>
-        <div>
-          <span></span>
-          <h3></h3>
-          <p></p>
+      <div className='flex'>
+        <div className='w-96 bg-primarycolor flex flex-col items-center justify-center'>
+          <span>icon</span>
+          <h3>Empresas</h3>
+          <p>Contribuir a la formación de valores en niños de diversos sectores del país.</p>
           <button>Ver más</button>
         </div>
-        <div></div>
-        <div></div>
+        <div>
+        <span>icon</span>
+          <h3>Empresas</h3>
+          <p>Contribuir a la formación de valores en niños de diversos sectores del país.</p>
+          <button>Ver más</button>
+        </div>
+        <div>
+        <span>icon</span>
+          <h3>Empresas</h3>
+          <p>Contribuir a la formación de valores en niños de diversos sectores del país.</p>
+          <button>Ver más</button>
+        </div>
       </div>
     </div>
   )

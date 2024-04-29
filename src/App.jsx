@@ -1,20 +1,19 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-//importar componentes
-import MainDiv from './Componentes/Principal/MainDiv'
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import Home from './Componentes/Principal/Home'
-import Empresas from './Componentes/Empresas/Empresas'
-
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Home from './Componentes/Principal/Home';
+import Empresas from './Componentes/Empresas/Empresas';
+import Power from './Componentes/Power/Power'
+import Practicantes from './Componentes/Practicantes/Practicantes'
 function App() {
-
   return (
-    <>
-      <Home />
-    </>
-  )
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/Empresas" element={<Empresas />} />
+        <Route path="/Power" element={<Power />} />
+        <Route path="/Practicantes" element={<Practicantes />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;
