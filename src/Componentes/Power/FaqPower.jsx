@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 function FaqPower() {
   return (
     <div
-    class=" font-dmsans relative w-full bg-white px-6 pt-10 pb-8 mt-8 shadow-xl ring-1 ring-gray-900/5 sm:mx-auto sm:max-w-2xl sm:rounded-lg sm:px-10">
+    class="mb-8 font-dmsans relative w-full bg-white px-6 pt-10 pb-8 mt-8 shadow-xl ring-1 ring-gray-900/5 sm:mx-auto sm:max-w-2xl sm:rounded-lg sm:px-10">
     <div class="mx-auto px-5">
         <div class="flex flex-col items-center">
             <h2 class="mt-5 text-center text-3xl font-bold tracking-tight md:text-4xl">Preguntas frecuentes</h2>

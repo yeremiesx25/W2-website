@@ -64,6 +64,7 @@ function BeneficiosPower() {
         <CardBeneficioPower />
         </div>
       </Slider>
+      
     </div>
   );
 }

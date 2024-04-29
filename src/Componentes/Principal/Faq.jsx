@@ -13,36 +13,130 @@ function Faq() {
   };
 
   return (
-    <section className="w-full py-10 bg-gray-50 sm:py-16 lg:py-24 flex items-center justify-center flex-wrap">
-      <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-6xl flex flex-wrap justify-center items-center">
-        
-        <div className="max-w-md">
-          <div className="max-w-md mx-auto text-center">
-            <h2 className="text-3xl font-bold leading-tight text-black sm:text-4xl lg:text-5xl">Preguntas Frecuentes</h2>
-            <p className="max-w-xl mx-auto mt-4 text-base leading-relaxed text-gray-600">Algunas preguntas que nos hacen a menudo</p>
-          </div>
+    <div
+    class="mb-8 font-dmsans relative w-full bg-white px-6 pt-10 pb-8 mt-8 shadow-xl ring-1 ring-gray-900/5 sm:mx-auto sm:max-w-2xl sm:rounded-lg sm:px-10">
+    <div class="mx-auto px-5">
+        <div class="flex flex-col items-center">
+            <h2 class="mt-5 text-center text-3xl font-bold tracking-tight md:text-4xl">Preguntas frecuentes</h2>
+            <p class="mt-3 text-center text-neutral-500 md:text-lg">Algunas dudas frecuentes de nuestros clientes
 
-          <div className="max-w-md mt-8 space-y-4 md:mt-16 ">
-            {[1, 2, 3, 4].map((item, index) => (
-              <div key={index} className={`transition-all duration-200 bg-white border border-gray-200 shadow-lg cursor-pointer hover:bg-gray-50 rounded-lg  ${showAnswer[index] ? 'border-blue-500' : ''}`}>
-                <button type="button" className="flex items-center justify-between w-full px-4 py-5 sm:p-6" onClick={() => toggleAnswer(index)}>
-                  <span className="flex text-lg font-semibold text-black">¿Qué tipo de empresas suelen contratar sus servicios de reclutamiento?</span>
-                  <svg className={`w-6 h-6 text-gray-400 ${showAnswer[index] ? 'rotate-180' : ''}`} xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-                  </svg>
-                </button>
-                <div className={`px-4 pb-5 sm:px-6 sm:pb-6  ${showAnswer[index] ? 'block' : 'hidden'}`}>
-                  <p>Esta pregunta permitirá a los visitantes de tu página web comprender mejor el tipo de empresas que pueden beneficiarse de tus servicios.</p>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <p className="text-center text-gray-600 textbase mt-9">¿Cuál es la experiencia y el historial de éxito de su empresa en el reclutamiento?<a href="#" title="" className="font-medium text-blue-600 transition-all duration-200 hover:text-blue-700 focus:text-blue-700 hover:underline">Contact our support</a></p>
+            </p>
         </div>
-        
-      </div>
-    </section>
+        <div class="mx-auto mt-8 grid max-w-xl divide-y divide-neutral-200">
+            <div class="py-5">
+                <details class="group">
+                    <summary class="flex cursor-pointer list-none items-center justify-between font-medium">
+                        <span> ¿Cualquiera puede postular a Power?</span>
+                        <span class="transition group-open:rotate-180">
+                                <svg fill="none" height="24" shape-rendering="geometricPrecision"
+                                    stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="1.5" viewBox="0 0 24 24" width="24">
+                                    <path d="M6 9l6 6 6-6"></path>
+                                </svg>
+                            </span>
+                    </summary>
+                    <p class="group-open:animate-fadeIn mt-3 text-neutral-600">Springerdata offers a variety of
+                        billing options, including monthly and annual subscription plans, as well as pay-as-you-go
+                        pricing for certain services. Payment is typically made through a credit card or other
+                        secure online payment method.
+                    </p>
+                </details>
+            </div>
+            <div class="py-5">
+                <details class="group">
+                    <summary class="flex cursor-pointer list-none items-center justify-between font-medium">
+                        <span> ¿Cualquiera puede postular a Power?</span>
+                        <span class="transition group-open:rotate-180">
+                                <svg fill="none" height="24" shape-rendering="geometricPrecision"
+                                    stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="1.5" viewBox="0 0 24 24" width="24">
+                                    <path d="M6 9l6 6 6-6"></path>
+                                </svg>
+                            </span>
+                    </summary>
+                    <p class="group-open:animate-fadeIn mt-3 text-neutral-600">We offer a 30-day money-back
+                        guarantee for most of its subscription plans. If you are not satisfied with your
+                        subscription within the first 30 days, you can request a full refund. Refunds for
+                        subscriptions that have been active for longer than 30 days may be considered on a
+                        case-by-case basis.
+                    </p>
+                </details>
+            </div>
+            <div class="py-5">
+                <details class="group">
+                    <summary class="flex cursor-pointer list-none items-center justify-between font-medium">
+                        <span>¿Cualquiera puede postular a Power?</span>
+                        <span class="transition group-open:rotate-180">
+                                <svg fill="none" height="24" shape-rendering="geometricPrecision"
+                                    stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="1.5" viewBox="0 0 24 24" width="24">
+                                    <path d="M6 9l6 6 6-6"></path>
+                                </svg>
+                            </span>
+                    </summary>
+                    <p class="group-open:animate-fadeIn mt-3 text-neutral-600">To cancel your subscription, you can
+                        log in to your account and navigate to the subscription management page. From there, you
+                        should be able to cancel your subscription and stop future billing.
+                    </p>
+                </details>
+            </div>
+            <div class="py-5">
+                <details class="group">
+                    <summary class="flex cursor-pointer list-none items-center justify-between font-medium">
+                        <span>¿Cualquiera puede postular a Power?</span>
+                        <span class="transition group-open:rotate-180">
+                                <svg fill="none" height="24" shape-rendering="geometricPrecision"
+                                    stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="1.5" viewBox="0 0 24 24" width="24">
+                                    <path d="M6 9l6 6 6-6"></path>
+                                </svg>
+                            </span>
+                    </summary>
+                    <p class="group-open:animate-fadeIn mt-3 text-neutral-600">We offer a free trial of our software
+                        for a limited time. During the trial period, you will have access to a limited set of
+                        features and functionality, but you will not be charged.
+                    </p>
+                </details>
+            </div>
+            <div class="py-5">
+                <details class="group">
+                    <summary class="flex cursor-pointer list-none items-center justify-between font-medium">
+                        <span>¿Cualquiera puede postular a Power?</span>
+                        <span class="transition group-open:rotate-180">
+                                <svg fill="none" height="24" shape-rendering="geometricPrecision"
+                                    stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="1.5" viewBox="0 0 24 24" width="24">
+                                    <path d="M6 9l6 6 6-6"></path>
+                                </svg>
+                            </span>
+                    </summary>
+                    <p class="group-open:animate-fadeIn mt-3 text-neutral-600">If you need help with our platform or
+                        have any other questions, you can contact the company's support team by submitting a support
+                        request through the website or by emailing support@ourwebsite.com.
+                    </p>
+                </details>
+            </div>
+            <div class="py-5">
+                <details class="group">
+                    <summary class="flex cursor-pointer list-none items-center justify-between font-medium">
+                        <span>¿Cualquiera puede postular a Power?</span>
+                        <span class="transition group-open:rotate-180">
+                                <svg fill="none" height="24" shape-rendering="geometricPrecision"
+                                    stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="1.5" viewBox="0 0 24 24" width="24">
+                                    <path d="M6 9l6 6 6-6"></path>
+                                </svg>
+                            </span>
+                    </summary>
+                    <p class="group-open:animate-fadeIn mt-3 text-neutral-600">We may offer discounts or promotions
+                        from time to time. To stay up-to-date on the latest deals and special offers, you can sign
+                        up for the company's newsletter or follow it on social media.
+                    </p>
+                </details>
+            </div>
+        </div>
+    </div>
+</div>
   );
 }
 
