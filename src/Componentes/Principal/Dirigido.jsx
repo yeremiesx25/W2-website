@@ -20,8 +20,14 @@ function Dirigido() {
         </div>
         <div class="flex-grow pl-6">
           <h2 class="text-primarytext text-lg title-font font-medium mb-2">Empresas</h2>
-          <p class="leading-relaxed text-base">Blue bottle crucifix vinyl post-ironic four dollar toast vegan taxidermy. Gastropub indxgo juice poutine, ramps microdosing banh mi pug VHS try-hard ugh iceland kickstarter tumblr live-edge tilde.</p>
-          <a class="mt-3 text-indigo-400 inline-flex items-center">Learn More
+          <p class="leading-relaxed text-base">Tus socios Estratégicos en
+GESTIÓN HUMANA
+Libérate del estrés de reclutamiento
+y selección con nuestro soporte
+estratégico de atracción de personal
+incluso si ya cuentan con un área
+de RR.HH. </p>
+          <a class="mt-3 text-indigo-400 inline-flex items-center">Ver más
             <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
               <path d="M5 12h14M12 5l7 7-7 7"></path>
             </svg>
@@ -37,9 +43,16 @@ function Dirigido() {
           </svg>
         </div>
         <div class="flex-grow pl-6">
-          <h2 class="text-primarytext text-lg title-font font-medium mb-2">Postulantes</h2>
-          <p class="leading-relaxed text-base">Blue bottle crucifix vinyl post-ironic four dollar toast vegan taxidermy. Gastropub indxgo juice poutine, ramps microdosing banh mi pug VHS try-hard ugh iceland kickstarter tumblr live-edge tilde.</p>
-          <a class="mt-3 text-indigo-400 inline-flex items-center">Learn More
+          <h2 class="text-primarytext text-lg title-font font-medium mb-2">Candidatos</h2>
+          <p class="leading-relaxed text-base">Asesoría y Mentorías
+Personalizadas
+Ayudamos a personas sin trabajo
+en busca de estabilidad laboral.
+Logren ingresar a trabajar en una
+empresa formal con los beneficios
+de ley mediante nuestra metodología
+de atracción incluso si no tienen CV</p>
+          <a class="mt-3 text-indigo-400 inline-flex items-center">Ver más
             <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
               <path d="M5 12h14M12 5l7 7-7 7"></path>
             </svg>
@@ -55,8 +68,17 @@ function Dirigido() {
         </div>
         <div class="flex-grow pl-6">
           <h2 class="text-primarytext text-lg title-font font-medium mb-2">Practicantes</h2>
-          <p class="leading-relaxed text-base">Blue bottle crucifix vinyl post-ironic four dollar toast vegan taxidermy. Gastropub indxgo juice poutine, ramps microdosing banh mi pug VHS try-hard ugh iceland kickstarter tumblr live-edge tilde.</p>
-          <a class="mt-3 text-indigo-400 inline-flex items-center">Learn More
+          <p class="leading-relaxed text-base">Programa de Prácticas
+PRE - Profesionales
+Los valores que nos caracterizan
+como empresa peruana.
+Programa dirigido a estudiantes de
+los últimos ciclos de sus carreras
+que deseen formarse y formar parte
+de W2. Revisa nuestro apartado de
+beneficios y vive tu primera
+experiencia laboral con nosotros. </p>
+          <a class="mt-3 text-indigo-400 inline-flex items-center">Ver más
             <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
               <path d="M5 12h14M12 5l7 7-7 7"></path>
             </svg>
