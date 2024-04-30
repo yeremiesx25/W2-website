@@ -1,18 +1,19 @@
 import React from 'react'
-import MainDiv from './MainDiv'
-import Servicio from './Servicio'
-import Intermedio from './Intermedio'
-import Preguntas from './Preguntas'
-import Footer from './Footer'
+import MainDiv from '../Empresas/MainDiv'
+import Intermedio from '../Empresas/Intermedio'
+import Servicio from '../Empresas/Servicio'
+import Preguntas from '../Empresas/Preguntas'
+import Footer from '../Empresas/Footer'
+
 function Empresas() {
   return (
-    <div>
-    <MainDiv />
-    <Servicio />
-    <Intermedio />
-    <Preguntas />
-    <Footer />
-    </div>
+    <>
+      <MainDiv />
+      <Intermedio />
+      <Servicio />
+      <Preguntas />
+      <Footer />
+    </>
   )
 }
 

@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 function Servicio() {
   return (
     <div className="flex flex-col items-center px-5 mt-20">
-      <div className="self-stretch px-20 pt-16 w-full bg-blue-600 max-md:px-5 max-md:max-w-full">
+      <div className="self-stretch px-20 pt-16 w-full bg-indigo-600 max-md:px-5 max-md:max-w-full">
         <div className="flex gap-5 max-md:flex-col max-md:gap-0">
           <div className="flex flex-col w-[39%] max-md:ml-0 max-md:w-full">
             <img
@@ -19,14 +19,17 @@ function Servicio() {
                 Encontramos el talento que tu empresa{" "}
                 <span className="text-green-300">necesita</span>
               </div>
-              <div className="flex gap-5 self-start px-5 py-6 mt-20 text-lg tracking-tight leading-8 text-indigo-600 bg-white rounded-lg max-md:pl-5 max-md:mt-10">
+              <a 
+                href="#" 
+                className="flex gap-5 self-start px-5 py-6 mt-20 text-lg tracking-tight leading-8 text-indigo-600 bg-white rounded-lg max-md:pl-5 max-md:mt-10 transition-all duration-200 ease-in-out hover:bg-indigo-500 hover:text-white"
+              >
                 <div className="flex-auto">Contactar con un asesor</div>
                 <img
                   loading="lazy"
                   src="https://cdn.builder.io/api/v1/image/assets/TEMP/28e8773f56cbffe35c549070c20badb0f4462309a457986188ee15770e888d2f?apiKey=6be6dd5b90fb4db2b9632e2f5aba57f6&"
                   className="shrink-0 self-start my-auto aspect-[1.18] w-[13px]"
                 />
-              </div>
+              </a>
             </div>
           </div>
         </div>
