@@ -9,7 +9,7 @@ function MainDiv() {
   return (
     <section style={{backgroundImage: `url(${fondo})`, height: '924px' }}
     className="pt-24 bg-white sm:pt-24 font-dmsans flex flex-col items-center bg-no-repeat bg-cover">
-    <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+    <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8"/>
         <div className="text-center">
             <p
                 className="max-w-4xl mx-auto mb-4 text-4xl font-bold leading-tight text-primarytext sm:leading-tight sm:text-5xl lg:text-6xl lg:leading-tight">
@@ -27,11 +27,10 @@ function MainDiv() {
                 </button>
                 <button href="#"
                     className="inline-flex items-center justify-center w-full px-8 py-3 text-lg font-bold text-primarytext transition-all duration-200 hover:bg-gray-50 sm:w-auto rounded-xl"
-                    >Aprender más</button>
+                    role="button">Aprender más</button>
             </div>
         </div>
-        </div>
-    <div style={{ minHeight: '740px', backgroundImage:`url(${fondo})`}}
+    <div style={{ minHeight: '740px', backgroundImage:`url(${Fondo2})`}}
     className='flex items-center justify-center bg-no-repeat text-center flex-col font-dmsans bg-cover pt-24'>
       <h2 
   style={{ animation: 'fade-in 1s ease-in' }}
@@ -63,7 +62,7 @@ function MainDiv() {
     </div>
     <Hero />
 </section>
-  )
+  );
 }
 
 export default MainDiv;
