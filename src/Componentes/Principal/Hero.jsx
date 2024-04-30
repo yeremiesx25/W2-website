@@ -23,11 +23,12 @@ function Hero() {
                 whileTap={{ scale: 1 }}
                 className='w-full md:w-1/4 lg:w-1/2 h-full flex items-center justify-center'>
                 {/* Imagen con ajustes responsivos */}
-                <img src={vector} alt="" className='w-48 md:w-76 h-auto' />
+                <img src={imagehero} alt="" className='w-48 md:w-76 h-auto' />
             </motion.div>
         <div className='w-[90%] h-[40rem] md:w-[70rem] bg-primarycolor rounded-xl mt-12 flex justify-center items-center flex-wrap p-2'>
           <h2 className='text-white font-medium text-xl md:text-2xl text-center'>Vive la experiencia del reclutamiento</h2>
           <img src={imagehero} alt="" />
+        </div>
         </div>
   );
 }

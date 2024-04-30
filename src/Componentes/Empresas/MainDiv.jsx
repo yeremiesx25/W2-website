@@ -1,11 +1,9 @@
 import React from "react";
-import Header from "./Header";
 import { motion } from "framer-motion";
 
 function MainDiv() {
   return (
     <div>
-      <Header />
       <div className="mt-28 mr-52 ml-24 max-sm:flex max-sm:flex-col max-sm:mx-5">
         <div className="flex gap-5 max-md:flex-col max-md:gap-0">
           <div className="flex flex-col w-[42%] max-md:ml-0 max-md:w-full">
