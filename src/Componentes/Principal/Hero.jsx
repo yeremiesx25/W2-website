@@ -4,6 +4,7 @@ import { motion } from "framer-motion"
 
 function Hero() {
   return (
+<<<<<<< HEAD
         <div className='bg-secundarycolor rounded-xl flex justify-center items-center flex-wrap-reverse md:w-3/4 p-4 mr-2 ml-2 self-center' style={{ maxWidth: '1000px', minHeight: '437px' }}>
             <div className='w-full md:w-3/4 lg:w-1/2 h-full flex items-center justify-center flex-col'>
                 {/* Texto con ajustes responsivos */}
@@ -25,6 +26,10 @@ function Hero() {
                 {/* Imagen con ajustes responsivos */}
                 <img src={vector} alt="" className='w-48 md:w-76 h-auto' />
             </motion.div>
+=======
+        <div className='w-[90%] h-[40rem] md:w-[70rem] bg-primarycolor rounded-xl mt-12'>
+
+>>>>>>> 12c07a32530f1f9f3c9e7ed65901932de8f532d5
         </div>
   );
 }

@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react'
 
-const Footer = () => {
+function FooterPower() {
   return (
     <div><footer className="px-4 divide-y bg-primarytext text-gray-100">
 	<div className="container flex flex-col justify-between py-10 mx-auto space-y-8 lg:flex-row lg:space-y-0">
@@ -9,7 +9,7 @@ const Footer = () => {
 				<div className="flex items-center justify-center w-12 h-12 rounded-full dark:bg-violet-600">
 					<img src="" alt="" />
 				</div>
-				<span className="self-center text-2xl font-semibold text-gray-100">W2</span>
+				<span className="self-center text-2xl font-semibold text-amber-400">Power</span>
 			</a>
 		</div>
 		<div className="grid grid-cols-2 text-sm gap-x-3 gap-y-8 lg:w-2/3 sm:grid-cols-4">
@@ -79,6 +79,7 @@ const Footer = () => {
 	</div>
 	<div className="py-6 text-sm text-center dark:text-gray-600">© 1968 Company Co. All rights reserved.</div>
 </footer></div>
-  );
-};
-export default Footer
+  )
+}
+
+export default FooterPower

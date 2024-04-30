@@ -1,17 +1,6 @@
-import React, { useState } from 'react';
-import vector from '../../assets/Aprendizaje Continuo.gif';
+import React, { useState } from 'react'
 
-function Faq() {
-  // Estado local para controlar la visibilidad de cada pregunta
-  const [showAnswer, setShowAnswer] = useState(Array(4).fill(false));
-
-  // Función para alternar la visibilidad de la respuesta
-  const toggleAnswer = (index) => {
-    const newShowAnswer = [...showAnswer];
-    newShowAnswer[index] = !newShowAnswer[index];
-    setShowAnswer(newShowAnswer);
-  };
-
+function FaqPower() {
   return (
     <div
     class="mb-8 font-dmsans relative w-full bg-white px-6 pt-10 pb-8 mt-8 shadow-xl ring-1 ring-gray-900/5 sm:mx-auto sm:max-w-2xl sm:rounded-lg sm:px-10">
@@ -137,7 +126,8 @@ function Faq() {
         </div>
     </div>
 </div>
-  );
+  )
 }
 
-export default Faq;
+export default FaqPower
+
