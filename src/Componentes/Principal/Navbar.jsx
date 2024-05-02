@@ -20,16 +20,16 @@ function Navbar() {
           </div>
           {/* Navegación de escritorio */}
           <div className="hidden md:flex md:items-center md:space-x-6">
-            <Link to="/" className="text-gray-800 hover:text-gray-600">
+            <Link to="/" className="text-gray-800 hover:text-primarycolor">
               Inicio
             </Link>
-            <Link to="/Empresas" className="text-gray-800 hover:text-gray-600">
+            <Link to="/Empresas" className="text-gray-800 hover:text-primarycolor">
               Empresas
             </Link>
-            <Link to="/Power" className="text-gray-800 hover:text-gray-600">
+            <Link to="/Power" className="text-gray-800 hover:text-primarycolor">
               Power
             </Link>
-            <Link to="/Practicantes" className="text-gray-800 hover:text-gray-600">
+            <Link to="/Practicantes" className="text-gray-800 hover:text-primarycolor">
               Practicantes
             </Link>
             <button className="bg-primarycolor hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-xl">

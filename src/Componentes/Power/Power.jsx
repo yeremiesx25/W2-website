@@ -17,7 +17,6 @@ function Power() {
     <BeneficiosPower />
     <CtaPower />
     <ContainerVideos />
-    <FaqPower />
     <FooterPower />
     </>
   )

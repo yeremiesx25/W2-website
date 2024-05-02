@@ -23,21 +23,18 @@ const Footer = () => {
 						<a rel="noopener noreferrer" href="#">Integrations</a>
 					</li>
 					<li>
-						<a rel="noopener noreferrer" href="#">Pricing</a>
-					</li>
-					<li>
 						<a rel="noopener noreferrer" href="#">FAQ</a>
 					</li>
 				</ul>
 			</div>
 			<div className="space-y-3">
-				<h3 className="tracking-wide uppercase dark:text-gray-900">Company</h3>
+				<h3 className="tracking-wide uppercase dark:text-gray-900">About us</h3>
 				<ul className="space-y-1">
 					<li>
-						<a rel="noopener noreferrer" href="#">Privacy</a>
+						<a rel="noopener noreferrer" href="#">Privacidad</a>
 					</li>
 					<li>
-						<a rel="noopener noreferrer" href="#">Terms of Service</a>
+						<a rel="noopener noreferrer" href="#">Términos del servicio</a>
 					</li>
 				</ul>
 			</div>
@@ -56,7 +53,7 @@ const Footer = () => {
 				</ul>
 			</div>
 			<div className="space-y-3">
-				<div className="uppercase dark:text-gray-900">Social media</div>
+				<div className="uppercase dark:text-gray-900">Redes sociales</div>
 				<div className="flex justify-start space-x-3">
 					<a rel="noopener noreferrer" href="#" title="Facebook" className="flex items-center p-1">
 						<svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 32 32" className="w-5 h-5 fill-current">
@@ -77,7 +74,7 @@ const Footer = () => {
 			</div>
 		</div>
 	</div>
-	<div className="py-6 text-sm text-center dark:text-gray-600">© 1968 Company Co. All rights reserved.</div>
+	<div className="py-6 text-sm text-center dark:text-gray-600">© W2 Asesores y Consultores. All rights reserved.</div>
 </footer></div>
   );
 };

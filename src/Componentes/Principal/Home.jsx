@@ -14,12 +14,10 @@ function Home() {
     <div className='flex flex-col' >
       <Navbar/>
       <MainDiv/>
-      <Hero />
       <MarcasSlider/>
       <Counts />
       <Dirigido/>
       <Testimonio/>
-      <Faq/>
       <Footer/>
     </div>
   )

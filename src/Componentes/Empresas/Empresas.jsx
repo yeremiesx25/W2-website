@@ -1,20 +1,16 @@
 import React from 'react'
 import Navbar from "../Principal/Navbar";
-import MainDiv from '../Empresas/MainDiv'
 import Intermedio from '../Empresas/Intermedio'
 import Servicio from '../Empresas/Servicio'
-import Preguntas from '../Empresas/Preguntas'
 import Footer from '../Empresas/Footer'
+import HeroEmpresa from './HeroEmpresa';
 
 function Empresas() {
   return (
     <>
       <Navbar />
-      <MainDiv />
+      <HeroEmpresa />
       <Intermedio />
-      <Servicio />
-      <Preguntas />
-      <Footer />
     </>
   )
 }
