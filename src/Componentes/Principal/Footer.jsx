@@ -1,5 +1,5 @@
 import React from "react";
-
+import logowhite from '../../assets/Logo horizontal W2 WHITE.png'
 const Footer = () => {
   return (
     <div><footer className="px-4 divide-y bg-primarytext text-gray-100">
@@ -9,21 +9,21 @@ const Footer = () => {
 				<div className="flex items-center justify-center w-12 h-12 rounded-full dark:bg-violet-600">
 					<img src="" alt="" />
 				</div>
-				<span className="self-center text-2xl font-semibold text-gray-100">W2</span>
+				<img className="w-44" src={logowhite} alt="" />
 			</a>
 		</div>
 		<div className="grid grid-cols-2 text-sm gap-x-3 gap-y-8 lg:w-2/3 sm:grid-cols-4">
 			<div className="space-y-3">
-				<h3 className="tracking-wide uppercase dark:text-gray-900">Product</h3>
+				<h3 className="tracking-wide uppercase dark:text-gray-900">Servicios</h3>
 				<ul className="space-y-1">
 					<li>
-						<a rel="noopener noreferrer" href="#">Features</a>
+						<a rel="noopener noreferrer" href="#">Reclutamiento</a>
 					</li>
 					<li>
-						<a rel="noopener noreferrer" href="#">Integrations</a>
+						<a rel="noopener noreferrer" href="#">Head Hunting</a>
 					</li>
 					<li>
-						<a rel="noopener noreferrer" href="#">FAQ</a>
+						<a rel="noopener noreferrer" href="#"></a>
 					</li>
 				</ul>
 			</div>

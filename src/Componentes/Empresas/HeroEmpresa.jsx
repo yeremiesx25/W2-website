@@ -6,7 +6,7 @@ function HeroEmpresa() {
     
   return (
     <section style={{backgroundImage: `url(${fondo})`, height: '700px' }}
-    className=" bg-white sm:pt-24 font-dmsans flex flex-col items-center bg-no-repeat bg-cover">
+    className=" bg-white pt-16 sm:pt-24 font-dmsans flex flex-col items-center bg-no-repeat bg-cover">
     <div className="w-full max-w-7xl sm:px-6 lg:px-8 flex flex-wrap pt-8">
         <div className="text-center sm:text-left w-[600px] px-2">
             <p
@@ -27,45 +27,7 @@ function HeroEmpresa() {
                     role="button">Aprender más</button>
             </div>
         </div>
-        <div className='md:ml-8'>
-        <div class="relative">
-    <div class="carousel max-w-xl flex">
         
-        <div class="carousel-item">
-            <img src="https://source.unsplash.com/random/800x600" alt="Carousel Image 1"
-                class="w-full h-96 object-cover"/>
-        </div>
-        <div class="carousel-item">
-            <img src="https://source.unsplash.com/random/800x600?2" alt="Carousel Image 2"
-                class="w-full h-96 object-cover"/>
-        </div>
-        <div class="carousel-item">
-            <img src="https://source.unsplash.com/random/800x600?3" alt="Carousel Image 3"
-                class="w-full h-96 object-cover"/>
-        </div>
-    </div>
-
-    <div class="absolute inset-y-0 left-0 flex items-center justify-start pl-4">
-        <button
-            class="carousel-control-prev bg-gray-800 hover:bg-gray-700 text-white rounded-full p-2 focus:outline-none">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-            </svg>
-        </button>
-    </div>
-    <div class="absolute inset-y-0 right-0 flex items-center justify-end pr-4">
-        <button
-            class="carousel-control-next bg-gray-800 hover:bg-gray-700 text-white rounded-full p-2 focus:outline-none">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
-            </svg>
-        </button>
-    </div>
-</div>
-
-        </div>      
     </div>
     
 </section>

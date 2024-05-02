@@ -8,6 +8,7 @@ import Testimonio from './Testimonio'
 import Faq from './Faq'
 import Navbar from './Navbar'
 import Footer from './Footer'
+import Founders from './Founders'
 
 function Home() {
   return (
@@ -18,6 +19,7 @@ function Home() {
       <Counts />
       <Dirigido/>
       <Testimonio/>
+      <Founders />
       <Footer/>
     </div>
   )
