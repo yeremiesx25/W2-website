@@ -5,7 +5,7 @@ import Descubre from './Descubre'
 function HeroPracticantes() {
   return (
     <section  style={{backgroundImage: `url(${fondo})` }}
-    className="pt-24 mb-8 md:mb-52 sm:pt-24 font-dmsans flex flex-col items-center bg-no-repeat bg-cover md:h-[1200px]">
+    className="pt-24 mb-8 md:mb-52 sm:pt-24 font-dmsans flex flex-col items-center bg-no-repeat bg-cover md:h-[1200px]np">
     <div className="w-full max-w-7xl sm:px-6 lg:px-8 flex flex-wrap">
         <div className="text-center sm:text-left w-[600px] px-2">
             <p

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {Link}from 'react-router-dom'
+import {NavLink}from 'react-router-dom'
 import logo from '../../assets/Logo horizontal W2 Black.png'
 function Navbar() {
   const [showMenu, setShowMenu] = useState(false);
@@ -8,30 +8,32 @@ function Navbar() {
     setShowMenu(!showMenu);
   };
 
+  const activeStyle = 'underline underline-offset-4 text-primarycolor font-medium'
+  const classDefault = 'text-gray-800 hover:text-primarycolor font-light'
   return (
     <nav className="bg-white shadow z-10 top-0 fixed w-full justify-around font-dmsans">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo o título */}
           <div className="flex-shrink-0">
-            <Link to="/" className="text-lg font-bold text-gray-800">
+            <NavLink to="/" className="text-lg font-bold text-gray-800">
               <img className='w-32 h-28' src={logo} alt="" />
-            </Link>
+            </NavLink>
           </div>
           {/* Navegación de escritorio */}
           <div className="hidden md:flex md:items-center md:space-x-6">
-            <Link to="/" className="text-gray-800 hover:text-primarycolor">
+            <NavLink to="/"  className={({isActive}) => isActive ? activeStyle : classDefault }>
               Inicio
-            </Link>
-            <Link to="/Empresas" className="text-gray-800 hover:text-primarycolor">
+            </NavLink>
+            <NavLink to="/Empresas" className={({isActive}) => isActive ? activeStyle : classDefault }>
               Empresas
-            </Link>
-            <Link to="/Practicantes" className="text-gray-800 hover:text-primarycolor">
+            </NavLink>
+            <NavLink to="/Practicantes" className={({isActive}) => isActive ? activeStyle : classDefault }>
               Practicantes
-            </Link>
-            <Link to="/Power" className="text-gray-800 hover:text-primarycolor">
+            </NavLink>
+            <NavLink to="/Power" className={({isActive}) => isActive ? activeStyle : classDefault }>
               Power
-            </Link>
+            </NavLink>
             
             <button className="bg-primarycolor hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-xl">
               Contáctanos

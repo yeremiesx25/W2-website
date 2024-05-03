@@ -9,7 +9,7 @@ import practicantes from '../../assets/people-hand-drawn-persons-group-svgrepo-c
 
 function Dirigido() {
   return (
-<section class="text-primarytext bg-white body-font font-dmsans">
+<section id='dirigido' class="text-primarytext bg-white body-font font-dmsans">
   <div class="container px-5 py-24 mx-auto">
     <h1 class="sm:text-3xl text-2xl font-medium title-font text-center text-primarytext mb-20">A quiénes está dirigido nuestro servicio...
     </h1>
@@ -27,7 +27,7 @@ y selección con nuestro soporte
 estratégico de atracción de personal
 incluso si ya cuentan con un área
 de RR.HH. </p>
-          <a class="mt-3 text-indigo-400 inline-flex items-center">Ver más
+          <a href='/Empresas' class="mt-3 text-indigo-400 inline-flex items-center">Ver más
             <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
               <path d="M5 12h14M12 5l7 7-7 7"></path>
             </svg>
@@ -48,7 +48,7 @@ Logren ingresar a trabajar en una
 empresa formal con los beneficios
 de ley mediante nuestra metodología
 de atracción incluso si no tienen CV</p>
-          <a class="mt-3 text-indigo-400 inline-flex items-center">Ver más
+          <a href='/Power' class="mt-3 text-indigo-400 inline-flex items-center">Ver más
             <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
               <path d="M5 12h14M12 5l7 7-7 7"></path>
             </svg>
@@ -71,7 +71,7 @@ que deseen formarse y formar parte
 de W2. Revisa nuestro apartado de
 beneficios y vive tu primera
 experiencia laboral con nosotros. </p>
-          <a class="mt-3 text-indigo-400 inline-flex items-center">Ver más
+          <a href='/Practicantes' class="mt-3 text-indigo-400 inline-flex items-center">Ver más
             <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-2" viewBox="0 0 24 24">
               <path d="M5 12h14M12 5l7 7-7 7"></path>
             </svg>

@@ -13,16 +13,16 @@ import SLA from '../../assets/Logos Clientes/SLA@2x.png'
 
 // Define the array of slides with numbers
 const slides = [
-    {Alma },
-    { Altisa },
-    { Bomi },
-    { Cardioclinic },
-    { Depsa },
-    {Econolentes},
-    {Germsa},
-    {Palomino},
-    {Ransa},
-    {SLA}
+    Alma,
+    Altisa,
+    Bomi,
+    Cardioclinic,
+    Depsa,
+    Econolentes,
+    Germsa,
+    Palomino,
+    Ransa,
+    SLA
 ];
 
 const MarcasSlider = () => {
@@ -30,37 +30,15 @@ const MarcasSlider = () => {
     const duplicatedSlides = [...slides, ...slides];
 
     return (
-        <div className="relative w-full overflow-hidden p-8 mt-8">
-            {/* Wrapping div for seamless looping */}
-            <motion.div
-                className="flex"
-                animate={{
-                    x: ['-100%', '0%'],
-                    transition: {
-                        ease: 'linear',
-                        duration: 20,
-                        repeat: Infinity,
-                    }
-                }}
-            >
-                {/* Render duplicated slides */}
+        <div class="slider">
+            <div class="move">
+                {/* Mapear cada elemento del array y renderizar la imagen dentro de un div */}
                 {duplicatedSlides.map((slide, index) => (
-                    <div key={index} className="flex-shrink-0" style={{ width: `${100/ slides.length}%` }}>
-                        <div className="flex flex-col items-center justify-center  text-6xl mr-2 ml-2">
-                            <img className='w-32' src={slide.Alma} alt="" />
-                            <img className='w-32' src={slide.Altisa} alt="" />
-                            <img className='w-32' src={slide.Bomi} alt="" />
-                            <img className='w-32' src={slide.Cardioclinic} alt="" />
-                            <img className='w-32' src={slide.Depsa} alt="" />
-                            <img className='w-32' src={slide.Econolentes} alt="" />
-                            <img className='w-32' src={slide.Germsa} alt="" />
-                            <img className='w-32' src={slide.Palomino} alt="" />
-                            <img className='w-32' src={slide.Ransa} alt="" />
-                            <img className='w-32' src={slide.SLA} alt="" />
-                        </div>
+                    <div className="box" key={index}>
+                        <img className="img-marca" src={slide} alt={`Marca ${index}`} />
                     </div>
                 ))}
-            </motion.div>
+            </div>
         </div>
     );
 };

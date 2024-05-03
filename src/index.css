@@ -111,3 +111,37 @@
       animation: gradientChange 4s ease infinite;
   }
 }
+
+
+/* marcas slider */
+.slider {
+  background: #ffffff;
+  height: 100px;
+  width: 90%;
+  overflow: hidden;
+}
+
+.slider .move {
+  display: flex;
+  width: calc(200px * 20);
+  animation: animacion 50s linear infinite;
+}
+
+@keyframes animacion {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-250px * 10));
+  }
+}
+
+.slider .box {
+  height: 100px;
+  width: 250px;
+}
+
+.img-marca{
+  width: 80px;
+  height: 70px;
+}

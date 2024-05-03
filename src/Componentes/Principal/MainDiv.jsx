@@ -25,9 +25,9 @@ function MainDiv() {
                     Conseguir talento <span className='flex items-center justify-center bg-no-repeat ml-2 animate-fade-right'
                      style={{backgroundImage: `url(${arrow})`,width:'30px', height:'20px' }}></span>    
                 </button>
-                <button href="#"
+                <a href="#dirigido"
                     className="inline-flex items-center justify-center w-full px-8 py-3 text-lg font-bold text-primarytext transition-all duration-200 hover:bg-gray-50 sm:w-auto rounded-xl animate-fade-right"
-                    role="button">Aprender más</button>
+                    role="button">Aprender más</a   >
             </div>
         </div>
     
