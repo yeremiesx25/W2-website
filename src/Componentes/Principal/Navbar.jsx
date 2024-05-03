@@ -26,12 +26,13 @@ function Navbar() {
             <Link to="/Empresas" className="text-gray-800 hover:text-primarycolor">
               Empresas
             </Link>
-            <Link to="/Power" className="text-gray-800 hover:text-primarycolor">
-              Power
-            </Link>
             <Link to="/Practicantes" className="text-gray-800 hover:text-primarycolor">
               Practicantes
             </Link>
+            <Link to="/Power" className="text-gray-800 hover:text-primarycolor">
+              Power
+            </Link>
+            
             <button className="bg-primarycolor hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-xl">
               Contáctanos
             </button>
