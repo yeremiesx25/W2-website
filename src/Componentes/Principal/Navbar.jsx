@@ -35,9 +35,9 @@ function Navbar() {
               Power
             </NavLink>
             
-            <button className="bg-primarycolor hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-xl">
+            <a href='https://crbt8rv6qfm.typeform.com/to/Uvov1KoE' className="bg-primarycolor hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-xl">
               Contáctanos
-            </button>
+            </a>
           </div>
           {/* Botón de menú para dispositivos móviles */}
           <div className="md:hidden">
@@ -72,33 +72,33 @@ function Navbar() {
       {showMenu && (
         <div className="md:hidden bg-white">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            <Link
+            <NavLink
               to="/"
               className="text-gray-800 hover:text-gray-600 block px-3 py-2 rounded-md text-base font-medium"
             >
               Inicio
-            </Link>
-            <Link
+            </NavLink>
+            <NavLink
               to="/Empresas"
               className="text-gray-800 hover:text-gray-600 block px-3 py-2 rounded-md text-base font-medium"
             >
               Empresas
-            </Link>
-            <Link
+            </NavLink>
+            <NavLink
               to="/Power"
               className="text-gray-800 hover:text-gray-600 block px-3 py-2 rounded-md text-base font-medium"
             >
               Power
-            </Link>
-            <Link
+            </NavLink>
+            <NavLink
               to="/Practicantes"
               className="text-gray-800 hover:text-gray-600 block px-3 py-2 rounded-md text-base font-medium"
             >
               Practicantes
-            </Link>
-            <button className="bg-primarycolor hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg mt-2">
+            </NavLink>
+            <a href='https://crbt8rv6qfm.typeform.com/to/Uvov1KoE' className="bg-primarycolor hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg mt-2">
               Contáctanos
-            </button>
+            </a>
           </div>
         </div>
       )}

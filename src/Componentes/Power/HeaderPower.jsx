@@ -29,8 +29,8 @@ function HeaderPower() {
         <div className="md:flex w-96 text-sm justify-around hidden">
           <Link to="/" className="text-gray-300 hover:text-white">Inicio</Link>
           <Link to="/Empresas" className="text-gray-300 hover:text-white">Empresas</Link>
-          <Link to="/Power" className="text-gray-300 hover:text-white">Power</Link>
           <Link to="/Practicantes" className="text-gray-300 hover:text-white">Practicantes</Link>
+          <Link to="/Power" className="font-semibold text-amber-400 hover:text-white underline decoration-amber-400 underline-offset-4">Power</Link>
         </div>
 
         {/* Botones de login y registro */}

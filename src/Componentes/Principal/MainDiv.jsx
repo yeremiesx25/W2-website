@@ -1,6 +1,5 @@
 import React from 'react'
 import fondo from '../../assets/gradiantFondo.png'
-import { motion } from "framer-motion"
 import Hero from './Hero'
 import arrow from '../../assets/flechas-a-la-derecha.png'
 
@@ -19,12 +18,12 @@ function MainDiv() {
             Potenciamos tu éxito empresarial con soluciones de gestión humana y tecnología de vanguardia, incluso sin un departamento de recursos humanos.
             </p>
             <div className="px-8 sm:items-start sm:justify-center sm:px-0 sm:space-x-5 sm:flex mt-9">
-                <button href="#" title=""
+                <a href="/Empresas" title=""
                     className="mb-3 sm:mb-0 inline-flex items-center justify-center w-full px-8 py-3 text-lg font-bold text-white transition-all duration-200 bg-primarycolor border-2 border-transparent sm:w-auto rounded-xl hover:bg-blue-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 animate-fade-right"
                     role="button">
                     Conseguir talento <span className='flex items-center justify-center bg-no-repeat ml-2 animate-fade-right'
                      style={{backgroundImage: `url(${arrow})`,width:'30px', height:'20px' }}></span>    
-                </button>
+                </a>
                 <a href="#dirigido"
                     className="inline-flex items-center justify-center w-full px-8 py-3 text-lg font-bold text-primarytext transition-all duration-200 hover:bg-gray-50 sm:w-auto rounded-xl animate-fade-right"
                     role="button">Aprender más</a   >

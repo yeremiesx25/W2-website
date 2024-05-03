@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 
 function Intermedio() {
   return (
-    <div className="flex flex-col items-center px-5 mt-20">
+    <div id="conseguirtalento" className="flex flex-col items-center px-5 mt-20">
       <div className="text-3xl md:text-4xl font-bold leading-10 text-center text-indigo-950 w-[599px] max-md:max-w-full font-dmsans">
         Encuentra el mejor servicio para tu empresa
       </div>

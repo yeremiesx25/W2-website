@@ -14,6 +14,7 @@ function Practicantes() {
     <div className='flex flex-col'>
       <Navbar />
       <HeroPracticantes />
+      <Descubre />
       <CtaAreas />
       <AreasPracticantes />
       <CtaOtraCarrera />
