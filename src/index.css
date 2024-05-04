@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
 .slider {
 
     width: 80vw;
@@ -71,4 +72,76 @@
   left: 0;
   width: 100%;
   height: 100%;
+}
+
+
+.carousel {
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+}
+
+.carousel-item {
+  flex: 0 0 100%;
+  scroll-snap-align: start;
+}
+
+@layer utilities {
+  @keyframes gradientChange {
+      0% {
+          background-position: 0%
+      }
+
+      50% {
+          background-position: 100%
+      }
+
+      100% {
+          background-position: 0%
+      }
+  }
+
+  .gradient {
+      background: linear-gradient(90deg, blue, red);
+      background-size: 200% 200%;
+  }
+
+  .element-to-rotate {
+      animation: gradientChange 4s ease infinite;
+  }
+}
+
+
+/* marcas slider */
+.slider {
+  background: #ffffff;
+  height: 100px;
+  width: 90%;
+  overflow: hidden;
+}
+
+.slider .move {
+  display: flex;
+  width: calc(200px * 20);
+  animation: animacion 50s linear infinite;
+}
+
+@keyframes animacion {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-250px * 10));
+  }
+}
+
+.slider .box {
+  height: 100px;
+  width: 250px;
+}
+
+.img-marca{
+  width: 80px;
+  height: 70px;
 }

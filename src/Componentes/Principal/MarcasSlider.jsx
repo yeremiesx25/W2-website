@@ -1,13 +1,28 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import redondos from '../../assets/logo-redondos.png'
+import Alma from '../../assets/Logos Clientes/Alma@2x.png'
+import Altisa from '../../assets/Logos Clientes/Altisa@2x.png'
+import Bomi from '../../assets/Logos Clientes/Bomi@2x.png'
+import Cardioclinic from '../../assets/Logos Clientes/Cardioclinic@2x.png'
+import Depsa from '../../assets/Logos Clientes/Depsa@2x.png'
+import Econolentes from '../../assets/Logos Clientes/Econolentes@2x.png'
+import Germsa from '../../assets/Logos Clientes/Germsa@2x.png'
+import Palomino from '../../assets/Logos Clientes/Palomino@2x.png'
+import Ransa from '../../assets/Logos Clientes/RANSA@2x.png'
+import SLA from '../../assets/Logos Clientes/SLA@2x.png'
+
 // Define the array of slides with numbers
 const slides = [
-    { redondos },
-    { redondos },
-    { redondos },
-    { redondos },
-    { redondos },
+    Alma,
+    Altisa,
+    Bomi,
+    Cardioclinic,
+    Depsa,
+    Econolentes,
+    Germsa,
+    Palomino,
+    Ransa,
+    SLA
 ];
 
 const MarcasSlider = () => {
@@ -15,28 +30,15 @@ const MarcasSlider = () => {
     const duplicatedSlides = [...slides, ...slides];
 
     return (
-        <div className="relative w-full overflow-hidden p-8">
-            {/* Wrapping div for seamless looping */}
-            <motion.div
-                className="flex"
-                animate={{
-                    x: ['-100%', '0%'],
-                    transition: {
-                        ease: 'linear',
-                        duration: 15,
-                        repeat: Infinity,
-                    }
-                }}
-            >
-                {/* Render duplicated slides */}
+        <div class="slider">
+            <div class="move">
+                {/* Mapear cada elemento del array y renderizar la imagen dentro de un div */}
                 {duplicatedSlides.map((slide, index) => (
-                    <div key={index} className="flex-shrink-0" style={{ width: `${100 / slides.length}%` }}>
-                        <div className="flex flex-col items-center justify-center  text-6xl mr-2 ml-2">
-                            <img className='w-32' src={slide.redondos} alt="" />
-                        </div>
+                    <div className="box" key={index}>
+                        <img className="img-marca" src={slide} alt={`Marca ${index}`} />
                     </div>
                 ))}
-            </motion.div>
+            </div>
         </div>
     );
 };

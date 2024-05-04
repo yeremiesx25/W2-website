@@ -3,11 +3,11 @@ import { motion } from "framer-motion";
 
 function Intermedio() {
   return (
-    <div className="flex flex-col items-center px-5 mt-20">
-      <div className="text-4xl font-bold leading-10 text-center text-indigo-950 w-[599px] max-md:max-w-full font-dmsans">
+    <div id="conseguirtalento" className="flex flex-col items-center px-5 mt-20">
+      <div className="text-3xl md:text-4xl font-bold leading-10 text-center text-indigo-950 w-[599px] max-md:max-w-full font-dmsans">
         Encuentra el mejor servicio para tu empresa
       </div>
-      <div className="flex gap-5 justify-between mt-14 text-lg font-medium leading-5 text-slate-500 max-md:flex-wrap max-md:mt-10">
+      <div className="flex justify-between mt-14 text-lg font-medium leading-5 text-slate-500 flex-wrap">
         <motion.button
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
@@ -27,6 +27,7 @@ function Intermedio() {
             <div className="flex-auto my-auto font-dmsans">Reclutamiento</div>
           </div>
         </motion.button>
+
         <motion.button
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
@@ -46,6 +47,7 @@ function Intermedio() {
             <div className="flex-auto my-auto font-dmsans">Head Hunting</div>
           </div>
         </motion.button>
+        
         <motion.button
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
@@ -68,7 +70,7 @@ function Intermedio() {
       </div>
 
       {/* Reclutamiento */}
-      <div id="servicio-reclutamiento" className="mt-2">
+      <div id="servicio-reclutamiento" className="mt-2 flex flex-wrap">
 
       <div className="flex flex-col items-center self-stretch px-16 pt-0 mt-10 w-full bg-indigo-600 rounded-3xl border border-gray-100 border-solid shadow-sm max-md:px-5 max-md:mt-10 max-md:max-w-full">
         <div className="mt-6 w-full max-w-[977px] max-md:max-w-full">
@@ -148,6 +150,7 @@ function Intermedio() {
       </div>
 
       </div>
+      
 
       {/* Outsourcing */}
       <div id="servicio-outsourcing" className="mt-2" style={{ display: "none" }}>

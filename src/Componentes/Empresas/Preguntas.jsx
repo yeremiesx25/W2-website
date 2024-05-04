@@ -3,71 +3,130 @@ import { motion } from "framer-motion";
 
 function Preguntas() {
   return (
-    <div className="mx-16 mt-20">
-      <div className="flex gap-5 max-md:flex-col max-md:gap-0">
-        <div className="flex flex-col w-[58%] max-md:ml-0 max-md:w-full">
-          <div className="flex flex-col grow pb-8 text-xl font-bold leading-9 text-slate-900 max-md:mt-10 max-md:max-w-full">
-            <img
-              loading="lazy"
-              srcSet="https://cdn.builder.io/api/v1/image/assets%2F6be6dd5b90fb4db2b9632e2f5aba57f6%2F6fcc4cb30a654c1685b446aee47c1fd4?width=100 100w, https://cdn.builder.io/api/v1/image/assets%2F6be6dd5b90fb4db2b9632e2f5aba57f6%2F6fcc4cb30a654c1685b446aee47c1fd4?width=200 200w, https://cdn.builder.io/api/v1/image/assets%2F6be6dd5b90fb4db2b9632e2f5aba57f6%2F6fcc4cb30a654c1685b446aee47c1fd4?width=400 400w, https://cdn.builder.io/api/v1/image/assets%2F6be6dd5b90fb4db2b9632e2f5aba57f6%2F6fcc4cb30a654c1685b446aee47c1fd4?width=800 800w, https://cdn.builder.io/api/v1/image/assets%2F6be6dd5b90fb4db2b9632e2f5aba57f6%2F6fcc4cb30a654c1685b446aee47c1fd4?width=1200 1200w, https://cdn.builder.io/api/v1/image/assets%2F6be6dd5b90fb4db2b9632e2f5aba57f6%2F6fcc4cb30a654c1685b446aee47c1fd4?width=1600 1600w, https://cdn.builder.io/api/v1/image/assets%2F6be6dd5b90fb4db2b9632e2f5aba57f6%2F6fcc4cb30a654c1685b446aee47c1fd4?width=2000 2000w, https://cdn.builder.io/api/v1/image/assets%2F6be6dd5b90fb4db2b9632e2f5aba57f6%2F6fcc4cb30a654c1685b446aee47c1fd4"
-              className="w-full border-0 border-solid aspect-[17.24] border-black border-opacity-0 stroke-[1px] stroke-black stroke-opacity-20 max-md:max-w-full"
-            />
-            <div className="flex gap-5 justify-between mt-8 max-md:flex-wrap max-md:max-w-full">
-              <div>¿Solicitan experiencia mínima?</div>
-              <img
-                loading="lazy"
-                src="https://cdn.builder.io/api/v1/image/assets/TEMP/58966b14407b82d1197ed908de2dbb12931c55d104ae9c3c44d45c806baf6a3a?apiKey=6be6dd5b90fb4db2b9632e2f5aba57f6&"
-                className="shrink-0 my-auto w-6 aspect-square"
-              />
-            </div>
-            <img
-              loading="lazy"
-              srcSet="https://cdn.builder.io/api/v1/image/assets%2F6be6dd5b90fb4db2b9632e2f5aba57f6%2Fa6d8f3e1791548108277bba005abf7da?width=100 100w, https://cdn.builder.io/api/v1/image/assets%2F6be6dd5b90fb4db2b9632e2f5aba57f6%2Fa6d8f3e1791548108277bba005abf7da?width=200 200w, https://cdn.builder.io/api/v1/image/assets%2F6be6dd5b90fb4db2b9632e2f5aba57f6%2Fa6d8f3e1791548108277bba005abf7da?width=400 400w, https://cdn.builder.io/api/v1/image/assets%2F6be6dd5b90fb4db2b9632e2f5aba57f6%2Fa6d8f3e1791548108277bba005abf7da?width=800 800w, https://cdn.builder.io/api/v1/image/assets%2F6be6dd5b90fb4db2b9632e2f5aba57f6%2Fa6d8f3e1791548108277bba005abf7da?width=1200 1200w, https://cdn.builder.io/api/v1/image/assets%2F6be6dd5b90fb4db2b9632e2f5aba57f6%2Fa6d8f3e1791548108277bba005abf7da?width=1600 1600w, https://cdn.builder.io/api/v1/image/assets%2F6be6dd5b90fb4db2b9632e2f5aba57f6%2Fa6d8f3e1791548108277bba005abf7da?width=2000 2000w, https://cdn.builder.io/api/v1/image/assets%2F6be6dd5b90fb4db2b9632e2f5aba57f6%2Fa6d8f3e1791548108277bba005abf7da"
-              className="mt-8 w-full border-0 border-solid aspect-[17.24] border-black border-opacity-0 stroke-[1px] stroke-black stroke-opacity-20 max-md:max-w-full"
-            />
-            <div className="flex gap-5 justify-between mt-8 max-md:flex-wrap max-md:max-w-full">
-              <div>¿Es trabajo remoto, presencial o híbrido?</div>
-              <img
-                loading="lazy"
-                src="https://cdn.builder.io/api/v1/image/assets/TEMP/58966b14407b82d1197ed908de2dbb12931c55d104ae9c3c44d45c806baf6a3a?apiKey=6be6dd5b90fb4db2b9632e2f5aba57f6&"
-                className="shrink-0 my-auto w-6 aspect-square"
-              />
-            </div>
-            <img
-              loading="lazy"
-              srcSet="https://cdn.builder.io/api/v1/image/assets%2F6be6dd5b90fb4db2b9632e2f5aba57f6%2Fa6d8f3e1791548108277bba005abf7da?width=100 100w, https://cdn.builder.io/api/v1/image/assets%2F6be6dd5b90fb4db2b9632e2f5aba57f6%2Fa6d8f3e1791548108277bba005abf7da?width=200 200w, https://cdn.builder.io/api/v1/image/assets%2F6be6dd5b90fb4db2b9632e2f5aba57f6%2Fa6d8f3e1791548108277bba005abf7da?width=400 400w, https://cdn.builder.io/api/v1/image/assets%2F6be6dd5b90fb4db2b9632e2f5aba57f6%2Fa6d8f3e1791548108277bba005abf7da?width=800 800w, https://cdn.builder.io/api/v1/image/assets%2F6be6dd5b90fb4db2b9632e2f5aba57f6%2Fa6d8f3e1791548108277bba005abf7da?width=1200 1200w, https://cdn.builder.io/api/v1/image/assets%2F6be6dd5b90fb4db2b9632e2f5aba57f6%2Fa6d8f3e1791548108277bba005abf7da?width=1600 1600w, https://cdn.builder.io/api/v1/image/assets%2F6be6dd5b90fb4db2b9632e2f5aba57f6%2Fa6d8f3e1791548108277bba005abf7da?width=2000 2000w, https://cdn.builder.io/api/v1/image/assets%2F6be6dd5b90fb4db2b9632e2f5aba57f6%2Fa6d8f3e1791548108277bba005abf7da"
-              className="mt-8 w-full border-0 border-solid aspect-[17.24] border-black border-opacity-0 stroke-[1px] stroke-black stroke-opacity-20 max-md:max-w-full"
-            />
-            <div className="flex gap-5 justify-between mt-8 max-md:flex-wrap max-md:max-w-full">
-              <div>¿Qué carreras son las más solicitadas?</div>
-              <img
-                loading="lazy"
-                src="https://cdn.builder.io/api/v1/image/assets/TEMP/58966b14407b82d1197ed908de2dbb12931c55d104ae9c3c44d45c806baf6a3a?apiKey=6be6dd5b90fb4db2b9632e2f5aba57f6&"
-                className="shrink-0 my-auto w-6 aspect-square"
-              />
-            </div>
-          </div>
+    <div
+    class="mb-8 font-dmsans relative w-full bg-white px-6 pt-10 pb-8 mt-8 shadow-xl ring-1 ring-gray-900/5 sm:mx-auto sm:max-w-2xl sm:rounded-lg sm:px-10">
+    <div class="mx-auto px-5">
+        <div class="flex flex-col items-center">
+            <h2 class="mt-5 text-center text-3xl font-bold tracking-tight md:text-4xl">Preguntas frecuentes</h2>
+            <p class="mt-3 text-center text-neutral-500 md:text-lg">Algunas dudas frecuentes de nuestros clientes
+
+            </p>
         </div>
-        <div className="flex flex-col ml-5 w-[42%] max-md:ml-0 max-md:w-full">
-          <div className="flex flex-col px-5 max-md:mt-10 max-md:max-w-full">
-            <div className="text-4xl font-bold tracking-tighter capitalize leading-[52px] text-slate-900 max-md:max-w-full">
-              ¿Tienes otra pregunta?
+        <div class="mx-auto mt-8 grid max-w-xl divide-y divide-neutral-200">
+            <div class="py-5">
+                <details class="group">
+                    <summary class="flex cursor-pointer list-none items-center justify-between font-medium">
+                        <span> ¿Cualquiera puede postular a Power?</span>
+                        <span class="transition group-open:rotate-180">
+                                <svg fill="none" height="24" shape-rendering="geometricPrecision"
+                                    stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="1.5" viewBox="0 0 24 24" width="24">
+                                    <path d="M6 9l6 6 6-6"></path>
+                                </svg>
+                            </span>
+                    </summary>
+                    <p class="group-open:animate-fadeIn mt-3 text-neutral-600">Springerdata offers a variety of
+                        billing options, including monthly and annual subscription plans, as well as pay-as-you-go
+                        pricing for certain services. Payment is typically made through a credit card or other
+                        secure online payment method.
+                    </p>
+                </details>
             </div>
-            <div className="mt-4 text-xl leading-9 text-black text-opacity-60 max-md:max-w-full">
-              Dejanos un mensaje y contestaremos a la brevedad.
+            <div class="py-5">
+                <details class="group">
+                    <summary class="flex cursor-pointer list-none items-center justify-between font-medium">
+                        <span> ¿Cualquiera puede postular a Power?</span>
+                        <span class="transition group-open:rotate-180">
+                                <svg fill="none" height="24" shape-rendering="geometricPrecision"
+                                    stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="1.5" viewBox="0 0 24 24" width="24">
+                                    <path d="M6 9l6 6 6-6"></path>
+                                </svg>
+                            </span>
+                    </summary>
+                    <p class="group-open:animate-fadeIn mt-3 text-neutral-600">We offer a 30-day money-back
+                        guarantee for most of its subscription plans. If you are not satisfied with your
+                        subscription within the first 30 days, you can request a full refund. Refunds for
+                        subscriptions that have been active for longer than 30 days may be considered on a
+                        case-by-case basis.
+                    </p>
+                </details>
             </div>
-            <div className="flex gap-2 mt-8 text-base capitalize max-md:flex-wrap max-md:max-w-full">
-              <div className="flex-1 justify-center items-start px-5 py-5 font-medium rounded-lg bg-zinc-100 text-neutral-400 max-md:pr-5">
-                Tu pregunta...
-              </div>
-              <div className="justify-center px-6 py-5 font-bold text-white whitespace-nowrap bg-indigo-600 rounded-lg max-md:px-5">
-                Enviar
-              </div>
+            <div class="py-5">
+                <details class="group">
+                    <summary class="flex cursor-pointer list-none items-center justify-between font-medium">
+                        <span>¿Cualquiera puede postular a Power?</span>
+                        <span class="transition group-open:rotate-180">
+                                <svg fill="none" height="24" shape-rendering="geometricPrecision"
+                                    stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="1.5" viewBox="0 0 24 24" width="24">
+                                    <path d="M6 9l6 6 6-6"></path>
+                                </svg>
+                            </span>
+                    </summary>
+                    <p class="group-open:animate-fadeIn mt-3 text-neutral-600">To cancel your subscription, you can
+                        log in to your account and navigate to the subscription management page. From there, you
+                        should be able to cancel your subscription and stop future billing.
+                    </p>
+                </details>
             </div>
-          </div>
+            <div class="py-5">
+                <details class="group">
+                    <summary class="flex cursor-pointer list-none items-center justify-between font-medium">
+                        <span>¿Cualquiera puede postular a Power?</span>
+                        <span class="transition group-open:rotate-180">
+                                <svg fill="none" height="24" shape-rendering="geometricPrecision"
+                                    stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="1.5" viewBox="0 0 24 24" width="24">
+                                    <path d="M6 9l6 6 6-6"></path>
+                                </svg>
+                            </span>
+                    </summary>
+                    <p class="group-open:animate-fadeIn mt-3 text-neutral-600">We offer a free trial of our software
+                        for a limited time. During the trial period, you will have access to a limited set of
+                        features and functionality, but you will not be charged.
+                    </p>
+                </details>
+            </div>
+            <div class="py-5">
+                <details class="group">
+                    <summary class="flex cursor-pointer list-none items-center justify-between font-medium">
+                        <span>¿Cualquiera puede postular a Power?</span>
+                        <span class="transition group-open:rotate-180">
+                                <svg fill="none" height="24" shape-rendering="geometricPrecision"
+                                    stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="1.5" viewBox="0 0 24 24" width="24">
+                                    <path d="M6 9l6 6 6-6"></path>
+                                </svg>
+                            </span>
+                    </summary>
+                    <p class="group-open:animate-fadeIn mt-3 text-neutral-600">If you need help with our platform or
+                        have any other questions, you can contact the company's support team by submitting a support
+                        request through the website or by emailing support@ourwebsite.com.
+                    </p>
+                </details>
+            </div>
+            <div class="py-5">
+                <details class="group">
+                    <summary class="flex cursor-pointer list-none items-center justify-between font-medium">
+                        <span>¿Cualquiera puede postular a Power?</span>
+                        <span class="transition group-open:rotate-180">
+                                <svg fill="none" height="24" shape-rendering="geometricPrecision"
+                                    stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                    stroke-width="1.5" viewBox="0 0 24 24" width="24">
+                                    <path d="M6 9l6 6 6-6"></path>
+                                </svg>
+                            </span>
+                    </summary>
+                    <p class="group-open:animate-fadeIn mt-3 text-neutral-600">We may offer discounts or promotions
+                        from time to time. To stay up-to-date on the latest deals and special offers, you can sign
+                        up for the company's newsletter or follow it on social media.
+                    </p>
+                </details>
+            </div>
         </div>
-      </div>
     </div>
+</div>
   );
 }
 

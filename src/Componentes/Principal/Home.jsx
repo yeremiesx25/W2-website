@@ -8,18 +8,18 @@ import Testimonio from './Testimonio'
 import Faq from './Faq'
 import Navbar from './Navbar'
 import Footer from './Footer'
+import Founders from './Founders'
 
 function Home() {
   return (
     <div className='flex flex-col' >
       <Navbar/>
       <MainDiv/>
-      <Hero />
       <MarcasSlider/>
       <Counts />
       <Dirigido/>
       <Testimonio/>
-      <Faq/>
+      <Founders />
       <Footer/>
     </div>
   )
