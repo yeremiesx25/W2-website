@@ -32,7 +32,7 @@ function Intermedio() {
               src="https://cdn.builder.io/api/v1/image/assets/TEMP/0d0379c52667cc830bebbbdfa50529d4877ba4bc532e41aec767c67161c253fa?apiKey=6be6dd5b90fb4db2b9632e2f5aba57f6&"
               className="shrink-0 w-12 aspect-square"
             />
-            <div className="flex-auto my-auto font-dmsans">Reclutamiento</div>
+            <div className="flex-auto my-auto font-dmsans">Reclutar a Yeremies</div>
           </div>
         </motion.button>
 
