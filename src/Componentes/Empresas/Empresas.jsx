@@ -11,6 +11,7 @@ function Empresas() {
       <Navbar />
       <HeroEmpresa />
       <Intermedio />
+      <Servicio />
     </>
   )
 }

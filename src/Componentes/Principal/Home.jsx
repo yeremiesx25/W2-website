@@ -15,9 +15,9 @@ function Home() {
     <div className='flex flex-col' >
       <Navbar/>
       <MainDiv/>
+      <Dirigido/>
       <MarcasSlider/>
       <Counts />
-      <Dirigido/>
       <Testimonio/>
       <Founders />
       <Footer/>

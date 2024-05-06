@@ -35,7 +35,7 @@ function Navbar() {
               Power
             </NavLink>
             
-            <a href='https://crbt8rv6qfm.typeform.com/to/Uvov1KoE' className="bg-primarycolor hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-xl">
+            <a href='https://2kliic9t7ed.typeform.com/to/Lw8OmtpQ' className="bg-primarycolor hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-xl">
               Contáctanos
             </a>
           </div>

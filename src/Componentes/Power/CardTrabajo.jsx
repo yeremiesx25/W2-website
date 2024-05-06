@@ -14,7 +14,7 @@ function CardTrabajo() {
           <span className='w-40 h-8 border border-amb er-400 rounded-xl px-4 text-amber-400'>S/.1900</span>
         </div>
       </div>
-      <button className='w-36 h-12 bg-primarytext text-white rounded-lg hidden sm:block font-semibold'>Postular</button>
+      <button className='w-36 h-12 bg-primarytext text-white rounded-lg hidden sm:block font-semibold'>Más info</button>
     </button>
   )
 }
