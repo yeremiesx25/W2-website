@@ -1,9 +1,10 @@
 import React from 'react'
 import Navbar from "../Principal/Navbar";
-import Intermedio from '../Empresas/Intermedio'
-import Servicio from '../Empresas/Servicio'
-import Footer from '../Empresas/Footer'
+import Intermedio from './IntermedioEmpresa'
+import Servicio from './ServicioEmpresa'
+import Footer from './FooterEmpresa'
 import HeroEmpresa from './HeroEmpresa';
+import Preguntas from './PreguntasEmpresa';
 
 function Empresas() {
   return (
@@ -11,7 +12,8 @@ function Empresas() {
       <Navbar />
       <HeroEmpresa />
       <Intermedio />
-      <Servicio />
+      <Preguntas />
+      <Footer />
     </>
   )
 }

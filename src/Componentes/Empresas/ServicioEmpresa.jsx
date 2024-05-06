@@ -9,7 +9,7 @@ function Servicio() {
     rel="stylesheet"
     href="https://horizon-tailwind-react-corporate-7s21b54hb-horizon-ui.vercel.app/static/css/main.d7f96858.css"
   />
-  <div className="flex w-full flex-col justify-center items-center h-[530px]">
+  <div className="flex w-full flex-col justify-center items-center h-[300x]">
     <div
       className="flex w-full flex-col rounded-md bg-cover px-[30px] py-[30px] md:px-[64px] md:py-[56px] w-[95%]"
       style={{
