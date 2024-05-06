@@ -6,7 +6,7 @@ import arrow from '../../assets/flechas-a-la-derecha.png'
 
 function MainDiv() {
   return (
-    <section style={{backgroundImage: `url(${fondo})`, height: '924px' }}
+    <section style={{backgroundImage: `url(${fondo})`, height: '1000px' }}
     className="pt-24 bg-white sm:pt-24 font-dmsans flex flex-col items-center bg-no-repeat bg-cover">
     <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8"/>
         <div className="text-center">

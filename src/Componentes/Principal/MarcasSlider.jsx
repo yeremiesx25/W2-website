@@ -31,10 +31,10 @@ const MarcasSlider = () => {
 
     return (
         <div class="slider">
-            <div class="move">
+            <div class="move bg-white flex items-center justify-center">
                 {/* Mapear cada elemento del array y renderizar la imagen dentro de un div */}
                 {duplicatedSlides.map((slide, index) => (
-                    <div className="box" key={index}>
+                    <div className="box flex items-center justify-center" key={index}>
                         <img className="img-marca" src={slide} alt={`Marca ${index}`} />
                     </div>
                 ))}

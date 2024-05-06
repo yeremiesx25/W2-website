@@ -14,8 +14,8 @@ function Dirigido() {
 <section id='dirigido' class="text-primarytext bg-white body-font font-dmsans pt-8">
   <h2 class="sm:text-3xl text-2xl font-medium title-font text-center text-primarytext mb-20">A quiénes está dirigido nuestro servicio...
     </h2>
-  <div class="container px-5 py-24 mx-auto">
-    <div className='w-96 h-[400px] shadow-lg rounded-lg flex flex-col items-center text-center justify-around py-8'>
+  <div class="container px-5 py-8 mx-auto">
+    <div className='w-96 h-[400px] shadow-2xl rounded-lg flex flex-col items-center text-center justify-around py-8'>
       <img className='w-24 h-24' src={empresa} alt="" />
       <h3 className=' font-medium text-xl'>Empresas</h3>
       <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nihil sed facere quidem consequatur nam perferendis.</p>
