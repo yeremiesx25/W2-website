@@ -15,7 +15,7 @@ function MainDiv() {
                 className="max-w-4xl mx-auto mb-4 text-4xl font-bold leading-tight text-primarytext sm:leading-tight sm:text-5xl lg:text-6xl lg:leading-tight animate-fade-right">
                 <span className='text-primarycolor'>Potenciamos talentos,</span> impulsamos resultados
             </h1>
-            <p className="max-w-2xl mx-auto px-6 text-lg text-primarytext font-inter animate-fadenpm install -D tailwindcss-animate">
+            <p className="max-w-2xl mx-auto px-6 text-lg text-primarytext font-inter animate-fade">
             Potenciamos tu éxito empresarial con soluciones de gestión humana y tecnología de vanguardia, incluso sin un departamento de recursos humanos.
             </p>
             <div className="px-8 sm:items-start sm:justify-center sm:px-0 sm:space-x-5 sm:flex mt-9">
