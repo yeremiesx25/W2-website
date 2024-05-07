@@ -4,12 +4,12 @@ import imgHero from '../../assets/imgPracticas.png'
 function HeroEmpresa() {
   return (
     <section  style={{backgroundImage: `url(${fondo})` }}
-    className="pt-20 font-dmsans flex flex-col items-center bg-no-repeat bg-cover md:h-[650px]">
+    className="pt-20 font-dmsans flex flex-col items-center justify-center bg-no-repeat bg-cover md:h-[650px]">
     <div className="w-full max-w-7xl sm:px-6 lg:px-8 flex flex-wrap">
         <div className="text-center sm:text-left w-[600px] px-2">
             <p
                 className="max-w-4xl mx-auto mb-4 text-4xl font-bold leading-tight text-primarytext sm:leading-tight sm:text-5xl lg:text-6xl lg:leading-tight animate-fade-up">
-                <span className='text-primarycolor'>Programa de prácticas</span> Pre Profesionales
+                <span className='text-primarycolor'>Alcanza tus objetivos</span> de Gestión Humana
             </p>
             <h1 className="max-w-2xl mx-auto text-lg text-primarytext font-inter animate-fade-up">
             Potenciamos tu éxito empresarial con soluciones de gestión humana y tecnología de vanguardia, incluso sin un departamento de recursos humanos.
@@ -26,7 +26,7 @@ function HeroEmpresa() {
             </div>
         </div>
         <div className='md:ml-8 animate-fade-left '>
-            <img className='' src={imgHero} alt="" />
+            <img className='w-[500px]' src="https://res.cloudinary.com/uvggt/image/upload/f_auto/v1600446040/2020/09%20SEPTIEMBRE/Gestion%20Talento%20Humano/recurso_humano_portada.jpg" alt="" />
         </div>      
     </div>
 </section>

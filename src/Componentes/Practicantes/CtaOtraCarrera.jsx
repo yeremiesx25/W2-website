@@ -1,12 +1,19 @@
 import React from 'react'
-
+import {useTypewriter, Cursor} from 'react-simple-typewriter'
 function CtaOtraCarrera() {
+
+    const [text] = useTypewriter({
+        words: ['otra carrera?', 'Derecho?', 'Sistemas?'],
+        loop: {},
+        typeSpeed: 120,
+    });
+
   return (
     <div class="bg-primarycolor text-white py-20 font-dmsans">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex flex-col gap-8 lg:flex-row items-center">
             <div class="lg:w-1/2">
-                <h1 class="text-4xl font-bold leading-tight mb-4">¿Eres de otra carrera?</h1>
+                <h1 class="text-4xl font-bold leading-tight mb-4">¿Eres de <span>{text}</span><Cursor /></h1>
                 <p class="text-xl mb-8">Queremos saber de ti. Compartenos de qué manera tus conocimientos y habilidades podrían generar un impacto significativo, y contribuir al cambio positivo dentro de la
 familia W2. Tú podrías ser el pionero(a) de una nueva área.</p>
                 <a href="#"
