@@ -7,6 +7,13 @@ module.exports = withMT( {
     "./node_modules/flowbite/**/*.js"
   ],
   theme: {
+    screens: {
+      xs: '320px',
+      sm: '480px',
+      md: '768px',
+      lg: '976px',
+      xl: '1440px',
+    },
     extend: {
       colors: {
         primarycolor: '#2563eb',
@@ -18,6 +25,18 @@ module.exports = withMT( {
       fontFamily: {
         'dmsans': ['"DM Sans", sans-serif']
       },
+      keyframes: {
+        spinIn: {
+          to: { transform: 'rotate(18deg)'}
+        },
+        spinOut: {
+          to: { transform: 'rotate(360deg)'}
+        }
+      },
+      animation: {
+        spinIn: 'spinIn 30s linear infinite',
+        spinout: 'spinIn 10s linear infinite',
+      }
     },
   },
   plugins: [

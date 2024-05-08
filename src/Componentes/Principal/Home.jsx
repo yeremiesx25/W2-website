@@ -13,11 +13,12 @@ import Founders from './Founders'
 function Home() {
   return (
     <div className='flex flex-col' >
+      
       <Navbar/>
       <MainDiv/>
       <Dirigido/>
-      <MarcasSlider/>
       <Counts />
+      <MarcasSlider/>
       <Testimonio/>
       <Founders />
       <Footer/>

@@ -23,52 +23,25 @@ function Descubre() {
         <span class="px-2 py-1 relative inline-block"><svg class="stroke-current bottom-0 absolute text-blue-300 -translate-x-2" viewBox="0 0 410 18" xmlns="http://www.w3.org/2000/svg"><path d="M6 6.4c16.8 16.8 380.8-11.2 397.6 5.602" stroke-width="12" fill="none" fill-rule="evenodd" stroke-linecap="round"></path></svg><span class="relative">lo que nos hace diferentes</span></span>
       </p>
       <p class="max-w-3xl mt-5 mx-auto text-xl text-gray-500 dark:text-gray-300">Explora los beneficios que brindamos a nuestros dedicado y talentoso equipo de trabajo.</p>
-      <a href="#flexibilidad"
-        class="inline-block px-6 py-3 mt-8 bg-blue-600 dark:bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600" id='flexibilidad'>
-        Explorar beneficios
-      </a>
     </div>
   </div>
-  <div class="bg-white ">
-  <div class="mx-auto max-w-7xl px-6 lg:px-8">
-    <div class="mx-auto mt-16 max-w-2xl sm:mt-20 lg:mt-24 lg:max-w-4xl">
-      <dl class="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16">
-        <div class="relative pl-16">
-          <dt class="text-base font-semibold leading-7 text-gray-900">
-            <div class="absolute left-0 top-0 flex h-12 w-12 items-center justify-center rounded-lg bg-blue-700">
-              <img className='w-8 h-8' src={icon4} alt="" />
-            </div>Flexibilidad en el trabajo  
-          </dt>
-          <dd  class="mt-2 text-base leading-7 text-gray-600">El equilibrio personal y laboral es nuestra prioridad, asegurando una calidad de vida de nuestro equipo.</dd>
-        </div>
-        <div class="relative pl-16">
-          <dt class="text-base font-semibold leading-7 text-gray-900">
-            <div class="absolute left-0 top-0 flex h-12 w-12 items-center justify-center rounded-lg bg-blue-700">
-              <img className='w-8 h-8' src={icon1} alt="" />
-            </div>Aprendizaje continuo
-          </dt>
-          <dd class="mt-2 text-base leading-7 text-gray-600">Nos involucramos en tu desarrollo profesional y personal, con diversas formas de capacitacitaciones a lo largo de tu estancia con nosotros.
-          </dd>
-        </div>
-        <div class="relative pl-16">
-          <dt class="text-base font-semibold leading-7 text-gray-900">
-            <div class="absolute left-0 top-0 flex h-12 w-12 items-center justify-center rounded-lg bg-blue-700">
-              <img className='w-8 h-8' src={icon3} alt="" />
-            </div>Cultura inclusiva
-          </dt>
-          <dd class="mt-2 text-base leading-7 text-gray-600">Porque las personas nos importan y nuestra cultura tiene un sello distintivo que fomenta la diversidad en todos sus ámbitos.</dd>
-        </div>
-        <div class="relative pl-16">
-          <dt class="text-base font-semibold leading-7 text-gray-900">
-            <div class="absolute left-0 top-0 flex h-12 w-12 items-center justify-center rounded-lg bg-blue-700">
-            <img className='w-8 h-8' src={icon2} alt="" />
-            </div>Desarrollo profesional
-          </dt>
-          <dd class="mt-2 text-base leading-7 text-gray-600">Tenemos la determinación que cada talento es capaz de lograr lo que se proponga en el tiempo ideal.</dd>
-        </div>
-      </dl>
+{/* animacion de scroll */}
+<div class="relative">
+    <div class="sticky top-0 h-screen flex flex-col items-center justify-center bg-gradient-to-b from-green-200 to-blue-200">
+        <h2 class="text-4xl font-bold">Flexibilidad en el trabajo</h2>
+        <p class="mt-2">Scroll Down for next slide</p>
     </div>
-  </div>
+    <div class="sticky top-0 h-screen flex flex-col items-center justify-center bg-gradient-to-b from-indigo-800 to-purple-800 text-white">
+        <h2 class="text-4xl font-bold">Aprendizaje continuo</h2>
+        <p class="mt-2">Scroll Down for next slide</p>
+    </div>
+    <div class="sticky top-0 h-screen flex flex-col items-center justify-center bg-gradient-to-b from-purple-800 to-pink-800 text-white">
+        <h2 class="text-4xl font-bold">The Third slide</h2>
+        <p class="mt-2">Scroll Down</p>
+    </div>
+    <div class="sticky top-0 h-screen flex flex-col items-center justify-center bg-gradient-to-b from-blue-200 to-indigo-100 text-black">
+        <h2 class="text-4xl font-bold">The Fourth slide</h2>
+    </div>
 </div>
 </section>
   )

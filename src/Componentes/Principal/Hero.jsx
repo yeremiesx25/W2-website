@@ -13,9 +13,9 @@ function Hero() {
 });
   return (
     <div 
-    class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    class="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
       
-    <div style={{backgroundImage: `url(${fondoPuntos})` }} class="bg-primarycolor bg-contain bg-repeat-x rounded-3xl p-8 text-center sm:p-16 md:px-24 md:py-20 lg:px-28">
+    <div style={{backgroundImage: `url(${fondoPuntos})` }} class="bg-primarycolor bg-contain bg-repeat rounded-3xl p-8 text-center sm:p-16 md:px-24 md:py-20 lg:px-28">
       <div class="max-w-2xl mx-auto">
         <h2 class="font-display text-2xl font-bold tracking-tight text-white sm:text-5xl lg:text-4xl">¿Estás listo? <br />
         Vive la experiencia <br /> <span class="text-teal-100 mx-1 font-extrabold text-2xl sm:text-5xl lg:text-4xl relative inline-block stroke-current">
