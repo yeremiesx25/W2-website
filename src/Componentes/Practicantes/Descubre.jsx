@@ -9,7 +9,7 @@ function Descubre() {
     <section class="w-full flex flex-col  dark:bg-gray-900 font-dmsans">
   <div class="max-w-7xl mx-auto pt-16 px-4  sm:px-6 lg:px-8">
     <div class="text-center space-y-5">
-      <h2 class="text-base font-semibold text-blue-500 dark:text-pink-300 tracking-wide uppercase animate-flip-up">Conoce sobre nuestro programa</h2>
+      <h2 class="text-base font-semibold text-blue-500 dark:text-pink-300 tracking-wide uppercase ">Conoce sobre nuestro programa</h2>
       <div class="inline-flex items-end justify-center w-full text-center mx-auto animate-flip-up">
         <img src="https://cdn.devdojo.com/tails/avatars/024.jpg" class="absolute transform translate-x-24 ml-6 rounded-full w-12 h-12 md:w-16 md:h-16 border-4 border-white" />
         <img src="https://cdn.devdojo.com/tails/avatars/012.jpg" class="absolute transform -translate-x-24 -ml-6 rounded-full w-12 h-12 md:w-16 md:h-16 border-4 border-white"/>

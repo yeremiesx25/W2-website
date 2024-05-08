@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {NavLink}from 'react-router-dom'
-import logo from '../../assets/Logo horizontal W2 Black.png'
+import logo from '../../assets/Logo horizontal W2 WHITE.png'
 function Navbar() {
   const [showMenu, setShowMenu] = useState(false);
 
@@ -8,16 +8,16 @@ function Navbar() {
     setShowMenu(!showMenu);
   };
 
-  const activeStyle = 'underline underline-offset-4 text-primarycolor font-medium'
-  const classDefault = 'text-gray-800 hover:text-primarycolor font-light'
+  const activeStyle = 'underline underline-offset-4 text-blue-500 font-medium'
+  const classDefault = 'text-white hover:text-primarycolor font-light'
   return (
-    <nav className="bg-white shadow z-10 top-0 fixed w-full justify-around font-dmsans">
+    <nav className="bg-primarytext shadow z-10 top-0 fixed w-full justify-around font-dmsans">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo o título */}
           <div className="flex-shrink-0">
-            <NavLink to="/" className="text-lg font-bold text-gray-800">
-              <img className='w-32 h-28' src={logo} alt="" />
+            <NavLink to="/" className="text-lg font-bold text-white">
+              <img className='w-36' src={logo} alt="" />
             </NavLink>
           </div>
           {/* Navegación de escritorio */}
@@ -45,25 +45,7 @@ function Navbar() {
               onClick={toggleMenu}
               className="text-gray-800 hover:text-gray-600 focus:outline-none"
             >
-              <svg
-                className="h-10 w-10 fill-current"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 24 24"
-              >
-                {showMenu ? (
-                  <path
-                    fillRule="evenodd"
-                    clipRule="evenodd"
-                    d="M4 6h16v2H4V6zm0 5h16v2H4v-2zm16 4H4v2h16v-2z"
-                  />
-                ) : (
-                  <path
-                    fillRule="evenodd"
-                    clipRule="evenodd"
-                    d="M4 6h16v2H4V6zm0 5h16v2H4v-2zm0 5h16v2H4v-2z"
-                  />
-                )}
-              </svg>
+              <img className='w-12 h-12' src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Hamburger_icon_white.svg/1024px-Hamburger_icon_white.svg.png" alt="" />
             </button>
           </div>
         </div>
