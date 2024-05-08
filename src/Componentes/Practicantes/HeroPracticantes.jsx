@@ -6,8 +6,9 @@ function HeroPracticantes() {
 
   return (
     <section  style={{backgroundImage: `url(${fondo})` }}
-    className="pt-20 font-dmsans flex flex-col items-center bg-no-repeat bg-cover md:h-[600px]">
+    className="pt-20 font-dmsans flex flex-col items-center bg-no-repeat bg-cover h-[auto]">
     <div className="w-full max-w-7xl sm:px-6 lg:px-8 flex flex-wrap">
+        
         <div className="text-center sm:text-left w-[600px] px-2">
             <p
                 className="max-w-4xl mx-auto mb-4 text-4xl font-bold leading-tight text-primarytext sm:leading-tight sm:text-5xl lg:text-6xl lg:leading-tight animate-fade-up">
