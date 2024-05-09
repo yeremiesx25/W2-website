@@ -4,6 +4,7 @@ import eleva from '../../assets/ELEVA TALENT.png'
 import top from '../../assets/TOP TALENT.png'
 import start from '../../assets/STARTUP TALENT.png'
 import reclut from '../../assets/reclutar.png'
+import hunt from '../../assets/head.png'
 import { motion } from "framer-motion";
 
 function Intermedio() {
@@ -51,8 +52,7 @@ const inactiveBtn = "w-full flex items-center gap-x-2 justify-center font-medium
                 <img src={eleva} alt="Icono" class="w-20 h-20 text-indigo-600" /> 
                 <p class="ml-3 leading-5 text-gray-600 font-dmsans">
                     Enfocado en personal de mandos medios como 
-                    <span class="block text-indigo-600 xl:inline"> asistentes,</span><p></p>
-                    <span class="block text-indigo-600 xl:inline"> y puestos focalizados en una organización.</span>
+                    <span class="block text-indigo-600 xl:inline"> asistentes, supervisores, coordinadores, posiciones IT y puestos focalizados en una organización.</span>
                 </p>
             </div>
         </li>
@@ -101,7 +101,7 @@ const inactiveBtn = "w-full flex items-center gap-x-2 justify-center font-medium
             <div class="flex items-center"> 
                 <img src={top} alt="Icono" class="w-20 h-20 text-indigo-600" /> 
                 <p class="ml-3 leading-5 text-gray-600">
-                Enfocado en procesos de atracción de mandos altos como <br></br> <span class="block text-indigo-600 xl:inline"> gerencias, jefaturas y posiciones altamente especializadas.</span>
+                Enfocado en procesos de atracción de mandos <br></br> altos como <span class="text-indigo-600 xl:inline"> gerencias, jefaturas y posiciones <br></br> altamente especializadas. </span> 
                 </p>
             </div>
         </li>
@@ -111,7 +111,7 @@ const inactiveBtn = "w-full flex items-center gap-x-2 justify-center font-medium
             <div class="flex items-center"> 
                 <img src={start} alt="Icono" class="w-20 h-20 text-indigo-600" /> 
                 <p class="ml-3 leading-5 text-gray-600">
-                Enfocado en procesos de <span class="block text-indigo-600 xl:inline"> atracción para startups, adaptados a su necesidad.</span>
+                Enfocado en procesos de <span class=" text-indigo-600 xl:inline"> atracción para startups, adaptados a su necesidad.</span>
                 </p>
             </div>
         </li>
@@ -130,8 +130,8 @@ const inactiveBtn = "w-full flex items-center gap-x-2 justify-center font-medium
   
 </div>
 
-<div class="lg:inset-y-0 lg:right-0 lg:w-1/2 my-4">
-   <img class="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80" alt=""/>
+<div class="lg:inset-y-0 lg:right-0 lg:w-1/3 my-4">
+   <img class="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" src={ hunt } alt=""/>
 </div>
 
 </div>
@@ -192,7 +192,7 @@ const inactiveBtn = "w-full flex items-center gap-x-2 justify-center font-medium
            </svg>
        </div>
        <p class="ml-3 leading-5 text-gray-600 font-dmsans">
-           Evaluaciones psicolaborales para <span class="block text-indigo-600 xl:inline"> identificar el perfil del talento ya sea<p><span class="block text-indigo-600 xl:inline">  antes de ingresar a la organización, para un ascenso, o determinar su estancia, etc.   </span></p> </span>
+           Evaluaciones psicolaborales para <span class=" text-indigo-600 xl:inline"> identificar el perfil del talento <br></br> ya sea <span class="text-indigo-600 xl:inline">  antes de ingresar a la organización, para un ascenso, o determinar su estancia, etc. </span> </span>
        </p>
    </li>
 </div>
