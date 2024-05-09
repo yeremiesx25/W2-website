@@ -5,26 +5,33 @@ import arrow from '../../assets/flechas-a-la-derecha.png'
 import ScrollTrigger from 'react-scroll-trigger'
 
 function MainDiv() {
-    useEffect(() => {
-        // Tu script aquí
-        (function(w, d, u) {
-          var s = d.createElement('script');
-          s.async = true;
-          s.src = u + '?' + (Date.now() / 180000 | 0);
-          var h = d.getElementsByTagName('script')[0];
-          h.parentNode.insertBefore(s, h);
-        })(window, document, 'https://cdn.bitrix24.es/b29057555/crm/form/loader_10.js');
-      }, []);
+
   return (
     
-    <section style={{backgroundImage: `url(${fondo})` }}
-    className="md:h-[900px] h-auto pt-24 bg-white sm:pt-24 font-dmsans flex flex-col items-center bg-no-repeat bg-cover animate-fade-up">
+    <section style={{backgroundImage: 'none' }}
+    className="md:h-[auto h-auto pt-24  sm:pt-24 font-dmsans flex flex-col items-center bg-no-repeat bg-cover animate-fade-up">
+        <div className="area h-full">
+			<ul class="circles">
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>
+		</div>
     <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8"/>
+    
         <div className="text-center px-4">
             <h1
                 className="max-w-4xl mx-auto mb-4 text-4xl font-bold leading-tight text-primarytext sm:leading-tight sm:text-5xl lg:text-6xl lg:leading-tight animate-fade-up">
                 <span className='text-primarycolor'>Potenciamos talentos,</span> impulsamos resultados
             </h1>
+            
             <p className="max-w-2xl mx-auto px-6 text-lg text-primarytext font-inter animate-fade-up">
             Potenciamos tu éxito empresarial con soluciones de gestión humana y tecnología de vanguardia, incluso sin un departamento de recursos humanos.
             </p>
@@ -42,6 +49,7 @@ function MainDiv() {
         </div>
     
         <Hero />
+        
         </section>
     
   );

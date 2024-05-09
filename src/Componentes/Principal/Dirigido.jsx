@@ -25,7 +25,7 @@ estratégico de atracción de personal
 incluso si ya cuentan con un área
 de RR.HH.</p>
     </div>
-    <button class="absolute inset-x-5 bottom-8 py-3 rounded-2xl font-semibold bg-white shadow-lg hidden transition duration-200 hover:bg-gray-300 group-hover:block">Learn more</button>
+    <button class="absolute inset-x-5 bottom-8 py-3 rounded-2xl font-semibold bg-white shadow-lg hidden transition duration-200 hover:bg-gray-300 group-hover:block">Ver más</button>
 </div>
 <div class="relative h-96 w-[350px] md:w-96 mx-auto  px-5 py-8 group rounded-3xl bg-gray-200 overflow-hidden shadow-xl">
     <img src="https://cdn.techwireasia.com/wp-content/uploads/2020/01/Google-Staff.jpg" alt="" class="absolute w-full h-full inset-0 object-cover"/>
@@ -42,7 +42,7 @@ empresa formal con los beneficios
 de ley mediante nuestra metodología
 de atracción incluso si no tienen CV. </p>
     </div>
-    <button class="absolute inset-x-5 bottom-8 py-3 rounded-2xl font-semibold bg-white shadow-lg hidden transition duration-200 hover:bg-gray-300 group-hover:block">Learn more</button>
+    <button class="absolute inset-x-5 bottom-8 py-3 rounded-2xl font-semibold bg-white shadow-lg hidden transition duration-200 hover:bg-gray-300 group-hover:block">Ver más</button>
 </div>
 <div class="relative h-96 w-96 mx-auto px-5 py-8 group rounded-3xl bg-gray-200 overflow-hidden shadow-xl">
     <img src="https://media.licdn.com/dms/image/D4E22AQE752m6yibZ0w/feedshare-shrink_2048_1536/0/1700660743138?e=1718236800&v=beta&t=t5LHk8Ky9OPl0EJbeCwBhXrumQWgRDsPkNcwTod8aAE" alt="" class="absolute w-full h-full inset-0 object-cover"/>

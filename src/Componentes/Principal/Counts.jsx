@@ -7,6 +7,7 @@ function Counts() {
   const [counterOn, setCounterOn] = useState(false);
   return (
     <ScrollTrigger onEnter={()=> setCounterOn(true)} onExit={()=> setCounterOn(false)}>
+      
       <div class="bg-gradient-to-r from-primarycolor to-indigo-900 w-full font-dmsans">
   <div class="max-w-7xl mx-auto py-12 px-4 sm:py-16 sm:px-6 lg:px-8  lg:py-20">
     <div class="max-w-5xl mx-auto text-center">
@@ -33,6 +34,7 @@ function Counts() {
     </dl>
   </div>
 </div>
+
     </ScrollTrigger>
     
   )

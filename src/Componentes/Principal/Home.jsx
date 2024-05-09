@@ -9,6 +9,7 @@ import Faq from './Faq'
 import Navbar from './Navbar'
 import Footer from './Footer'
 import Founders from './Founders'
+import FormButton from './FormButton'
 
 function Home() {
   return (
@@ -17,6 +18,7 @@ function Home() {
       <Navbar/>
       <MainDiv/>
       <Dirigido/>
+      <FormButton />
       <Counts />
       <MarcasSlider/>
       <Testimonio/>
