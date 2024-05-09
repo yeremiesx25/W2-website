@@ -1,10 +1,20 @@
-import React from 'react'
+import {useEffect} from 'react'
 import fondo from '../../assets/gradiantFondo.png'
 import Hero from './Hero'
 import arrow from '../../assets/flechas-a-la-derecha.png'
 import ScrollTrigger from 'react-scroll-trigger'
 
 function MainDiv() {
+    useEffect(() => {
+        // Tu script aquí
+        (function(w, d, u) {
+          var s = d.createElement('script');
+          s.async = true;
+          s.src = u + '?' + (Date.now() / 180000 | 0);
+          var h = d.getElementsByTagName('script')[0];
+          h.parentNode.insertBefore(s, h);
+        })(window, document, 'https://cdn.bitrix24.es/b29057555/crm/form/loader_10.js');
+      }, []);
   return (
     
     <section style={{backgroundImage: `url(${fondo})` }}
