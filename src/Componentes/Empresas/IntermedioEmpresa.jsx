@@ -5,6 +5,7 @@ import top from '../../assets/TOP TALENT.png'
 import start from '../../assets/STARTUP TALENT.png'
 import reclut from '../../assets/reclutar.png'
 import hunt from '../../assets/head.png'
+import evalu from '../../assets/evaluacion.png'
 import { motion } from "framer-motion";
 
 function Intermedio() {
@@ -101,7 +102,7 @@ const inactiveBtn = "w-full flex items-center gap-x-2 justify-center font-medium
             <div class="flex items-center"> 
                 <img src={top} alt="Icono" class="w-20 h-20 text-indigo-600" /> 
                 <p class="ml-3 leading-5 text-gray-600">
-                Enfocado en procesos de atracción de mandos <br></br> altos como <span class="text-indigo-600 xl:inline"> gerencias, jefaturas y posiciones <br></br> altamente especializadas. </span> 
+                Enfocado en procesos de atracción de mandos altos como <span class="text-indigo-600 xl:inline">gerencias, jefaturas y posiciones altamente especializadas. </span> 
                 </p>
             </div>
         </li>
@@ -211,7 +212,7 @@ const inactiveBtn = "w-full flex items-center gap-x-2 justify-center font-medium
 </div>
 
 <div class="lg:inset-y-0 lg:right-0 lg:w-1/2 my-4">
-   <img class="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80" alt=""/>
+   <img class="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" src= { evalu } alt=""/>
 </div>
 
 </div>
@@ -307,7 +308,7 @@ const inactiveBtn = "w-full flex items-center gap-x-2 justify-center font-medium
   <button
     className={`${
       activeContent === 0 ? activeBtn : inactiveBtn
-    } mb-2 lg:mb-0 px-4 py-2 rounded-l`}
+    } mb-2 lg:mb-0 px-4 py-2 rounded-l `}
     onClick={() => handleClick(0)}
   >
     Atracción de Personal
