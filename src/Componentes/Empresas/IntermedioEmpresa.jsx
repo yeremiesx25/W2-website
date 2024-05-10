@@ -16,21 +16,21 @@ function Intermedio() {
   const [activeContent, setActiveContent] = useState(0);
 
   const activeBtn =
-    "w-full flex items-center gap-x-4 justify-center font-medium rounded-r px-5 py-2 border bg-primarytext text-white border-gray-200 ";
+    "w-full flex items-center gap-x-4 justify-center font-medium rounded-r px-5 py-2 border bg-blue-600 text-white border-gray-200 "; 
 
   const handleClick = (index) => {
     setActiveContent(index);
     
   };
   
-const inactiveBtn = "w-full flex items-center gap-x-4 justify-center font-medium rounded-r px-5 py-2 border bg-white text-gray-800 border-gray-200 hover:bg-gray-100 font-dmsans ";
+const inactiveBtn = "w-full flex items-center gap-x-4 justify-center font-medium rounded-r px-5 py-2 border bg-white text-gray-800 border-gray-200 hover:bg-gray-100 font-dmsans";
   const content = [
     <div>
      <section class="sm:mt-6 lg:mt-8 mt-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 clas">
 
 <div
     class="my-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28 flex gap-3 lg:flex-justify lg:flex flex-col lg:flex-row font-dmsans border border-gray-300">
-    <div class="sm:text-center lg:text-left">
+    <div class="sm:text-center lg:text-left my-8">
         <h1 class="text-4xl tracking-tight font-extrabold text-gray-800 sm:text-5xl md:text-6xl">
             <span class="block xl:inline">Atracción de </span>
             <span class="block text-indigo-600 xl:inline">Personal</span>
@@ -91,14 +91,15 @@ const inactiveBtn = "w-full flex items-center gap-x-4 justify-center font-medium
 
 <div
   class="my-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28 flex gap-3 lg:flex-justify lg:flex flex-col lg:flex-row font-dmsans border border-gray-300">
-<div class="sm:text-center lg:text-left">
+<div class="sm:text-center lg:text-left my-8">
    <h1 class="text-4xl tracking-tight font-extrabold text-gray-800 sm:text-5xl md:text-6xl">
        <span class="block xl:inline">Head </span>
        <span class="block text-indigo-600 xl:inline">Hunting</span>
    </h1>
    <p
        class="mt-3 text-base text-black sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-       Segmentamos nuestros procesos para crear una experiencia optima y a la medida de nuestros clientes.
+       Segmentamos nuestros procesos para crear una 
+       <br></br>experiencia optima y a la medida de nuestros clientes.
    </p>
 
    <div>
@@ -107,7 +108,7 @@ const inactiveBtn = "w-full flex items-center gap-x-4 justify-center font-medium
             <div class="flex items-center"> 
                 <img src={top} alt="Icono" class="w-20 h-20 text-indigo-600" /> 
                 <p class="ml-3 leading-5 text-gray-600">
-                Enfocado en procesos de atracción de mandos altos como <span class="text-indigo-600 xl:inline">gerencias, jefaturas y posiciones altamente especializadas. </span> 
+                Enfocado en procesos de atracción de mandos altos <br></br> como <span class="text-indigo-600 xl:inline">gerencias, jefaturas y posiciones altamente <br></br>especializadas. </span> 
                 </p>
             </div>
         </li>
@@ -117,7 +118,7 @@ const inactiveBtn = "w-full flex items-center gap-x-4 justify-center font-medium
             <div class="flex items-center"> 
                 <img src={start} alt="Icono" class="w-20 h-20 text-indigo-600" /> 
                 <p class="ml-3 leading-5 text-gray-600">
-                Enfocado en procesos de <span class=" text-indigo-600 xl:inline"> atracción para startups, adaptados a su necesidad.</span>
+                Enfocado en procesos de <span class=" text-indigo-600 xl:inline"> atracción para startups, <br></br> adaptados a su necesidad.</span>
                 </p>
             </div>
         </li>
@@ -150,7 +151,7 @@ const inactiveBtn = "w-full flex items-center gap-x-4 justify-center font-medium
 
 <div
  class="my-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28 flex gap-3 lg:flex-justify lg:flex flex-col lg:flex-row font-dmsans border border-gray-300">
-<div class="sm:text-center lg:text-left">
+<div class="sm:text-center lg:text-left my-8">
    <h1 class="text-4xl tracking-tight font-extrabold text-gray-800 sm:text-5xl md:text-6xl">
        <span class="block xl:inline">Evaluación de </span>
        <span class="block text-indigo-600 xl:inline">Personal</span>
@@ -171,7 +172,7 @@ const inactiveBtn = "w-full flex items-center gap-x-4 justify-center font-medium
            </svg>
        </div>
        <p class="ml-3 leading-5 text-gray-600 font-dmsans">
-           Evaluaciones de clima y cultura adaptados a la realidad y <span class="block text-indigo-600 xl:inline"> necesidad de la organización. </span>
+           Evaluaciones de clima y cultura adaptados a la realidad y <span class=" text-indigo-600 xl:inline"> necesidad de la organización. </span>
   
        </p>
    </li>
@@ -185,7 +186,7 @@ const inactiveBtn = "w-full flex items-center gap-x-4 justify-center font-medium
            </svg>
        </div>
        <p class="ml-3 leading-5 text-gray-600 font-dmsans">
-       Evaluaciones de desempeño que permitan <span class="block text-indigo-600 xl:inline"> incrementar el potencial de un equipo de trabajo.</span> <p> <span class="block text-indigo-600 xl:inline">  </span></p>
+       Evaluaciones de desempeño que permitan <span class=" text-indigo-600 xl:inline"> incrementar el potencial de un equipo de trabajo.</span> <p> <span class="block text-indigo-600 xl:inline">  </span></p>
        </p>
    </li>
 
@@ -230,10 +231,10 @@ const inactiveBtn = "w-full flex items-center gap-x-4 justify-center font-medium
 
 <div
  class="my-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28 flex gap-3 lg:flex-justify lg:flex flex-col lg:flex-row font-dmsans border border-gray-300">
-<div class="sm:text-center lg:text-left">
-   <h1 class="text-4xl tracking-tight font-extrabold text-gray-800 sm:text-5xl md:text-6xl my-16">
+<div class="sm:text-center lg:text-left my-8">
+   <h1 class="text-4xl tracking-tight font-extrabold text-gray-800 sm:text-5xl md:text-6xl">
        <span class="block xl:inline">Capacitación y </span>
-       <span class="block text-indigo-600 xl:inline">Desarrollo de</span> <p><span class="block xl:inline">Personal</span></p>
+       <span class="block text-indigo-600 xl:inline">Desarrollo de</span> <span class="block xl:inline">Personal</span>
    </h1>
    <p
        class="mt-3 text-base text-black sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
