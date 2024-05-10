@@ -223,10 +223,6 @@ const inactiveBtn = "w-72 flex items-center gap-x-4 justify-center font-medium r
 </div>
 
 </div>
-<<<<<<< HEAD
-=======
-
->>>>>>> d1dfd37007e340ce7369bc34b20ce9e7796feed7
 </section>
 </div>,
 
@@ -314,7 +310,7 @@ const inactiveBtn = "w-72 flex items-center gap-x-4 justify-center font-medium r
 
   return (
     <div className=" flex flex-wrap justify-center p-3 lg:gap-8 w-full items-center   ">
-        <h2 className="text-primarytext font-semibold text-3xl mt-8 md:mt-20">Brindamos soluciones para todo tipo de reto de gestión humana</h2>
+        <h2 className="text-primarytext font-semibold text-4xl mt-8 md:mt-20 text-center">Brindamos soluciones para todo tipo de reto de gestión humana</h2>
       <div className="flex w-full flex-wrap justify-center mx-4 rounded">
   <button
     className={`${
