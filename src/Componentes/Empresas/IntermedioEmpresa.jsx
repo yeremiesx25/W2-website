@@ -223,7 +223,7 @@ const inactiveBtn = "w-72 flex items-center gap-x-4 justify-center font-medium r
 </div>
 
 </div>
-|
+
 </section>
 </div>,
 
