@@ -3,12 +3,13 @@ import agil from '../../assets/AGIL TALENT.png'
 import eleva from '../../assets/ELEVA TALENT.png'
 import top from '../../assets/TOP TALENT.png'
 import start from '../../assets/STARTUP TALENT.png'
-import reclut from '../../assets/reclutar.png'
+import reclut from '../../assets/Reclutamiento.png'
 import hunt from '../../assets/head.png'
 import evalu from '../../assets/evaluacion.png'
 import user from '../../assets/usuarios.png'
 import hed from '../../assets/headh.png'
 import reunion from '../../assets/reu.png'
+import desarrollo from '../../assets/Aprendizaje Continuo.gif'
 import anali from '../../assets/analizar.png'
 import { motion } from "framer-motion";
 
@@ -99,7 +100,7 @@ const inactiveBtn = "w-72 flex items-center gap-x-4 justify-center font-medium r
    <p
        class="mt-3 text-base text-black sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
        Segmentamos nuestros procesos para crear una 
-       <br></br>experiencia optima y a la medida de nuestros clientes.
+       experiencia optima y a la medida de nuestros clientes.
    </p>
 
    <div>
@@ -108,7 +109,7 @@ const inactiveBtn = "w-72 flex items-center gap-x-4 justify-center font-medium r
             <div class="flex items-center"> 
                 <img src={top} alt="Icono" class="w-20 h-20 text-indigo-600" /> 
                 <p class="ml-3 leading-5 text-gray-600">
-                Enfocado en procesos de atracción de mandos altos <br></br> como <span class="text-indigo-600 xl:inline">gerencias, jefaturas y posiciones altamente <br></br>especializadas. </span> 
+                Enfocado en procesos de atracción de mandos <br></br>altos como <span class="text-indigo-600 xl:inline">  gerencias, </span> <span class="text-indigo-600 xl:inline">  jefaturas y posiciones altamente especializadas. </span> 
                 </p>
             </div>
         </li>
@@ -137,7 +138,7 @@ const inactiveBtn = "w-72 flex items-center gap-x-4 justify-center font-medium r
   
 </div>
 
-<div class="lg:inset-y-0 lg:right-0 lg:w-1/3 my-4">
+<div class="lg:inset-y-0 lg:right-0 lg:w-1/2 my-4">
    <img class="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" src={ hunt } alt=""/>
 </div>
 
@@ -218,11 +219,11 @@ const inactiveBtn = "w-72 flex items-center gap-x-4 justify-center font-medium r
 </div>
 
 <div class="lg:inset-y-0 lg:right-0 lg:w-1/2 my-4">
-   <img class="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" src= { evalu } alt=""/>
+   <img class="h-42 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" src= { evalu } alt=""/>
 </div>
 
 </div>
-
+|
 </section>
 </div>,
 
@@ -298,7 +299,7 @@ const inactiveBtn = "w-72 flex items-center gap-x-4 justify-center font-medium r
 </div>
 
 <div class="lg:inset-y-0 lg:right-0 lg:w-1/2 my-4">
-   <img class="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" src="https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2850&q=80" alt=""/>
+   <img class="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" src={ desarrollo } alt=""/>
 </div>
 
 </div>
