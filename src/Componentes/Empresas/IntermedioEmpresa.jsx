@@ -223,6 +223,10 @@ const inactiveBtn = "w-72 flex items-center gap-x-4 justify-center font-medium r
 </div>
 
 </div>
+<<<<<<< HEAD
+=======
+
+>>>>>>> d1dfd37007e340ce7369bc34b20ce9e7796feed7
 </section>
 </div>,
 
