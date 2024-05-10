@@ -4,12 +4,6 @@ import imgHero from '../../assets/imgPracticas.png'
 import SiderEmpresa from './SiderEmpresa'
 
 function HeroEmpresa() {
-    const [showForm, setShowForm] = useState(false);
-
-  const handleClick = () => {
-    setShowForm(!showForm);
-  };
-
   return (
 <section style={{backgroundImage: 'none' }}
     className="md:h-[auto h-auto pt-24  sm:pt-24 font-dmsans flex flex-col items-center bg-no-repeat bg-cover animate-fade-up">
@@ -57,19 +51,7 @@ de Talento Humano.
                     role="button">Aprender más</a>
             </div>
         </div>
-        <div>
-      <button onClick={handleClick}>Mostrar Formulario</button>
-      {showForm && (
-        <div>
-          <script
-            data-b24-form="click/10/ex701t"
-            data-skip-moving="true"
-            src="https://cdn.bitrix24.es/b29057555/crm/form/loader_10.js"
-            async
-          />
-        </div>
-      )}
-    </div>
+        
 
         </section>
   )

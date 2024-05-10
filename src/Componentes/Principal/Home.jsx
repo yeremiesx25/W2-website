@@ -17,7 +17,6 @@ function Home() {
       
       <Navbar/>
       <MainDiv/>
-      <FormButton />
       <Dirigido/>
       <Counts />
       <MarcasSlider/>
