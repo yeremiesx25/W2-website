@@ -5,32 +5,16 @@ import SiderEmpresa from './SiderEmpresa'
 
 function HeroEmpresa() {
   return (
-<section style={{backgroundImage: 'none' }}
-    className="md:h-[auto h-auto pt-24  sm:pt-24 font-dmsans flex flex-col items-center bg-no-repeat bg-cover animate-fade-up">
-        <div className="area h-full">
-			<ul class="circles">
-				<li></li>
-				<li></li>
-				<li></li>
-				<li></li>
-				<li></li>
-				<li></li>
-				<li></li>
-				<li></li>
-				<li></li>
-				<li></li>
-			</ul>
-		</div>
-    <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8"/>
-    
-        <div className="text-center px-4">
-            <h1
-                className="max-w-4xl mx-auto mb-4 text-4xl font-bold leading-tight text-primarytext sm:leading-tight sm:text-5xl lg:text-6xl lg:leading-tight animate-fade-up">
-                <span className='text-primarycolor'>Alcanza tus objetivos <br /></span> de gestión humana
-            </h1>
-            
-            <p className="max-w-2xl mx-auto px-6 text-lg text-primarytext font-inter animate-fade-up">
-            Deja atrás el dolor del reclutamiento
+<div class="bg-white py-28 font-dmsans">
+    <div class="container mx-auto px-6 md:px-12">
+        <div class="flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 lg:w-2/3">
+                <h1 class="text-4xl md:text-6xl lg:text-7xl text-primarytext font-bold mb-6">
+                    Alcanza tus objetivos de <br class="hidden md:block" />
+                    <span class="text-primarycolor">Gestión Humana</span> 
+                </h1>
+                <p class="text-lg md:text-xl lg:text-xl text-gray-500 mb-8">
+                Deja atrás el dolor del reclutamiento
 de personal con nuestra metodología
 de atracción; despeja tus dudas sobre
 el equipo que tienes y el que ha de
@@ -39,21 +23,22 @@ psicolaboral.
 Pon en nuestras manos la gestión
 operativa de tus procesos del área
 de Talento Humano. 
-            </p>
-            <div className="px-8 sm:items-start sm:justify-center sm:px-0 sm:space-x-5 sm:flex mt-9">
-                <a href="/Empresas" title=""
-                    className="mb-3 sm:mb-0 inline-flex items-center justify-center w-full px-8 py-3 text-lg font-bold text-white transition-all duration-200 bg-primarycolor border-2 border-transparent sm:w-auto rounded-xl hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 animate-fade-right"
-                    role="button">
-                    Conseguir talento    
-                </a>
-                <a href="#dirigido"
-                    className="inline-flex items-center justify-center w-full px-8 py-3 text-lg font-bold text-primarytext  hover:bg-gray-50 sm:w-auto rounded-xl"
-                    role="button">Aprender más</a>
+                </p>
+                <div class="flex gap-2">
+                    <a href="#" class="bg-primarycolor hover:bg-indigo-600 text-white font-bold py-3 px-6 rounded-md">Get
+                        Started
+                    </a>
+                    <a href="#" class="bg-gray-700 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-md">Learn
+                        More
+                    </a>
+                </div>
+            </div>
+            <div class="md:w-1/2 lg:w-1/3 mt-8 md:mt-0">
+                <img src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Hero Image" class="rounded-lg shadow-lg" />
             </div>
         </div>
-        
-
-        </section>
+    </div>
+</div>
   )
 }
 

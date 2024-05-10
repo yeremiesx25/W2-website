@@ -5,35 +5,40 @@ import Descubre from './Descubre'
 function HeroPracticantes() {
 
   return (
-        <section  style={{backgroundImage: `url(${fondo})` }}
-        className="pt-20 font-dmsans flex flex-col items-center bg-no-repeat bg-cover h-auto sm:h-[700px]">
-            
-        <div className="w-full max-w-7xl sm:px-6 lg:px-8 flex flex-wrap">
-            
-            <div className="text-center sm:text-left w-96 sm:w-[600px] px-2">
-                <p
-                    className="max-w-4xl mx-auto mb-4 text-4xl font-bold leading-tight text-primarytext sm:leading-tight sm:text-5xl lg:text-6xl lg:leading-tight animate-fade-up">
-                    <span className='text-primarycolor'>Programa de prácticas</span> Pre Profesionales
-                </p>
-                <h1 className="max-w-2xl mx-auto text-lg text-primarytext font-inter animate-fade-up">
-                Potenciamos tu éxito empresarial con soluciones de gestión humana y tecnología de vanguardia, incluso sin un departamento de recursos humanos.
-                </h1>
-                <div className="px-8 sm:items-start sm:justify-center sm:px-0 sm:space-x-5 sm:flex mt-9">
-                    <a href="#" title=""
-                        className="mb-3 sm:mb-0 inline-flex items-center justify-center w-full px-8 py-3 text-lg font-bold text-white transition-all duration-200 bg-primarycolor border-2 border-transparent sm:w-auto rounded-xl hover:bg-blue-300 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 animate-fade-up"
-                        role="button">
-                        Postula Aquí   
-                    </a>
-                    <button href="#"
-                        className="inline-flex items-center justify-center w-full px-8 py-3 text-lg font-bold text-primarytext transition-all duration-200 hover:bg-gray-50 sm:w-auto rounded-xl animate-fade-up"
-                        role="button">Aprender más</button>
-                </div>
-            </div>
-            <div className='md:ml-8 animate-fade-left '>
-                <img className='w-96 sm:w-[400px] md:w-[500px]' src={imgHero} alt="" />
-            </div>      
-        </div>
-    </section>
+    <div class="flex flex-wrap pt-12 font-dmsans">
+        <div className="area h-full hidden md:block">
+			<ul class="circles">
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>
+		</div>
+    <div class="w-full sm:w-8/12 mb-10">
+      <div class="container mx-auto h-full sm:p-10">
+        <nav class="flex px-4 justify-between items-center">
+          <div>
+            <img src="https://image.flaticon.com/icons/svg/497/497348.svg" alt="" class="w-8"/>
+          </div>
+        </nav>
+        <header class="container px-4 lg:flex mt-10 items-center h-full lg:mt-0">
+          <div class="w-full">
+            <h1 class="text-4xl lg:text-6xl font-bold">Programa de <span class="text-primarycolor">Prácticas</span> preprofesionales</h1>
+            <div class="w-20 h-2 bg-primarycolor my-4"></div>
+            <p class="text-xl mb-10">Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae maiores neque eaque ea odit placeat, tenetur illum distinctio nulla voluptatum a corrupti beatae tempora aperiam quia id aliquam possimus aut.</p>
+            <button class="bg-primarycolor text-white text-2xl font-medium px-4 py-2 rounded-lg shadow">Postular al programa</button>
+          </div>
+        </header>
+      </div>
+    </div>
+    <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?q=80&w=1955&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Leafs" class="w-full h-48 object-cover sm:h-screen sm:w-4/12"/>
+  </div>
   )
 }
 
