@@ -16,20 +16,20 @@ function Intermedio() {
   const [activeContent, setActiveContent] = useState(0);
 
   const activeBtn =
-    "w-full flex items-center gap-x-4 justify-center font-medium rounded-r px-5 py-2 border bg-blue-600 text-white border-gray-200 "; 
+    "w-72 flex items-center gap-x-4 justify-center font-medium rounded-lg m-2 px-5 py-2 border bg-blue-600 text-white border-gray-200 "; 
 
   const handleClick = (index) => {
     setActiveContent(index);
     
   };
   
-const inactiveBtn = "w-full flex items-center gap-x-4 justify-center font-medium rounded-r px-5 py-2 border bg-white text-gray-800 border-gray-200 hover:bg-gray-100 font-dmsans";
+const inactiveBtn = "w-72 flex items-center gap-x-4 justify-center font-medium rounded-lg m-2 px-5 py-2 border bg-white text-gray-800 border-gray-200 hover:bg-gray-100 font-dmsans";
   const content = [
     <div>
      <section class="sm:mt-6 lg:mt-8 mt-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 clas">
 
 <div
-    class="my-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28 flex gap-3 lg:flex-justify lg:flex flex-col lg:flex-row font-dmsans border border-gray-300">
+    class="my-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28 flex gap-3 lg:flex-justify lg:flex flex-col lg:flex-row font-dmsans shadow-xl border-gray-300 rounded-lg">
     <div class="sm:text-center lg:text-left my-8">
         <h1 class="text-4xl tracking-tight font-extrabold text-gray-800 sm:text-5xl md:text-6xl">
             <span class="block xl:inline">Atracción de </span>
@@ -90,7 +90,7 @@ const inactiveBtn = "w-full flex items-center gap-x-4 justify-center font-medium
 <section class="sm:mt-6 lg:mt-8 mt-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
 <div
-  class="my-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28 flex gap-3 lg:flex-justify lg:flex flex-col lg:flex-row font-dmsans border border-gray-300">
+  class="my-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28 flex gap-3 lg:flex-justify lg:flex flex-col lg:flex-row font-dmsans shadow-xl border-gray-300">
 <div class="sm:text-center lg:text-left my-8">
    <h1 class="text-4xl tracking-tight font-extrabold text-gray-800 sm:text-5xl md:text-6xl">
        <span class="block xl:inline">Head </span>
@@ -150,7 +150,7 @@ const inactiveBtn = "w-full flex items-center gap-x-4 justify-center font-medium
 <section class="sm:mt-6 lg:mt-8 mt-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
 <div
- class="my-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28 flex gap-3 lg:flex-justify lg:flex flex-col lg:flex-row font-dmsans border border-gray-300">
+ class="my-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28 flex gap-3 lg:flex-justify lg:flex flex-col lg:flex-row font-dmsans shadow-xl border-gray-300">
 <div class="sm:text-center lg:text-left my-8">
    <h1 class="text-4xl tracking-tight font-extrabold text-gray-800 sm:text-5xl md:text-6xl">
        <span class="block xl:inline">Evaluación de </span>
@@ -230,7 +230,7 @@ const inactiveBtn = "w-full flex items-center gap-x-4 justify-center font-medium
 <section class="sm:mt-6 lg:mt-8 mt-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
 <div
- class="my-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28 flex gap-3 lg:flex-justify lg:flex flex-col lg:flex-row font-dmsans border border-gray-300">
+ class="my-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28 flex gap-3 lg:flex-justify lg:flex flex-col lg:flex-row font-dmsans shadow-xl border-gray-300">
 <div class="sm:text-center lg:text-left my-8">
    <h1 class="text-4xl tracking-tight font-extrabold text-gray-800 sm:text-5xl md:text-6xl">
        <span class="block xl:inline">Capacitación y </span>
@@ -309,15 +309,16 @@ const inactiveBtn = "w-full flex items-center gap-x-4 justify-center font-medium
   ];
 
   return (
-    <div className="container mx-auto flex flex-col justify-center p-3 lg:gap-8 w-full items-center my-12  ">
-      <div className="flex w-full  mx-4 rounded shadow ">
+    <div className=" flex flex-wrap justify-center p-3 lg:gap-8 w-full items-center   ">
+        <h2 className="text-primarytext font-semibold text-3xl mt-8 md:mt-20">Brindamos soluciones para todo tipo de reto de gestión humana</h2>
+      <div className="flex w-full flex-wrap justify-center mx-4 rounded">
   <button
     className={`${
       activeContent === 0 ? activeBtn : inactiveBtn
     } mb-2 lg:mb-0 px-4 py-2 rounded-l `}
     onClick={() => handleClick(0)}
   >
-  <img src={ user } alt=""/> Atracción de Personal
+   Atracción de Personal
   </button>
 
   <button
@@ -326,7 +327,7 @@ const inactiveBtn = "w-full flex items-center gap-x-4 justify-center font-medium
     } mb-2 lg:mb-0 px-4 py-2 `}
     onClick={() => handleClick(1)}
   >
-  <img src={ anali } alt=""/> Head Hunting
+   Head Hunting
   </button>
 
   <button
@@ -335,7 +336,7 @@ const inactiveBtn = "w-full flex items-center gap-x-4 justify-center font-medium
     } mb-2 lg:mb-0 px-4 py-2`}
     onClick={() => handleClick(2)}
   >
-  <img src={ hed } alt=""/>  Evaluación de Personal
+    Evaluación de Personal
   </button>
 
   <button
@@ -344,7 +345,7 @@ const inactiveBtn = "w-full flex items-center gap-x-4 justify-center font-medium
     } mb-2 lg:mb-0 px-4 py-2 rounded-r`}
     onClick={() => handleClick(3)}
   >
-  <img src={ reunion } alt=""/>   Evaluaciones Pro
+     Evaluaciones Pro
   </button>
 </div>
       <div>{content[activeContent]}</div>
