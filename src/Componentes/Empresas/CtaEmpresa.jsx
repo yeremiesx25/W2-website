@@ -14,7 +14,7 @@ function CtaEmpresa() {
     <div className="bg-primarycolor text-white pt-20 font-dmsans my-12">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
         <div className="flex flex-col lg:flex-row items-center">
-          <div className="lg:w-1/2">
+          <div className="w-full flex  flex-col items-center text-center lg:w-1/2">
             <h1 className="text-4xl font-bold leading-tight mb-16">Encontramos el talento que tu empresa <span className='text-[#6cffce]'>{text}</span><Cursor /> </h1>
             <a href="#" className="bg-white text-gray-900 py-3 px-6 font-semibold rounded-lg shadow-lg hover:shadow-xl transition duration-200 inline-block mb-4"> 
               Contactar con un asesor   

@@ -1,5 +1,5 @@
 import React from 'react'
-import fondo from '../../assets/gradiantFondo.png'
+import fondo from '../../assets/Web 3.jpg'
 import imgHero from '../../assets/imgPracticas.png'
 import Descubre from './Descubre'
 function HeroPracticantes() {

@@ -17,8 +17,8 @@ function Home() {
       
       <Navbar/>
       <MainDiv/>
-      <Dirigido/>
       <FormButton />
+      <Dirigido/>
       <Counts />
       <MarcasSlider/>
       <Testimonio/>
