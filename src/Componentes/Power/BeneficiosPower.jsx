@@ -3,6 +3,7 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import CardBeneficioPower from './CardBeneficioPower';
+import icon1 from '../../assets/habilidad.png'
 
 function BeneficiosPower() {
     var settings = {
@@ -47,31 +48,35 @@ function BeneficiosPower() {
       <Slider {...settings} className='font-dmsans'>
         <div>
           <CardBeneficioPower
-          iconBeneficio= ""
+          iconBeneficio= {icon1}
           nombreBeneficio= "Asesoría y orientación de Cv"
           parrafoBeneficio= "Si tu CV no esta correctamente direccionado para el puesto, nosotros te apoyamos."
           />
         </div>
         <div>
         <CardBeneficioPower 
+        iconBeneficio= {icon1}
         nombreBeneficio= "Preparación para la entrevista"
         parrafoBeneficio= "Te preparamos para las entrevistas con los tips exactos de cada pregunta."
         />
         </div>
         <div>
         <CardBeneficioPower
+        iconBeneficio= {icon1}
         nombreBeneficio= "Desarrollo de habildiades blandas"
         parrafoBeneficio= "Te ayudamos en el desarrollo de las habilidades requeridas para el área."
         />
         </div>
         <div>
         <CardBeneficioPower 
+        iconBeneficio= {icon1}
         nombreBeneficio= "Retroalimentación"
         parrafoBeneficio= "Retroalimentación constructiva para fortalecer tu autoconfianza."
         />
         </div>
         <div>
         <CardBeneficioPower 
+        iconBeneficio= {icon1}
         nombreBeneficio= "Soporte"
         parrafoBeneficio= "Te brindamos soporte emocional durante todo el proceso de selcción."
         />

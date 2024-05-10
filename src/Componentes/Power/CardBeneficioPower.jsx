@@ -1,5 +1,5 @@
 import React from 'react'
-
+import icon1 from '../../assets/habilidad.png'
 function CardBeneficioPower({nombreBeneficio, parrafoBeneficio, iconBeneficio}) {
   return (
     <div className='w-76 md:w-80 h-72 bg-primarytext text-white flex flex-col items-center justify-around py-8 rounded-xl mx-8'>

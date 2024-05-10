@@ -12,13 +12,13 @@ function HeroEmpresa() {
       setCurrentImageIndex(prevIndex =>
         prevIndex === backgroundImages.length - 1 ? 0 : prevIndex + 1
       );
-    }, 2000);
+    }, 2500);
 
     return () => clearInterval(interval);
   }, [backgroundImages]);
 
   return (
-    <section className="font-dmsans">
+    <section className="font-dmsans pt-12 md:pt-0 text-center">
       <div className="relative bg-gradient-to-r from-purple-600 to-blue-600 h-screen text-white overflow-hidden">
         <div className="absolute inset-0">
           <img
@@ -30,9 +30,9 @@ function HeroEmpresa() {
         </div>
 
         <div className="relative flex flex-col justify-center items-center h-full text-left">
-          <h1 className="text-5xl font-bold leading-tight mb-4">Alcanza tus Objetivos de Gestión Humana</h1>
+          <h1 className="text-5xl font-bold leading-tight mb-4 text-center">Alcanza tus Objetivos de Gestión Humana</h1>
 
-          <p className="text-lg text-gray-300 mb-8">
+          <p className="text-lg text-gray-300 mb-8 text-center">
             Deja atrás el dolor del reclutamiento de personal con nuestra metodología de atracción;
             <br />
             despeja tus dudas sobre el equipo que tienes y el que ha de ingresar con una evaluación psicolaboral.
