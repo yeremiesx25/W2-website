@@ -29,8 +29,8 @@ function Descubre() {
   </div>
 {/* animacion de scroll */}
 <div class="relative">
-    <div class="sticky top-0 h-screen flex flex-col items-center justify-center bg-gradient-to-b from-white to-indigo-50">
-    <section class="text-gray-800 body-font bg-none dark:bg-slate-900">
+<div class="sticky top-0 h-screen flex flex-col items-center justify-center bg-gradient-to-b from-white to-white text-white">
+    <section class="text-gray-600 body-font bg-none dark:bg-slate-900">
     <div class="container mx-auto flex md:px-24 md:py-10 md:flex-row flex-col items-center">
         <div
             class="lg:flex-grow mt-5 md:mt-0   md:w-1.5/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
@@ -38,55 +38,187 @@ function Descubre() {
                 class="text-2xl font-extrabold leading-9 tracking-tight mb-3 text-gray-800 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-5xl md:leading-normal">
                 Flexibilidad en el trabajo
             </h1>
-            <p class="mb-8 md:pl-0  pl-2 pr-2 leading-relaxed dark:text-gray-300">
+            <p class="mb-8 md:pl-0  pl-2 pr-2 leading-relaxed text-gray-800 dark:text-gray-300">
             El equilibrio personal y laboral es
 nuestra prioridad, asegurando una
 calidad de vida de nuestro equipo.
             </p>
+            <ul class="mt-8 space-y-3 font-medium">
+        <li class="flex items-start lg:col-span-1">
+            <div class="flex-shrink-0">
+                <svg class="w-5 h-5 text-indigo-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd"
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                        clip-rule="evenodd"></path>
+                </svg>
+            </div>
+            <p class="ml-3 leading-5 text-gray-600">
+            Trabajo Híbrido, 90% remoto
+10% presencial
+            </p>
+        </li>
+        <li class="flex items-start lg:col-span-1">
+            <div class="flex-shrink-0">
+                <svg class="w-5 h-5 text-indigo-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd"
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                        clip-rule="evenodd"></path>
+                </svg>
+            </div>
+            <p class="ml-3 leading-5 text-gray-600">
+            Jueves de PLATO.    
+            </p>
+        </li>
+        <li class="flex items-start lg:col-span-1">
+            <div class="flex-shrink-0">
+                <svg class="w-5 h-5 text-indigo-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd"
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                        clip-rule="evenodd"></path>
+                </svg>
+            </div>
+            <p class="ml-3 leading-5 text-gray-600">
+            “W2 Days”: Días de
+disfrute en Familia. 
+
+            </p>
+        </li>
+    </ul>
         </div>
         <div class="lg:max-w-lg lg:w-full mb-5 md:mb-0 md:w-1/2 w-3/6">
-            <img class="object-cover object-center rounded" alt="hero" src={Flexibilidad} />
+            <img class="object-cover object-center rounded" alt="hero" src="https://img.freepik.com/vector-gratis/ilustracion-concepto-teletrabajo_114360-5594.jpg"/>
         </div>
     </div>
 </section>
     </div>
-    <div class="sticky top-0 h-screen flex flex-col items-center justify-center bg-gradient-to-b from-indigo-800 to-purple-800 text-white">
+    <div class="sticky top-0 h-screen flex flex-col items-center justify-center bg-gradient-to-b from-white to-white text-black">
     <section class="text-gray-600 body-font bg-none dark:bg-slate-900">
     <div class="container mx-auto flex md:px-24 md:py-10 md:flex-row flex-col items-center">
+        
+        <div class="lg:max-w-lg lg:w-full mb-5 md:mb-0 md:w-1/2 w-3/6 md:mr-[10%]">
+            <img class="object-cover object-center rounded" alt="hero" src="https://img.freepik.com/vector-premium/etapas-aprendizaje-distancia-leccion-linea-e-learning-entrenamiento-linea_82574-6064.jpg"/>
+        </div>
         <div
             class="lg:flex-grow mt-5 md:mt-0   md:w-1.5/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
             <h1
-                class="text-2xl font-extrabold leading-9 tracking-tight mb-3 text-white dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-5xl md:leading-normal">
+                class="text-2xl font-extrabold leading-9 tracking-tight mb-3 text-gray-800 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-5xl md:leading-normal">
                 Aprendizaje continuo
             </h1>
-            <p class="mb-8 md:pl-0 text-white pl-2 pr-2 leading-relaxed dark:text-gray-300">
+            <p class="mb-8 md:pl-0  pl-2 pr-2 leading-relaxed text-gray-800">
             Nos involucramos en tu desarrollo
 profesional y personal, con diversas
 formas de capacitacitaciones a lo
 largo de tu estancia con nosotros
-            </p>    
-        </div>
-        <div class="lg:max-w-lg lg:w-full mb-5 md:mb-0 md:w-1/2 w-3/6">
-            <img class="object-cover object-center rounded" alt="hero" src="https://cdn-icons-png.flaticon.com/512/2644/2644258.png"/>
+            </p>
+            <ul class="mt-8 space-y-3 font-medium">
+        <li class="flex items-start lg:col-span-1">
+            <div class="flex-shrink-0">
+                <svg class="w-5 h-5 text-indigo-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd"
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                        clip-rule="evenodd"></path>
+                </svg>
+            </div>
+            <p class="ml-3 leading-5 text-gray-600">
+            Assessment Center con
+evaluación y capacitación.
+            </p>
+        </li>
+        <li class="flex items-start lg:col-span-1">
+            <div class="flex-shrink-0">
+                <svg class="w-5 h-5 text-indigo-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd"
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                        clip-rule="evenodd"></path>
+                </svg>
+            </div>
+            <p class="ml-3 leading-5 text-gray-600">
+            Experiencia a todo nivel.
+            </p>
+        </li>
+        <li class="flex items-start lg:col-span-1">
+            <div class="flex-shrink-0">
+                <svg class="w-5 h-5 text-indigo-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd"
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                        clip-rule="evenodd"></path>
+                </svg>
+            </div>
+            <p class="ml-3 leading-5 text-gray-600">
+            Capacitaciones de
+desarrollo personal.
+            </p>
+        </li>
+    </ul>
         </div>
     </div>
 </section>
     </div>
-    <div class="sticky top-0 h-screen flex flex-col items-center justify-center bg-gradient-to-b from-purple-800 to-pink-800 text-white">
+    <div class="sticky top-0 h-screen flex flex-col items-center justify-center bg-gradient-to-b from-white to-white text-white">
     <section class="text-gray-600 body-font bg-none dark:bg-slate-900">
     <div class="container mx-auto flex md:px-24 md:py-10 md:flex-row flex-col items-center">
         <div
             class="lg:flex-grow mt-5 md:mt-0   md:w-1.5/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
             <h1
-                class="text-2xl font-extrabold leading-9 tracking-tight mb-3 text-white dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-5xl md:leading-normal">
+                class="text-2xl font-extrabold leading-9 tracking-tight mb-3 text-gray-800 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-5xl md:leading-normal">
                 Cultura inclusiva
             </h1>
-            <p class="mb-8 md:pl-0  pl-2 pr-2 leading-relaxed text-white dark:text-gray-300">
+            <p class="mb-8 md:pl-0  pl-2 pr-2 leading-relaxed text-gray-800 dark:text-gray-300">
             Porque las personas nos importan y
 nuestra cultura tiene un sello
 distintivo que fomenta la diversidad
 en todos sus ámbitos.
             </p>
+            <ul class="mt-8 space-y-3 font-medium">
+        <li class="flex items-start lg:col-span-1">
+            <div class="flex-shrink-0">
+                <svg class="w-5 h-5 text-indigo-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd"
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                        clip-rule="evenodd"></path>
+                </svg>
+            </div>
+            <p class="ml-3 leading-5 text-gray-600">
+            Trabaja desde donde desees.
+            </p>
+        </li>
+        <li class="flex items-start lg:col-span-1">
+            <div class="flex-shrink-0">
+                <svg class="w-5 h-5 text-indigo-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd"
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                        clip-rule="evenodd"></path>
+                </svg>
+            </div>
+            <p class="ml-3 leading-5 text-gray-600">
+                Restrict capabilities using Token-Based Access Controls.
+            </p>
+        </li>
+        <li class="flex items-start lg:col-span-1">
+            <div class="flex-shrink-0">
+                <svg class="w-5 h-5 text-indigo-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd"
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                        clip-rule="evenodd"></path>
+                </svg>
+            </div>
+            <p class="ml-3 leading-5 text-gray-600">
+                Easily Manage API Keys.
+            </p>
+        </li>
+        <li class="flex items-start lg:col-span-1">
+            <div class="flex-shrink-0">
+                <svg class="w-5 h-5 text-indigo-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd"
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                        clip-rule="evenodd"></path>
+                </svg>
+            </div>
+            <p class="ml-3 leading-5 text-gray-600">
+                Custom validations to validate input coming to your API.
+            </p>
+        </li>
+    </ul>
         </div>
         <div class="lg:max-w-lg lg:w-full mb-5 md:mb-0 md:w-1/2 w-3/6">
             <img class="object-cover object-center rounded" alt="hero" src="https://inclusion.ubo.cl/wp-content/uploads/2024/01/inclusion-1-1024x850.webp"/>
@@ -94,23 +226,64 @@ en todos sus ámbitos.
     </div>
 </section>
     </div>
-    <div class="sticky top-0 h-screen flex flex-col items-center justify-center bg-gradient-to-b from-blue-200 to-indigo-100 text-black">
+    <div class="sticky top-0 h-screen flex flex-col items-center justify-center bg-gradient-to-b from-white to-white text-black">
     <section class="text-gray-600 body-font bg-none dark:bg-slate-900">
     <div class="container mx-auto flex md:px-24 md:py-10 md:flex-row flex-col items-center">
+        
+        <div class="lg:max-w-lg lg:w-full mb-5 md:mb-0 md:w-1/2 w-3/6  md:mr-[10%]">
+            <img class="object-cover object-center rounded" alt="hero" src="https://static.vecteezy.com/system/resources/previews/006/800/446/non_2x/career-development-illustration-exclusive-design-inspiration-vector.jpg"/>
+        </div>
         <div
             class="lg:flex-grow mt-5 md:mt-0   md:w-1.5/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">
             <h1
-                class="text-2xl font-extrabold leading-9 tracking-tight mb-3 text-gray-900 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-5xl md:leading-normal">
+                class="text-2xl font-extrabold leading-9 tracking-tight mb-3 text-gray-800 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-5xl md:leading-normal">
                 Desarrollo profesional
             </h1>
-            <p class="mb-8 md:pl-0  pl-2 pr-2 leading-relaxed dark:text-gray-300">
+            <p class="mb-8 md:pl-0  pl-2 pr-2 leading-relaxed text-gray-800">
             Tenemos la determinación que cada
 talento es capaz de lograr lo que se
 proponga en el tiempo ideal.
             </p>
-        </div>
-        <div class="lg:max-w-lg lg:w-full mb-5 md:mb-0 md:w-1/2 w-3/6">
-            <img class="object-cover object-center rounded" alt="hero" src="https://www.svgrepo.com/show/490900/hot-air-balloon.svg"/>
+            <ul class="mt-8 space-y-3 font-medium">
+        <li class="flex items-start lg:col-span-1">
+            <div class="flex-shrink-0">
+                <svg class="w-5 h-5 text-indigo-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd"
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                        clip-rule="evenodd"></path>
+                </svg>
+            </div>
+            <p class="ml-3 leading-5 text-gray-600">
+            Línea de carrera de acorde a
+desempeño y resultados.
+            </p>
+        </li>
+        <li class="flex items-start lg:col-span-1">
+            <div class="flex-shrink-0">
+                <svg class="w-5 h-5 text-indigo-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd"
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                        clip-rule="evenodd"></path>
+                </svg>
+            </div>
+            <p class="ml-3 leading-5 text-gray-600">
+            Desafiamos el desarrollo.
+            </p>
+        </li>
+        <li class="flex items-start lg:col-span-1">
+            <div class="flex-shrink-0">
+                <svg class="w-5 h-5 text-indigo-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd"
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                        clip-rule="evenodd"></path>
+                </svg>
+            </div>
+            <p class="ml-3 leading-5 text-gray-600">
+            Fomentamos la disrupción
+profesional.
+            </p>
+        </li>
+    </ul>
         </div>
     </div>
 </section>

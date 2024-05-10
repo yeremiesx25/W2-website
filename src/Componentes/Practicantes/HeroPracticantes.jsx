@@ -31,7 +31,7 @@ function HeroPracticantes() {
           <div class="w-full">
             <h1 class="text-4xl lg:text-6xl font-bold">Programa de <span class="text-primarycolor">Prácticas</span> preprofesionales</h1>
             <div class="w-20 h-2 bg-primarycolor my-4"></div>
-            <p class="text-xl mb-10">Lorem ipsum dolor sit amet consectetur adipisicing elit. Recusandae maiores neque eaque ea odit placeat, tenetur illum distinctio nulla voluptatum a corrupti beatae tempora aperiam quia id aliquam possimus aut.</p>
+            <p class="md:text-xl mb-10">Un programa diseñado para estudiantes de los últimos ciclos que buscan formarse y formar parte de W2. Nos esforzamos por preparar a los estudiantes para enfrentar los desafíos del mundo laboral al brindarles oportunidades prácticas que complementen su formación académica. No buscamos experiencia, buscamos descubrir talento y pasión.</p>
             <button class="bg-primarycolor text-white text-2xl font-medium px-4 py-2 rounded-lg shadow">Postular al programa</button>
           </div>
         </header>

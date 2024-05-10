@@ -13,8 +13,6 @@ function Empresas() {
       <Intermedio />
       <CtaEmpresa />
       <Footer />
-      
-      
     </>
   )
 }

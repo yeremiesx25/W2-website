@@ -1,5 +1,6 @@
 import React from 'react'
 import {useTypewriter, Cursor} from 'react-simple-typewriter'
+import fondoPuntos from '../../assets/punteado.png'
 function CtaOtraCarrera() {
 
     const [text] = useTypewriter({
@@ -9,7 +10,8 @@ function CtaOtraCarrera() {
     });
 
   return (
-    <div class="bg-primarycolor text-white py-20 font-dmsans">
+    <div style={{backgroundImage: `url(${fondoPuntos})` }}
+    class="bg-primarycolor text-white py-20 font-dmsans">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex flex-col gap-8 lg:flex-row items-center">
             <div class="lg:w-1/2">
