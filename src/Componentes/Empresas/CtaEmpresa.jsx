@@ -17,7 +17,7 @@ function CtaEmpresa() {
           <div className="w-full flex  flex-col items-center text-center lg:w-1/2">
             <h1 className="text-4xl font-bold leading-tight mb-16">Encontramos el talento que tu empresa <span className='text-[#6cffce]'>{text}</span><Cursor /> </h1>
             <a href="#" className="bg-white text-gray-900 py-3 px-6 font-semibold rounded-lg shadow-lg hover:shadow-xl transition duration-200 inline-block mb-4"> 
-              Contactar con un asesor   
+              Cotiza con nosotros  
             </a>
           </div>
           <div className="lg:w-1/3 order-first h-full flex items-end">

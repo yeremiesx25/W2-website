@@ -4,6 +4,7 @@ import Intermedio from './IntermedioEmpresa'
 import Footer from  "../Principal/Footer"
 import CtaEmpresa from './CtaEmpresa'
 import HeroEmpresa from './HeroEmpresa'
+import CardTrabajo from './CardTrabajo'
 
 function Empresas() {
   return (
@@ -13,6 +14,7 @@ function Empresas() {
       <Intermedio />
       <CtaEmpresa />
       <Footer />
+      <CardTrabajo />
     </>
   )
 }
