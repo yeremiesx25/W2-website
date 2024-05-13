@@ -20,7 +20,7 @@ function Dirigido() {
         class="absolute inset-0 w-full h-full rounded-3xl bg-black bg-opacity-0 transition duration-500 backdrop-filter group-hover:bg-opacity-20 group-hover:backdrop-blur">
     </div>
     <div class="absolute inset-x-5 text-white ">
-        <h2 class="text-5xl font-bold mb-2">Empresa</h2>
+        <h2 class="text-5xl font-bold mb-2">Empresas</h2>
         <p class="hidden group-hover:block">Libérate del estrés de reclutamiento
 y selección con nuestro soporte
 estratégico de atracción de personal

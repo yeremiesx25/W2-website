@@ -11,6 +11,10 @@ import hed from '../../assets/headh.png'
 import reunion from '../../assets/reu.png'
 import desarrollo from '../../assets/Aprendizaje Continuo.gif'
 import anali from '../../assets/analizar.png'
+import evalua from '../../assets/Evaluaciones.png'
+import feliz from '../../assets/Felicidad.png'
+import sico from '../../assets/Psico.png'
+import flecha from '../../assets/flecha.png'
 import { motion } from "framer-motion";
 
 function Intermedio() {
@@ -24,26 +28,29 @@ function Intermedio() {
     
   };
   
-const inactiveBtn = "w-72 flex items-center gap-x-4 justify-center font-medium rounded-lg m-2 px-5 py-2 border bg-white text-gray-800 border-gray-200 hover:bg-gray-100 font-dmsans";
-  const content = [
+   const inactiveBtn = "w-72 flex items-center gap-x-4 justify-center font-medium rounded-lg m-2 px-5 py-2 border bg-white text-gray-800 border-gray-200 hover:bg-gray-100 font-dmsans";
+  
+   const content = [
+    
     <div>
      <section class="sm:mt-6 lg:mt-8 mt-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 clas">
 
-<div
-    class="my-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28 flex gap-3 lg:flex-justify lg:flex flex-col lg:flex-row font-dmsans shadow-xl border-gray-300 rounded-lg">
+    <div class="my-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28 flex gap-3 lg:flex-justify lg:flex flex-col lg:flex-row font-dmsans shadow-xl border-gray-300 rounded-lg">
+    
     <div class="sm:text-center lg:text-left my-8">
         <h1 class="text-4xl tracking-tight font-extrabold text-gray-800 sm:text-5xl md:text-6xl">
             <span class="block xl:inline">Atracción de </span>
             <span class="block text-indigo-600 xl:inline">Personal</span>
         </h1>
+        
         <p
             class="mt-3 text-base text-black sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
             Entendemos el cambio y la globalización es por ello que implementamos nuestra metodología de atracción fundamentada en el Inbound Recruiting. 
             Que nos permite acelerar nuestros procesos y hacerlos efectivos.
         </p>
 
-        <div>
-    <ul class="mt-8 space-y-3 font-medium">
+    <div>
+        <ul class="mt-8 space-y-3 font-medium">
         <li class="flex items-start lg:col-span-1 mb-4">
             <div class="flex items-center"> 
                 <img src={agil} alt="Icono" class="w-20 h-20 text-indigo-600" /> 
@@ -66,6 +73,7 @@ const inactiveBtn = "w-72 flex items-center gap-x-4 justify-center font-medium r
     </ul>
 </div>
 
+
         <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
             <div class="rounded-md shadow">
                 <a href='https://2kliic9t7ed.typeform.com/to/Lw8OmtpQ'
@@ -73,10 +81,9 @@ const inactiveBtn = "w-72 flex items-center gap-x-4 justify-center font-medium r
                     Lo quiero
                 </a>
             </div>
-     
         </div>
        
-    </div>
+</div>
     
     <div class="lg:inset-y-0 lg:right-0 lg:w-1/2 my-4">
         <img class="h-56 w-full object-cover sm:h-72 md:h-64 lg:w-full lg:h-full" src={ reclut } alt=""/>
@@ -87,25 +94,27 @@ const inactiveBtn = "w-72 flex items-center gap-x-4 justify-center font-medium r
 </div>,
 
 
-<div>
-<section class="sm:mt-6 lg:mt-8 mt-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+   <div>
+       <section class="sm:mt-6 lg:mt-8 mt-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-<div
-  class="my-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28 flex gap-3 lg:flex-justify lg:flex flex-col lg:flex-row font-dmsans shadow-xl border-gray-300">
-<div class="sm:text-center lg:text-left my-8">
-   <h1 class="text-4xl tracking-tight font-extrabold text-gray-800 sm:text-5xl md:text-6xl">
+   <div class="my-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28 flex gap-3 lg:flex-justify lg:flex flex-col lg:flex-row font-dmsans shadow-xl border-gray-300">
+
+   <div class="sm:text-center lg:text-left my-8">
+       
+       <h1 class="text-4xl tracking-tight font-extrabold text-gray-800 sm:text-5xl md:text-6xl">
        <span class="block xl:inline">Head </span>
        <span class="block text-indigo-600 xl:inline">Hunting</span>
-   </h1>
-   <p
-       class="mt-3 text-base text-black sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
+       </h1>
+   
+   <p class="mt-3 text-base text-black sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
        Segmentamos nuestros procesos para crear una 
        experiencia optima y a la medida de nuestros clientes.
    </p>
 
    <div>
-<ul class="mt-8 space-y-3 font-medium"/>
-<li class="flex items-start lg:col-span-1 mb-4">
+
+    <ul class="mt-8 space-y-3 font-medium"/>
+        <li class="flex items-start lg:col-span-1 mb-4">
             <div class="flex items-center"> 
                 <img src={top} alt="Icono" class="w-20 h-20 text-indigo-600" /> 
                 <p class="ml-3 leading-5 text-gray-600">
@@ -123,7 +132,7 @@ const inactiveBtn = "w-72 flex items-center gap-x-4 justify-center font-medium r
                 </p>
             </div>
         </li>
-</div>
+    </div>
 
 
    <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
@@ -133,77 +142,63 @@ const inactiveBtn = "w-72 flex items-center gap-x-4 justify-center font-medium r
                Lo quiero
            </a>
        </div>
-
    </div>
-  
 </div>
 
-<div class="lg:inset-y-0 lg:right-0 lg:w-1/2 my-4">
-   <img class="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" src={ hunt } alt=""/>
-</div>
+    <div class="lg:inset-y-0 lg:right-0 lg:w-1/2 my-4">
+      <img class="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" src={ hunt } alt=""/>
+    </div>
 
 </div>
-
 </section>
 </div>,
 
-<div>
-<section class="sm:mt-6 lg:mt-8 mt-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div>
+        <section class="sm:mt-6 lg:mt-8 mt-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-<div
- class="my-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28 flex gap-3 lg:flex-justify lg:flex flex-col lg:flex-row font-dmsans shadow-xl border-gray-300">
-<div class="sm:text-center lg:text-left my-8">
-   <h1 class="text-4xl tracking-tight font-extrabold text-gray-800 sm:text-5xl md:text-6xl">
+    <div class="my-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28 flex gap-3 lg:flex-justify lg:flex flex-col lg:flex-row font-dmsans shadow-xl border-gray-300">
+
+    <div class="sm:text-center lg:text-left my-8">
+   
+       <h1 class="text-4xl tracking-tight font-extrabold text-gray-800 sm:text-5xl md:text-6xl">
        <span class="block xl:inline">Evaluación de </span>
        <span class="block text-indigo-600 xl:inline">Personal</span>
-   </h1>
-   <p
-       class="mt-3 text-base text-black sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
+       </h1>
+    <p class="mt-3 text-base text-black sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
        Es importante conocer a nuestro equipo de trabajo antes y durante su estancia en tu organización, por ese motivo para nosotros es importante la aplicación de evaluaciones que nos permitan identificar el perfil de nuestros colaboradores. 
    </p>
 
-   <div>
+<div>
 <ul class="mt-8 space-y-3 font-medium"/>
-   <li class="flex items-start lg:col-span-1 mb-4">
-       <div class="flex-shrink-0">
-           <svg class="w-5 h-5 text-indigo-600" fill="currentColor" viewBox="0 0 20 20">
-               <path fill-rule="evenodd"
-                   d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                   clip-rule="evenodd"></path>
-           </svg>
-       </div>
-       <p class="ml-3 leading-5 text-gray-600 font-dmsans">
-           Evaluaciones de clima y cultura adaptados a la realidad y <span class=" text-indigo-600 xl:inline"> necesidad de la organización. </span>
-  
-       </p>
-   </li>
    
-   <li class="flex items-start mt-5 lg:col-span-1 lg:mt-0 mb-4">
-       <div class="flex-shrink-0">
-           <svg class="w-5 h-5 text-indigo-600" fill="currentColor" viewBox="0 0 20 20">
-               <path fill-rule="evenodd"
-                   d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                   clip-rule="evenodd"></path>
-           </svg>
-       </div>
-       <p class="ml-3 leading-5 text-gray-600 font-dmsans">
-       Evaluaciones de desempeño que permitan <span class=" text-indigo-600 xl:inline"> incrementar el potencial de un equipo de trabajo.</span> <p> <span class="block text-indigo-600 xl:inline">  </span></p>
-       </p>
-   </li>
+        <li class="flex items-start lg:col-span-1 mb-4">
+            <div class="flex items-center"> 
+                <img src={feliz} alt="Icono" class="w-20 h-20" /> 
+                <p class="ml-3 leading-5 text-gray-600 font-dmsans"> Evaluaciones de clima y cultura adaptados a la realidad y <br></br><span class=" text-indigo-600 xl:inline"> necesidad de la organización. </span>
+                </p>
+            </div>
+        </li>
 
-   <li class="flex items-start mt-5 lg:col-span-1 lg:mt-0">
-       <div class="flex-shrink-0">
-           <svg class="w-5 h-5 text-indigo-600" fill="currentColor" viewBox="0 0 20 20">
-               <path fill-rule="evenodd"
-                   d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                   clip-rule="evenodd"></path>
-           </svg>
-       </div>
-       <p class="ml-3 leading-5 text-gray-600 font-dmsans">
-           Evaluaciones psicolaborales para <span class=" text-indigo-600 xl:inline"> identificar el perfil del talento <br></br> ya sea <span class="text-indigo-600 xl:inline">  antes de ingresar a la organización, para un ascenso, o determinar su estancia, etc. </span> </span>
-       </p>
-   </li>
-</div>
+
+        <li class="flex items-start lg:col-span-1 mb-4">
+            <div class="flex items-center"> 
+                <img src={evalua} alt="Icono" class="w-20 h-20" /> 
+                <p class="ml-3 leading-5 text-gray-600 font-dmsans"> Evaluaciones de desempeño que permitan <span class=" text-indigo-600 xl:inline"> incrementar el <br></br>potencial de un equipo de trabajo.</span> <p> <span class="block text-indigo-600 xl:inline">  </span></p>
+                </p>
+            </div>
+        </li>
+     
+
+<li class="flex items-start lg:col-span-1 mb-4">
+    <div class="flex items-center"> 
+        <img src={sico} alt="Icono" class="w-20 h-20" /> 
+        <p class="ml-3 leading-5 text-gray-600 font-dmsans">
+            Evaluaciones psicolaborales para 
+            <span class="text-indigo-600 xl:inline"> identificar el perfil del <br></br> talento ya sea antes de ingresar a la organización, para un <br></br>ascenso, o determinar su estancia, etc. </span> 
+        </p>
+    </div>
+</li>
+    </div>
 
 
    <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
@@ -218,33 +213,33 @@ const inactiveBtn = "w-72 flex items-center gap-x-4 justify-center font-medium r
   
 </div>
 
-<div class="lg:inset-y-0 lg:right-0 lg:w-1/2 my-4">
-   <img class="h-42 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" src= { evalu } alt=""/>
-</div>
+    <div class="lg:inset-y-0 lg:right-0 lg:w-1/2 my-4">
+      <img class="h-42 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" src= { evalu } alt=""/>
+    </div>
 
-</div>
-</section>
+       </div>
+   </section>
 </div>,
 
-<div>
-<section class="sm:mt-6 lg:mt-8 mt-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+   <div>
+       <section class="sm:mt-6 lg:mt-8 mt-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-<div
- class="my-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28 flex gap-3 lg:flex-justify lg:flex flex-col lg:flex-row font-dmsans shadow-xl border-gray-300">
-<div class="sm:text-center lg:text-left my-8">
-   <h1 class="text-4xl tracking-tight font-extrabold text-gray-800 sm:text-5xl md:text-6xl">
-       <span class="block xl:inline">Capacitación y </span>
-       <span class="block text-indigo-600 xl:inline">Desarrollo de</span> <span class="block xl:inline">Personal</span>
+    <div class="my-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28 flex gap-3 lg:flex-justify lg:flex flex-col lg:flex-row font-dmsans shadow-xl border-gray-300">
+
+    <div class="sm:text-center lg:text-left my-8">
+       <h1 class="text-4xl tracking-tight font-extrabold text-gray-800 sm:text-5xl md:text-6xl">
+       <span class="block xl:inline">Employer</span>
+       <span class="block text-indigo-600 xl:inline">Branding</span>
    </h1>
-   <p
-       class="mt-3 text-base text-black sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
+   
+   <p class="mt-3 text-base text-black sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
        Nos importa el desarrollo y crecimiento de los Talentos, por eso nos involucramos en su capacitación y desarrollo, con capacitaciones a la medida.
    </p>
 
    <div>
-<ul class="mt-8 space-y-3 font-medium"/>
-   <li class="flex items-start lg:col-span-1 mb-4">
-       <div class="flex-shrink-0">
+     <ul class="mt-8 space-y-3 font-medium"/>
+        <li class="flex items-start lg:col-span-1 mb-4">
+        <div class="flex-shrink-0">
            <svg class="w-5 h-5 text-indigo-600" fill="currentColor" viewBox="0 0 20 20">
                <path fill-rule="evenodd"
                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
@@ -309,14 +304,15 @@ const inactiveBtn = "w-72 flex items-center gap-x-4 justify-center font-medium r
   ];
 
   return (
-    <div className=" flex flex-wrap justify-center p-3 lg:gap-8 w-full items-center   ">
-        <h2 className="text-primarytext font-semibold text-4xl mt-8 md:mt-20 text-center">Brindamos soluciones para todo tipo de reto de gestión humana</h2>
+      <div className=" flex flex-wrap justify-center p-2 lg:gap-8 w-full items-center   ">
+        <h2 className="text-primarytext font-semibold text-5xl mt-8 md:mt-20 text-center"> <img src ={flecha} alt="" className="inline-block w-16 h-12 mr-2"></img>Brindamos soluciones para todo tipo de reto de <br></br> <span class="block text-primarycolor xl:inline">Gestión Humana </span></h2>
       <div className="flex w-full flex-wrap justify-center mx-4 rounded">
-  <button
+  
+<button
     className={`${
       activeContent === 0 ? activeBtn : inactiveBtn
     } mb-2 lg:mb-0 px-4 py-2 rounded-l `}
-    onClick={() => handleClick(0)}
+    onClick={() => handleClick(0)}git
   >
    Atracción de Personal
   </button>
@@ -345,7 +341,7 @@ const inactiveBtn = "w-72 flex items-center gap-x-4 justify-center font-medium r
     } mb-2 lg:mb-0 px-4 py-2 rounded-r`}
     onClick={() => handleClick(3)}
   >
-     Evaluaciones Pro
+     Employer Branding
   </button>
 </div>
       <div>{content[activeContent]}</div>

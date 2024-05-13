@@ -30,7 +30,7 @@ function HeroEmpresa() {
         </div>
 
         <div className="relative flex flex-col justify-center items-center h-full text-left">
-          <h1 className="text-5xl font-bold leading-tight mb-4 text-center">Alcanza tus Objetivos de Gestión Humana</h1>
+          <h1 className="text-5xl font-bold leading-tight mb-4 text-center">Alcanza tus Objetivos de <br></br> Gestión Humana</h1>
 
           <p className="text-lg text-gray-300 mb-8 text-center">
             Deja atrás el dolor del reclutamiento de personal con nuestra metodología de atracción;
