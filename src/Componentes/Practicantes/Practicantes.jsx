@@ -8,6 +8,7 @@ import FaqPracticantes from './FaqPracticantes'
 import AreasPracticantes from './AreasPracticantes'
 import Footer from '../Principal/Footer'
 import CtaOtraCarrera from './CtaOtraCarrera'
+import Equipo from './Equipo'
 
 function Practicantes() {
   return (
@@ -15,6 +16,7 @@ function Practicantes() {
       <Navbar />
       <HeroPracticantes />
       <Descubre />
+      <Equipo />
       <CtaAreas />
       <AreasPracticantes />
       <CtaOtraCarrera />

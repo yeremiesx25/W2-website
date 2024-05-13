@@ -16,19 +16,19 @@ function Counts() {
     </div>
     <dl class="mt-10 text-center sm:max-w-3xl sm:mx-auto sm:grid sm:grid-cols-4 sm:gap-8">
       <div class="flex flex-col">
-        <dt class="order-2 mt-2 text-lg leading-6 font-medium text-white">Años en el mercado</dt>
+        <dt class="order-2 mt-2 text-lg leading-6 font-medium text-white">Años en el <br /> mercado</dt>
         <dd class="order-1 text-5xl font-extrabold text-white">{counterOn && <CountUp end={7} duration={3} />}+</dd>
       </div>
       <div class="flex flex-col mt-10 sm:mt-0">
-        <dt class="order-2 mt-2 text-lg leading-6 font-medium text-white">Clientes satisfechos</dt>
+        <dt class="order-2 mt-2 text-lg leading-6 font-medium text-white">Clientes <br /> satisfechos</dt>
         <dd class="order-1 text-5xl font-extrabold text-white">{counterOn && <CountUp end={128} duration={3} />}+</dd>
       </div>
       <div class="flex flex-col mt-10 sm:mt-0">
-        <dt class="order-2 mt-2 text-lg leading-6 font-medium text-white">Trabajos realizados</dt>
+        <dt class="order-2 mt-2 text-lg leading-6 font-medium text-white">Trabajos <br /> realizados</dt>
         <dd class="order-1 text-5xl font-extrabold text-white">{counterOn && <CountUp end={298} duration={3} />}+</dd>
       </div>
       <div class="flex flex-col mt-10 sm:mt-0">
-        <dt class="order-2 mt-2 text-lg leading-6 font-medium text-white">Vacantes cubiertas</dt>
+        <dt class="order-2 mt-2 text-lg leading-6 font-medium text-white">Vacantes <br /> cubiertas</dt>
         <dd class="order-1 text-5xl font-extrabold text-white">{counterOn && <CountUp end={5000} duration={3} />}+</dd>
       </div>
     </dl>

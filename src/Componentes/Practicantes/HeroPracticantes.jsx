@@ -5,40 +5,41 @@ import Descubre from './Descubre'
 function HeroPracticantes() {
 
   return (
-    <div class="flex flex-wrap pt-12 font-dmsans">
-        <div className="area h-full hidden md:block">
-			<ul class="circles">
-				<li></li>
-				<li></li>
-				<li></li>
-				<li></li>
-				<li></li>
-				<li></li>
-				<li></li>
-				<li></li>
-				<li></li>
-				<li></li>
-			</ul>
-		</div>
-    <div class="w-full sm:w-8/12 mb-10">
-      <div class="container mx-auto h-full sm:p-10">
-        <nav class="flex px-4 justify-between items-center">
-          <div>
-            <img src="https://image.flaticon.com/icons/svg/497/497348.svg" alt="" class="w-8"/>
-          </div>
-        </nav>
-        <header class="container px-4 lg:flex mt-10 items-center h-full lg:mt-0">
-          <div class="w-full">
-            <h1 class="text-4xl lg:text-6xl font-bold">Programa de <span class="text-primarycolor">Prácticas</span> preprofesionales</h1>
-            <div class="w-20 h-2 bg-primarycolor my-4"></div>
-            <p class="md:text-xl mb-10">Un programa diseñado para estudiantes de los últimos ciclos que buscan formarse y formar parte de W2. Nos esforzamos por preparar a los estudiantes para enfrentar los desafíos del mundo laboral al brindarles oportunidades prácticas que complementen su formación académica. No buscamos experiencia, buscamos descubrir talento y pasión.</p>
-            <button class="bg-primarycolor text-white text-2xl font-medium px-4 py-2 rounded-lg shadow">Postular al programa</button>
-          </div>
-        </header>
-      </div>
+    <section class="bg-white dark:bg-gray-900 font-dmsans">
+    <div class="grid max-w-screen-xl px-4 pt-20 pb-8 mx-auto lg:gap-8 xl:gap-0 lg:py-16 lg:grid-cols-12 lg:pt-28">
+        <div class="mr-auto place-self-center lg:col-span-7">
+            <h1
+                class="max-w-2xl mb-4 text-4xl font-extrabold leading-none tracking-tight md:text-5xl xl:text-6xl dark:text-white">
+                Programa de <span className='text-primarycolor'>prácticas preprofesionales.</span>
+            </h1>
+
+            <p class="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">Un programa diseñado para
+estudiantes de los últimos ciclos
+que buscan formarse y formar parte
+de W2. Nos esforzamos por preparar
+a los estudiantes para enfrentar los
+desafíos del mundo laboral al brindarles
+oportunidades prácticas que
+complementen su formación
+académica.
+No buscamos experiencia, buscamos
+DESCUBRIR TALENTO y PASIÓN.
+            </p>
+
+            <div class="space-y-4 sm:flex sm:space-y-0 sm:space-x-4">
+            <a  className="bg-primarycolor hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg mt-2">
+              Contáctanos
+            </a>
+
+            </div>
+        </div>
+
+        <div class="lg:mt-0 lg:col-span-5 lg:flex">
+            <img src={imgHero} alt="hero image"/>
+        </div>
+
     </div>
-    <img src="https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?q=80&w=1955&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Leafs" class="w-full h-48 object-cover sm:h-screen sm:w-4/12"/>
-  </div>
+</section>
   )
 }
 

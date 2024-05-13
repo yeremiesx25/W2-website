@@ -29,7 +29,7 @@ function Navbar() {
               Empresas
             </NavLink>
             <NavLink to="/Practicantes" className={({isActive}) => isActive ? activeStyle : classDefault }>
-              Practicantes
+              Descubriendo talentos
             </NavLink>
             <NavLink to="/Power" className={({isActive}) => isActive ? activeStyle : classDefault }>
               Power
@@ -67,17 +67,18 @@ function Navbar() {
               Empresas
             </NavLink>
             <NavLink
+              to="/Practicantes"
+              className="text-gray-800 hover:text-gray-600 block px-3 py-2 rounded-md text-base font-medium"
+            >
+              Descubriendo talentos
+            </NavLink>
+            <NavLink
               to="/Power"
               className="text-gray-800 hover:text-gray-600 block px-3 py-2 rounded-md text-base font-medium"
             >
               Power
             </NavLink>
-            <NavLink
-              to="/Practicantes"
-              className="text-gray-800 hover:text-gray-600 block px-3 py-2 rounded-md text-base font-medium"
-            >
-              Practicantes
-            </NavLink>
+            
             <a href='https://crbt8rv6qfm.typeform.com/to/Uvov1KoE' className="bg-primarycolor hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg mt-2">
               Contáctanos
             </a>

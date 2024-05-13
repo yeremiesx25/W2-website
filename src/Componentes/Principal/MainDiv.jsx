@@ -39,12 +39,12 @@ function MainDiv() {
                 <a href="/Empresas" title=""
                     className="mb-3 sm:mb-0 inline-flex items-center justify-center w-full px-8 py-3 text-lg font-bold text-white transition-all duration-200 bg-primarycolor border-2 border-transparent sm:w-auto rounded-xl hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 animate-fade-right"
                     role="button">
-                    Conseguir talento <span className='flex items-center justify-center bg-no-repeat ml-2 animate-fade-right'
+                    Soy Empresa<span className='flex items-center justify-center bg-no-repeat ml-2 animate-fade-right'
                      style={{backgroundImage: `url(${arrow})`,width:'30px', height:'20px' }}></span>    
                 </a>
                 <a href="#dirigido"
                     className="inline-flex items-center justify-center w-full px-8 py-3 text-lg font-bold text-primarytext  hover:bg-gray-50 sm:w-auto rounded-xl"
-                    role="button">Aprender más</a>
+                    role="button">Soy Talento</a>
             </div>
         </div>
     

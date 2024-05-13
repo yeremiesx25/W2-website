@@ -10,6 +10,7 @@ import Navbar from './Navbar'
 import Footer from './Footer'
 import Founders from './Founders'
 import FormButton from './FormButton'
+import BtnWsp from './BtnWsp'
 
 function Home() {
   return (
@@ -17,13 +18,14 @@ function Home() {
       
       <Navbar/>
       <MainDiv/>
+
       <Dirigido/>
       <Counts />
       <MarcasSlider/>
       <Testimonio/>
       <Founders />
       <Footer/>
-      
+      <BtnWsp />
     </div>
   )
 }
