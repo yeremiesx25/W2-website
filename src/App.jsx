@@ -8,10 +8,12 @@ import Home from './Componentes/Principal/Home.jsx'
 import Empresas from './Componentes/Empresas/Empresas.jsx'
 import Power from './Componentes/Power/Power.jsx'
 import Practicantes from './Componentes/Practicantes/Practicantes.jsx'
+import ScrollToTop from './Componentes/Principal/ScrollToTop.jsx'
 
 function App() {
   return (
-<BrowserRouter>
+<BrowserRouter >
+<ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/Empresas" element={<Empresas />} />
