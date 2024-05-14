@@ -32,7 +32,7 @@ function HeroEmpresa() {
         <div className="relative flex flex-col justify-center items-center h-full text-left">
           <h1 className="text-5xl font-bold leading-tight mb-4 text-center">Alcanza tus Objetivos de <br></br> Gestión Humana</h1>
 
-          <p className="text-lg text-gray-300 mb-8 text-center">
+          <p className="text-lg text-white mb-8 text-center">
             Deja atrás el dolor del reclutamiento de personal con nuestra metodología de atracción;
             <br />
             despeja tus dudas sobre el equipo que tienes y el que ha de ingresar con una evaluación psicolaboral.

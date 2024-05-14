@@ -15,27 +15,25 @@ import evalua from '../../assets/Evaluaciones.png'
 import feliz from '../../assets/Felicidad.png'
 import sico from '../../assets/Psico.png'
 import flecha from '../../assets/flecha.png'
+import habil from '../../assets/Habilidades.png'
+import taller from '../../assets/Talleres.png'
+import capacitacion from '../../assets/Capacitaciones.png'
 import { motion } from "framer-motion";
 
 function Intermedio() {
-  const [activeContent, setActiveContent] = useState(0);
+    const [activeContent, setActiveContent] = useState(0);
 
-  const activeBtn =
-    "w-72 flex items-center gap-x-4 justify-center font-medium rounded-lg m-2 px-5 py-2 border bg-blue-600 text-white border-gray-200 "; 
-
-  const handleClick = (index) => {
-    setActiveContent(index);
+    const activeBtn =
+      "w-72 flex items-center gap-x-4 justify-center font-medium rounded-lg m-2 px-5 py-2 border bg-blue-600 text-white border-gray-200 "; 
+  
+    const inactiveBtn = "w-72 flex items-center gap-x-4 justify-center font-medium rounded-lg m-2 px-5 py-2 border bg-white text-gray-800 border-gray-200 hover:bg-gray-100 font-dmsans";
     
-  };
-  
-   const inactiveBtn = "w-72 flex items-center gap-x-4 justify-center font-medium rounded-lg m-2 px-5 py-2 border bg-white text-gray-800 border-gray-200 hover:bg-gray-100 font-dmsans";
-  
-   const content = [
+    const content = [
     
     <div>
      <section class="sm:mt-6 lg:mt-8 mt-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 clas">
 
-    <div class="my-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28 flex gap-3 lg:flex-justify lg:flex flex-col lg:flex-row font-dmsans shadow-xl border-gray-300 rounded-lg">
+    <div class="my-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-12 lg:px-8 xl:mt-28 flex gap-3 lg:flex-justify lg:flex flex-col lg:flex-row font-dmsans shadow-xl border-gray-300 rounded-lg">
     
     <div class="sm:text-center lg:text-left my-8">
         <h1 class="text-4xl tracking-tight font-extrabold text-gray-800 sm:text-5xl md:text-6xl">
@@ -97,7 +95,7 @@ function Intermedio() {
    <div>
        <section class="sm:mt-6 lg:mt-8 mt-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-   <div class="my-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28 flex gap-3 lg:flex-justify lg:flex flex-col lg:flex-row font-dmsans shadow-xl border-gray-300">
+   <div class="my-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-12 lg:px-8 xl:mt-28 flex gap-3 lg:flex-justify lg:flex flex-col lg:flex-row font-dmsans shadow-xl border-gray-300">
 
    <div class="sm:text-center lg:text-left my-8">
        
@@ -156,7 +154,7 @@ function Intermedio() {
     <div>
         <section class="sm:mt-6 lg:mt-8 mt-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-    <div class="my-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28 flex gap-3 lg:flex-justify lg:flex flex-col lg:flex-row font-dmsans shadow-xl border-gray-300">
+    <div class="my-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-12 lg:px-8 xl:mt-28 flex gap-3 lg:flex-justify lg:flex flex-col lg:flex-row font-dmsans shadow-xl border-gray-300">
 
     <div class="sm:text-center lg:text-left my-8">
    
@@ -189,16 +187,16 @@ function Intermedio() {
         </li>
      
 
-<li class="flex items-start lg:col-span-1 mb-4">
-    <div class="flex items-center"> 
+    <li class="flex items-start lg:col-span-1 mb-4">
+      <div class="flex items-center"> 
         <img src={sico} alt="Icono" class="w-20 h-20" /> 
         <p class="ml-3 leading-5 text-gray-600 font-dmsans">
             Evaluaciones psicolaborales para 
             <span class="text-indigo-600 xl:inline"> identificar el perfil del <br></br> talento ya sea antes de ingresar a la organización, para un <br></br>ascenso, o determinar su estancia, etc. </span> 
         </p>
-    </div>
-</li>
-    </div>
+      </div>
+    </li>
+</div>
 
 
    <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
@@ -208,23 +206,21 @@ function Intermedio() {
                Lo quiero
            </a>
        </div>
-
    </div>
-  
 </div>
 
     <div class="lg:inset-y-0 lg:right-0 lg:w-1/2 my-4">
       <img class="h-42 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" src= { evalu } alt=""/>
     </div>
 
-       </div>
+     </div>
    </section>
 </div>,
 
    <div>
        <section class="sm:mt-6 lg:mt-8 mt-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-    <div class="my-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28 flex gap-3 lg:flex-justify lg:flex flex-col lg:flex-row font-dmsans shadow-xl border-gray-300">
+    <div class="my-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-12 lg:px-8 xl:mt-28 flex gap-3 lg:flex-justify lg:flex flex-col lg:flex-row font-dmsans shadow-xl border-gray-300">
 
     <div class="sm:text-center lg:text-left my-8">
        <h1 class="text-4xl tracking-tight font-extrabold text-gray-800 sm:text-5xl md:text-6xl">
@@ -238,44 +234,32 @@ function Intermedio() {
 
    <div>
      <ul class="mt-8 space-y-3 font-medium"/>
-        <li class="flex items-start lg:col-span-1 mb-4">
-        <div class="flex-shrink-0">
-           <svg class="w-5 h-5 text-indigo-600" fill="currentColor" viewBox="0 0 20 20">
-               <path fill-rule="evenodd"
-                   d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                   clip-rule="evenodd"></path>
-           </svg>
-       </div>
-       <p class="ml-3 leading-5 text-gray-600 font-dmsans">
-       Desarrollo de habilidades blandas.
-       </p>
-   </li>
+     <li class="flex items-start lg:col-span-1 mb-4">
+      <div class="flex items-center"> 
+        <img src={habil} alt="Icono" class="w-20 h-20" /> 
+        <p class="ml-3 leading-5 text-gray-600 font-dmsans">
+            Desarrollo de habilidades blandas.
+        </p>
+      </div>
+    </li>
    
-   <li class="flex items-start mt-5 lg:col-span-1 lg:mt-0 mb-4">
-       <div class="flex-shrink-0">
-           <svg class="w-5 h-5 text-indigo-600" fill="currentColor" viewBox="0 0 20 20">
-               <path fill-rule="evenodd"
-                   d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                   clip-rule="evenodd"></path>
-           </svg>
-       </div>
-       <p class="ml-3 leading-5 text-gray-600 font-dmsans">
-       Capacitaciones de empoderamiento.
-       </p>
-   </li>
+   <li class="flex items-start lg:col-span-1 mb-4">
+      <div class="flex items-center"> 
+        <img src={capacitacion} alt="Icono" class="w-20 h-20" /> 
+        <p class="ml-3 leading-5 text-gray-600 font-dmsans">
+            Capacitaciones de emporamiento.
+        </p>
+      </div>
+    </li>
 
-   <li class="flex items-start mt-5 lg:col-span-1 lg:mt-0">
-       <div class="flex-shrink-0">
-           <svg class="w-5 h-5 text-indigo-600" fill="currentColor" viewBox="0 0 20 20">
-               <path fill-rule="evenodd"
-                   d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
-                   clip-rule="evenodd"></path>
-           </svg>
-       </div>
-       <p class="ml-3 leading-5 text-gray-600 font-dmsans">
-       Talleres vivenciales.
-       </p>
-   </li>
+    <li class="flex items-start lg:col-span-1 mb-4">
+      <div class="flex items-center"> 
+        <img src={taller} alt="Icono" class="w-20 h-20" /> 
+        <p class="ml-3 leading-5 text-gray-600 font-dmsans">
+            Talleres vivenciales.
+        </p>
+      </div>
+    </li>
 
 </div>
 
@@ -304,49 +288,41 @@ function Intermedio() {
   ];
 
   return (
-      <div className=" flex flex-wrap justify-center p-2 lg:gap-8 w-full items-center   ">
-        <h2 className="text-primarytext font-semibold text-5xl mt-8 md:mt-20 text-center"> <img src ={flecha} alt="" className="inline-block w-16 h-12 mr-2"></img>Brindamos soluciones para todo tipo de reto de <br></br> <span class="block text-primarycolor xl:inline">Gestión Humana </span></h2>
-      <div className="flex w-full flex-wrap justify-center mx-4 rounded">
-  
-<button
-    className={`${
-      activeContent === 0 ? activeBtn : inactiveBtn
-    } mb-2 lg:mb-0 px-4 py-2 rounded-l `}
-    onClick={() => handleClick(0)}git
-  >
-   Atracción de Personal
-  </button>
+    <div className=" flex flex-wrap justify-center p-2 lg:gap-8 w-full items-center">
+    <h2 className="text-primarytext font-semibold text-5xl mt-8 md:mt-20 text-center"> <img src ={flecha} alt="" className="inline-block w-16 h-12 mr-2"></img>Brindamos soluciones para todo tipo de reto de <br></br> <span class="block text-primarycolor xl:inline">Gestión Humana </span></h2>
+  <div className="flex w-full flex-wrap justify-center mx-4 rounded">
 
-  <button
-    className={`${
-      activeContent === 1 ? activeBtn : inactiveBtn
-    } mb-2 lg:mb-0 px-4 py-2 `}
-    onClick={() => handleClick(1)}
-  >
-   Head Hunting
-  </button>
+    <button
+        className={`${activeContent === 0 ? activeBtn : inactiveBtn} mb-2 lg:mb-0 px-4 py-2 rounded-l `}
+        onMouseEnter={() => setActiveContent(0)}
+    >
+       Atracción de Personal
+    </button>
 
-  <button
-    className={`${
-      activeContent === 2 ? activeBtn : inactiveBtn
-    } mb-2 lg:mb-0 px-4 py-2`}
-    onClick={() => handleClick(2)}
-  >
-    Evaluación de Personal
-  </button>
+    <button
+        className={`${activeContent === 1 ? activeBtn : inactiveBtn} mb-2 lg:mb-0 px-4 py-2 `}
+        onMouseEnter={() => setActiveContent(1)}
+    >
+       Head Hunting
+    </button>
 
-  <button
-    className={`${
-      activeContent === 3 ? activeBtn : inactiveBtn
-    } mb-2 lg:mb-0 px-4 py-2 rounded-r`}
-    onClick={() => handleClick(3)}
-  >
-     Employer Branding
-  </button>
+    <button
+        className={`${activeContent === 2 ? activeBtn : inactiveBtn} mb-2 lg:mb-0 px-4 py-2`}
+        onMouseEnter={() => setActiveContent(2)}
+    >
+        Evaluación de Personal
+    </button>
+
+    <button
+        className={`${activeContent === 3 ? activeBtn : inactiveBtn} mb-2 lg:mb-0 px-4 py-2 rounded-r`}
+        onMouseEnter={() => setActiveContent(3)}
+    >
+        Employer Branding
+    </button>
 </div>
-      <div>{content[activeContent]}</div>
-    </div>
-  );
+<div>{content[activeContent]}</div>
+</div>
+);
 }
 
 export default Intermedio;
