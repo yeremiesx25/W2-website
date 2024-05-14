@@ -38,9 +38,7 @@ function Descubre() {
                 Flexibilidad en el trabajo
             </h1>
             <p class="mb-8 md:pl-0  pl-2 pr-2 leading-relaxed text-gray-800 dark:text-gray-300">
-            El equilibrio personal y laboral es
-nuestra prioridad, asegurando una
-calidad de vida de nuestro equipo.
+            El equilibrio personal y laboral es nuestra prioridad, asegurando una calidad de vida de nuestro equipo.
             </p>
             <ul class="mt-8 space-y-3 font-medium">
         <li class="flex items-start lg:col-span-1">
@@ -52,8 +50,7 @@ calidad de vida de nuestro equipo.
                 </svg>
             </div>
             <p class="ml-3 leading-5 text-gray-600">
-            Trabajo Híbrido, 90% remoto
-10% presencial
+            Trabajo Híbrido, 90% remoto 10% presencial
             </p>
         </li>
         <li class="flex items-start lg:col-span-1">
@@ -84,9 +81,35 @@ disfrute en Familia.
         </li>
     </ul>
         </div>
-        <div class="lg:max-w-lg lg:w-full mb-5 md:mb-0 md:w-1/2 w-3/6">
-            <img class="object-cover object-center rounded" alt="hero" src="https://img.freepik.com/vector-gratis/ilustracion-concepto-teletrabajo_114360-5594.jpg"/>
+        <div class="lg:max-w-lg lg:w-full mb-5 md:mb-0 md:w-1/2 w-3/6 md:mr-[10%]">
+        <div class="text-left mx-auto max-w-sm">
+            <img className='rounded-full w-64   ' src={Flexibilidad} alt="" />
+    <div class="mb-4 text-black">
+        <svg height="35px" class="mb-2" fill="#5a67d8" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 32 32" xml:space="preserve">
+            <g>
+                <g id="right_x5F_quote">
+                    <g>
+                        <path d="M0,4v12h8c0,4.41-3.586,8-8,8v4c6.617,0,12-5.383,12-12V4H0z"></path>
+                        <path d="M20,4v12h8c0,4.41-3.586,8-8,8v4c6.617,0,12-5.383,12-12V4H20z"></path>
+                    </g>
+                </g>
+            </g>
+        </svg>
+        <p class="mt-2 text-base leading-6">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis
+            eaque, exercitationem praesentium nihil.
+        </p>
+        <div class="text-sm mt-5">
+            <a href="#"
+                class="font-medium leading-none text-indigo-600 hover:text-black transition duration-500 ease-in-out">Jonathan
+                Reinink
+            </a>
+            <p>CEO</p>
         </div>
+    </div>
+</div>
+</div>
     </div>
 </section>
     </div>
@@ -95,7 +118,33 @@ disfrute en Familia.
     <div class="container mx-auto flex md:px-24 md:py-10 md:flex-row flex-col items-center">
         
         <div class="lg:max-w-lg lg:w-full mb-5 md:mb-0 md:w-1/2 w-3/6 md:mr-[10%]">
-            <img class="object-cover object-center rounded" alt="hero" src="https://img.freepik.com/vector-premium/etapas-aprendizaje-distancia-leccion-linea-e-learning-entrenamiento-linea_82574-6064.jpg"/>
+        <div class="text-left mx-auto max-w-sm">
+            <img className='rounded-full' src={Flexibilidad} alt="" />
+    <div class="mb-4 text-black">
+        <svg height="35px" class="mb-2" fill="#5a67d8" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 32 32" xml:space="preserve">
+            <g>
+                <g id="right_x5F_quote">
+                    <g>
+                        <path d="M0,4v12h8c0,4.41-3.586,8-8,8v4c6.617,0,12-5.383,12-12V4H0z"></path>
+                        <path d="M20,4v12h8c0,4.41-3.586,8-8,8v4c6.617,0,12-5.383,12-12V4H20z"></path>
+                    </g>
+                </g>
+            </g>
+        </svg>
+        <p class="mt-2 text-base leading-6">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et perferendis
+            eaque, exercitationem praesentium nihil.
+        </p>
+        <div class="text-sm mt-5">
+            <a href="#"
+                class="font-medium leading-none text-indigo-600 hover:text-black transition duration-500 ease-in-out">Jonathan
+                Reinink
+            </a>
+            <p>CEO</p>
+        </div>
+    </div>
+</div>
         </div>
         <div
             class="lg:flex-grow mt-5 md:mt-0   md:w-1.5/2 lg:pr-24 md:pr-16 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center">

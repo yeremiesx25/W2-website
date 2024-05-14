@@ -1,12 +1,23 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import menuMobilePower from '../../assets/menu (4).png'; // Importa el icono de hamburguesa
+import Login from './Login';
 
 function HeaderPower() {
   const [showMenu, setShowMenu] = useState(false);
 
   const toggleMenu = () => {
     setShowMenu(!showMenu);
+  };
+
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const handleModalOpen = () => {
+    setModalOpen(true);
+  };
+
+  const handleModalClose = () => {
+    setModalOpen(false);
   };
 
   return (
@@ -35,7 +46,7 @@ function HeaderPower() {
 
         {/* Botones de login y registro */}
         <div className="flex items-center">
-          <button className="text-sm text-amber-400 hover:text-white hidden md:flex">Iniciar sesión</button>
+          <button onClick={handleModalOpen} className="text-sm text-amber-400 hover:text-white hidden md:flex">Iniciar sesión</button>
           <button className="text-sm bg-amber-400 hover:bg-amber-600 text-white px-4 py-2 rounded-lg ml-4 hidden md:flex">Registrarse</button>
         </div>
       </div>
@@ -53,6 +64,7 @@ function HeaderPower() {
           </div>
         </div>
       )}
+      {modalOpen && (<Login />)}
     </header>
   );
 }
