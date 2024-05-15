@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import menuMobilePower from '../../assets/menu (4).png'; // Importa el icono de hamburguesa
 import Login from './Login';
+import logo from '../../assets/Logo Power.png';
 
 function HeaderPower() {
   const [showMenu, setShowMenu] = useState(false);
@@ -22,11 +23,13 @@ function HeaderPower() {
 
   return (
     <header className="bg-primarytext text-gray-50 font-dmsans flex justify-around w-full flex-wrap fixed z-10" style={{ height: '78px' }}>
-      <div className="container mx-auto px-4 py-6 flex justify-between items-center">
-        {/* Logo */}
-        <div className="flex items-center">
-          <span className="text-xl font-semibold text-amber-400">Power</span>
-        </div>
+    <div className="container mx-auto px-4 py-6 flex justify-between items-center">
+      {/* Logo */}
+      <div className="flex items-center">
+        <a href="/Power">
+          <img src={logo} alt="Power" className="w-16 h-auto" />
+        </a>
+      </div>
 
         {/* Icono de menú para dispositivos móviles */}
         <div className="md:hidden w-full flex justify-end flex-wrap">

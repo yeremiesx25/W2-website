@@ -9,7 +9,7 @@ import evalu from '../../assets/evaluacion.png'
 import user from '../../assets/usuarios.png'
 import hed from '../../assets/headh.png'
 import reunion from '../../assets/reu.png'
-import desarrollo from '../../assets/Aprendizaje Continuo.gif'
+import desarrollo from '../../assets/Aprendizaje.png'
 import anali from '../../assets/analizar.png'
 import evalua from '../../assets/Evaluaciones.png'
 import feliz from '../../assets/Felicidad.png'
@@ -83,7 +83,7 @@ function Intermedio() {
        
 </div>
     
-    <div class="lg:inset-y-0 lg:right-0 lg:w-1/2 my-4">
+    <div class="lg:inset-y-0 lg:right-0 lg:w-1/ my-4">
         <img class="h-56 w-full object-cover sm:h-72 md:h-64 lg:w-full lg:h-full" src={ reclut } alt=""/>
     </div>
   
@@ -229,8 +229,7 @@ function Intermedio() {
    </h1>
    
    <p class="mt-3 text-base text-black sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-       Nos importa el desarrollo y crecimiento de los Talentos, por eso nos involucramos en su capacitación y desarrollo, con capacitaciones a la medida.
-   </p>
+   Te adyudamos aplicar una de las estrategias modernas para atraer, retener y comprometer a los mejores talentos. Nuestro enfoque será construir tu marca empleadora sólida y atractiva, que destaque los valores, la cultura y las oportunidades únicas que ofreces como empleador. Desde la creación de una identidad corporativa distintiva hasta el diseño de experiencias de empleado excepcionales, nuestro equipo trabajará en colaboración con su empresa para posicionarla como un empleador de elección. </p>
 
    <div>
      <ul class="mt-8 space-y-3 font-medium"/>
@@ -275,11 +274,9 @@ function Intermedio() {
    </div>
   
 </div>
-
 <div class="lg:inset-y-0 lg:right-0 lg:w-1/2 my-4">
-   <img class="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" src={ desarrollo } alt=""/>
+   <img class="h-42 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" src={desarrollo} alt=""/>
 </div>
-
 </div>
 
 </section>
