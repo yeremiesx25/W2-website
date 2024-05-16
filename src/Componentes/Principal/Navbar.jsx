@@ -29,7 +29,7 @@ function Navbar() {
               Empresas
             </NavLink>
             <NavLink to="/Practicantes" className={({isActive}) => isActive ? activeStyle : classDefault }>
-              Descubriendo talentos
+              Descubriendo Talentos
             </NavLink>
             <NavLink to="/Power" className={({isActive}) => isActive ? activeStyle : classDefault }>
               Power
@@ -70,7 +70,7 @@ function Navbar() {
               to="/Practicantes"
               className="text-gray-800 hover:text-gray-600 block px-3 py-2 rounded-md text-base font-medium"
             >
-              Descubriendo talentos
+              Descubriendo Talentos
             </NavLink>
             <NavLink
               to="/Power"
