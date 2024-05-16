@@ -9,6 +9,7 @@ import Empresas from "./Componentes/Empresas/Empresas.jsx";
 import Power from "./Componentes/Power/Power.jsx";
 import Practicantes from "./Componentes/Practicantes/Practicantes.jsx";
 import ScrollToTop from "./Componentes/Principal/ScrollToTop.jsx";
+import PowerAuth from './Componentes/PowerAuth/PowerAuth.jsx'
 import { AuthContextProvider } from "./Context/AuthContext.jsx";
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
           <Route path="/Empresas" element={<Empresas />} />
           <Route path="/Power" element={<Power />} />
           <Route path="/Practicantes" element={<Practicantes />} />
+          <Route path="/PowerAuth" element={<PowerAuth />} />
         </Routes>
     </AuthContextProvider>
   );

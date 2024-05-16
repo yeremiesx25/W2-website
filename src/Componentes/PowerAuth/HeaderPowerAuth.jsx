@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import menuMobilePower from '../../assets/menu (4).png'; // Importa el icono de hamburguesa
-import Login from './Login';
+import Login from '../Power/Login';
 import logo from '../../assets/Logo Power.png';
-
+import { UserAuth } from "../../Context/AuthContext";
 function HeaderPowerAuth() {
+  const { user } = UserAuth();
+
   const [showMenu, setShowMenu] = useState(false);
 
   const toggleMenu = () => {
@@ -49,7 +51,9 @@ function HeaderPowerAuth() {
 
         {/* Botones de login y registro */}
         <div className="flex items-center">
-          <button onClick={handleModalOpen} className="text-sm text-amber-400 hover:text-white hidden md:flex">Iniciar sesión</button>
+          <button onClick={handleModalOpen} className="text-sm text-amber-400 hover:text-white hidden md:flex">
+            <img  className='w-12 rounded-full' src={user.picture} alt="" />
+          </button>
           <button className="text-sm bg-amber-400 hover:bg-amber-600 text-white px-4 py-2 rounded-lg ml-4 hidden md:flex">Registrarse</button>
         </div>
       </div>
