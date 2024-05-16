@@ -54,7 +54,7 @@ function HeaderPowerAuth() {
           <button onClick={handleModalOpen} className="text-sm text-amber-400 hover:text-white hidden md:flex">
             <img  className='w-12 rounded-full' src={user.picture} alt="" />
           </button>
-          <button className="text-sm bg-amber-400 hover:bg-amber-600 text-white px-4 py-2 rounded-lg ml-4 hidden md:flex">Registrarse</button>
+          <p>{user.name}</p>
         </div>
       </div>
 
