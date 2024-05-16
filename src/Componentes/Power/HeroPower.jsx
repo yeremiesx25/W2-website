@@ -3,7 +3,7 @@ import logo from '../../assets/Logo Power.png';
 
 function HeroPower() {
   return (
-    <div className='flex flex-col items-center justify-center w-full h-auto font-dmsans pt-24 pb-12 text-white bg-primarytext'>
+    <div className='flex flex-col items-center justify-center w-full h-auto font-dmsans pt-24 pb-12 text-white bg-gray-900'>
         <h1 className='text-3xl md:text-5xl font-semibold mb-4 text-center px-2 animate-fade-right'>Vive la experiencia <img src={logo} alt="Power" className="inline-block w-20  md:w-20 " /> y postula con nosotros</h1>
         <p className='mb-4 text-center px-2 animate-fade-right w-full md:w-1/2'>Ayudamos a personas sin trabajo en busca de estabilidad laboral. Logren ingresar a trabajar en una empresa formal con los beneficios de ley mediante nuestra metodología de atracción incluso si no tienen CV.</p>
         <button className='mb-4 text-sm bg-amber-400 hover:bg-amber-600 text-white px-4 py-2 rounded-lg w-40 h-12 animate-fade-right'>Postular</button>

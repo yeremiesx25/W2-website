@@ -1,10 +1,14 @@
-import {createContext, useState, useContext} from 'react'
+import {createContext, useState, useContext, useEffect} from 'react'
 import {supabase} from '../supabase/supabase.config'
+import {useNavigate} from 'react-router-dom'
+
+
+
 
 const AuthContext = createContext();
-
 export const AuthContextProvider = ({ children }) =>{
-    const [user, setUser]  = useState([]);
+    const navigate = useNavigate()
+    const [user, setUser]  = useState(null);
     async function signInWithGoogle() {
         try {
         const { data, error } = supabase.auth.signInWithOAuth({
@@ -21,6 +25,20 @@ export const AuthContextProvider = ({ children }) =>{
         if(error) throw new Error("A ocurrido un error durante el cierre de sesión");
       }
     
+    useEffect(()=>{
+        const {data:authListener} = supabase.auth.onAuthStateChange(async (event, session)=>{
+            console.log("supabase event: ", event);
+            if(session==null){
+                navigate("/", {replace:true})
+            }
+            else {
+                setUser(session?.user)
+                console.log("data del usuario ", session?.user)
+                navigate("Power", {replace: true});
+            }
+        })
+    }, [])  
+
     return (
         <AuthContext.Provider value={{signInWithGoogle, signOut, user}} >
             {children}

@@ -14,7 +14,6 @@ import { AuthContextProvider } from "./Context/AuthContext.jsx";
 function App() {
   return (
     <AuthContextProvider>
-      <BrowserRouter>
         <ScrollToTop />
         <Routes>
           <Route path="/" element={<Home />} />
@@ -22,7 +21,6 @@ function App() {
           <Route path="/Power" element={<Power />} />
           <Route path="/Practicantes" element={<Practicantes />} />
         </Routes>
-      </BrowserRouter>
     </AuthContextProvider>
   );
 }
