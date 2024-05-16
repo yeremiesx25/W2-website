@@ -8,7 +8,7 @@ import {useNavigate} from 'react-router-dom'
 const AuthContext = createContext();
 export const AuthContextProvider = ({ children }) =>{
     const navigate = useNavigate()
-    const [user, setUser]  = useState(null);
+    const [user, setUser]  = useState([]);
     async function signInWithGoogle() {
         try {
         const { data, error } = supabase.auth.signInWithOAuth({
@@ -27,14 +27,14 @@ export const AuthContextProvider = ({ children }) =>{
     
     useEffect(()=>{
         const {data:authListener} = supabase.auth.onAuthStateChange(async (event, session)=>{
-            console.log("supabase event: ", event);
+            console.log("supabase event: ", session);
             if(session==null){
                 navigate("/", {replace:true})
             }
             else {
-                setUser(session?.user)
-                console.log("data del usuario ", session?.user)
-                navigate("Power", {replace: true});
+                setUser(session?.user.user_metadata)
+                console.log("data del usuario ", session?.user.user_metadata)
+                navigate("/Power", {replace: true});
             }
         })
     }, [])  

@@ -67,7 +67,7 @@ function HeaderPower() {
           </div>
         </div>
       )}
-      {modalOpen && (<Login />)}
+      {modalOpen && (<Login closeModal={handleModalClose} />)}
     </header>
   );
 }
