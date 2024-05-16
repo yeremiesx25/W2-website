@@ -9,7 +9,7 @@ import evalu from '../../assets/evaluacion.png'
 import user from '../../assets/usuarios.png'
 import hed from '../../assets/headh.png'
 import reunion from '../../assets/reu.png'
-import desarrollo from '../../assets/Aprendizaje Continuo.gif'
+import desarrollo from '../../assets/Aprendizaje.png'
 import anali from '../../assets/analizar.png'
 import evalua from '../../assets/Evaluaciones.png'
 import feliz from '../../assets/Felicidad.png'
@@ -52,7 +52,7 @@ function Intermedio() {
         <li class="flex items-start lg:col-span-1 mb-4">
             <div class="flex items-center"> 
                 <img src={agil} alt="Icono" class="w-20 h-20 text-indigo-600" /> 
-                <p class="ml-3 leading-5 text-gray-600">
+                <p class="ml-3 leading-5 text-black">
                     Enfocado en procesos masivos de alta demanda como
                     <p></p><span class="block text-indigo-600 xl:inline"> Operario  de almacen, producción, reparto, distribución, estiba, conductores, prevencionistas, etc.</span>
                 </p>
@@ -62,7 +62,7 @@ function Intermedio() {
         <li class="flex items-start mt-5 lg:col-span-1 lg:mt-0">
             <div class="flex items-center"> 
                 <img src={eleva} alt="Icono" class="w-20 h-20 text-indigo-600" /> 
-                <p class="ml-3 leading-5 text-gray-600 font-dmsans">
+                <p class="ml-3 leading-5 text-black font-dmsans">
                     Enfocado en personal de mandos medios como 
                     <span class="block text-indigo-600 xl:inline"> asistentes, supervisores, coordinadores, posiciones IT y puestos focalizados en una organización.</span>
                 </p>
@@ -83,7 +83,7 @@ function Intermedio() {
        
 </div>
     
-    <div class="lg:inset-y-0 lg:right-0 lg:w-1/2 my-4">
+    <div class="lg:inset-y-0 lg:right-0 lg:w-1/ my-4">
         <img class="h-56 w-full object-cover sm:h-72 md:h-64 lg:w-full lg:h-full" src={ reclut } alt=""/>
     </div>
   
@@ -115,7 +115,7 @@ function Intermedio() {
         <li class="flex items-start lg:col-span-1 mb-4">
             <div class="flex items-center"> 
                 <img src={top} alt="Icono" class="w-20 h-20 text-indigo-600" /> 
-                <p class="ml-3 leading-5 text-gray-600">
+                <p class="ml-3 leading-5 text-black">
                 Enfocado en procesos de atracción de mandos <br></br>altos como <span class="text-indigo-600 xl:inline">  gerencias, </span> <span class="text-indigo-600 xl:inline">  jefaturas y posiciones altamente especializadas. </span> 
                 </p>
             </div>
@@ -125,7 +125,7 @@ function Intermedio() {
         <li class="flex items-start lg:col-span-1 mb-4">
             <div class="flex items-center"> 
                 <img src={start} alt="Icono" class="w-20 h-20 text-indigo-600" /> 
-                <p class="ml-3 leading-5 text-gray-600">
+                <p class="ml-3 leading-5 text-black">
                 Enfocado en procesos de <span class=" text-indigo-600 xl:inline"> atracción para startups, <br></br> adaptados a su necesidad.</span>
                 </p>
             </div>
@@ -144,7 +144,7 @@ function Intermedio() {
 </div>
 
     <div class="lg:inset-y-0 lg:right-0 lg:w-1/2 my-4">
-      <img class="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" src={ hunt } alt=""/>
+      <img class="h-56 w-full object-cover sm:h-72 md:h-64 lg:w-full lg:h-full" src={ hunt } alt=""/>
     </div>
 
 </div>
@@ -172,7 +172,7 @@ function Intermedio() {
         <li class="flex items-start lg:col-span-1 mb-4">
             <div class="flex items-center"> 
                 <img src={feliz} alt="Icono" class="w-20 h-20" /> 
-                <p class="ml-3 leading-5 text-gray-600 font-dmsans"> Evaluaciones de clima y cultura adaptados a la realidad y <br></br><span class=" text-indigo-600 xl:inline"> necesidad de la organización. </span>
+                <p class="ml-3 leading-5 text-black font-dmsans"> Evaluaciones de clima y cultura adaptados a la realidad y <br></br><span class=" text-indigo-600 xl:inline"> necesidad de la organización. </span>
                 </p>
             </div>
         </li>
@@ -181,7 +181,7 @@ function Intermedio() {
         <li class="flex items-start lg:col-span-1 mb-4">
             <div class="flex items-center"> 
                 <img src={evalua} alt="Icono" class="w-20 h-20" /> 
-                <p class="ml-3 leading-5 text-gray-600 font-dmsans"> Evaluaciones de desempeño que permitan <span class=" text-indigo-600 xl:inline"> incrementar el <br></br>potencial de un equipo de trabajo.</span> <p> <span class="block text-indigo-600 xl:inline">  </span></p>
+                <p class="ml-3 leading-5 text-black font-dmsans"> Evaluaciones de desempeño que permitan <span class=" text-indigo-600 xl:inline"> incrementar el <br></br>potencial de un equipo de trabajo.</span> <p> <span class="block text-indigo-600 xl:inline">  </span></p>
                 </p>
             </div>
         </li>
@@ -190,7 +190,7 @@ function Intermedio() {
     <li class="flex items-start lg:col-span-1 mb-4">
       <div class="flex items-center"> 
         <img src={sico} alt="Icono" class="w-20 h-20" /> 
-        <p class="ml-3 leading-5 text-gray-600 font-dmsans">
+        <p class="ml-3 leading-5 text-black font-dmsans">
             Evaluaciones psicolaborales para 
             <span class="text-indigo-600 xl:inline"> identificar el perfil del <br></br> talento ya sea antes de ingresar a la organización, para un <br></br>ascenso, o determinar su estancia, etc. </span> 
         </p>
@@ -210,7 +210,7 @@ function Intermedio() {
 </div>
 
     <div class="lg:inset-y-0 lg:right-0 lg:w-1/2 my-4">
-      <img class="h-42 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" src= { evalu } alt=""/>
+      <img class="h-56 w-full object-cover sm:h-72 md:h-64 lg:w-full lg:h-full" src= { evalu } alt=""/>
     </div>
 
      </div>
@@ -218,70 +218,71 @@ function Intermedio() {
 </div>,
 
    <div>
-       <section class="sm:mt-6 lg:mt-8 mt-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+       <section class="sm:mt-6 lg:mt-8 mt-12 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 clas">
 
-    <div class="my-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-12 lg:px-8 xl:mt-28 flex gap-3 lg:flex-justify lg:flex flex-col lg:flex-row font-dmsans shadow-xl border-gray-300">
+<div class="my-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-12 lg:px-8 xl:mt-28 flex gap-3 lg:flex-justify lg:flex flex-col lg:flex-row font-dmsans shadow-xl border-gray-300 rounded-lg">
 
-    <div class="sm:text-center lg:text-left my-8">
-       <h1 class="text-4xl tracking-tight font-extrabold text-gray-800 sm:text-5xl md:text-6xl">
-       <span class="block xl:inline">Employer</span>
-       <span class="block text-indigo-600 xl:inline">Branding</span>
-   </h1>
-   
-   <p class="mt-3 text-base text-black sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-       Nos importa el desarrollo y crecimiento de los Talentos, por eso nos involucramos en su capacitación y desarrollo, con capacitaciones a la medida.
-   </p>
+<div class="sm:text-center lg:text-left my-8">
+    <h1 class="text-4xl tracking-tight font-extrabold text-gray-800 sm:text-5xl md:text-6xl">
+        <span class="block xl:inline">Employer </span>
+        <span class="block text-indigo-600 xl:inline"> Branding</span>
+    </h1>
+    
+    <p
+        class="mt-3 text-base text-black sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
+        Te ayudamos aplicar una de las estrategias modernas para atraer, retener y comprometer a los mejores talentos. Nuestro enfoque será construir tu marca empleadora sólida y atractiva, que destaque los valores, la cultura y las oportunidades únicas que ofreces como empleador. Desde la creación de una identidad corporativa distintiva hasta el diseño de experiencias de empleado excepcionales, nuestro equipo trabajará en colaboración con su empresa para posicionarla como un empleador de elección.
+    </p>
 
-   <div>
-     <ul class="mt-8 space-y-3 font-medium"/>
-     <li class="flex items-start lg:col-span-1 mb-4">
-      <div class="flex items-center"> 
-        <img src={habil} alt="Icono" class="w-20 h-20" /> 
-        <p class="ml-3 leading-5 text-gray-600 font-dmsans">
-            Desarrollo de habilidades blandas.
-        </p>
-      </div>
-    </li>
-   
-   <li class="flex items-start lg:col-span-1 mb-4">
-      <div class="flex items-center"> 
-        <img src={capacitacion} alt="Icono" class="w-20 h-20" /> 
-        <p class="ml-3 leading-5 text-gray-600 font-dmsans">
-            Capacitaciones de emporamiento.
-        </p>
-      </div>
-    </li>
-
+<div>
+    <ul class="mt-8 space-y-3 font-medium">
     <li class="flex items-start lg:col-span-1 mb-4">
-      <div class="flex items-center"> 
-        <img src={taller} alt="Icono" class="w-20 h-20" /> 
-        <p class="ml-3 leading-5 text-gray-600 font-dmsans">
-            Talleres vivenciales.
+        <div class="flex items-center"> 
+        <img src={habil} alt="Icono" class="w-20 h-20" /> 
+        <p class="ml-3 leading-5 text-black font-dmsans text-sm">
+        Talleres prácticos y sesiones de formación diseñadas para <br></br> empoderar a su equipo en la comprensión y aplicación <br></br> efectiva de estrategias de Employer Branding.
+        </p>
+        </div>
+    </li>
+    
+    <li class="flex items-start mt-5 lg:col-span-1 lg:mt-0">
+        <div class="flex items-center"> 
+        <img src={capacitacion} alt="Icono" class="w-20 h-20" /> 
+        <p class="ml-3 leading-5 text-black font-dmsans text-sm">
+        Fortalecimiento de la capacidad de liderazgo para crear <br></br> un ambiente de trabajo positivo y motivador que refuerce <br></br> la marca empleadora.
         </p>
       </div>
+
     </li>
 
+    <li class="flex items-start mt-5 lg:col-span-1 lg:mt-0">
+    <div class="flex items-center"> 
+        <img src={taller} alt="Icono" class="w-20 h-20" /> 
+        <p class="ml-3 leading-5 text-black font-dmsans text-sm"> 
+            Sesiones interactivas y dinámicas dirigidas tanto al <br></br> personal administrativo como operativo, centradas en la <br></br> promoción y consolidación de una cultura empresarial coherente.
+        </p>
+    </div>
+</li>
+
+</ul>
 </div>
 
 
-   <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
-       <div class="rounded-md shadow">
-           <a href='https://2kliic9t7ed.typeform.com/to/Lw8OmtpQ'
-               class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gray-800 hover:bg-gray-600 md:py-4 md:text-lg md:px-10 ">
-               Lo quiero
-           </a>
-       </div>
-
-   </div>
-  
+    <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
+        <div class="rounded-md shadow">
+            <a href='https://2kliic9t7ed.typeform.com/to/Lw8OmtpQ'
+                class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gray-800 hover:bg-gray-600 md:py-4 md:text-lg md:px-10 ">
+                Lo quiero
+            </a>
+        </div>
+    </div>
+   
 </div>
 
-<div class="lg:inset-y-0 lg:right-0 lg:w-1/2 my-4">
-   <img class="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" src={ desarrollo } alt=""/>
+<div class="lg:inset-y-0 lg:right-0 lg:w-1/ my-4">
+    <img class="h-56 w-full object-cover sm:h-72 md:h-64 lg:w-full lg:h-full" src={ reclut } alt=""/>
 </div>
 
 </div>
-
 </section>
 </div>,
 
