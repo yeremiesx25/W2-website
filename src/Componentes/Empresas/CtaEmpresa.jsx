@@ -11,7 +11,7 @@ function CtaEmpresa() {
 });
 
   return (
-    <div className="bg-primarycolor text-white pt-20 font-dmsans my-12">
+    <div className="bg-primarycolor text-white font-dmsans pt-20">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-full">
         <div className="flex flex-col lg:flex-row items-center">
           <div className="w-full flex  flex-col items-center text-center lg:w-1/2">

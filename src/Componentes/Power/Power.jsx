@@ -8,6 +8,7 @@ import CtaPower from './CtaPower'
 import ContainerVideos from './ContainerVideos'
 import FaqPower from './FaqPower'
 import FooterPower from './FooterPower'
+import BtnWsp from '../Principal/BtnWsp'
 function Power() {
   return (
     <>
@@ -18,6 +19,7 @@ function Power() {
     <CtaPower />
     <ContainerVideos />
     <FooterPower />
+    <BtnWsp />
     </>
   )
 }

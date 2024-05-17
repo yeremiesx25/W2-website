@@ -28,7 +28,7 @@ function Hero() {
           <div>
             <h2 class="font-display text-2xl font-bold tracking-tight text-white sm:text-5xl lg:text-4xl">
               ¿Estás listo? <br />
-              <span className="text-5xl">Vive la experiencia</span> <br />{" "}
+              <span className="text-4xl md:text-6xl">Vive la experiencia</span> <br />{" "}
               <span class="text-teal-100 mx-1 font-extrabold text-2xl sm:text-5xl lg:text-4xl relative inline-block stroke-current">
                 {text}
                 <Cursor />

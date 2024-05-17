@@ -6,6 +6,7 @@ import BeneficiosPower from '../Power/BeneficiosPower'
 import CtaPower from '../Power/CtaPower'
 import ContainerVideos from '../Power/ContainerVideos'
 import FooterPower from '../Power/FooterPower'
+import BtnWsp from '../Principal/BtnWsp'
 function PowerAuth() {
   return (
     <>
@@ -16,6 +17,7 @@ function PowerAuth() {
     <CtaPower />
     <ContainerVideos />
     <FooterPower />
+    <BtnWsp />
     </>
   )
 }

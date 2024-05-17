@@ -5,6 +5,7 @@ import Footer from  "../Principal/Footer"
 import CtaEmpresa from './CtaEmpresa'
 import HeroEmpresa from './HeroEmpresa'
 import CardTrabajo from './CardTrabajo'
+import BtnWsp from '../Principal/BtnWsp'
 
 function Empresas() {
   return (
@@ -15,6 +16,7 @@ function Empresas() {
       <CtaEmpresa />
       <Footer />
       <CardTrabajo />
+      <BtnWsp />
     </>
   )
 }

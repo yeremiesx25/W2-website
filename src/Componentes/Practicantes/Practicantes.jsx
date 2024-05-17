@@ -8,6 +8,7 @@ import FaqPracticantes from './FaqPracticantes'
 import AreasPracticantes from './AreasPracticantes'
 import Footer from '../Principal/Footer'
 import CtaOtraCarrera from './CtaOtraCarrera'
+import BtnWsp from '../Principal/BtnWsp'
 import Equipo from './Equipo'
 
 function Practicantes() {
@@ -21,6 +22,7 @@ function Practicantes() {
       <CtaOtraCarrera />
       <FaqPracticantes />
       <Footer />
+      <BtnWsp />
     </div>
   )
 }
