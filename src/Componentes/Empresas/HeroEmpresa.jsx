@@ -26,22 +26,18 @@ function HeroEmpresa() {
             alt="Background Image"
             className="object-cover object-center w-full h-full"
           />
-          <div className="absolute inset-0 bg-black opacity-50"></div>
+          <div className="absolute inset-0 bg-black opacity-65"></div>
         </div>
 
         <div className="relative flex flex-col justify-center items-center h-full text-left">
-          <h1 className="text-5xl font-bold leading-tight mb-4 text-center">Alcanza tus Objetivos de <br></br> Gestión Humana</h1>
+          <h1 className="text-5xl font-bold leading-tight mb-8 text-center">Potencia tu Marca Empleadora y Transforma tu Reclutamiento con Expertos en Gestión Humana</h1>
 
           <p className="text-lg text-white mb-8 text-center">
-            Deja atrás el dolor del reclutamiento de personal con nuestra metodología de atracción;
-            <br />
-            despeja tus dudas sobre el equipo que tienes y el que ha de ingresar con una evaluación psicolaboral.
-            <br />
-            Pon en nuestras manos la gestión operativa de tus procesos del área de Talento Humano.
+          Transforma tu proceso de reclutamiento y mejora tu imagen como empleador con nuestra metodología innovadora de atracción de talento. <br></br>Además, potencia tu marca empleadora con nuestras estrategias de Employer Branding. <br></br>Permítenos gestionar tus procesos de talento humano para que te concentres en tus objetivos estratégicos. <br></br> <h1 className=" font-bold leading-tight mb-4 text-center"> Confía en nosotros para crear una cultura organizacional atractiva y visible que te destaque frente a los demás.</h1>
           </p>
 
-          <a href="#" className="bg-primarycolor text-white py-2 px-6 rounded-lg text-lg font-semibold transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg">
-            Quiero un servicio
+          <a href="https://meetings.hubspot.com/winy-tupayachi-cahuana" className="bg-primarycolor text-white py-2 px-6 rounded-lg text-lg font-semibold transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg">
+            Agenda una reunión
           </a>
         </div>
       </div>
