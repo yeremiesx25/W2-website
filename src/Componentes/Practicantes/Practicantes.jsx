@@ -17,6 +17,7 @@ function Practicantes() {
       <Navbar />
       <HeroPracticantes />
       <Descubre />
+      <Equipo />
       <CtaAreas />
       <AreasPracticantes />
       <CtaOtraCarrera />

@@ -7,20 +7,7 @@
         class="relative w-full bg-white px-6 pt-10 pb-8 mt-8 shadow-xl ring-1 ring-gray-900/5 sm:mx-auto sm:max-w-2xl sm:rounded-lg sm:px-10 mb-10">
             
         <div class="mx-auto px-5">
-        <div className="area h-full">
-			<ul class="circles">
-				<li></li>
-				<li></li>
-				<li></li>
-				<li></li>
-				<li></li>
-				<li></li>
-				<li></li>
-				<li></li>
-				<li></li>
-				<li></li>
-			</ul>
-		</div>
+        
             <div class="flex flex-col items-center">
                 <h2 class="mt-5 text-center text-3xl font-bold tracking-tight md:text-3xl">Preguntas frecuentes</h2>
                 <p class="mt-3 text-md text-neutral-500 md:text-lg">Algunas de las dudas más comunes

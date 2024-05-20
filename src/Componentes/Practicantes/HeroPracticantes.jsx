@@ -1,14 +1,21 @@
 import React from "react";
-import fondo from "../../assets/Web 3.jpg";
+import fondo from "../../assets/FondoBanner2.png";
 import imgHero from "../../assets/imgPracticas.png";
 import arrow from "../../assets/flechas-a-la-derecha.png";
 import Descubre from "./Descubre";
 function HeroPracticantes() {
   return (
-    <section class="pt-20 md:pt-40 font-dmsans">
-      <div class="container mx-auto px-8 lg:flex">
+    <section
+  style={{ backgroundImage: `url(${fondo})` }}
+  className="pt-20 md:pt-40 font-dmsans"
+>
+      
+      <div class="container mx-auto px-0 md:px-8 lg:flex">
+        
         <div class="text-center lg:text-left lg:w-1/2">
+          
           <h1 class="text-4xl lg:text-5xl xl:text-6xl font-bold leading-none">
+            
             Descubriendo <span className="text-primarycolor">Talentos</span>{" "}
           </h1>
           <p class=" lg:text-xl mt-6 font-light">

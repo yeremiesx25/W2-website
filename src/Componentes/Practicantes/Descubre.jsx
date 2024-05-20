@@ -5,6 +5,9 @@ import icon3 from "../../assets/free_icon_1 (2).svg";
 import icon4 from "../../assets/free_icon_1 (3).svg";
 
 import Flexibilidad from "../../assets/Flexibilidad (1).gif";
+import aprendizaje from "../../assets/Aprendizaje Continuo.gif";
+import cultura from "../../assets/Cultura (1).gif";
+import desarrollo from "../../assets/Inicio Diferentes (1).gif";
 
 function Descubre() {
   return (
@@ -60,18 +63,18 @@ function Descubre() {
       </div>
       {/* animacion de scroll */}
       <div class="relative">
-        <div class="sticky top-0 h-full md:h-screen  flex flex-col items-center justify-center bg-gradient-to-b from-purple-700 to-blue-900 text-white">
+        <div class="sticky top-0 h-full md:h-screen  flex flex-col items-center justify-center bg-gradient-to-b from-white to-blue-100">
           <section class="text-white body-font bg-none dark:bg-slate-900">
             <div class="container mx-auto flex md:px-24 md:py-10 md:flex-row flex-col items-center justify-center">
               <div class="lg:flex-grow mt-5 md:mt-0   md:w-1.5/2  flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center justify-center">
-                <h1 class="text-2xl font-extrabold leading-9 tracking-tight mb-3 dark:text-gray-100 sm:text-4xl sm:leading-10 md:text-5xl md:leading-normal">
+                <h1 class="text-2xl font-extrabold leading-9 tracking-tight mb-3 text-black sm:text-4xl sm:leading-10 md:text-5xl md:leading-normal">
                   Flexibilidad en el trabajo
                 </h1>
-                <p class="mb-8 md:pl-0  pl-2 pr-2 leading-relaxed dark:text-gray-300">
+                <p class="mb-8 md:pl-0  pl-2 pr-2 leading-relaxed text-gray-700">
                   El equilibrio personal y laboral es nuestra prioridad,
                   asegurando una calidad de vida de nuestro equipo.
                 </p>
-                <ul class="mt-8 space-y-3 font-medium">
+                <ul class="mt-8 space-y-3 font-medium text-gray-700">
                   <li class="flex items-start lg:col-span-1">
                     <div class="flex-shrink-0">
                       <svg
@@ -133,7 +136,7 @@ function Descubre() {
                     src={Flexibilidad}
                     alt=""
                   />
-                  <div class="mb-4 text-white">
+                  <div class="mb-4 text-gray-700">
                     <svg
                       height="35px"
                       class="mb-2"
@@ -163,7 +166,7 @@ function Descubre() {
                       <p
                         class="font-medium leading-none text-indigo-600 hover:text-black transition duration-500 ease-in-out"
                       >
-                        Aldair de W2
+                        Alexander de W2
                       </p>
                       <p>Practicante</p>
                     </div>
@@ -243,8 +246,8 @@ desarrollo personal.
               <div class="lg:max-w-lg lg:w-full mb-5 md:mb-0 md:w-1/2 w-3/6">
                 <div class=" mx-auto max-w-sm flex flex-col items-center justify-center text-center">
                   <img
-                    className="rounded-full w-64   "
-                    src={Flexibilidad}
+                    className="rounded-full w-64 h-64"
+                    src={aprendizaje}
                     alt=""
                   />
                   <div class="mb-4 text-white">
@@ -273,15 +276,7 @@ desarrollo personal.
                     <p class="mt-2 text-base leading-6">
                     “La evaluación de ingreso es innovadora al enfocarse en capacitación y aprendizaje continuo sin requerir experiencia previa, incentivando nuestro esfuerzo por mantenernos a la vanguardia.”
                     </p>
-                    <div class="text-sm mt-5">
-                      <a
-                        href="#"
-                        class="font-medium leading-none text-indigo-600 hover:text-black transition duration-500 ease-in-out"
-                      >
-                        Jonathan Reinink
-                      </a>
-                      <p>CEO</p>
-                    </div>
+                    
                   </div>
                 </div>
               </div>
@@ -362,7 +357,7 @@ comunicación e interacción
                 <div class=" mx-auto max-w-sm flex flex-col items-center justify-center text-center">
                   <img
                     className="rounded-full w-64   "
-                    src={Flexibilidad}
+                    src={cultura}
                     alt=""
                   />
                   <div class="mb-4 text-white">
@@ -391,15 +386,7 @@ comunicación e interacción
                     <p class="mt-2 text-base leading-6">
                     “La cultura inclusiva me hace sentir valorada e integrada, permitiéndonos aportar nuestras mejores ideas y contribuciones sin importar ubicación, creencias o antecedentes, lo que hace a nuestro equipo excepcional.“
                     </p>
-                    <div class="text-sm mt-5">
-                      <a
-                        href="#"
-                        class="font-medium leading-none text-indigo-600 hover:text-black transition duration-500 ease-in-out"
-                      >
-                        Jonathan Reinink
-                      </a>
-                      <p>CEO</p>
-                    </div>
+                   
                   </div>
                 </div>
               </div>
@@ -479,7 +466,7 @@ profesional.
                 <div class=" mx-auto max-w-sm flex flex-col items-center justify-center text-center">
                   <img
                     className="rounded-full w-64   "
-                    src={Flexibilidad}
+                    src={desarrollo}
                     alt=""
                   />
                   <div class="mb-4 text-white">
@@ -510,15 +497,6 @@ profesional.
                       Voluptatibus quia, nulla! Maiores et perferendis eaque,
                       exercitationem praesentium nihil.
                     </p>
-                    <div class="text-sm mt-5">
-                      <a
-                        href="#"
-                        class="font-medium leading-none text-indigo-600 hover:text-black transition duration-500 ease-in-out"
-                      >
-                        Jonathan Reinink
-                      </a>
-                      <p>CEO</p>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -625,15 +603,7 @@ queremos reconocer.
                     <p class="mt-2 text-base leading-6">
                     “El trabajo flexible me ha permitido equilibrar mi vida personal y profesional, trabajar de manera más eficiente y sentirme en control de mi tiempo y éxito laboral.”
                     </p>
-                    <div class="text-sm mt-5">
-                      <a
-                        href="#"
-                        class="font-medium leading-none text-indigo-600 hover:text-black transition duration-500 ease-in-out"
-                      >
-                        Jonathan Reinink
-                      </a>
-                      <p>CEO</p>
-                    </div>
+                    
                   </div>
                 </div>
               </div>
