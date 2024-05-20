@@ -8,7 +8,7 @@ import hunt from "../../assets/head.png";
 import evalu from "../../assets/evaluacion.png";
 import user from "../../assets/usuarios.png";
 import hed from "../../assets/headh.png";
-import reunion from "../../assets/reu.png";
+import emplo from "../../assets/employer.png";
 import desarrollo from "../../assets/Aprendizaje.png";
 import anali from "../../assets/analizar.png";
 import evalua from "../../assets/Evaluaciones.png";
@@ -27,20 +27,18 @@ function Intermedio() {
     <div>
       <section class=" max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="transition-all duration-300 mx-auto max-w-7xl px-4  sm:px-6 lg:px-8  flex gap-3 lg:flex-justify lg:flex flex-col lg:flex-row font-dmsans  border-gray-300 rounded-lg">
+          
           <div class="sm:text-center lg:text-left my-8">
             <h1 class="text-3xl tracking-tight font-extrabold text-gray-800 sm:text-4xl md:text-5xl">
               <span class="block xl:inline">Atracción de </span>
               <span class="block text-primarycolor xl:inline">Personal</span>
             </h1>
-            <p class="mt-3 text-base text-black sm:mt-5 sm:text-lg sm:max-w-[500px] sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-              Entendemos el cambio y la globalización es por ello que
-              implementamos nuestra metodología de atracción fundamentada en el
-              Inbound Recruiting. Que nos permite acelerar nuestros procesos y
-              hacerlos efectivos.
+            <p class="mt-3 text-base text-black sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
+              Entendemos el cambio y la globalización es por ello que implementamos nuestra metodología de atracción fundamentada en el Inbound Recruiting. Que nos permite acelerar nuestros procesos y hacerlos efectivos.
             </p>
 
             <div>
-              <ul class="space-y-3 font-medium text-sm">
+              <ul class="mt-4 space-y-3 font-medium">
                 <li class="flex items-start lg:col-span-1 mb-4">
                   <div class="flex items-center">
                     <img
@@ -50,10 +48,9 @@ function Intermedio() {
                     />
                     <p class="ml-3 leading-5 text-black">
                       Enfocado en procesos masivos de alta demanda como
-                      <p></p>
-                      <span class="block text-indigo-600 xl:inline">
+                      <span class=" text-indigo-600 xl:inline">
                         {" "}
-                        Operario de almacen, producción, reparto, distribución,
+                       <br></br> Operario de almacen, producción, reparto, distribución,
                         estiba, conductores, prevencionistas, etc.
                       </span>
                     </p>
@@ -67,12 +64,12 @@ function Intermedio() {
                       alt="Icono"
                       class="w-20 h-20 text-indigo-600"
                     />
-                    <p class="ml-3 leading-5 text-black font-dmsans">
+                    <p class="ml-3 leading-5 text-black">
                       Enfocado en personal de mandos medios como
                       <span class="block text-indigo-600 xl:inline">
                         {" "}
                         asistentes, supervisores, coordinadores, posiciones IT y
-                        puestos focalizados en una organización.
+                        puestos <br></br>focalizados en una organización.
                       </span>
                     </p>
                   </div>
@@ -80,13 +77,13 @@ function Intermedio() {
               </ul>
             </div>
 
-            <div class="sm:flex sm:justify-center lg:justify-start">
+            <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
               <div class="rounded-lg shadow">
                 <a
                   href="https://2kliic9t7ed.typeform.com/to/Lw8OmtpQ"
                   class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gray-800 hover:bg-gray-600 md:py-4 md:text-lg md:px-10 "
                 >
-                  Lo quiero
+                  Descubre el talento ideal
                 </a>
               </div>
             </div>
@@ -94,7 +91,7 @@ function Intermedio() {
 
           <div class="lg:inset-y-0 lg:right-0 lg:w-1/2" >
             <img
-              class="h-56 w-full object-cover sm:h-72 md:h-64 lg:w-full lg:h-full"
+              class="h-72 w-full object-cover sm:h-72 md:h-64 lg:w-full lg:h-full"
               src={reclut}
               alt=""
             />
@@ -105,7 +102,8 @@ function Intermedio() {
 
     <div>
       <section class=" max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="transition-all duration-300 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8  flex gap-3 lg:flex-justify lg:flex flex-col lg:flex-row font-dmsans  border-gray-300">
+        <div class="transition-all duration-300 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 flex gap-3 lg:flex-justify lg:flex flex-col lg:flex-row font-dmsans border-gray-300">
+          
           <div class="sm:text-center lg:text-left my-8">
             <h1 class="text-3xl tracking-tight font-extrabold text-gray-800 sm:text-4xl md:text-5xl">
               <span class="block xl:inline">Head </span>
@@ -118,7 +116,7 @@ function Intermedio() {
             </p>
 
             <div>
-              <ul class="mt-8 space-y-3 font-medium" />
+              <ul class="mt-4 space-y-3 font-medium" />
               <li class="flex items-start lg:col-span-1 ">
                 <div class="flex items-center">
                   <img
@@ -161,9 +159,9 @@ function Intermedio() {
               <div class="rounded-lg shadow">
                 <a
                   href="https://2kliic9t7ed.typeform.com/to/Lw8OmtpQ"
-                  class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gray-800 hover:bg-gray-600  md:text-lg md:px-10 "
+                  class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gray-800 hover:bg-gray-600 md:py-4 md:text-lg md:px-10 "
                 >
-                  Lo quiero
+                  Encuentra a tu próximo líder
                 </a>
               </div>
             </div>
@@ -171,7 +169,7 @@ function Intermedio() {
 
           <div class="lg:inset-y-0 lg:right-0 lg:w-1/2">
             <img
-              class="h-56 w-full object-cover sm:h-72 md:h-64 lg:w-full lg:h-full"
+              class="h-60 w-full object-cover sm:h-72 md:h-64 lg:w-full lg:h-full"
               src={hunt}
               alt=""
             />
@@ -200,13 +198,12 @@ function Intermedio() {
 
               <li class="flex items-start lg:col-span-1 ">
                 <div class="flex items-center">
-                  <img src={feliz} alt="Icono" class="w-20 h-20" />
+                  <img src={feliz} alt="Icono" class="w-16 h-16" />
                   <p class="ml-3 leading-5 text-black font-dmsans">
                     {" "}
                     Evaluaciones de clima y cultura adaptados a la realidad y{" "}
-                    <br></br>
                     <span class=" text-indigo-600 xl:inline">
-                      {" "}
+
                       necesidad de la organización.{" "}
                     </span>
                   </p>
@@ -215,13 +212,13 @@ function Intermedio() {
 
               <li class="flex items-start lg:col-span-1 ">
                 <div class="flex items-center">
-                  <img src={evalua} alt="Icono" class="w-20 h-20" />
+                  <img src={evalua} alt="Icono" class="w-16 h-16" />
                   <p class="ml-3 leading-5 text-black font-dmsans">
                     {" "}
                     Evaluaciones de desempeño que permitan{" "}
                     <span class=" text-indigo-600 xl:inline">
                       {" "}
-                      incrementar el <br></br>potencial de un equipo de trabajo.
+                      incrementar el potencial de un equipo de trabajo.
                     </span>{" "}
                     <p>
                       {" "}
@@ -233,13 +230,13 @@ function Intermedio() {
 
               <li class="flex items-start lg:col-span-1 ">
                 <div class="flex items-center">
-                  <img src={sico} alt="Icono" class="w-20 h-20" />
+                  <img src={sico} alt="Icono" class="w-16 h-16" />
                   <p class="ml-3 leading-5 text-black font-dmsans">
                     Evaluaciones psicolaborales para
                     <span class="text-indigo-600 xl:inline">
                       {" "}
-                      identificar el perfil del <br></br> talento ya sea antes
-                      de ingresar a la organización, para un <br></br>ascenso, o
+                      identificar el perfil del talento ya sea <br></br>antes
+                      de ingresar a la organización, para un ascenso, o
                       determinar su estancia, etc.{" "}
                     </span>
                   </p>
@@ -248,12 +245,12 @@ function Intermedio() {
             </div>
 
             <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
-              <div class="rounded-md shadow">
+              <div class="rounded-lg shadow">
                 <a
                   href="https://2kliic9t7ed.typeform.com/to/Lw8OmtpQ"
                   class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gray-800 hover:bg-gray-600 md:py-4 md:text-lg md:px-10 "
                 >
-                  Lo quiero
+                  Evalúa tu equipo ahora
                 </a>
               </div>
             </div>
@@ -272,7 +269,7 @@ function Intermedio() {
 
     <div>
       <section class=" max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="transition-all duration-900 mx-auto max-w-7xl px-4  sm:px-6  lg:px-8  flex gap-3 lg:flex-justify lg:flex flex-col lg:flex-row font-dmsans border-gray-300 rounded-lg">
+        <div class="transition-all duration-300 mx-auto max-w-7xl px-4  sm:px-6 lg:px-8  flex gap-3 lg:flex-justify lg:flex flex-col lg:flex-row font-dmsans border-gray-300 rounded-lg">
           <div class="sm:text-center lg:text-left my-8">
             <h1 class="text-3xl tracking-tight font-extrabold text-gray-800 sm:text-4xl md:text-5xl">
               <span class="block xl:inline">Employer </span>
@@ -280,49 +277,35 @@ function Intermedio() {
             </h1>
 
             <p class="mt-3 text-base text-black sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-              Te ayudamos aplicar una de las estrategias modernas para atraer,
-              retener y comprometer a los mejores talentos. Nuestro enfoque será
-              construir tu marca empleadora sólida y atractiva, que destaque los
-              valores, la cultura y las oportunidades únicas que ofreces como
-              empleador. Desde la creación de una identidad corporativa
-              distintiva hasta el diseño de experiencias de empleado
-              excepcionales, nuestro equipo trabajará en colaboración con su
-              empresa para posicionarla como un empleador de elección.
+           Entendemos el cambio y la globalización es por ello que implementamos nuestra metodología de atracción fundamentada en el Inbound Recruiting. Que nos permite acelerar nuestros procesos y hacerlos efectivos.
+
             </p>
 
             <div>
-              <ul class="mt-8 space-y-3 font-medium">
+              <ul class="mt-4 space-y-3 font-medium">
                 <li class="flex items-start lg:col-span-1 mb-4">
                   <div class="flex items-center">
-                    <img src={habil} alt="Icono" class="w-20 h-20" />
-                    <p class="ml-3 leading-5 text-black font-dmsans text-sm">
-                      Talleres prácticos y sesiones de formación diseñadas para{" "}
-                      <br></br> empoderar a su equipo en la comprensión y
-                      aplicación <br></br> efectiva de estrategias de Employer
-                      Branding.
+                    <img src={habil} alt="Icono" class="w-12 h-12" />
+                    <p class="ml-3 leading-5 text-black font-dmsans">
+                    Brand Bootcamp | Capacitación Intensiva en Employer Branding
                     </p>
                   </div>
                 </li>
 
                 <li class="flex items-start mt-5 lg:col-span-1 lg:mt-0">
                   <div class="flex items-center">
-                    <img src={capacitacion} alt="Icono" class="w-20 h-20" />
-                    <p class="ml-3 leading-5 text-black font-dmsans text-sm">
-                      Fortalecimiento de la capacidad de liderazgo para crear{" "}
-                      <br></br> un ambiente de trabajo positivo y motivador que
-                      refuerce <br></br> la marca empleadora.
+                    <img src={capacitacion} alt="Icono" class="w-12 h-12" />
+                    <p class="ml-3 leading-5 text-black font-dmsans">
+                    Brand Leadership Academy | Liderazgo Inspirador para una Marca Empleadora Poderosa.
                     </p>
                   </div>
                 </li>
 
                 <li class="flex items-start mt-5 lg:col-span-1 lg:mt-0">
                   <div class="flex items-center">
-                    <img src={taller} alt="Icono" class="w-20 h-20" />
-                    <p class="ml-3 leading-5 text-black font-dmsans text-sm">
-                      Sesiones interactivas y dinámicas dirigidas tanto al{" "}
-                      <br></br> personal administrativo como operativo,
-                      centradas en la <br></br> promoción y consolidación de una
-                      cultura empresarial coherente.
+                    <img src={taller} alt="Icono" class="w-12 h-12" />
+                    <p class="ml-3 leading-5 text-black font-dmsans">
+                    Brand ADN Workshops | Construyendo la Identidad Cultural de una Marca Empleadora de Vanguardia.
                     </p>
                   </div>
                 </li>
@@ -330,12 +313,12 @@ function Intermedio() {
             </div>
 
             <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
-              <div class="rounded-md shadow">
+              <div class="rounded-lg shadow">
                 <a
                   href="https://2kliic9t7ed.typeform.com/to/Lw8OmtpQ"
-                  class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gray-800 hover:bg-gray-600 md:py-4 md:text-lg md:px-10 "
+                  class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gray-800 hover:bg-gray-600 md:py-4 md:text-lg md:px-10 text-center"
                 >
-                  Lo quiero
+                  Fortalece tu marca empleadora
                 </a>
               </div>
             </div>
@@ -343,8 +326,8 @@ function Intermedio() {
 
           <div class="lg:inset-y-0 lg:right-0 lg:w-1/2">
             <img
-              class="h-72 w-full object-cover sm:h-72 md:h-64 lg:w-full lg:h-full"
-              src={reclut}
+              class="h-full w-full object-cover sm:h-72 md:h-64 lg:w-full lg:h-full"
+              src={emplo}
               alt=""
             />
           </div>
@@ -359,11 +342,11 @@ function Intermedio() {
 
   return (
     <div className=" flex flex-wrap justify-center w-full items-center">
-      <h2 className="text-primarytext font-semibold text-5xl mt-8 md:mt-20 text-center">
+      <h2 className="text-primarytext font-semibold text-4xl mt-8 md:mt-20 text-center">
         {" "}
         <img src={flecha} alt="" className="inline-block w-16 h-12 mr-2"></img>
         Brindamos soluciones para todo tipo de reto de <br></br>{" "}
-        <span class="block text-primarycolor xl:inline">Gestión Humana </span>
+        <span class="block text-primarycolor xl:inline">GESTION HUMANA </span>
       </h2>
       <div className="flex w-auto flex-wrap justify-center mx-4 border-b-2 mt-12">
         <button

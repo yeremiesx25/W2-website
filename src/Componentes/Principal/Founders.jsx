@@ -1,12 +1,15 @@
 import React from 'react'
-import Wily from '../../assets/Wily2.png'
+import Wily from '../../assets/Willy.png'
 import Winy from '../../assets/Winy1.png'
 import flecha from '../../assets/flecha.png'
 function Founders() {
   return (
     <section class="bg-white dark:bg-gray-900">
     <div class="container px-6 py-10 mx-auto">
-        <h1 class="text-2xl font-semibold text-center text-gray-800 capitalize lg:text-3xl dark:text-white"><img src ={flecha} alt="" className="inline-block w-16 h-12 mr-2"></img>Nuestros Founders</h1>
+        <h1 class="text-2xl font-semibold text-center text-gray-800 capitalize lg:text-4xl dark:text-white">
+            <img src ={flecha} alt="" className="inline-block w-16 h-12 mr-2"></img>
+            Nuestros <span class="text-primarycolor xl:inline"> Founders</span>
+            </h1>
 
         <p class="max-w-2xl mx-auto my-6 text-center text-gray-500 dark:text-gray-300">
         Nuestra historia comienza con ellos. Conoce a los fundadores de nuestra empresa.
