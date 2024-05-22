@@ -1,6 +1,5 @@
 import React from 'react'
 import {useTypewriter, Cursor} from 'react-simple-typewriter'
-import fondoPuntos from '../../assets/punteado.png'
 function CtaOtraCarrera() {
 
     const [text] = useTypewriter({
