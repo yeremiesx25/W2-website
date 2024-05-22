@@ -49,7 +49,7 @@ empresa formal con los beneficios
 de ley mediante nuestra metodología
 de atracción incluso si no tienen CV. </p>
     </div>
-    <Link to="/Power" className="absolute inset-x-5 bottom-8 py-3 rounded-2xl font-semibold bg-amber-400 shadow-lg hidden transition duration-200 hover:bg-gray-300 group-hover:block text-white text-center">
+    <Link to="/Power" className="absolute inset-x-5 bottom-8 py-3 rounded-2xl font-semibold bg-amber-400 shadow-lg hidden transition duration-200 hover:bg-gray-300 hover:text-black group-hover:block text-white text-center">
             Ofertas Laborales
           </Link>
 </div>
@@ -67,7 +67,7 @@ de W2. Revisa nuestro apartado de
 beneficios y vive tu primera
 experiencia laboral con nosotros.</p>
     </div>
-    <Link to="/Practicantes" className="absolute inset-x-5 bottom-8 py-3 rounded-2xl font-semibold bg-primarycolor text-white shadow-lg hidden transition duration-200 hover:bg-gray-300 group-hover:block text-center">
+    <Link to="/Practicantes" className="absolute inset-x-5 bottom-8 py-3 rounded-2xl font-semibold bg-primarycolor text-white shadow-lg hidden transition duration-200  hover:text-primarycolor hover:bg-gray-300 group-hover:block text-center">
             Vive la experiencia
           </Link>
 </div>
