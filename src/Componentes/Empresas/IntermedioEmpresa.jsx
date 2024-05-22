@@ -337,7 +337,7 @@ function Intermedio() {
   
 
   return (
-    <div className=" flex flex-wrap justify-center w-full items-center">
+    <div id="intermedio" className=" flex flex-wrap justify-center w-full items-center">
       <h2 className="text-primarytext font-semibold text-4xl mt-8 md:mt-20 text-center">
         {" "}
         <img src={flecha} alt="" className="inline-block w-16 h-12 mr-2"></img>

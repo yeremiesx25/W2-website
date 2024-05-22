@@ -168,7 +168,7 @@ const SliderComponent = () => {
                       <p className="font-medium leading-none text-indigo-600 hover:text-black transition duration-500 ease-in-out">
                         Alexander de W2
                       </p>
-                      <p>Practicante</p>
+                      
                     </div>
                   </div>
                 </div>
@@ -289,7 +289,7 @@ const SliderComponent = () => {
                       <p className="font-medium leading-none text-indigo-600 hover:text-black transition duration-500 ease-in-out">
                         kirsten de W2
                       </p>
-                      <p>Practicante</p>
+                      
                     </div>
                   </div>
                 </div>
@@ -411,7 +411,7 @@ const SliderComponent = () => {
                       <p className="font-medium leading-none text-indigo-600 hover:text-black transition duration-500 ease-in-out">
                         Piero de W2
                       </p>
-                      <p>Practicante</p>
+                      
                     </div>
                   </div>
                 </div>
@@ -530,7 +530,7 @@ const SliderComponent = () => {
                       <p className="font-medium leading-none text-indigo-600 hover:text-black transition duration-500 ease-in-out">
                         Brayan de W2
                       </p>
-                      <p>Practicante</p>
+                      
                     </div>
                   </div>
                 </div>
@@ -651,7 +651,7 @@ const SliderComponent = () => {
                       <p className="font-medium leading-none text-indigo-600 hover:text-black transition duration-500 ease-in-out">
                         Aldair de W2
                       </p>
-                      <p>Practicante</p>
+                      
                     </div>
                   </div>
                 </div>

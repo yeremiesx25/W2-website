@@ -32,7 +32,7 @@ function MainDiv() {
         <p className="max-w-2xl mx-auto px-6 text-lg text-primarytext font-inter animate-fade-up">
           Potenciamos tu éxito empresarial con soluciones de gestión humana y tecnología de vanguardia, incluso sin un departamento de recursos humanos.
         </p>
-        <div className="px-8 sm:items-start sm:justify-center sm:px-0 sm:space-x-5 sm:flex mt-9">
+        <div className="px-8 sm:items-start justify-center sm:px-0 sm:space-x-5 sm:flex mt-9 flex flex-col sm:flex-row items-center">
 
           <Link to="/Empresas" title=""
            className="bg-primarycolor p-2 text-white font-semibold rounded-lg w-48 h-14 text-lg flex items-center justify-center hover:text-primarycolor hover:border-2 hover:border-primarycolor hover:bg-white" role="button">
@@ -41,7 +41,7 @@ function MainDiv() {
               style={{backgroundImage: `url(${arrow})`, width:'30px', height:'20px' }}></span>
           </Link>
 
-          <Link to="/Practicantes"
+          <Link to="/Power"
             className="inline-flex items-center justify-center w-full px-8 py-3 text-lg font-bold text-primarytext hover:bg-gray-50 sm:w-auto rounded-xl"
             role="button">Soy Talento
           </Link>

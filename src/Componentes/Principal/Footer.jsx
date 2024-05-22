@@ -1,6 +1,6 @@
 import React from "react";
 import logowhite from '../../assets/Logo horizontal W2 WHITE.png';
-
+import { Link } from 'react-router-dom';
 const Footer = () => {
   return (
     <div>
@@ -22,16 +22,16 @@ const Footer = () => {
               <h3 className="tracking-wide uppercase dark:text-gray-900">Servicios</h3>
               <ul className="space-y-1">
                 <li>
-                  <a rel="noopener noreferrer" href="#">Reclutamiento</a>
+                  <a rel="noopener noreferrer" href="#intermedio">Reclutamiento</a>
                 </li>
                 <li>
-                  <a rel="noopener noreferrer" href="#">Head Hunting</a>
+                  <a rel="noopener noreferrer" href="#intermedio">Head Hunting</a>
                 </li>
                 <li>
-                  <a rel="noopener noreferrer" href="#">Evaluación de Personal</a>
+                  <a rel="noopener noreferrer" href="#intermedio">Evaluación de Personal</a>
                 </li>
                 <li>
-                  <a rel="noopener noreferrer" href="#">Employer Branding</a>
+                  <a rel="noopener noreferrer" href="#intermedio">Employer Branding</a>
                 </li>
               </ul>
             </div>
@@ -43,6 +43,9 @@ const Footer = () => {
                 </li>
                 <li>
                   <a rel="noopener noreferrer" href="#">Términos del servicio</a>
+                </li>
+                <li>
+                  <Link rel="noopener noreferrer" to="/Practicantes">Trabaja con nosotros</Link>
                 </li>
               </ul>
             </div>
