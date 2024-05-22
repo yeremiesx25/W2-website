@@ -76,7 +76,7 @@ function Intermedio() {
             <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
               <div class="rounded-lg shadow">
                 <a
-                  href="https://2kliic9t7ed.typeform.com/to/Lw8OmtpQ"
+                  href="https://w2asesoresyconsultores.bitrix24.es/pub/form/10_como_podemos_ayudarte_/ex701t/?view=preview&preview=click"
                   class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gray-800 hover:bg-gray-600 md:py-4 md:text-lg md:px-10 "
                 >
                   Descubre el talento ideal
@@ -154,7 +154,7 @@ function Intermedio() {
             <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
               <div class="rounded-lg shadow">
                 <a
-                  href="https://2kliic9t7ed.typeform.com/to/Lw8OmtpQ"
+                  href="https://w2asesoresyconsultores.bitrix24.es/pub/form/10_como_podemos_ayudarte_/ex701t/?view=preview&preview=click"
                   class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gray-800 hover:bg-gray-600 md:py-4 md:text-lg md:px-10 "
                 >
                   Encuentra a tu próximo líder
@@ -243,7 +243,7 @@ function Intermedio() {
             <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
               <div class="rounded-lg shadow">
                 <a
-                  href="https://2kliic9t7ed.typeform.com/to/Lw8OmtpQ"
+                  href="https://w2asesoresyconsultores.bitrix24.es/pub/form/10_como_podemos_ayudarte_/ex701t/?view=preview&preview=click"
                   class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gray-800 hover:bg-gray-600 md:py-4 md:text-lg md:px-10 "
                 >
                   Evalúa tu equipo ahora
@@ -311,7 +311,7 @@ function Intermedio() {
             <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
               <div class="rounded-lg shadow">
                 <a
-                  href="https://2kliic9t7ed.typeform.com/to/Lw8OmtpQ"
+                  href="https://w2asesoresyconsultores.bitrix24.es/pub/form/10_como_podemos_ayudarte_/ex701t/?view=preview&preview=click"
                   class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gray-800 hover:bg-gray-600 md:py-4 md:text-lg md:px-10 text-center"
                 >
                   Fortalece tu marca empleadora

@@ -2,7 +2,9 @@ import React, { useState, useEffect } from 'react';
 
 function HeroEmpresa() {
   const [backgroundImages, setBackgroundImages] = useState([
-    'https://images.unsplash.com/photo-1573496130407-57329f01f769?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D','https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', 'https://images.unsplash.com/photo-1531545514256-b1400bc00f31?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    'https://images.unsplash.com/photo-1573496130407-57329f01f769?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', 
+    'https://images.unsplash.com/photo-1531545514256-b1400bc00f31?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     // Agrega aquí las URL de las imágenes adicionales
   ]);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -30,13 +32,23 @@ function HeroEmpresa() {
         </div>
 
         <div className="relative flex flex-col justify-center items-center h-full text-left">
-          <h1 className="text-3xl md:text-5xl font-bold leading-tight mb-8 text-center">Potencia tu Marca Empleadora y Transforma tu Reclutamiento con Expertos en Gestión Humana</h1>
+          <h1 className="text-3xl md:text-5xl font-bold leading-tight mb-8 text-center">
+            Potencia tu Marca Empleadora y Transforma tu Reclutamiento con Expertos en Gestión Humana
+          </h1>
 
           <p className="text-base md:text-lg text-white mb-8 text-center px-4">
-          Transforma tu proceso de reclutamiento y mejora tu imagen como empleador con nuestra metodología innovadora de atracción de talento. <br></br>Además, potencia tu marca empleadora con nuestras estrategias de Employer Branding. <br></br>Permítenos gestionar tus procesos de talento humano para que te concentres en tus objetivos estratégicos. <br></br> <h1 className=" font-bold leading-tight mb-4 text-center"> Confía en nosotros para crear una cultura organizacional atractiva y visible que te destaque frente a los demás.</h1>
+            Transforma tu proceso de reclutamiento y mejora tu imagen como empleador con nuestra metodología innovadora de atracción de talento. <br />
+            Además, potencia tu marca empleadora con nuestras estrategias de Employer Branding. <br />
+            Permítenos gestionar tus procesos de talento humano para que te concentres en tus objetivos estratégicos. <br />
+            <h1 className="font-bold leading-tight mb-4 text-center">
+              Confía en nosotros para crear una cultura organizacional atractiva y visible que te destaque frente a los demás.
+            </h1>
           </p>
 
-          <a href="https://meetings.hubspot.com/winy-tupayachi-cahuana" className="bg-primarycolor p-2 text-white font-semibold rounded-lg w-64 h-14 text-lg flex items-center justify-center hover:text-primarycolor hover:border-2 hover:border-primarycolor hover:bg-white">
+          <a 
+            href="https://meetings.hubspot.com/winy-tupayachi-cahuana" 
+            className="bg-primarycolor p-2 text-white font-semibold rounded-lg w-64 h-14 text-lg flex items-center justify-center heartbeat"
+          >
             Agenda una reunión
           </a>
         </div>

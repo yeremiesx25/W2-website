@@ -1,232 +1,81 @@
-  import React, {useState} from 'react'
-  import flecha from "../../assets/flecha.png";
+import React, { useState } from 'react';
+import flecha from "../../assets/flecha.png";
 
+function FaqPracticantes() {
+  const [activeIndex, setActiveIndex] = useState(null);
 
-  function FaqPracticantes() {
+  const faqData = [
+    {
+      pregunta: "¿Qué carreras son las más solicitadas?",
+      respuesta:
+        "¡Buscamos personas apasionadas por Recursos Humanos o áreas similares para unirse a nuestro equipo de Talent Hub en constante crecimiento! Si tienes interés en contribuir con tu talento en atracción y selección de personal, ¡Te animamos a aplicar!"
+    },
+    {
+      pregunta: "¿Cuánto tiempo de experiencia se solicita?",
+      respuesta:
+        "¡No importa si tienes o no experiencia previa! Ofrecemos capacitación para todos. Durante nuestro assessment center, evaluaremos tus habilidades para que puedas destacar. ¡Esperamos tu participación!"
+    },
+    {
+      pregunta: "¿Cuál es la modalidad de trabajo?",
+      respuesta:
+        "¡Nuestro enfoque es único y flexible! Trabajamos en un modelo híbrido: 90% virtual y 10% presencial. Nos reunimos mensualmente para fortalecer lazos, celebrar logros y establecer metas emocionantes. Es una combinación perfecta de colaboración y flexibilidad."
+    },
+    {
+      pregunta: "¿Cada cuánto tiempo inicia Descubriendo Talentos?",
+      respuesta:
+        "Realizamos Descubriendo Talentos tres veces al año o según el incremento de nuestras operaciones. Mantente atento a nuestras redes sociales y a nuestro sitio web para conocer las fechas exactas de cada convocatoria."
+    },
+    {
+      pregunta: "¿Luego de aplicar, cómo sé que me van a considerar?",
+      respuesta:
+        "¡Gracias por tu interés! Revisaremos todas las solicitudes antes de nuestro próximo evento de Descubriendo Talentos. Si eres seleccionado, recibirás un correo electrónico y un mensaje por WhatsApp detallando el proceso. ¡Estamos emocionados de tenerte en nuestro proceso de selección! ¡Buena suerte!"
+    }
+  ];
 
-    return (
-      
-      <><div class="pt-12 pb-8 bg-white font-dmsans">
-            <div class="max-w-screen-md mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-between">
-                <div class="text-center">
-                <h2 className="text-primarytext font-bold text-4xl mt-8 md:mt-8 text-center">
-        <img src={flecha} alt="" className="inline-block w-16 h-12 mr-2"></img>
-        Preguntas <span class=" text-primarycolor xl:inline"> Frecuentes</span>
-      </h2>
+  return (
+    <div className="relative w-full bg-white px-6 pt-4 pb-8 mt-8 shadow-xl ring-1 ring-gray-900/5 sm:mx-auto sm:max-w-2xl sm:rounded-lg sm:px-10 mb-10">
+      <div className="text-center">
+        <h2 className="text-primarytext font-bold text-4xl mt-8 md:mt-8 text-center">
+          <img src={flecha} alt="" className="inline-block w-16 h-12 mr-2" />
+          Preguntas <span className=" text-primarycolor xl:inline"> Frecuentes</span>
+        </h2>
 
-                    <p class="mt-4  leading-7 text-gray-700 font-regular">
-                        Encuentra respuestas a tus dudas sobre cómo formar parte de nuestro programa y dar un impulso a tu carrera profesional. Si necesitas más información, ¡Contáctanos! Estamos aquí para ayudarte.
-                    </p>
+        <p className="mt-4  leading-7 text-gray-700 font-regular">
+          Encuentra respuestas a tus dudas sobre cómo formar parte de nuestro programa y dar un impulso a tu carrera profesional. Si necesitas más información, ¡Contáctanos! Estamos aquí para ayudarte.
+        </p>
+      </div>
 
-                </div>
-
-                <div class="mt-12">
-                    <ul class="">
-
-                        <li class="text-left">
-                            <div class="flex flex-row items-start mb-5">
-                                <div
-                                    class="hidden sm:flex items-center justify-center p-3 mr-3 rounded-full bg-indigo-500 text-white border-4 border-white text-xl font-semibold">
-                                    <svg width="30px" fill="white" height="30px" viewBox="0 0 24 24"
-                                        xmlns="http://www.w3.org/2000/svg">
-                                        <g data-name="Layer 2">
-                                            <g data-name="menu-arrow">
-                                                <rect width="24" height="24" transform="rotate(180 12 12)" opacity="0"></rect>
-                                                <path
-                                                    d="M17 9A5 5 0 0 0 7 9a1 1 0 0 0 2 0 3 3 0 1 1 3 3 1 1 0 0 0-1 1v2a1 1 0 0 0 2 0v-1.1A5 5 0 0 0 17 9z">
-                                                </path>
-                                                <circle cx="12" cy="19" r="1"></circle>
-                                            </g>
-                                        </g>
-                                    </svg>
-                                </div>
-                                <div class="bg-gray-100 p-5 px-10 w-full flex items-center">
-                                    <h4 class="text-md leading-6 font-medium text-black">¿Qué carreras son las más solicitadas?</h4>
-                                </div>
-                            </div>
-
-                            <div class="flex flex-row items-start">
-                                <div class="bg-indigo-100 p-5 px-10 w-full flex items-center">
-                                    <p class="text-black text-sm">
-                                        ¡En nuestra organización valoramos una amplia gama de habilidades y talentos! Aunque no nos cerramos a una lista específica de carreras. El área que constantemente tiene un crecimiento es el de Talent Hub, buscamos estudiantes y profesionales apasionados por el Talento Humano que deseen formar parte del área de atracción y selección de personal. ¡Así que si tienes pasión por los Recursos Humanos o áreas afines, definitivamente te animamos a aplicar y unirte a nosotros para contribuir con tu talento!
-                                    </p>
-                                </div>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
+      <div className="mx-auto mt-8 max-w-xl">
+        {faqData.map((faq, index) => (
+          <div
+            key={index}
+            className="py-5 border-b border-gray-200"
+            onClick={() => setActiveIndex(activeIndex === index ? null : index)}
+            onMouseEnter={() => setActiveIndex(index)}
+            onMouseLeave={() => setActiveIndex(null)}
+          >
+            <div className="flex justify-between items-center font-medium">
+              <div>{faq.pregunta}</div>
+              <svg
+                className={`h-6 w-6 transition-transform ${
+                  activeIndex === index ? 'transform rotate-180' : ''
+                }`}
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path d="M6 9l6 6 6-6"></path>
+              </svg>
             </div>
-        </div>
-
-        <div class="py-4 bg-white">
-            <div class="max-w-screen-md mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-between">
-                        <ul class="">
-
-                            <li class="text-left mb-4">
-                                <div class="flex flex-row items-start mb-5">
-                                    <div
-                                        class="hidden sm:flex items-center justify-center p-3 mr-3 rounded-full bg-indigo-500 text-white border-4 border-white text-xl font-semibold">
-                                        <svg width="30px" fill="white" height="30px" viewBox="0 0 24 24"
-                                            xmlns="http://www.w3.org/2000/svg">
-                                            <g data-name="Layer 2">
-                                                <g data-name="menu-arrow">
-                                                    <rect width="24" height="24" transform="rotate(180 12 12)" opacity="0"></rect>
-                                                    <path
-                                                        d="M17 9A5 5 0 0 0 7 9a1 1 0 0 0 2 0 3 3 0 1 1 3 3 1 1 0 0 0-1 1v2a1 1 0 0 0 2 0v-1.1A5 5 0 0 0 17 9z">
-                                                    </path>
-                                                    <circle cx="12" cy="19" r="1"></circle>
-                                                </g>
-                                            </g>
-                                        </svg>
-                                    </div>
-                                    <div class="bg-gray-100 p-5 px-10 w-full flex items-center">
-                                        <h4 class="text-md leading-6 font-medium text-black">¿Cuánto tiempo de experiencia se solicita?</h4>
-                                    </div>
-                                </div>
-
-                                <div class="flex flex-row items-start">
-                                    <div class="bg-indigo-100 p-5 px-10 w-full flex items-center">
-                                        <p class="text-black text-sm">
-                                        ¡No te preocupes por la experiencia! En nuestro programa, valoramos tu potencial y compromiso. Si tienes experiencia, ¡eso es genial! Pero si no la tienes, ¡no te preocupes! Te proporcionaremos la capacitación necesaria para prosperar. Además, durante nuestro assessment center, evaluaremos tus conocimientos y resultados para ayudarte a destacar.
-                                        </p>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-
-            
-
-<div class="py-4 bg-white">
-<div class="max-w-screen-md mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-between">
-
-            <ul class="">
-
-                <li class="text-left mb-4">
-                    <div class="flex flex-row items-start mb-5">
-                        <div
-                            class="hidden sm:flex items-center justify-center p-3 mr-3 rounded-full bg-indigo-500 text-white border-4 border-white text-xl font-semibold">
-                            <svg width="30px" fill="white" height="30px" viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <g data-name="Layer 2">
-                                    <g data-name="menu-arrow">
-                                        <rect width="24" height="24" transform="rotate(180 12 12)" opacity="0"></rect>
-                                        <path
-                                            d="M17 9A5 5 0 0 0 7 9a1 1 0 0 0 2 0 3 3 0 1 1 3 3 1 1 0 0 0-1 1v2a1 1 0 0 0 2 0v-1.1A5 5 0 0 0 17 9z">
-                                        </path>
-                                        <circle cx="12" cy="19" r="1"></circle>
-                                    </g>
-                                </g>
-                            </svg>
-                        </div>
-                        <div class="bg-gray-100 p-5 px-10 w-full flex items-center">
-                            <h4 class="text-md leading-6 font-medium text-black">
-                            ¿Cuál es la modalidad de trabajo?
-                            </h4>
-                        </div>
-                    </div>
-
-                    <div class="flex flex-row items-start">
-                        <div class="bg-indigo-100 p-5 px-10 w-full flex items-center">
-                            <p class="text-black text-sm">
-                            ¡Nuestra modalidad es única y flexible! Adoptamos un enfoque híbrido, donde el 90% del trabajo es virtual y el 10% es presencial. Nos reunimos una vez al mes para fortalecer nuestros lazos, celebrar nuestros logros y establecer objetivos emocionantes para el futuro. ¡Es una combinación perfecta de colaboración y flexibilidad.
-                            </p>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </div>
+            {activeIndex === index && (
+              <p className="mt-3 text-neutral-600">{faq.respuesta}</p>
+            )}
+          </div>
+        ))}
+      </div>
     </div>
- 
+  );
+}
 
-
-<div class="py-4 bg-white">
-<div class="max-w-screen-md mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-between">
-
-
-            <ul class="">
-
-                <li class="text-left mb-4">
-                    <div class="flex flex-row items-start mb-5">
-                        <div
-                            class="hidden sm:flex items-center justify-center p-3 mr-3 rounded-full bg-indigo-500 text-white border-4 border-white text-xl font-semibold">
-                            <svg width="30px" fill="white" height="30px" viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <g data-name="Layer 2">
-                                    <g data-name="menu-arrow">
-                                        <rect width="24" height="24" transform="rotate(180 12 12)" opacity="0"></rect>
-                                        <path
-                                            d="M17 9A5 5 0 0 0 7 9a1 1 0 0 0 2 0 3 3 0 1 1 3 3 1 1 0 0 0-1 1v2a1 1 0 0 0 2 0v-1.1A5 5 0 0 0 17 9z">
-                                        </path>
-                                        <circle cx="12" cy="19" r="1"></circle>
-                                    </g>
-                                </g>
-                            </svg>
-                        </div>
-                        <div class="bg-gray-100 p-5 px-10 w-full flex items-center">
-                            <h4 class="text-md leading-6 font-medium text-black">
-                            ¿Cada cuánto tiempo inicia Descubriendo Talentos?
-                            </h4>
-                        </div>
-                    </div>
-
-                    <div class="flex flex-row items-start">
-                        <div class="bg-indigo-100 p-5 px-10 w-full flex items-center">
-                            <p class="text-black text-sm">
-                                Realizamos Descubriendo Talentos tres veces al año o según el incremento de nuestras operaciones. Mantente atento a nuestras redes sociales y a nuestro sitio web para conocer las fechas exactas de cada convocatoria.
-                            </p>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </div>
-
-    
-<div class="py-4 bg-white">
-<div class="max-w-screen-md mx-auto px-4 sm:px-6 lg:px-8 flex flex-col justify-between">
-
-            <ul class="">
-
-                <li class="text-left mb-10">
-                    <div class="flex flex-row items-start mb-5">
-                        <div
-                            class="hidden sm:flex items-center justify-center p-3 mr-3 rounded-full bg-indigo-500 text-white border-4 border-white text-xl font-semibold">
-                            <svg width="30px" fill="white" height="30px" viewBox="0 0 24 24"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <g data-name="Layer 2">
-                                    <g data-name="menu-arrow">
-                                        <rect width="24" height="24" transform="rotate(180 12 12)" opacity="0"></rect>
-                                        <path
-                                            d="M17 9A5 5 0 0 0 7 9a1 1 0 0 0 2 0 3 3 0 1 1 3 3 1 1 0 0 0-1 1v2a1 1 0 0 0 2 0v-1.1A5 5 0 0 0 17 9z">
-                                        </path>
-                                        <circle cx="12" cy="19" r="1"></circle>
-                                    </g>
-                                </g>
-                            </svg>
-                        </div>
-                        <div class="bg-gray-100 p-5 px-10 w-full flex items-center">
-                            <h4 class="text-md leading-6 font-medium text-black">
-                            ¿Luego de aplicar, cómo sé que me van a considerar?
-                            </h4>
-                        </div>
-                    </div>
-
-                    <div class="flex flex-row items-start">
-                        <div class="bg-indigo-100 p-5 px-10 w-full flex items-center">
-                            <p class="text-black text-sm">
-                            ¡Nos encanta tu interés en unirte a nuestro equipo! Una vez que aplicas, revisaremos todas las solicitudes antes de nuestro próximo Descubriendo Talentos. Si eres seleccionado para participar, recibirás un correo electrónico detallando el proceso y una confirmación adicional a través de un mensaje por WhatsApp. Estamos emocionados de tenerte como parte de nuestro proceso de selección. ¡Buena suerte!
-                            </p>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </div>
-    </>
-         
-    )
-  }
-
-  export default FaqPracticantes
+export default FaqPracticantes;
