@@ -35,13 +35,8 @@ function HeaderPowerAuth() {
           </a>
         </div>
 
-        <div className="md:hidden w-full flex justify-end flex-wrap">
-          <button onClick={toggleMenu} className="text-gray-800 hover:text-gray-600 focus:outline-none">
-            <img src={menuMobilePower} alt="Menu" className="w-6 h-6" />
-          </button>
-        </div>
 
-        <div className="md:flex w-96 text-sm justify-around hidden">
+        <div className="md:flex w-96 text-sm justify-around hidden ">
           <Link to="/" className="text-gray-300 hover:text-white">Inicio</Link>
           <Link to="/Empresas" className="text-gray-300 hover:text-white">Empresas</Link>
           <Link to="/Practicantes" className="text-gray-300 hover:text-white">Descubriendo Talentos</Link>
@@ -49,27 +44,27 @@ function HeaderPowerAuth() {
         </div>
 
         <div className="flex items-center">
-          {user && (
-            <>
-              <div className="relative inline-block text-left" ref={menuRef}>
-                <div>
-                  <button onClick={toggleMenu} type="button" className="flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white" id="options-menu" aria-haspopup="true" aria-expanded="true">
-                    <img className='w-12 h-12 rounded-full' src={user.picture} alt="" />
-                  </button>
-                </div>
-
-                {showMenu && (
-                  <div className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
-                    <div className="py-1" role="none">
-                      <button onClick={signOut} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">Cerrar sesión</button>
-                    </div>
-                  </div>
-                )}
-              </div>
-              <p>{user.name}</p>
-            </>
-          )}
+  {user && (
+    <>
+      <div className="relative inline-block text-left" ref={menuRef}>
+        <div>
+          <button onClick={toggleMenu} type="button" className="flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white " id="options-menu" aria-haspopup="true" aria-expanded="true">
+            <img className='w-10 h-10 rounded-full' src={user.picture} alt="" />
+          </button>
         </div>
+
+        {showMenu && (
+          <div className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="options-menu">
+            <div className="py-1" role="none">
+              <button onClick={signOut} className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">Cerrar sesión</button>
+            </div>
+          </div>
+        )}
+      </div>
+      <p className="hidden md:block" style={{ fontSize: '12px', marginLeft: '12px' }}>{user.name}</p> 
+    </>
+  )}
+</div>
       </div>
 
       {showMenu && (
