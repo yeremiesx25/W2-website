@@ -10,11 +10,17 @@ function TrabajosContainer() {
         </h1>
         <Buscador />
         <div className='flex flex-col w-full items-center px-2  '>
-            <CardTrabajo />
-            <CardTrabajo />
-            <CardTrabajo />
-            <CardTrabajo />
-            <CardTrabajo />
+            <CardTrabajo puesto='Asesor de Ventas' sede='Lima Este - Lima Sur - Lima Centro' />
+            <CardTrabajo puesto='Auxiliar de Reparto' sede='Ate - Huachipa' />
+            <CardTrabajo puesto='Conductor A3C - A3B' sede='Huachipa - Ate - Comas'  />
+            <CardTrabajo puesto='Operario de Almacen' sede='Chorrillos' />
+            <CardTrabajo puesto='Representante Médico Junior' sede='Zona Sur' />
+            <CardTrabajo puesto='Analista de Aseguramiento de Calidad' sede='Chorrillos' sueldo='S/. 3 500'  />
+            <CardTrabajo puesto='Asistente Operativo de Planta Frio' sede='RAA - Callao' sueldo='S/. 1 300'/>
+            <CardTrabajo puesto='Conductor A3C y A4' sede='RSA - Callao' sueldo='S/. 2 900'/>
+            <CardTrabajo puesto='Almacenero 2' sede='RSA - Callao' sueldo='S/. 1 025' />
+            <CardTrabajo puesto='Operador de equipo 2' sede='RSA - Callao' sueldo='S/. 1 400' />
+            <CardTrabajo puesto='Asistente de Calidad y Gestion de Procesos' sede='RSA - Callao' />
         </div>
     </div>
   )
