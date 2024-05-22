@@ -1,189 +1,161 @@
 import React from "react";
 import talent from "../../assets/talent_hub.jpg";
-import creative from "../../assets/Copia de IMG_4036.png";
+import creative from "../../assets/Copia de IMG_4036.jpg";
 import tech from "../../assets/tech_lab.jpg";
 import mind from "../../assets/mind_mastery.jpg";
 import money from "../../assets/money_matrix.jpg";
 
 function AreasPracticantes() {
   return (
-    <div className="max-w-7xl mx-auto my-4 px-2 font-dmsans">
-      <div className="flex flex-wrap  p-2 xl:p-5 justify-center gap-6">
-        <div className="relative bg-white flex flex-col justify-between border rounded shadow-md hover:shadow-blue-200 w-96">
-          <a className="relative" href="/tool/writey-ai">
-            <img
-              className="rounded relative w-full object-cover aspect-video"
-              src={talent}
-              alt="Writey A.I"
-              loading="lazy"
-            />
-          </a>
+    <div className="w-full flex flex-wrap justify-center gap-8 font-dmsans mb-8 ">
 
-          <div className="flex flex-col justify-between gap-3 px-4 py-2">
-            <p
-              className="flex justify-center items-center text-xl font-semibold text-primarycolor hover:text-blue-800 two-lines text-ellipsis"
-            >
-              <span>Talent Hub</span><br />
-              <small className="font-medium text-sm">
-                El Corazón de la Atracción de Talento
-              </small>
-            </p>
-
-            <p className="text-gray-600 three-lines">
-              Dirigido a estudiantes de Psicología Organizacional, Recursos Humanos, Ing. Industrial (enfocada en RR.HH).
-            </p>
-
-            <div className="flex justify-start pb-4">
-              <a
-                className="bg-primarycolor text-white px-4 py-2 rounded-lg"
-                href="/apply"
-              >
-                Postula Aquí
-              </a>
-            </div>
-          </div>
+   
+    <div className="rounded overflow-hidden shadow-lg flex flex-col w-96">
+      
+        <div className="relative">
+          <img className="w-full h-full" src={talent} alt="Atardecer en las montañas" />
+          <div className="hover:bg-transparent transition duration-300 absolute bottom-0 top-0 right-0 left-0 bg-gray-900 opacity-25"></div>
         </div>
-
-        <div className="relative bg-white flex flex-col justify-between border rounded shadow-md hover:shadow-blue-200 w-96">
-          <a className="relative" href="/tool/writey-ai">
-            <img
-              className="rounded relative w-full object-cover aspect-video"
-              src={creative}
-              alt="Writey A.I"
-              loading="lazy"
-            />
-          </a>
-
-          <div className="flex flex-col justify-between gap-3 px-4 py-2">
-            <p
-              className="flex justify-center items-center text-xl font-semibold text-blue-700 hover:text-blue-800 two-lines text-ellipsis"
-            >
-              <span>Creative Nexus</span><br />
-              <small className="font-medium text-sm">
-                Conectando Marcas con Audiencias de Impacto
-              </small>
-            </p>
-
-            <p className="text-gray-600 three-lines">
-              Dirigido a estudiantes de las carreras de Comunicaciones, Marketing, Diseño gráfico, Edición de video, Fotografía, y afines.
-            </p>
-
-            <div className="flex justify-start pb-4">
-              <a
-                className="bg-primarycolor text-white px-4 py-2 rounded-lg"
-                href="/apply"
-              >
-                Postula Aquí
-              </a>
-            </div>
-          </div>
+      
+      <a href="#!">
+        <div className="text-xs absolute top-0 right-0 bg-indigo-600 px-4 py-2 text-white mt-3 mr-3 hover:bg-white hover:text-indigo-600 transition duration-500 ease-in-out">
+          Cocina
         </div>
-
-        <div className="relative bg-white flex flex-col justify-between border rounded shadow-md hover:shadow-blue-200 w-96">
-          <a className="relative" href="/tool/writey-ai">
-            <img
-              className="rounded relative w-full object-cover aspect-video"
-              src={tech}
-              alt="Writey A.I"
-              loading="lazy"
-            />
-          </a>
-
-          <div className="flex flex-col justify-between gap-3 px-4 py-2">
-            <p
-              className="flex justify-center items-center text-xl font-semibold text-blue-700 hover:text-blue-800 two-lines text-ellipsis"
-            >
-              <span>Tech Lab</span><br />
-              <small className="font-medium text-sm">
-                Donde la Innovación Define el Futuro
-              </small>
-            </p>
-
-            <p className="text-gray-600 three-lines">
-              Dirigido a estudiantes de Ing. de Sistemas, Ciencias de la Computación, Ing. Electrónica, Desarrollo de Software y afines.
-            </p>
-
-            <div className="flex justify-start pb-4">
-              <a
-                className="bg-primarycolor text-white px-4 py-2 rounded-lg"
-                href="/apply"
-              >
-                Postula Aquí
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div className="relative bg-white flex flex-col justify-between border rounded shadow-md hover:shadow-blue-200 w-96">
-          <a className="relative" href="/tool/writey-ai">
-            <img
-              className="rounded relative w-full object-cover aspect-video"
-              src={mind}
-              alt="Writey A.I"
-              loading="lazy"
-            />
-          </a>
-
-          <div className="flex flex-col justify-between gap-3 px-4 py-2">
-            <p
-              className="flex justify-center items-center text-xl font-semibold text-blue-700 hover:text-blue-800 two-lines text-ellipsis"
-            >
-              <span>Mind Mastery</span><br />
-              <small className="font-medium text-sm">
-                Desarrollando el Potencial a Través del Conocimiento
-              </small>
-            </p>
-
-            <p className="text-gray-600 three-lines">
-              Dirigido a estudiantes de Psicología, Ciencias de la Educación, Pedagogía, Filosofía, Sociología, y afines.
-            </p>
-
-            <div className="flex justify-start pb-4">
-              <a
-                className="bg-primarycolor text-white px-4 py-2 rounded-lg"
-                href="/apply"
-              >
-                Postula Aquí
-              </a>
-            </div>
-          </div>
-        </div>
-
-        <div className="relative bg-white flex flex-col justify-between border rounded shadow-md hover:shadow-blue-200 w-96">
-          <a className="relative" href="/tool/writey-ai">
-            <img
-              className="rounded relative w-full object-cover aspect-video"
-              src={money}
-              alt="Writey A.I"
-              loading="lazy"
-            />
-          </a>
-
-          <div className="flex flex-col justify-between gap-3 px-4 py-2">
-            <p
-              className="flex justify-center items-center text-xl font-semibold text-blue-700 hover:text-blue-800 two-lines text-ellipsis"
-            >
-              <span>MoneyMatrix</span><br />
-              <small className="font-medium text-sm">
-                Construyendo Futuros Financieros
-              </small>
-            </p>
-
-            <p className="text-gray-600 three-lines">
-              Dirigido a estudiantes de Administración, Contabilidad, Finanzas, Economía y afines.
-            </p>
-
-            <div className="flex justify-start pb-4">
-              <a
-                className="bg-primarycolor text-white px-4 py-2 rounded-lg"
-                href="/apply"
-              >
-                Postula Aquí
-              </a>
-            </div>
-          </div>
-        </div>
+      </a>
+      <div className="px-6 py-4 mb-auto">
+        <p href="#" className="text-lg text-primarytext font-semibold transition duration-500 ease-in-out inline-block mb-2">
+          Talent Hub: El Corazón de la Atracción de Talento
+        </p>
+        <p className="text-gray-700 text-sm">
+        Dirigido a estudiantes de
+Psicología Organizacional,
+Recursos Humanos,
+Ing. Industrial (enfocada en
+RR.HH)
+        </p>
       </div>
+      <a className="px-6 py-3 flex flex-row items-center justify-center bg-primarycolor cursor-pointer">
+        
+          <span className="ml-1 text-white font-semibold">Postula Aquí</span>
+        
+      </a>
+    </div> 
+
+    <div className="rounded overflow-hidden shadow-lg flex flex-col w-96">
+      
+        <div className="relative">
+          <img className="w-full h-full" src={creative} alt="Atardecer en las montañas" />
+          <div className="hover:bg-transparent transition duration-300 absolute bottom-0 top-0 right-0 left-0 bg-gray-900 opacity-25"></div>
+        </div>
+      
+      <a href="#!">
+        <div className="text-xs absolute top-0 right-0 bg-indigo-600 px-4 py-2 text-white mt-3 mr-3 hover:bg-white hover:text-indigo-600 transition duration-500 ease-in-out">
+          Cocina
+        </div>
+      </a>
+      <div className="px-6 py-4 mb-auto">
+        <a href="#" className="font-medium text-lg hover:text-indigo-600 transition duration-500 ease-in-out inline-block mb-2">
+        Creative Nexus: Conectando Marcas con Audiencias de Impacto 
+        </a>
+        <p className="text-gray-700 text-sm">
+        Dirigido a estudiantes de las
+carreras de Comunicaciones,
+Marketing, Diseño gráfico,
+Edición de video, Fotografía,
+y afines.   
+        </p>
+      </div>
+      <a className="px-6 py-3 flex flex-row items-center justify-center bg-primarycolor cursor-pointer">
+        
+          <span className="ml-1 text-white font-semibold">Postula Aquí</span>
+        
+      </a>
+    </div> 
+
+    <div className="rounded overflow-hidden shadow-lg flex flex-col w-96">
+      
+        <div className="relative">
+          <img className="w-full h-full" src={tech} alt="Atardecer en las montañas" />
+          <div className="hover:bg-transparent transition duration-300 absolute bottom-0 top-0 right-0 left-0 bg-gray-900 opacity-25"></div>
+        </div>
+      
+      <a href="#!">
+        <div className="text-xs absolute top-0 right-0 bg-indigo-600 px-4 py-2 text-white mt-3 mr-3 hover:bg-white hover:text-indigo-600 transition duration-500 ease-in-out">
+          Cocina
+        </div>
+      </a>
+      <div className="px-6 py-4 mb-auto">
+        <a href="#" className="font-medium text-lg hover:text-indigo-600 transition duration-500 ease-in-out inline-block mb-2">
+        Tech Lab: Donde la Innovación Define el Futuro
+        </a>
+        <p className="text-gray-700 text-sm">
+        Dirigido a estudiantes de las carreras de Ingeniería en Sistemas, Ingeniería de Software, Ciencias de la Computación, Ingeniería en Informática, y afines.
+        </p>
+      </div>
+      <a className="px-6 py-3 flex flex-row items-center justify-center bg-primarycolor cursor-pointer">
+        
+          <span className="ml-1 text-white font-semibold">Postula Aquí</span>
+        
+      </a>
+    </div> 
+
+    <div className="rounded overflow-hidden shadow-lg flex flex-col w-96">
+      
+        <div className="relative">
+          <img className="w-full h-full" src={mind} alt="Atardecer en las montañas" />
+          <div className="hover:bg-transparent transition duration-300 absolute bottom-0 top-0 right-0 left-0 bg-gray-900 opacity-25"></div>
+        </div>
+      
+      <a href="#!">
+        <div className="text-xs absolute top-0 right-0 bg-indigo-600 px-4 py-2 text-white mt-3 mr-3 hover:bg-white hover:text-indigo-600 transition duration-500 ease-in-out">
+          Cocina
+        </div>
+      </a>
+      <div className="px-6 py-4 mb-auto">
+        <a href="#" className="font-medium text-lg hover:text-indigo-600 transition duration-500 ease-in-out inline-block mb-2">
+        Mind Mastery: Desarrollando el Potencial a Través del Conocimiento
+        </a>
+        <p className="text-gray-700 text-sm">
+        Dirigido a estudiantes de las carreras de Educación, Pedagogía, Ciencias de la Educación, Psicopedagogía, y afines.
+        </p>
+      </div>
+      <a className="px-6 py-3 flex flex-row items-center justify-center bg-primarycolor cursor-pointer">
+        
+          <span className="ml-1 text-white font-semibold">Postula Aquí</span>
+        
+      </a>
+    </div> 
+
+    <div className="rounded overflow-hidden shadow-lg flex flex-col w-96">
+      
+        <div className="relative">
+          <img className="w-full h-full" src={money} alt="Atardecer en las montañas" />
+          <div className="hover:bg-transparent transition duration-300 absolute bottom-0 top-0 right-0 left-0 bg-gray-900 opacity-25"></div>
+        </div>
+      
+      <a href="#!">
+        <div className="text-xs absolute top-0 right-0 bg-indigo-600 px-4 py-2 text-white mt-3 mr-3 hover:bg-white hover:text-indigo-600 transition duration-500 ease-in-out">
+          Cocina
+        </div>
+      </a>
+      <div className="px-6 py-4 mb-auto">
+        <a href="#" className="font-medium text-lg hover:text-indigo-600 transition duration-500 ease-in-out inline-block mb-2">
+        MoneyMatrix: Construyendo futuros financieros
+        </a>
+        <p className="text-gray-700 text-sm">
+        Dirigido a estudiantes de
+Administración, contabilidad,
+finanzas, economía y afines. 
+        </p>
+      </div>
+      <a className="px-6 py-3 flex flex-row items-center justify-center bg-primarycolor cursor-pointer">
+        
+          <span className="ml-1 text-white font-semibold">Postula Aquí</span>
+        
+      </a>
+    </div> 
+
+    
     </div>
   );
 }
