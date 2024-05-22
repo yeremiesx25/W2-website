@@ -4,7 +4,7 @@ import CardTrabajo from './CardTrabajo'
 
 function TrabajosContainer() {
   return (
-    <div className='w-full flex flex-col items-center font-dmsans pt-8'>
+    <div id='ofertas' className='w-full flex flex-col items-center font-dmsans pt-8'>
         <h1 className='text-2xl font-semibold px-4 text-center'>
             Principales ofertas para ti
         </h1>
