@@ -33,17 +33,19 @@ function MainDiv() {
           Potenciamos tu éxito empresarial con soluciones de gestión humana y tecnología de vanguardia, incluso sin un departamento de recursos humanos.
         </p>
         <div className="px-8 sm:items-start sm:justify-center sm:px-0 sm:space-x-5 sm:flex mt-9">
+
           <Link to="/Empresas" title=""
-            className="mb-3 sm:mb-0 inline-flex items-center justify-center w-full px-8 py-3 text-lg font-bold text-white transition-all duration-200 bg-primarycolor border-2 border-transparent sm:w-auto rounded-xl hover:bg-blue-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 animate-fade-right"
-            role="button">
+           className="bg-primarycolor p-2 text-white font-semibold rounded-lg w-48 h-14 text-lg flex items-center justify-center hover:text-primarycolor hover:border-2 hover:border-primarycolor hover:bg-white" role="button">
             Soy Empresa
             <span className='flex items-center justify-center bg-no-repeat ml-2 animate-fade-right'
               style={{backgroundImage: `url(${arrow})`, width:'30px', height:'20px' }}></span>
           </Link>
+
           <Link to="/Practicantes"
             className="inline-flex items-center justify-center w-full px-8 py-3 text-lg font-bold text-primarytext hover:bg-gray-50 sm:w-auto rounded-xl"
             role="button">Soy Talento
           </Link>
+          
         </div>
       </div>
       <Hero />

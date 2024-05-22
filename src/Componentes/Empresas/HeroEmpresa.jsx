@@ -36,7 +36,7 @@ function HeroEmpresa() {
           Transforma tu proceso de reclutamiento y mejora tu imagen como empleador con nuestra metodología innovadora de atracción de talento. <br></br>Además, potencia tu marca empleadora con nuestras estrategias de Employer Branding. <br></br>Permítenos gestionar tus procesos de talento humano para que te concentres en tus objetivos estratégicos. <br></br> <h1 className=" font-bold leading-tight mb-4 text-center"> Confía en nosotros para crear una cultura organizacional atractiva y visible que te destaque frente a los demás.</h1>
           </p>
 
-          <a href="https://meetings.hubspot.com/winy-tupayachi-cahuana" className="bg-primarycolor text-white py-2 px-6 rounded-lg text-lg font-semibold transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg">
+          <a href="https://meetings.hubspot.com/winy-tupayachi-cahuana" className="bg-primarycolor p-2 text-white font-semibold rounded-lg w-64 h-14 text-lg flex items-center justify-center hover:text-primarycolor hover:border-2 hover:border-primarycolor hover:bg-white">
             Agenda una reunión
           </a>
         </div>
