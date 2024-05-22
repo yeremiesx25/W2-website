@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import logoLacruz from '../../assets/STARTUP TALENT.png';
 
-function CardTrabajo() {
+function CardTrabajo({puesto,sede,sueldo}) {
   const [modalOpen, setModalOpen] = useState(false);
 
   const handleModalOpen = () => {
@@ -23,10 +23,10 @@ function CardTrabajo() {
             <img className='w-full h-full' src={logoLacruz} alt="" />
           </div>
           <div className=''>
-            <h4 className='font-bold text-primarytext'>Conductor A3C - A3B</h4>
-            <h5 className='text-[#7C8493] font-bold mb-4'>Frío Red - Lima, Perú</h5>
+            <h4 className='font-bold text-primarytext'>{puesto}</h4>
+            <h5 className='text-[#7C8493] font-bold mb-4'>{sede}</h5>
             <span className='w-40 h-8 border border-[#EFFAF7] bg-[#EFFAF7] rounded-xl px-4 text-[#56CDAD] mr-1'>Planilla</span>
-            <span className='w-40 h-8 border border-amb er-400 rounded-xl px-4 text-amber-400'>S/.1900</span>
+            <span className='w-40 h-8 border border-amb er-400 rounded-xl px-4 text-amber-400'>{sueldo}</span>
           </div>
         </div>
         <button className='w-36 h-12 bg-primarytext text-white rounded-lg hidden sm:block font-semibold'>Más info</button>
