@@ -1,10 +1,6 @@
 import React from "react";
 import { useTypewriter, Cursor } from "react-simple-typewriter";
-import imagehero from "../../assets/image3dhero.png";
-import fondoPuntos from "../../assets/punteado.png";
-import Flechas from "../../assets/flechasFalabella.png";
-import { motion } from "framer-motion";
-
+git 
 function Hero() {
   const [text] = useTypewriter({
     words: [

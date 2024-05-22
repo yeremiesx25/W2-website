@@ -1,7 +1,4 @@
 import React from "react";
-import FondoAzul from "../../assets/Testimonial.png";
-import CardTestimonio from "./CardTestimonio";
-import redondos from "../../assets/Designer-rafiki.png";
 import flecha from "../../assets/flecha.png";
 import capa from "../../assets/capacitaciones.jpg";
 import donar from "../../assets/donaciones.jpg";

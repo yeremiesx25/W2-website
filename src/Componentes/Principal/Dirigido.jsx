@@ -1,8 +1,5 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import empresa from '../../assets/Empresa@2x-8.png' 
-import candidatos from '../../assets/Postulantes@2x-8.png'
-import practicantes from '../../assets/Practicantes@2x-8.png'
 import poder from '../../assets/Power.jpg'
 import descubrir from '../../assets/descubriendo.jpeg'
 import empre from '../../assets/Empresa.gif'
