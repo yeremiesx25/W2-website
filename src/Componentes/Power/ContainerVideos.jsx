@@ -2,7 +2,7 @@ import React from "react";
 
 function ContainerVideos() {
   return (
-    <div className="flex flex-wrap w-full justify-center gap-6">
+    <div className="flex flex-wrap w-full justify-center gap-6 mb-12">
       <div class="flex items-center justify-center bg-gray-100">
         <div class="bg-white rounded-lg shadow-lg max-w-sm">
             <div class="p-4">
