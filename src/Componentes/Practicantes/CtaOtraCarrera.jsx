@@ -14,7 +14,6 @@ function CtaOtraCarrera() {
     <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex flex-col gap-8 lg:flex-row items-center">
             <div class="lg:w-1/2">
-                <h1 class="text-4xl font-bold leading-tight mb-4">¿Eres de otra carrera...?</h1>
                 <h1 className='text-4xl font-bold leading-tight mb-4'>Explorando Nuevas áreas</h1>
                 <p class="text-xl mb-8 text-justify">Creemos que el crecimiento y la innovación vienen de todas partes. Si tu carrera o pasión no encaja perfectamente en las áreas mencionadas, ¡no te preocupes! Queremos invitarte a traer tus ideas y ayudar a iniciar nuevas áreas dentro de nuestra organización. Ya sea que estés estudiando diseño gráfico, ciencias ambientales, derecho, psicología o cualquier otra disciplina, estamos emocionados de ver cómo puedes contribuir a nuestra misión.
 

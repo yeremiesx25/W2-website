@@ -2,6 +2,21 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Define the keyframes for the heartbeat animation */
+@keyframes heartbeat {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+/* Apply the animation to the button */
+.heartbeat {
+  animation: heartbeat 1.5s infinite;
+}
+
 .slider {
 
     width: 80vw;
@@ -319,4 +334,26 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+#root {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }

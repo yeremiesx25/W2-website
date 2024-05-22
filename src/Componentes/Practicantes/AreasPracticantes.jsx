@@ -34,7 +34,7 @@ Ing. Industrial (enfocada en
 RR.HH)
         </p>
       </div>
-      <a href="https://w2asesoresyconsultores.bitrix24.es/pub/form/10_como_podemos_ayudarte_/ex701t/?view=preview&preview=click" className="px-6 py-3 flex flex-row items-center justify-center bg-primarycolor cursor-pointer">
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfKakGbX6w4XxAFw7RqZlDosQ_RrgHm0Y-zRDxQoD8d6iwM0Q/viewform" className="px-6 py-3 flex flex-row items-center justify-center bg-primarycolor cursor-pointer">
         
           <span className="ml-1 text-white font-semibold">Postula Aquí</span>
         
@@ -65,8 +65,8 @@ Edición de video, Fotografía,
 y afines.   
         </p>
       </div>
-      <a className="px-6 py-3 flex flex-row items-center justify-center bg-primarycolor cursor-pointer">
-        
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfKakGbX6w4XxAFw7RqZlDosQ_RrgHm0Y-zRDxQoD8d6iwM0Q/viewform" className="px-6 py-3 flex flex-row items-center justify-center bg-primarycolor cursor-pointer">
+
           <span className="ml-1 text-white font-semibold">Postula Aquí</span>
         
       </a>
@@ -92,7 +92,7 @@ y afines.
         Dirigido a estudiantes de las carreras de Ingeniería en Sistemas, Ingeniería de Software, Ciencias de la Computación, Ingeniería en Informática, y afines.
         </p>
       </div>
-      <a href="https://w2asesoresyconsultores.bitrix24.es/pub/form/10_como_podemos_ayudarte_/ex701t/?view=preview&preview=click" className="px-6 py-3 flex flex-row items-center justify-center bg-primarycolor cursor-pointer">
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfKakGbX6w4XxAFw7RqZlDosQ_RrgHm0Y-zRDxQoD8d6iwM0Q/viewform" className="px-6 py-3 flex flex-row items-center justify-center bg-primarycolor cursor-pointer">
         
           <span className="ml-1 text-white font-semibold">Postula Aquí</span>
         
@@ -119,7 +119,7 @@ y afines.
         Dirigido a estudiantes de las carreras de Educación, Pedagogía, Ciencias de la Educación, Psicopedagogía, y afines.
         </p>
       </div>
-      <a className="px-6 py-3 flex flex-row items-center justify-center bg-primarycolor cursor-pointer">
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfKakGbX6w4XxAFw7RqZlDosQ_RrgHm0Y-zRDxQoD8d6iwM0Q/viewform" className="px-6 py-3 flex flex-row items-center justify-center bg-primarycolor cursor-pointer">
         
           <span className="ml-1 text-white font-semibold">Postula Aquí</span>
         
@@ -148,7 +148,7 @@ Administración, contabilidad,
 finanzas, economía y afines. 
         </p>
       </div>
-      <a href="https://w2asesoresyconsultores.bitrix24.es/pub/form/10_como_podemos_ayudarte_/ex701t/?view=preview&preview=click" className="px-6 py-3 flex flex-row items-center justify-center bg-primarycolor cursor-pointer">
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSfKakGbX6w4XxAFw7RqZlDosQ_RrgHm0Y-zRDxQoD8d6iwM0Q/viewform" className="px-6 py-3 flex flex-row items-center justify-center bg-primarycolor cursor-pointer">
         
           <span className="ml-1 text-white font-semibold">Postula Aquí</span>
         
