@@ -40,7 +40,7 @@ const SliderComponent = () => {
   };
 
   return (
-    <div className="w-full mx-auto relative mt-12 md:mt-24 font-dmsans">
+    <div id="descubre" className="w-full mx-auto relative mt-12 md:mt-24 font-dmsans">
       <div class="inline-flex items-end justify-center w-full text-center mx-auto mb-12">
         <img src="https://cdn.devdojo.com/tails/avatars/024.jpg" class="absolute transform translate-x-24 ml-6 rounded-full w-12 h-12 md:w-16 md:h-16 border-4 border-white"/>
         <img src="https://cdn.devdojo.com/tails/avatars/012.jpg" class="absolute transform -translate-x-24 -ml-6 rounded-full w-12 h-12 md:w-16 md:h-16 border-4 border-white"/>

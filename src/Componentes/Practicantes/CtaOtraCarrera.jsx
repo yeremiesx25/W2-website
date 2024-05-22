@@ -22,7 +22,7 @@ function CtaOtraCarrera() {
 Tu visión y creatividad pueden abrir puertas a nuevas posibilidades y juntos podemos construir un futuro más brillante.
 
 <strong> ¡TE ESTAMOS ESPERANDO!</strong></p>
-<a href="#"
+<a href="https://w2asesoresyconsultores.bitrix24.es/pub/form/10_como_podemos_ayudarte_/ex701t/?view=preview&preview=click"
     class="bg-white text-gray-900 py-3 px-6 font-semibold rounded-lg shadow-lg hover:shadow-xl transition duration-200 block sm:inline-block sm:py-4 sm:px-8 md:py-5 md:px-10 lg:py-6 lg:px-12 xl:py-7 xl:px-14">
     ¡Aplica Ahora y Transforma el Futuro con Nosotros!
 </a>

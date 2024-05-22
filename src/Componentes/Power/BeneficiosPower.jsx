@@ -75,7 +75,7 @@ nosotros te apoyamos.</p>
                 </div>
             </div>
             <div class="overflow-hidden bg-white shadow-md rounded-xl">
-                <div class="p-9"><img className='w-12' src={icon1} alt="" />
+                <div class="p-9"><img className='w-12 mx-auto md:mx-0' src={icon1} alt="" />
                     <h3 class="mt-6 text-2xl font-bold text-gray-900 sm:mt-10">Preparación para la entrevista</h3>
                     <p class="mt-6 text-base text-gray-600">Te preparamos para las
 entrevistas con los tips exactos
@@ -106,7 +106,7 @@ requeridas para el área.</p>
                 </div>
             </div>
             <div class="overflow-hidden bg-white shadow-md rounded-xl">
-                <div class="p-9"><img className='w-12' src={icon1} alt="" />
+                <div class="p-9"><img className='w-12 mx-auto md:mx-0' src={icon1} alt="" />
                     <h3 class="mt-6 text-2xl font-bold text-gray-900 sm:mt-10">Retro alimentación</h3>
                     <p class="mt-6 text-base text-gray-600">Retroalimentación constructiva
 para fortalecer tu
