@@ -351,18 +351,3 @@
   box-sizing: border-box;
 }
 
-/* Estilos adicionales para centrar las tarjetas y las flechas del slider */
-.slick-prev,
-.slick-next {
-  z-index: 1;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-.slick-prev {
-  left: -25px;
-}
-
-.slick-next {
-  right: -25px;
-}
