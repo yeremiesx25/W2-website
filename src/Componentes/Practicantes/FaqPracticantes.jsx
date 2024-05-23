@@ -33,7 +33,7 @@ function FaqPracticantes() {
   ];
 
   return (
-    <div className="relative w-full bg-white px-6 pt-4 pb-8 mt-8 shadow-xl ring-1 ring-gray-900/5 sm:mx-auto sm:max-w-2xl sm:rounded-lg sm:px-10 mb-10">
+    <div className="relative w-full font-dmsans bg-white px-6 pt-4 pb-8 mt-8 shadow-xl ring-1 ring-gray-900/5 sm:mx-auto sm:max-w-2xl sm:rounded-lg sm:px-10 mb-10">
       <div className="text-center">
         <h2 className="text-primarytext font-bold text-4xl mt-8 md:mt-8 text-center">
           <img src={flecha} alt="" className="inline-block w-16 h-12 mr-2" />
@@ -54,7 +54,7 @@ function FaqPracticantes() {
             onMouseEnter={() => setActiveIndex(index)}
             onMouseLeave={() => setActiveIndex(null)}
           >
-            <div className="flex justify-between items-center font-medium">
+            <div className="flex justify-between items-center font-semibold font-dmsans text-primarytext">
               <div>{faq.pregunta}</div>
               <svg
                 className={`h-6 w-6 transition-transform ${
@@ -69,7 +69,7 @@ function FaqPracticantes() {
               </svg>
             </div>
             {activeIndex === index && (
-              <p className="mt-3 text-neutral-600">{faq.respuesta}</p>
+              <p className="mt-3 text-gray-800">{faq.respuesta}</p>
             )}
           </div>
         ))}

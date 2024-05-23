@@ -2,7 +2,7 @@ import React from "react";
 import flecha from "../../assets/flecha.png";
 function CtaAreas() {
   return (
-    <div class="bg-white dark:bg-gray-800 font-dmsans">
+    <div id="areas" class="bg-white dark:bg-gray-800 font-dmsans">
       <div class="text-center w-full mx-auto py-12 px-4 sm:px-6 lg:pt-16 lg:px-8">
         <h2 class="text-3xl font-extrabold text-black dark:text-white sm:text-5xl">
         <img src={flecha} alt="" className="inline-block w-16 h-12 mr-2"/>Descubre nuestras áreas,
