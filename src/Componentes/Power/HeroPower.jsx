@@ -5,9 +5,7 @@ function HeroPower() {
   return (
     <div className='flex flex-col items-center justify-center w-full h-auto font-dmsans pt-24 pb-12 text-white bg-gray-900'>
         <h1 className='text-3xl md:text-5xl font-semibold mb-4 text-center px-2 animate-fade-right'>
-          Vive la experiencia 
-          <img src={logo} alt="Power" className="inline-block w-20 md:w-32" /> 
-          y postula con nosotros
+          Vive la experiencia <img src={logo} alt="Power" className="inline-block w-20 md:w-32" /> y postula con nosotros
         </h1>
         <p className='mb-4 text-center px-2 animate-fade-right w-full md:w-1/2'>
           Ayudamos a personas sin trabajo en busca de estabilidad laboral. 

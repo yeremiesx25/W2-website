@@ -4,9 +4,9 @@ import CardTrabajo from './CardTrabajo'
 
 function TrabajosContainer() {
   return (
-    <div id='ofertas' className='w-full flex flex-col items-center font-dmsans pt-8'>
-        <h1 className='text-2xl font-semibold px-4 text-center'>
-            Principales ofertas para ti
+    <div id='ofertas' className='w-full flex flex-col items-center font-dmsans pt-12'>
+        <h1 className='text-4xl font-semibold px-4 text-center'>
+            Ofertas Laborales
         </h1>
         <Buscador />
         <div className='flex flex-col w-full items-center px-2  '>

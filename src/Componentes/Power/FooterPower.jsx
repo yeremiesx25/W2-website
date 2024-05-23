@@ -3,16 +3,18 @@ import logo from '../../assets/Logo Power.png';
 
 function FooterPower() {
   return (
-	<div><footer className="px-4 divide-y bg-gray-900 text-gray-100">
-	<div className="container flex flex-col justify-center items-center py-10 mx-auto lg:flex-row">
-	  <a rel="noopener noreferrer" href="#">
-		<div className="flex justify-center items-center space-x-3">
-		  <div className="flex items-center justify-center w-20 rounded-full dark:bg-violet-600">
-			<img src={logo} alt="Power" className="w-full h-full" />
-		  </div>
-		  <p className="text-sm text-gray-300">Potenciamos Talentos | Impulsamos Resultados</p>
-		</div>
-	  </a>
+    <div><footer className="px-4 divide-y bg-gray-900 text-gray-100">
+      <div className="container flex flex-col justify-between py-10 mx-auto space-y-8 lg:flex-row lg:space-y-0">
+        <div className="lg:w-1/3">
+          <a rel="noopener noreferrer" href="/Power" className="flex justify-center lg:justify-start">
+            <div className="flex items-center justify-center w-8 h-8 rounded-full dark:bg-violet-600">
+            </div>
+            <div className="flex flex-col items-center">
+              <img className="w-32" src={logo} alt="Power" /> <br></br>
+              <p className="text-sm text-gray-300 ">Potenciamos Talentos | Impulsamos Resultados</p>
+            </div>
+          </a>
+        </div>
 	  <div className="space-y-3">
 		<div className="uppercase dark:text-gray-900">Redes sociales</div>
 		<div className="flex justify-start space-x-3">
