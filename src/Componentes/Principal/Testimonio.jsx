@@ -6,7 +6,7 @@ import { motion } from "framer-motion"
 
 function Testimonio() {
   return (
-    <section class="bg-gray-50 text-primarytext py-16 font-dmsans flex justify-center items-center">
+    <section class=" text-primarytext py-16 font-dmsans flex justify-center items-center">
       <div class="w-full mx-auto px-4 sm:px-6 lg:px-32">
         <h2 class="text-4xl text-center font-bold mb-8">
           {" "}

@@ -32,7 +32,7 @@ const SliderComponent = () => {
         <img src="https://cdn.devdojo.com/tails/avatars/032.jpg" class="rounded-full w-20 h-20 md:w-24 md:h-24 border-4 border-white relative"/>
       </div>
       <h2 class="text-3xl font-extrabold text-black dark:text-white sm:text-5xl text-center pb-12">
-        <img src={flecha} alt="" className="inline-block w-16 h-12 mr-2"/>Descubre que nos hace
+        <img src={flecha} alt="" className="inline-block w-16 h-12 mr-2"/>Descubre lo que nos hace
           <span class=" text-primarycolor"> DIFERENTES</span>
         </h2>
         <Swiper
@@ -262,7 +262,7 @@ const SliderComponent = () => {
                     </p>
                     <div className="text-sm mt-5">
                       <p className="font-medium leading-none text-indigo-600 hover:text-black transition duration-500 ease-in-out">
-                        kirsten de W2
+                        Kirsten de W2
                       </p>
                      
                     </div>

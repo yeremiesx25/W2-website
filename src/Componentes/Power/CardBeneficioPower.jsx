@@ -1,12 +1,10 @@
-import React from 'react'
-function CardBeneficioPower({nombreBeneficio, parrafoBeneficio, iconBeneficio}) {
+function CardBeneficioPower({ nombreBeneficio, iconBeneficio }) {
   return (
-    <div className='w-76 md:w-80 h-72 bg-primarytext text-white flex flex-col items-center justify-around py-8 rounded-xl mx-8'>
-        <img className='w-16 h-16 mb-4' src={iconBeneficio} alt="" />
-        <h2 className='px-8 text-lg font-semibold mb-4 text-center'>{nombreBeneficio}</h2>
-        <p className='px-8 w-[230px] md:w-[300px] text-center text-gray-300'>{parrafoBeneficio}</p>
+    <div className='w-full md:w-80 h-72 bg-white text-black flex flex-col items-center justify-around py-8 rounded-xl mx-auto shadow-md'>
+      <img className='w-36 h-36 mb-4' src={iconBeneficio} alt={nombreBeneficio} />
+      <h2 className='px-16 text-lg font-semibold mb-4 text-center'>{nombreBeneficio}</h2>
     </div>
-  )
+  );
 }
 
-export default CardBeneficioPower
+export default CardBeneficioPower;

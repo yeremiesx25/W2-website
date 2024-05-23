@@ -18,64 +18,63 @@
 }
 
 .slider {
-
-    width: 80vw;
-    height: auto;
-    margin: auto;
-    margin-top: 40px;
-    overflow: hidden;
+  width: 80vw;
+  height: auto;
+  margin: auto;
+  margin-top: 40px;
+  overflow: hidden;
 }
 
 .slider .slide-track {
-    display: flex;
-    animation: scroll 40s linear infinite;
-    -webkit-animation: scroll 40s linear infinite;
-    width: calc(200px * 14);
+  display: flex;
+  animation: scroll 40s linear infinite;
+  -webkit-animation: scroll 40s linear infinite;
+  width: calc(200px * 14);
 }
 
 .slider .slide {
-    width: 150px;
+  width: 150px;
 }
 
 .slider .slide img {
-    width: 100%;
+  width: 100%;
 }
 
 @keyframes scroll {
-    0% {
-        -webkit-transform: translateX(0);
-        transform: translateX(0);
-    }
-    100% {
-        -webkit-transform: translateX(calc(-200px * 7));
-        transform: translateX(calc(-200px * 7));
-    }
+  0% {
+    -webkit-transform: translateX(0);
+    transform: translateX(0);
+  }
+  100% {
+    -webkit-transform: translateX(calc(-200px * 7));
+    transform: translateX(calc(-200px * 7));
+  }
 }
 
 .swiper {
-    width: 100%;
-    height: 100%;
-  }
-  
-  .swiper-slide {
-    text-align: center;
-    font-size: 18px;
-    background: #fff;
-  
-    /* Center slide text vertically */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .swiper-slide img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  
-  .video-container {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+
+  /* Center slide text vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.video-container {
   position: relative;
   width: 100%;
   padding-bottom: 56.25%; /* Proporción 16:9 (dividir 9 por 16 y multiplicar por 100) */
@@ -88,7 +87,6 @@
   width: 100%;
   height: 100%;
 }
-
 
 .carousel {
   overflow-x: scroll;
@@ -104,29 +102,26 @@
 
 @layer utilities {
   @keyframes gradientChange {
-      0% {
-          background-position: 0%
-      }
-
-      50% {
-          background-position: 100%
-      }
-
-      100% {
-          background-position: 0%
-      }
+    0% {
+      background-position: 0%;
+    }
+    50% {
+      background-position: 100%;
+    }
+    100% {
+      background-position: 0%;
+    }
   }
 
   .gradient {
-      background: linear-gradient(90deg, blue, red);
-      background-size: 200% 200%;
+    background: linear-gradient(90deg, blue, red);
+    background-size: 200% 200%;
   }
 
   .element-to-rotate {
-      animation: gradientChange 4s ease infinite;
+    animation: gradientChange 4s ease infinite;
   }
 }
-
 
 /* marcas slider */
 .slider {
@@ -156,184 +151,183 @@
   width: 250px;
 }
 
-.img-marca{
+.img-marca {
   width: 80px;
   height: 70px;
 }
 
-
-/*Start Animations*/
+/* Start Animations */
 @-webkit-keyframes animatetop {
-	from {
-		top: -300px;
-		opacity: 0;
-	}
-	to {
-		top: 0;
-		opacity: 1;
-	}
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
 }
+
 @keyframes animatetop {
-	from {
-		top: -300px;
-		opacity: 0;
-	}
-	to {
-		top: 0;
-		opacity: 1;
-	}
+  from {
+    top: -300px;
+    opacity: 0;
+  }
+  to {
+    top: 0;
+    opacity: 1;
+  }
 }
+
 @-webkit-keyframes zoomIn {
-	0% {
-		opacity: 0;
-		-webkit-transform: scale3d(0.3, 0.3, 0.3);
-		transform: scale3d(0.3, 0.3, 0.3);
-	}
-	50% {
-		opacity: 1;
-	}
+  0% {
+    opacity: 0;
+    -webkit-transform: scale3d(0.3, 0.3, 0.3);
+    transform: scale3d(0.3, 0.3, 0.3);
+  }
+  50% {
+    opacity: 1;
+  }
 }
+
 @keyframes zoomIn {
-	0% {
-		opacity: 0;
-		-webkit-transform: scale3d(0.3, 0.3, 0.3);
-		transform: scale3d(0.3, 0.3, 0.3);
-	}
-	50% {
-		opacity: 1;
-	}
+  0% {
+    opacity: 0;
+    -webkit-transform: scale3d(0.3, 0.3, 0.3);
+    transform: scale3d(0.3, 0.3, 0.3);
+  }
+  50% {
+    opacity: 1;
+  }
 }
-/*End Animations*/
-/*
--- Start BackGround Animation 
-*/
+
+/* End Animations */
+/* -- Start BackGround Animation -- */
 .area {
-	background: white;
-	background: -webkit-linear-gradient(to left, #8f94fb, #4e54c8);
-	width: 100%;
-	height: 100vh;
-	position: absolute;
-	z-index: -1;
+  background: white;
+  background: -webkit-linear-gradient(to left, #8f94fb, #4e54c8);
+  width: 100%;
+  height: 100vh;
+  position: absolute;
+  z-index: -1;
 }
 
 .circles {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 96%;
-	overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 96%;
+  overflow: hidden;
 }
 
 .circles li {
-	position: absolute;
-	display: block;
-	list-style: none;
-	width: 20px;
-	height: 20px;
-	background: blue;
-	animation: animate 25s linear infinite;
-	bottom: -150px;
+  position: absolute;
+  display: block;
+  list-style: none;
+  width: 20px;
+  height: 20px;
+  background: blue;
+  animation: animate 25s linear infinite;
+  bottom: -150px;
 }
 
 .circles li:nth-child(1) {
-	left: 25%;
-	width: 80px;
-	height: 80px;
-	animation-delay: 0s;
+  left: 25%;
+  width: 80px;
+  height: 80px;
+  animation-delay: 0s;
 }
 
 .circles li:nth-child(2) {
-	left: 10%;
-	width: 20px;
-	height: 20px;
-	animation-delay: 2s;
-	animation-duration: 12s;
+  left: 10%;
+  width: 20px;
+  height: 20px;
+  animation-delay: 2s;
+  animation-duration: 12s;
 }
 
 .circles li:nth-child(3) {
-	left: 70%;
-	width: 20px;
-	height: 20px;
-	animation-delay: 4s;
+  left: 70%;
+  width: 20px;
+  height: 20px;
+  animation-delay: 4s;
 }
 
 .circles li:nth-child(4) {
-	left: 40%;
-	width: 60px;
-	height: 60px;
-	animation-delay: 0s;
-	animation-duration: 18s;
+  left: 40%;
+  width: 60px;
+  height: 60px;
+  animation-delay: 0s;
+  animation-duration: 18s;
 }
 
 .circles li:nth-child(5) {
-	left: 65%;
-	width: 20px;
-	height: 20px;
-	animation-delay: 0s;
+  left: 65%;
+  width: 20px;
+  height: 20px;
+  animation-delay: 0s;
 }
 
 .circles li:nth-child(6) {
-	left: 75%;
-	width: 110px;
-	height: 110px;
-	animation-delay: 3s;
+  left: 75%;
+  width: 110px;
+  height: 110px;
+  animation-delay: 3s;
 }
 
 .circles li:nth-child(7) {
-	left: 35%;
-	width: 150px;
-	height: 150px;
-	animation-delay: 7s;
+  left: 35%;
+  width: 150px;
+  height: 150px;
+  animation-delay: 7s;
 }
 
 .circles li:nth-child(8) {
-	left: 50%;
-	width: 25px;
-	height: 25px;
-	animation-delay: 15s;
-	animation-duration: 45s;
+  left: 50%;
+  width: 25px;
+  height: 25px;
+  animation-delay: 15s;
+  animation-duration: 45s;
 }
 
 .circles li:nth-child(9) {
-	left: 20%;
-	width: 15px;
-	height: 15px;
-	animation-delay: 2s;
-	animation-duration: 35s;
+  left: 20%;
+  width: 15px;
+  height: 15px;
+  animation-delay: 2s;
+  animation-duration: 35s;
 }
 
 .circles li:nth-child(10) {
-	left: 85%;
-	width: 150px;
-	height: 150px;
-	animation-delay: 0s;
-	animation-duration: 11s;
+  left: 85%;
+  width: 150px;
+  height: 150px;
+  animation-delay: 0s;
+  animation-duration: 11s;
 }
 
 @keyframes animate {
-	0% {
-		transform: translateY(0) rotate(0deg);
-		opacity: 1;
-		border-radius: 0;
-	}
-
-	100% {
-		transform: translateY(-1000px) rotate(720deg);
-		opacity: 0;
-		border-radius: 100%;
-	}
+  0% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 1;
+    border-radius: 0;
+  }
+  100% {
+    transform: translateY(-1000px) rotate(720deg);
+    opacity: 0;
+    border-radius: 100%;
+  }
 }
-/*
--- End BackGround Animation 
-*/
+
+/* -- End BackGround Animation -- */
 
 .two-lines {
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 * {
@@ -341,7 +335,6 @@
   padding: 0;
   box-sizing: border-box;
 }
-
 
 @keyframes fade-in {
   from {
@@ -358,6 +351,7 @@
   box-sizing: border-box;
 }
 
+<<<<<<< HEAD
 
 .swiper {
   width: 100%;
@@ -381,3 +375,20 @@
   height: 100%;
   object-fit: cover;
 }
+=======
+/* Estilos adicionales para centrar las tarjetas y las flechas del slider */
+.slick-prev,
+.slick-next {
+  z-index: 1;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.slick-prev {
+  left: -25px;
+}
+
+.slick-next {
+  right: -25px;
+}
+>>>>>>> ed32c8646b8d757edf2a8007fdae7db63265bd46
