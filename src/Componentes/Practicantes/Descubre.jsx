@@ -1,46 +1,29 @@
-import React, { useRef } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
+import React, { useRef, useState } from 'react';
+// Import Swiper React components
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+//Import de imágenes
 import flexibilidad from "../../assets/Flexibilidad (1).gif";
 import aprendizaje from "../../assets/Aprendizaje Continuo.gif";
 import cultura from "../../assets/Cultura (1).gif";
 import desarrollo from "../../assets/Inicio Diferentes.gif";
 import beneficios from "../../assets/Beneficios.gif";
 import flecha from "../../assets/flecha.png";
-import rightarrow from "../../assets/chevron-derecho.png";
-import leftarrow from "../../assets/chevron-izquierdo.png";
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/pagination';
+
+
+// import required modules
+import { Mousewheel, Pagination } from 'swiper/modules';
 
 const SliderComponent = () => {
-  const swiperRef = useRef();
 
-  // Configuración de Swiper para mostrar solo un slide a la vez
-  const swiperSettings = {
-    slidesPerView: 1,
-    spaceBetween: 10,
-    navigation: true, // Desactivamos la navegación predeterminada de Swiper
-    pagination: {
-      clickable: true,
-    },
-    scrollbar: {
-      draggable: true,
-    },
-  };
 
-  // Funciones para manejar el clic en los botones de navegación
-  const handlePrevClick = () => {
-    if (swiperRef.current && swiperRef.current.swiper) {
-      swiperRef.current.swiper.slidePrev();
-    }
-  };
 
-  const handleNextClick = () => {
-    if (swiperRef.current && swiperRef.current.swiper) {
-      swiperRef.current.swiper.slideNext();
-    }
-  };
-
-  return (
-    <div id="descubre" className="w-full mx-auto relative mt-12 md:mt-24 font-dmsans">
+    return (
+      <div id="descubre" className="w-full mx-auto relative mt-12 md:mt-24 font-dmsans">
       <div class="inline-flex items-end justify-center w-full text-center mx-auto mb-12">
         <img src="https://cdn.devdojo.com/tails/avatars/024.jpg" class="absolute transform translate-x-24 ml-6 rounded-full w-12 h-12 md:w-16 md:h-16 border-4 border-white"/>
         <img src="https://cdn.devdojo.com/tails/avatars/012.jpg" class="absolute transform -translate-x-24 -ml-6 rounded-full w-12 h-12 md:w-16 md:h-16 border-4 border-white"/>
@@ -52,18 +35,18 @@ const SliderComponent = () => {
         <img src={flecha} alt="" className="inline-block w-16 h-12 mr-2"/>Descubre lo que nos hace
           <span class=" text-primarycolor"> DIFERENTES</span>
         </h2>
-      {/* Botón para ir al slide anterior */}
-
-      <Swiper ref={swiperRef} {...swiperSettings}>
-        <SwiperSlide>
-          <button
-            className="absolute top-1/2 left-4 z-10 w-12 h-12 bg-primarycolor p-2 rounded-full shadow-md transform -translate-y-1/2"
-            onClick={handlePrevClick}
-          ><img src={leftarrow} alt="" /></button>
-          <button
-            className="absolute top-[1/2] right-4 z-10 w-12 h-12 bg-primarycolor p-2 rounded-full shadow-md"
-            onClick={handleNextClick}
-          ><img src={rightarrow} alt="" /></button>
+        <Swiper
+          direction={'horizontal'}
+          slidesPerView={1}
+          spaceBetween={30}
+          mousewheel={true}
+          pagination={{
+            clickable: true,
+          }}
+          modules={[Mousewheel, Pagination]}
+          className="mySwiper"
+        >
+          <SwiperSlide>
           <section className="text-white body-font bg-none dark:bg-slate-900 shadow-xl">
             <div className="container mx-auto flex md:px-24 md:py-10 md:flex-row flex-col items-center justify-center">
               <div className="lg:flex-grow mt-5 md:mt-0 md:w-1.5/2 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center justify-center">
@@ -168,24 +151,16 @@ const SliderComponent = () => {
                       <p className="font-medium leading-none text-indigo-600 hover:text-black transition duration-500 ease-in-out">
                         Alexander de W2
                       </p>
-                      
+                     
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </section>
-        </SwiperSlide>
 
-        <SwiperSlide>
-        <button
-            className="absolute top-1/2 left-4 z-10 w-12 h-12 bg-primarycolor p-2 rounded-full shadow-md transform -translate-y-1/2"
-            onClick={handlePrevClick}
-          ><img src={leftarrow} alt="" /></button>
-          <button
-            className="absolute top-[1/2] right-4 z-10 w-12 h-12 bg-primarycolor p-2 rounded-full shadow-md"
-            onClick={handleNextClick}
-          ><img src={rightarrow} alt="" /></button>
+          </SwiperSlide>
+          <SwiperSlide>
           <section className="text-white body-font bg-none dark:bg-slate-900 shadow-xl">
             <div className="container mx-auto flex md:px-24 md:py-10 md:flex-row flex-col items-center justify-center">
               <div className="lg:flex-grow mt-5 md:mt-0 md:w-1.5/2 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center justify-center">
@@ -289,23 +264,16 @@ const SliderComponent = () => {
                       <p className="font-medium leading-none text-indigo-600 hover:text-black transition duration-500 ease-in-out">
                         Kirsten de W2
                       </p>
-                      
+                     
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </section>
-        </SwiperSlide>
-        <SwiperSlide>
-        <button
-            className="absolute top-1/2 left-4 z-10 w-12 h-12 bg-primarycolor p-2 rounded-full shadow-md transform -translate-y-1/2"
-            onClick={handlePrevClick}
-          ><img src={leftarrow} alt="" /></button>
-          <button
-            className="absolute top-[1/2] right-4 z-10 w-12 h-12 bg-primarycolor p-2 rounded-full shadow-md"
-            onClick={handleNextClick}
-          ><img src={rightarrow} alt="" /></button>
+
+          </SwiperSlide>
+          <SwiperSlide>
           <section className="text-white body-font bg-none dark:bg-slate-900 shadow-xl">
             <div className="container mx-auto flex md:px-24 md:py-10 md:flex-row flex-col items-center justify-center">
               <div className="lg:flex-grow mt-5 md:mt-0 md:w-1.5/2 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center justify-center">
@@ -411,23 +379,15 @@ const SliderComponent = () => {
                       <p className="font-medium leading-none text-indigo-600 hover:text-black transition duration-500 ease-in-out">
                         Piero de W2
                       </p>
-                      
+                     
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </section>
-        </SwiperSlide>
-        <SwiperSlide>
-        <button
-            className="absolute top-1/2 left-4 z-10 w-12 h-12 bg-primarycolor p-2 rounded-full shadow-md transform -translate-y-1/2"
-            onClick={handlePrevClick}
-          ><img src={leftarrow} alt="" /></button>
-          <button
-            className="absolute top-[1/2] right-4 z-10 w-12 h-12 bg-primarycolor p-2 rounded-full shadow-md"
-            onClick={handleNextClick}
-          ><img src={rightarrow} alt="" /></button>
+          </SwiperSlide>
+          <SwiperSlide>
           <section className="text-white body-font bg-none dark:bg-slate-900 shadow-xl">
             <div className="container mx-auto flex md:px-24 md:py-10 md:flex-row flex-col items-center justify-center">
               <div className="lg:flex-grow mt-5 md:mt-0 md:w-1.5/2 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center justify-center">
@@ -530,23 +490,15 @@ const SliderComponent = () => {
                       <p className="font-medium leading-none text-indigo-600 hover:text-black transition duration-500 ease-in-out">
                         Brayan de W2
                       </p>
-                      
+                     
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </section>
-        </SwiperSlide>
-        <SwiperSlide>
-        <button
-            className="absolute top-1/2 left-4 z-10 w-12 h-12 bg-primarycolor p-2 rounded-full shadow-md transform -translate-y-1/2"
-            onClick={handlePrevClick}
-          ><img src={leftarrow} alt="" /></button>
-          <button
-            className="absolute top-[1/2] right-4 z-10 w-12 h-12 bg-primarycolor p-2 rounded-full shadow-md"
-            onClick={handleNextClick}
-          ><img src={rightarrow} alt="" /></button>
+          </SwiperSlide>
+          <SwiperSlide>
           <section className="text-white body-font bg-none dark:bg-slate-900 shadow-xl">
             <div className="container mx-auto flex md:px-24 md:py-10 md:flex-row flex-col items-center justify-center">
               <div className="lg:flex-grow mt-5 md:mt-0 md:w-1.5/2 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center justify-center">
@@ -651,18 +603,17 @@ const SliderComponent = () => {
                       <p className="font-medium leading-none text-indigo-600 hover:text-black transition duration-500 ease-in-out">
                         Aldair de W2
                       </p>
-                      
+                     
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </section>
-        </SwiperSlide>
-      </Swiper>
+          </SwiperSlide>
+        </Swiper>
+      </div>
 
-      {/* Botón para ir al slide siguiente */}
-    </div>
   );
 };
 

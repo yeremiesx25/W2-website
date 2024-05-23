@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import logoLacruz from '../../assets/STARTUP TALENT.png';
+import startup from '../../assets/STARTUP TALENT.png';
 
 function CardTrabajo({puesto,sede,sueldo}) {
   const [modalOpen, setModalOpen] = useState(false);
@@ -19,9 +19,7 @@ function CardTrabajo({puesto,sede,sueldo}) {
         onClick={handleModalOpen}
       >
         <div className='flex justify-start'>
-          <div className='w-16 h-16 mr-4'>
-            <img className='w-full h-full' src={logoLacruz} alt="" />
-          </div>
+          
           <div className='flex flex-col items-start'>
             <h4 className='font-bold text-primarytext'>{puesto}</h4>
             <h5 className='text-[#7C8493] font-bold mb-4'>{sede}</h5>
@@ -32,7 +30,9 @@ function CardTrabajo({puesto,sede,sueldo}) {
             
           </div>
         </div>
-        <button className='w-36 h-12 bg-primarytext text-white rounded-lg hidden sm:block font-semibold'>Más info</button>
+        <div className='w-16 h-16 mr-4'>
+            <img className='w-full h-full' src={startup} alt="" />
+          </div>
       </button>
       
       {modalOpen && (
