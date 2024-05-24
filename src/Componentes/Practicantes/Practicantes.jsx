@@ -18,7 +18,6 @@ function Practicantes() {
       <HeroPracticantes />
       <Descubre />
       <Equipo />
-      <CtaAreas />
       <AreasPracticantes />
       <CtaOtraCarrera />
       <FaqPracticantes />
