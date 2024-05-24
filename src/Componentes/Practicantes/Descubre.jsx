@@ -46,7 +46,7 @@ const SliderComponent = () => {
           modules={[Mousewheel, Pagination]}
           className="mySwiper"
         >
-          <SwiperSlide>
+          <SwiperSlide className='px-8'>
           <section className="text-white body-font bg-none dark:bg-slate-900 shadow-xl">
             <div className="container mx-auto flex md:px-24 md:py-10 md:flex-row flex-col items-center justify-center">
               <div className="lg:flex-grow mt-5 md:mt-0 md:w-1.5/2 flex flex-col md:items-start md:text-left mb-16 md:mb-0 items-center text-center justify-center">

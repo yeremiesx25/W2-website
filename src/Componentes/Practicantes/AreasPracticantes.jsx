@@ -83,7 +83,7 @@ function AreasPracticantes() {
     return (
         <section className="py-12 text-gray-100 sm:py-12 lg:py-16 font-dmsans">
             <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-                <div className="text-center w-full mx-auto py-12 px-4 sm:px-6 lg:pt-16 lg:px-8">
+                <div className="text-center w-full mx-auto py-2 px-4 sm:px-6 lg:pt-4 lg:px-8">
                     <h2 className="text-3xl font-extrabold text-black dark:text-white sm:text-5xl">
                         <img src={flecha} alt="" className="inline-block w-16 h-12 mr-2"/>Descubre nuestras áreas,
                         <span className="text-primarycolor"> sé parte de nuestro equipo</span>
