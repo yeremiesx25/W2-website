@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { UserAuth } from "../../Context/AuthContext";
+import { FaSearchengin } from "react-icons/fa6";
+import { MdOutlineSettings } from "react-icons/md";
+import { MdOutlinePowerSettingsNew } from "react-icons/md";
+import { ImPower } from "react-icons/im";
+import { LuFileSpreadsheet } from "react-icons/lu";
+import { RiMailSendLine } from "react-icons/ri";
 import logo from '../../assets/Logo Power.png';
 import menuIcon from '../../assets/menu (4).png';
 
@@ -12,44 +18,67 @@ function HeaderPowerAuth() {
     setIsExpanded(!isExpanded);
   };
 
+  const handleModalClose = () => {
+    setIsExpanded(false);
+  };
+
   return (
     <div className="flex">
-      <nav className={`bg-powercolor text-white ${isExpanded ? 'w-64' : 'w-16'} flex flex-col items-center py-4 fixed h-full transition-width duration-300`}>
+      <nav className={`bg-powercolor text-white ${isExpanded ? 'w-72' : 'w-20'} flex flex-col items-center py-4 fixed h-full transition-width duration-300`}>
         <button onClick={toggleMenu} className="mb-4">
-          <img src={menuIcon} alt="Menu" className="w-8 h-8" />
+          {isExpanded ? (
+            <button onClick={handleModalClose} className="absolute top-2 right-2  bg-amber-400 text-black px-3 py-1 rounded-lg font-semibold">X</button>
+          ) : (
+            <img src={menuIcon} alt="Menu" className="w-8 h-8" />
+          )}
         </button>
         {user && (
-          <div className="flex flex-col items-center">
+          <div className={`flex items-center ${isExpanded ? 'ml-4' : 'justify-center'}`}>
             <img className="w-10 h-10 rounded-full" src={user.picture} alt="User" />
-            {isExpanded && <p className="mt-2 text-sm">{user.name}</p>}
+            {isExpanded && <span className="ml-2 overflow-hidden whitespace-nowrap overflow-ellipsis">{user.name}</span>}
           </div>
         )}
-        <Link to="/" className="my-2 flex items-center w-full px-4 opacity-75 hover:opacity-100 transition-opacity duration-300">
-          <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
-          {isExpanded && <span className="ml-4">Inicio</span>}
-        </Link>
-        <Link to="/Empresas" className="my-2 flex items-center w-full px-4 opacity-75 hover:opacity-100 transition-opacity duration-300">
-          <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M2 22h20V2L2 22z"/></svg>
-          {isExpanded && <span className="ml-4">Empresas</span>}
-        </Link>
-        <Link to="/Practicantes" className="my-2 flex items-center w-full px-4 opacity-75 hover:opacity-100 transition-opacity duration-300">
-          <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M20 14v4h-4l-4 4-4-4H4v-4L0 10l4-4V2h4l4-4 4 4h4v4l4 4-4 4z"/></svg>
-          {isExpanded && <span className="ml-4">Descubriendo Talentos</span>}
-        </Link>
-        <Link to="/PowerAuth" className="my-2 flex items-center w-full px-4 opacity-75 hover:opacity-100 transition-opacity duration-300">
-          <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0L2 20h20L12 0z"/></svg>
-          {isExpanded && <span className="ml-4">Power</span>}
-        </Link>
+        <div className="flex flex-col mt-4">
+          <Link to="/" className="my-2 flex items-center w-full px-4 opacity-75 hover:opacity-100 transition-opacity duration-300">
+            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+            {isExpanded && <span className="ml-4">Inicio</span>}
+          </Link>
+
+          <Link to="/" className="my-2 flex items-center w-full px-4 opacity-75 hover:opacity-100 transition-opacity duration-300">
+            <MdOutlineSettings size={24} />
+            {isExpanded && <span className="ml-4">Configuración</span>}
+          </Link>
+
+          <Link to="/" className="my-2 flex items-center w-full px-4 opacity-75 hover:opacity-100 transition-opacity duration-300">
+            <LuFileSpreadsheet size={24} />
+            {isExpanded && <span className="ml-4">Mi CV</span>}
+          </Link>
+
+          <Link to="/Empresas" className="my-2 flex items-center w-full px-4 opacity-75 hover:opacity-100 transition-opacity duration-300">
+            <FaSearchengin size={24} />
+            {isExpanded && <span className="ml-4">Buscar Ofertas</span>}
+          </Link>
+
+          <Link to="/Practicantes" className="my-2 flex items-center w-full px-4 opacity-75 hover:opacity-100 transition-opacity duration-300">
+            <RiMailSendLine size={24} />
+            {isExpanded && <span className="ml-4">Mis Postulaciones</span>}
+          </Link>
+
+          <Link to="/PowerAuth" className="my-2 flex items-center w-full px-4 opacity-75 hover:opacity-100 transition-opacity duration-300">
+            <ImPower size={24} />
+            {isExpanded && <span className="ml-4">Power</span>}
+          </Link>
+        </div>
+
         {isExpanded && (
-          <button onClick={signOut} className="my-2 flex items-center w-full px-4 opacity-75 hover:opacity-100 transition-opacity duration-300">
-            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M16 13v-2h-4V9h-2v2H6v2h4v2h2v-2z"/></svg>
-            <span className="ml-4">Cerrar sesión</span>
-          </button>
+          <div className="mt-auto">
+            <button onClick={signOut} className="my-2 flex items-center w-full px-4 opacity-75 hover:opacity-100 transition-opacity duration-300">
+              <MdOutlinePowerSettingsNew size={24} />
+              <span className="ml-4">Cerrar sesión</span>
+            </button>
+          </div>
         )}
       </nav>
-      <main className="ml-16 flex-1">
-        {/* Resto del contenido de tu página */}
-      </main>
     </div>
   );
 }
