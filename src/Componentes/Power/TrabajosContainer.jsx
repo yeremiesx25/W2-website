@@ -15,11 +15,7 @@ function TrabajosContainer() {
   };
 
   return (
-    <div id='ofertas' className='w-full flex flex-col items-center font-dmsans pt-12  justify-center'>
-      <h1 className='text-4xl font-semibold px-4 text-center'>
-        Ofertas Laborales
-      </h1>
-      <Buscador />
+    <div id='ofertas' className='w-full flex flex-col items-center font-dmsans pt-12 pl-14 justify-center'>
       <div className='flex w-full justify-center items-center'>
         <div className='flex flex-col w-1/2  justify-start items-center py-4 gap-4 h-[650px] overflow-auto'>
         

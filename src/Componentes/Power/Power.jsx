@@ -16,7 +16,7 @@ function Power() {
     <HeroPower />
     <BeneficiosPower />
     <TrabajosContainer />
-
+    
 
     <BtnWsp />
     </>

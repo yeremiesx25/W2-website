@@ -20,7 +20,8 @@ module.exports = withMT( {
         primarytext: '#061C3D',
         secundarycolor: '#407BFF',
         bgsecundary: '#F7F7FB',
-        colorgreen: '#01C29E'
+        colorgreen: '#01C29E',
+        powercolor: '#111827'
       },
       fontFamily: {
         'dmsans': ['"DM Sans", sans-serif']

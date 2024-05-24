@@ -14,7 +14,7 @@ function HeaderPowerAuth() {
 
   return (
     <div className="flex">
-      <nav className={`bg-gray-900 text-white ${isExpanded ? 'w-64' : 'w-16'} flex flex-col items-center py-4 fixed h-full transition-width duration-300`}>
+      <nav className={`bg-powercolor text-white ${isExpanded ? 'w-64' : 'w-16'} flex flex-col items-center py-4 fixed h-full transition-width duration-300`}>
         <button onClick={toggleMenu} className="mb-4">
           <img src={menuIcon} alt="Menu" className="w-8 h-8" />
         </button>

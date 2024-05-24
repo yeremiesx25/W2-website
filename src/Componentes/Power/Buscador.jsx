@@ -1,20 +1,44 @@
-import React from 'react'
+import React, { useState } from 'react';
+import { FaSearch, FaMapMarkerAlt } from 'react-icons/fa';
 
 function Buscador() {
-  return (
-    <form class="flex flex-col md:flex-row gap-3 shadow-md p-4 rounded-lg mt-4 mb-12 w-[320px] md:w-1/2">
-        <span></span><input type="text" placeholder="Buscar puesto de trabajo"
-			class="w-full md:w-80 px-3 border-none outline-none h-10  focus:outline-none focus:border-amber-500"
-			/>
-    <span></span><select id="Buscador" name="Buscador"
-		class="w-48 h-10 outline-none  border-none border-b-2 border-amber-500 focus:outline-none focus:border-amber-200 text-sky-500 px-2 md:px-3 py-0 md:py-1  bg-white">
-		<option value="Lima">Lima</option>
-		<option value="Arequipa">Arequipa</option>
-		<option value="Piura">Piura</option>
-	</select>
-    <button type="submit" class="bg-amber-400 text-white rounded-lg px-2 md:px-3 py-0 md:py-1 h-12 min-w-32 md:ml-4">Buscar</button>
-</form>
-  )
+    const [keyword, setKeyword] = useState('');
+    const [location, setLocation] = useState('');
+
+    const handleSearch = (e) => {
+        e.preventDefault();
+        console.log('Searching for:', keyword, 'in:', location);
+    };
+
+    return (
+        <div className="flex justify-center mt-10">
+            <form onSubmit={handleSearch} className="flex bg-white rounded-lg shadow-md overflow-hidden">
+                <div className="relative flex items-center">
+                    <FaSearch className="absolute left-4 text-gray-500" />
+                    <input
+                        type="text"
+                        value={keyword}
+                        onChange={(e) => setKeyword(e.target.value)}
+                        placeholder="Cargo o categoría."
+                        className="p-4 pl-12 border-r outline-none w-full"
+                    />
+                </div>
+                <div className="relative flex items-center">
+                    <FaMapMarkerAlt className="absolute left-4 text-gray-500" />
+                    <input
+                        type="text"
+                        value={location}
+                        onChange={(e) => setLocation(e.target.value)}
+                        placeholder="Lugar"
+                        className="p-4 pl-12 border-r outline-none w-full"
+                    />
+                </div>
+                <button type="submit" className="bg-amber-400 text-white p-4 hover:bg-blue-700">
+                    <FaSearch />
+                </button>
+            </form>
+        </div>
+    );
 }
 
-export default Buscador
+export default Buscador;

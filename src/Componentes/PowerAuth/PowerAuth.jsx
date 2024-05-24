@@ -13,11 +13,7 @@ function PowerAuth() {
     <>
     <HeaderPowerAuth />
     <HeroPowerAuth />
-    <MarcasSliderAuth />
     <TrabajosContainer />
-    <BeneficiosPower />
-    <CtaPower />
-    <ContainerVideos />
     <FooterPower />
     <BtnWsp />
     </>
