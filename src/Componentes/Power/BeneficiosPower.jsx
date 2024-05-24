@@ -77,8 +77,8 @@ function BeneficiosPower() {
                     </h2>
                     <p className="mb-4">Conectamos talentos con grandes empresas</p>
                 </div>
-                <div className="mt-8 sm:mt-12 lg:mt-20">
-                    <Slider {...settings}>
+                <div className="mt-8 sm:mt-12 lg:mt-20 flex justify-center">
+                    <Slider {...settings} className='w-72 md:w-[90%]'>
                         {beneficios.map((beneficio, index) => (
                             <div key={index} className="px-2">
                                 <CardBeneficioPower 

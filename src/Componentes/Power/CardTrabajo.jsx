@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import startup from '../../assets/STARTUP TALENT.png';
+import { FaMapMarkerAlt } from 'react-icons/fa';
 
-function CardTrabajo({puesto,sede,sueldo}) {
+function CardTrabajo({ jobTitle, company, location, salary, companyLogo, requirements, timeActive}) {
   const [modalOpen, setModalOpen] = useState(false);
 
   const handleModalOpen = () => {
@@ -13,27 +14,29 @@ function CardTrabajo({puesto,sede,sueldo}) {
   };
 
   return (
-    <>
-      <button
-        className='w-[320px] sm:w-[550px] md:w-1/2 h-32 rounded-lg bg-white border-2 border-[#D6DDEB] mb-4 font-dmsans flex justify-between items-center px-4'
-        onClick={handleModalOpen}
-      >
-        <div className='flex justify-start'>
-          
-          <div className='flex flex-col items-start'>
-            <h4 className='font-bold text-primarytext'>{puesto}</h4>
-            <h5 className='text-[#7C8493] font-bold mb-4'>{sede}</h5>
-            <div>
-              <span className='w-40 h-8 border border-[#EFFAF7] bg-[#EFFAF7] rounded-xl px-4 text-[#56CDAD] mr-1'>Planilla</span>
-              <span className='w-40 h-8 border border-amb er-400 rounded-xl px-4 text-amber-400'>{sueldo}</span>
+    <div className='w-full mx-auto flex justify-center font-dmsans'>
+      <button  className="w-full md:w-1/2 bg-white text-left border hover:shadow-md rounded-lg overflow-hidden">
+            <div className="px-6 py-4">
+                <div className="flex items-center mb-2">
+                    <img className="w-10 h-10 rounded-full mr-4" src={companyLogo} alt={company} />
+                    <div>
+                        <div className="font-bold text-xl">{jobTitle}</div>
+                        <p className="text-gray-700">{company}</p>
+                    </div>
+                </div>
+                <p className="text-gray-700">{location}</p>
+                <p className="text-gray-700 mt-2"><span className="font-bold">Sueldo:</span> {salary}</p>
+                <p className="text-gray-700 mt-2"><span className="font-bold">Requisitos:</span></p>
+                <ul className="list-disc list-inside">
+    {requirements && requirements.map((requirement, index) => (
+        <li key={index} className="text-gray-700">{requirement}</li>
+    ))}
+</ul>
             </div>
-            
-          </div>
-        </div>
-        <div className='w-16 h-16 mr-4'>
-            <img className='w-full h-full' src={startup} alt="" />
-          </div>
-      </button>
+            <div className="px-6 py-4 bg-amber-400">
+                <span className="inline-block bg-white rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">{timeActive} activo</span>
+            </div>
+        </button>
       
       {modalOpen && (
         <div className="fixed inset-0 flex items-center justify-center z-50">
@@ -50,7 +53,7 @@ function CardTrabajo({puesto,sede,sueldo}) {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 }
 
