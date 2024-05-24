@@ -16,9 +16,8 @@ function Power() {
     <HeroPower />
     <BeneficiosPower />
     <TrabajosContainer />
-    <CtaPower />
-    <ContainerVideos />
-    <FooterPower />
+
+
     <BtnWsp />
     </>
   )
