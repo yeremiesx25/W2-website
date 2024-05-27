@@ -33,7 +33,7 @@ function HeroEmpresa() {
 
         <div className="relative flex flex-col justify-center items-center h-full text-left">
           <h1 className="text-3xl md:text-5xl font-bold leading-tight mb-8 text-center">
-            Potencia tu Marca Empleadora y Transforma tu Reclutamiento con Expertos en Gestión Humana
+            Potencia tu Marca Empleadora y  <span class="block text-blue-300 xl:inline">Transforma tu Reclutamiento </span>con Expertos en Gestión Humana
           </h1>
 
           <p className="text-base md:text-lg text-white mb-8 text-center px-4">
