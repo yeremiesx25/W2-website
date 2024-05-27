@@ -11,6 +11,7 @@ import Practicantes from "./Componentes/Practicantes/Practicantes.jsx";
 import ScrollToTop from "./Componentes/Principal/ScrollToTop.jsx";
 import PowerAuth from './Componentes/PowerAuth/PowerAuth.jsx'
 import { AuthContextProvider } from "./Context/AuthContext.jsx";
+import Admin from "./Componentes/Admin/Admin.jsx";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/Power" element={<Power />} />
           <Route path="/Practicantes" element={<Practicantes />} />
           <Route path="/PowerAuth" element={<PowerAuth />} />
+          <Route path="/Admin" element={<Admin />} />
         </Routes>
     </AuthContextProvider>
   );

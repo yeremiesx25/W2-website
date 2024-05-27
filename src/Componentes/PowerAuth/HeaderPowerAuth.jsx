@@ -48,7 +48,7 @@ function HeaderPowerAuth() {
             {isExpanded && <span className="ml-4">Inicio</span>}
           </Link>
 
-          <Link to="/" className={`my-3 flex items-center ${isExpanded ? 'px-4' : 'justify-center'} opacity-75 hover:opacity-100 transition-opacity duration-300`}>
+          <Link to="/Admin" className={`my-3 flex items-center ${isExpanded ? 'px-4' : 'justify-center'} opacity-75 hover:opacity-100 transition-opacity duration-300`}>
             <RiAdminLine size={24} />
             {isExpanded && <span className="ml-4">Reclutador</span>}
           </Link>
