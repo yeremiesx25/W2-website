@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { UserAuth } from "../../Context/AuthContext";
+import { MdOutlineHome } from "react-icons/md";
 import { FaSearchengin } from "react-icons/fa6";
 import { MdOutlineSettings } from "react-icons/md";
 import { MdOutlinePowerSettingsNew } from "react-icons/md";
-import { ImPower } from "react-icons/im";
+import { AiOutlineThunderbolt } from "react-icons/ai";
 import { LuFileSpreadsheet } from "react-icons/lu";
 import { RiMailSendLine } from "react-icons/ri";
 import logo from '../../assets/Logo Power.png';
@@ -44,7 +45,7 @@ function HeaderPowerAuth() {
 
         <div className="flex flex-col  w-full">
           <Link to="/" className={`my-2 flex items-center ${isExpanded ? 'px-4' : 'justify-center'} opacity-75 hover:opacity-100 transition-opacity duration-300`}>
-            <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+          <MdOutlineHome size={24} />
             {isExpanded && <span className="ml-4">Inicio</span>}
           </Link>
 
@@ -80,7 +81,7 @@ function HeaderPowerAuth() {
             </Link>
 
             <Link to="/PowerAuth" className={`my-3 flex items-center ${isExpanded ? 'px-4' : 'justify-center'} opacity-75 hover:opacity-100 transition-opacity duration-300`}>
-              <ImPower size={24} />
+              <AiOutlineThunderbolt size={24} />
               {isExpanded && <span className="ml-4">Power</span>}
             </Link>
           </div>

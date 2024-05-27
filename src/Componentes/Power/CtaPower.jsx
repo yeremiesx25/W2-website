@@ -9,7 +9,7 @@ function CtaPower() {
         <div className='flex flex-col items-center w-96 h-64 justify-around'>
           <h3 className='md:text-3xl text-2xl text-black font-semibold text-center w-72 md:w-auto'>Nuestros coaches están listos para asesorarte</h3>
           <p className='text-black text-center w-72 md:w-auto'>Contamos con un equipo de profesionales expertos para ayudarte a conseguir el trabajo que deseas.</p>
-          <a href="https://chat.whatsapp.com/JqkrAHlepM02lGqkjSWJuR" target="_blank" rel="noopener noreferrer"  className="inline-flex items-center justify-center w-full px-8 py-3 text-lg font-bold text-white bg-gray-800  hover:bg-white hover:text-black sm:w-auto rounded-xl">Contacta con un coach, sé parte de la Comunidad POWER</a>
+          <a href="https://chat.whatsapp.com/JqkrAHlepM02lGqkjSWJuR" target="_blank" rel="noopener noreferrer"  className="inline-flex items-center justify-center w-full px-8 py-3 text-lg font-bold text-white bg-gray-800  hover:bg-white hover:text-black sm:w-auto rounded-xl text-center">Contacta con un coach, sé parte de la Comunidad POWER</a>
         </div>
       </div>
     </div>
