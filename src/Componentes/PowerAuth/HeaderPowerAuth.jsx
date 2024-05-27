@@ -8,7 +8,7 @@ import { ImPower } from "react-icons/im";
 import { LuFileSpreadsheet } from "react-icons/lu";
 import { RiMailSendLine } from "react-icons/ri";
 import logo from '../../assets/Logo Power.png';
-import menuIcon from '../../assets/menu (4).png';
+import { MdOutlineMenu } from "react-icons/md";
 
 function HeaderPowerAuth() {
   const { user, signOut } = UserAuth();
@@ -24,21 +24,21 @@ function HeaderPowerAuth() {
 
   return (
     <div className="flex">
-      <nav className={`bg-powercolor text-white ${isExpanded ? 'w-72' : 'w-20'} flex flex-col items-center py-4 fixed h-full transition-width duration-300`}>
+      <nav className={`bg-powercolor text-white ${isExpanded ? 'w-72' : 'w-20'} flex flex-col items-center py-4 fixed h-full transition-width duration-300 pt-8 `}>
         <button onClick={toggleMenu} className="mb-4">
           {isExpanded ? (
             <button onClick={handleModalClose} className="absolute top-2 right-2  bg-amber-400 text-black px-3 py-1 rounded-lg font-semibold">X</button>
           ) : (
-            <img src={menuIcon} alt="Menu" className="w-8 h-8" />
+            <MdOutlineMenu size={32} />
           )}
         </button>
         {user && (
-          <div className={`flex items-center ${isExpanded ? 'ml-4' : 'justify-center'}`}>
+          <div className={`flex items-center ${isExpanded ? 'mt-8' : 'justify-center'}`}>
             <img className="w-10 h-10 rounded-full" src={user.picture} alt="User" />
             {isExpanded && <span className="ml-2 overflow-hidden whitespace-nowrap overflow-ellipsis">{user.name}</span>}
           </div>
         )}
-        <div className="flex flex-col mt-4">
+        <div className="flex flex-col mt-4 gap-6">
           <Link to="/" className="my-2 flex items-center w-full px-4 opacity-75 hover:opacity-100 transition-opacity duration-300">
             <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
             {isExpanded && <span className="ml-4">Inicio</span>}

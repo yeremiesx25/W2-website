@@ -42,7 +42,7 @@ function MainDiv() {
           </Link>
 
           <Link to="/Power"
-            className="inline-flex items-center justify-center w-full px-8 py-3 text-lg font-bold text-primarytext hover:bg-gray-50 sm:w-auto rounded-xl"
+            className="border border-primarycolor inline-flex items-center justify-center w-full px-8 py-3 text-lg font-bold text-primarytext hover:bg-gray-50 sm:w-auto rounded-xl"
             role="button">Soy Talento
           </Link>
           

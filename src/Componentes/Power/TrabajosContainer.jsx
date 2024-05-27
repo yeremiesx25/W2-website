@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import Buscador from './Buscador';
 import CardTrabajo from './CardTrabajo';
+import InfoJob from '../PowerAuth/InfoJob'; // Importa el nuevo componente
 import startup from '../../assets/STARTUP TALENT.png';
 
 function TrabajosContainer() {
@@ -135,14 +136,7 @@ function TrabajosContainer() {
           />
        
       </div>
-      {selectedJob && (
-        <div className="selected-job-info w-1/2 h-[650px] border rounded-lg flex flex-col mx-10">
-          <h2>{selectedJob.jobTitle}</h2>
-          <p>Empresa: {selectedJob.company}</p>
-          <p>Ubicación: {selectedJob.location}</p>
-          <p>Salario: {selectedJob.salary}</p>
-        </div>
-      )}
+      {selectedJob && <InfoJob selectedJob={selectedJob} />} {/* Utiliza el nuevo componente */}
       </div>
     </div>
   );

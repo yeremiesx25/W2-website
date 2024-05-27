@@ -47,7 +47,7 @@ function Testimonio() {
               <h3 className="text-xl font-semibold mb-2">Capacitaciones</h3>
               <p className="font-light">
                 Brindar capacitaciones gratuitas para la población en general
-                sobre temas cioyunturales.
+                sobre temas coyunturales.
               </p>
             </div>
           </div>

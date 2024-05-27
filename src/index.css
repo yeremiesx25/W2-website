@@ -147,13 +147,16 @@
 }
 
 .slider .box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 100px;
   width: 250px;
 }
 
 .img-marca {
-  width: 80px;
-  height: 60px;
+  width: 60%;
+  height: 65%;
 }
 
 /* Start Animations */
