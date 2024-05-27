@@ -4,7 +4,7 @@ import flecha from "../../assets/flecha.png";
 function ContainerVideos() {
   return (
     
-    <><br></br><><h2 class="font-dmsans sm:text-4xl text-2xl font-bold title-font text-center text-transparent bg-clip-text bg-gradient-to-r from-primarytext to-black mb-12 mt-6"> <img src={flecha} alt="" className="inline-block w-16 h-12 mr-2"></img> Para <span class="text-amber-500 xl:inline"> Estudiantes </span>
+    <><br></br><><h2 class="font-dmsans sm:text-4xl text-2xl font-bold title-font text-center text-transparent bg-clip-text bg-gradient-to-r from-primarytext to-black mb-12 mt-6"> <img src={flecha} alt="" className="inline-block w-16 h-12 mr-2"></img> Para <span class="text-amber-500 xl:inline"> Postulantes </span>
       </h2><div className="flex flex-wrap w-full justify-center gap-6 mb-12">
               <div class="flex items-center justify-center bg-gray-100">
                   <div class="bg-white rounded-lg shadow-lg max-w-sm">

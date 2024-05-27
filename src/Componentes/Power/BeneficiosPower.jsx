@@ -8,6 +8,7 @@ import icon2 from '../../assets/entrevista.png';
 import icon3 from '../../assets/blandas.png';
 import icon4 from '../../assets/retro.png';
 import icon5 from '../../assets/suport.png';
+import flecha from "../../assets/flechasFalabella.png";
 
 function BeneficiosPower() {
     const settings = {
@@ -72,7 +73,7 @@ function BeneficiosPower() {
         <section className="py-12 bg-gray-900 text-gray-100 sm:py-12 lg:py-16 font-dmsans">
             <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
                 <div className="max-w-xl mx-auto text-center xl:max-w-2xl">
-                    <h2 className="text-3xl font-bold leading-tight text-gray-50 sm:text-5xl xl:text-5xl mb-6">
+                    <h2 className="text-3xl font-bold leading-tight text-gray-50 sm:text-5xl xl:text-5xl mb-6"> <img src={flecha} alt="" className="inline-block w-16 h-12 mr-2"></img>
                         Beneficios <span className="text-amber-400 xl:inline"> Power</span>
                     </h2>
                     <p className="mb-4">Conectamos talentos con grandes empresas</p>
