@@ -13,8 +13,8 @@ function Buscador() {
     return (
         <div className="flex justify-center mt-10">
             <form onSubmit={handleSearch} className="flex bg-white rounded-lg shadow-md overflow-hidden">
-                <div className="relative flex items-center">
-                    <FaSearch className="absolute left-4 text-gray-500" />
+                <div className=" flex items-center">
+                    <FaSearch className="ml-4 text-gray-500" />
                     <input
                         type="text"
                         value={keyword}
@@ -23,8 +23,8 @@ function Buscador() {
                         className="p-4 pl-12 border-r outline-none w-full"
                     />
                 </div>
-                <div className="relative flex items-center">
-                    <FaMapMarkerAlt className="absolute left-4 text-gray-500" />
+                <div className=" flex items-center">
+                    <FaMapMarkerAlt className="ml-4 text-gray-500" />
                     <input
                         type="text"
                         value={location}

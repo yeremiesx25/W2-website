@@ -26,12 +26,6 @@ function CardTrabajo({ jobTitle, company, location, salary, companyLogo, require
                 </div>
                 <p className="text-gray-700">{location}</p>
                 <p className="text-gray-700 mt-2"><span className="font-bold">Sueldo:</span> {salary}</p>
-                <p className="text-gray-700 mt-2"><span className="font-bold">Requisitos:</span></p>
-                <ul className="list-disc list-inside">
-    {requirements && requirements.map((requirement, index) => (
-        <li key={index} className="text-gray-700">{requirement}</li>
-    ))}
-</ul>
             </div>
             <div className="px-6 py-4 bg-amber-400">
                 <span className="inline-block bg-white rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">{timeActive} activo</span>
