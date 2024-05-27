@@ -342,7 +342,7 @@ function Intermedio() {
         {" "}
         <img src={flecha} alt="" className="inline-block w-16 h-12 mr-2"></img>
         Brindamos soluciones para todo tipo de reto de <br></br>{" "}
-        <span class="block text-primarycolor xl:inline">GESTION HUMANA </span>
+        <span class="block text-primarycolor xl:inline">GESTIÓN HUMANA </span>
       </h2>
       <div className="flex w-auto flex-wrap justify-center mx-4 border-b-2 mt-12">
         <button
