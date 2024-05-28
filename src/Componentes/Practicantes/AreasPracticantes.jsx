@@ -9,6 +9,29 @@ import mind from "../../assets/mind_mastery.jpg";
 import money from "../../assets/money_matrix.jpg";
 import flecha from "../../assets/flecha.png";
 
+function NextArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{ ...style, display: "block", background: "gray",  borderRadius: "50%" }}
+      onClick={onClick}
+    />
+  );
+}
+
+function PrevArrow(props) {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{ ...style, display: "block", background: "gray",  borderRadius: "55%" }}
+      onClick={onClick}
+      
+    />
+  );
+}
+
 function AreasPracticantes() {
     const settings = {
         dots: true,
@@ -17,6 +40,8 @@ function AreasPracticantes() {
         slidesToShow: 3, 
         slidesToScroll: 1, 
         initialSlide: 0,
+        nextArrow: <NextArrow />,
+        prevArrow: <PrevArrow />,
         responsive: [
           {
             breakpoint: 1024,

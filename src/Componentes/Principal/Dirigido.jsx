@@ -22,7 +22,7 @@ function Dirigido() {
     </div>
     <div class="absolute inset-x-5 text-white ">
         <h2 class="text-5xl font-bold mb-2">Empresas</h2>
-        <p class="hidden group-hover:block">Libérate del estrés de reclutamiento
+        <p class="hidden group-hover:block text-justify">Libérate del estrés de reclutamiento
 y selección con nuestro soporte
 estratégico de atracción de personal
 incluso si ya cuentan con un área
@@ -39,7 +39,7 @@ de RR.HH.</p>
     </div>
     <div class="absolute inset-x-5 text-white">
         <h2 class="text-5xl font-bold mb-2 text-amber-400">Power</h2>
-        <p class="hidden group-hover:block">Ayudamos a personas sin trabajo
+        <p class="hidden group-hover:block text-justify">Ayudamos a personas sin trabajo
 en busca de estabilidad laboral.
 Logren ingresar a trabajar en una
 empresa formal con los beneficios
@@ -57,7 +57,7 @@ de atracción incluso si no tienen CV. </p>
     </div>
     <div class="absolute inset-x-5 text-white">
         
-        <p class="hidden group-hover:block"> <h2 class="text-4xl font-bold mb-2">Descubriendo Talentos</h2>Programa dirigido a estudiantes de
+        <p class="hidden group-hover:block text-justify"> <h2 class="text-4xl font-bold mb-2">Descubriendo Talentos</h2>Programa dirigido a estudiantes de
 los últimos ciclos de sus carreras
 que deseen formarse y formar parte
 de W2. Revisa nuestro apartado de

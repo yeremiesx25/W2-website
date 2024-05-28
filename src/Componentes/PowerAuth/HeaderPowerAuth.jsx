@@ -60,7 +60,7 @@ function HeaderPowerAuth() {
           </Link>
 
 
-          {isExpanded && <hr className="border-t border-gray-200 my-2 w-full " />}
+          {isExpanded && <hr className="border-t border-gray-500 my-2 w-full" />}
         </div>
 
         <div className="flex flex-col mt-4 justify-center w-full">
@@ -86,7 +86,7 @@ function HeaderPowerAuth() {
             </Link>
           </div>
 
-          {isExpanded && <hr className="border-t border-gray-400 my-2 w-full" />}
+          {isExpanded && <hr className="border-t border-gray-500 my-2 w-full" />}
         </div>
 
         <div className="flex flex-col mt-12 w-full">
