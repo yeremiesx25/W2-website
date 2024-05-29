@@ -41,7 +41,7 @@ function Testimonio() {
           <div class="bg-primarycolor w-80 h-96 shadow rounded-lg p-8 text-white text-center flex flex-col justify-around items-center mb-6">
           <motion.div whileHover={{ scale: 1.1 }}
     whileTap={{ scale: 0.9 }}>
-            <img src={capa} alt="" className="w-full h-44 mb-4 rounded-lg" />
+            <img src={capa} alt="" className="w-full h-40 mb-4 rounded-lg" />
             </motion.div>
             <div className="w-full h-48">
               <h3 className="text-xl font-semibold mb-2">Capacitaciones</h3>

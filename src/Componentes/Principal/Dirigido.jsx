@@ -1,8 +1,8 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import poder from '../../assets/Power.jpg'
-import descubrir from '../../assets/descubriendo.jpeg'
-import empre from '../../assets/Empresa.gif'
+import poder from '../../assets/Power2.jpg'
+import descubrir from '../../assets/descubriendo.jpg'
+import empre from '../../assets/Empresa.jpg'
 import flecha from "../../assets/flecha.png";
 
 
@@ -18,28 +18,28 @@ function Dirigido() {
   <div class="mb-8 relative h-96 w-96 mx-auto px-5 py-8 group rounded-3xl bg-gray-200 overflow-hidden shadow-xl">
     <img src= { empre } alt="" class="absolute w-full h-full inset-0 object-cover"/>
     <div
-        class="absolute inset-0 w-full h-full rounded-3xl bg-black bg-opacity-0 transition duration-500 backdrop-filter group-hover:bg-opacity-20 group-hover:backdrop-blur">
+        class="absolute inset-0 w-full h-full rounded-3xl bg-black bg-opacity-0 transition duration-500 backdrop-filter group-hover:bg-opacity-40 group-hover:backdrop-blur">
     </div>
     <div class="absolute inset-x-5 text-white ">
-        <h2 class="text-5xl font-bold mb-2">Empresas</h2>
-        <p class="hidden group-hover:block text-justify">Libérate del estrés de reclutamiento
+       
+        <p class="hidden group-hover:block text-justify"> <h2 class="text-5xl font-bold mb-2">Empresas</h2>Libérate del estrés de reclutamiento
 y selección con nuestro soporte
 estratégico de atracción de personal
 incluso si ya cuentan con un área
 de RR.HH.</p>
     </div>
-    <Link to="/Empresas" className="absolute inset-x-5 bottom-8 py-3 rounded-2xl font-semibold bg-white shadow-lg hidden transition duration-200 hover:bg-gray-300 group-hover:block text-center">
+    <Link to="/Empresas" className="absolute inset-x-5 bottom-8 py-3 rounded-2xl font-semibold bg-primarycolor shadow-lg hidden transition duration-200 hover:bg-gray-300 group-hover:block hover:text-primarycolor text-center text-white">
             Descubre más
           </Link>
 </div>
 <div class="mb-8 relative h-96 w-[350px] md:w-96 mx-auto  px-5 py-8 group rounded-3xl bg-gray-200 overflow-hidden shadow-xl">
     <img src={ poder } alt="" class="absolute w-full h-full inset-0 object-cover"/>
     <div
-        class="absolute inset-0 w-full h-full rounded-3xl bg-black bg-opacity-0 transition duration-500 backdrop-filter group-hover:bg-opacity-20 group-hover:backdrop-blur">
+        class="absolute inset-0 w-full h-full rounded-3xl bg-black bg-opacity-0 transition duration-500 backdrop-filter group-hover:bg-opacity-40 group-hover:backdrop-blur">
     </div>
     <div class="absolute inset-x-5 text-white">
-        <h2 class="text-5xl font-bold mb-2 text-amber-400">Power</h2>
-        <p class="hidden group-hover:block text-justify">Ayudamos a personas sin trabajo
+        
+        <p class="hidden group-hover:block text-justify"><h2 class="text-5xl font-bold mb-2 text-amber-400">Power</h2>Ayudamos a personas sin trabajo
 en busca de estabilidad laboral.
 Logren ingresar a trabajar en una
 empresa formal con los beneficios
@@ -53,7 +53,7 @@ de atracción incluso si no tienen CV. </p>
 <div class="relative h-96 w-96 mx-auto px-5 py-8 group rounded-3xl bg-gray-200 overflow-hidden shadow-xl">
     <img src= { descubrir } alt="" class="absolute w-full h-full inset-0 object-cover"/>
     <div
-        class="absolute inset-0 w-full h-full rounded-3xl bg-black bg-opacity-0 transition duration-500 backdrop-filter group-hover:bg-opacity-20 group-hover:backdrop-blur">
+        class="absolute inset-0 w-full h-full rounded-3xl bg-black bg-opacity-0 transition duration-500 backdrop-filter group-hover:bg-opacity-40 group-hover:backdrop-blur">
     </div>
     <div class="absolute inset-x-5 text-white">
         
@@ -64,7 +64,7 @@ de W2. Revisa nuestro apartado de
 beneficios y vive tu primera
 experiencia laboral con nosotros.</p>
     </div>
-    <Link to="/Practicantes" className="absolute inset-x-5 bottom-8 py-3 rounded-2xl font-semibold bg-primarycolor text-white shadow-lg hidden transition duration-200  hover:text-primarycolor hover:bg-gray-300 group-hover:block text-center">
+    <Link to="/Practicantes" className="absolute inset-x-5 bottom-8 py-3 rounded-2xl font-semibold bg-red-500 text-white shadow-lg hidden transition duration-200  hover:text-primarycolor hover:bg-gray-300 group-hover:block text-center">
             Vive la experiencia
           </Link>
 </div>
