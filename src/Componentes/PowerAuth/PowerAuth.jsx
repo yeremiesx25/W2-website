@@ -8,6 +8,7 @@ import CtaPower from '../Power/CtaPower'
 import ContainerVideos from '../Power/ContainerVideos'
 import FooterPower from '../Power/FooterPower'
 import BtnWsp from '../Principal/BtnWsp'
+import {Outlet} from 'react-router-dom'
 function PowerAuth() {
   return (
     <>
@@ -16,6 +17,7 @@ function PowerAuth() {
     <TrabajosContainer />
     <FooterPower />
     <BtnWsp />
+    <Outlet />
     </>
   )
 }

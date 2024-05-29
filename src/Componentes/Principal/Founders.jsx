@@ -5,8 +5,8 @@ import flecha from "../../assets/flecha.png";
 
 function Founders() {
   return (
-    <section className="bg-white dark:bg-gray-900">
-      <div className="container px-6 py-10 mx-auto">
+    <section className="bg-white dark:bg-gray-900 w-full flex justify-center">
+      <div className="container px-6 py-10 flex flex-col items-center">
         <h1 className="text-4xl font-semibold text-center text-gray-800 capitalize lg:text-5xl dark:text-white">
           <img
             src={flecha}
@@ -22,8 +22,8 @@ function Founders() {
         <br></br>
         <br></br>
         <br></br>
-        <div className="grid grid-cols-1 gap-28 mt-8 xl:mt-16 md:grid-cols-2 xl:grid-cols-2">
-          <div className="relative flex flex-col items-center p-8 transition-colors duration-300 transform border cursor-pointer rounded-xl hover:border-transparent group hover:bg-primarycolor dark:border-gray-700 dark:hover:border-transparent">
+        <div className="grid grid-cols-1 gap-12 mt-8 xl:mt-16 md:grid-cols-2 xl:grid-cols-2 justify-center items-center">
+          <div className="relative flex flex-col items-center p-8 transition-colors duration-300 transform border cursor-pointer rounded-xl hover:border-transparent group hover:bg-primarycolor w-96">
             <img
               className="absolute -top-32 w-44"
               src={Winy}
@@ -66,7 +66,7 @@ function Founders() {
             </div>
           </div>
 
-          <div className="relative flex flex-col items-center p-8 transition-colors duration-300 transform border cursor-pointer rounded-xl hover:border-transparent group hover:bg-primarycolor dark:border-gray-700 dark:hover:border-transparent">
+          <div className="relative flex flex-col items-center p-8 transition-colors duration-300 transform border cursor-pointer rounded-xl hover:border-transparent group hover:bg-primarycolor w-96">
             <img
               className="absolute -top-32 w-32"
               src={Wily}

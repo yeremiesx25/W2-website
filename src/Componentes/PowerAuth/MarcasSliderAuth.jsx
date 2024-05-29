@@ -4,7 +4,6 @@ import Altisa from '../../assets/Logos Clientes/Altisa@2x.png';
 import Bomi from '../../assets/Logos Clientes/Bomi@2x.png';
 import Cardioclinic from '../../assets/Logos Clientes/Cardioclinic@2x.png';
 import Depsa from '../../assets/Logos Clientes/Depsa@2x.png';
-import Econolentes from '../../assets/Logos Clientes/Econolentes@2x.png';
 import Germsa from '../../assets/Logos Clientes/Germsa@2x.png';
 import Palomino from '../../assets/Logos Clientes/Palomino@2x.png';
 import Ransa from '../../assets/Logos Clientes/RANSA@2x.png';
@@ -17,7 +16,6 @@ const slides = [
     Bomi,
     Cardioclinic,
     Depsa,
-    Econolentes,
     Germsa,
     Palomino,
     Ransa,

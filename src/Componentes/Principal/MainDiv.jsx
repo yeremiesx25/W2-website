@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { HiArrowRight } from "react-icons/hi";
 import fondo from '../../assets/gradiantFondo.png';
 import Hero from './Hero';
 import arrow from '../../assets/flechanegra.png';
@@ -34,16 +35,14 @@ function MainDiv() {
         <div className="px-8 sm:items-start justify-center sm:px-0 sm:space-x-5 sm:flex mt-9 flex flex-col sm:flex-row items-center gap-4">
 
           <Link to="/Empresas" title=""
-            className="bg-primarycolor p-2 text-white font-semibold rounded-lg w-48 h-14 text-lg flex items-center justify-center hover:text-primarycolor hover:border-2 hover:border-primarycolor hover:bg-white" role="button">
+            className="bg-primarycolor p-2 text-white font-semibold rounded-lg w-48 h-14 text-lg flex items-center justify-center hover:text-primarycolor hover:border-2 hover:border-primarycolor hover:bg-white transition-all duration-200" role="button">
             Soy Empresa
-            <span className='flex items-center justify-center bg-no-repeat ml-3'
-              style={{ backgroundImage: `url(${arrow})`, width: '30px', height: '20px', backgroundSize: 'contain' }}></span>
+            <HiArrowRight className='flex items-center justify-center  ml-3'/>
           </Link>
 
           <Link to="/Power"
-            className="bg-white border border-primarycolor p-2 text-primarycolor font-semibold rounded-lg w-48 h-14 text-lg flex items-center justify-center hover:text-white hover:border-2 hover:border-primarycolor hover:bg-primarycolor" role="button">Soy Talento
-            <span className='flex items-center justify-center bg-no-repeat ml-5'
-              style={{ backgroundImage: `url(${arrow})`, width: '30px', height: '20px', backgroundSize: 'contain' }}></span>
+            className="bg-white border-2 border-primarycolor p-2 text-primarycolor font-semibold rounded-lg w-48 h-14 text-lg flex items-center justify-center hover:text-white hover:border-2 hover:border-primarycolor hover:bg-primarycolor transition-all duration-200" role="button">Soy Talento
+            <HiArrowRight className='flex items-center justify-center  ml-3'/>
           </Link>
 
         </div>

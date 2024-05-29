@@ -4,10 +4,10 @@ import AddButton from './AddButton'
 
 function Admin() {
   return (
-    <>
+    <div className=''>
         <HeaderPowerAuth />
         <AddButton />
-    </>
+    </div>
   )
 }
 

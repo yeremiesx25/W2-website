@@ -137,7 +137,7 @@ function TrabajosContainer() {
           />
        
       </div>
-      {selectedJob && <InfoJob selectedJob={selectedJob} />} {/* Utiliza el nuevo componente */}
+      {/* {selectedJob && <InfoJob selectedJob={selectedJob} />}  */}
       </div>
     </div>
   );
