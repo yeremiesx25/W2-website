@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import startup from '../../assets/STARTUP TALENT.png';
 import { FaMapMarkerAlt } from 'react-icons/fa';
 
+
 function CardTrabajo({ jobTitle, company, location, salary, companyLogo, requirements, timeActive, onClick}) {
   const [modalOpen, setModalOpen] = useState(false);
 
@@ -15,7 +16,7 @@ function CardTrabajo({ jobTitle, company, location, salary, companyLogo, require
 
   return (
     <div className='w-full flex justify-center font-dmsans'>
-      <button onClick={onClick}  className="w-full md:w-[90%] bg-white text-left border hover:shadow-md rounded-lg overflow-hidden">
+      <button onClick={handleModalOpen}  className="w-full md:w-[90%] bg-white text-left border hover:shadow-md rounded-lg overflow-hidden">
             <div className="px-6 py-4">
                 <div className="flex items-center mb-2">
                     <img className="w-10 h-10 rounded-full mr-4" src={companyLogo} alt={company} />
