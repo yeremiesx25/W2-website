@@ -28,7 +28,7 @@
               <NavLink to="/Empresas" className={({isActive}) => isActive ? activeStyle : classDefault }>
                 Empresas
               </NavLink>
-              <NavLink to="/Practicantes" className={({isActive}) => isActive ? activeStyle : classDefault }>
+              <NavLink to="/DescubriendoTalentos" className={({isActive}) => isActive ? activeStyle : classDefault }>
                 Descubriendo Talentos
               </NavLink>
               <NavLink to="/Power" className={({isActive}) => isActive ? activeStyle : classDefault }>
@@ -67,7 +67,7 @@
                 Empresas
               </NavLink>
               <NavLink
-                to="/Practicantes"
+                to="/DescubriendoTalentos"
                 className="text-gray-800 hover:text-gray-600 block px-3 py-2 rounded-md text-base font-medium"
               >
                 Descubriendo Talentos

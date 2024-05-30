@@ -21,7 +21,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/Empresas" element={<Empresas />} />
           <Route path="/Power" element={<Power />} />
-          <Route path="/Practicantes" element={<Practicantes />} />
+          <Route path="/DescubriendoTalentos" element={<Practicantes />} />
           <Route path="/PowerAuth" element={<PowerAuth />} />
           <Route path="/Admin" element={<Admin />} />
         </Routes>
