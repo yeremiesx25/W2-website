@@ -21,7 +21,7 @@ function HeaderPower() {
   };
 
   return (
-    <header className="bg-gray-900 text-gray-50 font-dmsans flex justify-around w-full flex-wrap fixed z-10" style={{ height: '78px' }}>
+    <header className="bg-powercolor text-gray-50 font-dmsans flex justify-around w-full flex-wrap fixed z-10" style={{ height: '78px' }}>
       <div className="container mx-auto px-4 py-6 flex justify-between items-center">
         {/* Logo */}
         <div className="flex items-center">

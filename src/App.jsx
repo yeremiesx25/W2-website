@@ -15,7 +15,7 @@ import Admin from "./Componentes/Admin/Admin.jsx";
 
 function App() {
   return (
-    <AuthContextProvider>
+    <div>
         <ScrollToTop />
         <Routes>
           <Route path="/" element={<Home />} />
@@ -25,7 +25,7 @@ function App() {
           <Route path="/PowerAuth" element={<PowerAuth />} />
           <Route path="/Admin" element={<Admin />} />
         </Routes>
-    </AuthContextProvider>
+    </div>
   );
 }
 

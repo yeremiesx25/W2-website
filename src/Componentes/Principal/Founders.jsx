@@ -23,9 +23,9 @@ function Founders() {
         <br></br>
         <br></br>
         <div className="grid grid-cols-1 gap-12 mt-8 xl:mt-16 md:grid-cols-2 xl:grid-cols-2 justify-center items-center">
-          <div className="relative flex flex-col items-center p-8 transition-colors duration-300 transform border cursor-pointer rounded-xl hover:border-transparent group hover:bg-primarycolor w-96">
+          <div className="relative flex flex-col items-center p-8 transition-colors duration-300 transform border border-gray-300 cursor-pointer rounded-xl hover:border-transparent group hover:bg-primarycolor w-full max-w-md mb-16 md:mb-0">
             <img
-              className="absolute -top-32 w-44"
+              className="absolute -top-32 w-44 md:w-32 lg:w-44"
               src={Winy}
               alt=""
             />
@@ -66,9 +66,9 @@ function Founders() {
             </div>
           </div>
 
-          <div className="relative flex flex-col items-center p-8 transition-colors duration-300 transform border cursor-pointer rounded-xl hover:border-transparent group hover:bg-primarycolor w-96">
+          <div className="relative flex flex-col items-center p-8 transition-colors duration-300 transform border border-gray-300 cursor-pointer rounded-xl hover:border-transparent group hover:bg-primarycolor w-full max-w-md">
             <img
-              className="absolute -top-32 w-32"
+              className="absolute -top-32 w-32 md:w-24 lg:w-32"
               src={Wily}
               alt=""
             />
