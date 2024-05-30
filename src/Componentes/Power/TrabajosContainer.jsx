@@ -111,9 +111,9 @@ function TrabajosContainer() {
           />
           <CardTrabajo
             jobTitle="Operario de Almacén"
-            company="1200"
+            company=""
             location="Callao"
-            salary=""
+            salary="S/. 1200"
             companyLogo={agil}
             requirements={[]}
             timeActive="Hace 2 días"
