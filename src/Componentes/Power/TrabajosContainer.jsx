@@ -117,7 +117,11 @@ function TrabajosContainer() {
             jobTitle="Operario de Almacén"
             company=""
             location="Callao"
+<<<<<<< HEAD
             salary="1200"
+=======
+            salary="S/. 1200"
+>>>>>>> 89591d6d9533b8e9436a5200e5c5a38c32ef7f0c
             companyLogo={agil}
             requirements={[]}
             timeActive="Hace 2 días"

@@ -1,11 +1,18 @@
 import React from 'react'
+<<<<<<< HEAD
 import Navbar from '../Principal/Navbar'
 import Footer from '../Principal/Footer'
 import BtnWsp from '../Principal/BtnWsp'
+=======
+import Navbar from '.Navbar'
+import Footer from '.Footer'
+import BtnWsp from './BtnWsp'
+>>>>>>> 89591d6d9533b8e9436a5200e5c5a38c32ef7f0c
 
 function Home() {
   return (
     <div className='flex flex-col' >
+<<<<<<< HEAD
       <Navbar/>
       <div className='w-full'>
       <section className="bg-white dark:bg-gray-900 p-8 md:p-16 text-gray-800 dark:text-gray-300 mt-8">
@@ -66,6 +73,10 @@ function Home() {
       </div>
     </section>
       </div>
+=======
+      
+      <Navbar/>
+>>>>>>> 89591d6d9533b8e9436a5200e5c5a38c32ef7f0c
       <Footer/>
       <BtnWsp />
 
