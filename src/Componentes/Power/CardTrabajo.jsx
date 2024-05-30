@@ -1,7 +1,14 @@
 import React, { useState } from 'react';
 import startup from '../../assets/STARTUP TALENT.png';
 import { FaMapMarkerAlt } from 'react-icons/fa';
-
+import flyer2 from '../../assets/Flyers Nuevos/2.png'
+import flyer3 from '../../assets/Flyers Nuevos/3.png'
+import flyer4 from '../../assets/Flyers Nuevos/4.png'
+import flyer5 from '../../assets/Flyers Nuevos/5.png'
+import flyer6 from '../../assets/Flyers Nuevos/6.png'
+import flyer7 from '../../assets/Flyers Nuevos/7.png'
+import flyer8 from '../../assets/Flyers Nuevos/8.png'
+import flyer9 from '../../assets/Flyers Nuevos/9.png'
 
 function CardTrabajo({ jobTitle, company, location, salary, companyLogo, requirements, timeActive, onClick}) {
   const [modalOpen, setModalOpen] = useState(false);
