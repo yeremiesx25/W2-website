@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-function CardTrabajo({ jobTitle, company, location, salary, companyLogo, requirements, timeActive, onClick, imageUrl }) {
+function CardTrabajo({ jobTitle, company, location, salary, companyLogo, requirements, timeActive, onClick, imageUrl, wspUrl }) {
   const [modalOpen, setModalOpen] = useState(false);
 
   const handleModalOpen = () => {
@@ -37,7 +37,7 @@ function CardTrabajo({ jobTitle, company, location, salary, companyLogo, require
             <img className='w-full h-auto mb-4 rounded' src={imageUrl} alt="Job Details" />
             <div className='flex w-full justify-around mt-4'>
               <button onClick={handleModalClose} className="bg-red-600 text-white px-4 py-2 rounded-lg font-semibold">Cerrar</button>
-              <button onClick={handleModalClose} className="bg-primarytext text-white px-4 py-2 rounded-lg font-semibold">Postular</button>
+              <a href={wspUrl} className="bg-primarytext text-white px-4 py-2 rounded-lg font-semibold">Postular</a>
             </div>
           </div>
         </div>

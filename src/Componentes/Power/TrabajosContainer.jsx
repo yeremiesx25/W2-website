@@ -42,6 +42,7 @@ function TrabajosContainer() {
             requirements={['Químico farmacéutico titulado', 'Residir en Chorrillos o zonas aledañas', 'Experiencia de 1 año como Analista de Aseguramiento de la Calidad.']}
             timeActive="Hace 2 días"
             imageUrl={asesor}
+            wspUrl = "https://wa.me/51970970198?text=%C2%A1Hola%2C%20Jos%C3%A9%20%F0%9F%91%8B%F0%9F%8F%BB%21%20Me%20interesa%20la%20oferta%20laboral%20de%20Asesor%20de%20Ventas"
             onClick={() => handleJobClick({
               jobTitle: "QF - Analista de Aseguramiento de la Calidad",
               company: "Mi Empresa",
@@ -61,6 +62,7 @@ function TrabajosContainer() {
             requirements={['Con estudios de las carreras Técnicas de Refrigeración o electricidad u carreras afines.', 'Experiencia como asistente operativo en equipos de refigeración.', 'Disponibilidad para realizar turnos rotativos y vivir en el Callao.']}
             timeActive="Hace 2 días"
             imageUrl={repartidor}
+            wspUrl = "https://wa.me/51991879666?text=%C2%A1Hola%2C%20Roc%C3%ADo%20%F0%9F%91%8B%F0%9F%8F%BB%21%20Me%20interesa%20la%20oferta%20laboral%20de%20Auxiliar%20de%20Reparto%20CBC"
             onClick={() => handleJobClick({
               jobTitle: "Asistente Operativo de Planta Frío",
               company: "Ransa",
@@ -80,6 +82,7 @@ function TrabajosContainer() {
             requirements={['DNI y licencia A3C vigente +  A4 + Buen récord del conductor.', 'Disponibilidad para rotar.', 'Experiencia manejando Semitrailer Americano y en ruta minera.']}
             timeActive="Hace 2 días"
             imageUrl={conductor}
+            wspUrl = "https://wa.me/51970970198?text=%C2%A1Hola%2C%20Jos%C3%A9%20%F0%9F%91%8B%F0%9F%8F%BB%21%20Me%20interesa%20la%20oferta%20laboral%20de%20Conductor%20de%20Reparto%20A3B%20-%20A3C"
             onClick={() => handleJobClick({
               jobTitle: "Conductores Semitrailer Americano A3C Y A4",
               company: "Ransa",
@@ -99,6 +102,7 @@ function TrabajosContainer() {
             requirements={['Experiencia mínima de 6 meses como almacenero.', 'DNI vigente + Vivir en zonas aledañas al Callao.', 'Disponibilidad para realizar turnos rotativos.']}
             timeActive="Hace 2 días"
             imageUrl={medico}
+            wspUrl = "https://wa.me/51991879666?text=%C2%A1Hola%2C%20Roc%C3%ADo%20%F0%9F%91%8B%F0%9F%8F%BB%21%20Me%20interesa%20la%20oferta%20laboral%20de%20Representante%20M%C3%A9dico%20Junior"
             onClick={() => handleJobClick({
               jobTitle: "Almacenero",
               company: "Ransa",
@@ -111,13 +115,14 @@ function TrabajosContainer() {
           />
           <CardTrabajo
             jobTitle="Operario de Almacén"
-            company="1200"
+            company=""
             location="Callao"
-            salary=""
+            salary="1200"
             companyLogo={agil}
             requirements={[]}
             timeActive="Hace 2 días"
             imageUrl={operario}
+            wspUrl = "https://wa.me/51991879666?text=%C2%A1Hola%2C%20Roc%C3%ADo%20%F0%9F%91%8B%F0%9F%8F%BB%21%20Me%20interesa%20la%20oferta%20laboral%20de%20Operario%20de%20Almac%C3%A9n"
             onClick={() => handleJobClick({
               jobTitle: "Desarrollador bcakend Senior",
               company: "Mi Empresa",
@@ -137,6 +142,7 @@ function TrabajosContainer() {
             requirements={[]}
             timeActive="Hace 2 días"
             imageUrl={asistente}
+            wspUrl = "https://wa.me/51991879666?text=%C2%A1Hola%2C%20Roc%C3%ADo%20%F0%9F%91%8B%F0%9F%8F%BB%21%20Me%20interesa%20la%20oferta%20laboral%20de%20Asistente%20Operativo%20de%20Planta%20de%20Fr%C3%ADo"
             onClick={() => handleJobClick({
               jobTitle: "Desarrollador bcakend Senior",
               company: "Mi Empresa",
@@ -157,6 +163,7 @@ function TrabajosContainer() {
             requirements={[]}
             timeActive="Hace 2 días"
             imageUrl={almacenero}
+            wspUrl = "https://wa.me/51991879666?text=%C2%A1Hola%2C%20Roc%C3%ADo%20%F0%9F%91%8B%F0%9F%8F%BB%21%20Me%20interesa%20la%20oferta%20laboral%20de%20Almacenero"
             onClick={() => handleJobClick({
               jobTitle: "Desarrollador bcakend Senior",
               company: "Mi Empresa",
@@ -177,6 +184,7 @@ function TrabajosContainer() {
             requirements={[]}
             timeActive="Hace 2 días"
             imageUrl={trailer}
+            wspUrl = "https://wa.me/51991879666?text=%C2%A1Hola%2C%20Roc%C3%ADo%20%F0%9F%91%8B%F0%9F%8F%BB%21%20Me%20interesa%20la%20oferta%20laboral%20de%20Conductores%20SemiTrailer%20Americano%20A3C%20y%20A4"
             onClick={() => handleJobClick({
               jobTitle: "Desarrollador backend Senior",
               company: "Mi Empresa",

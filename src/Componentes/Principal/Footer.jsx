@@ -39,13 +39,16 @@ const Footer = () => {
               <h3 className="tracking-wide uppercase dark:text-gray-900">About us</h3>
               <ul className="space-y-1">
                 <li>
-                  <a rel="noopener noreferrer" href="#">Privacidad</a>
+                  <Link to="/Privacidad">Política de Privacidad</Link>
                 </li>
                 <li>
-                  <a rel="noopener noreferrer" href="#">Términos del servicio</a>
+                  <Link rel="noopener noreferrer" to="/DescubriendoTalentos">Trabaja con nosotros</Link>
                 </li>
                 <li>
-                  <Link rel="noopener noreferrer" to="/Practicantes">Trabaja con nosotros</Link>
+                  <Link rel="noopener noreferrer" to="/Empresas">Empresas</Link>
+                </li>
+                <li>
+                  <Link rel="noopener noreferrer" to="/Power">Postulantes</Link>
                 </li>
               </ul>
             </div>
