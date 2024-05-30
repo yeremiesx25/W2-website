@@ -1,7 +1,7 @@
 import React from 'react'
-import Navbar from '../Principal/Navbar'
-import Footer from '../Principal/Footer'
-import BtnWsp from '../Principal/BtnWsp'
+import Navbar from '.Navbar'
+import Footer from '.Footer'
+import BtnWsp from './BtnWsp'
 
 function Home() {
   return (
