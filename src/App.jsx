@@ -16,7 +16,7 @@ import Privacidad from './Componentes/Principal/Privacidad.jsx'
 
 function App() {
   return (
-    <div>
+    <AuthContextProvider>
         <ScrollToTop />
         <Routes>
           <Route path="/" element={<Home />} />
@@ -27,7 +27,7 @@ function App() {
           <Route path="/Admin" element={<Admin />} />
           <Route path="/Privacidad" element={<Privacidad />} />
         </Routes>
-    </div>
+    </AuthContextProvider>
   );
 }
 
