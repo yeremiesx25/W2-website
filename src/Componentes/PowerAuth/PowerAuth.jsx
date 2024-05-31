@@ -9,12 +9,13 @@ import ContainerVideos from '../Power/ContainerVideos'
 import FooterPower from '../Power/FooterPower'
 import BtnWsp from '../Principal/BtnWsp'
 import {Outlet} from 'react-router-dom'
+import TrabajosContainer2 from '../Power/TrabajosContainer2'
 function PowerAuth() {
   return (
     <>
     <HeaderPowerAuth />
     <HeroPowerAuth />
-    <TrabajosContainer />
+    <TrabajosContainer2 />
     <FooterPower />
     <BtnWsp />
     <Outlet />

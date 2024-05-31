@@ -106,7 +106,7 @@ function HeaderPowerAuth() {
 
         <div className="flex flex-col mt-12 w-full">
           {isExpanded && (
-            <button onClick={signOut} className="my-2 flex items-center px-4 opacity-75 hover:opacity-100 transition-opacity duration-300">
+            <button onClick={signOut} className=" flex items-center px-4 opacity-75 hover:opacity-100 transition-opacity duration-300">
               <MdOutlinePowerSettingsNew size={24} />
               <span className="ml-4">Cerrar sesión</span>
             </button>
