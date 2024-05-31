@@ -1,7 +1,7 @@
 import React from 'react'
 import HeaderPower from './HeaderPower'
 import HeroPower from './HeroPower'
-import TrabajosContainer from './TrabajosContainer'
+import TrabajosContainer2 from './TrabajosContainer2'
 import BeneficiosPower from './BeneficiosPower'
 import CardBeneficioPower from './CardBeneficioPower'
 import CtaPower from './CtaPower'
@@ -15,7 +15,7 @@ function Power() {
     <HeaderPower />
     <HeroPower />
     <BeneficiosPower />
-    <TrabajosContainer />
+    <TrabajosContainer2 />
     <CtaPower />
     <ContainerVideos />
     <FooterPower />
