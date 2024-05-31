@@ -22,7 +22,7 @@ const Footer = () => {
               <h3 className="tracking-wide uppercase dark:text-gray-900">Servicios</h3>
               <ul className="space-y-1">
                 <li>
-                  <a rel="noopener noreferrer" href="#intermedio">Reclutamiento</a>
+                  <a rel="noopener noreferrer" href="/Empresas#intermedio">Reclutamiento</a>
                 </li>
                 <li>
                   <a rel="noopener noreferrer" href="#intermedio">Head Hunting</a>
