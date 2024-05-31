@@ -59,7 +59,7 @@ function HeaderPowerAuth() {
 
 
         <div className="flex flex-col  w-full">
-          <Link to="/" className={`my-2 flex items-center ${isExpanded ? 'px-4' : 'justify-center'} opacity-75 hover:opacity-100 transition-opacity duration-300`}>
+          <Link to="/PowerAuth" className={`my-2 flex items-center ${isExpanded ? 'px-4' : 'justify-center'} opacity-75 hover:opacity-100 transition-opacity duration-300`}>
           <MdOutlineHome size={24} />
             {isExpanded && <span className="ml-4">Inicio</span>}
           </Link>
