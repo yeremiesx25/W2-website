@@ -43,7 +43,7 @@ function Intermedio() {
                       class="w-20 h-20 text-indigo-600"
                     />
                     <p class="ml-3 leading-5 text-black">
-                      Enfocado en procesos masivos de alta demanda como
+                      Enfocado en procesos masivos de alta demanda como:
                       <span class=" text-indigo-600 xl:inline">
                         {" "}
                        <br></br> Operario de almacen, producción, reparto, distribución,
@@ -61,7 +61,7 @@ function Intermedio() {
                       class="w-20 h-20 text-indigo-600"
                     />
                     <p class="ml-3 leading-5 text-black">
-                      Enfocado en personal de mandos medios como
+                      Enfocado en personal de mandos medios como:
                       <span class="block text-indigo-600 xl:inline">
                         {" "}
                         asistentes, supervisores, coordinadores, posiciones IT y
@@ -76,7 +76,7 @@ function Intermedio() {
             <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
               <div class="rounded-lg shadow">
                 <a
-                  href="https://w2asesoresyconsultores.bitrix24.es/pub/form/10_como_podemos_ayudarte_/ex701t/?view=preview&preview=click"
+                  href="https://b24-0nhd36.bitrix24.site/crm_form_pn9nk/"
                   class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gray-800 hover:bg-gray-600 md:py-4 md:text-lg md:px-10 "
                 >
                   Descubre el talento ideal
@@ -154,7 +154,7 @@ function Intermedio() {
             <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
               <div class="rounded-lg shadow">
                 <a
-                  href="https://w2asesoresyconsultores.bitrix24.es/pub/form/10_como_podemos_ayudarte_/ex701t/?view=preview&preview=click"
+                  href="https://b24-0nhd36.bitrix24.site/crm_form_pn9nk/"
                   class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gray-800 hover:bg-gray-600 md:py-4 md:text-lg md:px-10 "
                 >
                   Encuentra a tu próximo líder
@@ -243,7 +243,7 @@ function Intermedio() {
             <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
               <div class="rounded-lg shadow">
                 <a
-                  href="https://w2asesoresyconsultores.bitrix24.es/pub/form/10_como_podemos_ayudarte_/ex701t/?view=preview&preview=click"
+                  href="https://b24-0nhd36.bitrix24.site/crm_form_pn9nk/"
                   class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gray-800 hover:bg-gray-600 md:py-4 md:text-lg md:px-10 "
                 >
                   Evalúa tu equipo ahora
@@ -272,8 +272,8 @@ function Intermedio() {
               <span class="block text-indigo-600 xl:inline"> Branding</span>
             </h1>
 
-            <p class="mt-3 text-base text-black sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-           Entendemos el cambio y la globalización es por ello que implementamos nuestra metodología de atracción fundamentada en el Inbound Recruiting. Que nos permite acelerar nuestros procesos y hacerlos efectivos.
+            <p class="mt-3 text-base text-black sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0 text-justify">
+            Te adyudamos aplicar una de las estrategias modernas para atraer, retener y comprometer a los mejores talentos. Nuestro enfoque será construir tu marca empleadora sólida y atractiva. Desde la creación de una identidad corporativa distintiva hasta el diseño de experiencias de empleado excepcionales.  
 
             </p>
 
@@ -311,7 +311,7 @@ function Intermedio() {
             <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
               <div class="rounded-lg shadow">
                 <a
-                  href="https://w2asesoresyconsultores.bitrix24.es/pub/form/10_como_podemos_ayudarte_/ex701t/?view=preview&preview=click"
+                  href="https://b24-0nhd36.bitrix24.site/crm_form_pn9nk/"
                   class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gray-800 hover:bg-gray-600 md:py-4 md:text-lg md:px-10 text-center"
                 >
                   Fortalece tu marca empleadora

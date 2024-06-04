@@ -8,7 +8,7 @@ function Home() {
     <div className='flex flex-col' >
       <Navbar/>
       <div className='w-full'>
-      <section className="bg-white dark:bg-gray-900 p-8 md:p-16 text-gray-800 dark:text-gray-300 mt-8">
+      <section className="bg-white dark:bg-gray-900 p-8 md:p-16 text-gray-800 dark:text-gray-300 mt-8 text-justify">
       <div className="container mx-auto max-w-4xl">
         <h1 className="text-4xl font-semibold text-center text-primary mb-8">Política de Seguridad y Privacidad del sitio Web de W2</h1>
 
@@ -61,7 +61,7 @@ function Home() {
           Estamos conscientes de que pudieran producirse incidentes de uso indebido o incursiones de programas no autorizados, como les ocurre a casi todo sitio Web. En esos casos, nuestros propósitos son trabajar rápidamente para aislar el problema, garantizar o restablecer la funcionalidad adecuada, y reducir al mínimo cualquier inconveniencia a nuestros usuarios. Como es apropiado y necesario, W2 les notificará a las autoridades pertinentes estos incidentes de uso indebido o incursiones de programas no autorizados en su sitio Web.
         </p>
         <p className="mt-4">
-          Le agradecemos que reporte cualquier problema llamando al (01) 27 960 72. Aunque en ocasiones no podemos darle respuesta a cada informe, lo tomaremos muy en serio y lo investigaremos exhaustivamente.
+          Le agradecemos que reporte cualquier problema llamando al (+51) 995 667 713. Aunque en ocasiones no podemos darle respuesta a cada informe, lo tomaremos muy en serio y lo investigaremos exhaustivamente.
         </p>
       </div>
     </section>
