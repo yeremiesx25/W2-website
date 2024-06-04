@@ -32,7 +32,7 @@ function TrabajosContainer() {
         <div className='flex flex-col w-full md:w-1/2 justify-start items-center py-4 gap-4 h-[650px] overflow-auto pl-12'>
           <CardTrabajo
             companyLogo={ransa}
-            jobTitle="Asesor de Ventaso"
+            jobTitle="Asesor de Ventas"
             company=""
             location="Lima Este - Sur - Centro"
             salary="S/. 1025"
