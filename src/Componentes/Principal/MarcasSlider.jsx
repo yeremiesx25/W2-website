@@ -16,6 +16,8 @@ import sodimac from '../../assets/Logos Clientes/sodimac.png'
 import topsa from '../../assets/Logos Clientes/topsa.jpg'
 import unacem from '../../assets/Logos Clientes/unacem.jpg'
 import visioncenter from '../../assets/Logos Clientes/visioncenter.jpg'
+import sabores from '../../assets/Logos Clientes/8sabores.png'
+import friendly from '../../assets/Logos Clientes/friendly.png'
 
 // Define the array of slides with numbers
 const slides = [
@@ -34,7 +36,9 @@ const slides = [
     sodimac,
     topsa,
     unacem,
-    visioncenter
+    visioncenter,
+    sabores,
+    friendly
 ];
 
 const MarcasSlider = () => {

@@ -22,7 +22,7 @@ function JobList() {
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
             {jobs.map((job) => (
-              <tr key={job.id}>
+              <tr key={job.id} className='max-h-20'>
                 <td className="px-6 py-4 whitespace-nowrap">{job.puesto}</td>
                 <td className="px-6 py-4 whitespace-nowrap">{job.ubicacion}</td>
                 <td className="px-6 py-4 whitespace-nowrap">{job.fecha_publicacion}</td>

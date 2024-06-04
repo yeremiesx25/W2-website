@@ -42,15 +42,15 @@ function HeaderPower() {
         <div className="md:flex w-96 text-sm justify-around hidden">
           <Link to="/" className="text-gray-300 hover:text-white">Inicio</Link>
           <Link to="/Empresas" className="text-gray-300 hover:text-white">Empresas</Link>
-          <Link to="/Practicantes" className="text-gray-300 hover:text-white">Descubriendo Talentos</Link>
+          <Link to="/DescubriendoTalentos" className="text-gray-300 hover:text-white">Descubriendo Talentos</Link>
           <Link to="/Power" className="font-semibold text-amber-400 hover:text-white underline decoration-amber-400 underline-offset-4">Power</Link>
         </div>
 
         {/* Botones de login y registro (solo en escritorio) */}
-        <div className="hidden md:flex items-center">
+        {/* <div className="hidden md:flex items-center">
           <button onClick={handleModalOpen} className="text-sm text-amber-400 hover:text-white">Iniciar sesión</button>
           <button className="text-sm bg-amber-400 hover:bg-amber-600 text-white px-4 py-2 rounded-lg ml-4">Registrarse</button>
-        </div>
+        </div> */}
       </div>
 
       {/* Menú desplegable para dispositivos móviles */}
@@ -60,9 +60,9 @@ function HeaderPower() {
             <Link to="/" className="text-white hover:text-gray-600 block px-3 py-2 rounded-md text-base font-medium">Inicio</Link>
             <Link to="/Empresas" className="text-white hover:text-gray-600 block px-3 py-2 rounded-md text-base font-medium">Empresas</Link>
             <Link to="/Power" className="text-white hover:text-gray-600 block px-3 py-2 rounded-md text-base font-medium">Power</Link>
-            <Link to="/Practicantes" className="text-white hover:text-gray-600 block px-3 py-2 rounded-md text-base font-medium">Descubriendo Talentos</Link>
-            <button onClick={handleModalOpen} className="bg-amber-400 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg mt-2 mr-2">Iniciar Sesión</button>
-            <button className="bg-amber-400 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg mt-2">Registrar</button>
+            <Link to="/DescubriendoTalentos" className="text-white hover:text-gray-600 block px-3 py-2 rounded-md text-base font-medium">Descubriendo Talentos</Link>
+            {/* <button onClick={handleModalOpen} className="bg-amber-400 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg mt-2 mr-2">Iniciar Sesión</button>
+            <button className="bg-amber-400 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg mt-2">Registrar</button> */}
           </div>
         </div>
       )}
