@@ -11,12 +11,14 @@ import Practicantes from "./Componentes/Practicantes/Practicantes.jsx";
 import ScrollToTop from "./Componentes/Principal/ScrollToTop.jsx";
 import PowerAuth from './Componentes/PowerAuth/PowerAuth.jsx'
 import { AuthContextProvider } from "./Context/AuthContext.jsx";
+import {JobsProvider} from './Context/JobsContext.jsx'
 import Admin from "./Componentes/Admin/Admin.jsx";
 import Privacidad from './Componentes/Principal/Privacidad.jsx'
 
 function App() {
   return (
     <AuthContextProvider>
+      <JobsProvider>
         <ScrollToTop />
         <Routes>
           <Route path="/" element={<Home />} />
@@ -27,6 +29,7 @@ function App() {
           <Route path="/Admin" element={<Admin />} />
           <Route path="/Privacidad" element={<Privacidad />} />
         </Routes>
+        </JobsProvider>
     </AuthContextProvider>
   );
 }

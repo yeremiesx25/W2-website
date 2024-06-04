@@ -1,14 +1,13 @@
 import React from 'react'
 import HeaderPowerAuth from '../PowerAuth/HeaderPowerAuth'
-import AddButton from './AddButton'
-import JobsList from './JobsList'
+import AdminLayout from './AdminLayout'
+
 
 function Admin() {
   return (
-    <div className='w-full'>
+    <div className='w-full h-screen'>
         <HeaderPowerAuth />
-        <AddButton />
-        <JobsList />
+        <AdminLayout />
     </div>
   )
 }

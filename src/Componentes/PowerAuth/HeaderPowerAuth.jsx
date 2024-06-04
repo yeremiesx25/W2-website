@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { UserAuth } from "../../Context/AuthContext";
-import { MdOutlineHome } from "react-icons/md";
+import { FiHome } from "react-icons/fi";
 import { FaSearchengin } from "react-icons/fa6";
 import { MdOutlineSettings } from "react-icons/md";
 import { MdOutlinePowerSettingsNew } from "react-icons/md";
@@ -26,15 +26,15 @@ function HeaderPowerAuth() {
   };
 
   return (
-    <div className="flex">
+    <div className="flex font-dmsans">
       {/* Botón del menú para vista móvil */}
       {!isExpanded && (
-        <button onClick={toggleMenu} className="fixed top-4 left-4 z-50 text-white">
+        <button onClick={toggleMenu} className="fixed top-4 left-6  z-50 text-white">
           <MdOutlineMenu size={32} />
         </button>
       )}
       {/* Menú de navegación */}
-      <nav className={`bg-powercolor text-white ${isExpanded ? 'w-72' : 'w-20'} flex flex-col items-center py-4 fixed h-full transition-width duration-300 pt-8 ${isExpanded ? 'block' : 'hidden'} md:block`}>
+      <nav className={`bg-powercolor text-white ${isExpanded ? 'w-72' : 'w-20'} flex flex-col items-center justify-around py-4 px-2 fixed h-full transition-width duration-300 pt-8 ${isExpanded ? 'block' : 'hidden'} md:block`}>
         {/* Botón de cierre para vista móvil */}
         {isExpanded && (
           <><button onClick={toggleMenu} className="md:hidden mb-4 text-white absolute top-2 right-2">
@@ -60,7 +60,7 @@ function HeaderPowerAuth() {
 
         <div className="flex flex-col  w-full">
           <Link to="/PowerAuth" className={`my-2 flex items-center ${isExpanded ? 'px-4' : 'justify-center'} opacity-75 hover:opacity-100 transition-opacity duration-300`}>
-          <MdOutlineHome size={24} />
+          <FiHome size={24} />
             {isExpanded && <span className="ml-4">Inicio</span>}
           </Link>
 
@@ -75,7 +75,7 @@ function HeaderPowerAuth() {
           </Link>
 
 
-          {isExpanded && <hr className="border-t border-gray-500 my-2 w-full" />}
+          {isExpanded && <hr className="border-t border-gray-500 my-2 w-[90%] self-center" />}
         </div>
 
         <div className="flex flex-col mt-4 justify-center w-full">
@@ -101,7 +101,7 @@ function HeaderPowerAuth() {
             </Link>
           </div>
 
-          {isExpanded && <hr className="border-t border-gray-500 my-2 w-full" />}
+          {isExpanded && <hr className="border-t border-gray-500 my-2 w-[90%] self-center" />}
         </div>
 
         <div className="flex flex-col mt-12 w-full">
