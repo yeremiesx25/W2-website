@@ -9,7 +9,7 @@ const removeAccents = (str) => {
 
 export const JobsProvider = ({ children }) => {
   const [jobs, setJobs] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [userSearchResults, setUserSearchResults] = useState([]);
 
   useEffect(() => {
     const fetchJobs = async () => {
@@ -22,36 +22,33 @@ export const JobsProvider = ({ children }) => {
       } else {
         const validJobs = data.filter((job) => job.puesto !== undefined && job.puesto !== null);
         setJobs(validJobs);
+        setUserSearchResults(validJobs); // Inicialmente mostrar todos los trabajos
       }
     };
 
     fetchJobs();
   }, []);
 
-  const deleteJob = async (id_oferta) => {
-    try {
-      const { error } = await supabase
-        .from('Oferta')
-        .delete()
-        .eq('id_oferta', id_oferta);
+  const searchJobs = async (keyword, location) => {
+    const { data, error } = await supabase
+      .from('Oferta')
+      .select('*')
+      .ilike('puesto', `%${keyword}%`)
+      .ilike('ubicacion', `%${location}%`);
 
-      if (error) {
-        throw error;
-      }
-
-      setJobs(jobs.filter((job) => job.id_oferta !== id_oferta));
-    } catch (error) {
-      console.error('Error deleting job:', error.message);
+    if (error) {
+      console.error('Error searching jobs:', error);
+    } else {
+      setUserSearchResults(data);
     }
   };
 
-  const filteredJobs = jobs.filter((job) => 
-    removeAccents(job.puesto?.toLowerCase()).includes(removeAccents(searchTerm.toLowerCase())) ||
-    removeAccents(job.ubicacion?.toLowerCase()).includes(removeAccents(searchTerm.toLowerCase()))
-  );
+  const resetSearchResults = () => {
+    setUserSearchResults(jobs); // Restablecer a todos los trabajos
+  };
 
   return (
-    <JobsContext.Provider value={{ jobs: filteredJobs, setJobs, deleteJob, searchTerm, setSearchTerm }}>
+    <JobsContext.Provider value={{ jobs, setJobs, searchJobs, userSearchResults, resetSearchResults }}>
       {children}
     </JobsContext.Provider>
   );
