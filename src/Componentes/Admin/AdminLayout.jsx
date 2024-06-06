@@ -16,7 +16,7 @@ function AdminLayout() {
   return (
     <div className="w-full h-full pl-20 flex flex-col items-center justify-center shadow pt-12">
       <p className="text-4xl mb-8 text-gray-800">
-        Hola, <strong>{user.name}</strong>👋
+        Hola, <strong>{user.name}</strong>
       </p>
       <div className="w-full flex justify-center">
 

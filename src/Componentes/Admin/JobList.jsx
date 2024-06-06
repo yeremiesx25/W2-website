@@ -5,23 +5,23 @@ import DeleteButton from './DeleteButton';
 import { FaRegEdit } from "react-icons/fa";
 
 function JobList() {
-  const { jobs } = useContext(JobsContext);
+  const { userSearchResults } = useContext(JobsContext);
 
   return (
     <div className='w-[90%] flex justify-center h-[700px] overflow-y-scroll font-dmsans'>
-      {jobs.length > 0 ? (
+      {userSearchResults.length > 0 ? (
         <table className="divide-y divide-gray-200">
           <thead>
-        <tr>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Puesto</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Lugar</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fecha</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Estado</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"></th>
-        </tr>
-    </thead>
+            <tr>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Puesto</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Lugar</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Fecha</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Estado</th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"></th>
+            </tr>
+          </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {jobs.map((job) => (
+            {userSearchResults.map((job) => (
               <tr key={job.id_oferta} className='max-h-20'>
                 <td className="px-6 py-4 whitespace-nowrap">{job.puesto}</td>
                 <td className="px-6 py-4 whitespace-nowrap">{job.ubicacion}</td>

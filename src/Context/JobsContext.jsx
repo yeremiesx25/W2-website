@@ -10,6 +10,7 @@ const removeAccents = (str) => {
 export const JobsProvider = ({ children }) => {
   const [jobs, setJobs] = useState([]);
   const [userSearchResults, setUserSearchResults] = useState([]);
+  const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
     const fetchJobs = async () => {
@@ -28,6 +29,13 @@ export const JobsProvider = ({ children }) => {
 
     fetchJobs();
   }, []);
+
+  useEffect(() => {
+    const filteredJobs = jobs.filter(job => 
+      removeAccents(job.puesto.toLowerCase()).includes(removeAccents(searchTerm.toLowerCase()))
+    );
+    setUserSearchResults(filteredJobs);
+  }, [searchTerm, jobs]);
 
   const searchJobs = async (keyword, location) => {
     const { data, error } = await supabase
@@ -48,7 +56,7 @@ export const JobsProvider = ({ children }) => {
   };
 
   return (
-    <JobsContext.Provider value={{ jobs, setJobs, searchJobs, userSearchResults, resetSearchResults }}>
+    <JobsContext.Provider value={{ jobs, setJobs, searchJobs, userSearchResults, resetSearchResults, searchTerm, setSearchTerm }}>
       {children}
     </JobsContext.Provider>
   );
