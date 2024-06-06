@@ -8,7 +8,7 @@ function JobList() {
   const { userSearchResults } = useContext(JobsContext);
 
   return (
-    <div className='w-[90%] flex justify-center h-[700px] overflow-y-scroll font-dmsans'>
+    <div className='w-[90%] flex justify-center h-[450px] overflow-y-scroll font-dmsans scroll-smooth'>
       {userSearchResults.length > 0 ? (
         <table className="divide-y divide-gray-200">
           <thead>

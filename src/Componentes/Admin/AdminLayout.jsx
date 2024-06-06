@@ -3,6 +3,7 @@ import BtnContainer from "./BtnContainer";
 import JobList from "./JobList";
 import BuscadorJob from "./BuscadorJob";
 import { UserAuth } from "../../Context/AuthContext";
+import PruebaForm from "../Form/PruebaForm";
 
 function AdminLayout() {
   const { user, signOut } = UserAuth();
@@ -14,7 +15,7 @@ function AdminLayout() {
   
 
   return (
-    <div className="w-full h-full pl-20 flex flex-col items-center justify-center shadow pt-12">
+    <div className="w-full h-full pl-20 flex flex-col items-center justify-center py-12 ">
       <p className="text-4xl mb-8 text-gray-800">
         Hola, <strong>{user.name}</strong>
       </p>

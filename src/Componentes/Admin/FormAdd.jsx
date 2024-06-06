@@ -100,7 +100,7 @@ function AddPuestoForm({ onClose }) {
             onChange={handleChange}
           />
           {step < steps.length ? (
-            <button
+            <button 
               type="button"
               onClick={handleNextStep}
               className="bg-primarycolor text-white p-2 rounded hover:bg-blue-600 transition"

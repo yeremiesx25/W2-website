@@ -14,6 +14,7 @@ import { AuthContextProvider } from "./Context/AuthContext.jsx";
 import {JobsProvider} from './Context/JobsContext.jsx'
 import Admin from "./Componentes/Admin/Admin.jsx";
 import Privacidad from './Componentes/Principal/Privacidad.jsx'
+import AdminForm from './Componentes/Form/AdminForm.jsx'
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
           <Route path="/PowerAuth" element={<PowerAuth />} />
           <Route path="/Admin" element={<Admin />} />
           <Route path="/Privacidad" element={<Privacidad />} />
+          <Route path="/AdminForm" element={<AdminForm />} />
         </Routes>
         </JobsProvider>
     </AuthContextProvider>
