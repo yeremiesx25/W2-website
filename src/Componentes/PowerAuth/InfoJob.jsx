@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FaLocationDot } from "react-icons/fa6";
+import agil from "../../assets/AGIL TALENT.png";
 
 function InfoJob({ selectedJob }) {
   const [activeIndices, setActiveIndices] = useState([]);
@@ -32,19 +33,24 @@ function InfoJob({ selectedJob }) {
   };
 
   return (
-    <div className="selected-job-info w-full sm:w-1/2 border rounded-lg flex flex-col p-4 mx-8 bg-white shadow-lg">
-      <div className="flex items-center mt-4 ml-1">
-        <span className="inline-block bg-brown-600 text-white py-1 px-3 text-xs rounded-full uppercase font-semibold tracking-wide ml-2" style={{ backgroundColor: '#964A00', display: 'flex', alignItems: 'center' }}>
-          <FaLocationDot style={{ color: 'white', marginRight: '5px' }} />
-          {selectedJob.ubicacion}
-        </span>
-        <span className="inline-block bg-green-600 text-white py-1 px-3 text-xs rounded-full uppercase font-semibold tracking-wide ml-2" style={{ backgroundColor: '#00964A', display: 'flex', alignItems: 'center' }}>
-          {selectedJob.empresa}
-        </span>
+    <div className="selected-job-info w-full sm:w-1/2 border rounded-lg flex flex-col p-4 mx-8 bg-white shadow-lg" style={{ height: '650px', overflowY: 'auto', position: 'relative' }}>
+      <div className="flex items-center justify-between mb-2 mt-2">
+        <div className="flex items-center">
+          <span className="inline-block bg-brown-600 text-white py-1 px-3 text-xs rounded-full uppercase font-semibold tracking-wide ml-2" style={{ backgroundColor: '#964A00', display: 'flex', alignItems: 'center' }}>
+            <FaLocationDot style={{ color: 'white', marginRight: '5px' }} />
+            {selectedJob.ubicacion}
+          </span>
+          <span className="inline-block bg-green-600 text-white py-1 px-3 text-xs rounded-full uppercase font-semibold tracking-wide ml-2" style={{ backgroundColor: '#00964A', display: 'flex', alignItems: 'center' }}>
+            {selectedJob.empresa}
+          </span>
+        </div>
+        <div style={{ position: 'absolute', right: '10px', top: '10px' }}>
+          <img src={agil} alt="Agil Talent" style={{ maxWidth: '90px', height: 'auto' }} />
+        </div>
       </div>
-      <h2 className="ml-3 font-bold text-xl mt-4 text-[#d59c00]">{selectedJob.puesto}</h2>
-      <div className="flex justify-start mt-4">
-        <button className="bg-orange-500 text-white font-bold py-2 px-4 rounded-full">POSTULARME</button>
+      <h2 className="ml-1 font-bold text-4xl text-[#d59c00]">{selectedJob.puesto}</h2>
+      <div className="flex justify-start mt-2">
+        <button className="bg-orange-500 text-white font-bold py-2 px-4 rounded-full mt-2">POSTULARME</button>
       </div>
 
       <div className="mx-auto mt-3 w-full">
@@ -76,7 +82,6 @@ function InfoJob({ selectedJob }) {
         ))}
       </div>
 
-      {/* Agregar botones aquí */}
       <div className="flex justify-start mt-4">
         <button className="bg-orange-500 text-white font-bold py-2 px-4 rounded-full mr-4">POSTULARME</button>
         <button className="bg-green-500 text-white font-bold py-2 px-4 rounded-full">WhatsApp</button>

@@ -17,11 +17,10 @@ function TrabajosContainer2() {
   return (
     <div id='ofertas' className='w-full flex flex-col items-center font-dmsans pt-6 px-4 justify-center'>
       <h2 className="font-dmsans sm:text-4xl text-2xl font-bold title-font text-center text-transparent bg-clip-text bg-gradient-to-r from-primarytext to-black mb-12 mt-6 "> 
-        
         Ofertas <span className="text-amber-500 xl:inline"> Laborales </span>
       </h2>
       <div className='flex w-full justify-center items-center'>
-      <div className='flex flex-col w-full md:w-1/2 justify-start items-center gap-4 h-[650px] overflow-auto pl-12 ml-10'>
+        <div className='flex flex-col w-full md:w-1/2 justify-start items-center gap-4 h-[650px] overflow-auto pl-12 ml-10'>
           {userSearchResults.map((job, index) => (
             <CardTrabajo2
               key={index}
