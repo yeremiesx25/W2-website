@@ -123,7 +123,7 @@ function PruebaForm() {
                   Cancelar
                 </button>
                 </Link>
-                <button
+                <button onClick={handleSubmit}
                   type="submit"
                   className="w-1/3 bg-primarycolor text-white py-2 px-4 rounded-lg hover:bg-blue-600 transition duration-300"
                 >
