@@ -16,8 +16,7 @@ function PowerAuth() {
     <HeaderPowerAuth />
     <HeroPowerAuth />
     <TrabajosContainer2 />
-    <FooterPower />
-    <BtnWsp />
+
     <Outlet />
     </>
   )

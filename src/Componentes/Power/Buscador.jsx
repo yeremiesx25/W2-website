@@ -18,29 +18,29 @@ function Buscador() {
 
   return (
     <div className="flex justify-center mt-10">
-      <form onSubmit={handleSearch} className="flex bg-white rounded-lg shadow-md overflow-hidden">
-        <div className=" flex items-center">
-          <FaSearch className="ml-4 text-gray-500" />
+      <form onSubmit={handleSearch} className="flex bg-white rounded-full shadow-md overflow-hidden w-full max-w-4xl border">
+        <div className="relative flex items-center w-full border-r">
+          <FaSearch className="absolute left-4 text-gray-500" />
           <input
             type="text"
             value={keyword}
             onChange={(e) => setKeyword(e.target.value)}
-            placeholder="Cargo o categoría."
-            className="p-4 pl-12 border-r outline-none w-full"
+            placeholder="Título del empleo"
+            className="p-4 pl-12 outline-none w-full"
           />
         </div>
-        <div className=" flex items-center">
-          <FaMapMarkerAlt className="ml-4 text-gray-500" />
+        <div className="relative flex items-center w-full border-r">
+          <FaMapMarkerAlt className="absolute left-4 text-gray-500" />
           <input
             type="text"
             value={location}
             onChange={(e) => setLocation(e.target.value)}
-            placeholder="Lugar"
-            className="p-4 pl-12 border-r outline-none w-full"
+            placeholder="Ciudad o Lugar"
+            className="p-4 pl-12 outline-none w-full"
           />
         </div>
-        <button type="submit" className="bg-amber-400 text-white p-4 hover:bg-blue-700">
-          <FaSearch />
+        <button type="submit" className="bg-blue-600 text-white px-6 py-4 hover:bg-blue-700 rounded-r-full">
+          Buscar empleos
         </button>
       </form>
     </div>
