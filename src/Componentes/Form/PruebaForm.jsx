@@ -30,7 +30,7 @@ function PruebaForm() {
       } else {
         console.log('Datos guardados exitosamente:', data);
         // Actualizar el estado global de trabajos con los datos recién insertados
-        setJobs(prevJobs => [...prevJobs, data[0]]);
+        setJobs(jobs => [...jobs, data[0]]);
       }
     } catch (error) {
       console.error('Error al interactuar con Supabase:', error);

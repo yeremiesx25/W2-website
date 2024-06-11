@@ -35,7 +35,7 @@
                 Power
               </NavLink>
               
-              <a href='https://b24-0nhd36.bitrix24.site/crm_form_pn9nk/git ' className="bg-primarycolor hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-xl">
+              <a href='https://b24-0nhd36.bitrix24.site/crm_form_pn9nk/' className="bg-primarycolor hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-xl">
                 Contáctanos
               </a>
             </div>
@@ -79,7 +79,7 @@
                 Power
               </NavLink>
               
-              <a href='https://crbt8rv6qfm.typeform.com/to/Uvov1KoE' className="bg-primarycolor hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg mt-2">
+              <a href='https://b24-0nhd36.bitrix24.site/crm_form_pn9nk/' className="bg-primarycolor hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg mt-2">
                 Contáctanos
               </a>
             </div>

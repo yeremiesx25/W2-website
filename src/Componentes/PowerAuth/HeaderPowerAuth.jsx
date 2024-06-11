@@ -34,7 +34,7 @@ function HeaderPowerAuth() {
         </button>
       )}
       {/* Menú de navegación */}
-      <nav className={`bg-powercolor text-white ${isExpanded ? 'w-72' : 'w-20'} flex flex-col items-center justify-around py-4 px-2 fixed h-full transition-width duration-300 pt-8 ${isExpanded ? 'block' : 'hidden'} md:block`}>
+      <nav className={`bg-primarycolor text-white drop-shadow-xl ${isExpanded ? 'w-72' : 'w-20'} flex flex-col items-center justify-around py-4 px-2 fixed h-full transition-width duration-300 pt-8 ${isExpanded ? 'block' : 'hidden'} md:block`}>
         {/* Botón de cierre para vista móvil */}
         {isExpanded && (
           <><button onClick={toggleMenu} className="md:hidden mb-4 text-white absolute top-2 right-2">
