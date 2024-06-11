@@ -34,7 +34,7 @@ export const AuthContextProvider = ({ children }) =>{
             else {
                 setUser(session?.user.user_metadata)
                 console.log("data del usuario ", session?.user.user_metadata)
-                navigate("/AdminForm", );
+                navigate("/PowerAuth", );
             }
         })
     }, [])  

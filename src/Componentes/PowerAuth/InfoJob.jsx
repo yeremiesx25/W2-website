@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { FaLocationDot } from "react-icons/fa6";
-import agil from "../../assets/AGIL TALENT.png";
 
 function InfoJob({ selectedJob }) {
   const [activeIndices, setActiveIndices] = useState([]);
@@ -34,25 +33,25 @@ function InfoJob({ selectedJob }) {
 
   return (
     <div className="selected-job-info w-full sm:w-1/2 border rounded-lg flex flex-col p-4 mx-8 bg-white shadow-lg" style={{ height: '650px', overflowY: 'auto', position: 'relative' }}>
+      <h2 className="ml-1 mt-3 font-bold text-4xl text-[#d59c00]">{selectedJob.puesto}</h2>
       <div className="flex items-center justify-between mb-2 mt-2">
-        <div className="flex items-center">
-          <span className="inline-block bg-brown-600 text-white py-1 px-3 text-xs rounded-full uppercase font-semibold tracking-wide ml-2" style={{ backgroundColor: '#964A00', display: 'flex', alignItems: 'center' }}>
-            <FaLocationDot style={{ color: 'white', marginRight: '5px' }} />
-            {selectedJob.ubicacion}
-          </span>
-          <span className="inline-block bg-green-600 text-white py-1 px-3 text-xs rounded-full uppercase font-semibold tracking-wide ml-2" style={{ backgroundColor: '#00964A', display: 'flex', alignItems: 'center' }}>
+        <div className="flex flex-col">
+          <span className="inline-block text-black py-1 px-3 text-s rounded-full uppercase font-semibold tracking-wide" style={{ display: 'flex', alignItems: 'center' }}>
             {selectedJob.empresa}
           </span>
-        </div>
-        <div style={{ position: 'absolute', right: '10px', top: '10px' }}>
-          <img src={agil} alt="Agil Talent" style={{ maxWidth: '90px', height: 'auto' }} />
+          <span className="inline-block mt-2 text-black py-1 px-3 text-s rounded-full uppercase font-semibold tracking-wide" style={{ display: 'flex', alignItems: 'center' }}>
+            <FaLocationDot style={{ color: 'black', marginRight: '5px' }} />
+            {selectedJob.ubicacion}
+          </span>
+          <span className="inline-block mt-2 text-black py-1 px-3 text-s rounded-full uppercase font-semibold tracking-wide" style={{ display: 'flex', alignItems: 'center' }}>
+            S/. {selectedJob.sueldo} al mes
+          </span>
         </div>
       </div>
-      <h2 className="ml-1 font-bold text-4xl text-[#d59c00]">{selectedJob.puesto}</h2>
       <div className="flex justify-start mt-2">
-        <button className="bg-orange-500 text-white font-bold py-2 px-4 rounded-full mt-2">POSTULARME</button>
+        <button className="bg-[#d59c00] text-white font-bold py-2 px-4 rounded-full  mb-4">POSTULARME</button>
       </div>
-
+Descripción del Empleo:
       <div className="mx-auto mt-3 w-full">
         {jobDetails.map((detail, index) => (
           <div
@@ -83,7 +82,7 @@ function InfoJob({ selectedJob }) {
       </div>
 
       <div className="flex justify-start mt-4">
-        <button className="bg-orange-500 text-white font-bold py-2 px-4 rounded-full mr-4">POSTULARME</button>
+        <button className="bg-[#d59c00] text-white font-bold py-2 px-4 rounded-full mr-4">POSTULARME</button>
         <button className="bg-green-500 text-white font-bold py-2 px-4 rounded-full">WhatsApp</button>
       </div>
     </div>
