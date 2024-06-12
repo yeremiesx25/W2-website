@@ -22,7 +22,7 @@ function CardTrabajo2({ job, onSelectJob, isSelected }) {
     <div className='w-full flex justify-center font-dmsans'>
       <button
         onClick={() => onSelectJob(job)}
-        className={`w-full md:w-[90%] bg-white text-left border hover:shadow-md rounded-lg p-4 overflow-hidden ${
+        className={`w-full md:w-[90%] bg-white text-left border hover:shadow-md hover:transition-all hover:duration-200 rounded-lg p-4 overflow-hidden ${
           isSelected ? 'border-yellow-500' : 'border-gray-300'
         }`}
       >
