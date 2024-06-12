@@ -15,6 +15,7 @@ import {JobsProvider} from './Context/JobsContext.jsx'
 import Admin from "./Componentes/Admin/Admin.jsx";
 import Privacidad from './Componentes/Principal/Privacidad.jsx'
 import AdminForm from './Componentes/Form/AdminForm.jsx'
+import LoginAdmin from "./Componentes/Admin/LoginAdmin.jsx";
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
           <Route path="/Admin" element={<Admin />} />
           <Route path="/Privacidad" element={<Privacidad />} />
           <Route path="/AdminForm" element={<AdminForm />} />
+          <Route path="/AdminLogin" element={<LoginAdmin />} />
         </Routes>
         </JobsProvider>
     </AuthContextProvider>

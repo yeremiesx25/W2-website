@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import FormAdminImg from "../../assets/formAdminImg.svg";
+
 import { useNavigate } from 'react-router-dom';
+import { supabase } from '../../supabase/supabase.config'; // Ajusta la ruta según la ubicación de tu archivo
 
 function FormOferta() {
     const navigate = useNavigate();
@@ -10,7 +12,8 @@ function FormOferta() {
         location: "",
         salary: "",
         jobDescription: "",
-        requirements: ""
+        requirements: "",
+        funciones: "" // Añadir el campo de funciones aquí
     });
 
     const [showInitialFields, setShowInitialFields] = useState(true);
@@ -24,17 +27,46 @@ function FormOferta() {
     };
 
     const handleNextButtonClick = (e) => {
-        e.preventDefault(); // Prevent the form from submitting
-        // Guardar los valores del formulario en el almacenamiento local
-        localStorage.setItem("formData", JSON.stringify(formData));
-        // Redirigir a la siguiente página
-        setShowInitialFields(false);
+        e.preventDefault();
+        if (showInitialFields) {
+            // Guardar los valores del formulario en el almacenamiento local
+            localStorage.setItem("formData", JSON.stringify(formData));
+            // Redirigir a la siguiente página
+            setShowInitialFields(false);
+        } else {
+            // Llamar a la función para insertar datos en Supabase
+            saveFormDataToSupabase();
+        }
     };
 
     const handleBackButtonClick = (e) => {
-        e.preventDefault(); // Prevent the form from submitting
-        // Mostrar los campos iniciales
+        e.preventDefault();
         setShowInitialFields(true);
+    };
+
+    const saveFormDataToSupabase = async () => {
+        const { name, company, location, salary, jobDescription, requirements, funciones } = formData;
+        const { data, error } = await supabase
+            .from('Oferta')
+            .insert([
+                {
+                    puesto: name,
+                    empresa: company,
+                    ubicacion: location,
+                    sueldo: salary,
+                    requisitos: requirements,
+                    beneficios: jobDescription,
+                    funciones: funciones
+                }
+            ]);
+
+        if (error) {
+            console.error('Error inserting data:', error);
+        } else {
+            console.log('Data inserted successfully:', data);
+            // Navegar a otra página si es necesario
+            navigate('/some-other-page');
+        }
     };
 
     return (
@@ -146,14 +178,14 @@ function FormOferta() {
                                         ></textarea>
                                     </div>
                                     <div className="mb-5">
-                                        <label htmlFor="requirements" className="mb-3 block text-base font-medium text-[#07074D]">
+                                        <label htmlFor="funciones" className="mb-3 block text-base font-medium text-[#07074D]">
                                             Funciones del trabajador
                                         </label>
                                         <textarea
-                                            name="requirements"
-                                            id="requirements"
-                                            placeholder="Requisitos"
-                                            value={formData.requirements}
+                                            name="funciones"
+                                            id="funciones"
+                                            placeholder="Funciones"
+                                            value={formData.funciones}
                                             onChange={handleInputChange}
                                             className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                                         ></textarea>
