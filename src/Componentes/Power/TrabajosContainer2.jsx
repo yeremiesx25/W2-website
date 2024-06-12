@@ -9,7 +9,9 @@ function TrabajosContainer2() {
 
   useEffect(() => {
     if (userSearchResults.length > 0) {
-      setSelectedJob(userSearchResults[0]);
+      // Ordenar los resultados por fecha de publicación de manera descendente
+      const sortedResults = userSearchResults.slice().sort((a, b) => new Date(b.fecha_publicacion) - new Date(a.fecha_publicacion));
+      setSelectedJob(sortedResults[0]); // Seleccionar el primer trabajo (el más reciente)
     }
   }, [userSearchResults]);
 
@@ -23,14 +25,17 @@ function TrabajosContainer2() {
             scrollbarWidth: 'none'   // Firefox
           }}
         >
-          {userSearchResults.map((job, index) => (
-            <CardTrabajo2
-              key={index}
-              job={job}
-              onSelectJob={setSelectedJob}
-              isSelected={selectedJob === job}
-            />
-          ))}
+     {userSearchResults
+  .slice()
+  .sort((a, b) => new Date(b.fecha_publicacion) - new Date(a.fecha_publicacion))
+  .map((job, index) => (
+    <CardTrabajo2
+      key={index}
+      job={job}
+      onSelectJob={setSelectedJob}
+      isSelected={selectedJob === job}
+    />
+))}
         </div>
         {selectedJob && (
           <InfoJob selectedJob={selectedJob} />
