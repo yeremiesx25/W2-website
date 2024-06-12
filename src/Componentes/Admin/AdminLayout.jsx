@@ -1,9 +1,8 @@
 import React from "react";
 import BtnContainer from "./BtnContainer";
 import JobList from "./JobList";
-import BuscadorJob from "./BuscadorJob";
+
 import { UserAuth } from "../../Context/AuthContext";
-import PruebaForm from "../Form/PruebaForm";
 
 function AdminLayout() {
   const { user, signOut } = UserAuth();
