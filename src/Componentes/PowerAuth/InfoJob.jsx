@@ -32,8 +32,8 @@ function InfoJob({ selectedJob }) {
   };
 
   return (
-    <div className="selected-job-info w-full sm:w-1/2 border rounded-lg flex flex-col p-4 mx-8 bg-white shadow-lg" style={{ height: '650px', position: 'relative' }}>
-      <h2 className="ml-1 mt-3 font-bold text-4xl text-amber-400">{selectedJob.puesto}</h2>
+   <div className="selected-job-info w-full sm:w-1/2 border rounded-lg flex flex-col p-4 mx-8 bg-white shadow-lg" style={{ height: '650px', overflowY: 'auto', position: 'relative' }}>
+      <h2 className="ml-1 mt-3 font-bold text-4xl text-black">{selectedJob.puesto}</h2>
       <div className="flex items-center justify-between mb-2 mt-2">
         <div className="flex flex-col">
           <span className="inline-block text-black py-1 px-3 text-s rounded-full uppercase font-semibold tracking-wide" style={{ display: 'flex', alignItems: 'center' }}>
@@ -49,7 +49,7 @@ function InfoJob({ selectedJob }) {
         </div>
       </div>
       <div className="flex justify-start mt-2">
-        <button className="bg-amber-400 text-white font-bold py-2 px-4 rounded-full mb-4">POSTULARME</button>
+        <button className="bg-blue-600 text-white font-bold py-2 px-4 rounded-full mb-4">POSTULARME</button>
       </div>
       <div className="border-t border-gray-300 my-2" style={{ width: '100%' }}></div>
       <div className="mx-auto mt-3 w-full overflow-y-auto" style={{ height: 'calc(100% - 180px)' }}>
@@ -82,7 +82,7 @@ function InfoJob({ selectedJob }) {
         ))}
       </div>
       <div className="flex justify-start mt-4">
-        <button className="bg-amber-400 text-white font-bold py-2 px-4 rounded-full mr-4">POSTULARME</button>
+        <button className="bg-blue-600 text-white font-bold py-2 px-4 rounded-full mr-4">POSTULARME</button>
         <button className="bg-green-500 text-white font-bold py-2 px-4 rounded-full">WhatsApp</button>
       </div>
     </div>
