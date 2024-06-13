@@ -8,41 +8,50 @@ function Buscador() {
   const [location, setLocation] = useState('');
   const [showKeywordSuggestions, setShowKeywordSuggestions] = useState(false);
   const [showLocationSuggestions, setShowLocationSuggestions] = useState(false);
+  const [keywordSuggestions, setKeywordSuggestions] = useState([]);
+  const [locationSuggestions, setLocationSuggestions] = useState([]);
   const keywordSuggestionsRef = useRef(null);
   const locationSuggestionsRef = useRef(null);
 
   const handleKeywordChange = (e) => {
-    setKeyword(e.target.value);
+    const value = e.target.value;
+    setKeyword(value);
     setShowKeywordSuggestions(true);
-    setShowLocationSuggestions(false);
-    if (e.target.value || location) {
-      searchJobs(e.target.value, location);
-    } else {
-      resetSearchResults();
-    }
+    updateKeywordSuggestions(value);
   };
 
   const handleLocationChange = (e) => {
-    setLocation(e.target.value);
+    const value = e.target.value;
+    setLocation(value);
     setShowLocationSuggestions(true);
-    setShowKeywordSuggestions(false);
-    if (e.target.value || keyword) {
-      searchJobs(keyword, e.target.value);
-    } else {
-      resetSearchResults();
-    }
+    updateLocationSuggestions(value);
+  };
+
+  const updateKeywordSuggestions = (value) => {
+    const suggestions = uniqueSuggestions(userSearchResults.map((job) => job.puesto)).filter((suggestion) => suggestion.toLowerCase().includes(value.toLowerCase()));
+    setKeywordSuggestions(suggestions);
+  };
+
+  const updateLocationSuggestions = (value) => {
+    const suggestions = uniqueSuggestions(userSearchResults.map((job) => job.ubicacion)).filter((suggestion) => suggestion.toLowerCase().includes(value.toLowerCase()));
+    setLocationSuggestions(suggestions);
   };
 
   const handleSelectKeywordSuggestion = (suggestion) => {
     setKeyword(suggestion);
     setShowKeywordSuggestions(false);
-    searchJobs(suggestion, location);
   };
 
   const handleSelectLocationSuggestion = (suggestion) => {
     setLocation(suggestion);
     setShowLocationSuggestions(false);
-    searchJobs(keyword, suggestion);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    searchJobs(keyword, location);
+    setShowKeywordSuggestions(false);
+    setShowLocationSuggestions(false);
   };
 
   useEffect(() => {
@@ -72,16 +81,10 @@ function Buscador() {
     });
   };
 
-  const keywordSuggestions = uniqueSuggestions(userSearchResults.map((job) => job.puesto));
-  const locationSuggestions = uniqueSuggestions(userSearchResults.map((job) => job.ubicacion));
-
   return (
     <div className="relative">
       <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          searchJobs(keyword, location);
-        }}
+        onSubmit={handleSubmit}
         className="relative bg-white flex flex-col md:flex-row items-center justify-center border py-2 px-2 rounded-2xl gap-2 shadow-2xl focus-within:border-gray-300 w-full max-w-2xl mt-12"
       >
         <div className="relative flex items-center w-full border-r">
@@ -127,20 +130,20 @@ function Buscador() {
             <li key={index} className="px-4 py-2 cursor-pointer hover:bg-gray-100" onClick={() => handleSelectKeywordSuggestion(suggestion)}>
               {suggestion}
             </li>
-            ))}
-            </ul>
-          )}
-          {showLocationSuggestions && (
-            <ul ref={locationSuggestionsRef} className="absolute top-full left-0 z-10 bg-white border border-gray-200 rounded-b-md shadow-md w-full max-h-[200px] overflow-y-auto">
-              {locationSuggestions.map((suggestion, index) => (
-                <li key={index} className="px-4 py-2 cursor-pointer hover:bg-gray-100" onClick={() => handleSelectLocationSuggestion(suggestion)}>
-                  {suggestion}
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
-      );
-    }
-    
-    export default Buscador;
+          ))}
+        </ul>
+      )}
+      {showLocationSuggestions && (
+        <ul ref={locationSuggestionsRef} className="absolute top-full left-0 z-10 bg-white border border-gray-200 rounded-b-md shadow-md w-full max-h-[200px] overflow-y-auto">
+          {locationSuggestions.map((suggestion, index) => (
+            <li key={index} className="px-4 py-2 cursor-pointer hover:bg-gray-100" onClick={() => handleSelectLocationSuggestion(suggestion)}>
+              {suggestion}
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
+  );
+}
+
+export default Buscador;

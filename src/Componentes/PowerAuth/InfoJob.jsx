@@ -2,6 +2,10 @@ import React from 'react';
 import { FaLocationDot } from "react-icons/fa6";
 
 function InfoJob({ selectedJob }) {
+  if (!selectedJob) {
+    return null; // Evitar renderizar si selectedJob es null
+  }
+
   const jobDetails = [
     {
       title: "¿Por qué deberías unirte a nosotros?",
@@ -21,7 +25,7 @@ function InfoJob({ selectedJob }) {
     }
   ];
 
-  const whatsappBaseUrl = selectedJob.wtsp_url.split('?')[0];
+  const whatsappBaseUrl = selectedJob.wtsp_url ? selectedJob.wtsp_url.split('?')[0] : '';
   const whatsappMessage = `Hola, estoy interesado en el puesto de ${selectedJob.puesto}`;
   const whatsappUrl = `${whatsappBaseUrl}?text=${encodeURIComponent(whatsappMessage)}`;
 
@@ -66,9 +70,11 @@ function InfoJob({ selectedJob }) {
       </div>
       <div className="flex justify-start mt-4">
         <button className="bg-[#0057c2] text-white font-bold py-2 px-4 rounded-full mr-4">POSTULARME</button>
-        <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
-          <button className="bg-green-500 text-white font-bold py-2 px-4 rounded-full" disabled={!whatsappBaseUrl}>WhatsApp</button>
-        </a>
+        {whatsappBaseUrl && (
+          <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
+            <button className="bg-green-500 text-white font-bold py-2 px-4 rounded-full">WhatsApp</button>
+          </a>
+        )}
       </div>
     </div>
   );
