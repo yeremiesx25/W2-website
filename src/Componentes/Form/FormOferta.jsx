@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import FormAdminImg from "../../assets/formAdminImg.svg";
-
+import { UserAuth } from "../../Context/AuthContext";
 import { useNavigate } from 'react-router-dom';
 import { supabase } from '../../supabase/supabase.config'; // Ajusta la ruta según la ubicación de tu archivo
 
 function FormOferta() {
+    const { user } = UserAuth();
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
         name: "",
@@ -13,9 +14,19 @@ function FormOferta() {
         salary: "",
         jobDescription: "",
         requirements: "",
-        funciones: "", // Añadir el campo de funciones aquí
-        celular: "" // Añadir el campo de celular aquí
+        funciones: "",
+        celular: "",
+        user_id: ""
     });
+
+    useEffect(() => {
+        if (user) {
+            setFormData((prevData) => ({
+                ...prevData,
+                user_id: user.id
+            }));
+        }
+    }, [user]);
 
     const [showInitialFields, setShowInitialFields] = useState(true);
 
@@ -32,7 +43,7 @@ function FormOferta() {
         if (showInitialFields) {
             // Guardar los valores del formulario en el almacenamiento local
             localStorage.setItem("formData", JSON.stringify(formData));
-            // Redirigir a la siguiente página
+            // Mostrar la siguiente sección del formulario
             setShowInitialFields(false);
         } else {
             // Llamar a la función para insertar datos en Supabase
@@ -46,16 +57,16 @@ function FormOferta() {
     };
 
     const saveFormDataToSupabase = async () => {
-        const { name, company, location, salary, jobDescription, requirements, funciones, celular } = formData;
+        const { name, company, location, salary, jobDescription, requirements, funciones, celular, user_id } = formData;
 
         // Generar la URL de WhatsApp
         const whatsappMessage = `Hola, estoy interesado en el puesto de ${name}`;
         const whatsappUrl = `https://wa.me/${celular}?text=${encodeURIComponent(whatsappMessage)}`;
 
-        const { data, error } = await supabase
-            .from('Oferta')
-            .insert([
-                {
+        try {
+            const { data, error } = await supabase
+                .from('Oferta')
+                .insert({
                     puesto: name,
                     empresa: company,
                     ubicacion: location,
@@ -63,16 +74,19 @@ function FormOferta() {
                     requisitos: requirements,
                     beneficios: jobDescription,
                     funciones: funciones,
-                    wtsp_url: whatsappUrl // Guardar la URL generada
-                }
-            ]);
+                    wtsp_url: whatsappUrl,
+                    user_id: user_id
+                });
 
-        if (error) {
-            console.error('Error inserting data:', error);
-        } else {
-            console.log('Data inserted successfully:', data);
-            // Navegar a otra página si es necesario
-            navigate('/some-other-page');
+            if (error) {
+                console.error('Error inserting data:', error);
+            } else {
+                console.log('Data inserted successfully:', data);
+                // Navegar a otra página si es necesario
+                navigate('/Admin');
+            }
+        } catch (error) {
+            console.error('Error saving data to Supabase:', error);
         }
     };
 
