@@ -1,41 +1,24 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { UserAuth } from '../../Context/AuthContext'; // Asegúrate de ajustar la ruta correcta
+import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { UserAuth } from '../../Context/AuthContext'; 
 import LoginAdminImg from "../../assets/LoginAdminImg.svg";
 import HeaderPowerAuth from '../PowerAuth/HeaderPowerAuth';
 
 function LoginAdmin() {
-    const { signInWithGoogle } = UserAuth(); // Importa la función signInWithGoogle del contexto
-
+    const navigate = useNavigate();
+    const { user } = UserAuth(); 
     const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [uid, setUid] = useState('');
     const [error, setError] = useState('');
 
     const handleLogin = async () => {
-        try {
-            // Aquí deberías usar supabase.auth.signIn con email y password
-            // Supabase debería manejar la autenticación y devolver un objeto de sesión si es exitoso
-            // Ejemplo de uso:
-            // const { user, error } = await supabase.auth.signIn({ email, password });
-
-            // Por simplicidad, supongamos que estás usando Google Sign-In temporalmente
-            await signInWithGoogle(); // Esto es un ejemplo para signInWithGoogle
-
-            // En el caso de signInWithEmailAndPassword:
-            // const { user, error } = await supabase.auth.signInWithEmailAndPassword(email, password);
-
-            // Si hay un error, establecer el estado de error para mostrarlo al usuario
-            if (error) {
-                setError(error.message);
-            } else {
-                // Limpiar errores y redirigir al usuario a la siguiente página
-                setError('');
-                // Aquí deberías redirigir al usuario a la página adecuada, por ejemplo:
-                // history.push('/dashboard');
-            }
-        } catch (error) {
-            console.error('Error de inicio de sesión:', error.message);
-            setError('Error de inicio de sesión. Por favor, verifica tus credenciales.');
+        if (user && user.email === email && user.id === uid) {
+            setError('');
+            // Redirigir al usuario a la página adecuada
+            navigate('/Admin');
+            console.log("Reclutador logueado")
+        } else {
+            setError('Correo electrónico o UID incorrecto');
         }
     };
 
@@ -50,8 +33,8 @@ function LoginAdmin() {
                             <div className="px-5 py-7">
                                 <label className="font-semibold text-sm text-gray-600 pb-1 block">Correo electrónico</label>
                                 <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full" />
-                                <label className="font-semibold text-sm text-gray-600 pb-1 block">Contraseña</label>
-                                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full" />
+                                <label className="font-semibold text-sm text-gray-600 pb-1 block">UID</label>
+                                <input type="text" value={uid} onChange={(e) => setUid(e.target.value)} className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full" />
                                 {error && <p className="text-red-500 text-sm mb-3">{error}</p>}
                                 <button type="button" onClick={handleLogin} className="transition duration-200 bg-primarycolor hover:bg-blue-600 focus:bg-blue-700 focus:shadow-sm focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 text-white w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md font-semibold text-center inline-block">
                                     <span className="inline-block mr-2">Continuar</span>
@@ -60,7 +43,6 @@ function LoginAdmin() {
                                     </svg>
                                 </button>
                             </div>
-                            {/* Resto del formulario */}
                         </div>
                     </div>
                 </div>
