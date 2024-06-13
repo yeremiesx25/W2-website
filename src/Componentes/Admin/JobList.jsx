@@ -1,15 +1,40 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import React from 'react';
 import JobsContext from '../../Context/JobsContext';
 import DeleteButton from './DeleteButton';
 import { FaRegEdit } from "react-icons/fa";
+import { UserAuth } from "../../Context/AuthContext";
+import { supabase } from '../../supabase/supabase.config';
 
 function JobList() {
-  const { userSearchResults } = useContext(JobsContext);
+  const { userSearchResults, setUserSearchResults } = useContext(JobsContext);
+  const { user } = UserAuth();
+  const [jobs, setJobs] = useState([]);
+
+  useEffect(() => {
+    if (user) {
+      const fetchJobs = async () => {
+        const { data, error } = await supabase
+          .from('Oferta')
+          .select('*')
+          .eq('user_id', user.id);
+  
+        if (error) {
+          console.error('Error fetching jobs:', error);
+        } else {
+          console.log('Jobs fetched successfully:', data); // Añade este console.log
+          setJobs(data);
+          setUserSearchResults(data);
+        }
+      };
+  
+      fetchJobs();
+    }
+  }, [user, setUserSearchResults]);
 
   return (
     <div className='w-[90%] flex justify-center h-[450px] overflow-y-scroll font-dmsans scroll-smooth'>
-      {userSearchResults.length > 0 ? (
+      {jobs.length > 0 ? (
         <table className="divide-y divide-gray-200">
           <thead>
             <tr>
@@ -21,7 +46,7 @@ function JobList() {
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {userSearchResults.map((job) => (
+            {jobs.map((job) => (
               <tr key={job.id_oferta} className='max-h-20'>
                 <td className="px-6 py-4 whitespace-nowrap">{job.puesto}</td>
                 <td className="px-6 py-4 whitespace-nowrap">{job.ubicacion}</td>
