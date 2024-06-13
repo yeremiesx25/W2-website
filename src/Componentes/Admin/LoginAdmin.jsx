@@ -29,6 +29,8 @@ function LoginAdmin() {
                 <div className="w-[calc(100%-600px)] h-full py-6 bg-white flex items-center">
                     <div className="p-10 xs:p-0 mx-auto md:w-full md:max-w-md">
                         <h1 className="font-bold text-center text-2xl mb-5 text-primarytext">Iniciar sesión como reclutador</h1>
+                        <h1>{user.email}</h1>
+                        <h1>{user.id}</h1>
                         <div className="bg-white shadow w-full rounded-lg divide-y divide-gray-200">
                             <div className="px-5 py-7">
                                 <label className="font-semibold text-sm text-gray-600 pb-1 block">Correo electrónico</label>
@@ -47,6 +49,7 @@ function LoginAdmin() {
                     </div>
                 </div>
                 <div className="w-[600px] h-full bg-primarycolor">
+                    
                     <img src={LoginAdminImg} className="w-full h-full" alt="" />
                 </div>
             </div>
