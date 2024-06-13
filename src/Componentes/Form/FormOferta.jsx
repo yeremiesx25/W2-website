@@ -13,7 +13,8 @@ function FormOferta() {
         salary: "",
         jobDescription: "",
         requirements: "",
-        funciones: "" // Añadir el campo de funciones aquí
+        funciones: "", // Añadir el campo de funciones aquí
+        celular: "" // Añadir el campo de celular aquí
     });
 
     const [showInitialFields, setShowInitialFields] = useState(true);
@@ -45,7 +46,12 @@ function FormOferta() {
     };
 
     const saveFormDataToSupabase = async () => {
-        const { name, company, location, salary, jobDescription, requirements, funciones } = formData;
+        const { name, company, location, salary, jobDescription, requirements, funciones, celular } = formData;
+
+        // Generar la URL de WhatsApp
+        const whatsappMessage = `Hola, estoy interesado en el puesto de ${name}`;
+        const whatsappUrl = `https://wa.me/${celular}?text=${encodeURIComponent(whatsappMessage)}`;
+
         const { data, error } = await supabase
             .from('Oferta')
             .insert([
@@ -56,7 +62,8 @@ function FormOferta() {
                     sueldo: salary,
                     requisitos: requirements,
                     beneficios: jobDescription,
-                    funciones: funciones
+                    funciones: funciones,
+                    wtsp_url: whatsappUrl // Guardar la URL generada
                 }
             ]);
 
@@ -128,12 +135,26 @@ function FormOferta() {
                                             className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                                         />
                                     </div>
+                                    <div className="mb-5">
+                                        <label htmlFor="celular" className="mb-3 block text-base font-medium text-[#07074D]">
+                                            Número de WhatsApp
+                                        </label>
+                                        <input
+                                            type="text"
+                                            name="celular"
+                                            id="celular"
+                                            placeholder="Número de celular"
+                                            value={formData.celular}
+                                            onChange={handleInputChange}
+                                            className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                                        />
+                                    </div>
                                     <button
-                                            onClick={handleNextButtonClick}
-                                            className="hover:shadow-form w-full rounded-md bg-primarycolor py-3 px-8 text-center text-base font-semibold text-white outline-none"
-                                        >
-                                            Siguiente
-                                        </button>
+                                        onClick={handleNextButtonClick}
+                                        className="hover:shadow-form w-full rounded-md bg-primarycolor py-3 px-8 text-center text-base font-semibold text-white outline-none"
+                                    >
+                                        Siguiente
+                                    </button>
                                 </>
                             ) : (
                                 <>

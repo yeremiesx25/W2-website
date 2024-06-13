@@ -21,6 +21,10 @@ function InfoJob({ selectedJob }) {
     }
   ];
 
+  const whatsappBaseUrl = selectedJob.wtsp_url.split('?')[0];
+  const whatsappMessage = `Hola, estoy interesado en el puesto de ${selectedJob.puesto}`;
+  const whatsappUrl = `${whatsappBaseUrl}?text=${encodeURIComponent(whatsappMessage)}`;
+
   return (
     <div className="selected-job-info w-full sm:w-1/2 border rounded-lg flex flex-col p-4 mx-8 bg-white shadow-lg" style={{ height: '650px', overflowY: 'auto', position: 'relative' }}>
       <h2 className="ml-1 mt-3 font-bold text-4xl text-black">{selectedJob.puesto}</h2>
@@ -62,7 +66,9 @@ function InfoJob({ selectedJob }) {
       </div>
       <div className="flex justify-start mt-4">
         <button className="bg-[#0057c2] text-white font-bold py-2 px-4 rounded-full mr-4">POSTULARME</button>
-        <button className="bg-green-500 text-white font-bold py-2 px-4 rounded-full">WhatsApp</button>
+        <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
+          <button className="bg-green-500 text-white font-bold py-2 px-4 rounded-full" disabled={!whatsappBaseUrl}>WhatsApp</button>
+        </a>
       </div>
     </div>
   );
