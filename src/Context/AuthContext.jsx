@@ -1,16 +1,18 @@
 import { createContext, useState, useContext, useEffect } from 'react';
 import { supabase } from '../supabase/supabase.config';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
   const navigate = useNavigate();
+  const location = useLocation();
   const [user, setUser] = useState(() => {
     const userData = localStorage.getItem('user');
     return userData ? JSON.parse(userData) : null;
   });
   const [loading, setLoading] = useState(true);
+  const [justLoggedIn, setJustLoggedIn] = useState(false);
 
   async function signInWithGoogle() {
     try {
@@ -18,6 +20,7 @@ export const AuthContextProvider = ({ children }) => {
         provider: 'google',
       });
       if (error) throw new Error("Ocurrió un error durante la autenticación");
+      setJustLoggedIn(true); // Marcar que el usuario acaba de iniciar sesión
       return data;
     } catch (error) {
       console.log(error);
@@ -29,25 +32,33 @@ export const AuthContextProvider = ({ children }) => {
     if (error) throw new Error("Ocurrió un error durante el cierre de sesión");
     setUser(null);
     localStorage.removeItem('user');
+    setJustLoggedIn(false); // Resetear el estado
     navigate("/", { replace: true });
   }
 
-    useEffect(() => {
-        const { data: authListener } = supabase.auth.onAuthStateChange(async (event, session) => {
-            console.log("supabase event: ", session);
-            if (session == null) {
-                navigate("/", { replace: true });
-            } else {
-                setUser(session?.user);
-                console.log("data del usuario ", session?.user);
-                navigate("/Admin");
-            }
-        });
+  useEffect(() => {
+    const { data: authListener } = supabase.auth.onAuthStateChange(async (event, session) => {
+      if (session == null) {
+        setUser(null);
+        localStorage.removeItem('user');
+      } else {
+        const user = session.user;
+        setUser(user);
+        localStorage.setItem('user', JSON.stringify(user));
+
+        // Redirigir a PowerAuth solo si el usuario acaba de iniciar sesión
+        if (justLoggedIn || location.pathname === '/') {
+          navigate("/PowerAuth", { replace: true });
+          setJustLoggedIn(false); // Resetear el estado
+        }
+      }
+      setLoading(false);
+    });
 
     return () => {
       authListener?.subscription.unsubscribe();
     };
-  }, [navigate]);
+  }, [navigate, justLoggedIn, location.pathname]);
 
   return (
     <AuthContext.Provider value={{ signInWithGoogle, signOut, user, loading }}>

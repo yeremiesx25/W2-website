@@ -1,7 +1,33 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { FaLocationDot } from "react-icons/fa6";
 
 function InfoJob({ selectedJob }) {
+  const [atBottom, setAtBottom] = useState(false);
+  const contentRef = useRef(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (contentRef.current) {
+        const { scrollTop, scrollHeight, clientHeight } = contentRef.current;
+        if (scrollTop + clientHeight >= scrollHeight - 1) {
+          setAtBottom(true);
+        } else {
+          setAtBottom(false);
+        }
+      }
+    };
+
+    if (contentRef.current) {
+      contentRef.current.addEventListener('scroll', handleScroll);
+    }
+
+    return () => {
+      if (contentRef.current) {
+        contentRef.current.removeEventListener('scroll', handleScroll);
+      }
+    };
+  }, []);
+
   if (!selectedJob) {
     return null; // Evitar renderizar si selectedJob es null
   }
@@ -54,7 +80,7 @@ function InfoJob({ selectedJob }) {
         <button className="bg-[#0057c2] text-white font-bold py-2 px-4 rounded-full mb-4">POSTULARME</button>
       </div>
       <div className="border-t border-gray-300 my-2" style={{ width: '100%' }}></div>
-      <div className="mx-auto mt-3 w-full overflow-y-auto" style={{ height: 'calc(100% - 180px)' }}>
+      <div ref={contentRef} className="mx-auto mt-3 w-full overflow-y-auto" style={{ height: 'calc(100% - 180px)' }}>
         <h3>Descripción del Empleo:</h3>
         {jobDetails.map((detail, index) => (
           <div
@@ -68,7 +94,7 @@ function InfoJob({ selectedJob }) {
           </div>
         ))}
       </div>
-      <div className="flex justify-start mt-4">
+      <div className="flex justify-start mt-4" style={{ opacity: atBottom ? 1 : 0, transition: 'opacity 0.3s' }}>
         <button className="bg-[#0057c2] text-white font-bold py-2 px-4 rounded-full mr-4">POSTULARME</button>
         {whatsappBaseUrl && (
           <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
