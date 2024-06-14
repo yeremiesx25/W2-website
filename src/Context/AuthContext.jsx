@@ -32,19 +32,17 @@ export const AuthContextProvider = ({ children }) => {
     navigate("/", { replace: true });
   }
 
-  useEffect(() => {
-    const { data: authListener } = supabase.auth.onAuthStateChange(async (event, session) => {
-      if (session == null) {
-        setUser(null);
-        localStorage.removeItem('user');
-      } else {
-        const user = session.user;
-        setUser(user);
-        localStorage.setItem('user', JSON.stringify(user));
-        navigate("/PowerAuth", { replace: true });  // Redirigir a PowerAuth después del inicio de sesión
-      }
-      setLoading(false);
-    });
+    useEffect(() => {
+        const { data: authListener } = supabase.auth.onAuthStateChange(async (event, session) => {
+            console.log("supabase event: ", session);
+            if (session == null) {
+                navigate("/", { replace: true });
+            } else {
+                setUser(session?.user);
+                console.log("data del usuario ", session?.user);
+                navigate("/Admin");
+            }
+        });
 
     return () => {
       authListener?.subscription.unsubscribe();
