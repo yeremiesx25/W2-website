@@ -32,7 +32,7 @@ export const AuthContextProvider = ({ children }) => {
             } else {
                 setUser(session?.user);
                 console.log("data del usuario ", session?.user);
-                navigate("/PowerAuth");
+                navigate("/Admin");
             }
         });
 

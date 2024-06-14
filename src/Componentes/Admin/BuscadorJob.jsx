@@ -5,7 +5,7 @@ function BuscadorJob() {
   const { searchTerm, setSearchTerm } = useContext(JobsContext);
 
   return (
-    <div className="h-16 border border-gray-300 rounded-lg w-1/2 max-w-lg mb-8 flex">
+    <div className="h-16 border border-gray-300 rounded-lg w-96 max-w-lg mb-8 flex">
       <input 
         type="text" 
         className="rounded-md p-3 w-full focus:outline-none" 
