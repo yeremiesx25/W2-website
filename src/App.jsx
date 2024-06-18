@@ -12,7 +12,11 @@ import Privacidad from './Componentes/Principal/Privacidad.jsx'
 import AdminForm from './Componentes/Form/AdminForm.jsx'
 import LoginAdmin from "./Componentes/Admin/LoginAdmin.jsx";
 import ProtectedRoute from './ProtectedRoute.jsx';
+<<<<<<< HEAD
 import Profile from './Componentes/Profile/Profile.jsx'
+=======
+import Share from "./Componentes/PowerAuth/Share.jsx"; // Importar el componente Share
+>>>>>>> 62168165e3e555c0a170fc684f9fe55d17d81f5d
 
 function App() {
   return (
@@ -33,7 +37,11 @@ function App() {
           <Route path="/Privacidad" element={<Privacidad />} />
           <Route path="/AdminForm" element={<AdminForm />} />
           <Route path="/AdminLogin" element={<LoginAdmin />} />
+<<<<<<< HEAD
           <Route path="/Profile" element = {<Profile />} />
+=======
+          <Route path="/Share" element={<Share />} /> {/* Añadir ruta para Share */}
+>>>>>>> 62168165e3e555c0a170fc684f9fe55d17d81f5d
         </Routes>
       </JobsProvider>
     </AuthContextProvider>
