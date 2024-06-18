@@ -4,6 +4,7 @@ import JobsContext from '../../Context/JobsContext'
 import { CgLoadbarDoc } from "react-icons/cg";
 import { UserAuth } from "../../Context/AuthContext";
 import { MdOutlineQueryStats } from "react-icons/md";
+import { HiOutlineDocumentSearch } from "react-icons/hi";
 
 function CountOfertas() {
     const { jobs } = useContext(JobsContext);
@@ -27,7 +28,7 @@ function CountOfertas() {
 
     <div className='w-56 h-20 bg-white flex  items-center justify-center rounded-lg text-gray-700 shadow-md gap-6 font-dmsans'>
     <div className='w-12 h-12 bg-[#f4f7fe] rounded-full flex justify-center items-center text-[#422afb]'>
-      <CgLoadbarDoc size={30}/>
+      <HiOutlineDocumentSearch size={30}/>
     </div>
     <div className='flex flex-col text-center'>
       <p className='font-medium text-md text-gray-600'>Mis Ofertas</p>

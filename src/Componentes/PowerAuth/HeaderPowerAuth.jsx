@@ -49,8 +49,8 @@ function HeaderPowerAuth() {
 
         {user && (
           <div className={`flex items-center ${isExpanded ? 'px-4' : 'justify-center'}`}>
-            <img className="w-10 h-10 rounded-full my-8" src={user.user_metadata.avatar_url} alt="User" />
-            {isExpanded && <span className="ml-2 overflow-hidden whitespace-nowrap overflow-ellipsis my-8">{user.user_metadata.full_name}</span>}
+            <Link to="/Profile" className='flex items-center'><img className="w-10 h-10 rounded-full my-8" src={user.user_metadata.avatar_url} alt="User" />
+            {isExpanded && <span className="ml-2 overflow-hidden whitespace-nowrap overflow-ellipsis my-8">{user.user_metadata.full_name}</span>}</Link>
           </div>
         )}
 

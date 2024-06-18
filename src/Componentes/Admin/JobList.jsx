@@ -53,7 +53,7 @@ function JobList() {
                 <div className="flex items-center gap-x-3">
                   <input type="checkbox" className="text-blue-500 border-gray-300 rounded dark:bg-gray-900 dark:ring-offset-gray-900 dark:border-gray-700"/>
                   <button className="flex items-center gap-x-2">
-                    <span>Invoice</span>
+                    <span>Puesto</span>
                     <svg className="h-3" viewBox="0 0 10 11" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M2.13347 0.0999756H2.98516L5.01902 4.79058H3.86226L3.45549 3.79907H1.63772L1.24366 4.79058H0.0996094L2.13347 0.0999756ZM2.54025 1.46012L1.96822 2.92196H3.11227L2.54025 1.46012Z" fill="currentColor" stroke="currentColor" stroke-width="0.1" />
                       <path d="M0.722656 9.60832L3.09974 6.78633H0.811638V5.87109H4.35819V6.78633L2.01925 9.60832H4.43446V10.5617H0.722656V9.60832Z" fill="currentColor" stroke="currentColor" stroke-width="0.1" />
@@ -63,19 +63,19 @@ function JobList() {
                 </div>
               </th>
               <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                Date
+                Ubicación
               </th>
               <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                Status
+                Fecha
               </th>
               <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                Customer
+                Estado
               </th>
               <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                Purchase
+                Acciones
               </th>
               <th scope="col" className="relative py-3.5 px-4">
-                <span className="sr-only">Actions</span>
+                <span className="sr-only">Acciones</span>
               </th>
             </tr>
           </thead>
