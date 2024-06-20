@@ -13,7 +13,7 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
         setLoading(true);
         const { data, error } = await supabase
           .from('Oferta')
-          .select(`preg_1, preg_2, preg_3`)
+          .select('preg_1, preg_2, preg_3')
           .eq('id_oferta', selectedJob.id_oferta)
           .single();
 
@@ -51,10 +51,38 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
     setAnswers(newAnswers);
   };
 
-  const handleSubmit = () => {
-    // Implementa lógica para manejar el envío de respuestas aquí
-    console.log('Respuestas enviadas:', answers);
-    onClose();
+  const handleSubmit = async () => {
+    try {
+      console.log('Enviando respuestas:', answers);
+
+      // Obtener el valor actual de count_postulados
+      const { data: currentData, error: fetchError } = await supabase
+        .from('Oferta')
+        .select('count_postulados')
+        .eq('id_oferta', selectedJob.id_oferta)
+        .single();
+
+      if (fetchError) {
+        throw fetchError;
+      }
+
+      const currentCount = currentData.count_postulados || 0;
+
+      // Incrementar la columna count_postulados en 1
+      const { error: updateError } = await supabase
+        .from('Oferta')
+        .update({ count_postulados: currentCount + 1 })
+        .eq('id_oferta', selectedJob.id_oferta);
+
+      if (updateError) {
+        throw updateError;
+      }
+
+      console.log('Actualización exitosa de count_postulados');
+      onClose();
+    } catch (error) {
+      console.error('Error updating count_postulados:', error.message);
+    }
   };
 
   return (

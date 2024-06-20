@@ -21,7 +21,7 @@ function JobList() {
       const fetchJobs = async () => {
         const { data, error } = await supabase
           .from('Oferta')
-          .select('*')
+          .select('id_oferta, puesto, ubicacion, fecha_publicacion, count_postulados') // Asegúrate de seleccionar count_postulados
           .eq('user_id', user.id);
   
         if (error) {
@@ -83,7 +83,7 @@ function JobList() {
                 <td className="px-6 py-4 whitespace-nowrap">{job.ubicacion}</td>
                 <td className="px-6 py-4 whitespace-nowrap">{job.fecha_publicacion}</td>
                 <td className="px-6 py-4 whitespace-nowrap">
-                  <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">0</span>
+                  <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">{job.count_postulados} postulados</span>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap flex space-x-2">
                   <button className="px-4 py-2 font-medium text-white bg-blue-600 rounded-md hover:bg-blue-500 focus:outline-none focus:shadow-outline-blue active:bg-blue-600 transition duration-150 ease-in-out">
