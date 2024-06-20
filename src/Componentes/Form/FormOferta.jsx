@@ -57,7 +57,7 @@ function FormOferta() {
     };
 
     const saveFormDataToSupabase = async () => {
-        const { name, company, location, salary, jobDescription, requirements, funciones, celular, user_id } = formData;
+        const { name, company, location, salary, jobDescription, requirements, funciones, celular, user_id, preguntas } = formData;
 
         // Generar la URL de WhatsApp
         const whatsappMessage = `Hola, estoy interesado en el puesto de ${name}`;
@@ -75,7 +75,8 @@ function FormOferta() {
                     beneficios: jobDescription,
                     funciones: funciones,
                     wtsp_url: whatsappUrl,
-                    user_id: user_id
+                    user_id: user_id,
+                    preguntas: preguntas
                 });
 
             if (error) {
@@ -95,16 +96,16 @@ function FormOferta() {
             <div className="w-[600px] h-full bg-primarycolor">
                 <img src={FormAdminImg} className="w-full h-full" alt="" />
             </div>
-            <div className="w-[calc(100%-600px)] h-full py-6">
+            <div className="w-[calc(100%-600px)] h-full py-6 overflow-y-scroll">
                 <h2 className="text-primarytext font-bold text-3xl text-center mt-8">
                     Completa todos los campos
                 </h2>
                 <p className="text-gray-700 text-center pt-8 font-medium">
                     Información básica sobre el empleo
                 </p>
-                <div className="flex items-center justify-center p-2">
+                <div className="flex items-center justify-center p-2 ">
                     <div className="mx-auto w-full max-w-[550px] bg-white">
-                        <form>
+                        <form className="">
                             {showInitialFields ? (
                                 <>
                                     <div className="mb-5">
@@ -221,6 +222,19 @@ function FormOferta() {
                                             id="funciones"
                                             placeholder="Funciones"
                                             value={formData.funciones}
+                                            onChange={handleInputChange}
+                                            className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                                        ></textarea>
+                                    </div>
+                                    <div className="mb-5">
+                                        <label htmlFor="preguntas" className="mb-3 block text-base font-medium text-[#07074D]">
+                                            Preguntas del reclutador
+                                        </label>
+                                        <textarea
+                                            name="preguntas"
+                                            id="preguntas"
+                                            placeholder="Preguntas"
+                                            value={formData.preguntas}
                                             onChange={handleInputChange}
                                             className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                                         ></textarea>

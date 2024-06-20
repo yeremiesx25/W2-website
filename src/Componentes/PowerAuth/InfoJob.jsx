@@ -174,7 +174,7 @@ function InfoJob({ selectedJob }) {
         <h3 className="font-bold">Descripción del Empleo:</h3>
         {jobDetails.map((detail, index) => (
           <div key={index} className="py-5 border-b border-gray-200">
-            <div className="font-semibold font-dmsans text-primarytext text-orange-500">
+            <div className="font-semibold font-dmsans text-primarytext">
               <div>{detail.title}</div>
             </div>
             <p className="mt-3 text-gray-800" style={{ wordWrap: 'break-word', overflowWrap: 'break-word', width: '100%' }}>
