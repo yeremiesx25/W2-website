@@ -1,15 +1,18 @@
+// InfoJob.js
+
 import React, { useState, useEffect, useRef } from 'react';
 import { FaLocationDot, FaWhatsapp } from 'react-icons/fa6';
 import { CiShare2 } from 'react-icons/ci';
 import { useNavigate } from 'react-router-dom';
 import ModalInfo from './ModalInfo'; // Importar el componente ApplyModal
+import QuestionsModal from './QuestionsModal'; // Importar el componente QuestionsModal
 import { FaCopy, FaFacebookF} from "react-icons/fa";
 import { IoLogoWhatsapp } from "react-icons/io";
-
 
 function InfoJob({ selectedJob }) {
   const [atBottom, setAtBottom] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isQuestionsModalOpen, setIsQuestionsModalOpen] = useState(false);
   const [isShareMenuOpen, setIsShareMenuOpen] = useState(false);
   const contentRef = useRef(null);
   const shareButtonRef = useRef(null);
@@ -87,9 +90,8 @@ function InfoJob({ selectedJob }) {
   };
 
   const handleConfirmApply = () => {
-    // Aquí puedes implementar la lógica para obtener preguntas de Supabase y mostrarlas
-    // Por ahora, solo cerramos el modal
     setIsModalOpen(false);
+    setIsQuestionsModalOpen(true); // Mostrar el modal de preguntas después de confirmar la postulación
   };
 
   const handleShareClick = () => {
@@ -99,7 +101,24 @@ function InfoJob({ selectedJob }) {
   const handleCopyLink = () => {
     const shareUrl = `http://localhost:5173/Share?id=${selectedJob.id_oferta}`;
     navigator.clipboard.writeText(shareUrl);
-    alert('Enlace copiado al portapapeles');
+    
+    const copiedMessage = document.createElement('div');
+    copiedMessage.textContent = 'Enlace Copiado';
+    copiedMessage.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+    copiedMessage.style.color = 'white';
+    copiedMessage.style.position = 'fixed';
+    copiedMessage.style.bottom = '20px';
+    copiedMessage.style.left = '50%';
+    copiedMessage.style.transform = 'translateX(-50%)';
+    copiedMessage.style.padding = '10px 20px';
+    copiedMessage.style.borderRadius = '5px';
+    copiedMessage.style.zIndex = '9999';
+    document.body.appendChild(copiedMessage);
+  
+    setTimeout(() => {
+      copiedMessage.remove();
+    }, 3000);
+    
     setIsShareMenuOpen(false);
   };
 
@@ -197,6 +216,7 @@ function InfoJob({ selectedJob }) {
         )}
       </div>
       <ModalInfo isOpen={isModalOpen} onClose={handleCloseModal} onConfirm={handleConfirmApply} />
+      <QuestionsModal isOpen={isQuestionsModalOpen} onClose={() => setIsQuestionsModalOpen(false)} selectedJob={selectedJob} />
     </div>
   );
 }

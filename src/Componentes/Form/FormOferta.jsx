@@ -16,6 +16,10 @@ function FormOferta() {
         requirements: "",
         funciones: "",
         celular: "",
+        horario: "",
+        preg_1: "",
+        preg_2: "",
+        preg_3: "",
         user_id: ""
     });
 
@@ -28,7 +32,7 @@ function FormOferta() {
         }
     }, [user]);
 
-    const [showInitialFields, setShowInitialFields] = useState(true);
+    const [formStep, setFormStep] = useState(1);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -40,11 +44,14 @@ function FormOferta() {
 
     const handleNextButtonClick = (e) => {
         e.preventDefault();
-        if (showInitialFields) {
+        if (formStep === 1) {
             // Guardar los valores del formulario en el almacenamiento local
             localStorage.setItem("formData", JSON.stringify(formData));
             // Mostrar la siguiente sección del formulario
-            setShowInitialFields(false);
+            setFormStep(2);
+        } else if (formStep === 2) {
+            // Avanzar a la siguiente sección del formulario
+            setFormStep(3);
         } else {
             // Llamar a la función para insertar datos en Supabase
             saveFormDataToSupabase();
@@ -53,11 +60,15 @@ function FormOferta() {
 
     const handleBackButtonClick = (e) => {
         e.preventDefault();
-        setShowInitialFields(true);
+        if (formStep === 2) {
+            setFormStep(1);
+        } else if (formStep === 3) {
+            setFormStep(2);
+        }
     };
 
     const saveFormDataToSupabase = async () => {
-        const { name, company, location, salary, jobDescription, requirements, funciones, celular, user_id, preguntas } = formData;
+        const { name, company, location, salary, jobDescription, requirements, funciones, celular, horario, preg_1, preg_2, preg_3, user_id } = formData;
 
         // Generar la URL de WhatsApp
         const whatsappMessage = `Hola, estoy interesado en el puesto de ${name}`;
@@ -75,8 +86,11 @@ function FormOferta() {
                     beneficios: jobDescription,
                     funciones: funciones,
                     wtsp_url: whatsappUrl,
-                    user_id: user_id,
-                    preguntas: preguntas
+                    horario: horario,
+                    preg_1: preg_1,
+                    preg_2: preg_2,
+                    preg_3: preg_3,
+                    user_id: user_id
                 });
 
             if (error) {
@@ -105,8 +119,8 @@ function FormOferta() {
                 </p>
                 <div className="flex items-center justify-center p-2 ">
                     <div className="mx-auto w-full max-w-[550px] bg-white">
-                        <form className="">
-                            {showInitialFields ? (
+                        <form>
+                            {formStep === 1 && (
                                 <>
                                     <div className="mb-5">
                                         <label htmlFor="name" className="mb-3 block text-base font-medium text-[#07074D]">
@@ -171,7 +185,8 @@ function FormOferta() {
                                         Siguiente
                                     </button>
                                 </>
-                            ) : (
+                            )}
+                            {formStep === 2 && (
                                 <>
                                     <div className="mb-5">
                                         <label htmlFor="salary" className="mb-3 block text-base font-medium text-[#07074D]">
@@ -227,17 +242,78 @@ function FormOferta() {
                                         ></textarea>
                                     </div>
                                     <div className="mb-5">
-                                        <label htmlFor="preguntas" className="mb-3 block text-base font-medium text-[#07074D]">
-                                            Preguntas del reclutador
+                                        <label htmlFor="horario" className="mb-3 block text-base font-medium text-[#07074D]">
+                                            Horario del puesto
                                         </label>
-                                        <textarea
-                                            name="preguntas"
-                                            id="preguntas"
-                                            placeholder="Preguntas"
-                                            value={formData.preguntas}
+                                        <input
+                                            type="text"
+                                            name="horario"
+                                            id="horario"
+                                            placeholder="Horario"
+                                            value={formData.horario}
                                             onChange={handleInputChange}
                                             className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                                        ></textarea>
+                                        />
+                                    </div>
+                                    <div className="flex justify-between">
+                                        <button
+                                            onClick={handleBackButtonClick}
+                                            className="hover:shadow-form rounded-md w-56 bg-powercolor py-3 px-8 text-center text-base font-semibold text-white outline-none"
+                                        >
+                                            Atrás
+                                        </button>
+                                        <button
+                                            onClick={handleNextButtonClick}
+                                            className="hover:shadow-form rounded-md w-56 bg-primarycolor py-3 px-8 text-center text-base font-semibold text-white outline-none"
+                                        >
+                                            Siguiente
+                                        </button>
+                                    </div>
+                                </>
+                            )}
+                            {formStep === 3 && (
+                                <>
+                                    <div className="mb-5">
+                                        <label htmlFor="preg_1" className="mb-3 block text-base font-medium text-[#07074D]">
+                                            Pregunta 1 para el postulante
+                                        </label>
+                                        <input
+                                            type="text"
+                                            name="preg_1"
+                                            id="preg_1"
+                                            placeholder="Pregunta 1"
+                                            value={formData.preg_1}
+                                            onChange={handleInputChange}
+                                            className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                                        />
+                                    </div>
+                                    <div className="mb-5">
+                                        <label htmlFor="preg_2" className="mb-3 block text-base font-medium text-[#07074D]">
+                                            Pregunta 2 para el postulante
+                                        </label>
+                                        <input
+                                            type="text"
+                                            name="preg_2"
+                                            id="preg_2"
+                                            placeholder="Pregunta 2"
+                                            value={formData.preg_2}
+                                            onChange={handleInputChange}
+                                            className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                                        />
+                                    </div>
+                                    <div className="mb-5">
+                                        <label htmlFor="preg_3" className="mb-3 block text-base font-medium text-[#07074D]">
+                                            Pregunta 3 para el postulante
+                                        </label>
+                                        <input
+                                            type="text"
+                                            name="preg_3"
+                                            id="preg_3"
+                                            placeholder="Pregunta 3"
+                                            value={formData.preg_3}
+                                            onChange={handleInputChange}
+                                            className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                                        />
                                     </div>
                                     <div className="flex justify-between">
                                         <button
