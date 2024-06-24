@@ -1,17 +1,13 @@
-// InfoJob.js
-
 import React, { useState, useEffect, useRef } from 'react';
 import { FaLocationDot, FaWhatsapp } from 'react-icons/fa6';
 import { CiShare2 } from 'react-icons/ci';
 import { useNavigate } from 'react-router-dom';
-import ModalInfo from './ModalInfo'; // Importar el componente ApplyModal
 import QuestionsModal from './QuestionsModal'; // Importar el componente QuestionsModal
-import { FaCopy, FaFacebookF} from "react-icons/fa";
+import { FaCopy, FaFacebookF } from "react-icons/fa";
 import { IoLogoWhatsapp } from "react-icons/io";
 
 function InfoJob({ selectedJob }) {
   const [atBottom, setAtBottom] = useState(false);
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [isQuestionsModalOpen, setIsQuestionsModalOpen] = useState(false);
   const [isShareMenuOpen, setIsShareMenuOpen] = useState(false);
   const contentRef = useRef(null);
@@ -82,16 +78,7 @@ function InfoJob({ selectedJob }) {
   const whatsappUrl = `${whatsappBaseUrl}?text=${encodeURIComponent(whatsappMessage)}`;
 
   const handleApplyClick = () => {
-    setIsModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-  };
-
-  const handleConfirmApply = () => {
-    setIsModalOpen(false);
-    setIsQuestionsModalOpen(true); // Mostrar el modal de preguntas después de confirmar la postulación
+    setIsQuestionsModalOpen(true); // Mostrar el modal de preguntas directamente
   };
 
   const handleShareClick = () => {
@@ -101,7 +88,7 @@ function InfoJob({ selectedJob }) {
   const handleCopyLink = () => {
     const shareUrl = `http://localhost:5173/Share?id=${selectedJob.id_oferta}`;
     navigator.clipboard.writeText(shareUrl);
-    
+
     const copiedMessage = document.createElement('div');
     copiedMessage.textContent = 'Enlace Copiado';
     copiedMessage.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
@@ -114,11 +101,11 @@ function InfoJob({ selectedJob }) {
     copiedMessage.style.borderRadius = '5px';
     copiedMessage.style.zIndex = '9999';
     document.body.appendChild(copiedMessage);
-  
+
     setTimeout(() => {
       copiedMessage.remove();
     }, 3000);
-    
+
     setIsShareMenuOpen(false);
   };
 
@@ -163,30 +150,29 @@ function InfoJob({ selectedJob }) {
           POSTULARME
         </button>
         <div ref={shareButtonRef} className="ml-2 flex items-center justify-center bg-[#0057c2] rounded-full cursor-pointer hover:bg-blue-300 mb-4 relative" style={{ height: '40px', width: '40px' }} onClick={handleShareClick}>
-        <CiShare2 size={24} color="white" />
+          <CiShare2 size={24} color="white" />
         
-        {isShareMenuOpen && (
-        <div className="absolute right-0 mt-2 w-48 bg-white border rounded shadow-lg z-50">
-        <div className="py-2">
-        
-        <a href={`https://wa.me/?text=${encodeURIComponent(`Hola, te puede interesar este puesto de trabajo: ${selectedJob.puesto}. Aquí tienes el enlace: http://localhost:5173/Share?id=${selectedJob.id_oferta}`)}`} target="_blank" rel="noopener noreferrer" className="flex items-center px-4 py-2 text-gray-800 hover:bg-blue-50">
-        <IoLogoWhatsapp className="mr-2" size={16} />
-        <span>WhatsApp</span>
-        </a>
-        
-        <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href + `/Share?id=${selectedJob.id_oferta}`)}`} target="_blank" rel="noopener noreferrer" className="flex items-center px-4 py-2 text-gray-800 hover:bg-blue-50">
-          <FaFacebookF className="mr-2" size={16} />
-          <span>Facebook</span>
-        </a>
-        
-        <button onClick={handleCopyLink} className="flex items-center w-full px-4 py-2 text-gray-800 hover:bg-blue-50">
-          <FaCopy className="mr-2" size={16} />
-          <span>Copiar Enlace</span>
-        </button>
-      </div>
-    </div>
-  )}
-</div>
+          {isShareMenuOpen && (
+            <div className="absolute right-0 mt-2 w-48 bg-white border rounded shadow-lg z-50">
+              <div className="py-2">
+                <a href={`https://wa.me/?text=${encodeURIComponent(`Hola, te puede interesar este puesto de trabajo: ${selectedJob.puesto}. Aquí tienes el enlace: http://localhost:5173/Share?id=${selectedJob.id_oferta}`)}`} target="_blank" rel="noopener noreferrer" className="flex items-center px-4 py-2 text-gray-800 hover:bg-blue-50">
+                  <IoLogoWhatsapp className="mr-2" size={16} />
+                  <span>WhatsApp</span>
+                </a>
+                
+                <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href + `/Share?id=${selectedJob.id_oferta}`)}`} target="_blank" rel="noopener noreferrer" className="flex items-center px-4 py-2 text-gray-800 hover:bg-blue-50">
+                  <FaFacebookF className="mr-2" size={16} />
+                  <span>Facebook</span>
+                </a>
+                
+                <button onClick={handleCopyLink} className="flex items-center w-full px-4 py-2 text-gray-800 hover:bg-blue-50">
+                  <FaCopy className="mr-2" size={16} />
+                  <span>Copiar Enlace</span>
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
       <div className="border-t border-gray-300 my-2" style={{ width: '100%' }}></div>
       <div ref={contentRef} className="mx-auto mt-3 w-full overflow-y-auto" style={{ height: 'calc(100% - 180px)' }}>
@@ -215,7 +201,6 @@ function InfoJob({ selectedJob }) {
           </a>
         )}
       </div>
-      <ModalInfo isOpen={isModalOpen} onClose={handleCloseModal} onConfirm={handleConfirmApply} />
       <QuestionsModal isOpen={isQuestionsModalOpen} onClose={() => setIsQuestionsModalOpen(false)} selectedJob={selectedJob} />
     </div>
   );

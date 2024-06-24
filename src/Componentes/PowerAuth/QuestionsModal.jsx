@@ -95,11 +95,19 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
           ×
         </button>
         <div className="flex flex-col items-center justify-center mt-4">
-          <h2 className="text-2xl font-bold mb-4">Preguntas de la Aplicación</h2>
+          <h2 className="text-2xl font-bold mb-4">Preguntas para el Postulante</h2>
           {loading ? (
             <p>Cargando preguntas...</p>
           ) : questions.length === 0 ? (
-            <p>No hay preguntas disponibles.</p>
+            <div className="flex flex-col items-center">
+              <p>No hay preguntas disponibles.</p>
+              <button
+                className="bg-green-500 text-white font-bold py-2 px-4 rounded-full w-32 mt-4"
+                onClick={handleSubmit}
+              >
+                Enviar
+              </button>
+            </div>
           ) : (
             <div>
               <p>{questions[currentQuestionIndex]}</p>
