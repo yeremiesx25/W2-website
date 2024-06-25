@@ -5,6 +5,7 @@ import DeleteButton from './DeleteButton';
 import { FaRegEdit } from "react-icons/fa";
 import { UserAuth } from "../../Context/AuthContext";
 import { supabase } from '../../supabase/supabase.config';
+import { Link } from 'react-router-dom';
 
 const removeAccents = (str) => {
   return str ? str.normalize("NFD").replace(/[\u0300-\u036f]/g, "") : "";
@@ -21,7 +22,7 @@ function JobList() {
       const fetchJobs = async () => {
         const { data, error } = await supabase
           .from('Oferta')
-          .select('id_oferta, puesto, ubicacion, fecha_publicacion, count_postulados') // Asegúrate de seleccionar count_postulados
+          .select('id_oferta, puesto, ubicacion, fecha_publicacion, count_postulados')
           .eq('user_id', user.id);
   
         if (error) {
@@ -79,7 +80,9 @@ function JobList() {
           <tbody className="bg-white divide-y divide-gray-200">
             {filteredJobs.map((job) => (
               <tr key={job.id_oferta} className='max-h-20'>
-                <td className="px-6 py-4 whitespace-nowrap">{job.puesto}</td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <Link to={`/job/${job.id_oferta}`} className="text-blue-600 hover:text-blue-800">{job.puesto}</Link>
+                </td>
                 <td className="px-6 py-4 whitespace-nowrap">{job.ubicacion}</td>
                 <td className="px-6 py-4 whitespace-nowrap">{job.fecha_publicacion}</td>
                 <td className="px-6 py-4 whitespace-nowrap">
