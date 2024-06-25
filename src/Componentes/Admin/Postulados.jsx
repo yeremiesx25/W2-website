@@ -22,8 +22,8 @@ function Postulados() {
         setJobDetails(jobData);
 
         const { data: postuladosData, error: postuladosError } = await supabase
-          .from('Postulados') // Asegúrate de que esta es la tabla correcta
-          .select('id, nombre, email') // Selecciona los campos necesarios
+          .from('Postulacion')
+          .select('name_user, name_job, fecha_postulacion') // Selecciona los campos necesarios
           .eq('id_oferta', id);
 
         if (postuladosError) {
@@ -49,13 +49,12 @@ function Postulados() {
         
       <h1 className='text-2xl font-bold'>{jobDetails.puesto}</h1>
       <p className='text-gray-600'>{jobDetails.ubicacion}</p>
-      <p className='text-gray-600'>{jobDetails.fecha_publicacion}</p>
       <h2 className='text-xl font-semibold mt-4'>Postulados</h2>
       <ul>
         {postulados.map((postulado) => (
           <li key={postulado.id} className='border-b py-2'>
-            <p className='font-medium'>{postulado.nombre}</p>
-            <p className='text-gray-600'>{postulado.email}</p>
+            <p className='font-medium'>{postulado.name_user}</p>
+            <p className='text-gray-600'>{postulado.fecha_postulacion}</p>
           </li>
         ))}
       </ul></div>

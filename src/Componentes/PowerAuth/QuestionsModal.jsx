@@ -119,7 +119,15 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
                 placeholder="Escribe tu respuesta aquí"
               />
               <div className="flex justify-center space-x-4 mt-2">
-                {currentQuestionIndex === 0 && (
+                {currentQuestionIndex > 0 && (
+                  <button
+                    className="bg-gray-300 text-black font-bold py-2 px-4 rounded-full w-32"
+                    onClick={handlePrevious}
+                  >
+                    Anterior
+                  </button>
+                )}
+                {currentQuestionIndex < questions.length - 1 && (
                   <button
                     className="bg-[#0057c2] text-white font-bold py-2 px-4 rounded-full w-32"
                     onClick={handleNext}
@@ -127,37 +135,13 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
                     Siguiente
                   </button>
                 )}
-                {currentQuestionIndex > 0 && currentQuestionIndex < questions.length - 1 && (
-                  <>
-                    <button
-                      className="bg-gray-300 text-black font-bold py-2 px-4 rounded-full w-32"
-                      onClick={handlePrevious}
-                    >
-                      Anterior
-                    </button>
-                    <button
-                      className="bg-[#0057c2] text-white font-bold py-2 px-4 rounded-full w-32"
-                      onClick={handleNext}
-                    >
-                      Siguiente
-                    </button>
-                  </>
-                )}
                 {currentQuestionIndex === questions.length - 1 && (
-                  <>
-                    <button
-                      className="bg-gray-300 text-black font-bold py-2 px-4 rounded-full w-32"
-                      onClick={handlePrevious}
-                    >
-                      Anterior
-                    </button>
-                    <button
-                      className="bg-green-500 text-white font-bold py-2 px-4 rounded-full w-32"
-                      onClick={handleSubmit}
-                    >
-                      Enviar
-                    </button>
-                  </>
+                  <button
+                    className="bg-green-500 text-white font-bold py-2 px-4 rounded-full w-32"
+                    onClick={handleSubmit}
+                  >
+                    Enviar
+                  </button>
                 )}
               </div>
             </div>
