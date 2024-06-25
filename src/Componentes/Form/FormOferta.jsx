@@ -23,6 +23,9 @@ function FormOferta() {
         user_id: ""
     });
 
+    const [showSecondQuestion, setShowSecondQuestion] = useState(false);
+    const [showThirdQuestion, setShowThirdQuestion] = useState(false);
+
     useEffect(() => {
         if (user) {
             setFormData((prevData) => ({
@@ -64,6 +67,14 @@ function FormOferta() {
             setFormStep(1);
         } else if (formStep === 3) {
             setFormStep(2);
+        }
+    };
+
+    const handleAddQuestion = () => {
+        if (!showSecondQuestion) {
+            setShowSecondQuestion(true);
+        } else if (!showThirdQuestion) {
+            setShowThirdQuestion(true);
         }
     };
 
@@ -287,34 +298,47 @@ function FormOferta() {
                                             className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                                         />
                                     </div>
-                                    <div className="mb-5">
-                                        <label htmlFor="preg_2" className="mb-3 block text-base font-medium text-[#07074D]">
-                                            Pregunta 2 para el postulante
-                                        </label>
-                                        <input
-                                            type="text"
-                                            name="preg_2"
-                                            id="preg_2"
-                                            placeholder="Pregunta 2"
-                                            value={formData.preg_2}
-                                            onChange={handleInputChange}
-                                            className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                                        />
-                                    </div>
-                                    <div className="mb-5">
-                                        <label htmlFor="preg_3" className="mb-3 block text-base font-medium text-[#07074D]">
-                                            Pregunta 3 para el postulante
-                                        </label>
-                                        <input
-                                            type="text"
-                                            name="preg_3"
-                                            id="preg_3"
-                                            placeholder="Pregunta 3"
-                                            value={formData.preg_3}
-                                            onChange={handleInputChange}
-                                            className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                                        />
-                                    </div>
+                                    {showSecondQuestion && (
+                                        <div className="mb-5">
+                                            <label htmlFor="preg_2" className="mb-3 block text-base font-medium text-[#07074D]">
+                                                Pregunta 2 para el postulante
+                                            </label>
+                                            <input
+                                                type="text"
+                                                name="preg_2"
+                                                id="preg_2"
+                                                placeholder="Pregunta 2"
+                                                value={formData.preg_2}
+                                                onChange={handleInputChange}
+                                                className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                                            />
+                                        </div>
+                                    )}
+                                    {showThirdQuestion && (
+                                        <div className="mb-5">
+                                            <label htmlFor="preg_3" className="mb-3 block text-base font-medium text-[#07074D]">
+                                                Pregunta 3 para el postulante
+                                            </label>
+                                            <input
+                                                type="text"
+                                                name="preg_3"
+                                                id="preg_3"
+                                                placeholder="Pregunta 3"
+                                                value={formData.preg_3}
+                                                onChange={handleInputChange}
+                                                className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                                            />
+                                        </div>
+                                    )}
+                                    {!showSecondQuestion || !showThirdQuestion ? (
+                                        <button
+                                            type="button"
+                                            onClick={handleAddQuestion}
+                                            className="mb-5 flex items-center justify-center w-12 h-12 rounded-full bg-gray-300 text-black text-2xl outline-none focus:shadow-md"
+                                        >
+                                            +
+                                        </button>
+                                    ) : null}
                                     <div className="flex justify-between">
                                         <button
                                             onClick={handleBackButtonClick}
