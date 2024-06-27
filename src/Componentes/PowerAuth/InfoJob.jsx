@@ -79,18 +79,32 @@ function InfoJob({ selectedJob }) {
     return null; // Evitar renderizar si selectedJob es null
   }
 
+  // Función para formatear el contenido como lista si es beneficios, requisitos o funciones
+  const formatContentAsList = (content) => {
+    if (!content) return null;
+    // Verificar si el contenido tiene listas separadas por guiones o puntos
+    const isList = content.includes('-') || content.includes('•');
+    if (isList) {
+      return content.split(/[-•]/).map((item, index) => (
+        <li key={index} className="mt-1">{item.trim()}</li>
+      ));
+    } else {
+      return content; // Devolver el contenido sin modificar si no hay listas detectadas
+    }
+  };
+
   const jobDetails = [
     {
       title: '¿Por qué deberías unirte a nosotros?',
-      content: selectedJob.beneficios,
+      content: formatContentAsList(selectedJob.beneficios),
     },
     {
       title: '¿Qué buscamos?',
-      content: selectedJob.requisitos,
+      content: formatContentAsList(selectedJob.requisitos),
     },
     {
       title: '¿Qué es lo que harás?',
-      content: selectedJob.funciones,
+      content: formatContentAsList(selectedJob.funciones),
     },
     {
       title: 'Horario de Trabajo',
@@ -132,13 +146,6 @@ function InfoJob({ selectedJob }) {
     }, 3000);
 
     setIsShareMenuOpen(false);
-  };
-
-  const formatContentAsList = (content) => {
-    if (!content) return null;
-    return content.split(/[-•]/).map((item, index) => (
-      <li key={index} className="mt-1">{item.trim()}</li>
-    ));
   };
 
   return (
@@ -215,9 +222,15 @@ function InfoJob({ selectedJob }) {
             <div className="font-semibold font-dmsans text-primarytext">
               <div>{detail.title}</div>
             </div>
-            <ul className="mt-3 text-gray-800" style={{ wordWrap: 'break-word', overflowWrap: 'break-word', width: '100%' }}>
-              {formatContentAsList(detail.content)}
-            </ul>
+            {typeof detail.content === 'string' ? (
+              <p className="mt-3 text-gray-800" style={{ wordWrap: 'break-word', overflowWrap: 'break-word', width: '100%' }}>
+                {detail.content}
+              </p>
+            ) : (
+              <ul className="mt-3 text-gray-800" style={{ wordWrap: 'break-word', overflowWrap: 'break-word', width: '100%' }}>
+                {detail.content}
+              </ul>
+            )}
           </div>
         ))}
       </div>

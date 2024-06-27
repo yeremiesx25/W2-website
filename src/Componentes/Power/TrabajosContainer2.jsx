@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from 'react';
 import CardTrabajo2 from './CardTrabajo2';
 import InfoJob from '../PowerAuth/InfoJob';
-import JobsContext from '../../Context/JobsContext';
+import JobsContext from '../../Context/JobsContext'; // Ajusta la ruta según sea necesario
 
 function TrabajosContainer2() {
   const { userSearchResults } = useContext(JobsContext);
@@ -25,17 +25,17 @@ function TrabajosContainer2() {
             scrollbarWidth: 'none'   // Firefox
           }}
         >
-          {userSearchResults
-            .slice()
-            .sort((a, b) => new Date(b.fecha_publicacion) - new Date(a.fecha_publicacion))
-            .map((job, index) => (
-              <CardTrabajo2
-                key={index}
-                job={job}
-                onSelectJob={setSelectedJob}
-                isSelected={selectedJob === job}
-              />
-            ))}
+     {userSearchResults
+  .slice()
+  .sort((a, b) => new Date(b.fecha_publicacion) - new Date(a.fecha_publicacion))
+  .map((job, index) => (
+    <CardTrabajo2
+      key={index}
+      job={job}
+      onSelectJob={setSelectedJob}
+      isSelected={selectedJob === job}
+    />
+))}
         </div>
         {selectedJob && (
           <InfoJob selectedJob={selectedJob} />
