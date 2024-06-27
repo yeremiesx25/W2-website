@@ -64,14 +64,15 @@ function JobList() {
                 </div>
               </th>
               <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
+                Postulados
+              </th>
+              <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
                 Ubicación
               </th>
               <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
                 Fecha
               </th>
-              <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
-                Postulados
-              </th>
+              
               <th scope="col" className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500 dark:text-gray-400">
                 Acciones
               </th>
@@ -83,11 +84,12 @@ function JobList() {
                 <td className="px-6 py-4 whitespace-nowrap">
                   <Link to={`/job/${job.id_oferta}`} className="text-blue-600 hover:text-blue-800">{job.puesto}</Link>
                 </td>
-                <td className="px-6 py-4 whitespace-nowrap">{job.ubicacion}</td>
-                <td className="px-6 py-4 whitespace-nowrap">{job.fecha_publicacion}</td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <span className="px-2 inline-flex text-md leading-5 font-semibold rounded-full bg-blue-100 text-blue-800">{job.count_postulados}</span>
                 </td>
+                <td className="px-6 py-4 whitespace-nowrap">{job.ubicacion}</td>
+                <td className="px-6 py-4 whitespace-nowrap">{job.fecha_publicacion}</td>
+                
                 <td className="px-6 py-4 whitespace-nowrap flex space-x-2">
                   <button className="px-4 py-2 font-medium text-white bg-blue-600 rounded-md hover:bg-blue-500 focus:outline-none focus:shadow-outline-blue active:bg-blue-600 transition duration-150 ease-in-out">
                     <FaRegEdit />
