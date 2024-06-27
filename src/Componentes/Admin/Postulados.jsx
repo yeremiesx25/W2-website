@@ -23,7 +23,7 @@ function Postulados() {
 
         const { data: postuladosData, error: postuladosError } = await supabase
           .from('Postulacion')
-          .select('name_user, name_job, fecha_postulacion') // Selecciona los campos necesarios
+          .select('name_user, fecha_postulacion') // Selecciona los campos necesarios
           .eq('id_oferta', id);
 
         if (postuladosError) {

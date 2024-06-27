@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from "../../supabase/supabase.config"; // Importa tu cliente de Supabase
+import { UserAuth } from '../../Context/AuthContext'; // Importa el contexto de autenticación
 
 function QuestionsModal({ isOpen, onClose, selectedJob }) {
+  const { user } = UserAuth(); // Obtiene la información del usuario autenticado
   const [questions, setQuestions] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [loading, setLoading] = useState(true);
@@ -78,10 +80,26 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
         throw updateError;
       }
 
-      console.log('Actualización exitosa de count_postulados');
+      // Insertar una nueva fila en la tabla Postulacion
+      const { error: insertError } = await supabase
+        .from('Postulacion')
+        .insert({
+          id_oferta: selectedJob.id_oferta,
+          user_id: user.id,
+          name_user: user.user_metadata.full_name, // Asegúrate de que este campo exista y contenga el nombre del usuario
+          correo: user.email,
+          fecha_postulacion: new Date(),
+          estado: 'pendiente',
+        });
+
+      if (insertError) {
+        throw insertError;
+      }
+
+      console.log('Actualización exitosa de count_postulados y creación de nueva Postulacion');
       onClose();
     } catch (error) {
-      console.error('Error updating count_postulados:', error.message);
+      console.error('Error al enviar la postulación:', error.message);
     }
   };
 
