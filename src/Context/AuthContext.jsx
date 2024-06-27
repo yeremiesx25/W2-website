@@ -46,6 +46,20 @@ export const AuthContextProvider = ({ children }) => {
         setUser(user);
         localStorage.setItem('user', JSON.stringify(user));
 
+        // Save or update user info in the database
+        const { data, error: upsertError } = await supabase
+          .from('Usuarios')
+          .upsert({
+            id: user.id,
+            name: user.user_metadata.full_name,
+            email: user.email,
+            profile_image: user.user_metadata.avatar_url
+          });
+
+        if (upsertError) {
+          console.error('Error upserting user info:', upsertError);
+        }
+
         // Redirigir a PowerAuth solo si el usuario acaba de iniciar sesión
         if (justLoggedIn || location.pathname === '/') {
           navigate("/PowerAuth", { replace: true });

@@ -115,7 +115,11 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
         <div className="flex flex-col items-center justify-center mt-4">
           <h2 className="text-2xl font-bold mb-4">Preguntas para el Postulante</h2>
           {loading ? (
-            <p>Cargando preguntas...</p>
+            <div class="relative inline-flex">
+            <div class="w-8 h-8 bg-blue-500 rounded-full"></div>
+            <div class="w-8 h-8 bg-blue-500 rounded-full absolute top-0 left-0 animate-ping"></div>
+            <div class="w-8 h-8 bg-blue-500 rounded-full absolute top-0 left-0 animate-pulse"></div>
+        </div>
           ) : questions.length === 0 ? (
             <div className="flex flex-col items-center">
               <p>No hay preguntas disponibles.</p>
