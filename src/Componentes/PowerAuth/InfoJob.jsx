@@ -2,18 +2,18 @@ import React, { useState, useEffect, useRef } from 'react';
 import { FaLocationDot, FaWhatsapp } from 'react-icons/fa6';
 import { CiShare2 } from 'react-icons/ci';
 import { useNavigate } from 'react-router-dom';
-import QuestionsModal from './QuestionsModal';
+import QuestionsModal from './QuestionsModal'; // Importar el componente QuestionsModal
 import { FaCopy, FaFacebookF } from "react-icons/fa";
 import { IoLogoWhatsapp } from "react-icons/io";
-import { supabase } from '../../supabase/supabase.config';
-import { UserAuth } from '../../Context/AuthContext'; // Importar el contexto de autenticación
+import { supabase } from "../../supabase/supabase.config"; // Importar cliente de Supabase
+import { UserAuth } from '../../Context/AuthContext'; // Importar contexto de autenticación
 
-const InfoJob = ({ selectedJob }) => {
-  const { user } = UserAuth();
+function InfoJob({ selectedJob }) {
+  const { user } = UserAuth(); // Obtener información del usuario autenticado
   const [atBottom, setAtBottom] = useState(false);
   const [isQuestionsModalOpen, setIsQuestionsModalOpen] = useState(false);
   const [isShareMenuOpen, setIsShareMenuOpen] = useState(false);
-  const [appliedJobs, setAppliedJobs] = useState({});
+  const [hasApplied, setHasApplied] = useState(false); // Estado para rastrear si el usuario ya se postuló
   const contentRef = useRef(null);
   const shareButtonRef = useRef(null);
   const navigate = useNavigate();
@@ -42,54 +42,68 @@ const InfoJob = ({ selectedJob }) => {
   }, []);
 
   useEffect(() => {
-    const checkApplication = async () => {
-      if (user) {
+    const handleClickOutside = (event) => {
+      if (shareButtonRef.current && !shareButtonRef.current.contains(event.target)) {
+        setIsShareMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
+
+  useEffect(() => {
+    const checkIfApplied = async () => {
+      if (user && selectedJob) {
         const { data, error } = await supabase
           .from('Postulacion')
-          .select('id_postulacion, id_oferta, name_user, name_job')
-          .eq('id_oferta', selectedJob.id_oferta)
+          .select('id_postulacion')
           .eq('user_id', user.id)
+          .eq('id_oferta', selectedJob.id_oferta)
           .single();
 
-        if (error) {
-          console.error('Error al verificar la postulación:', error);
+        if (error && error.code !== 'PGRST116') {
+          console.error('Error checking if user has applied:', error.message);
         } else {
-          const updatedAppliedJobs = { ...appliedJobs };
-          updatedAppliedJobs[selectedJob.id_oferta] = data !== null;
-          setAppliedJobs(updatedAppliedJobs);
+          setHasApplied(!!data); // Si hay datos, el usuario ya se ha postulado
         }
       }
     };
 
-    checkApplication();
-  }, [selectedJob, user]);
+    checkIfApplied();
+  }, [user, selectedJob]);
 
-  const handleApplyClick = async () => {
-    if (appliedJobs[selectedJob.id_oferta]) {
-      return;
-    }
+  if (!selectedJob) {
+    return null; // Evitar renderizar si selectedJob es null
+  }
 
-    const { data, error } = await supabase
-      .from('Postulacion')
-      .insert([
-        {
-          id_oferta: selectedJob.id_oferta,
-          user_id: user.id,
-          correo: user.email,
-          fecha_postulacion: new Date(),
-          estado: 'pendiente',
-          name_user: user.user_metadata.full_name,
-          name_job: selectedJob.puesto
-        }
-      ]);
+  const jobDetails = [
+    {
+      title: '¿Por qué deberías unirte a nosotros?',
+      content: selectedJob.beneficios,
+    },
+    {
+      title: '¿Qué buscamos?',
+      content: selectedJob.requisitos,
+    },
+    {
+      title: '¿Qué es lo que harás?',
+      content: selectedJob.funciones,
+    },
+    {
+      title: 'Horario de Trabajo',
+      content: selectedJob.horario,
+    },
+  ];
 
-    if (error) {
-      console.error('Error al postular:', error);
-    } else {
-      console.log('Postulación exitosa:', data);
-      setIsQuestionsModalOpen(true);
-      setAppliedJobs({ ...appliedJobs, [selectedJob.id_oferta]: true });
-    }
+  const whatsappBaseUrl = selectedJob.wtsp_url ? selectedJob.wtsp_url.split('?')[0] : '';
+  const whatsappMessage = `Hola, estoy interesado en el puesto de ${selectedJob.puesto}`;
+  const whatsappUrl = `${whatsappBaseUrl}?text=${encodeURIComponent(whatsappMessage)}`;
+
+  const handleApplyClick = () => {
+    setIsQuestionsModalOpen(true); // Mostrar el modal de preguntas directamente
   };
 
   const handleShareClick = () => {
@@ -120,53 +134,46 @@ const InfoJob = ({ selectedJob }) => {
     setIsShareMenuOpen(false);
   };
 
-  const jobDetails = [
-    {
-      title: '¿Por qué deberías unirte a nosotros?',
-      content: selectedJob.beneficios,
-    },
-    {
-      title: '¿Qué buscamos?',
-      content: selectedJob.requisitos,
-    },
-    {
-      title: '¿Qué es lo que harás?',
-      content: selectedJob.funciones,
-    },
-    {
-      title: 'Horario de Trabajo',
-      content: selectedJob.horario,
-    },
-  ];
-
-  const whatsappBaseUrl = selectedJob.wtsp_url ? selectedJob.wtsp_url.split('?')[0] : '';
-  const whatsappMessage = `Hola, estoy interesado en el puesto de ${selectedJob.puesto}`;
-  const whatsappUrl = `${whatsappBaseUrl}?text=${encodeURIComponent(whatsappMessage)}`;
-
   return (
-    <div className="selected-job-info w-full sm:w-1/2 border rounded-lg flex flex-col p-4 mx-8 bg-white shadow-lg" style={{ height: '650px', overflowY: 'auto', position: 'relative' }}>
+    <div
+      className="selected-job-info w-full sm:w-1/2 border rounded-lg flex flex-col p-4 mx-8 bg-white shadow-lg"
+      style={{ height: '650px', overflowY: 'auto', position: 'relative' }}
+    >
       <h2 className="ml-1 mt-3 font-bold text-4xl text-black">{selectedJob.puesto}</h2>
       <div className="flex items-center justify-between mb-2 mt-2">
         <div className="flex flex-col w-full">
           <div className="flex items-center justify-start">
-            <span className="text-black text-sm uppercase font-semibold tracking-wide" style={{ display: 'flex', alignItems: 'center' }}>
+            <span
+              className="text-black text-sm uppercase font-semibold tracking-wide"
+              style={{ display: 'flex', alignItems: 'center' }}
+            >
               {selectedJob.empresa}
             </span>
             <span className="inline-block mx-4 h-4 w-px bg-gray-400"></span>
-            <span className="text-black text-sm uppercase font-semibold tracking-wide" style={{ display: 'flex', alignItems: 'center' }}>
+            <span
+              className="text-black text-sm uppercase font-semibold tracking-wide"
+              style={{ display: 'flex', alignItems: 'center' }}
+            >
               <FaLocationDot style={{ color: 'black', marginRight: '5px' }} />
               {selectedJob.ubicacion}
             </span>
             <span className="inline-block mx-4 h-4 w-px bg-gray-400"></span>
-            <span className="text-black text-sm uppercase font-semibold tracking-wide" style={{ display: 'flex', alignItems: 'center' }}>
+            <span
+              className="text-black text-sm uppercase font-semibold tracking-wide"
+              style={{ display: 'flex', alignItems: 'center' }}
+            >
               S/. {selectedJob.sueldo} al mes
             </span>
           </div>
         </div>
       </div>
       <div className="flex justify-start mt-2 items-center">
-        <button className="bg-[#0057c2] text-white font-bold py-2 px-4 rounded-full mb-4" onClick={handleApplyClick} disabled={appliedJobs[selectedJob.id_oferta]}>
-          {appliedJobs[selectedJob.id_oferta] ? "Ya te has postulado" : "POSTULARME"}
+        <button
+          className={`font-bold py-2 px-4 rounded-full mb-4 ${hasApplied ? 'bg-[#0057c2] text-white' : 'bg-[#0057c2] text-white'}`}
+          onClick={hasApplied ? null : handleApplyClick}
+          disabled={hasApplied}
+        >
+          {hasApplied ? 'Ya te has postulado' : 'POSTULARME'}
         </button>
         <div ref={shareButtonRef} className="ml-2 flex items-center justify-center bg-[#0057c2] rounded-full cursor-pointer hover:bg-blue-300 mb-4 relative" style={{ height: '40px', width: '40px' }} onClick={handleShareClick}>
           <CiShare2 size={24} color="white" />
@@ -179,7 +186,7 @@ const InfoJob = ({ selectedJob }) => {
                   <span>WhatsApp</span>
                 </a>
                 
-                <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(`http://localhost:5173/Share?id=${selectedJob.id_oferta}`)}`} target="_blank" rel="noopener noreferrer" className="flex items-center px-4 py-2 text-gray-800 hover:bg-blue-50">
+                <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href + `/Share?id=${selectedJob.id_oferta}`)}`} target="_blank" rel="noopener noreferrer" className="flex items-center px-4 py-2 text-gray-800 hover:bg-blue-50">
                   <FaFacebookF className="mr-2" size={16} />
                   <span>Facebook</span>
                 </a>
@@ -208,8 +215,12 @@ const InfoJob = ({ selectedJob }) => {
         ))}
       </div>
       <div className="flex justify-center mt-4" style={{ opacity: atBottom ? 1 : 0, transition: 'opacity 0.3s' }}>
-        <button className="bg-[#0057c2] text-white font-bold py-2 px-4 rounded-full mr-4" onClick={handleApplyClick} disabled={appliedJobs[selectedJob.id_oferta]}>
-          {appliedJobs[selectedJob.id_oferta] ? "Ya te has postulado" : "POSTULARME"}
+        <button
+          className={`font-bold py-2 px-4 rounded-full mr-4 ${hasApplied ? 'bg-[#0057c2] text-white' : 'bg-[#0057c2] text-white'}`}
+          onClick={hasApplied ? null : handleApplyClick}
+          disabled={hasApplied}
+        >
+          {hasApplied ? 'Ya te has postulado' : 'POSTULARME'}
         </button>
         {whatsappBaseUrl && (
           <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
@@ -223,6 +234,6 @@ const InfoJob = ({ selectedJob }) => {
       <QuestionsModal isOpen={isQuestionsModalOpen} onClose={() => setIsQuestionsModalOpen(false)} selectedJob={selectedJob} />
     </div>
   );
-};
+}
 
 export default InfoJob;
