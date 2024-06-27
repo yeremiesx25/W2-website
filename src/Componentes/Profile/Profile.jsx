@@ -2,29 +2,10 @@ import React, { useState } from "react";
 import HeaderPowerAuth from "../PowerAuth/HeaderPowerAuth";
 import { UserAuth } from "../../Context/AuthContext";
 
+
 function Profile() {
   const { user } = UserAuth();
-  const [cvFile, setCvFile] = useState(null);
-  const [experience, setExperience] = useState([
-    { company: "", position: "", duration: "" },
-  ]);
 
-  const handleCvUpload = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      setCvFile(file);
-    }
-  };
-
-  const handleExperienceChange = (index, field, value) => {
-    const newExperience = [...experience];
-    newExperience[index][field] = value;
-    setExperience(newExperience);
-  };
-
-  const addExperience = () => {
-    setExperience([...experience, { company: "", position: "", duration: "" }]);
-  };
 
   return (
     <div className="w-full h-screen font-dmsans">
@@ -54,53 +35,10 @@ function Profile() {
         </div>
         <div className="w-1/2 h-full flex flex-col justify-around items-start">
           <div className="w-[90%] h-[40%] bg-white shadow rounded-lg p-4">
-            <h3 className="text-lg font-semibold mb-2">Cargar CV</h3>
-            <input type="file" accept="application/pdf" onChange={handleCvUpload} />
-            {cvFile && (
-              <div className="mt-2 text-sm text-gray-600">
-                <p>Archivo cargado: {cvFile.name}</p>
-              </div>
-            )}
+            
           </div>
           <div className="w-[90%] h-[40%] bg-white shadow rounded-lg p-4">
-            <h3 className="text-lg font-semibold mb-2">Experiencia Laboral</h3>
-            {experience.map((exp, index) => (
-              <div key={index} className="mb-4 p-2 border-b border-gray-200">
-                <input
-                  type="text"
-                  className="w-full p-2 mb-2 border rounded"
-                  placeholder="Empresa"
-                  value={exp.company}
-                  onChange={(e) =>
-                    handleExperienceChange(index, "company", e.target.value)
-                  }
-                />
-                <input
-                  type="text"
-                  className="w-full p-2 mb-2 border rounded"
-                  placeholder="Puesto"
-                  value={exp.position}
-                  onChange={(e) =>
-                    handleExperienceChange(index, "position", e.target.value)
-                  }
-                />
-                <input
-                  type="text"
-                  className="w-full p-2 mb-2 border rounded"
-                  placeholder="Duración"
-                  value={exp.duration}
-                  onChange={(e) =>
-                    handleExperienceChange(index, "duration", e.target.value)
-                  }
-                />
-              </div>
-            ))}
-            <button
-              className="mt-2 p-2 bg-blue-500 text-white rounded"
-              onClick={addExperience}
-            >
-              Añadir Experiencia
-            </button>
+            
           </div>
         </div>
       </div>
@@ -109,3 +47,4 @@ function Profile() {
 }
 
 export default Profile;
+  

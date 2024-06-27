@@ -43,21 +43,46 @@ function Postulados() {
 
   return (
     <div className=''>
-        <HeaderPowerAuth />
-        <div className='pl-20'>
-
+      <HeaderPowerAuth />
+      <div className='pl-20'>
+        <h1 className='text-2xl font-bold'>{jobDetails.puesto}</h1>
+        <p className='text-gray-600'>{jobDetails.ubicacion}</p>
+        <h2 className='text-xl font-semibold mt-4'>Postulados</h2>
         
-      <h1 className='text-2xl font-bold'>{jobDetails.puesto}</h1>
-      <p className='text-gray-600'>{jobDetails.ubicacion}</p>
-      <h2 className='text-xl font-semibold mt-4'>Postulados</h2>
-      <ul>
-        {postulados.map((postulado) => (
-          <li key={postulado.id} className='border-b py-2'>
-            <p className='font-medium'>{postulado.name_user}</p>
-            <p className='text-gray-600'>{postulado.fecha_postulacion}</p>
-          </li>
-        ))}
-      </ul></div>
+        <table className="min-w-full divide-y divide-gray-200 overflow-x-auto">
+          <thead className="bg-gray-50">
+            <tr>
+              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Nombre
+              </th>
+              <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Fecha de Postulación
+              </th>
+            </tr>
+          </thead>
+          <tbody className="bg-white divide-y divide-gray-200">
+            {postulados.map((postulado) => (
+              <tr key={postulado.id}>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <div className="flex items-center">
+                    <div className="flex-shrink-0 h-10 w-10">
+                      <img className="h-10 w-10 rounded-full" src="https://i.pravatar.cc/150" alt="" />
+                    </div>
+                    <div className="ml-4">
+                      <div className="text-sm font-medium text-gray-900">
+                        {postulado.name_user}
+                      </div>
+                    </div>
+                  </div>
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
+                  <div className="text-sm text-gray-500">{postulado.fecha_postulacion}</div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </div>
   );
 }

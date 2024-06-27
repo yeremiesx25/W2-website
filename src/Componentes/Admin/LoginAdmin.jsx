@@ -35,7 +35,7 @@ function LoginAdmin() {
                             <div className="px-5 py-7">
                                 <label className="font-semibold text-sm text-gray-600 pb-1 block">Correo electrónico</label>
                                 <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full" />
-                                <label className="font-semibold text-sm text-gray-600 pb-1 block">UID</label>
+                                <label className="font-semibold text-sm text-gray-600 pb-1 block">Contraseña</label>
                                 <input type="text" value={uid} onChange={(e) => setUid(e.target.value)} className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full" />
                                 {error && <p className="text-red-500 text-sm mb-3">{error}</p>}
                                 <button type="button" onClick={handleLogin} className="transition duration-200 bg-primarycolor hover:bg-blue-600 focus:bg-blue-700 focus:shadow-sm focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 text-white w-full py-2.5 rounded-lg text-sm shadow-sm hover:shadow-md font-semibold text-center inline-block">
