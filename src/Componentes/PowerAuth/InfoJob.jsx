@@ -134,6 +134,13 @@ function InfoJob({ selectedJob }) {
     setIsShareMenuOpen(false);
   };
 
+  const formatContentAsList = (content) => {
+    if (!content) return null;
+    return content.split(/[-•]/).map((item, index) => (
+      <li key={index} className="mt-1">{item.trim()}</li>
+    ));
+  };
+
   return (
     <div
       className="selected-job-info w-full sm:w-1/2 border rounded-lg flex flex-col p-4 mx-8 bg-white shadow-lg"
@@ -208,9 +215,9 @@ function InfoJob({ selectedJob }) {
             <div className="font-semibold font-dmsans text-primarytext">
               <div>{detail.title}</div>
             </div>
-            <p className="mt-3 text-gray-800" style={{ wordWrap: 'break-word', overflowWrap: 'break-word', width: '100%' }}>
-              {detail.content}
-            </p>
+            <ul className="mt-3 text-gray-800" style={{ wordWrap: 'break-word', overflowWrap: 'break-word', width: '100%' }}>
+              {formatContentAsList(detail.content)}
+            </ul>
           </div>
         ))}
       </div>
