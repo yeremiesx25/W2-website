@@ -48,8 +48,8 @@ function HeaderPower() {
 
         {/* Botones de login y registro (solo en escritorio) */}
         <div className="hidden md:flex items-center">
-          <button onClick={handleModalOpen} className="text-sm text-amber-400 hover:text-white">Iniciar sesión</button>
-          <button className="text-sm bg-amber-400 hover:bg-amber-600 text-white px-4 py-2 rounded-lg ml-4">Registrarse</button>
+          <button onClick={handleModalOpen} className="text-md w-48 font-bold bg-amber-400 hover:bg-amber-600 text-white px-4 py-2 rounded-lg ml-4">Iniciar sesión</button>
+          {/* <button className="text-sm bg-amber-400 hover:bg-amber-600 text-white px-4 py-2 rounded-lg ml-4">Registrarse</button> */}
         </div>
       </div>
 
