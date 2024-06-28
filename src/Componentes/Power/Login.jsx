@@ -46,7 +46,7 @@ function Login({ closeModal }) {
                 >
                   <span className="sr-only">Inicia Sesión con Google</span>
                   <FcGoogle className="h-8 w-8" /> {/* Icono de Google */}
-                  <span className="ml-2">Inicia Sesión con Google</span>{" "}
+                  <span className="ml-2">Continuar con Google</span>{" "}
                   {/* Texto del botón */}
                 </button>
               </div>
