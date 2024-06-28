@@ -20,11 +20,15 @@ function FormOferta() {
         preg_1: "",
         preg_2: "",
         preg_3: "",
+        preg_4: "",
+        preg_5: "",
         user_id: ""
     });
 
     const [showSecondQuestion, setShowSecondQuestion] = useState(false);
     const [showThirdQuestion, setShowThirdQuestion] = useState(false);
+    const [showFourthQuestion, setShowFourthQuestion] = useState(false);
+    const [showFifthQuestion, setShowFifthQuestion] = useState(false);
 
     useEffect(() => {
         if (user) {
@@ -75,11 +79,15 @@ function FormOferta() {
             setShowSecondQuestion(true);
         } else if (!showThirdQuestion) {
             setShowThirdQuestion(true);
+        } else if (!showFourthQuestion) {
+            setShowFourthQuestion(true);
+        } else if (!showFifthQuestion) {
+            setShowFifthQuestion(true);
         }
     };
 
     const saveFormDataToSupabase = async () => {
-        const { name, company, location, salary, jobDescription, requirements, funciones, celular, horario, preg_1, preg_2, preg_3, user_id } = formData;
+        const { name, company, location, salary, jobDescription, requirements, funciones, celular, horario, preg_1, preg_2, preg_3, preg_4, preg_5, user_id } = formData;
 
         // Generar la URL de WhatsApp
         const whatsappMessage = `Hola, estoy interesado en el puesto de ${name}`;
@@ -101,6 +109,8 @@ function FormOferta() {
                     preg_1: preg_1,
                     preg_2: preg_2,
                     preg_3: preg_3,
+                    preg_4: preg_4,
+                    preg_5: preg_5,
                     user_id: user_id
                 });
 
@@ -330,7 +340,39 @@ function FormOferta() {
                                             />
                                         </div>
                                     )}
-                                    {!showSecondQuestion || !showThirdQuestion ? (
+                                    {showFourthQuestion && (
+                                        <div className="mb-5">
+                                            <label htmlFor="preg_4" className="mb-3 block text-base font-medium text-[#07074D]">
+                                                Pregunta 4 para el postulante
+                                            </label>
+                                            <input
+                                                type="text"
+                                                name="preg_4"
+                                                id="preg_4"
+                                                placeholder="Pregunta 4"
+                                                value={formData.preg_4}
+                                                onChange={handleInputChange}
+                                                className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                                            />
+                                        </div>
+                                    )}
+                                    {showFifthQuestion && (
+                                        <div className="mb-5">
+                                            <label htmlFor="preg_5" className="mb-3 block text-base font-medium text-[#07074D]">
+                                                Pregunta 5 para el postulante
+                                            </label>
+                                            <input
+                                                type="text"
+                                                name="preg_5"
+                                                id="preg_5"
+                                                placeholder="Pregunta 5"
+                                                value={formData.preg_5}
+                                                onChange={handleInputChange}
+                                                className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                                            />
+                                        </div>
+                                    )}
+                                    {!showSecondQuestion || !showThirdQuestion || !showFourthQuestion || !showFifthQuestion ? (
                                         <button
                                             type="button"
                                             onClick={handleAddQuestion}

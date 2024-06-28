@@ -7,7 +7,8 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
   const [questions, setQuestions] = useState([]);
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [loading, setLoading] = useState(true);
-  const [answers, setAnswers] = useState(['', '', '']); // Estado para almacenar las respuestas
+  const [answers, setAnswers] = useState(['', '', '', '', '']); // Estado para almacenar las respuestas
+  const [phone, setPhone] = useState(''); // Estado para almacenar el número de celular
 
   useEffect(() => {
     const fetchQuestions = async () => {
@@ -15,7 +16,7 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
         setLoading(true);
         const { data, error } = await supabase
           .from('Oferta')
-          .select('preg_1, preg_2, preg_3')
+          .select('preg_1, preg_2, preg_3, preg_4, preg_5')
           .eq('id_oferta', selectedJob.id_oferta)
           .single();
 
@@ -23,7 +24,7 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
           throw error;
         }
 
-        const questionsData = [data.preg_1, data.preg_2, data.preg_3];
+        const questionsData = [data.preg_1, data.preg_2, data.preg_3, data.preg_4, data.preg_5];
         setQuestions(questionsData.filter((question) => question)); // Filtra las preguntas que no son null o undefined
         setLoading(false);
       } catch (error) {
@@ -35,7 +36,8 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
     if (isOpen && selectedJob) {
       fetchQuestions();
       setCurrentQuestionIndex(0); // Restablece el índice a 0 cuando el modal se abre
-      setAnswers(['', '', '']); // Restablece las respuestas cuando el modal se abre
+      setAnswers(['', '', '', '', '']); // Restablece las respuestas cuando el modal se abre
+      setPhone(''); // Restablece el número de celular cuando el modal se abre
     }
   }, [isOpen, selectedJob]);
 
@@ -51,6 +53,10 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
     const newAnswers = [...answers];
     newAnswers[currentQuestionIndex] = e.target.value;
     setAnswers(newAnswers);
+  };
+
+  const handlePhoneChange = (e) => {
+    setPhone(e.target.value);
   };
 
   const handleSubmit = async () => {
@@ -88,6 +94,12 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
           user_id: user.id,
           name_user: user.user_metadata.full_name, // Asegúrate de que este campo exista y contenga el nombre del usuario
           correo: user.email,
+          telefono: phone, // Añadir el número de celular
+          resp_1: answers[0],
+          resp_2: answers[1],
+          resp_3: answers[2],
+          resp_4: answers[3],
+          resp_5: answers[4],
           fecha_postulacion: new Date(),
           estado: 'pendiente',
         });
@@ -114,12 +126,19 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
         </button>
         <div className="flex flex-col items-center justify-center mt-4">
           <h2 className="text-2xl font-bold mb-4">Preguntas para el Postulante</h2>
+          <input
+            type="text"
+            placeholder="Número de celular"
+            value={phone}
+            onChange={handlePhoneChange}
+            className="w-full mt-2 p-2 border rounded"
+          />
           {loading ? (
-            <div class="relative inline-flex">
-            <div class="w-8 h-8 bg-blue-500 rounded-full"></div>
-            <div class="w-8 h-8 bg-blue-500 rounded-full absolute top-0 left-0 animate-ping"></div>
-            <div class="w-8 h-8 bg-blue-500 rounded-full absolute top-0 left-0 animate-pulse"></div>
-        </div>
+            <div className="relative inline-flex">
+              <div className="w-8 h-8 bg-blue-500 rounded-full"></div>
+              <div className="w-8 h-8 bg-blue-500 rounded-full absolute top-0 left-0 animate-ping"></div>
+              <div className="w-8 h-8 bg-blue-500 rounded-full absolute top-0 left-0 animate-pulse"></div>
+            </div>
           ) : questions.length === 0 ? (
             <div className="flex flex-col items-center">
               <p>No hay preguntas disponibles.</p>
