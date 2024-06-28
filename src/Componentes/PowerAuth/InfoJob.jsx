@@ -125,7 +125,7 @@ function InfoJob({ selectedJob }) {
   };
 
   const handleCopyLink = () => {
-    const shareUrl = `http://localhost:5173/Share?id=${selectedJob.id_oferta}`;
+    const shareUrl = `https://w2asesoresyconsultores.com/Share?id=${selectedJob.id_oferta}`;
     navigator.clipboard.writeText(shareUrl);
 
     const copiedMessage = document.createElement('div');
@@ -195,15 +195,15 @@ function InfoJob({ selectedJob }) {
           {isShareMenuOpen && (
             <div className="absolute right-0 mt-2 w-48 bg-white border rounded shadow-lg z-50">
               <div className="py-2">
-                <a href={`https://wa.me/?text=${encodeURIComponent(`Hola, te puede interesar este puesto de trabajo: ${selectedJob.puesto}. Aquí tienes el enlace: http://localhost:5173/Share?id=${selectedJob.id_oferta}`)}`} target="_blank" rel="noopener noreferrer" className="flex items-center px-4 py-2 text-gray-800 hover:bg-blue-50">
+                <a href={`https://wa.me/?text=${encodeURIComponent(`Hola, te puede interesar este puesto de trabajo: ${selectedJob.puesto}. Aquí tienes el enlace: https://w2asesoresyconsultores.com/Share?id=${selectedJob.id_oferta}`)}`} target="_blank" rel="noopener noreferrer" className="flex items-center px-4 py-2 text-gray-800 hover:bg-blue-50">
                   <IoLogoWhatsapp className="mr-2" size={16} />
                   <span>WhatsApp</span>
                 </a>
                 
-                <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(window.location.href + `/Share?id=${selectedJob.id_oferta}`)}`} target="_blank" rel="noopener noreferrer" className="flex items-center px-4 py-2 text-gray-800 hover:bg-blue-50">
-                  <FaFacebookF className="mr-2" size={16} />
-                  <span>Facebook</span>
-                </a>
+                <a href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(`https://w2asesoresyconsultores.com/Share?id=${selectedJob.id_oferta}`)}`} target="_blank" rel="noopener noreferrer" className="flex items-center px-4 py-2 text-gray-800 hover:bg-blue-50">
+  <FaFacebookF className="mr-2" size={16} />
+  <span>Facebook</span>
+</a>
                 
                 <button onClick={handleCopyLink} className="flex items-center w-full px-4 py-2 text-gray-800 hover:bg-blue-50">
                   <FaCopy className="mr-2" size={16} />
