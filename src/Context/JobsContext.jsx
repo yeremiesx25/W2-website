@@ -55,8 +55,22 @@ export const JobsProvider = ({ children }) => {
     setUserSearchResults(jobs); // Restablecer a todos los trabajos
   };
 
+  const deleteJob = async (id_oferta) => {
+    const { error } = await supabase
+      .from('Oferta')
+      .delete()
+      .eq('id_oferta', id_oferta);
+
+    if (error) {
+      console.error('Error deleting job:', error);
+    } else {
+      setJobs(prevJobs => prevJobs.filter(job => job.id_oferta !== id_oferta));
+      setUserSearchResults(prevResults => prevResults.filter(job => job.id_oferta !== id_oferta));
+    }
+  };
+
   return (
-    <JobsContext.Provider value={{ jobs, setJobs, searchJobs, userSearchResults, resetSearchResults, searchTerm, setSearchTerm }}>
+    <JobsContext.Provider value={{ jobs, setJobs, searchJobs, userSearchResults, resetSearchResults, searchTerm, setSearchTerm, deleteJob }}>
       {children}
     </JobsContext.Provider>
   );
