@@ -28,7 +28,7 @@ function CardTrabajo2({ job, onSelectJob, isSelected }) {
       >
         <div>
           <h4 className="font-bold text-xl leading-tight " style={{ marginBottom: '6px' }}>{puesto}</h4>
-          <div className="text-sm uppercase" style={{ fontWeight: '600', color: '#333' }}>{empresa}</div>
+
           <div className="my-2 text-xs  font-semibold tracking-wide" style={{ color: '#666' }}>
             {ubicacion}
           </div>

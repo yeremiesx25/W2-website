@@ -5,10 +5,12 @@ import { UserAuth } from '../../Context/AuthContext'; // Importa el contexto de 
 function QuestionsModal({ isOpen, onClose, selectedJob }) {
   const { user } = UserAuth(); // Obtiene la información del usuario autenticado
   const [questions, setQuestions] = useState([]);
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(-1); // Inicialmente -1 para el teléfono
   const [loading, setLoading] = useState(true);
-  const [answers, setAnswers] = useState(['', '', '', '', '']); // Estado para almacenar las respuestas
+  const [answers, setAnswers] = useState([]); // Estado para almacenar las respuestas dinámicas
   const [phone, setPhone] = useState(''); // Estado para almacenar el número de celular
+  const [phoneError, setPhoneError] = useState(''); // Estado para el error del teléfono
+  const [answerErrors, setAnswerErrors] = useState([]); // Estado para los errores de las respuestas
 
   useEffect(() => {
     const fetchQuestions = async () => {
@@ -26,6 +28,8 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
 
         const questionsData = [data.preg_1, data.preg_2, data.preg_3, data.preg_4, data.preg_5];
         setQuestions(questionsData.filter((question) => question)); // Filtra las preguntas que no son null o undefined
+        setAnswers(new Array(questionsData.length).fill('')); // Inicializa las respuestas con el tamaño adecuado
+        setAnswerErrors(new Array(questionsData.length).fill('')); // Inicializa los errores con el tamaño adecuado
         setLoading(false);
       } catch (error) {
         console.error('Error fetching questions:', error.message);
@@ -35,33 +39,47 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
 
     if (isOpen && selectedJob) {
       fetchQuestions();
-      setCurrentQuestionIndex(0); // Restablece el índice a 0 cuando el modal se abre
-      setAnswers(['', '', '', '', '']); // Restablece las respuestas cuando el modal se abre
+      setCurrentQuestionIndex(-1); // Restablece el índice a -1 para el teléfono cuando el modal se abre
       setPhone(''); // Restablece el número de celular cuando el modal se abre
     }
   }, [isOpen, selectedJob]);
 
-  const handleNext = () => {
-    setCurrentQuestionIndex((prevIndex) => Math.min(prevIndex + 1, questions.length - 1));
+  const handleClose = () => {
+    onClose(); // Cierra el modal al hacer clic en la "X"
   };
 
-  const handlePrevious = () => {
-    setCurrentQuestionIndex((prevIndex) => Math.max(prevIndex - 1, 0));
-  };
-
-  const handleAnswerChange = (e) => {
+  const handleAnswerChange = (e, index) => {
     const newAnswers = [...answers];
-    newAnswers[currentQuestionIndex] = e.target.value;
+    newAnswers[index] = e.target.value;
     setAnswers(newAnswers);
+
+    const newErrors = [...answerErrors];
+    newErrors[index] = ''; // Clear error when the user starts typing
+    setAnswerErrors(newErrors);
   };
 
   const handlePhoneChange = (e) => {
-    setPhone(e.target.value);
+    const value = e.target.value;
+    setPhone(value);
+    // Validar si el campo de teléfono está vacío
+    if (!value.trim()) {
+      setPhoneError('Campo Obligatorio');
+    } else {
+      setPhoneError('');
+    }
   };
 
   const handleSubmit = async () => {
     try {
       console.log('Enviando respuestas:', answers);
+
+      // Validar si todas las respuestas están llenas
+      const hasEmptyAnswers = answers.some(answer => answer.trim() === '');
+      if (hasEmptyAnswers || !phone.trim()) {
+        setAnswerErrors(answerErrors.map((error, index) => answers[index].trim() === '' ? 'Campo Obligatorio' : ''));
+        setPhoneError(!phone.trim() ? 'Campo Obligatorio' : '');
+        return;
+      }
 
       // Obtener el valor actual de count_postulados
       const { data: currentData, error: fetchError } = await supabase
@@ -115,76 +133,93 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
     }
   };
 
+  const handleBack = () => {
+    setCurrentQuestionIndex(-1); // Vuelve al paso del número de celular
+  };
+
   return (
-    <div className={`fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 z-50 ${isOpen ? '' : 'hidden'}`}>
-      <div className="bg-white rounded-lg p-6 w-96 relative">
+    <div className={`fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 z-50 ${isOpen ? '' : 'hidden'}`} onClick={handleClose}>
+      <div className="bg-white rounded-lg p-6 w-full max-w-lg relative" onClick={(e) => e.stopPropagation()}>
         <button
           className="absolute top-2 right-3 text-gray-500 hover:text-gray-700 text-3xl"
-          onClick={onClose}
+          onClick={handleClose} // Cierra el modal al hacer clic en la "X"
         >
           ×
         </button>
         <div className="flex flex-col items-center justify-center mt-4">
           <h2 className="text-2xl font-bold mb-4">Preguntas para el Postulante</h2>
-          <input
-            type="text"
-            placeholder="Número de celular"
-            value={phone}
-            onChange={handlePhoneChange}
-            className="w-full mt-2 p-2 border rounded"
-          />
-          {loading ? (
-            <div className="relative inline-flex">
-              <div className="w-8 h-8 bg-blue-500 rounded-full"></div>
-              <div className="w-8 h-8 bg-blue-500 rounded-full absolute top-0 left-0 animate-ping"></div>
-              <div className="w-8 h-8 bg-blue-500 rounded-full absolute top-0 left-0 animate-pulse"></div>
-            </div>
-          ) : questions.length === 0 ? (
-            <div className="flex flex-col items-center">
-              <p>No hay preguntas disponibles.</p>
-              <button
-                className="bg-green-500 text-white font-bold py-2 px-4 rounded-full w-32 mt-4"
-                onClick={handleSubmit}
-              >
-                Enviar
-              </button>
-            </div>
-          ) : (
-            <div>
-              <p>{questions[currentQuestionIndex]}</p>
-              <textarea
-                className="w-full mt-2 p-2 border rounded"
-                rows="4"
-                value={answers[currentQuestionIndex]}
-                onChange={handleAnswerChange}
-                placeholder="Escribe tu respuesta aquí"
+          {currentQuestionIndex === -1 ? (
+            <>
+              <label className="w-full text-left">Ingrese su Celular</label>
+              <input
+                type="text"
+                placeholder="Número de celular"
+                value={phone}
+                onChange={handlePhoneChange}
+                className={`w-full mt-2 p-2 border rounded ${phoneError ? 'border-red-500' : ''}`}
               />
-              <div className="flex justify-center space-x-4 mt-2">
-                {currentQuestionIndex > 0 && (
+              {phoneError && <p className="text-red-500 text-sm">{phoneError}</p>}
+              <div className="flex justify-center mt-4"> {/* Cambiado a justify-center para centrar los botones */}
+                <button
+                  className={`bg-[#0057c2] text-white font-bold py-2 px-4 rounded-full w-32 ${phone.trim() ? '' : 'opacity-50 cursor-not-allowed'}`}
+                  onClick={() => phone.trim() && setCurrentQuestionIndex(0)} // Cambia el índice a 0 para mostrar las preguntas si el teléfono no está vacío
+                  disabled={!phone.trim()}
+                >
+                  Siguiente
+                </button>
+              </div>
+            </>
+          ) : (
+            <div className="max-h-96 overflow-y-auto"> {/* Agregado: Contenedor con scroll vertical */}
+              {loading ? (
+                <div className="relative inline-flex">
+                  <div className="w-8 h-8 bg-blue-500 rounded-full"></div>
+                  <div className="w-8 h-8 bg-blue-500 rounded-full absolute top-0 left-0 animate-ping"></div>
+                  <div className="w-8 h-8 bg-blue-500 rounded-full absolute top-0 left-0 animate-pulse"></div>
+                </div>
+              ) : questions.length === 0 ? (
+                <div className="flex flex-col items-center">
+                  <p>No hay preguntas disponibles.</p>
                   <button
-                    className="bg-gray-300 text-black font-bold py-2 px-4 rounded-full w-32"
-                    onClick={handlePrevious}
-                  >
-                    Anterior
-                  </button>
-                )}
-                {currentQuestionIndex < questions.length - 1 && (
-                  <button
-                    className="bg-[#0057c2] text-white font-bold py-2 px-4 rounded-full w-32"
-                    onClick={handleNext}
-                  >
-                    Siguiente
-                  </button>
-                )}
-                {currentQuestionIndex === questions.length - 1 && (
-                  <button
-                    className="bg-green-500 text-white font-bold py-2 px-4 rounded-full w-32"
+                    className="bg-green-500 text-white font-bold py-2 px-4 rounded-full w-full mt-4"
                     onClick={handleSubmit}
                   >
                     Enviar
                   </button>
-                )}
-              </div>
+                </div>
+              ) : (
+                <div>
+                  {questions.map((question, index) => (
+                    <div key={index} className="mb-4">
+                      <p>{question}</p>
+                      <textarea
+                        className="w-full mt-2 p-2 border rounded"
+                        rows={Math.min(4, Math.ceil(question.length / 50))}
+                        value={answers[index]}
+                        onChange={(e) => handleAnswerChange(e, index)}
+                        placeholder="Escribe tu respuesta aquí"
+                      />
+                      {answerErrors[index] && (
+                        <p className="text-red-500 text-sm">{answerErrors[index]}</p>
+                      )}
+                    </div>
+                  ))}
+                  <div className="flex justify-center mt-4"> {/* Cambiado a justify-center para centrar los botones */}
+                    <button
+                      className="bg-gray-300 text-black font-bold py-2 px-4 rounded-full w-32"
+                      onClick={handleBack} // Vuelve al paso del número de celular
+                    >
+                      Atrás
+                    </button>
+                    <button
+                      className="bg-green-500 text-white font-bold py-2 px-4 rounded-full w-32 ml-2"
+                      onClick={handleSubmit}
+                    >
+                      Enviar
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
           )}
         </div>
