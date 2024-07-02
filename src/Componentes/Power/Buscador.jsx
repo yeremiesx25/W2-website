@@ -82,13 +82,13 @@ function Buscador() {
   };
 
   return (
-    <div className="relative">
+    <div className="">
       <form
         onSubmit={handleSubmit}
-        className="relative bg-white flex flex-col md:flex-row items-center justify-center border py-2 px-2 rounded-2xl gap-2 shadow-2xl focus-within:border-gray-300 w-full max-w-2xl mt-12"
+        className=" bg-white flex flex-col md:flex-row items-center justify-center border py-2 px-2 rounded-2xl gap-2 shadow-2xl focus-within:border-gray-300 w-full max-w-2xl mt-12"
       >
-        <div className="relative flex items-center w-full border-r">
-          <FaSearch className="absolute left-4 text-gray-500" />
+        <div className=" flex items-center w-full border-r">
+          <FaSearch className="ml-4 text-gray-500" />
           <input
             type="text"
             value={keyword}
