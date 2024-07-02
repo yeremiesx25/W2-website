@@ -290,7 +290,7 @@ function FormOferta() {
                     <label htmlFor="horario" className="mb-3 block text-base font-medium text-[#07074D]">
                       Horario del puesto
                     </label>
-                    <input
+                    <textarea
                       type="text"
                       name="horario"
                       id="horario"
@@ -298,7 +298,7 @@ function FormOferta() {
                       value={formData.horario}
                       onChange={handleInputChange}
                       className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                    />
+                    ></textarea>
                   </div>
                   <div className="flex justify-between">
                     <button
