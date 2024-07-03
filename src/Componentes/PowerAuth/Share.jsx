@@ -3,7 +3,7 @@ import { supabase } from "../../supabase/supabase.config";
 import { useLocation, useNavigate } from "react-router-dom";
 import Buscador from "../Power/Buscador";
 import HeaderPowerAuth from "./HeaderPowerAuth";
-import ModalInfo from './ModalInfo'; // Importar el componente ModalInfo
+import QuestionsModal from './QuestionsModal'; // Importar el componente QuestionsModal
 import { IoIosArrowBack } from "react-icons/io";
 
 function Share() {
@@ -50,6 +50,22 @@ function Share() {
     return null; 
   }
 
+  // Función para formatear el contenido como lista si contiene guiones o puntos
+  const formatContentAsList = (content) => {
+    if (!content) return null;
+    // Verificar si el contenido tiene listas separadas por guiones o puntos
+    const isList = content.includes("-") || content.includes("•");
+    if (isList) {
+      return content.split(/\n/).map((item, index) => (
+        <li key={index} className="mt-2">
+          {item.trim()}
+        </li>
+      ));
+    } else {
+      return <p>{content}</p>; // Devolver el contenido sin modificar si no hay listas detectadas
+    }
+  };
+
   return (
     <div>
       <HeaderPowerAuth />
@@ -74,13 +90,21 @@ function Share() {
           <p className="mb-2 font-bold">Salario:</p> 
           <p className="mb-2">S/. {selectedJob.sueldo}</p>
           <p className="mb-2 font-bold">Beneficios:</p> 
-          <p className="mb-2">{selectedJob.beneficios}</p>
+          <ul className="mb-2">
+            {formatContentAsList(selectedJob.beneficios)}
+          </ul>
           <p className="mb-2 font-bold">Requisitos:</p> 
-          <p className="mb-2">{selectedJob.requisitos}</p>
+          <ul className="mb-2">
+            {formatContentAsList(selectedJob.requisitos)}
+          </ul>
           <p className="mb-2 font-bold">Funciones:</p> 
-          <p className="mb-2">{selectedJob.funciones}</p>
+          <ul className="mb-2">
+            {formatContentAsList(selectedJob.funciones)}
+          </ul>
           <p className="mb-2 font-bold">Horario:</p> 
-          <p className="mb-2">{selectedJob.horario}</p>
+          <ul className="mb-2">
+            {formatContentAsList(selectedJob.horario)}
+          </ul>
           <p className="mb-2 font-bold">Fecha de publicación:</p> 
           <p className="mb-2">{selectedJob.fecha_publicacion}</p>
         </div>
@@ -90,9 +114,9 @@ function Share() {
       </section>
 
       {/* Renderizar el modal */}
-      <ModalInfo isOpen={isModalOpen} onClose={handleCloseModal} onConfirm={handleConfirmApply} />
+      <QuestionsModal isOpen={isModalOpen} onClose={handleCloseModal} onConfirm={handleConfirmApply} />
     </div>
   );
 }
 
-export default Share; 
+export default Share;

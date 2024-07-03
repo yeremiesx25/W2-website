@@ -1,7 +1,4 @@
 import React from "react";
-import fondoIlustrado from "../../assets/BG 31.png";
-import bgpowerauth from "../../assets/Bg-PowerAuth.png";
-import logopower from "../../assets/Logo Power.png";
 import Buscador from "../Power/Buscador";
 import { useContext } from 'react';
 import JobsContext from '../../Context/JobsContext';
