@@ -17,7 +17,7 @@ function CountOfertas() {
   const totalPostulados = userJobs.reduce((acc, job) => acc + job.count_postulados, 0);
 
   return (
-    <div className='flex gap-6'>
+    <div className='flex gap-6 flex-wrap'>
       <div className='w-56 h-20 bg-white flex items-center justify-center rounded-lg text-gray-700 shadow-md gap-6 font-dmsans'>
         <div className='w-12 h-12 bg-[#f4f7fe] rounded-full flex justify-center items-center text-[#422afb]'>
           <CgLoadbarDoc size={30}/>
