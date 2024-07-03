@@ -16,7 +16,7 @@ function AdminLayout() {
 
   return (
     <div className="w-full h-full pl-20 flex flex-col items-center justify-center py-12 ">
-      <div className="flex gap-10">
+      <div className="flex gap-10 flex-wrap">
         <p className="text-4xl mb-8 text-gray-800">
           Hola, <strong>{firstName}</strong>
         </p>

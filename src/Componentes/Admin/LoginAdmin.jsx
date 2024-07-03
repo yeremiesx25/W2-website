@@ -26,19 +26,20 @@ function LoginAdmin() {
         <div>
             <HeaderPowerAuth />
             <div className="lg:pl-20 w-[100%] h-screen flex font-dmsans items-center">
-                <div className="md:w-[calc(100%-600px)] h-full py-6 bg-white flex items-center mx-auto">
-                    <div className="p-10 xs:p-0 mx-auto md:w-full md:max-w-md">
+                <div className="md:w-[calc(100%-600px)] h-full py-6 bg-white flex items-center mx-auto px-4     ">
+                    <div className="p-10 xs:p-0 md:mx-auto lg:w-full lg:max-w-md    ">
                         <h1 className="font-bold text-left text-2xl text-primarycolor">Te damos la bienvenida</h1>
-                        <h1 className="font-regular text-left text-md mb-5 text-primarytext">Ingresa tus datos para iniciar sesión</h1>
+                        <h1 className="font-regular text-left text-md mb-5 text-gray-700">Ingresa tus datos para iniciar sesión</h1>
                         <div className="bg-white w-full rounded-lg divide-y divide-gray-200">
                             <div className=" py-7 w-full">
-                                <label className="font-semibold text-sm text-gray-600 pb-1 block">Correo electrónico</label>
-                                <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full" />
-                                <label className="font-semibold text-sm text-gray-600 pb-1 block">Contraseña</label>
-                                <input type="text" value={uid} onChange={(e) => setUid(e.target.value)} className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full" />
+                                <label className="font-regular text-md text-gray-600 pb-1 block">Correo electrónico</label>
+                                <input placeholder="Ingresa tu correo" type="text" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-primarycolor focus:bg-white focus:outline-none mb-8" required />
+                                <label className="font-regular text-md text-gray-600 pb-1 block">Contraseña</label>
+                                <input type="password" placeholder="Ingresa tu contraseña" value={uid} onChange={(e) => setUid(e.target.value)} className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-primarycolor focus:bg-white focus:outline-none mb-12" required/>
                                 {error && <p className="text-red-500 text-sm mb-3">{error}</p>}
-                                <div className='flex justify-between items-center'>
-                                    <a href="" className='text-[#4fd1ba] font-base underline underline-offset-4 text-md'>Olvidé mi contraseña</a>
+                                <div className='flex md:justify-between items-center flex-wrap gap-4 justify-center'>
+                                    <a href="https://wa.me/51970632448?text=Hola%2C%20me%20gustar%C3%ADa%20que%20me%20pueda%20ayudar%20a%20recuperar%20mi%20contrase%C3%B1a
+" className='text-[#00aec7] font-base  text-md'>Olvidé mi contraseña</a>
                                      <button type="button" onClick={handleLogin} className="transition duration-200 bg-[#ffe946] hover:bg-[#fff084] focus:bg-blue-700 focus:shadow-sm focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 text-primarycolor w-52 h-10 flex py-2.5 rounded-lg text-md shadow-sm hover:shadow-md font-semibold text-center justify-center items-center">
                                     <span className="inline-block mr-2">Continuar</span>
                                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="w-4 h-4 inline-block">
@@ -51,7 +52,7 @@ function LoginAdmin() {
                         </div>
                     </div>
                 </div>
-                <div className="w-[600px] h-full bg-primarycolor hidden md:block">
+                <div className="w-[600px] h-full bg-primarycolor hidden lg:block">
                     
                     <img src={LoginAdminImg} className="w-full h-full" alt="" />    
                 </div>

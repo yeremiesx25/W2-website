@@ -16,10 +16,10 @@ function TrabajosContainer2() {
   }, [userSearchResults]);
 
   return (
-    <div id='ofertas' className='w-full flex flex-col items-center font-dmsans pt-6 px-4 justify-center pb-10'>
+    <div id='ofertas' className='w-full flex flex-col items-center font-dmsans pt-16 md:pt-6 px-4 justify-center pb-10'>
       <div className='flex w-full justify-center items-center'>
         <div
-          className='flex flex-col w-full md:w-1/2 justify-start items-center gap-4 h-[650px] overflow-auto pl-12 ml-10'
+          className='flex flex-col w-full md:w-1/2 justify-start items-center gap-4 h-[650px] overflow-auto md:pl-12 md:ml-10'
           style={{
             msOverflowStyle: 'none',  // IE and Edge
             scrollbarWidth: 'none'   // Firefox
