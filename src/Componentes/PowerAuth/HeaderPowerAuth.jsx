@@ -87,7 +87,7 @@ function HeaderPowerAuth() {
             <FaSearchengin size={24} />
             {isExpanded && <span className="ml-4">Buscar Ofertas</span>}
           </Link>
-          <Link to="/Practicantes" className={`my-3 flex items-center ${isExpanded ? 'px-4' : 'justify-center'} opacity-75 hover:opacity-100 transition-opacity duration-300`}>
+          <Link to="/DescubriendoTalentos" className={`my-3 flex items-center ${isExpanded ? 'px-4' : 'justify-center'} opacity-75 hover:opacity-100 transition-opacity duration-300`}>
             <RiMailSendLine size={24} />
             {isExpanded && <span className="ml-4">Mis Postulaciones</span>}
           </Link>
