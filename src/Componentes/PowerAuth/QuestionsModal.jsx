@@ -28,8 +28,6 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
 
         const questionsData = [data.preg_1, data.preg_2, data.preg_3, data.preg_4, data.preg_5];
         setQuestions(questionsData.filter((question) => question)); // Filtra las preguntas que no son null o undefined
-        setAnswers(new Array(questionsData.length).fill('')); // Inicializa las respuestas con el tamaño adecuado
-        setAnswerErrors(new Array(questionsData.length).fill('')); // Inicializa los errores con el tamaño adecuado
         setLoading(false);
       } catch (error) {
         console.error('Error fetching questions:', error.message);
@@ -39,8 +37,11 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
 
     if (isOpen && selectedJob) {
       fetchQuestions();
-      setCurrentQuestionIndex(-1); // Restablece el índice a -1 para el teléfono cuando el modal se abre
+      setCurrentQuestionIndex(-1); // Inicialmente -1 para solicitar el número de celular
+      setAnswers(['', '', '', '', '']); // Restablece las respuestas cuando el modal se abre
       setPhone(''); // Restablece el número de celular cuando el modal se abre
+      setPhoneError(''); // Limpia cualquier error anterior del número de celular
+      setAnswerErrors(['', '', '', '', '']); // Limpia cualquier error anterior de respuestas
     }
   }, [isOpen, selectedJob]);
 
@@ -54,7 +55,7 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
     setAnswers(newAnswers);
 
     const newErrors = [...answerErrors];
-    newErrors[index] = ''; // Clear error when the user starts typing
+    newErrors[index] = ''; // Limpia el error cuando el usuario comienza a escribir
     setAnswerErrors(newErrors);
   };
 
@@ -71,15 +72,13 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
 
   const handleSubmit = async () => {
     try {
-      console.log('Enviando respuestas:', answers);
-
-      // Validar si todas las respuestas están llenas
-      const hasEmptyAnswers = answers.some(answer => answer.trim() === '');
-      if (hasEmptyAnswers || !phone.trim()) {
-        setAnswerErrors(answerErrors.map((error, index) => answers[index].trim() === '' ? 'Campo Obligatorio' : ''));
-        setPhoneError(!phone.trim() ? 'Campo Obligatorio' : '');
+      // Validar que todos los campos estén completos
+      if (!phone.trim()) {
+        setPhoneError('Campo Obligatorio');
         return;
       }
+
+      console.log('Enviando respuestas:', answers);
 
       // Obtener el valor actual de count_postulados
       const { data: currentData, error: fetchError } = await supabase
@@ -110,9 +109,9 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
         .insert({
           id_oferta: selectedJob.id_oferta,
           user_id: user.id,
-          name_user: user.user_metadata.full_name, // Asegúrate de que este campo exista y contenga el nombre del usuario
+          name_user: user.user_metadata.full_name,
           correo: user.email,
-          telefono: phone, // Añadir el número de celular
+          telefono: phone,
           resp_1: answers[0],
           resp_2: answers[1],
           resp_3: answers[2],
@@ -159,7 +158,7 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
                 className={`w-full mt-2 p-2 border rounded ${phoneError ? 'border-red-500' : ''}`}
               />
               {phoneError && <p className="text-red-500 text-sm">{phoneError}</p>}
-              <div className="flex justify-center mt-4"> {/* Cambiado a justify-center para centrar los botones */}
+              <div className="flex justify-center mt-4">
                 <button
                   className={`bg-[#0057c2] text-white font-bold py-2 px-4 rounded-full w-32 ${phone.trim() ? '' : 'opacity-50 cursor-not-allowed'}`}
                   onClick={() => phone.trim() && setCurrentQuestionIndex(0)} // Cambia el índice a 0 para mostrar las preguntas si el teléfono no está vacío
@@ -170,7 +169,7 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
               </div>
             </>
           ) : (
-            <div className="max-h-96 overflow-y-auto"> {/* Agregado: Contenedor con scroll vertical */}
+            <div className="max-h-96 overflow-y-auto">
               {loading ? (
                 <div className="relative inline-flex">
                   <div className="w-8 h-8 bg-blue-500 rounded-full"></div>
@@ -204,7 +203,7 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
                       )}
                     </div>
                   ))}
-                  <div className="flex justify-center mt-4"> {/* Cambiado a justify-center para centrar los botones */}
+                  <div className="flex justify-center mt-4">
                     <button
                       className="bg-gray-300 text-black font-bold py-2 px-4 rounded-full w-32"
                       onClick={handleBack} // Vuelve al paso del número de celular

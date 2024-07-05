@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css'; // Estilo por defecto de Quill
 import FormAdminImg from "../../assets/formAdminImg.svg";
 import { UserAuth } from "../../Context/AuthContext";
 import { useNavigate } from 'react-router-dom';
-import { supabase } from '../../supabase/supabase.config'; // Ajusta la ruta según la ubicación de tu archivo
+import { supabase } from '../../supabase/supabase.config';
 import { MdDeleteForever } from "react-icons/md";
 
 function FormOferta() {
@@ -16,14 +18,15 @@ function FormOferta() {
     jobDescription: "",
     requirements: "",
     funciones: "",
-    celular: "",
     horario: "",
+    celular: "",
     preg_1: "",
     preg_2: "",
     preg_3: "",
     preg_4: "",
     preg_5: "",
-    user_id: ""
+    user_id: "",
+    modalidad: ""
   });
 
   const [showSecondQuestion, setShowSecondQuestion] = useState(false);
@@ -53,15 +56,11 @@ function FormOferta() {
   const handleNextButtonClick = (e) => {
     e.preventDefault();
     if (formStep === 1) {
-      // Guardar los valores del formulario en el almacenamiento local
       localStorage.setItem("formData", JSON.stringify(formData));
-      // Mostrar la siguiente sección del formulario
       setFormStep(2);
     } else if (formStep === 2) {
-      // Avanzar a la siguiente sección del formulario
       setFormStep(3);
     } else {
-      // Llamar a la función para insertar datos en Supabase
       saveFormDataToSupabase();
     }
   };
@@ -111,9 +110,8 @@ function FormOferta() {
   };
 
   const saveFormDataToSupabase = async () => {
-    const { name, company, location, salary, jobDescription, requirements, funciones, celular, horario, preg_1, preg_2, preg_3, preg_4, preg_5, user_id } = formData;
+    const { name, company, location, salary, jobDescription, requirements, funciones, horario, celular, preg_1, preg_2, preg_3, preg_4, preg_5, user_id, modalidad } = formData;
 
-    // Generar la URL de WhatsApp
     const whatsappMessage = `Hola, estoy interesado en el puesto de ${name}`;
     const whatsappUrl = `https://wa.me/${celular}?text=${encodeURIComponent(whatsappMessage)}`;
 
@@ -135,18 +133,28 @@ function FormOferta() {
           preg_3: preg_3,
           preg_4: preg_4,
           preg_5: preg_5,
-          user_id: user_id
+          user_id: user_id,
+          modalidad: modalidad
         });
 
       if (error) {
         console.error('Error inserting data:', error);
       } else {
         console.log('Data inserted successfully:', data);
-        // Navegar a otra página si es necesario
         navigate('/Admin');
       }
     } catch (error) {
       console.error('Error saving data to Supabase:', error);
+    }
+  };
+
+  const handleInputKeyDown = (e, nextInputName) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      const nextInput = document.getElementsByName(nextInputName)[0];
+      if (nextInput) {
+        nextInput.focus();
+      }
     }
   };
 
@@ -178,6 +186,7 @@ function FormOferta() {
                       placeholder="Puesto"
                       value={formData.name}
                       onChange={handleInputChange}
+                      onKeyDown={(e) => handleInputKeyDown(e, 'company')}
                       className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                     />
                   </div>
@@ -192,6 +201,7 @@ function FormOferta() {
                       placeholder="Empresa"
                       value={formData.company}
                       onChange={handleInputChange}
+                      onKeyDown={(e) => handleInputKeyDown(e, 'location')}
                       className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                     />
                   </div>
@@ -205,6 +215,21 @@ function FormOferta() {
                       id="location"
                       placeholder="Ubicación"
                       value={formData.location}
+                      onChange={handleInputChange}
+                      onKeyDown={(e) => handleInputKeyDown(e, 'celular')}
+                      className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                    />
+                  </div>
+                  <div className="mb-5">
+                    <label htmlFor="modalidad" className="mb-3 block text-base font-medium text-[#07074D]">
+                      Modalidad de trabajo
+                    </label>
+                    <input
+                      type="text"
+                      name="modalidad"
+                      id="modalidad"
+                      placeholder="Modalidad"
+                      value={formData.modalidad}
                       onChange={handleInputChange}
                       className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                     />
@@ -220,6 +245,7 @@ function FormOferta() {
                       placeholder="Número de celular"
                       value={formData.celular}
                       onChange={handleInputChange}
+                      onKeyDown={(e) => handleInputKeyDown(e, 'salary')}
                       className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                     />
                   </div>
@@ -244,6 +270,7 @@ function FormOferta() {
                       placeholder="Salario"
                       value={formData.salary}
                       onChange={handleInputChange}
+                      onKeyDown={(e) => handleInputKeyDown(e, 'jobDescription')}
                       className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                     />
                   </div>
@@ -251,54 +278,49 @@ function FormOferta() {
                     <label htmlFor="jobDescription" className="mb-3 block text-base font-medium text-[#07074D]">
                       Beneficios del trabajo
                     </label>
-                    <textarea
+                    <ReactQuill
                       name="jobDescription"
                       id="jobDescription"
-                      placeholder="Descripción del trabajo"
                       value={formData.jobDescription}
-                      onChange={handleInputChange}
-                      className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                    ></textarea>
+                      onChange={(value) => setFormData({ ...formData, jobDescription: value })}
+                      className="rounded-md border border-[#e0e0e0] bg-white text-base font-medium text-[#6B7280] focus:border-[#6A64F1] focus:shadow-md"
+                    />
                   </div>
                   <div className="mb-5">
                     <label htmlFor="requirements" className="mb-3 block text-base font-medium text-[#07074D]">
-                      Requisitos del trabajo
+                      Requisitos
                     </label>
-                    <textarea
+                    <ReactQuill
                       name="requirements"
                       id="requirements"
-                      placeholder="Requisitos"
                       value={formData.requirements}
-                      onChange={handleInputChange}
-                      className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                    ></textarea>
+                      onChange={(value) => setFormData({ ...formData, requirements: value })}
+                      className="rounded-md border border-[#e0e0e0] bg-white text-base font-medium text-[#6B7280] focus:border-[#6A64F1] focus:shadow-md"
+                    />
                   </div>
                   <div className="mb-5">
                     <label htmlFor="funciones" className="mb-3 block text-base font-medium text-[#07074D]">
-                      Funciones del trabajador
+                      Funciones del puesto
                     </label>
-                    <textarea
+                    <ReactQuill
                       name="funciones"
                       id="funciones"
-                      placeholder="Funciones"
                       value={formData.funciones}
-                      onChange={handleInputChange}
-                      className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                    ></textarea>
+                      onChange={(value) => setFormData({ ...formData, funciones: value })}
+                      className="rounded-md border border-[#e0e0e0] bg-white text-base font-medium text-[#6B7280] focus:border-[#6A64F1] focus:shadow-md"
+                    />
                   </div>
                   <div className="mb-5">
                     <label htmlFor="horario" className="mb-3 block text-base font-medium text-[#07074D]">
-                      Horario del puesto
+                      Horario de trabajo
                     </label>
-                    <textarea
-                      type="text"
+                    <ReactQuill
                       name="horario"
                       id="horario"
-                      placeholder="Horario"
                       value={formData.horario}
-                      onChange={handleInputChange}
-                      className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                    ></textarea>
+                      onChange={(value) => setFormData({ ...formData, horario: value })}
+                      className="rounded-md border border-[#e0e0e0] bg-white text-base font-medium text-[#6B7280] focus:border-[#6A64F1] focus:shadow-md"
+                    />
                   </div>
                   <div className="flex justify-between">
                     <button
@@ -316,7 +338,8 @@ function FormOferta() {
                   </div>
                 </>
               )}
-              {formStep === 3 && (
+
+{formStep === 3 && (
                 <>
                 Preguntas para el Postulante
                   <div className="mb-5 flex items-center">
@@ -329,6 +352,7 @@ function FormOferta() {
                       placeholder="Pregunta 1"
                       value={formData.preg_1}
                       onChange={handleInputChange}
+                      onKeyDown={(e) => handleInputKeyDown(e, 'preg_2')}
                       className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                     />
                     <button
@@ -351,6 +375,7 @@ function FormOferta() {
                         placeholder="Pregunta 2"
                         value={formData.preg_2}
                         onChange={handleInputChange}
+                        onKeyDown={(e) => handleInputKeyDown(e, 'preg_3')}
                         className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                       />
                       <button
@@ -374,6 +399,7 @@ function FormOferta() {
                         placeholder="Pregunta 3"
                         value={formData.preg_3}
                         onChange={handleInputChange}
+                        onKeyDown={(e) => handleInputKeyDown(e, 'preg_4')}
                         className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                       />
                       <button
@@ -397,6 +423,7 @@ function FormOferta() {
                         placeholder="Pregunta 4"
                         value={formData.preg_4}
                         onChange={handleInputChange}
+                        onKeyDown={(e) => handleInputKeyDown(e, 'preg_5')}
                         className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                       />
                       <button
@@ -420,6 +447,7 @@ function FormOferta() {
                         placeholder="Pregunta 5"
                         value={formData.preg_5}
                         onChange={handleInputChange}
+                        onKeyDown={(e) => handleInputKeyDown(e, 'preg_6')}
                         className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                       />
                       <button
@@ -465,3 +493,4 @@ function FormOferta() {
 }
 
 export default FormOferta;
+
