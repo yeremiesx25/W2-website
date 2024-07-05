@@ -1,19 +1,56 @@
 import React, { useState, useContext, useEffect } from 'react';
 import CardTrabajo2 from './CardTrabajo2';
 import InfoJob from '../PowerAuth/InfoJob';
-import JobsContext from '../../Context/JobsContext'; // Ajusta la ruta según sea necesario
+import JobsContext from '../../Context/JobsContext';
+import { useNavigate, useParams } from 'react-router-dom'; // Importa useParams para obtener el parámetro de la URL
 
 function TrabajosContainer2() {
   const { userSearchResults } = useContext(JobsContext);
   const [selectedJob, setSelectedJob] = useState(null);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+  const navigate = useNavigate();
+  const { id_oferta } = useParams(); // Obtiene el parámetro de la URL
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    // Cleanup event listener
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   useEffect(() => {
     if (userSearchResults.length > 0) {
-      // Ordenar los resultados por fecha de publicación de manera descendente
       const sortedResults = userSearchResults.slice().sort((a, b) => new Date(b.fecha_publicacion) - new Date(a.fecha_publicacion));
-      setSelectedJob(sortedResults[0]); // Seleccionar el primer trabajo (el más reciente)
+      setSelectedJob(sortedResults[0]);
     }
   }, [userSearchResults]);
+
+  useEffect(() => {
+    // Check if id_oferta exists in params and userSearchResults
+    if (id_oferta && userSearchResults.length > 0) {
+      const foundJob = userSearchResults.find(job => job.id_oferta === parseInt(id_oferta));
+      if (foundJob) {
+        setSelectedJob(foundJob);
+      } else {
+        // Handle case where job with id_oferta is not found
+        navigate('/');
+      }
+    }
+  }, [id_oferta, userSearchResults, navigate]);
+
+  const handleCardClick = (job) => {
+    if (isMobile) {
+      navigate(`/info-job-movil/${job.id_oferta}`);
+    } else {
+      setSelectedJob(job);
+    }
+  };
 
   return (
     <div id='ofertas' className='w-full flex flex-col items-center font-dmsans pt-16 md:pt-6 px-4 justify-center pb-10'>
@@ -25,19 +62,19 @@ function TrabajosContainer2() {
             scrollbarWidth: 'none'   // Firefox
           }}
         >
-     {userSearchResults
-  .slice()
-  .sort((a, b) => new Date(b.fecha_publicacion) - new Date(a.fecha_publicacion))
-  .map((job, index) => (
-    <CardTrabajo2
-      key={index}
-      job={job}
-      onSelectJob={setSelectedJob}
-      isSelected={selectedJob === job}
-    />
-))}
+          {userSearchResults
+            .slice()
+            .sort((a, b) => new Date(b.fecha_publicacion) - new Date(a.fecha_publicacion))
+            .map((job, index) => (
+              <CardTrabajo2
+                key={index}
+                job={job}
+                onSelectJob={() => handleCardClick(job)}
+                isSelected={selectedJob === job}
+              />
+            ))}
         </div>
-        {selectedJob && (
+        {selectedJob && !isMobile && (
           <InfoJob selectedJob={selectedJob} />
         )}
       </div>

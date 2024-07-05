@@ -15,6 +15,7 @@ import ProtectedRoute from './ProtectedRoute.jsx';
 import Profile from './Componentes/Profile/Profile.jsx';
 import Postulados from './Componentes/Admin/Postulados.jsx'
 import Share from "./Componentes/PowerAuth/Share.jsx"; // Importar el componente Share
+import InfoJobMovil from "./Componentes/PowerAuth/InfoJobMovil.jsx";
 
 function App() {
   return (
@@ -38,6 +39,7 @@ function App() {
           <Route path="/Profile" element = {<Profile />} />
           <Route path="/job/:id" element = {<Postulados />} />
           <Route path="/Share" element={<Share />} /> {/* Añadir ruta para Share */}
+          <Route path="/info-job-movil/:id" element={<InfoJobMovil />} />
         </Routes>
       </JobsProvider>
     </AuthContextProvider>
