@@ -5,12 +5,15 @@ import Buscador from "../Power/Buscador";
 import HeaderPowerAuth from "./HeaderPowerAuth";
 import QuestionsModal from './QuestionsModal'; // Importar el componente QuestionsModal
 import { IoIosArrowBack } from "react-icons/io";
+import { UserAuth } from "../../Context/AuthContext"; // Importar contexto de autenticación
 
 function Share() {
   const location = useLocation();
   const navigate = useNavigate(); // Hook useNavigate para manejar la navegación
+  const { user } = UserAuth(); // Obtener información del usuario autenticado
   const [selectedJob, setSelectedJob] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false); // Estado del modal
+  const [hasApplied, setHasApplied] = useState(false); // Estado para rastrear si el usuario ya se postuló
 
   useEffect(() => {
     const fetchJob = async () => {
@@ -32,17 +35,32 @@ function Share() {
     fetchJob();
   }, [location]);
 
+  useEffect(() => {
+    const checkIfApplied = async () => {
+      if (user && selectedJob) {
+        const { data, error } = await supabase
+          .from("Postulacion")
+          .select("id_postulacion")
+          .eq("user_id", user.id)
+          .eq("id_oferta", selectedJob.id_oferta)
+          .single();
+
+        if (error && error.code !== "PGRST116") {
+          console.error("Error checking if user has applied:", error.message);
+        } else {
+          setHasApplied(!!data); // Si hay datos, el usuario ya se ha postulado
+        }
+      }
+    };
+
+    checkIfApplied();
+  }, [user, selectedJob]);
+
   const handleOpenModal = () => {
     setIsModalOpen(true);
   };
 
   const handleCloseModal = () => {
-    setIsModalOpen(false);
-  };
-
-  const handleConfirmApply = () => {
-    // Aquí puedes implementar la lógica para postularse al trabajo
-    // Por ahora, simplemente cerramos el modal
     setIsModalOpen(false);
   };
 
@@ -108,13 +126,23 @@ function Share() {
           <p className="mb-2 font-bold">Fecha de publicación:</p> 
           <p className="mb-2">{selectedJob.fecha_publicacion}</p>
         </div>
-        <button className="mt-4 p-2 bg-blue-600 text-white rounded-lg ml-24" onClick={handleOpenModal}>
-          Postularme
+        <button
+          className={` mt-4 font-bold py-2 px-4 rounded-full mb-4 ml-24 ${
+            hasApplied ? "bg-[#0057c2] text-white" : "bg-[#0057c2] text-white"
+          }`}
+          onClick={hasApplied ? null : handleOpenModal}
+          disabled={hasApplied}
+        >
+          {hasApplied ? "Ya te has postulado" : "POSTULARME"}
         </button>
       </section>
 
       {/* Renderizar el modal */}
-      <QuestionsModal isOpen={isModalOpen} onClose={handleCloseModal} onConfirm={handleConfirmApply} />
+      <QuestionsModal
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+        selectedJob={selectedJob}
+      />
     </div>
   );
 }

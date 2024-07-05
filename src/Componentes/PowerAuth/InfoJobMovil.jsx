@@ -1,58 +1,45 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { FaLocationDot } from 'react-icons/fa';
+// InfoJobMovil.jsx
+
+import React, { useEffect, useState } from 'react';
+import { FaLocationDot } from 'react-icons/fa6';
 import { IoLogoWhatsapp } from 'react-icons/io';
 import { CiShare2 } from 'react-icons/ci';
+import { useNavigate, useParams } from 'react-router-dom';
 import { UserAuth } from '../../Context/AuthContext';
 import QuestionsModal from './QuestionsModal';
 import { supabase } from '../../supabase/supabase.config';
 
-function InfoJobMovil({ selectedJob }) {
+function InfoJobMovil() {
+  const { id } = useParams();
   const { user } = UserAuth();
-  const [atBottom, setAtBottom] = useState(false);
+  const [selectedJob, setSelectedJob] = useState(null);
   const [isQuestionsModalOpen, setIsQuestionsModalOpen] = useState(false);
   const [isShareMenuOpen, setIsShareMenuOpen] = useState(false);
   const [hasApplied, setHasApplied] = useState(false);
-  const contentRef = useRef(null);
-  const shareButtonRef = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (contentRef.current) {
-        const { scrollTop, scrollHeight, clientHeight } = contentRef.current;
-        if (scrollTop + clientHeight >= scrollHeight - 1) {
-          setAtBottom(true);
-        } else {
-          setAtBottom(false);
+    const fetchJobDetails = async () => {
+      try {
+        const { data: jobData, error } = await supabase
+          .from('Oferta')
+          .select('*')
+          .eq('id_oferta', id)
+          .single();
+
+        if (error) {
+          console.error('Error fetching job details:', error.message);
+          return;
         }
+
+        setSelectedJob(jobData);
+      } catch (error) {
+        console.error('Error fetching job details:', error.message);
       }
     };
 
-    if (contentRef.current) {
-      contentRef.current.addEventListener('scroll', handleScroll);
-    }
-
-    return () => {
-      if (contentRef.current) {
-        contentRef.current.removeEventListener('scroll', handleScroll);
-      }
-    };
-  }, []);
-
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (
-        shareButtonRef.current &&
-        !shareButtonRef.current.contains(event.target)
-      ) {
-        setIsShareMenuOpen(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
+    fetchJobDetails();
+  }, [id]);
 
   useEffect(() => {
     const checkIfApplied = async () => {
@@ -75,10 +62,6 @@ function InfoJobMovil({ selectedJob }) {
     checkIfApplied();
   }, [user, selectedJob]);
 
-  if (!selectedJob) {
-    return null;
-  }
-
   const formatContentAsList = (content) => {
     if (!content) return null;
     const isList = content.includes('-') || content.includes('•');
@@ -96,26 +79,26 @@ function InfoJobMovil({ selectedJob }) {
   const jobDetails = [
     {
       title: '¿Por qué deberías unirte a nosotros?',
-      content: formatContentAsList(selectedJob.beneficios),
+      content: formatContentAsList(selectedJob?.beneficios),
     },
     {
       title: '¿Qué buscamos?',
-      content: formatContentAsList(selectedJob.requisitos),
+      content: formatContentAsList(selectedJob?.requisitos),
     },
     {
       title: '¿Qué es lo que harás?',
-      content: formatContentAsList(selectedJob.funciones),
+      content: formatContentAsList(selectedJob?.funciones),
     },
     {
       title: 'Horario de Trabajo',
-      content: formatContentAsList(selectedJob.horario),
+      content: formatContentAsList(selectedJob?.horario),
     },
   ];
 
-  const whatsappBaseUrl = selectedJob.wtsp_url
+  const whatsappBaseUrl = selectedJob?.wtsp_url
     ? selectedJob.wtsp_url.split('?')[0]
     : '';
-  const whatsappMessage = `Hola, estoy interesado en el puesto de ${selectedJob.puesto}`;
+  const whatsappMessage = `Hola, estoy interesado en el puesto de ${selectedJob?.puesto}`;
   const whatsappUrl = `${whatsappBaseUrl}?text=${encodeURIComponent(
     whatsappMessage
   )}`;
@@ -129,7 +112,7 @@ function InfoJobMovil({ selectedJob }) {
   };
 
   const handleCopyLink = () => {
-    const shareUrl = `https://w2asesoresyconsultores.com/Share?id=${selectedJob.id_oferta}`;
+    const shareUrl = `https://w2asesoresyconsultores.com/Share?id=${selectedJob?.id_oferta}`;
     navigator.clipboard.writeText(shareUrl);
 
     const copiedMessage = document.createElement('div');
@@ -152,13 +135,17 @@ function InfoJobMovil({ selectedJob }) {
     setIsShareMenuOpen(false);
   };
 
+  if (!selectedJob) {
+    return null; // Puedes mostrar un spinner de carga o un mensaje mientras se carga la información
+  }
+
   return (
     <div
       className='selected-job-info w-full sm:w-1/2 border rounded-lg flex flex-col p-4 mx-8 bg-white shadow-lg'
       style={{ height: '650px', overflowY: 'auto', position: 'relative' }}
     >
       <h2 className='ml-1 mt-3 font-bold text-3xl mb-3 text-black'>
-        {selectedJob.puesto}
+        {selectedJob?.puesto}
       </h2>
       <div className='flex items-center justify-between mb-2 mt-2'>
         <div className='flex flex-col w-full'>
@@ -167,7 +154,7 @@ function InfoJobMovil({ selectedJob }) {
               className='text-black text-sm uppercase font-semibold tracking-wide'
               style={{ display: 'flex', alignItems: 'center' }}
             >
-              {selectedJob.empresa}
+              {selectedJob?.empresa}
             </span>
             <span className='inline-block mx-4 h-4 w-px bg-gray-400'></span>
             <span
@@ -177,17 +164,16 @@ function InfoJobMovil({ selectedJob }) {
               <FaLocationDot
                 style={{ color: 'black', marginRight: '5px' }}
               />
-              {selectedJob.ubicacion}
+              {selectedJob?.ubicacion}
             </span>
             <span className='inline-block mx-4 h-4 w-px bg-gray-400'></span>
             <span className='text-black text-sm uppercase font-semibold tracking-wide'>
-              ${selectedJob.salario}
+              ${selectedJob?.salario}
             </span>
           </div>
         </div>
       </div>
       <div
-        ref={contentRef}
         className='mt-2 mb-2 mx-0 md:mx-10 font-normal text-gray-600 text-sm sm:text-base'
         style={{ height: '400px', overflowY: 'auto' }}
       >
@@ -212,7 +198,7 @@ function InfoJobMovil({ selectedJob }) {
         >
           {hasApplied ? 'Ya Aplicado' : 'Aplicar'}
         </button>
-        <div ref={shareButtonRef}>
+        <div>
           <button
             className='flex items-center ml-2 bg-gray-300 hover:bg-gray-400 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
             onClick={handleShareClick}
@@ -221,35 +207,32 @@ function InfoJobMovil({ selectedJob }) {
             Compartir
           </button>
           {isShareMenuOpen && (
-            <div
-              className='flex flex-col absolute bg-white shadow-lg rounded-lg mt-2 top-12 right-0 z-10'
-              style={{ minWidth: '120px' }}
-            >
+            <div className='absolute z-10 mt-2 py-2 w-48 bg-white rounded-md shadow-lg'>
               <button
-                className='flex items-center text-black hover:bg-gray-200 py-2 px-4 rounded-t-lg'
+                className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900'
                 onClick={handleCopyLink}
               >
-                <FaCopy className='mr-2' />
                 Copiar Enlace
               </button>
               <a
                 href={whatsappUrl}
+                className='block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900'
                 target='_blank'
                 rel='noopener noreferrer'
-                className='flex items-center text-black hover:bg-gray-200 py-2 px-4 rounded-b-lg'
               >
-                <IoLogoWhatsapp className='mr-2' />
-                WhatsApp
+                <IoLogoWhatsapp className='inline-block mr-1' />
+                Compartir por WhatsApp
               </a>
             </div>
           )}
         </div>
       </div>
-      <QuestionsModal
-        isOpen={isQuestionsModalOpen}
-        onClose={() => setIsQuestionsModalOpen(false)}
-        selectedJob={selectedJob}
-      />
+      {isQuestionsModalOpen && (
+        <QuestionsModal
+          selectedJob={selectedJob}
+          onClose={() => setIsQuestionsModalOpen(false)}
+        />
+      )}
     </div>
   );
 }
