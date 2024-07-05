@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { FaLocationDot, FaWhatsapp } from "react-icons/fa6";
+import { FaLocationDot} from "react-icons/fa6";
 import { CiShare2 } from "react-icons/ci";
 import { useNavigate } from "react-router-dom";
 import QuestionsModal from "./QuestionsModal"; // Importar el componente QuestionsModal
@@ -82,38 +82,35 @@ function InfoJob({ selectedJob }) {
     return null; // Evitar renderizar si selectedJob es null
   }
 
-  // Función para formatear el contenido como lista si es beneficios, requisitos o funciones
-  const formatContentAsList = (content) => {
+  // Función para formatear el contenido con react-quill
+  const formatContent = (content) => {
     if (!content) return null;
-    // Verificar si el contenido tiene listas separadas por guiones o puntos
-    const isList = content.includes("-") || content.includes("•");
-    if (isList) {
-      return content.split(/\n/).map((item, index) => (
-        <li key={index} className="mt-2">
-          {item.trim()}
-        </li>
-      ));
-    } else {
-      return content; // Devolver el contenido sin modificar si no hay listas detectadas
-    }
+    return (
+      <div
+        dangerouslySetInnerHTML={{
+          __html: content.replaceAll('<ul>', '<ul class="list-disc pl-6">')
+                          .replaceAll('<ol>', '<ol class="list-decimal pl-6">')
+        }}
+      />
+    );
   };
-
+  
   const jobDetails = [
     {
       title: "¿Por qué deberías unirte a nosotros?",
-      content: formatContentAsList(selectedJob.beneficios),
+      content: formatContent(selectedJob.beneficios),
     },
     {
       title: "¿Qué buscamos?",
-      content: formatContentAsList(selectedJob.requisitos),
+      content: formatContent(selectedJob.requisitos),
     },
     {
       title: "¿Qué es lo que harás?",
-      content: formatContentAsList(selectedJob.funciones),
+      content: formatContent(selectedJob.funciones),
     },
     {
       title: "Horario de Trabajo",
-      content: formatContentAsList(selectedJob.horario),
+      content: formatContent(selectedJob.horario),
     },
   ];
 
@@ -249,14 +246,11 @@ function InfoJob({ selectedJob }) {
           )}
         </div>
       </div>
-      <div
-        className="border-t border-gray-300 my-2"
-        style={{ width: "100%" }}
-      ></div>
+
       <div
         ref={contentRef}
-        className="mx-auto mt-3 w-full overflow-y-auto"
-        style={{ height: "calc(100% - 180px)" }}
+        className="overflow-y-auto pb-4 mt-3"
+        style={{ height: "420px" }}
       >
         <h3 className="font-bold">Descripción del Empleo:</h3>
         {jobDetails.map((detail, index) => (
@@ -264,59 +258,45 @@ function InfoJob({ selectedJob }) {
             <div className="font-semibold font-dmsans text-primarytext">
               <div>{detail.title}</div>
             </div>
-            {typeof detail.content === "string" ? (
-              <p
-                className="mt-3 text-gray-800"
-                style={{
-                  wordWrap: "break-word",
-                  overflowWrap: "break-word",
-                  width: "100%",
-                }}
-              >
-                {detail.content}
-              </p>
-            ) : (
-              <ul
-                className="mt-3 text-gray-800"
-                style={{
-                  wordWrap: "break-word",
-                  overflowWrap: "break-word",
-                  width: "100%",
-                }}
-              >
-                {detail.content}
-              </ul>
-            )}
+            <div
+              className="mt-3 text-gray-800"
+              style={{
+                wordWrap: "break-word",
+                overflowWrap: "break-word",
+                width: "100%",
+              }}
+            >
+              {detail.content}
+            </div>
           </div>
         ))}
       </div>
-      <div
-        className="flex justify-center mt-4"
-        style={{ opacity: atBottom ? 1 : 0, transition: "opacity 0.3s" }}
-      >
-        <button
-          className={`font-bold py-2 px-4 rounded-full mr-4 ${
-            hasApplied ? "bg-[#0057c2] text-white" : "bg-[#0057c2] text-white"
-          }`}
-          onClick={hasApplied ? null : handleApplyClick}
-          disabled={hasApplied}
-        >
-          {hasApplied ? "Ya te has postulado" : "POSTULARME"}
-        </button>
-        {whatsappBaseUrl && (
-          <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
-            <button className="bg-green-500 text-white font-bold py-2 px-4 rounded-full flex items-center">
-              <FaWhatsapp className="mr-2" size={24} />
-              WhatsApp
-            </button>
-          </a>
-        )}
-      </div>
-      <QuestionsModal
-        isOpen={isQuestionsModalOpen}
-        onClose={() => setIsQuestionsModalOpen(false)}
-        selectedJob={selectedJob}
-      />
+
+      <div className="flex justify-center mt-4" style={{ opacity: atBottom ? 1 : 0, transition: "opacity 0.3s" }}>
+  <button
+    className={`font-bold py-2 px-4 rounded-full mr-4 ${
+      hasApplied ? "bg-[#0057c2] text-white" : "bg-[#0057c2] text-white"
+    }`}
+    onClick={hasApplied ? null : handleApplyClick}
+    disabled={hasApplied}
+  >
+    {hasApplied ? "Ya te has postulado" : "POSTULARME"}
+  </button>
+  {whatsappBaseUrl && (
+    <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
+      <button className="bg-green-500 text-white font-bold py-2 px-4 rounded-full flex items-center">
+        <IoLogoWhatsapp className="mr-2" size={24} />
+        WhatsApp
+      </button>
+    </a>
+  )}
+</div>
+
+<QuestionsModal
+  isOpen={isQuestionsModalOpen}
+  onClose={() => setIsQuestionsModalOpen(false)}
+  selectedJob={selectedJob}
+/>
     </div>
   );
 }
