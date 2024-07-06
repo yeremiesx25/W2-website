@@ -5,7 +5,7 @@ import DeleteButton from './DeleteButton';
 import { FaRegEdit } from "react-icons/fa";
 import { UserAuth } from "../../Context/AuthContext";
 import { supabase } from '../../supabase/supabase.config';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const removeAccents = (str) => {
   return str ? str.normalize("NFD").replace(/[\u0300-\u036f]/g, "") : "";
@@ -16,6 +16,7 @@ function JobList() {
   const { user } = UserAuth();
   const [jobs, setJobs] = useState([]);
   const [filteredJobs, setFilteredJobs] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (user) {
@@ -43,6 +44,10 @@ function JobList() {
     );
     setFilteredJobs(filtered);
   }, [searchTerm, jobs]);
+
+  const handleEdit = (jobId) => {
+    navigate(`/edit-job/${jobId}`);
+  };
 
   return (
     <div className='w-full flex justify-center h-[450px] overflow-y-scroll font-dmsans scroll-smooth'>
@@ -91,7 +96,10 @@ function JobList() {
                 <td className="px-6 py-4 whitespace-nowrap">{job.fecha_publicacion}</td>
                 
                 <td className="px-6 py-4 whitespace-nowrap flex space-x-2">
-                  <button className="px-4 py-2 font-medium text-white bg-blue-600 rounded-md hover:bg-blue-500 focus:outline-none focus:shadow-outline-blue active:bg-blue-600 transition duration-150 ease-in-out">
+                  <button 
+                    className="px-4 py-2 font-medium text-white bg-blue-600 rounded-md hover:bg-blue-500 focus:outline-none focus:shadow-outline-blue active:bg-blue-600 transition duration-150 ease-in-out"
+                    onClick={() => handleEdit(job.id_oferta)}
+                  >
                     <FaRegEdit />
                   </button>
                   <DeleteButton id_oferta={job.id_oferta} />

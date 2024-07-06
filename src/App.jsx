@@ -16,6 +16,7 @@ import Profile from './Componentes/Profile/Profile.jsx';
 import Postulados from './Componentes/Admin/Postulados.jsx'
 import Share from "./Componentes/PowerAuth/Share.jsx"; // Importar el componente Share
 import InfoJobMovil from "./Componentes/PowerAuth/InfoJobMovil.jsx";
+import EditJob from './Componentes/Form/EditJob.jsx';
 
 function App() {
   return (
@@ -40,6 +41,7 @@ function App() {
           <Route path="/job/:id" element = {<Postulados />} />
           <Route path="/Share" element={<Share />} /> {/* Añadir ruta para Share */}
           <Route path="/info-job-movil/:id" element={<InfoJobMovil />} />
+          <Route path="/edit-job/:id_oferta" element={<EditJob />} />
         </Routes>
       </JobsProvider>
     </AuthContextProvider>
