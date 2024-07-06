@@ -119,6 +119,7 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
           resp_5: answers[4],
           fecha_postulacion: new Date(),
           estado: 'pendiente',
+          avatar_url: user.user_metadata.avatar_url, // Agregado: guarda el avatar_url del usuario
         });
 
       if (insertError) {
