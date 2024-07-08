@@ -82,10 +82,10 @@ function Buscador() {
   };
 
   return (
-    <div className="">
+    <div className=" w-[80%] mx-auto">
       <form
         onSubmit={handleSubmit}
-        className=" bg-white flex flex-col md:flex-row items-center justify-center border py-2 px-2 rounded-2xl gap-2 shadow-2xl focus-within:border-gray-300 w-full max-w-2xl mt-12"
+        className=" bg-white flex flex-col md:flex-row items-center justify-center border py-2 px-2 rounded-3xl gap-2 shadow-2xl  w-full mt-12"
       >
         <div className=" flex items-center w-full border-r">
           <FaSearch className="ml-4 text-gray-500" />
@@ -94,21 +94,21 @@ function Buscador() {
             value={keyword}
             onChange={handleKeywordChange}
             placeholder="Título del empleo"
-            className="px-6 py-2 w-full rounded-md flex-1 outline-none bg-white pl-12"
+            className="px-6 py-2 w-full rounded-md flex-1 outline-none bg-white pl-2"
             onClick={() => {
               setShowKeywordSuggestions(true);
               setShowLocationSuggestions(false);
             }}
           />
         </div>
-        <div className="relative flex items-center w-full border-r">
-          <FaMapMarkerAlt className="absolute left-4 text-gray-500" />
+        <div className="flex items-center w-full border-r">
+          <FaMapMarkerAlt className=" text-gray-500" />
           <input
             type="text"
             value={location}
             onChange={handleLocationChange}
             placeholder="Ciudad o Lugar"
-            className="px-6 py-2 w-full rounded-md flex-1 outline-none bg-white pl-12"
+            className=" py-2 w-full rounded-md flex-1 outline-none bg-white pl-2"
             onClick={() => {
               setShowLocationSuggestions(true);
               setShowKeywordSuggestions(false);
@@ -117,15 +117,15 @@ function Buscador() {
         </div>
         <button
           type="submit"
-          className="w-full md:w-auto min-w-[150px] px-6 py-3 bg-[#0057c2] border-[#0057c2] text-white fill-white active:scale-95 duration-100 border will-change-transform overflow-hidden relative rounded-xl transition-all disabled:opacity-70"
+          className="w-12 md:w-auto min-w-[48px] h-12 bg-[#FFE946]  text-white rounded-full"
         >
-          <div className="relative flex items-center justify-center">
-            <span className="text-sm font-semibold whitespace-nowrap">Buscar empleos</span>
+          <div className="flex items-center justify-center">
+            <span className="text-sm font-semibold whitespace-nowrap"><FaSearch className=" text-[#0057c2]" /></span>
           </div>
         </button>
       </form>
       {showKeywordSuggestions && (
-        <ul ref={keywordSuggestionsRef} className="absolute top-full left-0 z-10 bg-white border border-gray-200 rounded-b-md shadow-md w-full max-h-[200px] overflow-y-auto">
+        <ul ref={keywordSuggestionsRef} className=" bg-white border border-gray-200 rounded-b-md shadow-md w-full max-h-[200px] overflow-y-auto">
           {keywordSuggestions.map((suggestion, index) => (
             <li key={index} className="px-4 py-2 cursor-pointer hover:bg-gray-100" onClick={() => handleSelectKeywordSuggestion(suggestion)}>
               {suggestion}
@@ -134,7 +134,7 @@ function Buscador() {
         </ul>
       )}
       {showLocationSuggestions && (
-        <ul ref={locationSuggestionsRef} className="absolute top-full left-0 z-10 bg-white border border-gray-200 rounded-b-md shadow-md w-full max-h-[200px] overflow-y-auto">
+        <ul ref={locationSuggestionsRef} className=" bg-white border border-gray-200 rounded-b-md shadow-md w-full max-h-[200px] overflow-y-auto">
           {locationSuggestions.map((suggestion, index) => (
             <li key={index} className="px-4 py-2 cursor-pointer hover:bg-gray-100" onClick={() => handleSelectLocationSuggestion(suggestion)}>
               {suggestion}
