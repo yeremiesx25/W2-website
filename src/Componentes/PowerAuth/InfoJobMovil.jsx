@@ -6,6 +6,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { UserAuth } from '../../Context/AuthContext';
 import QuestionsModal from './QuestionsModal';
 import { supabase } from '../../supabase/supabase.config';
+import HeaderPowerAuth from './HeaderPowerAuth'
 
 function InfoJobMovil() {
   const { id } = useParams();
@@ -138,10 +139,13 @@ function InfoJobMovil() {
   }
 
   return (
+    <div className='w-full h-screen font-dmsans'>
+      <HeaderPowerAuth />
     <div
-      className='selected-job-info w-full sm:w-1/2 border rounded-lg flex flex-col p-4 mx-8 bg-white shadow-lg'
-      style={{ height: '650px', overflowY: 'auto', position: 'relative' }}
+      className='selected-job-info w-full flex flex-col p-4 pt-16 pb-8 bg-white '
+      style={{ height: '650px', overflowY: 'auto' }}
     >
+      
       <h2 className='ml-1 mt-3 font-bold text-3xl mb-3 text-black'>
         {selectedJob?.puesto}
       </h2>
@@ -243,6 +247,7 @@ function InfoJobMovil() {
           userId={user?.id}
         />
       )}
+    </div>
     </div>
   );
 }
