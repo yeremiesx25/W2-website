@@ -146,7 +146,7 @@ function InfoJobMovil() {
       style={{ height: '650px', overflowY: 'auto' }}
     >
       
-      <h2 className='ml-1 mt-3 font-bold text-3xl mb-3 text-black'>
+      <h2 className=' mt-3 font-bold text-xl mb-3 text-black w-full'>
         {selectedJob?.puesto}
       </h2>
       <div className='flex items-center justify-between mb-2 mt-2'>
@@ -158,7 +158,7 @@ function InfoJobMovil() {
             >
               {selectedJob?.empresa}
             </span>
-            <span className='inline-block mx-4 h-4 w-px bg-gray-400'></span>
+            <span className='inline-block mx-4 h-4 w-px bg-gray-400'>huhu</span>
             <span
               className='text-black text-sm uppercase font-semibold tracking-wide'
               style={{ display: 'flex', alignItems: 'center' }}
