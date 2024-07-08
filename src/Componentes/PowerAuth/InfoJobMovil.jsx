@@ -1,5 +1,3 @@
-// InfoJobMovil.jsx
-
 import React, { useEffect, useState } from 'react';
 import { FaLocationDot } from 'react-icons/fa6';
 import { IoLogoWhatsapp } from 'react-icons/io';
@@ -168,7 +166,7 @@ function InfoJobMovil() {
             </span>
             <span className='inline-block mx-4 h-4 w-px bg-gray-400'></span>
             <span className='text-black text-sm uppercase font-semibold tracking-wide'>
-              ${selectedJob?.salario}
+              S/. {selectedJob?.sueldo}
             </span>
           </div>
         </div>
@@ -188,16 +186,26 @@ function InfoJobMovil() {
           </div>
         ))}
       </div>
-      <div className='flex justify-between items-center'>
+      <div className="flex justify-center mt-4">
         <button
-          className={`bg-green-600 hover:bg-green-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline ${
-            hasApplied ? 'cursor-default' : 'cursor-pointer'
+          className={`font-bold py-2 px-4 rounded-full mr-4 ${
+            hasApplied ? "bg-[#0057c2] text-white" : "bg-[#0057c2] text-white"
           }`}
           onClick={hasApplied ? null : handleApplyClick}
           disabled={hasApplied}
         >
-          {hasApplied ? 'Ya Aplicado' : 'Aplicar'}
+          {hasApplied ? "Ya te has postulado" : "POSTULARME"}
         </button>
+        {whatsappBaseUrl && (
+          <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
+            <button className="bg-green-500 text-white font-bold py-2 px-4 rounded-full flex items-center">
+              <IoLogoWhatsapp className="mr-2" size={24} />
+              WhatsApp
+            </button>
+          </a>
+        )}
+      </div>
+      <div className='flex justify-between items-center'>
         <div>
           <button
             className='flex items-center ml-2 bg-gray-300 hover:bg-gray-400 text-black font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline'
@@ -229,8 +237,10 @@ function InfoJobMovil() {
       </div>
       {isQuestionsModalOpen && (
         <QuestionsModal
-          selectedJob={selectedJob}
+          isOpen={isQuestionsModalOpen}
           onClose={() => setIsQuestionsModalOpen(false)}
+          jobId={selectedJob?.id_oferta}
+          userId={user?.id}
         />
       )}
     </div>

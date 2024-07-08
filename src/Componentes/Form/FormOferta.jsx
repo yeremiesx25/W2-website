@@ -216,7 +216,7 @@ function FormOferta() {
                       placeholder="Ubicación"
                       value={formData.location}
                       onChange={handleInputChange}
-                      onKeyDown={(e) => handleInputKeyDown(e, 'celular')}
+                      onKeyDown={(e) => handleInputKeyDown(e, 'modalidad')}
                       className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                     />
                   </div>
@@ -231,6 +231,7 @@ function FormOferta() {
                       placeholder="Modalidad"
                       value={formData.modalidad}
                       onChange={handleInputChange}
+                      onKeyDown={(e) => handleInputKeyDown(e, 'celular')}
                       className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                     />
                   </div>
