@@ -1,7 +1,7 @@
 import React from 'react';
 
 function CardTrabajo2({ job, onSelectJob, isSelected }) {
-  const { puesto, empresa, ubicacion, sueldo, fecha_publicacion } = job;
+  const { puesto, modalidad, ubicacion, sueldo, fecha_publicacion } = job;
 
   const calcularTiempoTranscurrido = (fecha) => {
     const fechaPublicacion = new Date(fecha);
@@ -29,8 +29,11 @@ function CardTrabajo2({ job, onSelectJob, isSelected }) {
         <div>
           <h4 className="font-semibold text-xl leading-tight " style={{ marginBottom: '6px' }}>{puesto}</h4>
 
-          <div className="my-2 text-xs  font-semibold tracking-wide" style={{ color: '#666' }}>
+          <div className="my-2 text-xs  font-semibold tracking-wide" style={{ color: 'black' }}>
             {ubicacion}
+          </div>
+          <div className="my-2 text-xs  font-semibold tracking-wide" style={{ color: 'black' }}>
+            {modalidad}
           </div>
           <div className="flex justify-between items-center mt-2">
             <div className="text-sm" style={{ fontWeight: '600', color: '#333' }}>{calcularTiempoTranscurrido(fecha_publicacion)}</div>
