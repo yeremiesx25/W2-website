@@ -159,7 +159,7 @@ function InfoJob({ selectedJob }) {
       className="selected-job-info w-full sm:w-1/2 border rounded-lg md:flex flex-col p-4 mx-8 bg-white shadow-lg hidden"
       style={{ height: "650px", overflowY: "auto", position: "relative" }}
     >
-      <h2 className="ml-1 mt-3 font-bold text-3xl mb-3 text-black">
+      <h2 className="ml-1 mt-3 font-bold text-2xl mb-3 text-black">
         {selectedJob.puesto}
       </h2>
       <div className="flex items-center justify-between mb-2 mt-2">
