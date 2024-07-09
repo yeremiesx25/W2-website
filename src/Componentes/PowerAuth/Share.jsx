@@ -122,7 +122,7 @@ function Share() {
           <IoIosArrowBack className="mr-2" size={20} /> Volver al listado
         </button>
 
-        <h1 className="text-3xl font-bold mb-4 ml-24">{selectedJob.puesto}</h1>
+        <h1 className="text-primarytext text-3xl font-bold mb-4 ml-24">{selectedJob.puesto}</h1>
         <p className="text-black mb-4 ml-24"> <MdOutlineVerifiedUser className='inline-block mr-2 text-green-500' />{selectedJob.empresa} - {selectedJob.ubicacion}</p>
         <div className='ml-24 mb-4 text-sm text-black flex items-center '>
           <TbMoneybag className='mr-2' />
@@ -151,7 +151,7 @@ function Share() {
           onClick={hasApplied ? null : handleOpenModal}
           disabled={hasApplied}
         >
-          {hasApplied ? "Ya te has postulado" : "POSTULARME"}
+          {hasApplied ? "YA HAS POSTULADO" : "POSTULARME"}
         </button>
       </section>
 

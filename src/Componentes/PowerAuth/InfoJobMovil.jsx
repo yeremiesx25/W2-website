@@ -8,6 +8,7 @@ import HeaderPowerAuth from './HeaderPowerAuth';
 import { TbMoneybag } from 'react-icons/tb';
 import { FaRegBuilding } from 'react-icons/fa';
 import { MdOutlineVerifiedUser } from "react-icons/md";
+import { FaArrowLeft } from "react-icons/fa6";
 
 function InfoJobMovil() {
   const { id } = useParams();
@@ -64,7 +65,6 @@ function InfoJobMovil() {
   const formatContent = (content) => {
     if (!content) return null;
 
-    // Aplicar clases de Tailwind a las listas desordenadas y ordenadas
     const formattedContent = content
       .replaceAll('<ul>', '<ul class="list-disc pl-6">')
       .replaceAll('<ol>', '<ol class="list-decimal pl-6">');
@@ -78,6 +78,14 @@ function InfoJobMovil() {
     );
   };
 
+  const handleBackToList = () => {
+    navigate('/PowerAuth');
+  };
+
+  if (!selectedJob) {
+    return null;
+  }
+
   const whatsappBaseUrl = selectedJob?.wtsp_url
     ? selectedJob.wtsp_url.split('?')[0]
     : '';
@@ -89,7 +97,7 @@ function InfoJobMovil() {
   )}`;
 
   const handleApplyClick = () => {
-    setIsQuestionsModalOpen(true);
+    setIsQuestionsModalOpen(true); // Mostrar el modal de preguntas directamente
   };
 
   if (!selectedJob) {
@@ -100,7 +108,13 @@ function InfoJobMovil() {
     <div className='w-full h-screen font-dmsans flex flex-col'>
       <HeaderPowerAuth />
       <div className='selected-job-info flex-1 p-4 pt-16 pb-20 bg-white overflow-y-auto'>
-        <h2 className='ml-1 mt-3 font-bold text-3xl text-center text-black break-words whitespace-normal'>
+      <button
+  className='text-black mb-2  mt-2 border border-gray-400 bg-white hover:bg-gray-200 rounded-full p-2'
+  onClick={handleBackToList}
+>
+  <FaArrowLeft className='text-black' size={20} />
+</button>
+        <h2 className='ml-1 mt-3 font-bold text-3xl text-center text-primarytext break-words whitespace-normal'>
           {selectedJob?.puesto}
         </h2>
         <div className='flex items-center justify-center mb-2 mt-2'>
@@ -153,7 +167,7 @@ function InfoJobMovil() {
             onClick={hasApplied ? null : handleApplyClick}
             disabled={hasApplied}
           >
-            {hasApplied ? 'Ya te has postulado' : 'POSTULARME'}
+            {hasApplied ? 'YA HAS POSTULADO' : 'POSTULARME'}
           </button>
           {whatsappBaseUrl && (
             <a
@@ -170,14 +184,11 @@ function InfoJobMovil() {
           )}
         </div>
       </div>
-      {isQuestionsModalOpen && (
-        <QuestionsModal
-          isOpen={isQuestionsModalOpen}
-          onClose={() => setIsQuestionsModalOpen(false)}
-          jobId={selectedJob?.id_oferta}
-          userId={user?.id}
-        />
-      )}
+      <QuestionsModal
+        isOpen={isQuestionsModalOpen}
+        onClose={() => setIsQuestionsModalOpen(false)}
+        selectedJob={selectedJob}
+      />
     </div>
   );
 }
