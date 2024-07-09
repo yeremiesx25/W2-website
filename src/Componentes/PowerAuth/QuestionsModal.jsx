@@ -11,6 +11,7 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
   const [phone, setPhone] = useState(''); // Estado para almacenar el número de celular
   const [phoneError, setPhoneError] = useState(''); // Estado para el error del teléfono
   const [answerErrors, setAnswerErrors] = useState([]); // Estado para los errores de las respuestas
+  const [submissionSuccess, setSubmissionSuccess] = useState(false); // Estado para mostrar el mensaje de éxito
 
   useEffect(() => {
     const fetchQuestions = async () => {
@@ -42,6 +43,7 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
       setPhone(''); // Restablece el número de celular cuando el modal se abre
       setPhoneError(''); // Limpia cualquier error anterior del número de celular
       setAnswerErrors(['', '', '', '', '']); // Limpia cualquier error anterior de respuestas
+      setSubmissionSuccess(false); // Oculta el mensaje de éxito al abrir el modal
     }
   }, [isOpen, selectedJob]);
 
@@ -126,8 +128,18 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
         throw insertError;
       }
 
-      console.log('Actualización exitosa de count_postulados y creación de nueva Postulacion');
-      onClose();
+      // Mostrar mensaje de éxito
+      setSubmissionSuccess(true);
+
+      // Limpiar formularios y datos para una nueva postulación
+      setPhone('');
+      setAnswers(['', '', '', '', '']);
+
+      // Opcional: cerrar el modal automáticamente después del éxito
+      // setTimeout(() => {
+      //   onClose();
+      // }, 2000); // Cierra el modal después de 2 segundos
+
     } catch (error) {
       console.error('Error al enviar la postulación:', error.message);
     }
@@ -135,6 +147,11 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
 
   const handleBack = () => {
     setCurrentQuestionIndex(-1); // Vuelve al paso del número de celular
+  };
+
+  const handleAccept = () => {
+    // Recargar la página
+    window.location.reload();
   };
 
   return (
@@ -197,7 +214,7 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
                         rows={Math.min(4, Math.ceil(question.length / 50))}
                         value={answers[index]}
                         onChange={(e) => handleAnswerChange(e, index)}
-                        placeholder="Escribe tu respuesta aquí"
+                        placeholder="Escribe tus respuestas aquí"
                       />
                       {answerErrors[index] && (
                         <p className="text-red-500 text-sm">{answerErrors[index]}</p>
@@ -220,6 +237,28 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
                   </div>
                 </div>
               )}
+            </div>
+          )}
+          {submissionSuccess && (
+            <div className="absolute inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 z-50">
+              <div className="bg-white rounded-lg p-6 w-full max-w-md text-center">
+                <div className="flex flex-col items-center">
+                  <div className="bg-green-500 rounded-full p-3 mb-4">
+                    <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                    </svg>
+                  </div>
+                  <h2 className="text-2xl font-bold mb-2 text-green-500">¡Postulación Exitosa!</h2>
+                  <p className="mb-4">Felicitaciones, has enviado tu postulación correctamente.</p>
+                  <p className="mb-4">Los reclutadores se comunicarán contigo pronto.</p>
+                  <button
+                    className="bg-[#0057c2] text-white font-bold py-2 px-4 rounded-full w-32"
+                    onClick={handleAccept}
+                  >
+                    Aceptar
+                  </button>
+                </div>
+              </div>
             </div>
           )}
         </div>

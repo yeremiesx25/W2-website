@@ -197,7 +197,7 @@ function InfoJob({ selectedJob }) {
           onClick={hasApplied ? null : handleApplyClick}
           disabled={hasApplied}
         >
-          {hasApplied ? "Ya te has postulado" : "POSTULARME"}
+          {hasApplied ? "YA HAS POSTULADO" : "POSTULARME"}
         </button>
         <div
           ref={shareButtonRef}
@@ -280,7 +280,7 @@ function InfoJob({ selectedJob }) {
     onClick={hasApplied ? null : handleApplyClick}
     disabled={hasApplied}
   >
-    {hasApplied ? "Ya te has postulado" : "POSTULARME"}
+    {hasApplied ? "YA HAS POSTULADO" : "POSTULARME"}
   </button>
   {whatsappBaseUrl && (
     <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
