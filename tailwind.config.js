@@ -40,6 +40,7 @@ module.exports = withMT( {
       },
       backgroundImage: {
         'primarygradient': 'linear-gradient(0.25turn, #2563EB, #13337A)',
+        'primarygradientmobile': 'linear-gradient(0.50turn, #2563EB, #13337A)',
       },
     },
   },

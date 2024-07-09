@@ -7,6 +7,7 @@ import { FaCopy, FaFacebookF } from "react-icons/fa";
 import { IoLogoWhatsapp } from "react-icons/io";
 import { supabase } from "../../supabase/supabase.config"; // Importar cliente de Supabase
 import { UserAuth } from "../../Context/AuthContext"; // Importar contexto de autenticación
+import { MdOutlineVerifiedUser } from "react-icons/md";
 
 function InfoJob({ selectedJob }) {
   const { user } = UserAuth(); // Obtener información del usuario autenticado
@@ -159,29 +160,29 @@ function InfoJob({ selectedJob }) {
       className="selected-job-info w-full sm:w-1/2 border rounded-lg md:flex flex-col p-4 mx-8 bg-white shadow-lg hidden"
       style={{ height: "650px", overflowY: "auto", position: "relative" }}
     >
-      <h2 className="ml-1 mt-3 font-bold text-2xl mb-3 text-black">
+      <h2 className="ml-1 mt-3 font-semibold text-2xl mb-3 text-gray-800">
         {selectedJob.puesto}
       </h2>
       <div className="flex items-center justify-between mb-2 mt-2">
         <div className="flex flex-col w-full">
           <div className="flex items-center justify-start">
             <span
-              className="text-black text-sm uppercase font-semibold tracking-wide"
+              className="text-blue-900 text-base uppercase font-regular tracking-wide"
               style={{ display: "flex", alignItems: "center" }}
             >
-              {selectedJob.empresa}
+              {selectedJob.empresa}<MdOutlineVerifiedUser className="flex text-green-500 ml-1 text-lg mb-0.5" />
             </span>
             <span className="inline-block mx-4 h-4 w-px bg-gray-400"></span>
             <span
-              className="text-black text-sm uppercase font-semibold tracking-wide"
+              className="text-gray-700 text-base  font-regular tracking-wide"
               style={{ display: "flex", alignItems: "center" }}
             >
-              <FaLocationDot style={{ color: "black", marginRight: "5px" }} />
+              <FaLocationDot style={{ marginRight: "5px" }} />
               {selectedJob.ubicacion}
             </span>
             <span className="inline-block mx-4 h-4 w-px bg-gray-400"></span>
             <span
-              className="text-black text-sm uppercase font-semibold tracking-wide"
+              className="text-gray-700 text-base font-regular tracking-wide"
               style={{ display: "flex", alignItems: "center" }}
             >
               S/. {selectedJob.sueldo}
@@ -201,11 +202,11 @@ function InfoJob({ selectedJob }) {
         </button>
         <div
           ref={shareButtonRef}
-          className="ml-2 flex items-center justify-center bg-[#0057c2] rounded-full cursor-pointer hover:bg-blue-300 mb-4 relative"
+          className="ml-2 flex items-center justify-center bg-[#eaf3fb] rounded-full cursor-pointer hover:bg-blue-100 mb-4 relative"
           style={{ height: "40px", width: "40px" }}
           onClick={handleShareClick}
         >
-          <CiShare2 size={24} color="white" />
+          <CiShare2 size={24} color="#005da9" />
 
           {isShareMenuOpen && (
             <div className="absolute right-0 mt-2 w-48 bg-white border rounded shadow-lg z-50">
@@ -252,14 +253,14 @@ function InfoJob({ selectedJob }) {
         className="overflow-y-auto pb-4 mt-3"
         style={{ height: "420px" }}
       >
-        <h3 className="font-bold">Descripción del Empleo:</h3>
+        <h3 className="font-semibold text-xl text-gray-800">Descripción del Empleo</h3>
         {jobDetails.map((detail, index) => (
-          <div key={index} className="py-5 border-b border-gray-200">
-            <div className="font-semibold font-dmsans text-primarytext">
+          <div key={index} className="py-5 border-b border-gray-300">
+            <div className="font-semibold font-dmsans text-gray-800">
               <div>{detail.title}</div>
             </div>
             <div
-              className="mt-3 text-gray-800"
+              className="mt-3 text-gray-700 font-regular"
               style={{
                 wordWrap: "break-word",
                 overflowWrap: "break-word",
@@ -284,7 +285,7 @@ function InfoJob({ selectedJob }) {
   </button>
   {whatsappBaseUrl && (
     <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
-      <button className="bg-green-500 text-white font-bold py-2 px-4 rounded-full flex items-center">
+      <button className="bg-[#00d35e] text-white font-bold py-2 px-4 rounded-full flex items-center">
         <IoLogoWhatsapp className="mr-2" size={24} />
         WhatsApp
       </button>

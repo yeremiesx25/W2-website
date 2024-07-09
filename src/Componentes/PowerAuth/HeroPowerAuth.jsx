@@ -7,7 +7,7 @@ function HeroPowerAuth() {
   const { jobs } = useContext(JobsContext);
 
   return (
-    <section className="w-full md:h-[400px] h-[450px] bg-primarygradient font-dmsans flex items-center justify-center md:pl-20 rounded-full-b-3xl">
+    <section className="w-full md:h-[400px] h-[450px] bg-primarygradientmobile md:bg-primarygradient font-dmsans flex items-center justify-center md:pl-20 rounded-full-b-3xl">
       <div className="md:w-1/2 w-full md:p-8 p-4">
         <h1 className="text-3xl md:text-4xl text-center text-white font-regular mt-12 md:mt-0 max-w-[500px] mx-auto">
           Vive la experiencia{" "}
