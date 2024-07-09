@@ -82,7 +82,7 @@ function Buscador() {
   };
 
   return (
-    <div className=" w-[80%] mx-auto">
+    <div className=" md:w-[80%] mx-auto w-full">
       <form
         onSubmit={handleSubmit}
         className=" bg-white flex flex-col md:flex-row items-center justify-center border py-2 px-2 rounded-3xl gap-2 shadow-2xl  w-full mt-12"
@@ -117,8 +117,8 @@ function Buscador() {
         </div>
         <button
           type="submit"
-          className="w-12 md:w-auto min-w-[48px] h-12 bg-[#FFE946]  text-white rounded-full"
-        >
+          className="w-full md:w-auto min-w-[48px] h-12 bg-[#FFE946]  text-white rounded-full flex justify-center items-center gap-4"
+        ><span className='block md:hidden text-primarycolor font-semibold text-lg'>Buscar</span>
           <div className="flex items-center justify-center">
             <span className="text-sm font-semibold whitespace-nowrap"><FaSearch className=" text-[#0057c2]" /></span>
           </div>
