@@ -31,7 +31,7 @@ function EditJob() {
 
   useEffect(() => {
     if (!id_oferta) {
-      setError('No job ID provided');
+      setError(<span></span>);
       setLoading(false);
       return;
     }
