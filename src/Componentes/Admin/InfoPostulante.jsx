@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from '../../supabase/supabase.config';
+import { FaWhatsapp } from "react-icons/fa";
 
 const InfoPostulante = ({ postulado, preguntas, respuestas, onEstadoChange }) => {
   const [estadoActual, setEstadoActual] = useState(postulado.estado);
@@ -7,7 +8,7 @@ const InfoPostulante = ({ postulado, preguntas, respuestas, onEstadoChange }) =>
   useEffect(() => {
     setEstadoActual(postulado.estado);
   }, [postulado]);
-
+  const whatsappLink = `https://wa.me/${postulado.telefono}`;
   const handleEstadoClick = async (estadoNuevo) => {
     try {
       console.log('Estado nuevo:', estadoNuevo);
@@ -35,7 +36,7 @@ const InfoPostulante = ({ postulado, preguntas, respuestas, onEstadoChange }) =>
   };
 
   return (
-    <div className="bg-white shadow overflow-hidden sm:rounded-lg p-4">
+    <div className="bg-gray-100 shadow overflow-hidden sm:rounded-lg p-4">
       <div className="flex justify-between items-center mb-4">
         <div className="flex items-center space-x-4">
           <img
@@ -47,6 +48,7 @@ const InfoPostulante = ({ postulado, preguntas, respuestas, onEstadoChange }) =>
             <p className="text-lg font-semibold">{postulado.name_user}</p>
             <p className="text-gray-500">{postulado.correo}</p>
           </div>
+          <a href={whatsappLink}  className='w-12 h-12 bg-green-500 rounded-full flex justify-center items-center text-white text-3xl'><FaWhatsapp /></a>
         </div>
         <div>
           <div className="flex items-center space-x-2">
