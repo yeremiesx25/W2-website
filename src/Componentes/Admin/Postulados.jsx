@@ -10,6 +10,7 @@ function Postulados() {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedPostulado, setSelectedPostulado] = useState(null);
   const [user, setUser] = useState(null); // Para manejar el objeto de usuario
+  const [cvUrl, setCvUrl] = useState(null); // Estado para la URL del CV
 
   useEffect(() => {
     // Obtén el objeto de usuario desde el contexto global de autenticación
@@ -100,14 +101,32 @@ function Postulados() {
     setModalOpen(false);
   };
 
+  const handlePostuladoClick = async (postulado) => {
+    setSelectedPostulado(postulado);
+    // Obtener la URL del CV del postulado
+    const { data, error } = await supabase
+      .from('Usuario')
+      .select('cv_url')
+      .eq('user_id', postulado.user_id)
+      .single();
+
+    if (error) {
+      console.error('Error fetching CV URL:', error);
+    } else {
+      setCvUrl(data.cv_url);
+    }
+  };
+
   if (!jobDetails) {
-    return <div className="flex justify-center items-center h-screen">
-    <div className="relative inline-flex">
-        <div className="w-8 h-8 bg-amber-400 rounded-full"></div>
-        <div className="w-8 h-8 bg-amber-400 rounded-full absolute top-0 left-0 animate-ping"></div>
-        <div className="w-8 h-8 bg-amber-400 rounded-full absolute top-0 left-0 animate-pulse"></div>
-    </div>
-</div>;
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <div className="relative inline-flex">
+          <div className="w-8 h-8 bg-amber-400 rounded-full"></div>
+          <div className="w-8 h-8 bg-amber-400 rounded-full absolute top-0 left-0 animate-ping"></div>
+          <div className="w-8 h-8 bg-amber-400 rounded-full absolute top-0 left-0 animate-pulse"></div>
+        </div>
+      </div>
+    );
   }
 
   return (
@@ -185,10 +204,20 @@ function Postulados() {
             <tbody className="bg-white divide-y divide-gray-200">
               {postulados.map((postulado) => (
                 <tr key={postulado.id}>
-                  <td className="px-6 py-4 whitespace-nowrap">
+                  <td
+                    className="px-6 py-4 whitespace-nowrap cursor-pointer"
+                    onClick={() => handlePostuladoClick(postulado)}
+                  >
                     <div className="flex items-center">
                       <div className="flex-shrink-0 h-10 w-10">
-                        <img className="h-10 w-10 object-cover rounded-full" src={postulado.avatar_url || "https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?size=338&ext=jpg&ga=GA1.1.1788068356.1719446400&semt=ais_user"} alt="" />
+                        <img
+                          className="h-10 w-10 object-cover rounded-full"
+                          src={
+                            postulado.avatar_url ||
+                            "https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?size=338&ext=jpg&ga=GA1.1.1788068356.1719446400&semt=ais_user"
+                          }
+                          alt=""
+                        />
                       </div>
                       <div className="ml-4">
                         <div className="text-sm font-medium text-gray-900">
@@ -219,46 +248,22 @@ function Postulados() {
             </tbody>
           </table>
         </div>
-      </div>
 
-      {modalOpen && selectedPostulado && (
-        <div className="fixed z-10 inset-0 overflow-y-auto flex items-center justify-center">
-          <div className="fixed inset-0 transition-opacity" aria-hidden="true">
-            <div className="absolute inset-0 bg-gray-500 opacity-75"></div>
-          </div>
-
-          <div className="bg-white rounded-lg overflow-hidden shadow-xl transform transition-all sm:max-w-lg sm:w-full">
-            <div className="px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
-              <div className="sm:flex sm:items-start">
-                <div className="mx-auto flex-shrink-0 flex items-center justify-center h-12 w-12 rounded-full bg-indigo-100 sm:mx-0 sm:h-10 sm:w-10">
-                  {/* Icono o imagen del usuario */}
-                </div>
-                <div className="mt-3 text-center sm:mt-0 sm:ml-4 sm:text-left">
-                  <h3 className="text-lg leading-6 font-medium text-gray-900">
-                    Respuestas de {selectedPostulado.name_user}
-                  </h3>
-                  <div className="mt-2">
-                    <p className="text-sm text-gray-700"><strong>{jobDetails.preg_1}</strong><br /> {selectedPostulado.resp_1}</p>
-                    <p className="text-sm text-gray-700"><strong>{jobDetails.preg_2}</strong><br />  {selectedPostulado.resp_2}</p>
-                    <p className="text-sm text-gray-700"><strong>{jobDetails.preg_3}</strong><br />  {selectedPostulado.resp_3}</p>
-                    <p className="text-sm text-gray-700"><strong>{jobDetails.preg_4}</strong><br />  {selectedPostulado.resp_4}</p>
-                    <p className="text-sm text-gray-700"><strong>{jobDetails.preg_5}</strong><br />  {selectedPostulado.resp_5}</p>
-                  </div>
-                </div>
+        {selectedPostulado && (
+           <div className="col-span-2">
+              <div className="bg-gray-100 p-6 rounded-lg">
+                <h3 className="text-lg font-bold">Detalles del Postulante</h3>
+                <p className="mt-2"><span className="font-bold">Nombre:</span> {selectedPostulado.name_user}</p>
+                <p><span className="font-bold">Teléfono:</span> {selectedPostulado.telefono}</p>
+                <p><span className="font-bold">Correo:</span> {selectedPostulado.correo}</p>
+                <p><span className="font-bold">Fecha de Postulación:</span> {selectedPostulado.fecha_postulacion}</p>
+                {cvUrl && (
+                  <p><span className="font-bold">CV:</span> <a href={cvUrl} target="_blank" rel="noopener noreferrer">Ver CV</a></p>
+                )}
               </div>
-            </div>
-            <div className="px-4 py-3 sm:px-6 sm:flex sm:flex-row-reverse">
-              <button
-                type="button"
-                className="w-full inline-flex justify-center rounded-md border border-transparent shadow-sm px-4 py-2 bg-indigo-600 text-base font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 sm:ml-3 sm:w-auto sm:text-sm"
-                onClick={closeModal}
-              >
-                Cerrar
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+           </div>
+        )}
+      </div>
     </div>
   );
 }
