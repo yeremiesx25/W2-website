@@ -95,7 +95,7 @@ function JobList() {
               </td>
               <td className="px-6 py-4 whitespace-nowrap">
               <button 
-                    className="px-2 py-2  bg-[#eaf3fb] rounded-full cursor-pointer hover:bg-blue-100 text-primarycolor"
+                    className="px-4 py-2 font-medium text-white bg-blue-600 rounded-md hover:bg-blue-500 focus:outline-none focus:shadow-outline-red active:bg-blue-800 transition duration-150 ease-in-out"
                     onClick={() => handleEdit(job.id_oferta)}
                   >
                     <FaRegEdit />

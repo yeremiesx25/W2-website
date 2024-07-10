@@ -7,7 +7,7 @@ function AddButton() {
     <div className=''>
       <Link to="/AdminForm">
         <button
-          className='w-60 h-20 bg-primarycolor text-white font-semibold shadow-md rounded-lg flex justify-center items-center gap-6'
+          className='w-60 h-14 bg-primarycolor text-yellowprimary font-semibold shadow-md rounded-lg flex justify-center items-center gap-6'
         >
           <FaPlus size={20} /> <p className=''>Agregar Puesto</p>
         </button>

@@ -128,8 +128,8 @@ function Postulados() {
                       onClick={() => handleFilterClick('total')}
                       className={`py-3 my-1 w-40 text-base font-medium transition ${
                         filtroSeleccionado === 'total'
-                          ? 'bg-[#00c792] hover:bg-shadow-1 text-white'
-                          : 'bg-white text-[#00c792] hover:bg-opacity-90 text-[#00c792]'
+                          ? 'bg-primarycolor hover:bg-shadow-1 text-white'
+                          : 'bg-white text-primarycolor hover:bg-opacity-90'
                       } rounded-md px-7`}
                     >
                       Total
@@ -139,7 +139,7 @@ function Postulados() {
                       className={`py-3 my-1 w-40 text-base font-medium transition ${
                         filtroSeleccionado === 'seleccionado'
                           ? 'bg-[#00c792] hover:bg-shadow-1 text-white'
-                          : 'bg-white text-[#00c792] hover:bg-opacity-90 text-[#00c792]'
+                          : 'bg-white text-[#00c792] hover:bg-opacity-90 '
                       } rounded-md px-7`}
                     >
                       Seleccionados
@@ -150,8 +150,8 @@ function Postulados() {
                       onClick={() => handleFilterClick('descartado')}
                       className={`py-3 my-1 w-40 text-base font-medium transition ${
                         filtroSeleccionado === 'descartado'
-                          ? 'bg-[#00c792] hover:bg-shadow-1 text-white'
-                          : 'bg-white text-[#00c792] hover:bg-opacity-90 text-[#00c792]'
+                          ? 'bg-red-400 hover:bg-shadow-1 text-white'
+                          : 'bg-white text-red-400 hover:bg-opacity-90 '
                       } rounded-md px-7`}
                     >
                       Descartados
@@ -160,8 +160,8 @@ function Postulados() {
                       onClick={() => handleFilterClick('pendiente')}
                       className={`py-3 my-1 w-40 text-base font-medium transition ${
                         filtroSeleccionado === 'pendiente'
-                          ? 'bg-[#00c792] hover:bg-shadow-1 text-white'
-                          : 'bg-white text-[#00c792] hover:bg-opacity-90 text-[#00c792]'
+                          ? 'bg-yellowprimary hover:bg-shadow-1 text-primarycolor'
+                          : 'bg-gray-100 text-yellow-800 hover:bg-opacity-90'
                       } rounded-md px-7`}
                     >
                       Pendientes

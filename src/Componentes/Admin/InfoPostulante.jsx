@@ -45,7 +45,7 @@ const InfoPostulante = ({ postulado, preguntas, respuestas, onEstadoChange }) =>
           />
           <div>
             <p className="text-lg font-semibold">{postulado.name_user}</p>
-            <p className="text-gray-500">{postulado.email}</p>
+            <p className="text-gray-500">{postulado.correo}</p>
           </div>
         </div>
         <div>
@@ -72,6 +72,12 @@ const InfoPostulante = ({ postulado, preguntas, respuestas, onEstadoChange }) =>
         </div>
       </div>
       <div className="border-t border-gray-200 pt-4">
+        <p>
+            Teléfono: {postulado.telefono}
+        </p>
+        <p>
+             {postulado.fecha_postulacion}
+        </p>
         <p className="text-lg font-semibold mb-2">Respuestas:</p>
         <ul className="divide-y divide-gray-200">
           {preguntas.map((pregunta, index) => (

@@ -5,9 +5,9 @@ import BuscadorJob from './BuscadorJob'
 
 function BtnContainer() {
   return (
-    <div className='w-full gap-24 px-8 flex justify-center mb-8 flex-wrap'>
+    <div className='w-full gap-24 px-8 flex justify-center items-center my-4 flex-wrap'>
         <CountOfertas />
-        <AddButton />
+        {/* <AddButton /> */}
     </div>
   )
 }

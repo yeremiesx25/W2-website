@@ -17,6 +17,7 @@ module.exports = withMT( {
     extend: {
       colors: {
         primarycolor: '#2563eb',
+        yellowprimary: '#ffe946',
         primarytext: '#061C3D',
         secundarycolor: '#407BFF',
         bgsecundary: '#F7F7FB',
@@ -41,6 +42,7 @@ module.exports = withMT( {
       backgroundImage: {
         'primarygradient': 'linear-gradient(0.25turn, #2563EB, #13337A)',
         'primarygradientmobile': 'linear-gradient(0.50turn, #2563EB, #13337A)',
+        'secundarygradient': 'linear-gradient(0.25turn, #2563EB, #4D2EA4)',
       },
     },
   },
