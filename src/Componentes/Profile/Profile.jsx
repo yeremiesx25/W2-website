@@ -17,7 +17,7 @@ function Profile() {
     async function fetchUserData() {
       try {
         const { data, error } = await supabase
-          .from("Usuario")
+          .from("usuario")
           .select("*")
           .eq("user_id", user.id)
           .single();
@@ -74,7 +74,23 @@ function Profile() {
 
       // Add cv_url to userDataToSave if cvFile exists
       if (cvFile) {
-        userDataToSave.cv_url = URL.createObjectURL(cvFile);
+        // Upload file to Supabase Storage bucket 'cv_user'
+        const { data: fileData, error: fileError } = await supabase.storage
+          .from('cv_user')
+          .upload(`cv_${user.id}_${cvFile.name}`, cvFile, {
+            cacheControl: '3600',
+            upsert: false,
+          });
+
+        if (fileError) {
+          throw fileError;
+        }
+
+        // Construct URL for the uploaded file
+        const cvUrl = `${supabaseUrl}/${supabaseKey}/storage/v1/object/public/cv_user/${fileData.Key}`;
+
+        // Add cv_url to userDataToSave
+        userDataToSave.cv_url = cvUrl;
       } else if (existingRecord && existingRecord.cv_url) {
         // If cvFile does not exist but there's an existing cv_url, keep it
         userDataToSave.cv_url = existingRecord.cv_url;
@@ -82,10 +98,10 @@ function Profile() {
 
       // Perform upsert based on whether existingRecord exists
       const { data, error } = existingRecord
-        ? await supabase.from("Usuario").upsert([
+        ? await supabase.from("usuario").upsert([
             { ...existingRecord, ...userDataToSave },
           ])
-        : await supabase.from("Usuario").insert([userDataToSave]);
+        : await supabase.from("usuario").insert([userDataToSave]);
 
       if (error) {
         throw error;

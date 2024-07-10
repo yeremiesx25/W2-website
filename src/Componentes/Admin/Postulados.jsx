@@ -105,7 +105,7 @@ function Postulados() {
     setSelectedPostulado(postulado);
     // Obtener la URL del CV del postulado
     const { data, error } = await supabase
-      .from('Usuario')
+      .from('usuario')
       .select('cv_url')
       .eq('user_id', postulado.user_id)
       .single();
