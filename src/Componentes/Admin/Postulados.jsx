@@ -47,6 +47,18 @@ function Postulados() {
     };
 
     fetchJobDetails();
+
+    const subscription = supabase
+      .channel(`public:Postulacion:id_oferta=eq.${id}`)
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'Postulacion', filter: `id_oferta=eq.${id}` }, (payload) => {
+        console.log('Cambio detectado:', payload);
+        fetchJobDetails(); // Re-fetch data on change
+      })
+      .subscribe();
+
+    return () => {
+      supabase.removeChannel(subscription);
+    };
   }, [id]);
 
   useEffect(() => {
@@ -210,6 +222,7 @@ function Postulados() {
                 postulado={selectedPostulado}
                 preguntas={preguntas}
                 respuestas={respuestas}
+                onEstadoChange={() => fetchJobDetails()} // Actualizar después del cambio de estado
               />
             </div>
           )}

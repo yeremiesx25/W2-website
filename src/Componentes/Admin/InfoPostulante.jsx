@@ -1,41 +1,31 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from '../../supabase/supabase.config';
 
-const InfoPostulante = ({ postulado, preguntas, respuestas }) => {
-  const [estadoActual, setEstadoActual] = useState(postulado.estado); // Estado actual del postulante
+const InfoPostulante = ({ postulado, preguntas, respuestas, onEstadoChange }) => {
+  const [estadoActual, setEstadoActual] = useState(postulado.estado);
 
   useEffect(() => {
-    setEstadoActual(postulado.estado); // Actualizar estado actual cuando cambia el postulado seleccionado
+    setEstadoActual(postulado.estado);
   }, [postulado]);
 
   const handleEstadoClick = async (estadoNuevo) => {
     try {
-      console.log('Estado nuevo:', estadoNuevo); // Verificar qué valor se está pasando como estadoNuevo
+      console.log('Estado nuevo:', estadoNuevo);
 
       // Actualizar el estado en Supabase
       const { data, error } = await supabase
         .from('Postulacion')
         .update({ estado: estadoNuevo })
-        .eq('id_postulacion', postulado.id_postulacion); // Verifica si 'id_postulacion' es correcto
+        .eq('id_postulacion', postulado.id_postulacion);
 
       if (error) {
         throw error;
       }
 
-      // Verificar si data es válido antes de acceder a sus propiedades
       if (data) {
-        // Aquí asumimos que data debería ser un array o un objeto con la fila actualizada
-        console.log('Respuesta de actualización:', data);
-
-        if (Array.isArray(data) && data.length > 0) {
-          setEstadoActual(estadoNuevo); // Actualizar el estado local si la actualización fue exitosa
-        } else if (typeof data === 'object' && data !== null) {
-          // Si data no es un array, revisamos si es un objeto válido
-          console.log('Respuesta de actualización como objeto:', data);
-          setEstadoActual(estadoNuevo); // Actualizar el estado local si la actualización fue exitosa
-        } else {
-          console.warn('La respuesta de actualización no es un array y no es un objeto válido');
-        }
+        // Llamar a la función callback para actualizar el estado en el componente padre
+        setEstadoActual(estadoNuevo);
+        onEstadoChange(); // Llamar al callback
       } else {
         console.warn('La respuesta de actualización es null o undefined');
       }
