@@ -113,14 +113,55 @@ function Postulados() {
   return (
     <div className='font-dmsans'>
       <HeaderPowerAuth />
-      <div className='px-4 sm:px-8 md:px-16 lg:px-20 xl:px-24'>
-        <div className='text-center pt-16 md:pt-12 pb-8'>
-          <h1 className='text-2xl font-bold'>{jobDetails.puesto}</h1>
-          <p className='text-gray-600'>{jobDetails.ubicacion}</p>
-          <h2 className='text-xl font-semibold mt-4'>Postulados</h2>
+      <div className=''>
+        <section className="pt-28 pb-10 md:py-8 bg-primarygradientmobile  md:bg-primarygradient dark:bg-dark h-96 md:h-64 flex justify-center items-center">
+        <div className="container mx-auto">
+          <div className="overflow-hidden rounded bg-primary py-12 px-8 md:p-[70px]">
+            <div className="flex flex-wrap items-center text-center md:text-left -mx-4">
+              <div className="w-full px-4 lg:w-1/2">
+                <span className="block text-base font-medium text-white">
+                  {jobDetails.ubicacion}
+                </span>
+                <h2 className="mb-6 text-xl sm:text-3xl font-bold leading-tight text-white sm:mb-8 lg:mb-0">
+                  <span className="xs:block"> {jobDetails.puesto} </span>
+                  </h2>
+                  <div className='flex gap-8 justify-center md:justify-start'>
+                    <span className='block mb-4 text-base font-medium text-white'>{jobDetails.modalidad}</span> 
+                    <span className='block mb-4 text-base font-medium text-white'>S/. {jobDetails.sueldo}</span> 
+                  </div>  
+              </div>
+              <div className="w-full px-4 lg:w-1/2">
+                <div className="flex flex-wrap lg:justify-end justify-center gap-2">
+                  <button
+                    className="py-3 my-1 w-40 text-base font-medium transition bg-[#00c792] rounded-md hover:bg-shadow-1 text-white px-7"
+                  >
+                    Seleccionados
+                  </button>
+                  <button
+                    className="py-3 my-1 w-40 text-base font-medium text-red-400 bg-white transition rounded-md bg-secondary px-7 hover:bg-opacity-90"
+                  >
+                    Descartados
+                  </button>
+                </div>
+                <div className="flex flex-wrap lg:justify-end justify-center gap-2">
+                  <button
+                    className="py-3 my-1 w-40 text-base font-medium transition bg-[#00aec7] rounded-md hover:bg-shadow-1 text-white px-7"
+                  >
+                    Pendientes
+                  </button>
+                  <button
+                    className="py-3 my-1 w-40 text-base font-medium text-[#ffe946] underline underline-offset-2 transition rounded-md bg-secondary px-7 hover:bg-opacity-90"
+                  >
+                    Ver todo
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
+      </section>
         
-        <div className="overflow-x-auto">
+        <div className="overflow-x-auto px-4 sm:px-8 md:px-16 lg:px-20 xl:px-24">
           <table className="w-full divide-y divide-gray-200">
             <thead className="bg-gray-50">
               <tr>
