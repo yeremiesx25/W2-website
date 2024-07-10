@@ -160,7 +160,7 @@ function FormOferta() {
 
   return (
     <div className="pl-20 w-[100%] h-screen flex font-dmsans items-center">
-      <div className="w-[600px] h-full bg-primarycolor">
+      <div className="w-[600px] h-full bg-primarycolor bg-no-repeat">
         <img src={FormAdminImg} className="w-full h-full" alt="" />
       </div>
       <div className="w-[calc(100%-600px)] h-full py-6 overflow-y-scroll">
