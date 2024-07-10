@@ -79,7 +79,20 @@ function Profile() {
           throw fileError;
         }
 
-        userDataToSave.cv_url = fileData.Key;
+        // Fetch the uploaded file to get its path
+        const { data: files, error: listError } = await supabase
+          .storage
+          .from('cv_user')
+          .list(`cv_${user.id}`, { limit: 1, sortBy: { column: 'created_at', order: 'desc' } });
+
+        if (listError || !files || files.length === 0) {
+          throw new Error('Failed to retrieve uploaded file information');
+        }
+
+        const latestFile = files[0];
+        const cvUrl = `https://elcuvegbwtlngranjtym.supabase.co/storage/v1/object/public/cv_user/cv_${user.id}/${latestFile.name}`;
+
+        userDataToSave.cv_url = cvUrl;
       } else if (existingRecord && existingRecord.cv_url) {
         userDataToSave.cv_url = existingRecord.cv_url;
       }
