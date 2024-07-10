@@ -250,7 +250,7 @@ function Postulados() {
         </div>
 
         {selectedPostulado && (
-           <div className="col-span-2">
+           <div className="col-span-2 pl-20">
               <div className="bg-gray-100 p-6 rounded-lg">
                 <h3 className="text-lg font-bold">Detalles del Postulante</h3>
                 <p className="mt-2"><span className="font-bold">Nombre:</span> {selectedPostulado.name_user}</p>
