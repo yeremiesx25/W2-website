@@ -12,6 +12,8 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
   const [phoneError, setPhoneError] = useState(''); // Estado para el error del teléfono
   const [answerErrors, setAnswerErrors] = useState([]); // Estado para los errores de las respuestas
   const [submissionSuccess, setSubmissionSuccess] = useState(false); // Estado para mostrar el mensaje de éxito
+  const [cvFile, setCvFile] = useState(null); // Estado para almacenar el archivo CV
+  const [cvUrl, setCvUrl] = useState(''); // Estado para almacenar el URL del archivo CV
 
   useEffect(() => {
     const fetchQuestions = async () => {
@@ -44,6 +46,8 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
       setPhoneError(''); // Limpia cualquier error anterior del número de celular
       setAnswerErrors(['', '', '', '', '']); // Limpia cualquier error anterior de respuestas
       setSubmissionSuccess(false); // Oculta el mensaje de éxito al abrir el modal
+      setCvFile(null); // Reinicia el archivo CV
+      setCvUrl(''); // Reinicia el URL del archivo CV
     }
   }, [isOpen, selectedJob]);
 
@@ -72,6 +76,11 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
     }
   };
 
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    setCvFile(file);
+  };
+
   const handleSubmit = async () => {
     try {
       // Validar que todos los campos estén completos
@@ -80,30 +89,25 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
         return;
       }
 
-      console.log('Enviando respuestas:', answers);
-
-      // Obtener el valor actual de count_postulados
-      const { data: currentData, error: fetchError } = await supabase
-        .from('Oferta')
-        .select('count_postulados')
-        .eq('id_oferta', selectedJob.id_oferta)
-        .single();
-
-      if (fetchError) {
-        throw fetchError;
+      if (cvFile === null) {
+        // Validar que se haya seleccionado un archivo CV
+        console.error('Debes seleccionar un archivo CV');
+        return;
       }
 
-      const currentCount = currentData.count_postulados || 0;
+      // Subir archivo CV a Supabase Storage
+      const { data: fileData, error: fileError } = await supabase.storage
+        .from('cv_user')
+        .upload(`cv_${user.id}/${cvFile.name}`, cvFile);
 
-      // Incrementar la columna count_postulados en 1
-      const { error: updateError } = await supabase
-        .from('Oferta')
-        .update({ count_postulados: currentCount + 1 })
-        .eq('id_oferta', selectedJob.id_oferta);
-
-      if (updateError) {
-        throw updateError;
+      if (fileError) {
+        throw fileError;
       }
+
+      // Obtener URL del archivo subido
+      const cvUrl = fileData.Key;
+
+      console.log('URL del archivo subido:', cvUrl);
 
       // Insertar una nueva fila en la tabla Postulacion
       const { error: insertError } = await supabase
@@ -122,6 +126,7 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
           fecha_postulacion: new Date(),
           estado: 'pendiente',
           avatar_url: user.user_metadata.avatar_url, // Agregado: guarda el avatar_url del usuario
+          cv_link: cvUrl, // Agrega el URL del archivo CV a la columna cv_link
         });
 
       if (insertError) {
@@ -134,11 +139,8 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
       // Limpiar formularios y datos para una nueva postulación
       setPhone('');
       setAnswers(['', '', '', '', '']);
-
-      // Opcional: cerrar el modal automáticamente después del éxito
-      // setTimeout(() => {
-      //   onClose();
-      // }, 2000); // Cierra el modal después de 2 segundos
+      setCvFile(null);
+      setCvUrl('');
 
     } catch (error) {
       console.error('Error al enviar la postulación:', error.message);
@@ -176,11 +178,18 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
                 className={`w-full mt-2 p-2 border rounded ${phoneError ? 'border-red-500' : ''}`}
               />
               {phoneError && <p className="text-red-500 text-sm">{phoneError}</p>}
+              <label className="w-full text-left mt-4">Subir CV</label>
+              <input
+                type="file"
+                accept=".pdf,.doc,.docx"
+                onChange={handleFileChange}
+                className="w-full mt-2 p-2 border rounded"
+              />
               <div className="flex justify-center mt-4">
                 <button
-                  className={`bg-[#0057c2] text-white font-bold py-2 px-4 rounded-full w-32 ${phone.trim() ? '' : 'opacity-50 cursor-not-allowed'}`}
-                  onClick={() => phone.trim() && setCurrentQuestionIndex(0)} // Cambia el índice a 0 para mostrar las preguntas si el teléfono no está vacío
-                  disabled={!phone.trim()}
+                  className={`bg-[#0057c2] text-white font-bold py-2 px-4 rounded-full w-32 ${phone.trim() && cvFile ? '' : 'opacity-50 cursor-not-allowed'}`}
+                  onClick={() => phone.trim() && cvFile && setCurrentQuestionIndex(0)} // Cambia el índice a 0 para mostrar las preguntas si el teléfono y el archivo CV no están vacíos
+                  disabled={!phone.trim() || !cvFile}
                 >
                   Siguiente
                 </button>
@@ -194,48 +203,40 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
                   <div className="w-8 h-8 bg-blue-500 rounded-full absolute top-0 left-0 animate-ping"></div>
                   <div className="w-8 h-8 bg-blue-500 rounded-full absolute top-0 left-0 animate-pulse"></div>
                 </div>
-              ) : questions.length === 0 ? (
-                <div className="flex flex-col items-center">
-                  <p>No hay preguntas disponibles.</p>
-                  <button
-                    className="bg-green-500 text-white font-bold py-2 px-4 rounded-full w-full mt-4"
-                    onClick={handleSubmit}
-                  >
-                    Enviar
-                  </button>
-                </div>
               ) : (
-                <div>
-                  {questions.map((question, index) => (
-                    <div key={index} className="mb-4">
-                      <p>{question}</p>
-                      <textarea
-                        className="w-full mt-2 p-2 border rounded"
-                        rows={Math.min(4, Math.ceil(question.length / 50))}
-                        value={answers[index]}
-                        onChange={(e) => handleAnswerChange(e, index)}
-                        placeholder="Escribe tus respuestas aquí"
-                      />
-                      {answerErrors[index] && (
-                        <p className="text-red-500 text-sm">{answerErrors[index]}</p>
-                      )}
+                <>
+                  {questions.length === 0 ? (
+                    <div className="flex flex-col items-center">
+                      <p>No hay preguntas disponibles.</p>
                     </div>
-                  ))}
-                  <div className="flex justify-center mt-4">
+                  ) : (
+                    questions.map((question, index) => (
+                      <div key={index} className="mt-4">
+                        <label className="w-full text-left">{question}</label>
+                        <textarea
+                          value={answers[index]}
+                          onChange={(e) => handleAnswerChange(e, index)}
+                          className={`w-full mt-2 p-2 border rounded ${answerErrors[index] ? 'border-red-500' : ''}`}
+                        />
+                        {answerErrors[index] && <p className="text-red-500 text-sm">{answerErrors[index]}</p>}
+                      </div>
+                    ))
+                  )}
+                  <div className="flex justify-between mt-4">
                     <button
-                      className="bg-gray-300 text-black font-bold py-2 px-4 rounded-full w-32"
+                      className="bg-gray-500 text-white font-bold py-2 px-4 rounded-full w-32"
                       onClick={handleBack} // Vuelve al paso del número de celular
                     >
                       Atrás
                     </button>
                     <button
-                      className="bg-green-500 text-white font-bold py-2 px-4 rounded-full w-32 ml-2"
-                      onClick={handleSubmit}
+                      className="bg-[#0057c2] text-white font-bold py-2 px-4 rounded-full w-32"
+                      onClick={handleSubmit} // Envía las respuestas y el archivo CV
                     >
                       Enviar
                     </button>
                   </div>
-                </div>
+                </>
               )}
             </div>
           )}

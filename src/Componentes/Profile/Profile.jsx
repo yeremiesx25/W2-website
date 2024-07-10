@@ -9,10 +9,10 @@ function Profile() {
   const [email, setEmail] = useState("");
   const [telefono, setTelefono] = useState("");
   const [cvFile, setCvFile] = useState(null);
-  const [existingRecord, setExistingRecord] = useState(null); // State to hold existing record
-  const [isEditing, setIsEditing] = useState(false); // State to manage edit mode
+  const [existingRecord, setExistingRecord] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
+  const [showSuccessMessage, setShowSuccessMessage] = useState(false);
 
-  // Fetch existing user data on component mount
   useEffect(() => {
     async function fetchUserData() {
       try {
@@ -31,11 +31,9 @@ function Profile() {
           setNombre(data.nombre || "");
           setEmail(data.email || "");
           setTelefono(data.telefono || "");
-          // You might want to set cvFile state if cv_url exists in data
-          // setCvFile(data.cv_url ? new File([data.cv_url], 'cvFile') : null);
         }
       } catch (error) {
-        console.error("Error fetching user data:", error.message);
+        console.error("Error al obtener los datos del usuario:", error.message);
       }
     }
 
@@ -72,46 +70,39 @@ function Profile() {
         telefono: telefono,
       };
 
-      // Add cv_url to userDataToSave if cvFile exists
       if (cvFile) {
-        // Upload file to Supabase Storage bucket 'cv_user'
         const { data: fileData, error: fileError } = await supabase.storage
           .from('cv_user')
-          .upload(`cv_${user.id}_${cvFile.name}`, cvFile, {
-            cacheControl: '3600',
-            upsert: false,
-          });
+          .upload(`cv_${user.id}/${cvFile.name}`, cvFile);
 
         if (fileError) {
           throw fileError;
         }
 
-        // Construct URL for the uploaded file
-        const cvUrl = `${supabaseUrl}/${supabaseKey}/storage/v1/object/public/cv_user/${fileData.Key}`;
-
-        // Add cv_url to userDataToSave
-        userDataToSave.cv_url = cvUrl;
+        userDataToSave.cv_url = fileData.Key;
       } else if (existingRecord && existingRecord.cv_url) {
-        // If cvFile does not exist but there's an existing cv_url, keep it
         userDataToSave.cv_url = existingRecord.cv_url;
       }
 
-      // Perform upsert based on whether existingRecord exists
-      const { data, error } = existingRecord
+      const { data: savedData, error: saveError } = existingRecord
         ? await supabase.from("usuario").upsert([
             { ...existingRecord, ...userDataToSave },
           ])
         : await supabase.from("usuario").insert([userDataToSave]);
 
-      if (error) {
-        throw error;
+      if (saveError) {
+        throw saveError;
       }
 
-      console.log("Data saved successfully:", data);
-      alert("Datos guardados correctamente.");
-      setIsEditing(false); // Disable editing after saving
+      console.log("Datos guardados correctamente:", savedData);
+      setShowSuccessMessage(true);
+      setIsEditing(false);
+
+      setTimeout(() => {
+        setShowSuccessMessage(false);
+      }, 2000);
     } catch (error) {
-      console.error("Error saving data:", error.message);
+      console.error("Error guardando los datos:", error.message);
     }
   };
 
@@ -121,6 +112,12 @@ function Profile() {
       <div className="pl-24 p-10 w-full h-full">
         <h1 className="text-2xl font-bold mb-4">Perfil de Usuario</h1>
         
+        {showSuccessMessage && (
+          <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
+            <span className="block sm:inline">Guardado correctamente.</span>
+          </div>
+        )}
+
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700">
             Nombre
