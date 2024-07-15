@@ -104,8 +104,11 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
         throw fileError;
       }
 
-      // Obtener URL del archivo subido
-      const cvUrl = fileData.Key;
+      // Generar URL del archivo subido
+      const bucketName = 'cv_user';
+      const filePath = fileData.path;
+      const baseUrl = 'https://elcuvegbwtlngranjtym.supabase.co/storage/v1/object/public';
+      const cvUrl = `${baseUrl}/${bucketName}/${filePath}`;
 
       console.log('URL del archivo subido:', cvUrl);
 
