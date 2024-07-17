@@ -157,7 +157,7 @@ function InfoJob({ selectedJob }) {
 
   return (
     <div
-      className="selected-job-info w-full sm:w-1/2 border rounded-lg md:flex flex-col p-4 mx-8 bg-white shadow-lg hidden"
+      className="selected-job-info w-full sm:w-1/2 border rounded-lg md:flex flex-col p-4 mx-8 bg-white shadow-lg hidden transition-all duration-500"
       style={{ height: "650px", overflowY: "auto", position: "relative" }}
     >
       <h2 className="ml-1 mt-3 font-semibold text-2xl mb-3 text-gray-800">

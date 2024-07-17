@@ -6,6 +6,7 @@ import { Worker, Viewer } from '@react-pdf-viewer/core';
 import '@react-pdf-viewer/core/lib/styles/index.css';
 import '@react-pdf-viewer/default-layout/lib/styles/index.css';
 import mammoth from 'mammoth';
+import Portada from "./Portada";
 
 function Profile() {
   const { user } = UserAuth();
@@ -129,18 +130,24 @@ function Profile() {
   };
 
   return (
-    <div className="w-full h-screen font-dmsans flex">
+    <div className="w-full h-screen font-dmsans flex ">
       <HeaderPowerAuth />
-      <div className="pl-24 p-10 w-full h-full">
-        <h1 className="text-2xl font-bold mb-4">Perfil de Usuario</h1>
-
+      <div className="md:pl-20 md:p-10 pt-12 md:pt-auto w-full h-full flex justify-center bg-[#fcfcfd]">
+        <div className="md:w-2/5 md:rounded-xl overflow-hidden bg-white shadow">
+        <Portada />
+        <img 
+        className="relative top-3/2 mx-auto  transform  -translate-y-1/2 w-24 h-24 rounded-full border-2 border-white" 
+        src={user.user_metadata.avatar_url} 
+        alt="Avatar" 
+      />
         {showSuccessMessage && (
           <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
             <span className="block sm:inline">Guardado correctamente.</span>
           </div>
         )}
 
-        <div className="mb-4">
+        <div className="px-4">
+          <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700">Nombre</label>
           <input
             type="text"
@@ -185,7 +192,6 @@ function Profile() {
           />
           {cvFile && <p className="mt-2 text-sm text-gray-500">{cvFile.name}</p>}
         </div>
-
         {!isEditing ? (
           <button
             className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
@@ -201,8 +207,11 @@ function Profile() {
             Guardar
           </button>
         )}
+        </div>
 
-        {cvContent && cvContent.type === "pdf" && (
+        
+
+        {/* {cvContent && cvContent.type === "pdf" && (
           <div className="mt-4">
             <Worker workerUrl={`https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js`}>
               <Viewer fileUrl={cvContent.content} />
@@ -223,7 +232,8 @@ function Profile() {
               Descargar CV
             </a>
           </div>
-        )}
+        )} */}
+        </div>
       </div>
     </div>
   );
