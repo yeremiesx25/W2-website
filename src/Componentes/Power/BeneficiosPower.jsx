@@ -13,11 +13,13 @@ import flecha from "../../assets/flechasFalabella.png";
 function BeneficiosPower() {
     const settings = {
         dots: true,
-        infinite: false,
+        infinite: true,
         speed: 500,
         slidesToShow: 3, // Mostrar tres tarjetas a la vez
         slidesToScroll: 1, // Avanzar una tarjeta a la vez
         initialSlide: 0,
+        autoplay: true,
+        autoplaySpeed: 3000, // Avanzar cada 3 segundos
         responsive: [
           {
             breakpoint: 1024,

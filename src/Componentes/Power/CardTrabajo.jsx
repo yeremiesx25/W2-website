@@ -1,55 +1,73 @@
-import React, { useState } from 'react';
+import React from "react";
+import { MdOutlineVerifiedUser } from "react-icons/md";
+import { IoHomeOutline } from "react-icons/io5";
+import { MdOutlineHomeWork } from "react-icons/md";
+import { IoLocationOutline } from "react-icons/io5";
 
-function CardTrabajo({ jobTitle, company, location, salary, companyLogo,logo, requirements, timeActive, onClick, imageUrl, wspUrl }) {
-  const [modalOpen, setModalOpen] = useState(false);
+function CardTrabajo({ job, onSelectJob, isSelected }) {
+  const { puesto, modalidad, ubicacion, sueldo, fecha_publicacion, empresa } =
+    job;
 
-  const handleModalOpen = () => {
-    onClick();
-    setModalOpen(true);
-  };
+  const calcularTiempoTranscurrido = (fecha) => {
+    const fechaPublicacion = new Date(fecha);
+    const fechaActual = new Date();
+    const diferencia = fechaActual.getTime() - fechaPublicacion.getTime();
+    const diasTranscurridos = Math.floor(diferencia / (1000 * 60 * 60 * 24));
 
-  const handleModalClose = () => {
-    setModalOpen(false);
+    if (diasTranscurridos < 1) {
+      return "Publicado Ahora";
+    } else if (diasTranscurridos === 1) {
+      return "Publicado hace 1 día";
+    } else {
+      return `Publicado hace ${diasTranscurridos} días`;
+    }
   };
 
   return (
-    <div className='w-full flex justify-center font-dmsans'>
-      <button onClick={handleModalOpen} className="w-full md:w-[90%] bg-white text-left border hover:shadow-md rounded-lg overflow-hidden">
-        <div className="px-6 py-4">
-          <div className="flex items-center mb-2">
-          
-            <img className="w-14 h-14 rounded-full mr-4" src={logo} alt={logo} />
-            <div>
-              <div className="font-bold text-xl">{jobTitle}</div>
-              <p className="text-gray-700">{company}</p>
-            </div>
+    <div className="w-full flex justify-center font-dmsans">
+      <button
+        onClick={() => onSelectJob(job)}
+        className={`w-full md:w-[90%] bg-white text-left border hover:shadow-md hover:transition-all hover:duration-200 rounded-lg p-4 overflow-hidden ${
+          isSelected ? "border-primarycolor" : "border-gray-300"
+        }`}
+      >
+        <div>
+          <h4
+            className="font-semibold text-xl leading-tight text-gray-800"
+            style={{ marginBottom: "6px" }}
+          >
+            {puesto}
+          </h4>
+          <div className=" text-xs  font-regular tracking-wide text-gray-700 flex items-center py-1  rounded-full mx-1">
+            {empresa}
+            <MdOutlineVerifiedUser className="flex text-green-500 ml-1 text-sm mb-0.5" />
           </div>
-          <p className="text-gray-700">{location}</p>
-          <p className="text-gray-700 mt-2"><span className="font-bold">Sueldo:</span> {salary}</p>
-        </div>
-        <div className="px-6 py-4 bg-amber-400">
-          <span className="inline-block bg-white rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">{timeActive} activo</span>
-          
+          <div className="my-2 text-xs  font-regular tracking-wide text-gray-700 flex rounded-full mx-1">
+            <IoLocationOutline className="mr-1 text-sm mb-0.5" />
+            {ubicacion}
+          </div>
+          <div
+            className={`my-2 text-xs font-regular tracking-wide text-gray-700 ${
+              modalidad ? "" : ""
+            } flex rounded-full mx-1`}
+          >
+            {modalidad && <MdOutlineHomeWork className="mr-1 text-sm mb-0.5" />}
+            {modalidad}
+          </div>
+
+          <div className="flex justify-between items-center mt-2">
+            <div className="text-sm font-regular text-gray-600">
+              {calcularTiempoTranscurrido(fecha_publicacion)}
+            </div>
+            <span
+              className="inline-block bg-gray-200 text-gray-800 py-1 px-3 text-xs rounded-full font-regular tracking-wide"
+              style={{ backgroundColor: "#f5f5f5", color: "#333" }}
+            >
+              S/. {sueldo}
+            </span>
+          </div>
         </div>
       </button>
-      
-
-
-
-
-
-      {modalOpen && (
-        <div className="fixed inset-0 flex items-center justify-center z-50">
-          <div className="absolute inset-0 bg-black opacity-50"></div>
-          <div className="bg-white p-4 md:p-8 rounded-lg z-50 w-11/12 md:w-2/3 lg:w-1/2 max-w-xl overflow-y-auto">
-            <img className='w-full h-auto mb-4 rounded' src={imageUrl} alt="Job Details" />
-            <div className='flex w-full justify-around mt-4'>
-              <button onClick={handleModalClose} className="bg-red-600 text-white px-4 py-2 rounded-lg font-semibold">Cerrar</button>
-              <a href={wspUrl} className="bg-powercolor text-white px-4 py-2 rounded-lg font-semibold">Postular</a>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }
