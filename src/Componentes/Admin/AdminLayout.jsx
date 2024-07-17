@@ -20,7 +20,7 @@ function AdminLayout() {
         <div class=" w-full bg-secundarygradient pt-12 flex justify-center flex-col items-center">
         <div className="w-1/2">
             <h1 class="text-center font-bold text-white text-4xl">
-              Bienvenido {firstName}
+              Bienvenid@ {firstName}
             </h1>
             <p class="mx-auto font-normal text-sm my-6 max-w-lg text-white text-center">
               En esta sección podrás crear una nueva oferta de trabajo y visualizar tus ofertas ya creadas.

@@ -2,6 +2,11 @@ import React, { useState, useEffect } from "react";
 import HeaderPowerAuth from '../PowerAuth/HeaderPowerAuth';
 import { UserAuth } from "../../Context/AuthContext";
 import { supabase } from "../../supabase/supabase.config";
+import { Worker, Viewer } from '@react-pdf-viewer/core';
+import '@react-pdf-viewer/core/lib/styles/index.css';
+import '@react-pdf-viewer/default-layout/lib/styles/index.css';
+import mammoth from 'mammoth';
+import Portada from "./Portada";
 
 function Profile() {
   const { user } = UserAuth();
@@ -120,21 +125,25 @@ function Profile() {
   };
 
   return (
-    <div className="w-full h-screen font-dmsans flex">
+    <div className="w-full h-screen font-dmsans flex ">
       <HeaderPowerAuth />
-      <div className="pl-24 p-10 w-full h-full">
-        <h1 className="text-2xl font-bold mb-4">Perfil de Usuario</h1>
-        
+      <div className="md:pl-20 md:p-10 pt-12 md:pt-auto w-full h-full flex justify-center bg-[#fcfcfd]">
+        <div className="md:w-2/5 md:rounded-xl overflow-hidden bg-white shadow">
+        <Portada />
+        <img 
+        className="relative top-3/2 mx-auto  transform  -translate-y-1/2 w-24 h-24 rounded-full border-2 border-white" 
+        src={user.user_metadata.avatar_url} 
+        alt="Avatar" 
+      />
         {showSuccessMessage && (
           <div className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
             <span className="block sm:inline">Guardado correctamente.</span>
           </div>
         )}
 
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700">
-            Nombre
-          </label>
+        <div className="px-4">
+          <div className="mb-4">
+          <label className="block text-sm font-medium text-gray-700">Nombre</label>
           <input
             type="text"
             className={`mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 ${!isEditing && "bg-gray-200"}`}
@@ -186,7 +195,6 @@ function Profile() {
             <p className="mt-2 text-sm text-gray-500">{cvFile.name}</p>
           )}
         </div>
-
         {!isEditing ? (
           <button
             className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
@@ -202,6 +210,33 @@ function Profile() {
             Guardar
           </button>
         )}
+        </div>
+
+        
+
+        {/* {cvContent && cvContent.type === "pdf" && (
+          <div className="mt-4">
+            <Worker workerUrl={`https://unpkg.com/pdfjs-dist@3.11.174/build/pdf.worker.min.js`}>
+              <Viewer fileUrl={cvContent.content} />
+            </Worker>
+          </div>
+        )}
+
+        {cvContent && cvContent.type === "doc" && (
+          <div className="mt-4">
+            <h2 className="text-lg font-semibold">Contenido del CV:</h2>
+            <pre className="whitespace-pre-wrap">{cvContent.content}</pre>
+            <a
+              href={cvContent.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-500 underline"
+            >
+              Descargar CV
+            </a>
+          </div>
+        )} */}
+        </div>
       </div>
     </div>
   );

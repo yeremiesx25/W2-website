@@ -8,7 +8,9 @@ const InfoPostulante = ({ postulado, preguntas, respuestas, onEstadoChange }) =>
   useEffect(() => {
     setEstadoActual(postulado.estado);
   }, [postulado]);
+
   const whatsappLink = `https://wa.me/${postulado.telefono}`;
+  
   const handleEstadoClick = async (estadoNuevo) => {
     try {
       console.log('Estado nuevo:', estadoNuevo);
@@ -48,7 +50,7 @@ const InfoPostulante = ({ postulado, preguntas, respuestas, onEstadoChange }) =>
             <p className="text-lg font-semibold">{postulado.name_user}</p>
             <p className="text-gray-500">{postulado.correo}</p>
           </div>
-          <a href={whatsappLink}  className='w-12 h-12 bg-green-500 rounded-full flex justify-center items-center text-white text-3xl'><FaWhatsapp /></a>
+          <a href={whatsappLink} className='w-12 h-12 bg-green-500 rounded-full flex justify-center items-center text-white text-3xl'><FaWhatsapp /></a>
         </div>
         <div>
           <div className="flex items-center space-x-2">
@@ -74,12 +76,8 @@ const InfoPostulante = ({ postulado, preguntas, respuestas, onEstadoChange }) =>
         </div>
       </div>
       <div className="border-t border-gray-200 pt-4">
-        <p>
-            Teléfono: {postulado.telefono}
-        </p>
-        <p>
-             {postulado.fecha_postulacion}
-        </p>
+        <p>Teléfono: {postulado.telefono}</p>
+        <p>{postulado.fecha_postulacion}</p>
         <p className="text-lg font-semibold mb-2">Respuestas:</p>
         <ul className="divide-y divide-gray-200">
           {preguntas.map((pregunta, index) => (
@@ -89,6 +87,18 @@ const InfoPostulante = ({ postulado, preguntas, respuestas, onEstadoChange }) =>
             </li>
           ))}
         </ul>
+        {postulado.cv_link && (
+          <div className="mt-4">
+            <p className="text-lg font-semibold mb-2">Currículum Vitae:</p>
+            <iframe
+              src={postulado.cv_link}
+              title="CV"
+              width="100%"
+              height="500px"
+              className="border border-gray-300 rounded-lg"
+            />
+          </div>
+        )}
       </div>
     </div>
   );
