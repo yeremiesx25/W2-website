@@ -82,11 +82,6 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
     }
   };
 
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    setCvFile(file);
-  };
-
   const handleSubmit = async () => {
     try {
       // Validar que todos los campos estén completos
@@ -136,6 +131,24 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
         avatar_url: user.user_metadata.avatar_url, // Agregado: guarda el avatar_url del usuario
         cv_link: cvUrl, // Agrega el URL del archivo CV a la columna cv_link
       });
+      // Insertar una nueva fila en la tabla Postulacion
+      const { error: insertError } = await supabase
+        .from('Postulacion')
+        .insert({
+          id_oferta: selectedJob.id_oferta,
+          user_id: user.id,
+          name_user: user.user_metadata.full_name,
+          correo: user.email,
+          telefono: phone,
+          resp_1: answers[0],
+          resp_2: answers[1],
+          resp_3: answers[2],
+          resp_4: answers[3],
+          resp_5: answers[4],
+          fecha_postulacion: new Date(),
+          estado: 'pendiente',
+          avatar_url: user.user_metadata.avatar_url, // Agregado: guarda el avatar_url del usuario
+        });
 
       if (insertError) {
         throw insertError;
@@ -149,6 +162,9 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
       setAnswers(["", "", "", "", ""]);
       setCvFile(null);
       setCvUrl("");
+      setPhone('');
+      setAnswers(['', '', '', '', '']);
+
     } catch (error) {
       console.error("Error al enviar la postulación:", error.message);
     }
@@ -294,7 +310,7 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
                     </button>
                     <button
                       className="bg-[#0057c2] text-white font-bold py-2 px-4 rounded-full w-32"
-                      onClick={handleSubmit} // Envía las respuestas y el archivo CV
+                      onClick={handleSubmit} // Envía las respuestas
                     >
                       Enviar
                     </button>
@@ -323,18 +339,11 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
                       ></path>
                     </svg>
                   </div>
-                  <h2 className="text-2xl font-bold mb-2 text-green-500">
-                    ¡Postulación Exitosa!
-                  </h2>
-                  <p className="mb-4">
-                    Felicitaciones, has enviado tu postulación correctamente.
-                  </p>
-                  <p className="mb-4">
-                    Los reclutadores se comunicarán contigo pronto.
-                  </p>
+                  <h2 className="text-xl font-bold mb-2">¡Postulación enviada con éxito!</h2>
+                  <p className="text-sm text-gray-500 mb-4">Gracias por tu interés.</p>
                   <button
                     className="bg-[#0057c2] text-white font-bold py-2 px-4 rounded-full w-32"
-                    onClick={handleAccept}
+                    onClick={handleAccept} // Recargar la página
                   >
                     Aceptar
                   </button>
