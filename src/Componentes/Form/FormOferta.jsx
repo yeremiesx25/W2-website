@@ -159,24 +159,24 @@ function FormOferta() {
   };
 
   return (
-    <div className="pl-20 w-[100%] h-screen flex font-dmsans items-center">
+    <div className="pl-20 w-[100%] h-screen flex font-dmsans items-center ">
       <div className="w-[600px] h-full bg-primarycolor bg-no-repeat">
         <img src={FormAdminImg} className="w-full h-full" alt="" />
       </div>
-      <div className="w-[calc(100%-600px)] h-full py-6 overflow-y-scroll">
-        <h2 className="text-primarytext font-bold text-3xl text-center mt-8">
+      <div className="w-[calc(100%-600px)] h-full py-2 overflow-y-scroll">
+        <h2 className="text-gray-700 font-bold text-3xl text-center mt-8">
           Completa todos los campos
         </h2>
-        <p className="text-gray-700 text-center pt-8 font-medium">
+        <p className="text-gray-700 text-center pt-4 font-medium">
           Información básica sobre el empleo
         </p>
         <div className="flex items-center justify-center p-2 ">
-          <div className="mx-auto w-full max-w-[550px] bg-white">
-            <form>
+          <div className="mx-auto w-full max-w-[550px] bg-white ">
+            <form className="">
               {formStep === 1 && (
                 <>
                   <div className="mb-5">
-                    <label htmlFor="name" className="mb-3 block text-base font-medium text-[#07074D]">
+                    <label htmlFor="name" className="mb-3 block text-base font-medium text-gray-600">
                       Nombre del puesto
                     </label>
                     <input
@@ -191,7 +191,7 @@ function FormOferta() {
                     />
                   </div>
                   <div className="mb-5">
-                    <label htmlFor="company" className="mb-3 block text-base font-medium text-[#07074D]">
+                    <label htmlFor="company" className="mb-3 block text-base font-medium text-gray-600">
                       Nombre de la empresa
                     </label>
                     <input
@@ -206,7 +206,7 @@ function FormOferta() {
                     />
                   </div>
                   <div className="mb-5">
-                    <label htmlFor="location" className="mb-3 block text-base font-medium text-[#07074D]">
+                    <label htmlFor="location" className="mb-3 block text-base font-medium text-gray-600">
                       Ubicación de la empresa
                     </label>
                     <input
@@ -221,7 +221,7 @@ function FormOferta() {
                     />
                   </div>
                   <div className="mb-5">
-                    <label htmlFor="modalidad" className="mb-3 block text-base font-medium text-[#07074D]">
+                    <label htmlFor="modalidad" className="mb-3 block text-base font-medium text-gray-600">
                       Modalidad de trabajo
                     </label>
                     <input
@@ -236,7 +236,7 @@ function FormOferta() {
                     />
                   </div>
                   <div className="mb-5">
-                    <label htmlFor="celular" className="mb-3 block text-base font-medium text-[#07074D]">
+                    <label htmlFor="celular" className="mb-3 block text-base font-medium text-gray-600">
                       Número de WhatsApp
                     </label>
                     <input
@@ -261,7 +261,7 @@ function FormOferta() {
               {formStep === 2 && (
                 <>
                   <div className="mb-5">
-                    <label htmlFor="salary" className="mb-3 block text-base font-medium text-[#07074D]">
+                    <label htmlFor="salary" className="mb-3 block text-base font-medium text-gray-600">
                       Salario
                     </label>
                     <input
@@ -276,7 +276,7 @@ function FormOferta() {
                     />
                   </div>
                   <div className="mb-5">
-                    <label htmlFor="jobDescription" className="mb-3 block text-base font-medium text-[#07074D]">
+                    <label htmlFor="jobDescription" className="mb-3 block text-base font-medium text-gray-600">
                       Beneficios del trabajo
                     </label>
                     <ReactQuill
@@ -288,7 +288,7 @@ function FormOferta() {
                     />
                   </div>
                   <div className="mb-5">
-                    <label htmlFor="requirements" className="mb-3 block text-base font-medium text-[#07074D]">
+                    <label htmlFor="requirements" className="mb-3 block text-base font-medium text-gray-600">
                       Requisitos
                     </label>
                     <ReactQuill
@@ -300,7 +300,7 @@ function FormOferta() {
                     />
                   </div>
                   <div className="mb-5">
-                    <label htmlFor="funciones" className="mb-3 block text-base font-medium text-[#07074D]">
+                    <label htmlFor="funciones" className="mb-3 block text-base font-medium text-gray-600">
                       Funciones del puesto
                     </label>
                     <ReactQuill
@@ -312,7 +312,7 @@ function FormOferta() {
                     />
                   </div>
                   <div className="mb-5">
-                    <label htmlFor="horario" className="mb-3 block text-base font-medium text-[#07074D]">
+                    <label htmlFor="horario" className="mb-3 block text-base font-medium text-gray-600">
                       Horario de trabajo
                     </label>
                     <ReactQuill
@@ -344,7 +344,7 @@ function FormOferta() {
                 <>
                 Preguntas para el Postulante
                   <div className="mb-5 flex items-center">
-                    <label htmlFor="preg_1" className="mb-3 block text-base font-medium text-[#07074D]">
+                    <label htmlFor="preg_1" className="mb-3 block text-base font-medium text-gray-600">
                     </label>
                     <input
                       type="text"
@@ -366,7 +366,7 @@ function FormOferta() {
                   </div>
                   {showSecondQuestion && (
                     <div className="mb-5 flex items-center">
-                      <label htmlFor="preg_2" className="mb-3 block text-base font-medium text-[#07074D]">
+                      <label htmlFor="preg_2" className="mb-3 block text-base font-medium text-gray-600">
                        
                       </label>
                       <input
@@ -390,7 +390,7 @@ function FormOferta() {
                   )}
                   {showThirdQuestion && (
                     <div className="mb-5 flex items-center">
-                      <label htmlFor="preg_3" className="mb-3 block text-base font-medium text-[#07074D]">
+                      <label htmlFor="preg_3" className="mb-3 block text-base font-medium text-gray-600">
                         
                       </label>
                       <input
@@ -414,7 +414,7 @@ function FormOferta() {
                   )}
                   {showFourthQuestion && (
                     <div className="mb-5 flex items-center">
-                      <label htmlFor="preg_4" className="mb-3 block text-base font-medium text-[#07074D]">
+                      <label htmlFor="preg_4" className="mb-3 block text-base font-medium text-gray-600">
                        
                       </label>
                       <input
@@ -438,7 +438,7 @@ function FormOferta() {
                   )}
                   {showFifthQuestion && (
                     <div className="mb-5 flex items-center">
-                      <label htmlFor="preg_5" className="mb-3 block text-base font-medium text-[#07074D]">
+                      <label htmlFor="preg_5" className="mb-3 block text-base font-medium text-gray-600">
                        
                       </label>
                       <input

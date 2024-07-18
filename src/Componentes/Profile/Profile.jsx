@@ -128,7 +128,7 @@ function Profile() {
     <div className="w-full h-screen font-dmsans flex ">
       <HeaderPowerAuth />
       <div className="md:pl-20 md:p-10 pt-12 md:pt-auto w-full h-full flex justify-center bg-[#fcfcfd]">
-        <div className="md:w-2/5 md:rounded-xl overflow-hidden bg-white shadow">
+        <div className="md:w-2/5 md:rounded-xl overflow-y-auto bg-white shadow">
         <Portada />
         <img 
         className="relative top-3/2 mx-auto  transform  -translate-y-1/2 w-24 h-24 rounded-full border-2 border-white" 

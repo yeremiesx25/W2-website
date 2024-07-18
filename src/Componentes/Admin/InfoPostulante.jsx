@@ -37,6 +37,9 @@ const InfoPostulante = ({ postulado, preguntas, respuestas, onEstadoChange }) =>
     }
   };
 
+  // Agregar parámetros para visualizar solo el documento
+  const cvUrl = postulado.cv_link ? `${postulado.cv_link}#view=fitH` : '';
+
   return (
     <div className="bg-gray-100 shadow overflow-hidden sm:rounded-lg p-4">
       <div className="flex justify-between items-center mb-4">
@@ -91,7 +94,7 @@ const InfoPostulante = ({ postulado, preguntas, respuestas, onEstadoChange }) =>
           <div className="mt-4">
             <p className="text-lg font-semibold mb-2">Currículum Vitae:</p>
             <iframe
-              src={postulado.cv_link}
+              src={cvUrl}
               title="CV"
               width="100%"
               height="500px"
