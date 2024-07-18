@@ -12,8 +12,6 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
   const [phoneError, setPhoneError] = useState(''); // Estado para el error del teléfono
   const [answerErrors, setAnswerErrors] = useState([]); // Estado para los errores de las respuestas
   const [submissionSuccess, setSubmissionSuccess] = useState(false); // Estado para mostrar el mensaje de éxito
-  const [cvFile, setCvFile] = useState(null); // Estado para almacenar el archivo CV
-  const [cvUrl, setCvUrl] = useState(''); // Estado para almacenar el URL del archivo CV
 
   useEffect(() => {
     const fetchQuestions = async () => {
@@ -46,8 +44,6 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
       setPhoneError(''); // Limpia cualquier error anterior del número de celular
       setAnswerErrors(['', '', '', '', '']); // Limpia cualquier error anterior de respuestas
       setSubmissionSuccess(false); // Oculta el mensaje de éxito al abrir el modal
-      setCvFile(null); // Reinicia el archivo CV
-      setCvUrl(''); // Reinicia el URL del archivo CV
     }
   }, [isOpen, selectedJob]);
 
@@ -76,11 +72,6 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
     }
   };
 
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    setCvFile(file);
-  };
-
   const handleSubmit = async () => {
     try {
       // Validar que todos los campos estén completos
@@ -88,29 +79,6 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
         setPhoneError('Campo Obligatorio');
         return;
       }
-
-      if (cvFile === null) {
-        // Validar que se haya seleccionado un archivo CV
-        console.error('Debes seleccionar un archivo CV');
-        return;
-      }
-
-      // Subir archivo CV a Supabase Storage
-      const { data: fileData, error: fileError } = await supabase.storage
-        .from('cv_user')
-        .upload(`cv_${user.id}/${cvFile.name}`, cvFile);
-
-      if (fileError) {
-        throw fileError;
-      }
-
-      // Generar URL del archivo subido
-      const bucketName = 'cv_user';
-      const filePath = fileData.path;
-      const baseUrl = 'https://elcuvegbwtlngranjtym.supabase.co/storage/v1/object/public';
-      const cvUrl = `${baseUrl}/${bucketName}/${filePath}`;
-
-      console.log('URL del archivo subido:', cvUrl);
 
       // Insertar una nueva fila en la tabla Postulacion
       const { error: insertError } = await supabase
@@ -129,7 +97,6 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
           fecha_postulacion: new Date(),
           estado: 'pendiente',
           avatar_url: user.user_metadata.avatar_url, // Agregado: guarda el avatar_url del usuario
-          cv_link: cvUrl, // Agrega el URL del archivo CV a la columna cv_link
         });
 
       if (insertError) {
@@ -142,8 +109,6 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
       // Limpiar formularios y datos para una nueva postulación
       setPhone('');
       setAnswers(['', '', '', '', '']);
-      setCvFile(null);
-      setCvUrl('');
 
     } catch (error) {
       console.error('Error al enviar la postulación:', error.message);
@@ -181,18 +146,11 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
                 className={`w-full mt-2 p-2 border rounded ${phoneError ? 'border-red-500' : ''}`}
               />
               {phoneError && <p className="text-red-500 text-sm">{phoneError}</p>}
-              <label className="w-full text-left mt-4">Subir CV</label>
-              <input
-                type="file"
-                accept=".pdf,.doc,.docx"
-                onChange={handleFileChange}
-                className="w-full mt-2 p-2 border rounded"
-              />
               <div className="flex justify-center mt-4">
                 <button
-                  className={`bg-[#0057c2] text-white font-bold py-2 px-4 rounded-full w-32 ${phone.trim() && cvFile ? '' : 'opacity-50 cursor-not-allowed'}`}
-                  onClick={() => phone.trim() && cvFile && setCurrentQuestionIndex(0)} // Cambia el índice a 0 para mostrar las preguntas si el teléfono y el archivo CV no están vacíos
-                  disabled={!phone.trim() || !cvFile}
+                  className={`bg-[#0057c2] text-white font-bold py-2 px-4 rounded-full w-32 ${phone.trim() ? '' : 'opacity-50 cursor-not-allowed'}`}
+                  onClick={() => phone.trim() && setCurrentQuestionIndex(0)} // Cambia el índice a 0 para mostrar las preguntas si el teléfono no está vacío
+                  disabled={!phone.trim()}
                 >
                   Siguiente
                 </button>
@@ -234,7 +192,7 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
                     </button>
                     <button
                       className="bg-[#0057c2] text-white font-bold py-2 px-4 rounded-full w-32"
-                      onClick={handleSubmit} // Envía las respuestas y el archivo CV
+                      onClick={handleSubmit} // Envía las respuestas
                     >
                       Enviar
                     </button>
@@ -252,12 +210,11 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
                     </svg>
                   </div>
-                  <h2 className="text-2xl font-bold mb-2 text-green-500">¡Postulación Exitosa!</h2>
-                  <p className="mb-4">Felicitaciones, has enviado tu postulación correctamente.</p>
-                  <p className="mb-4">Los reclutadores se comunicarán contigo pronto.</p>
+                  <h2 className="text-xl font-bold mb-2">¡Postulación enviada con éxito!</h2>
+                  <p className="text-sm text-gray-500 mb-4">Gracias por tu interés.</p>
                   <button
                     className="bg-[#0057c2] text-white font-bold py-2 px-4 rounded-full w-32"
-                    onClick={handleAccept}
+                    onClick={handleAccept} // Recargar la página
                   >
                     Aceptar
                   </button>
