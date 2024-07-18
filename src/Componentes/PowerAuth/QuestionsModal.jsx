@@ -125,7 +125,7 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
   };
 
   return (
-    <div className={fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 z-50 ${isOpen ? '' : 'hidden'}} onClick={handleClose}>
+    <div className={`fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 z-50 ${isOpen ? '' : 'hidden'}`} onClick={handleClose}>
       <div className="bg-white rounded-lg p-6 w-full max-w-lg relative" onClick={(e) => e.stopPropagation()}>
         <button
           className="absolute top-2 right-3 text-gray-500 hover:text-gray-700 text-3xl"
@@ -143,12 +143,12 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
                 placeholder="Número de celular"
                 value={phone}
                 onChange={handlePhoneChange}
-                className={w-full mt-2 p-2 border rounded ${phoneError ? 'border-red-500' : ''}}
+                className={`w-full mt-2 p-2 border rounded ${phoneError ? 'border-red-500' : ''}`}
               />
               {phoneError && <p className="text-red-500 text-sm">{phoneError}</p>}
               <div className="flex justify-center mt-4">
                 <button
-                  className={bg-[#0057c2] text-white font-bold py-2 px-4 rounded-full w-32 ${phone.trim() ? '' : 'opacity-50 cursor-not-allowed'}}
+                  className={`bg-[#0057c2] text-white font-bold py-2 px-4 rounded-full w-32 ${phone.trim() ? '' : 'opacity-50 cursor-not-allowed'}`}
                   onClick={() => phone.trim() && setCurrentQuestionIndex(0)} // Cambia el índice a 0 para mostrar las preguntas si el teléfono no está vacío
                   disabled={!phone.trim()}
                 >
@@ -177,7 +177,7 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
                         <textarea
                           value={answers[index]}
                           onChange={(e) => handleAnswerChange(e, index)}
-                          className={w-full mt-2 p-2 border rounded ${answerErrors[index] ? 'border-red-500' : ''}}
+                          className={`w-full mt-2 p-2 border rounded ${answerErrors[index] ? 'border-red-500' : ''}`}
                         />
                         {answerErrors[index] && <p className="text-red-500 text-sm">{answerErrors[index]}</p>}
                       </div>
