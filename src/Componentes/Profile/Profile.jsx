@@ -17,6 +17,7 @@ function Profile() {
   const [distrito, setDistrito] = useState("");
   const [isEditing, setIsEditing] = useState(false);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+  const [errorMessages, setErrorMessages] = useState({});
 
   useEffect(() => {
     async function fetchUserData() {
@@ -84,6 +85,21 @@ function Profile() {
   };
 
   const handleSave = async () => {
+    let errors = {};
+
+    if (!nombre) errors.nombre = "Campo Obligatorio";
+    if (!email) errors.email = "Campo Obligatorio";
+    if (!telefono) errors.telefono = "Campo Obligatorio";
+    if (!dni) errors.dni = "Campo Obligatorio";
+    if (!fechaNac) errors.fechaNac = "Campo Obligatorio";
+    if (!distrito) errors.distrito = "Campo Obligatorio";
+
+    setErrorMessages(errors);
+
+    if (Object.keys(errors).length > 0) {
+      return;
+    }
+
     try {
       let userDataToSave = {
         user_id: user.id,
@@ -95,49 +111,49 @@ function Profile() {
         distrito: distrito,
         cv_file_name: cvFileName,
       };
-  
+
       if (cvFile) {
         const { data: fileData, error: fileError } = await supabase.storage
           .from("cv_user")
           .upload(`cv_${user.id}/${cvFile.name}`, cvFile);
-  
+
         if (fileError) {
           throw fileError;
         }
-  
+
         const { data: files, error: listError } = await supabase.storage
           .from("cv_user")
           .list(`cv_${user.id}`, {
             limit: 1,
             sortBy: { column: "created_at", order: "desc" },
           });
-  
+
         if (listError || !files || files.length === 0) {
           throw new Error("Failed to retrieve uploaded file information");
         }
-  
+
         const latestFile = files[0];
         const cvUrl = `https://elcuvegbwtlngranjtym.supabase.co/storage/v1/object/public/cv_user/cv_${user.id}/${latestFile.name}`;
-  
+
         userDataToSave.cv_url = cvUrl;
         userDataToSave.cv_file_name = cvFile.name;
       } else if (existingRecord && existingRecord.cv_url) {
         userDataToSave.cv_url = existingRecord.cv_url;
       }
-  
+
       const { data: savedData, error: saveError } = existingRecord
         ? await supabase
             .from("usuario")
             .upsert([{ ...existingRecord, ...userDataToSave }])
         : await supabase.from("usuario").insert([userDataToSave]);
-  
+
       if (saveError) {
         throw saveError;
       }
-  
+
       console.log("Datos guardados correctamente:", savedData);
       setIsEditing(false);
-  
+
       // Mostrar mensaje de guardado correctamente en la parte superior
       const savedMessage = document.createElement("div");
       savedMessage.textContent = "Guardado correctamente";
@@ -151,7 +167,7 @@ function Profile() {
       savedMessage.style.borderRadius = "5px";
       savedMessage.style.zIndex = "9999";
       document.body.appendChild(savedMessage);
-  
+
       // Remover el mensaje después de 2 segundos
       setTimeout(() => {
         document.body.removeChild(savedMessage);
@@ -160,8 +176,9 @@ function Profile() {
       console.error("Error guardando los datos:", error.message);
     }
   };
+
   return (
-    <div className="w-full h-screen font-dmsans flex ">
+    <div className="w-full h-screen font-dmsans flex">
       <HeaderPowerAuth />
       <div className="md:pl-20 md:p-10 pt-12 md:pt-auto w-full h-full flex justify-center bg-[#fcfcfd]">
         <div className="md:w-2/5 md:rounded-xl overflow-hidden overflow-y-auto bg-white shadow">
@@ -178,14 +195,17 @@ function Profile() {
                 Nombres y Apellidos
               </label>
               <input
-  type="text"
-  className={`mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 ${
-    !isEditing ? "bg-gray-200" : "border-2 border-indigo-500"
-  } py-2 px-3`}
-  value={nombre}
-  onChange={handleNombreChange}
-  disabled={!isEditing}
-/>
+                type="text"
+                className={`mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 ${
+                  !isEditing ? "bg-gray-200" : "border-2 border-indigo-500"
+                } py-2 px-3`}
+                value={nombre}
+                onChange={handleNombreChange}
+                disabled={!isEditing}
+              />
+              {errorMessages.nombre && (
+                <div className="text-red-500 text-sm">{errorMessages.nombre}</div>
+              )}
             </div>
 
             <div className="mb-4">
@@ -202,6 +222,9 @@ function Profile() {
                 onChange={handleDniChange}
                 disabled={!isEditing}
               />
+              {errorMessages.dni && (
+                <div className="text-red-500 text-sm">{errorMessages.dni}</div>
+              )}
             </div>
 
             <div className="mb-4">
@@ -217,6 +240,9 @@ function Profile() {
                 onChange={handleEmailChange}
                 disabled={!isEditing}
               />
+              {errorMessages.email && (
+                <div className="text-red-500 text-sm">{errorMessages.email}</div>
+              )}
             </div>
 
             <div className="mb-4">
@@ -233,6 +259,9 @@ function Profile() {
                 onChange={handleTelefonoChange}
                 disabled={!isEditing}
               />
+              {errorMessages.telefono && (
+                <div className="text-red-500 text-sm">{errorMessages.telefono}</div>
+              )}
             </div>
 
             <div className="mb-4">
@@ -248,6 +277,9 @@ function Profile() {
                 onChange={handleFechaNacChange}
                 disabled={!isEditing}
               />
+              {errorMessages.fechaNac && (
+                <div className="text-red-500 text-sm">{errorMessages.fechaNac}</div>
+              )}
             </div>
 
             <div className="mb-4">
@@ -264,6 +296,9 @@ function Profile() {
                 onChange={handleDistritoChange}
                 disabled={!isEditing}
               />
+              {errorMessages.distrito && (
+                <div className="text-red-500 text-sm">{errorMessages.distrito}</div>
+              )}
             </div>
 
             <div className="mb-4">
