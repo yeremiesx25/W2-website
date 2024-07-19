@@ -3,6 +3,7 @@ import HeaderPowerAuth from "../PowerAuth/HeaderPowerAuth";
 import { UserAuth } from "../../Context/AuthContext";
 import { supabase } from "../../supabase/supabase.config";
 import Portada from "./Portada";
+import { RiEditLine } from "react-icons/ri";
 
 function Profile() {
   const { user } = UserAuth();
@@ -99,7 +100,7 @@ function Profile() {
       if (cvFile) {
         const { data: fileData, error: fileError } = await supabase.storage
           .from("cv_user")
-          .upload(`cv_${user.id}/${cvFile.name}`, cvFile);
+          .upload(`cv_${user.id}/${cvFile.name}, cvFile`);
   
         if (fileError) {
           throw fileError;
@@ -107,7 +108,7 @@ function Profile() {
   
         const { data: files, error: listError } = await supabase.storage
           .from("cv_user")
-          .list(`cv_${user.id}`, {
+          .list(cv_`${user.id}`, {
             limit: 1,
             sortBy: { column: "created_at", order: "desc" },
           });
@@ -161,151 +162,176 @@ function Profile() {
     }
   };
   return (
-    <div className="w-full h-screen font-dmsans flex ">
+    <div className="w-full font-dmsans flex ">
       <HeaderPowerAuth />
-      <div className="md:pl-20 md:p-10 pt-12 md:pt-auto w-full h-full flex justify-center bg-[#fcfcfd]">
-        <div className="md:w-2/5 md:rounded-xl overflow-hidden overflow-y-auto bg-white shadow">
+      <div className="md:pl-20 md:p-4  w-full  flex justify-center ">
+        <div className="md:w-4/5 w-full md:rounded-xl  bg-white shadow overflow-hidden pt-12 md:pt-0">
           <Portada />
-          <img
-            className="relative top-3/2 mx-auto transform -translate-y-1/2 w-24 h-24 rounded-full border-2 border-white"
-            src={user.user_metadata.avatar_url}
-            alt="Avatar"
-          />
-
-          <div className="px-4">
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700">
-                Nombres y Apellidos
-              </label>
-              <input
-  type="text"
-  className={`mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 ${
-    !isEditing ? "bg-gray-200" : "border-2 border-indigo-500"
-  } py-2 px-3`}
-  value={nombre}
-  onChange={handleNombreChange}
-  disabled={!isEditing}
-/>
-            </div>
-
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700">
-                DNI
-              </label>
-              <input
-                type="text"
-                className={`mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 ${
-                  !isEditing ? "bg-gray-200" : "border-2 border-indigo-500"
-                } py-2 px-3`}
-                placeholder="Ingrese su DNI"
-                value={dni}
-                onChange={handleDniChange}
-                disabled={!isEditing}
-              />
-            </div>
-
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700">
-                Email
-              </label>
-              <input
-                type="email"
-                className={`mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 ${
-                  !isEditing ? "bg-gray-200" : "border-2 border-indigo-500"
-                } py-2 px-3`}
-                value={email}
-                onChange={handleEmailChange}
-                disabled={!isEditing}
-              />
-            </div>
-
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700">
-                Celular
-              </label>
-              <input
-                type="text"
-                className={`mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 ${
-                  !isEditing ? "bg-gray-200" : "border-2 border-indigo-500"
-                } py-2 px-3`}
-                placeholder="Ingrese su teléfono"
-                value={telefono}
-                onChange={handleTelefonoChange}
-                disabled={!isEditing}
-              />
-            </div>
-
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700">
-                Fecha de Nacimiento
-              </label>
-              <input
-                type="date"
-                className={`mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 ${
-                  !isEditing ? "bg-gray-200" : "border-2 border-indigo-500"
-                } py-2 px-3`}
-                value={fechaNac}
-                onChange={handleFechaNacChange}
-                disabled={!isEditing}
-              />
-            </div>
-
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700">
-                Distrito donde Vive
-              </label>
-              <input
-                type="text"
-                className={`mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 ${
-                  !isEditing ? "bg-gray-200" : "border-2 border-indigo-500"
-                } py-2 px-3`}
-                placeholder="Ingrese su distrito"
-                value={distrito}
-                onChange={handleDistritoChange}
-                disabled={!isEditing}
-              />
-            </div>
-
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700">
-                CV (PDF)
-              </label>
-              {isEditing ? (
+          <div className="flex w-full justify-start px-4 md:px-12 py-6 items-center">
+            <img
+              className="w-24 h-24 rounded-full border-2 border-white"
+              src={user.user_metadata.avatar_url}
+              alt="Avatar"
+            />
+            <div className="flex flex-col">
+              <div className="">
                 <input
-                  type="file"
-                  className={`mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 ${
-                    !isEditing ? "bg-gray-200" : "border-2 border-indigo-500"
-                  } py-2 px-3`}
-                  onChange={handleCvUpload}
+                  type="text"
+                  className={`md:w-96 rounded-md text-gray-700 focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 ${
+                    !isEditing ? "bg-white" : "border-2 border-indigo-500 py-2"
+                  }  px-3`}
+                  value={nombre}
+                  onChange={handleNombreChange}
+                  disabled={!isEditing}
                 />
+              </div>
+              <div className="">
+                <input
+                  type="email"
+                  className={`md:w-96 rounded-md text-gray-500 text-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 ${
+                    !isEditing ? "bg-white" : "border-2 border-indigo-500 py-2"
+                  }  px-3`}
+                  value={email}
+                  onChange={handleEmailChange}
+                  disabled={!isEditing}
+                />
+              </div>
+            </div>
+            <div className="flex w-12 h-12 ml-[48%]  text-right  ">
+              {!isEditing ? (
+                <button
+                  className="w-full bg-primarycolor text-white text-xl p-2 rounded-full flex items-center justify-center"
+                  onClick={handleEdit}
+                >
+                  <RiEditLine />
+                </button>
               ) : (
-                <div className="mt-1 block w-full py-2 px-3 bg-gray-200 rounded-md">
-                  {cvFileName ? (
-                    <a
-                      href={existingRecord?.cv_url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-blue-600 underline"
-                    >
-                      {cvFileName}
-                    </a>
-                  ) : (
-                    "No se ha subido ningún CV"
-                  )}
+                <div className="flex w-full">
+                  {/* <button
+                  className="w-1/2 bg-gray-500 text-white p-2 rounded-md mr-2"
+                  onClick={() => setIsEditing(false)}
+                >
+                  Cancelar
+                </button>
+                <button
+                  className="w-1/2 bg-green-500 text-white p-2 rounded-md"
+                  onClick={handleSave}
+                >
+                  Guardar
+                </button> */}
                 </div>
               )}
             </div>
           </div>
 
+          {/* contenedor general de inputs */}
+          <div className="px-4">
+            <div className="w-1/2 px-8 flex flex-col gap-4">
+              <div className="mb-4">
+                <label className="block text-sm font-regular text-gray-700">
+                  DNI
+                </label>
+                <input
+                  type="text"
+                  className={`mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-gray-600 ${
+                    !isEditing ? "bg-gray-50" : "border-2 border-indigo-500"
+                  } py-2 px-3`}
+                  placeholder="Ingrese su DNI"
+                  value={dni}
+                  onChange={handleDniChange}
+                  disabled={!isEditing}
+                />
+              </div>
+
+              <div className="mb-4">
+                <label className="block text-sm font-regular text-gray-700">
+                  Celular
+                </label>
+                <input
+                  type="text"
+                  className={`mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-gray-600 ${
+                    !isEditing ? "bg-gray-50" : "border-2 border-indigo-500"
+                  } py-2 px-3`}
+                  placeholder="Ingrese su teléfono"
+                  value={telefono}
+                  onChange={handleTelefonoChange}
+                  disabled={!isEditing}
+                />
+              </div>
+
+              <div className="mb-4">
+                <label className="block text-sm font-regular text-gray-700">
+                  Fecha de Nacimiento
+                </label>
+                <input
+                  type="date"
+                  className={`mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-gray-600 ${
+                    !isEditing ? "bg-gray-50" : "border-2 border-indigo-500"
+                  } py-2 px-3`}
+                  value={fechaNac}
+                  onChange={handleFechaNacChange}
+                  disabled={!isEditing}
+                />
+              </div>
+
+              <div className="mb-4">
+                <label className="block text-sm font-regular text-gray-700">
+                  Distrito de residencia
+                </label>
+                <input
+                  type="text"
+                  className={`mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-gray-600 ${
+                    !isEditing ? "bg-gray-50" : "border-2 border-indigo-500"
+                  } py-2 px-3`}
+                  placeholder="Ingrese su distrito"
+                  value={distrito}
+                  onChange={handleDistritoChange}
+                  disabled={!isEditing}
+                />
+              </div>
+
+              <div className="mb-4">
+                <label className="block text-sm font-regular text-gray-700">
+                  Cv (Formato pdf)
+                </label>
+                {isEditing ? (
+                  <input
+                    type="file"
+                    className={`mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-gray-500 ${
+                      !isEditing ? "bg-gray-50" : "border-2 border-indigo-500"
+                    } py-2 px-3`}
+                    onChange={handleCvUpload}
+                  />
+                ) : (
+                  <div className="mt-1 block w-full py-2 px-3 bg-gray-50 rounded-md">
+                    {cvFileName ? (
+                      <a
+                        href={existingRecord?.cv_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-600 underline"
+                      >
+                        {cvFileName}
+                      </a>
+                    ) : (
+                      "No se ha subido ningún CV"
+                    )}
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+
           <div className="flex justify-end px-4 py-3 bg-gray-50 text-right sm:px-6">
             {!isEditing ? (
-              <button
-                className="w-full bg-indigo-500 text-white p-2 rounded-md"
-                onClick={handleEdit}
-              >
-                Editar
-              </button>
+              <div></div>
             ) : (
+              // <button
+              //   className="w-full bg-indigo-500 text-white p-2 rounded-md"
+              //   onClick={handleEdit}
+              // >
+              //   Editar
+              // </button>
               <div className="flex w-full">
                 <button
                   className="w-1/2 bg-gray-500 text-white p-2 rounded-md mr-2"
