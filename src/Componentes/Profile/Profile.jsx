@@ -18,6 +18,7 @@ function Profile() {
   const [distrito, setDistrito] = useState("");
   const [isEditing, setIsEditing] = useState(false);
   const [showSuccessMessage, setShowSuccessMessage] = useState(false);
+  const [errorMessages, setErrorMessages] = useState({});
 
   useEffect(() => {
     async function fetchUserData() {
@@ -85,6 +86,21 @@ function Profile() {
   };
 
   const handleSave = async () => {
+    let errors = {};
+
+    if (!nombre) errors.nombre = "Campo Obligatorio";
+    if (!email) errors.email = "Campo Obligatorio";
+    if (!telefono) errors.telefono = "Campo Obligatorio";
+    if (!dni) errors.dni = "Campo Obligatorio";
+    if (!fechaNac) errors.fechaNac = "Campo Obligatorio";
+    if (!distrito) errors.distrito = "Campo Obligatorio";
+
+    setErrorMessages(errors);
+
+    if (Object.keys(errors).length > 0) {
+      return;
+    }
+
     try {
       let userDataToSave = {
         user_id: user.id,
@@ -96,7 +112,7 @@ function Profile() {
         distrito: distrito,
         cv_file_name: cvFileName,
       };
-  
+
       if (cvFile) {
         const { data: fileData, error: fileError } = await supabase.storage
           .from("cv_user")
@@ -105,40 +121,40 @@ function Profile() {
         if (fileError) {
           throw fileError;
         }
-  
+
         const { data: files, error: listError } = await supabase.storage
           .from("cv_user")
           .list(cv_`${user.id}`, {
             limit: 1,
             sortBy: { column: "created_at", order: "desc" },
           });
-  
+
         if (listError || !files || files.length === 0) {
           throw new Error("Failed to retrieve uploaded file information");
         }
-  
+
         const latestFile = files[0];
         const cvUrl = `https://elcuvegbwtlngranjtym.supabase.co/storage/v1/object/public/cv_user/cv_${user.id}/${latestFile.name}`;
-  
+
         userDataToSave.cv_url = cvUrl;
         userDataToSave.cv_file_name = cvFile.name;
       } else if (existingRecord && existingRecord.cv_url) {
         userDataToSave.cv_url = existingRecord.cv_url;
       }
-  
+
       const { data: savedData, error: saveError } = existingRecord
         ? await supabase
             .from("usuario")
             .upsert([{ ...existingRecord, ...userDataToSave }])
         : await supabase.from("usuario").insert([userDataToSave]);
-  
+
       if (saveError) {
         throw saveError;
       }
-  
+
       console.log("Datos guardados correctamente:", savedData);
       setIsEditing(false);
-  
+
       // Mostrar mensaje de guardado correctamente en la parte superior
       const savedMessage = document.createElement("div");
       savedMessage.textContent = "Guardado correctamente";
@@ -152,7 +168,7 @@ function Profile() {
       savedMessage.style.borderRadius = "5px";
       savedMessage.style.zIndex = "9999";
       document.body.appendChild(savedMessage);
-  
+
       // Remover el mensaje después de 2 segundos
       setTimeout(() => {
         document.body.removeChild(savedMessage);
@@ -161,6 +177,7 @@ function Profile() {
       console.error("Error guardando los datos:", error.message);
     }
   };
+
   return (
     <div className="w-full font-dmsans flex ">
       <HeaderPowerAuth />

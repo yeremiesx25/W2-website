@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css'; // Estilo por defecto de Quill
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css"; // Estilo por defecto de Quill
 import FormAdminImg from "../../assets/formAdminImg.svg";
 import { UserAuth } from "../../Context/AuthContext";
-import { useNavigate } from 'react-router-dom';
-import { supabase } from '../../supabase/supabase.config';
+import { useNavigate } from "react-router-dom";
+import { supabase } from "../../supabase/supabase.config";
 import { MdDeleteForever } from "react-icons/md";
+import ShareModal from "./ShareModal"; // Importa el componente ShareModal
 
 function FormOferta() {
   const { user } = UserAuth();
@@ -26,34 +27,35 @@ function FormOferta() {
     preg_4: "",
     preg_5: "",
     user_id: "",
-    modalidad: ""
+    modalidad: "",
   });
 
   const [showSecondQuestion, setShowSecondQuestion] = useState(false);
   const [showThirdQuestion, setShowThirdQuestion] = useState(false);
   const [showFourthQuestion, setShowFourthQuestion] = useState(false);
   const [showFifthQuestion, setShowFifthQuestion] = useState(false);
+  const [formStep, setFormStep] = useState(1);
+  const [showShareModal, setShowShareModal] = useState(false); // Estado para controlar la visibilidad de ShareModal
+  const [selectedJob, setSelectedJob] = useState(null); // Estado para el trabajo seleccionado
 
   useEffect(() => {
     if (user) {
       setFormData((prevData) => ({
         ...prevData,
-        user_id: user.id
+        user_id: user.id,
       }));
     }
   }, [user]);
-
-  const [formStep, setFormStep] = useState(1);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
       ...prevData,
-      [name]: value
+      [name]: value,
     }));
   };
 
-  const handleNextButtonClick = (e) => {
+  const handleNextButtonClick = async (e) => {
     e.preventDefault();
     if (formStep === 1) {
       localStorage.setItem("formData", JSON.stringify(formData));
@@ -61,7 +63,11 @@ function FormOferta() {
     } else if (formStep === 2) {
       setFormStep(3);
     } else {
-      saveFormDataToSupabase();
+      const jobData = await saveFormDataToSupabase();
+      if (jobData) {
+        setSelectedJob(jobData); // Establece el trabajo seleccionado con los datos guardados
+        setShowShareModal(true); // Abre el modal después de guardar los datos
+      }
     }
   };
 
@@ -89,7 +95,7 @@ function FormOferta() {
   const handleDeleteQuestion = (questionNumber) => {
     setFormData((prevData) => ({
       ...prevData,
-      [`preg_${questionNumber}`]: ""
+      [`preg_${questionNumber}`]: "",
     }));
     switch (questionNumber) {
       case 2:
@@ -110,46 +116,65 @@ function FormOferta() {
   };
 
   const saveFormDataToSupabase = async () => {
-    const { name, company, location, salary, jobDescription, requirements, funciones, horario, celular, preg_1, preg_2, preg_3, preg_4, preg_5, user_id, modalidad } = formData;
+    const {
+      name,
+      company,
+      location,
+      salary,
+      jobDescription,
+      requirements,
+      funciones,
+      horario,
+      celular,
+      preg_1,
+      preg_2,
+      preg_3,
+      preg_4,
+      preg_5,
+      user_id,
+      modalidad,
+    } = formData;
 
     const whatsappMessage = `Hola, estoy interesado en el puesto de ${name}`;
-    const whatsappUrl = `https://wa.me/${celular}?text=${encodeURIComponent(whatsappMessage)}`;
+    const whatsappUrl = `https://wa.me/${celular}?text=${encodeURIComponent(
+      whatsappMessage
+    )}`;
 
     try {
-      const { data, error } = await supabase
-        .from('Oferta')
-        .insert({
-          puesto: name,
-          empresa: company,
-          ubicacion: location,
-          sueldo: salary,
-          requisitos: requirements,
-          beneficios: jobDescription,
-          funciones: funciones,
-          wtsp_url: whatsappUrl,
-          horario: horario,
-          preg_1: preg_1,
-          preg_2: preg_2,
-          preg_3: preg_3,
-          preg_4: preg_4,
-          preg_5: preg_5,
-          user_id: user_id,
-          modalidad: modalidad
-        });
+      const { data, error } = await supabase.from("Oferta").insert({
+        puesto: name,
+        empresa: company,
+        ubicacion: location,
+        sueldo: salary,
+        requisitos: requirements,
+        beneficios: jobDescription,
+        funciones: funciones,
+        wtsp_url: whatsappUrl,
+        horario: horario,
+        preg_1: preg_1,
+        preg_2: preg_2,
+        preg_3: preg_3,
+        preg_4: preg_4,
+        preg_5: preg_5,
+        user_id: user_id,
+        modalidad: modalidad,
+      }).select('*'); // Selecciona todos los datos, incluyendo el id generado
 
       if (error) {
-        console.error('Error inserting data:', error);
+        console.error("Error inserting data:", error);
+        return null;
       } else {
-        console.log('Data inserted successfully:', data);
-        navigate('/Admin');
+        console.log("Data inserted successfully:", data);
+        return data[0]; // Devuelve el primer elemento del array de datos insertados
       }
     } catch (error) {
-      console.error('Error saving data to Supabase:', error);
+      console.error("Error saving data to Supabase:", error);
+      return null;
     }
   };
 
   const handleInputKeyDown = (e, nextInputName) => {
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       e.preventDefault();
       const nextInput = document.getElementsByName(nextInputName)[0];
       if (nextInput) {
@@ -176,7 +201,10 @@ function FormOferta() {
               {formStep === 1 && (
                 <>
                   <div className="mb-5">
-                    <label htmlFor="name" className="mb-3 block text-base font-medium text-gray-600">
+                    <label
+                      htmlFor="name"
+                      className="mb-3 block text-base font-medium text-gray-600"
+                    >
                       Nombre del puesto
                     </label>
                     <input
@@ -186,12 +214,15 @@ function FormOferta() {
                       placeholder="Puesto"
                       value={formData.name}
                       onChange={handleInputChange}
-                      onKeyDown={(e) => handleInputKeyDown(e, 'company')}
+                      onKeyDown={(e) => handleInputKeyDown(e, "company")}
                       className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                     />
                   </div>
                   <div className="mb-5">
-                    <label htmlFor="company" className="mb-3 block text-base font-medium text-gray-600">
+                    <label
+                      htmlFor="company"
+                      className="mb-3 block text-base font-medium text-gray-600"
+                    >
                       Nombre de la empresa
                     </label>
                     <input
@@ -201,12 +232,15 @@ function FormOferta() {
                       placeholder="Empresa"
                       value={formData.company}
                       onChange={handleInputChange}
-                      onKeyDown={(e) => handleInputKeyDown(e, 'location')}
+                      onKeyDown={(e) => handleInputKeyDown(e, "location")}
                       className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                     />
                   </div>
                   <div className="mb-5">
-                    <label htmlFor="location" className="mb-3 block text-base font-medium text-gray-600">
+                    <label
+                      htmlFor="location"
+                      className="mb-3 block text-base font-medium text-gray-600"
+                    >
                       Ubicación de la empresa
                     </label>
                     <input
@@ -216,12 +250,15 @@ function FormOferta() {
                       placeholder="Ubicación"
                       value={formData.location}
                       onChange={handleInputChange}
-                      onKeyDown={(e) => handleInputKeyDown(e, 'modalidad')}
+                      onKeyDown={(e) => handleInputKeyDown(e, "modalidad")}
                       className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                     />
                   </div>
                   <div className="mb-5">
-                    <label htmlFor="modalidad" className="mb-3 block text-base font-medium text-gray-600">
+                    <label
+                      htmlFor="modalidad"
+                      className="mb-3 block text-base font-medium text-gray-600"
+                    >
                       Modalidad de trabajo
                     </label>
                     <input
@@ -231,12 +268,15 @@ function FormOferta() {
                       placeholder="Modalidad"
                       value={formData.modalidad}
                       onChange={handleInputChange}
-                      onKeyDown={(e) => handleInputKeyDown(e, 'celular')}
+                      onKeyDown={(e) => handleInputKeyDown(e, "celular")}
                       className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                     />
                   </div>
                   <div className="mb-5">
-                    <label htmlFor="celular" className="mb-3 block text-base font-medium text-gray-600">
+                    <label
+                      htmlFor="celular"
+                      className="mb-3 block text-base font-medium text-gray-600"
+                    >
                       Número de WhatsApp
                     </label>
                     <input
@@ -246,7 +286,7 @@ function FormOferta() {
                       placeholder="Número de celular"
                       value={formData.celular}
                       onChange={handleInputChange}
-                      onKeyDown={(e) => handleInputKeyDown(e, 'salary')}
+                      onKeyDown={(e) => handleInputKeyDown(e, "salary")}
                       className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                     />
                   </div>
@@ -261,7 +301,10 @@ function FormOferta() {
               {formStep === 2 && (
                 <>
                   <div className="mb-5">
-                    <label htmlFor="salary" className="mb-3 block text-base font-medium text-gray-600">
+                    <label
+                      htmlFor="salary"
+                      className="mb-3 block text-base font-medium text-gray-600"
+                    >
                       Salario
                     </label>
                     <input
@@ -271,55 +314,75 @@ function FormOferta() {
                       placeholder="Salario"
                       value={formData.salary}
                       onChange={handleInputChange}
-                      onKeyDown={(e) => handleInputKeyDown(e, 'jobDescription')}
+                      onKeyDown={(e) => handleInputKeyDown(e, "jobDescription")}
                       className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                     />
                   </div>
                   <div className="mb-5">
-                    <label htmlFor="jobDescription" className="mb-3 block text-base font-medium text-gray-600">
+                    <label
+                      htmlFor="jobDescription"
+                      className="mb-3 block text-base font-medium text-gray-600"
+                    >
                       Beneficios del trabajo
                     </label>
                     <ReactQuill
                       name="jobDescription"
                       id="jobDescription"
                       value={formData.jobDescription}
-                      onChange={(value) => setFormData({ ...formData, jobDescription: value })}
+                      onChange={(value) =>
+                        setFormData({ ...formData, jobDescription: value })
+                      }
                       className="rounded-md border border-[#e0e0e0] bg-white text-base font-medium text-[#6B7280] focus:border-[#6A64F1] focus:shadow-md"
                     />
                   </div>
                   <div className="mb-5">
-                    <label htmlFor="requirements" className="mb-3 block text-base font-medium text-gray-600">
+                    <label
+                      htmlFor="requirements"
+                      className="mb-3 block text-base font-medium text-gray-600"
+                    >
                       Requisitos
                     </label>
                     <ReactQuill
                       name="requirements"
                       id="requirements"
                       value={formData.requirements}
-                      onChange={(value) => setFormData({ ...formData, requirements: value })}
+                      onChange={(value) =>
+                        setFormData({ ...formData, requirements: value })
+                      }
                       className="rounded-md border border-[#e0e0e0] bg-white text-base font-medium text-[#6B7280] focus:border-[#6A64F1] focus:shadow-md"
                     />
                   </div>
                   <div className="mb-5">
-                    <label htmlFor="funciones" className="mb-3 block text-base font-medium text-gray-600">
+                    <label
+                      htmlFor="funciones"
+                      className="mb-3 block text-base font-medium text-gray-600"
+                    >
                       Funciones del puesto
                     </label>
                     <ReactQuill
                       name="funciones"
                       id="funciones"
                       value={formData.funciones}
-                      onChange={(value) => setFormData({ ...formData, funciones: value })}
+                      onChange={(value) =>
+                        setFormData({ ...formData, funciones: value })
+                      }
                       className="rounded-md border border-[#e0e0e0] bg-white text-base font-medium text-[#6B7280] focus:border-[#6A64F1] focus:shadow-md"
                     />
                   </div>
                   <div className="mb-5">
-                    <label htmlFor="horario" className="mb-3 block text-base font-medium text-gray-600">
+                    <label
+                      htmlFor="horario"
+                      className="mb-3 block text-base font-medium text-gray-600"
+                    >
                       Horario de trabajo
                     </label>
                     <ReactQuill
                       name="horario"
                       id="horario"
                       value={formData.horario}
-                      onChange={(value) => setFormData({ ...formData, horario: value })}
+                      onChange={(value) =>
+                        setFormData({ ...formData, horario: value })
+                      }
                       className="rounded-md border border-[#e0e0e0] bg-white text-base font-medium text-[#6B7280] focus:border-[#6A64F1] focus:shadow-md"
                     />
                   </div>
@@ -340,12 +403,14 @@ function FormOferta() {
                 </>
               )}
 
-{formStep === 3 && (
+              {formStep === 3 && (
                 <>
-                Preguntas para el Postulante
+                  Preguntas para el Postulante
                   <div className="mb-5 flex items-center">
-                    <label htmlFor="preg_1" className="mb-3 block text-base font-medium text-gray-600">
-                    </label>
+                    <label
+                      htmlFor="preg_1"
+                      className="mb-3 block text-base font-medium text-gray-600"
+                    ></label>
                     <input
                       type="text"
                       name="preg_1"
@@ -353,22 +418,21 @@ function FormOferta() {
                       placeholder="Pregunta 1"
                       value={formData.preg_1}
                       onChange={handleInputChange}
-                      onKeyDown={(e) => handleInputKeyDown(e, 'preg_2')}
+                      onKeyDown={(e) => handleInputKeyDown(e, "preg_2")}
                       className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                     />
                     <button
                       type="button"
                       onClick={() => handleDeleteQuestion(1)}
                       className="ml-3 text-2xl text-red-500"
-                    >
-
-                    </button>
+                    ></button>
                   </div>
                   {showSecondQuestion && (
                     <div className="mb-5 flex items-center">
-                      <label htmlFor="preg_2" className="mb-3 block text-base font-medium text-gray-600">
-                       
-                      </label>
+                      <label
+                        htmlFor="preg_2"
+                        className="mb-3 block text-base font-medium text-gray-600"
+                      ></label>
                       <input
                         type="text"
                         name="preg_2"
@@ -376,7 +440,7 @@ function FormOferta() {
                         placeholder="Pregunta 2"
                         value={formData.preg_2}
                         onChange={handleInputChange}
-                        onKeyDown={(e) => handleInputKeyDown(e, 'preg_3')}
+                        onKeyDown={(e) => handleInputKeyDown(e, "preg_3")}
                         className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                       />
                       <button
@@ -390,9 +454,10 @@ function FormOferta() {
                   )}
                   {showThirdQuestion && (
                     <div className="mb-5 flex items-center">
-                      <label htmlFor="preg_3" className="mb-3 block text-base font-medium text-gray-600">
-                        
-                      </label>
+                      <label
+                        htmlFor="preg_3"
+                        className="mb-3 block text-base font-medium text-gray-600"
+                      ></label>
                       <input
                         type="text"
                         name="preg_3"
@@ -400,7 +465,7 @@ function FormOferta() {
                         placeholder="Pregunta 3"
                         value={formData.preg_3}
                         onChange={handleInputChange}
-                        onKeyDown={(e) => handleInputKeyDown(e, 'preg_4')}
+                        onKeyDown={(e) => handleInputKeyDown(e, "preg_4")}
                         className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                       />
                       <button
@@ -414,9 +479,10 @@ function FormOferta() {
                   )}
                   {showFourthQuestion && (
                     <div className="mb-5 flex items-center">
-                      <label htmlFor="preg_4" className="mb-3 block text-base font-medium text-gray-600">
-                       
-                      </label>
+                      <label
+                        htmlFor="preg_4"
+                        className="mb-3 block text-base font-medium text-gray-600"
+                      ></label>
                       <input
                         type="text"
                         name="preg_4"
@@ -424,7 +490,7 @@ function FormOferta() {
                         placeholder="Pregunta 4"
                         value={formData.preg_4}
                         onChange={handleInputChange}
-                        onKeyDown={(e) => handleInputKeyDown(e, 'preg_5')}
+                        onKeyDown={(e) => handleInputKeyDown(e, "preg_5")}
                         className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                       />
                       <button
@@ -438,9 +504,10 @@ function FormOferta() {
                   )}
                   {showFifthQuestion && (
                     <div className="mb-5 flex items-center">
-                      <label htmlFor="preg_5" className="mb-3 block text-base font-medium text-gray-600">
-                       
-                      </label>
+                      <label
+                        htmlFor="preg_5"
+                        className="mb-3 block text-base font-medium text-gray-600"
+                      ></label>
                       <input
                         type="text"
                         name="preg_5"
@@ -448,7 +515,7 @@ function FormOferta() {
                         placeholder="Pregunta 5"
                         value={formData.preg_5}
                         onChange={handleInputChange}
-                        onKeyDown={(e) => handleInputKeyDown(e, 'preg_6')}
+                        onKeyDown={(e) => handleInputKeyDown(e, "preg_6")}
                         className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                       />
                       <button
@@ -460,7 +527,10 @@ function FormOferta() {
                       </button>
                     </div>
                   )}
-                  {!showSecondQuestion || !showThirdQuestion || !showFourthQuestion || !showFifthQuestion ? (
+                  {!showSecondQuestion ||
+                  !showThirdQuestion ||
+                  !showFourthQuestion ||
+                  !showFifthQuestion ? (
                     <button
                       type="button"
                       onClick={handleAddQuestion}
@@ -482,6 +552,12 @@ function FormOferta() {
                     >
                       Guardar
                     </button>
+                    {showShareModal && (
+        <ShareModal
+          selectedJob={selectedJob}
+          onClose={() => setShowShareModal(false)}
+        />
+      )}
                   </div>
                 </>
               )}
@@ -494,4 +570,3 @@ function FormOferta() {
 }
 
 export default FormOferta;
-

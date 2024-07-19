@@ -71,7 +71,7 @@ function HeaderPowerAuth() {
             <RiAdminLine size={24} />
             {isExpanded && <span className="ml-4">Reclutador</span>}
           </Link>
-          <Link to="/" className={`my-3 flex items-center ${isExpanded ? 'px-4' : 'justify-center'} opacity-75 hover:opacity-100 transition-opacity duration-300`}>
+          <Link to="" className={`my-3 flex items-center ${isExpanded ? 'px-4' : 'justify-center'} opacity-75 hover:opacity-100 transition-opacity duration-300`}>
             <MdOutlineSettings size={24} />
             {isExpanded && <span className="ml-4">Configuración</span>}
           </Link>
@@ -79,15 +79,15 @@ function HeaderPowerAuth() {
         </div>
 
         <div className="flex flex-col mt-4 justify-center w-full">
-          <Link to="/" className={`my-3 flex items-center ${isExpanded ? 'px-4' : 'justify-center'} opacity-75 hover:opacity-100 transition-opacity duration-300`}>
+          <Link to="" className={`my-3 flex items-center ${isExpanded ? 'px-4' : 'justify-center'} opacity-75 hover:opacity-100 transition-opacity duration-300`}>
             <LuFileSpreadsheet size={24} />
             {isExpanded && <span className="ml-4">Mi CV</span>}
           </Link>
-          <Link to="/Empresas" className={`my-3 flex items-center ${isExpanded ? 'px-4' : 'justify-center'} opacity-75 hover:opacity-100 transition-opacity duration-300`}>
+          <Link to="" className={`my-3 flex items-center ${isExpanded ? 'px-4' : 'justify-center'} opacity-75 hover:opacity-100 transition-opacity duration-300`}>
             <FaSearchengin size={24} />
             {isExpanded && <span className="ml-4">Buscar Ofertas</span>}
           </Link>
-          <Link to="/DescubriendoTalentos" className={`my-3 flex items-center ${isExpanded ? 'px-4' : 'justify-center'} opacity-75 hover:opacity-100 transition-opacity duration-300`}>
+          <Link to="" className={`my-3 flex items-center ${isExpanded ? 'px-4' : 'justify-center'} opacity-75 hover:opacity-100 transition-opacity duration-300`}>
             <RiMailSendLine size={24} />
             {isExpanded && <span className="ml-4">Mis Postulaciones</span>}
           </Link>
