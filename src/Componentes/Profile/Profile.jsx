@@ -119,8 +119,6 @@ function Profile() {
           .from("cv_user")
           .upload(`cv_${user.id}/${cvFile.name}`, cvFile);
   
-          .upload(`cv_${user.id}/${cvFile.name}, cvFile`);
-  
         if (fileError) {
           throw fileError;
         }
