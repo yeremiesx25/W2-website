@@ -2,14 +2,14 @@ import React, { useState, useContext, useEffect } from 'react';
 import CardTrabajo2 from './CardTrabajo2';
 import InfoJob from '../PowerAuth/InfoJob';
 import JobsContext from '../../Context/JobsContext';
-import { useNavigate, useParams } from 'react-router-dom'; // Importa useParams para obtener el parámetro de la URL
+import { useNavigate, useParams } from 'react-router-dom';
 
 function TrabajosContainer2() {
   const { userSearchResults } = useContext(JobsContext);
   const [selectedJob, setSelectedJob] = useState(null);
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const navigate = useNavigate();
-  const { id_oferta } = useParams(); // Obtiene el parámetro de la URL
+  const { id_oferta } = useParams();
 
   useEffect(() => {
     const handleResize = () => {
@@ -18,7 +18,6 @@ function TrabajosContainer2() {
 
     window.addEventListener('resize', handleResize);
 
-    // Cleanup event listener
     return () => {
       window.removeEventListener('resize', handleResize);
     };
@@ -26,19 +25,21 @@ function TrabajosContainer2() {
 
   useEffect(() => {
     if (userSearchResults.length > 0) {
-      const sortedResults = userSearchResults.slice().sort((a, b) => new Date(b.fecha_publicacion) - new Date(a.fecha_publicacion));
-      setSelectedJob(sortedResults[0]);
+      const filteredResults = userSearchResults
+        .filter(job => job.estado === 'abierto') // Filtrar por estado "abierto"
+        .slice()
+        .sort((a, b) => new Date(b.fecha_publicacion) - new Date(a.fecha_publicacion));
+      
+      setSelectedJob(filteredResults[0]);
     }
   }, [userSearchResults]);
 
   useEffect(() => {
-    // Check if id_oferta exists in params and userSearchResults
     if (id_oferta && userSearchResults.length > 0) {
-      const foundJob = userSearchResults.find(job => job.id_oferta === parseInt(id_oferta));
+      const foundJob = userSearchResults.find(job => job.id_oferta === parseInt(id_oferta) && job.estado === 'abierto');
       if (foundJob) {
         setSelectedJob(foundJob);
       } else {
-        // Handle case where job with id_oferta is not found
         navigate('/');
       }
     }
@@ -58,11 +59,12 @@ function TrabajosContainer2() {
         <div
           className='flex flex-col w-full md:w-1/2 justify-start items-center gap-4 h-[650px] overflow-auto md:pl-12 md:ml-10'
           style={{
-            msOverflowStyle: 'none',  // IE and Edge
-            scrollbarWidth: 'none'   // Firefox
+            msOverflowStyle: 'none',
+            scrollbarWidth: 'none'
           }}
         >
           {userSearchResults
+            .filter(job => job.estado === 'abierto') // Filtrar por estado "abierto"
             .slice()
             .sort((a, b) => new Date(b.fecha_publicacion) - new Date(a.fecha_publicacion))
             .map((job, index) => (
