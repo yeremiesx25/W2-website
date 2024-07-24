@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { UserAuth } from "../../Context/AuthContext";
+import { supabase } from "../../supabase/supabase.config";  // Asegúrate de tener configurado Supabase
 import { FiHome } from "react-icons/fi";
 import { FaSearchengin } from "react-icons/fa6";
 import { MdOutlineSettings } from "react-icons/md";
@@ -11,10 +12,35 @@ import { RiMailSendLine } from "react-icons/ri";
 import { MdOutlineMenu } from "react-icons/md";
 import { RiAdminLine } from "react-icons/ri";
 import { IoIosClose } from "react-icons/io";
+import { IoMdNotifications } from "react-icons/io";
 
 function HeaderPowerAuth() {
   const { user, signOut } = UserAuth();
   const [isExpanded, setIsExpanded] = useState(false);
+  const [isProfileComplete, setIsProfileComplete] = useState(true); // Asume que el perfil está completo por defecto
+
+  useEffect(() => {
+    async function checkUserProfile() {
+      if (user) {
+        const { data, error } = await supabase
+          .from("usuario")
+          .select("profile_complete")
+          .eq("user_id", user.id)
+          .single();
+
+        if (error) {
+          console.error("Error al verificar el perfil del usuario:", error.message);
+          return;
+        }
+
+        if (data) {
+          setIsProfileComplete(data.profile_complete);
+        }
+      }
+    }
+
+    checkUserProfile();
+  }, [user]);
 
   const toggleMenu = () => {
     setIsExpanded(!isExpanded);
@@ -34,7 +60,7 @@ function HeaderPowerAuth() {
       </div>
 
       {/* Sidebar Menu */}
-      <nav className={`bg-primarycolor text-white drop-shadow-xl  ${isExpanded ? 'w-72' : 'w-20'} flex flex-col items-center justify-around py-4 px-2 fixed h-full transition-width duration-300 pt-8 ${isExpanded ? 'block' : 'hidden'} md:block`}>
+      <nav className={`bg-primarycolor text-white drop-shadow-xl ${isExpanded ? 'w-72' : 'w-20'} flex flex-col items-center justify-around py-4 px-2 fixed h-full transition-width duration-300 pt-8 ${isExpanded ? 'block' : 'hidden'} md:block`}>
         <button onClick={toggleMenu} className={`text-white ml-4 flex ${isExpanded ? 'hidden' : 'block'}`}>
           <MdOutlineMenu size={32} />
         </button>
@@ -56,7 +82,12 @@ function HeaderPowerAuth() {
         {user && (
           <div className={`flex items-center ${isExpanded ? 'px-4 w-full' : 'justify-center'}`}>
             <Link to="/Profile" className='flex items-center'>
-              <img className="w-10 h-10 rounded-full my-8" src={user.user_metadata.avatar_url} alt="User" />
+              <div className="relative">
+                <img className="w-10 h-10 rounded-full my-8" src={user.user_metadata.avatar_url} alt="User" />
+                {!isProfileComplete && (
+                  <IoMdNotifications className="absolute top-0 right-0 w-4 h-4 text-red-500" />
+                )}
+              </div>
               {isExpanded && <span className="ml-2 overflow-hidden whitespace-nowrap overflow-ellipsis my-8">{user.user_metadata.full_name}</span>}
             </Link>
           </div>
