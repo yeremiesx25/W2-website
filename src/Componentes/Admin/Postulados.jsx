@@ -11,6 +11,7 @@ function Postulados() {
   const [selectedPostulado, setSelectedPostulado] = useState(null);
   const [filteredPostulados, setFilteredPostulados] = useState([]);
   const [filtroSeleccionado, setFiltroSeleccionado] = useState('total');
+  const [selectedCheckboxes, setSelectedCheckboxes] = useState({});
 
   useEffect(() => {
     const fetchJobDetails = async () => {
@@ -76,6 +77,13 @@ function Postulados() {
 
   const handleFilterClick = (filtro) => {
     setFiltroSeleccionado(filtro);
+  };
+
+  const handleCheckboxChange = (id) => {
+    setSelectedCheckboxes((prevState) => ({
+      ...prevState,
+      [id]: !prevState[id],
+    }));
   };
 
   const preguntas = jobDetails
@@ -183,6 +191,12 @@ function Postulados() {
                   >
                     Postulantes
                   </th>
+                  <th
+                    scope="col"
+                    className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    Selección
+                  </th>
                 </tr>
               </thead>
               <tbody className="bg-white divide-y divide-gray-200">
@@ -209,6 +223,13 @@ function Postulados() {
                           </div>
                         </div>
                       </div>
+                    </td>
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <input
+                        type="checkbox"
+                        checked={selectedCheckboxes[postulado.id] || false}
+                        onChange={() => handleCheckboxChange(postulado.id)}
+                      />
                     </td>
                   </tr>
                 ))}
