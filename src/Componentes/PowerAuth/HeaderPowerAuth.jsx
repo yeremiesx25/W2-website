@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { UserAuth } from "../../Context/AuthContext";
-import { supabase } from "../../supabase/supabase.config";  // Asegúrate de tener configurado Supabase
+import { supabase } from "../../supabase/supabase.config";
 import { FiHome } from "react-icons/fi";
 import { FaSearchengin } from "react-icons/fa6";
 import { MdOutlineSettings } from "react-icons/md";
@@ -12,12 +12,14 @@ import { RiMailSendLine } from "react-icons/ri";
 import { MdOutlineMenu } from "react-icons/md";
 import { RiAdminLine } from "react-icons/ri";
 import { IoIosClose } from "react-icons/io";
-import { IoMdNotifications } from "react-icons/io";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function HeaderPowerAuth() {
   const { user, signOut } = UserAuth();
   const [isExpanded, setIsExpanded] = useState(false);
-  const [isProfileComplete, setIsProfileComplete] = useState(true); // Asume que el perfil está completo por defecto
+  const [isProfileComplete, setIsProfileComplete] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function checkUserProfile() {
@@ -35,12 +37,25 @@ function HeaderPowerAuth() {
 
         if (data) {
           setIsProfileComplete(data.profile_complete);
+          if (!data.profile_complete) {
+            toast.warning("Completa tu perfil para tener más oportunidad en tu postulación.", {
+              position: "top-right",
+              autoClose: false,
+              hideProgressBar: true,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              toastId: "profileIncomplete",
+              onClick: () => navigate('/Profile')
+            });
+          }
         }
       }
     }
 
     checkUserProfile();
-  }, [user]);
+  }, [user, navigate]);
 
   const toggleMenu = () => {
     setIsExpanded(!isExpanded);
@@ -85,7 +100,12 @@ function HeaderPowerAuth() {
               <div className="relative">
                 <img className="w-10 h-10 rounded-full my-8" src={user.user_metadata.avatar_url} alt="User" />
                 {!isProfileComplete && (
-                  <IoMdNotifications className="absolute top-0 right-0 w-4 h-4 text-red-500" />
+                  <div className="absolute top-4 right-0 flex justify-center items-center">
+                    <div className="relative w-3 h-3">
+                      <div className="w-4 h-4 bg-red-500 rounded-full absolute top-1 right-0 left-1 animate-ping"></div>
+                      <div className="w-4 h-4 bg-red-600 rounded-full absolute top-1 right-0 left-1 animate-pulse"></div>
+                    </div>
+                  </div>
                 )}
               </div>
               {isExpanded && <span className="ml-2 overflow-hidden whitespace-nowrap overflow-ellipsis my-8">{user.user_metadata.full_name}</span>}
@@ -137,6 +157,7 @@ function HeaderPowerAuth() {
           )}
         </div>
       </nav>
+      <ToastContainer />
     </div>
   );
 }
