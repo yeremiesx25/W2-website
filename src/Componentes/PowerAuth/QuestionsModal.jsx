@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
-import { supabase } from "../../supabase/supabase.config"; // Importa tu cliente de Supabase
-import { UserAuth } from '../../Context/AuthContext'; // Importa el contexto de autenticación
+import { supabase } from "../../supabase/supabase.config";
+import { UserAuth } from '../../Context/AuthContext';
 
 function QuestionsModal({ isOpen, onClose, selectedJob }) {
-  const { user } = UserAuth(); // Obtiene la información del usuario autenticado
+  const { user } = UserAuth();
   const [questions, setQuestions] = useState([]);
-  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(-1); // Inicialmente -1 para el teléfono
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(-1);
   const [loading, setLoading] = useState(true);
-  const [answers, setAnswers] = useState([]); // Estado para almacenar las respuestas dinámicas
-  const [phone, setPhone] = useState(''); // Estado para almacenar el número de celular
-  const [phoneError, setPhoneError] = useState(''); // Estado para el error del teléfono
-  const [answerErrors, setAnswerErrors] = useState([]); // Estado para los errores de las respuestas
-  const [submissionSuccess, setSubmissionSuccess] = useState(false); // Estado para mostrar el mensaje de éxito
+  const [answers, setAnswers] = useState([]);
+  const [phone, setPhone] = useState('');
+  const [phoneError, setPhoneError] = useState('');
+  const [answerErrors, setAnswerErrors] = useState([]);
+  const [submissionSuccess, setSubmissionSuccess] = useState(false);
 
   useEffect(() => {
     const fetchQuestions = async () => {
@@ -28,7 +28,7 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
         }
 
         const questionsData = [data.preg_1, data.preg_2, data.preg_3, data.preg_4, data.preg_5];
-        setQuestions(questionsData.filter((question) => question)); // Filtra las preguntas que no son null o undefined
+        setQuestions(questionsData.filter((question) => question));
         setLoading(false);
       } catch (error) {
         console.error('Error fetching questions:', error.message);
@@ -38,17 +38,17 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
 
     if (isOpen && selectedJob) {
       fetchQuestions();
-      setCurrentQuestionIndex(-1); // Inicialmente -1 para solicitar el número de celular
-      setAnswers(['', '', '', '', '']); // Restablece las respuestas cuando el modal se abre
-      setPhone(''); // Restablece el número de celular cuando el modal se abre
-      setPhoneError(''); // Limpia cualquier error anterior del número de celular
-      setAnswerErrors(['', '', '', '', '']); // Limpia cualquier error anterior de respuestas
-      setSubmissionSuccess(false); // Oculta el mensaje de éxito al abrir el modal
+      setCurrentQuestionIndex(-1);
+      setAnswers(['', '', '', '', '']);
+      setPhone('');
+      setPhoneError('');
+      setAnswerErrors(['', '', '', '', '']);
+      setSubmissionSuccess(false);
     }
   }, [isOpen, selectedJob]);
 
   const handleClose = () => {
-    onClose(); // Cierra el modal al hacer clic en la "X"
+    onClose();
   };
 
   const handleAnswerChange = (e, index) => {
@@ -57,14 +57,13 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
     setAnswers(newAnswers);
 
     const newErrors = [...answerErrors];
-    newErrors[index] = ''; // Limpia el error cuando el usuario comienza a escribir
+    newErrors[index] = '';
     setAnswerErrors(newErrors);
   };
 
   const handlePhoneChange = (e) => {
     const value = e.target.value;
     setPhone(value);
-    // Validar si el campo de teléfono está vacío
     if (!value.trim()) {
       setPhoneError('Campo Obligatorio');
     } else {
@@ -74,13 +73,11 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
 
   const handleSubmit = async () => {
     try {
-      // Validar que todos los campos estén completos
       if (!phone.trim()) {
         setPhoneError('Campo Obligatorio');
         return;
       }
 
-      // Insertar una nueva fila en la tabla Postulacion
       const { error: insertError } = await supabase
         .from('Postulacion')
         .insert({
@@ -96,31 +93,35 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
           resp_5: answers[4],
           fecha_postulacion: new Date(),
           estado: 'pendiente',
-          avatar_url: user.user_metadata.avatar_url, // Agregado: guarda el avatar_url del usuario
+          avatar_url: user.user_metadata.avatar_url,
         });
 
       if (insertError) {
         throw insertError;
       }
 
-      // Mostrar mensaje de éxito
-      setSubmissionSuccess(true);
+      const { error: updateError } = await supabase
+        .from('Oferta')
+        .update({ count_postulados: selectedJob.count_postulados + 1 })
+        .eq('id_oferta', selectedJob.id_oferta);
 
-      // Limpiar formularios y datos para una nueva postulación
+      if (updateError) {
+        throw updateError;
+      }
+
+      setSubmissionSuccess(true);
       setPhone('');
       setAnswers(['', '', '', '', '']);
-
     } catch (error) {
       console.error('Error al enviar la postulación:', error.message);
     }
   };
 
   const handleBack = () => {
-    setCurrentQuestionIndex(-1); // Vuelve al paso del número de celular
+    setCurrentQuestionIndex(-1);
   };
 
   const handleAccept = () => {
-    // Recargar la página
     window.location.reload();
   };
 
@@ -129,7 +130,7 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
       <div className="bg-white rounded-lg p-6 w-full max-w-lg relative" onClick={(e) => e.stopPropagation()}>
         <button
           className="absolute top-2 right-3 text-gray-500 hover:text-gray-700 text-3xl"
-          onClick={handleClose} // Cierra el modal al hacer clic en la "X"
+          onClick={handleClose}
         >
           ×
         </button>
@@ -149,7 +150,7 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
               <div className="flex justify-center mt-4">
                 <button
                   className={`bg-[#0057c2] text-white font-bold py-2 px-4 rounded-full w-32 ${phone.trim() ? '' : 'opacity-50 cursor-not-allowed'}`}
-                  onClick={() => phone.trim() && setCurrentQuestionIndex(0)} // Cambia el índice a 0 para mostrar las preguntas si el teléfono no está vacío
+                  onClick={() => phone.trim() && setCurrentQuestionIndex(0)}
                   disabled={!phone.trim()}
                 >
                   Siguiente
@@ -186,13 +187,13 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
                   <div className="flex justify-between mt-4">
                     <button
                       className="bg-gray-500 text-white font-bold py-2 px-4 rounded-full w-32"
-                      onClick={handleBack} // Vuelve al paso del número de celular
+                      onClick={handleBack}
                     >
                       Atrás
                     </button>
                     <button
                       className="bg-[#0057c2] text-white font-bold py-2 px-4 rounded-full w-32"
-                      onClick={handleSubmit} // Envía las respuestas
+                      onClick={handleSubmit}
                     >
                       Enviar
                     </button>
@@ -214,7 +215,7 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
                   <p className="text-sm text-gray-500 mb-4">Gracias por tu interés.</p>
                   <button
                     className="bg-[#0057c2] text-white font-bold py-2 px-4 rounded-full w-32"
-                    onClick={handleAccept} // Recargar la página
+                    onClick={handleAccept}
                   >
                     Aceptar
                   </button>

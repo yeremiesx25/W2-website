@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { supabase } from "../../supabase/supabase.config";
 import { FaWhatsapp } from "react-icons/fa";
 
-const InfoPostulante = ({
+const InfoPostulante = ({ 
   postulado,
   preguntas,
   respuestas,
