@@ -28,7 +28,7 @@ const fetchPendingPostuladosCount = async (jobId) => {
 };
 
 function JobList() {
-  const { searchTerm, userSearchResults, deleteJob } = useContext(JobsContext);
+  const { searchTerm, deleteJob } = useContext(JobsContext);
   const { user } = UserAuth();
   const [jobs, setJobs] = useState([]);
   const [filteredJobs, setFilteredJobs] = useState([]);
@@ -47,7 +47,12 @@ function JobList() {
           console.error('Error fetching jobs:', error);
         } else {
           console.log('Jobs fetched successfully:', data);
-          setJobs(data);
+          // Formatear la fecha aquí
+          const formattedData = data.map(job => ({
+            ...job,
+            fecha_publicacion: new Date(job.fecha_publicacion).toLocaleDateString('es-ES'),
+          }));
+          setJobs(formattedData);
         }
       };
 
@@ -57,14 +62,28 @@ function JobList() {
 
   useEffect(() => {
     const fetchPendingCounts = async () => {
-      const counts = {};
-      for (const job of jobs) {
-        counts[job.id_oferta] = await fetchPendingPostuladosCount(job.id_oferta);
+      try {
+        const counts = await Promise.all(
+          jobs.map(async (job) => ({
+            id_oferta: job.id_oferta,
+            count: await fetchPendingPostuladosCount(job.id_oferta),
+          }))
+        );
+        
+        const countsMap = counts.reduce((acc, { id_oferta, count }) => {
+          acc[id_oferta] = count;
+          return acc;
+        }, {});
+
+        setPendingCounts(countsMap);
+      } catch (error) {
+        console.error('Error fetching pending counts:', error);
       }
-      setPendingCounts(counts);
     };
 
-    fetchPendingCounts();
+    if (jobs.length > 0) {
+      fetchPendingCounts();
+    }
   }, [jobs]);
 
   useEffect(() => {
@@ -79,20 +98,23 @@ function JobList() {
   };
 
   const handleStatusChange = async (jobId, newStatus) => {
-    const { error } = await supabase
-      .from('Oferta')
-      .update({ estado: newStatus })
-      .eq('id_oferta', jobId);
+    try {
+      const { error } = await supabase
+        .from('Oferta')
+        .update({ estado: newStatus })
+        .eq('id_oferta', jobId);
 
-    if (error) {
+      if (error) {
+        console.error('Error updating job status:', error);
+      } else {
+        setJobs(jobs.map(job => 
+          job.id_oferta === jobId ? { ...job, estado: newStatus } : job
+        ));
+      }
+    } catch (error) {
       console.error('Error updating job status:', error);
-    } else {
-      setJobs(jobs.map(job => 
-        job.id_oferta === jobId ? { ...job, estado: newStatus } : job
-      ));
     }
   };
-
   return (
     <div className='w-full flex justify-center overflow-y-scroll font-dmsans scroll-smooth'>
       {filteredJobs.length > 0 ? (
