@@ -12,11 +12,27 @@ const removeAccents = (str) => {
   return str ? str.normalize("NFD").replace(/[\u0300-\u036f]/g, "") : "";
 };
 
+const fetchPendingPostuladosCount = async (jobId) => {
+  const { data, error } = await supabase
+    .from('Postulacion')
+    .select('id_postulacion')
+    .eq('id_oferta', jobId)
+    .eq('estado', 'pendiente');
+  
+  if (error) {
+    console.error('Error fetching pending postulados count:', error);
+    return 0;
+  }
+
+  return data.length;
+};
+
 function JobList() {
-  const { searchTerm, userSearchResults, deleteJob } = useContext(JobsContext);
+  const { searchTerm, deleteJob } = useContext(JobsContext);
   const { user } = UserAuth();
   const [jobs, setJobs] = useState([]);
   const [filteredJobs, setFilteredJobs] = useState([]);
+  const [pendingCounts, setPendingCounts] = useState({});
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -31,13 +47,44 @@ function JobList() {
           console.error('Error fetching jobs:', error);
         } else {
           console.log('Jobs fetched successfully:', data);
-          setJobs(data);
+          // Formatear la fecha aquí
+          const formattedData = data.map(job => ({
+            ...job,
+            fecha_publicacion: new Date(job.fecha_publicacion).toLocaleDateString('es-ES'),
+          }));
+          setJobs(formattedData);
         }
       };
 
       fetchJobs();
     }
   }, [user]);
+
+  useEffect(() => {
+    const fetchPendingCounts = async () => {
+      try {
+        const counts = await Promise.all(
+          jobs.map(async (job) => ({
+            id_oferta: job.id_oferta,
+            count: await fetchPendingPostuladosCount(job.id_oferta),
+          }))
+        );
+        
+        const countsMap = counts.reduce((acc, { id_oferta, count }) => {
+          acc[id_oferta] = count;
+          return acc;
+        }, {});
+
+        setPendingCounts(countsMap);
+      } catch (error) {
+        console.error('Error fetching pending counts:', error);
+      }
+    };
+
+    if (jobs.length > 0) {
+      fetchPendingCounts();
+    }
+  }, [jobs]);
 
   useEffect(() => {
     const filtered = jobs.filter(job => 
@@ -51,20 +98,23 @@ function JobList() {
   };
 
   const handleStatusChange = async (jobId, newStatus) => {
-    const { error } = await supabase
-      .from('Oferta')
-      .update({ estado: newStatus })
-      .eq('id_oferta', jobId);
+    try {
+      const { error } = await supabase
+        .from('Oferta')
+        .update({ estado: newStatus })
+        .eq('id_oferta', jobId);
 
-    if (error) {
+      if (error) {
+        console.error('Error updating job status:', error);
+      } else {
+        setJobs(jobs.map(job => 
+          job.id_oferta === jobId ? { ...job, estado: newStatus } : job
+        ));
+      }
+    } catch (error) {
       console.error('Error updating job status:', error);
-    } else {
-      setJobs(jobs.map(job => 
-        job.id_oferta === jobId ? { ...job, estado: newStatus } : job
-      ));
     }
   };
-
   return (
     <div className='w-full flex justify-center overflow-y-scroll font-dmsans scroll-smooth'>
       {filteredJobs.length > 0 ? (
@@ -75,7 +125,10 @@ function JobList() {
                 Puesto
               </th>
               <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Postulados
+                Total Postulados
+              </th>
+              <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Pendientes
               </th>
               <th scope="col" className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 Ubicación
@@ -107,6 +160,9 @@ function JobList() {
                   <div className="text-sm text-gray-600">{job.count_postulados}</div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
+                  <div className="text-sm text-gray-600">{pendingCounts[job.id_oferta] || 0}</div>
+                </td>
+                <td className="px-6 py-4 whitespace-nowrap">
                   <div className="text-sm text-gray-600">{job.ubicacion}</div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
@@ -114,11 +170,11 @@ function JobList() {
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap">
                   <select 
-                    className="form-select mt-1 block w-full" 
+                    className="form-select outline-none text-gray-600 mt-1 block w-full rounded-md border border-gray-300 bg-gray-50 py-2 px-3 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm" 
                     value={job.estado}
                     onChange={(e) => handleStatusChange(job.id_oferta, e.target.value)}
                   >
-                    <option value="abierto">Abierto</option>
+                    <option className='hover:bg-gray-300' value="abierto">Abierto</option>
                     <option value="cerrado">Cerrado</option>
                   </select>
                 </td>
@@ -129,7 +185,7 @@ function JobList() {
                   >
                     <FaRegEdit />
                   </button>
-                  <DeleteButton id_oferta={job.id_oferta} />
+                  {/* <DeleteButton id_oferta={job.id_oferta} /> */}
                 </td>
               </tr>
             ))}
