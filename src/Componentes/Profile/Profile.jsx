@@ -101,6 +101,25 @@ function Profile() {
       return;
     }
   
+    // Display success message immediately
+    setIsEditing(false);
+    const savedMessage = document.createElement("div");
+    savedMessage.textContent = "Guardado correctamente";
+    savedMessage.style.backgroundColor = "rgba(0, 128, 0, 0.8)";
+    savedMessage.style.color = "white";
+    savedMessage.style.position = "fixed";
+    savedMessage.style.top = "20px";
+    savedMessage.style.left = "50%";
+    savedMessage.style.transform = "translateX(-50%)";
+    savedMessage.style.padding = "10px 20px";
+    savedMessage.style.borderRadius = "5px";
+    savedMessage.style.zIndex = "9999";
+    document.body.appendChild(savedMessage);
+  
+    setTimeout(() => {
+      document.body.removeChild(savedMessage);
+    }, 2000);
+  
     try {
       let userDataToSave = {
         user_id: user.id,
@@ -111,7 +130,7 @@ function Profile() {
         fecha_nac: fechaNac,
         distrito: distrito,
         cv_file_name: cvFileName,
-        profile_complete: true,  // Marcar como completo
+        profile_complete: true,
       };
   
       if (cvFile) {
@@ -125,7 +144,7 @@ function Profile() {
   
         const { data: files, error: listError } = await supabase.storage
           .from("cv_user")
-          .list(cv_`${user.id}`, {
+          .list(`cv_${user.id}`, {
             limit: 1,
             sortBy: { column: "created_at", order: "desc" },
           });
@@ -154,30 +173,11 @@ function Profile() {
       }
   
       console.log("Datos guardados correctamente:", savedData);
-      setIsEditing(false);
-  
-      // Mostrar mensaje de guardado correctamente en la parte superior
-      const savedMessage = document.createElement("div");
-      savedMessage.textContent = "Guardado correctamente";
-      savedMessage.style.backgroundColor = "rgba(0, 128, 0, 0.8)"; // Verde oscuro
-      savedMessage.style.color = "white";
-      savedMessage.style.position = "fixed";
-      savedMessage.style.top = "20px"; // Ajustar la posición superior deseada
-      savedMessage.style.left = "50%";
-      savedMessage.style.transform = "translateX(-50%)";
-      savedMessage.style.padding = "10px 20px";
-      savedMessage.style.borderRadius = "5px";
-      savedMessage.style.zIndex = "9999";
-      document.body.appendChild(savedMessage);
-  
-      // Remover el mensaje después de 2 segundos
-      setTimeout(() => {
-        document.body.removeChild(savedMessage);
-      }, 2000);
     } catch (error) {
       console.error("Error guardando los datos:", error.message);
     }
   };
+
   return (
     <div className="w-full font-dmsans flex ">
       <HeaderPowerAuth />
@@ -214,31 +214,21 @@ function Profile() {
                 />
               </div>
             </div>
-            <div className="flex w-12 h-12 ml-[48%]  text-right  ">
-              {!isEditing ? (
-                <button
-                  className="w-full bg-primarycolor text-white text-xl p-2 rounded-full flex items-center justify-center"
-                  onClick={handleEdit}
-                >
-                  <RiEditLine />
-                </button>
-              ) : (
-                <div className="flex w-full">
-                  {/* <button
-                  className="w-1/2 bg-gray-500 text-white p-2 rounded-md mr-2"
-                  onClick={() => setIsEditing(false)}
-                >
-                  Cancelar
-                </button>
-                <button
-                  className="w-1/2 bg-green-500 text-white p-2 rounded-md"
-                  onClick={handleSave}
-                >
-                  Guardar
-                </button> */}
-                </div>
-              )}
-            </div>
+            <div className="flex items-center justify-center w-full h-12">
+  {!isEditing ? (
+    <button
+      className="bg-primarycolor text-white text-lg px-4 py-2 rounded-full flex items-center space-x-2"
+      onClick={handleEdit}
+    >
+      <RiEditLine className="text-xl" />
+      <span>Editar</span>
+    </button>
+  ) : (
+    <div className="flex w-full">
+      {/* Aquí puedes añadir contenido adicional si es necesario */}
+    </div>
+  )}
+</div>
           </div>
 
           {/* contenedor general de inputs */}
@@ -343,12 +333,6 @@ function Profile() {
             {!isEditing ? (
               <div></div>
             ) : (
-              // <button
-              //   className="w-full bg-indigo-500 text-white p-2 rounded-md"
-              //   onClick={handleEdit}
-              // >
-              //   Editar
-              // </button>
               <div className="flex w-full">
                 <button
                   className="w-1/2 bg-gray-500 text-white p-2 rounded-md mr-2"
