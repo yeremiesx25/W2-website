@@ -110,7 +110,7 @@ function Postulados() {
     <div className="font-dmsans">
       <HeaderPowerAuth />
       <div className="">
-        <section className="pt-28 pb-10 md:py-8 bg-primarygradientmobile md:bg-primarygradient dark:bg-dark h-96 md:h-64 flex justify-center items-center">
+        <section className=" pt-28 pb-10 md:py-8 bg-primarygradientmobile md:bg-primarygradient dark:bg-dark h-96 md:h-64 flex justify-center items-center">
           <div className="container mx-auto">
             <div className="overflow-hidden rounded bg-primary py-12 px-8 md:p-[70px]">
               <div className="flex flex-wrap items-center text-center md:text-left -mx-4">
@@ -180,9 +180,9 @@ function Postulados() {
             </div>
           </div>
         </section>
-        <div className="flex justify-center mt-8 pl-20">
-          <div className="overflow-x-auto w-full md:w-1/3">
-            <table className="w-full divide-y divide-gray-200">
+        <div className="flex justify-center mt-8 pl-24 pr-4">
+          <div className="overflow-x-auto  w-full md:w-1/3 rounded-xl border border-primarycolor">
+            <table className="w-full divide-y divide-gray-200  mx-auto ">
               <thead className="bg-gray-50">
                 <tr>
                   <th

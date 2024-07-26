@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { supabase } from "../../supabase/supabase.config";
 import { FaWhatsapp } from "react-icons/fa";
+import { FaCheck } from "react-icons/fa";
+import { FaQuestion } from "react-icons/fa";
+import { IoMdClose } from "react-icons/io";
+import { IoClose } from "react-icons/io5";
 
 const InfoPostulante = ({ 
   postulado,
@@ -70,17 +74,17 @@ const InfoPostulante = ({
   const cvUrl = postulado.cv_link ? `${postulado.cv_link}#view=fitH` : '';
 
   return (
-    <div className="bg-gray-100 shadow overflow-hidden sm:rounded-lg p-4">
+    <div className="border border-primarycolor overflow-hidden sm:rounded-lg p-12">
       <div className="flex justify-between items-center mb-4">
         <div className="flex items-center space-x-4">
           <img
-            className="h-10 w-10 rounded-full object-cover"
+            className="w-20 rounded-full object-cover"
             src={postulado.avatar_url || "https://via.placeholder.com/150"}
             alt=""
           />
           <div>
-            <p className="text-lg font-semibold">{postulado.name_user}</p>
-            <p className="text-gray-500">{postulado.correo}</p>
+            <p className="text-lg font-semibold text-gray-700">{postulado.name_user}</p>
+            <p className="text-gray-500">{postulado.correo}</p> 
             <p className="text-gray-500">{postulado.fecha_postulacion}</p>
           </div>
           <a
@@ -97,20 +101,10 @@ const InfoPostulante = ({
               className={`px-4 py-2 ${
                 estadoActual === "seleccionado"
                   ? "bg-green-500 text-white"
-                  : "bg-gray-300 text-gray-700"
-              } rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400`}
+                  : "bg-green-300 text-white"
+              } rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400`}
             >
-              Seleccionar
-            </button>
-            <button
-              onClick={() => handleEstadoClick("descartado")}
-              className={`px-4 py-2 ${
-                estadoActual === "descartado"
-                  ? "bg-red-500 text-white"
-                  : "bg-gray-300 text-gray-700"
-              } rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400`}
-            >
-              Descartar
+              <FaCheck size={24}/>
             </button>
             <button
               onClick={() => handleEstadoClick("pendiente")}
@@ -120,8 +114,20 @@ const InfoPostulante = ({
                   : "bg-gray-300 text-gray-700"
               } rounded-md hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-400`}
             >
-              Pendiente
+              <FaQuestion size={24}/>
             </button>
+            <button
+              onClick={() => handleEstadoClick("descartado")}
+              className={`px-4 py-2 ${
+                estadoActual === "descartado"
+                  ? "bg-red-500 text-white"
+                  : "bg-red-300 text-white"
+              } rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400`}
+            >
+              <IoMdClose size={24
+              } />
+            </button>
+            
           </div>
         </div>
       </div>
@@ -153,7 +159,6 @@ const InfoPostulante = ({
                 <span className="font-semibold">Distrito:</span>{" "}
                 <span>{userData.distrito}</span>
               </div>
-
               <p className="text-lg font-semibold mt-4">Respuestas:</p>
               <ul className="divide-y divide-gray-200">
                 {preguntas.map((pregunta, index) => (
