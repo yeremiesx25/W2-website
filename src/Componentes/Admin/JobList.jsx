@@ -116,7 +116,7 @@ function JobList() {
     }
   };
   return (
-    <div className='w-full flex justify-center overflow-y-scroll font-dmsans scroll-smooth'>
+    <div className='w-full flex md:justify-center overflow-y-scroll font-dmsans scroll-smooth'>
       {filteredJobs.length > 0 ? (
         <table className="w-full divide-y divide-gray-200">
           <thead className="bg-gray-50">

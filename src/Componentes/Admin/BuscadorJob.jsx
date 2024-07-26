@@ -7,7 +7,7 @@ function BuscadorJob() {
 
   return (
       
-      <form className="w-1/2 flex gap-4">
+      <form className="w-1/2 md:flex gap-4 hidden">
             
             <div class="sm:flex items-center bg-white rounded-full overflow-hidden px-2 py-1 justify-between w-3/5">
               <input

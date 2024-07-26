@@ -15,7 +15,7 @@ function AdminLayout() {
   const firstName = user.user_metadata.full_name.split(' ')[0];
 
   return (
-    <div className="w-full h-full pl-20 flex flex-col items-center font-dmsans">
+    <div className="w-full h-full md:pl-20 flex flex-col items-center font-dmsans pt-8 md:pt-0">
       <div className="flex w-full">
         <div class=" w-full bg-secundarygradient pt-12 flex justify-center flex-col items-center">
         <div className="w-1/2">

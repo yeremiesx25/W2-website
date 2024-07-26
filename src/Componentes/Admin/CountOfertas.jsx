@@ -54,7 +54,7 @@ function CountOfertas() {
   }, [userJobIds]);
 
   return (
-    <div className='flex gap-4 flex-wrap'>
+    <div className='flex gap-4 flex-wrap justify-center'>
       <div className='w-40 h-16 flex items-center justify-center rounded-lg text-gray-700 font-dmsans '>
         <div className='flex flex-col text-center ml-2 '>
           <p className='font-medium text-sm text-white'>Mis Ofertas</p>
