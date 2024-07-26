@@ -38,7 +38,7 @@ function HeaderPowerAuth() {
         if (data) {
           setIsProfileComplete(data.profile_complete);
           if (!data.profile_complete) {
-            toast.warning("Completa tu perfil para tener más oportunidad en tu postulación.", {
+            toast.warning("Completa tu perfil para obtener más oportunidad al postular.", {
               position: "top-right",
               autoClose: false,
               hideProgressBar: true,
@@ -47,7 +47,9 @@ function HeaderPowerAuth() {
               draggable: true,
               progress: undefined,
               toastId: "profileIncomplete",
-              onClick: () => navigate('/Profile')
+              onClick: () => navigate('/Profile'),
+              className: 'border-primarycolor',
+              bodyClassName: 'text-black'
             });
           }
         }
