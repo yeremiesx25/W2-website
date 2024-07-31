@@ -76,8 +76,7 @@ function Reserva() {
         fecha_reserva: fecha,
         tipo_asiento,
         id_asiento,
-        estado: 'reservado',
-        id_reserva: reservaId // Agregamos el id_reserva aquí
+        estado: 'reservado'
       };
     });
 
