@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import Modal from 'react-modal';
 import { supabase } from '../../supabase/supabase.config';
 import SeatSelection from './SeatSelection';
+
+Modal.setAppElement('#root'); // Necesario para accesibilidad
 
 function Reserva() {
   const [formData, setFormData] = useState({
@@ -17,6 +20,7 @@ function Reserva() {
 
   const [availableSeats, setAvailableSeats] = useState([]);
   const [reservedSeats, setReservedSeats] = useState([]);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
   useEffect(() => {
     if (formData.fecha) {
@@ -88,12 +92,18 @@ function Reserva() {
       console.error('Error updating availability:', updateError);
     }
 
-    alert('Reserva creada exitosamente!');
+    // Show success modal
+    setModalIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+    window.location.reload(); // Reload the page after closing the modal
   };
 
   return (
     <div className="max-w-md mx-auto mt-10 p-5 border rounded-lg shadow-lg">
-      <h1 className="text-2xl font-bold mb-5">Reserva</h1>
+      <h1 className="text-3xl font-bold text-primarycolor text-center mb-4">Reserva de Coworking</h1>
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700 mb-1">Fecha de Reserva</label>
@@ -195,6 +205,22 @@ function Reserva() {
           Reservar
         </button>
       </form>
+
+      {/* Modal for success message */}
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        contentLabel="Reserva Exitosamente"
+        className="modal"
+        overlayClassName="modal-overlay"
+      >
+        <div className="flex flex-col items-center justify-center">
+        <h2 className="text-xl font-bold mb-4">¡Reserva creada exitosamente!</h2>
+        <button onClick={closeModal} className="py-2 px-4 bg-primarycolor text-white rounded-lg">
+          Aceptar
+        </button>
+        </div>
+      </Modal>
     </div>
   );
 }
