@@ -19,7 +19,7 @@ function BeneficiosPower() {
         slidesToScroll: 1, // Avanzar una tarjeta a la vez
         initialSlide: 0,
         autoplay: true,
-        autoplaySpeed: 3000, // Avanzar cada 3 segundos
+        autoplaySpeed: 1500, // Avanzar cada 3 segundos
         responsive: [
           {
             breakpoint: 1024,

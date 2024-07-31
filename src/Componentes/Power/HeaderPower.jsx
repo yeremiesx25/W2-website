@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import menuMobilePower from '../../assets/menu (4).png'; // Importa el icono de hamburguesa
 import Login from './Login';
 import logo from '../../assets/Logo Power.png';
+import gradiantPower from '../../assets/gradiantPower.svg'
 
 function HeaderPower() {
   const [showMenu, setShowMenu] = useState(false);
@@ -21,12 +22,13 @@ function HeaderPower() {
   };
 
   return (
-    <header className="bg-powercolor text-gray-50 font-dmsans flex justify-around w-full flex-wrap fixed z-10" style={{ height: '78px' }}>
+    <header 
+    className="bg-cover font-dmsans flex justify-around w-full flex-wrap fixed z-10" style={{ height: '78px', backgroundImage: `url(${gradiantPower})` }}>
       <div className="container mx-auto px-4 py-6 flex justify-between items-center">
         {/* Logo */}
         <div className="flex items-center">
           <a href="/Power">
-            <img src={logo} alt="Power" className="w-16 h-auto" />
+            <img src={logo} alt="Power" className="w-20 h-auto" />
           </a>
         </div>
 
@@ -39,16 +41,16 @@ function HeaderPower() {
         </div>
 
         {/* Opciones de navegación */}
-        <div className="md:flex w-96 text-sm justify-around hidden">
-          <Link to="/" className="text-gray-300 hover:text-white">Inicio</Link>
-          <Link to="/Empresas" className="text-gray-300 hover:text-white">Empresas</Link>
-          <Link to="/DescubriendoTalentos" className="text-gray-300 hover:text-white">Descubriendo Talentos</Link>
-          <Link to="/Power" className="font-semibold text-amber-400 hover:text-white underline decoration-amber-400 underline-offset-4">Power</Link>
+        <div className="md:flex w-96 text-sm justify-around hidden text-gray-700">
+          <Link to="/" className=" hover:text-primarycolor">Inicio</Link>
+          <Link to="/Empresas" className=" hover:text-primarycolor">Empresas</Link>
+          <Link to="/DescubriendoTalentos" className=" hover:text-primarycolor">Descubriendo Talentos</Link>
+          <Link to="/Power" className="font-semibold text-primarycolor hover:text-primarycolor underline decoration-primarycolor underline-offset-4">Power</Link>
         </div>
 
         {/* Botones de login y registro (solo en escritorio) */}
         <div className="hidden md:flex items-center">
-          <button onClick={handleModalOpen} className="text-md w-48 font-bold bg-amber-400 hover:bg-amber-600 text-white px-4 py-2 rounded-lg ml-4">Iniciar sesión</button>
+          <button onClick={handleModalOpen} className="text-md w-48 font-bold bg-yellowprimary hover:bg-yellow-200 text-primarycolor px-4 py-2 rounded-md ml-4">Iniciar sesión</button>
           {/* <button className="text-sm bg-amber-400 hover:bg-amber-600 text-white px-4 py-2 rounded-lg ml-4">Registrarse</button> */}
         </div>
       </div>

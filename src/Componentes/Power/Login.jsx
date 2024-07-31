@@ -8,7 +8,7 @@ function Login({ closeModal }) {
 
   return (
     <div className="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50 z-50">
-      <div className="bg-gray-50 dark:bg-gray-800 w-full max-w-md p-8 rounded-lg shadow-lg relative">
+      <div className="bg-gray-50 dark:bg-gray-800 w-96 max-w-md p-8 rounded-lg shadow-lg relative h-[500px]">
         <button
           className="absolute top-2 right-2 text-gray-600 dark:text-white"
           onClick={closeModal}
@@ -31,9 +31,9 @@ function Login({ closeModal }) {
         </button>
         <div className="flex flex-col items-center"> {/* Contenedor principal con alineación vertical */}
           <div className="text-center">
-            <h1 className="text-3xl font-extrabold text-gray-900 dark:text-white">
-              Inicia Sesión en <img src={logo} alt="Power" className="inline-block w-20 md:w-28" />
-            </h1>
+          <p class="m-0 text-[16px] font-semibold dark:text-white">Login to your Account</p>
+                    <span class="m-0 text-xs max-w-[90%] text-center text-[#8B8E98]">Get started with our app, just start section and enjoy experience.
+                    </span>
           </div>
   
           <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
