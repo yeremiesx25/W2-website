@@ -11,7 +11,6 @@ function Postulados() {
   const [selectedPostulado, setSelectedPostulado] = useState(null);
   const [filteredPostulados, setFilteredPostulados] = useState([]);
   const [filtroSeleccionado, setFiltroSeleccionado] = useState('total');
-  const [selectedCheckboxes, setSelectedCheckboxes] = useState({});
 
   useEffect(() => {
     const fetchJobDetails = async () => {
@@ -36,10 +35,15 @@ function Postulados() {
         if (postuladosError) {
           console.error('Error fetching postulados:', postuladosError);
         } else {
-          setPostulados(postuladosData);
-          setFilteredPostulados(postuladosData);
-          if (postuladosData.length > 0) {
-            setSelectedPostulado(postuladosData[0]);
+          // Inicializa la propiedad 'checked' en false para cada postulado
+          const postuladosConChecked = postuladosData.map(postulado => ({
+            ...postulado,
+            checked: false
+          }));
+          setPostulados(postuladosConChecked);
+          setFilteredPostulados(postuladosConChecked);
+          if (postuladosConChecked.length > 0) {
+            setSelectedPostulado(postuladosConChecked[0]);
           }
         }
       } catch (error) {
@@ -77,188 +81,167 @@ function Postulados() {
 
   const handleFilterClick = (filtro) => {
     setFiltroSeleccionado(filtro);
-  
+
     // Verifica si el postulante seleccionado está en la nueva sección filtrada
     const postulanteEnFiltro = filteredPostulados.find(postulado => postulado.id === selectedPostulado?.id);
-  
+
     if (!postulanteEnFiltro) {
       // Si el postulante seleccionado ya no está en la sección filtrada, restablece el estado
       setSelectedPostulado(null);
     }
   };
-  
+
+  // Maneja el cambio de la casilla de verificación
   const handleCheckboxChange = (id) => {
-    setSelectedCheckboxes((prevState) => ({
-      ...prevState,
-      [id]: !prevState[id],
-    }));
+    setPostulados((prevPostulados) =>
+      prevPostulados.map((postulado) =>
+        postulado.id === id
+          ? { ...postulado, checked: !postulado.checked }
+          : postulado
+      )
+    );
   };
 
   const preguntas = jobDetails
     ? [
-        jobDetails.preg_1,
-        jobDetails.preg_2,
-        jobDetails.preg_3,
-        jobDetails.preg_4,
-        jobDetails.preg_5,
-      ]
+      jobDetails.preg_1,
+      jobDetails.preg_2,
+      jobDetails.preg_3,
+      jobDetails.preg_4,
+      jobDetails.preg_5,
+    ]
     : [];
 
   const respuestas = selectedPostulado
     ? [
-        selectedPostulado.resp_1,
-        selectedPostulado.resp_2,
-        selectedPostulado.resp_3,
-        selectedPostulado.resp_4,
-        selectedPostulado.resp_5,
-      ]
+      selectedPostulado.resp_1,
+      selectedPostulado.resp_2,
+      selectedPostulado.resp_3,
+      selectedPostulado.resp_4,
+      selectedPostulado.resp_5,
+    ]
     : [];
 
-return (
-  <div className="font-dmsans">
-    <HeaderPowerAuth />
-    <div className="">
-      <section className="pt-28 pb-10 md:py-8 bg-primarygradientmobile md:bg-primarygradient dark:bg-dark h-96 md:h-64 flex justify-center items-center">
-        <div className="container mx-auto">
-          <div className="overflow-hidden rounded bg-primary py-12 px-8 md:p-[70px]">
-            <div className="flex flex-wrap items-center text-center md:text-left -mx-4">
-              <div className="w-full px-4 lg:w-1/2">
-                <span className="block text-base font-medium text-white">
-                  {jobDetails && jobDetails.ubicacion}
-                </span>
-                <h2 className="mb-6 text-xl sm:text-3xl font-bold leading-tight text-white sm:mb-8 lg:mb-0">
-                  <span className="xs:block"> {jobDetails && jobDetails.puesto} </span>
-                </h2>
-                <div className="flex gap-8 justify-center md:justify-start">
-                  <span className="block mb-4 text-base font-medium text-white">
-                    {jobDetails && jobDetails.modalidad}
+  return (
+    <div className="font-dmsans">
+      <HeaderPowerAuth />
+      <div className="">
+        <section className="pt-28 pb-10 md:py-8 bg-primarygradientmobile md:bg-primarygradient dark:bg-dark h-96 md:h-64 flex justify-center items-center">
+          <div className="container mx-auto">
+            <div className="overflow-hidden rounded bg-primary py-12 px-8 md:p-[70px]">
+              <div className="flex flex-wrap items-center text-center md:text-left -mx-4">
+                <div className="w-full px-4 lg:w-1/2">
+                  <span className="block text-base font-medium text-white">
+                    {jobDetails && jobDetails.ubicacion}
                   </span>
-                  <span className="block mb-4 text-base font-medium text-white">
-                    S/. {jobDetails && jobDetails.sueldo}
-                  </span>
+                  <h2 className="mb-6 text-xl sm:text-3xl font-bold leading-tight text-white sm:mb-8 lg:mb-0">
+                    <span className="xs:block"> {jobDetails && jobDetails.puesto} </span>
+                  </h2>
+                  <div className="flex gap-8 justify-center md:justify-start">
+                    <span className="block mb-4 text-base font-medium text-white">
+                      {jobDetails && jobDetails.modalidad}
+                    </span>
+                    <span className="block mb-4 text-base font-medium text-white">
+                      S/. {jobDetails && jobDetails.sueldo}
+                    </span>
+                  </div>
                 </div>
-              </div>
-              <div className="w-full px-4 lg:w-1/2">
-                <div className="flex flex-wrap lg:justify-end justify-center gap-2">
-                  <button
-                    onClick={() => handleFilterClick('total')}
-                    className={`py-3 my-1 w-40 text-base font-medium transition ${
-                      filtroSeleccionado === 'total'
-                        ? 'bg-primarycolor hover:bg-shadow-1 text-white'
-                        : 'bg-white text-primarycolor hover:bg-opacity-90'
-                    } rounded-md px-7`}
-                  >
-                    Total
-                  </button>
-                  <button
-                    onClick={() => handleFilterClick('seleccionado')}
-                    className={`py-3 my-1 w-40 text-base font-medium transition ${
-                      filtroSeleccionado === 'seleccionado'
-                        ? 'bg-[#00c792] hover:bg-shadow-1 text-white'
-                        : 'bg-white text-[#00c792] hover:bg-opacity-90 '
-                    } rounded-md px-7`}
-                  >
-                    Seleccionados
-                  </button>
-                </div>
-                <div className="flex flex-wrap lg:justify-end justify-center gap-2">
-                  <button
-                    onClick={() => handleFilterClick('descartado')}
-                    className={`py-3 my-1 w-40 text-base font-medium transition ${
-                      filtroSeleccionado === 'descartado'
-                        ? 'bg-red-400 hover:bg-shadow-1 text-white'
-                        : 'bg-white text-red-400 hover:bg-opacity-90 '
-                    } rounded-md px-7`}
-                  >
-                    Descartados
-                  </button>
-                  <button
-                    onClick={() => handleFilterClick('pendiente')}
-                    className={`py-3 my-1 w-40 text-base font-medium transition ${
-                      filtroSeleccionado === 'pendiente'
-                        ? 'bg-yellowprimary hover:bg-shadow-1 text-primarycolor'
-                        : 'bg-gray-100 text-yellow-800 hover:bg-opacity-90'
-                    } rounded-md px-7`}
-                  >
-                    Pendientes
-                  </button>
+                <div className="w-full px-4 lg:w-1/2">
+                  <div className="flex flex-wrap lg:justify-end justify-center gap-2">
+                    <button
+                      onClick={() => handleFilterClick('total')}
+                      className={`py-3 my-1 w-40 text-base font-medium transition ${filtroSeleccionado === 'total' ? 'bg-primarycolor hover:bg-shadow-1 text-white' : 'bg-white text-primarycolor hover:bg-opacity-90'} rounded-md px-7`}
+                    >
+                      Total
+                    </button>
+                    <button
+                      onClick={() => handleFilterClick('seleccionado')}
+                      className={`py-3 my-1 w-40 text-base font-medium transition ${filtroSeleccionado === 'seleccionado' ? 'bg-[#00c792] hover:bg-shadow-1 text-white' : 'bg-white text-[#00c792] hover:bg-opacity-90 '} rounded-md px-7`}
+                    >
+                      Seleccionados
+                    </button>
+                  </div>
+                  <div className="flex flex-wrap lg:justify-end justify-center gap-2">
+                    <button
+                      onClick={() => handleFilterClick('descartado')}
+                      className={`py-3 my-1 w-40 text-base font-medium transition ${filtroSeleccionado === 'descartado' ? 'bg-red-400 hover:bg-shadow-1 text-white' : 'bg-white text-red-400 hover:bg-opacity-90 '} rounded-md px-7`}
+                    >
+                      Descartados
+                    </button>
+                    <button
+                      onClick={() => handleFilterClick('pendiente')}
+                      className={`py-3 my-1 w-40 text-base font-medium transition ${filtroSeleccionado === 'pendiente' ? 'bg-yellowprimary hover:bg-shadow-1 text-primarycolor' : 'bg-gray-100 text-yellow-800 hover:bg-opacity-90'} rounded-md px-7`}
+                    >
+                      Pendientes
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </section>
-      <div className="flex mt-8 pl-20">
-        <div className="overflow-x-auto w-full md:w-1/3">
-          <table className="w-full divide-y divide-gray-200">
-            <thead className="bg-gray-50">
-              <tr>
-                <th
-                  scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                >
-                  Postulantes
-                </th>
-                <th
-                  scope="col"
-                  className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-                >
-                  Selección
-                </th>
-              </tr>
-            </thead>
-            <tbody className="bg-white divide-y divide-gray-200">
-              {filteredPostulados.map((postulado) => (
-                <tr key={postulado.id}>
-                  <td
-                    className="px-6 py-4 whitespace-nowrap cursor-pointer"
+        </section>
+        <div className="flex mt-8 pl-20">
+          <div className="overflow-x-auto w-full md:w-1/3">
+            <table className="w-full divide-y divide-gray-200">
+              <thead className="bg-gray-50">
+                <tr>
+                  <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                    Postulantes
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="bg-white divide-y divide-gray-200">
+                {filteredPostulados.map((postulado) => (
+                  <tr
+                    key={postulado.id}
+                    className="cursor-pointer"
                     onClick={() => handlePostuladoClick(postulado)}
                   >
-                    <div className="flex items-center">
-                      <div className="flex-shrink-0 h-10 w-10">
-                        <img
-                          className="h-10 w-10 object-cover rounded-full"
-                          src={
-                            postulado.avatar_url ||
-                            "https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?size=338&ext=jpg&ga=GA1.1.1788068356.1719446400&semt=ais_user"
-                          }
-                          alt=""
+                    <td className="px-6 py-4 whitespace-nowrap">
+                      <div className="flex items-center">
+                        <input
+                          type="checkbox"
+                          checked={postulado.checked}
+                          onChange={(e) => {
+                            e.stopPropagation();
+                            handleCheckboxChange(postulado.id);
+                          }}
+                          className="mr-4"
                         />
-                      </div>
-                      <div className="ml-4">
-                        <div className="text-sm font-medium text-gray-900">
-                          {postulado.name_user}
+                        <div className="flex-shrink-0 h-10 w-10">
+                          <img
+                            className="h-10 w-10 rounded-full"
+                            src={
+                              postulado.avatar_url ||
+                              "https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?size=338&ext=jpg&ga=GA1.1.1788068356.1719446400&semt=ais_user"
+                            }
+                            alt=""
+                          />
+                        </div>
+                        <div className="ml-4">
+                          <div className="text-sm font-medium text-gray-900">
+                            {postulado.name_user}
+                          </div>
+                          <div className="text-sm text-gray-500">
+                            {postulado.estado}
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </td>
-                  <td className="px-6 py-4 whitespace-nowrap">
-                    <input
-                      type="checkbox"
-                      checked={selectedCheckboxes[postulado.id] || false}
-                      onChange={() => handleCheckboxChange(postulado.id)}
-                    />
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-
-        {selectedPostulado && (
-          <div className="w-2/3">
-            <InfoPostulante 
-              postulado={selectedPostulado}
-              preguntas={preguntas}
-              respuestas={respuestas}
-              onEstadoChange={() => fetchJobDetails()} // Actualizar después del cambio de estado
-            />
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
-        )}
+          <div className="hidden md:block md:w-2/3">
+            {selectedPostulado && (
+              <InfoPostulante key={selectedPostulado.id} postulado={selectedPostulado} preguntas={preguntas} respuestas={respuestas} />
+            )}
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
 }
 
 export default Postulados;
