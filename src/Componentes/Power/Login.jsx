@@ -31,8 +31,8 @@ function Login({ closeModal }) {
         </button>
         <div className="flex flex-col items-center"> {/* Contenedor principal con alineación vertical */}
           <div className="text-center">
-          <p class="m-0 text-[16px] font-semibold dark:text-white">Login to your Account</p>
-                    <span class="m-0 text-xs max-w-[90%] text-center text-[#8B8E98]">Get started with our app, just start section and enjoy experience.
+          <p class="m-0 text-[16px] font-semibold dark:text-white">Inicia sesión en <span className="text-primarycolor">Power</span></p>
+                    <span class="m-0 text-xs max-w-[90%] text-center text-[#8B8E98]">Selecciona la opción de continuar con google para iniciar.
                     </span>
           </div>
   

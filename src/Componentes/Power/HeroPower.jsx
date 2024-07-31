@@ -20,7 +20,7 @@ function HeroPower() {
         </a>
         </div>
         
-        {/* <div className='flex justify-center animate-fade-left'>
+        <div className='flex justify-center animate-fade-left'>
           <iframe
             className='w-[80vw] h-[50vw] md:w-[70vw] md:h-[40vw] rounded-lg bg-white mb-4'
             src="https://www.youtube.com/embed/9QvD3w3_Ga0?autoplay=1"
@@ -30,12 +30,12 @@ function HeroPower() {
             referrerPolicy="strict-origin-when-cross-origin"
             allowFullScreen
           ></iframe>
-        </div> */}
-        <div className='flex justify-center gap-4  w-full'>
-          <CardOfertaPower />
-          <CardOfertaPower />
-          <CardOfertaPower />
         </div>
+        {/* <div className='flex justify-center gap-4  w-full'>
+          <CardOfertaPower />
+          <CardOfertaPower />
+          <CardOfertaPower />
+        </div> */}
         
     </div>
   );
