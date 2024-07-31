@@ -1,8 +1,29 @@
 import React, { useState, useEffect } from 'react';
+import Modal from 'react-modal';
 import { supabase } from '../../supabase/supabase.config';
 import SeatSelection from './SeatSelection';
 import Auth from './Auth';  // Importar el componente Auth
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 import { Link } from 'react-router-dom';
+
+
+
+
+
+Modal.setAppElement('#root'); // Necesario para accesibilidad
 
 function Reserva() {
   const [formData, setFormData] = useState({
@@ -19,7 +40,7 @@ function Reserva() {
 
   const [availableSeats, setAvailableSeats] = useState([]);
   const [reservedSeats, setReservedSeats] = useState([]);
-  const [modalOpen, setModalOpen] = useState(false);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
   useEffect(() => {
     if (formData.fecha) {
@@ -91,7 +112,13 @@ function Reserva() {
       console.error('Error updating availability:', updateError);
     }
 
-    alert('Reserva creada exitosamente!');
+    // Show success modal
+    setModalIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+    window.location.reload(); // Reload the page after closing the modal
   };
 
   return (
@@ -206,6 +233,21 @@ function Reserva() {
       </form>
 
       {modalOpen && <Auth onClose={() => setModalOpen(false)} />}
+      {/* Modal for success message */}
+      <Modal
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        contentLabel="Reserva Exitosamente"
+        className="modal"
+        overlayClassName="modal-overlay"
+      >
+        <div className="flex flex-col items-center justify-center">
+        <h2 className="text-xl font-bold mb-4">¡Reserva creada exitosamente!</h2>
+        <button onClick={closeModal} className="py-2 px-4 bg-primarycolor text-white rounded-lg">
+          Aceptar
+        </button>
+        </div>
+      </Modal>
     </div>
   );
 }
