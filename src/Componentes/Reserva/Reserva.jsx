@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from '../../supabase/supabase.config';
 import SeatSelection from './SeatSelection';
+import Auth from './Auth';  // Importar el componente Auth
+import { Link } from 'react-router-dom';
 
 function Reserva() {
   const [formData, setFormData] = useState({
@@ -17,6 +19,7 @@ function Reserva() {
 
   const [availableSeats, setAvailableSeats] = useState([]);
   const [reservedSeats, setReservedSeats] = useState([]);
+  const [modalOpen, setModalOpen] = useState(false);
 
   useEffect(() => {
     if (formData.fecha) {
@@ -92,8 +95,14 @@ function Reserva() {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-10 p-5 border rounded-lg shadow-lg">
-      <h1 className="text-2xl font-bold mb-5">Reserva</h1>
+    <div className="max-w-md mx-auto mt-10 p-5 border rounded-lg shadow-lg font-dmsans">
+      <div className='flex justify-between'>
+        <h1 className="text-2xl font-bold mb-5">Reserva</h1>
+        <button onClick={() => setModalOpen(true)} className='bg-yellowprimary flex justify-center items-center px-4 font-semibold text-primarycolor rounded-lg'>
+          Ver reservas
+        </button>
+      </div>
+      
       <form onSubmit={handleSubmit}>
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700 mb-1">Fecha de Reserva</label>
@@ -195,6 +204,8 @@ function Reserva() {
           Reservar
         </button>
       </form>
+
+      {modalOpen && <Auth onClose={() => setModalOpen(false)} />}
     </div>
   );
 }

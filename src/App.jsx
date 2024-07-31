@@ -19,6 +19,7 @@ import InfoJobMovil from "./Componentes/PowerAuth/InfoJobMovil.jsx";
 import EditJob from "./Componentes/Form/EditJob.jsx";
 import Reserva from './Componentes/Reserva/Reserva.jsx'
 import ReservaAdmin from './Componentes/Reserva/ReservaAdmin.jsx'
+import Auth from './Componentes/Reserva/Auth.jsx'
 
 function App() {
   return (
@@ -81,6 +82,7 @@ function App() {
           <Route path="/Privacidad" element={<Privacidad />} />
           <Route path="/Reserva" element={<Reserva />} />
           <Route path="/ReservaAdmin" element={<ReservaAdmin/>} />
+          <Route path="/auth" element={<Auth/>} />
          
           <Route path="/Share" element={<Share />} />{" "}
           {/* Añadir ruta para Share */}

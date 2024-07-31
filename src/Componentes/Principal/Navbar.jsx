@@ -1,5 +1,5 @@
   import React, { useState } from 'react';
-  import {NavLink}from 'react-router-dom'
+  import {NavLink, Link}from 'react-router-dom'
   import logo from '../../assets/Logo horizontal W2 WHITE.png'
   function Navbar() {
     const [showMenu, setShowMenu] = useState(false);
@@ -35,9 +35,9 @@
                 Power
               </NavLink>
               
-              <a href='https://b24-0nhd36.bitrix24.site/crm_form_pn9nk/' className="bg-primarycolor hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-xl">
-                Contáctanos
-              </a>
+              <Link to='/Reserva' className="bg-primarycolor hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-xl">
+                Reserva CoWorking
+              </Link>
             </div>
             {/* Botón de menú para dispositivos móviles */}
             <div className="md:hidden">
@@ -79,9 +79,9 @@
                 Power
               </NavLink>
               
-              <a href='https://b24-0nhd36.bitrix24.site/crm_form_pn9nk/' className="bg-primarycolor hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg mt-2">
-                Contáctanos
-              </a>
+              <Link to='/Reserva' className="bg-primarycolor hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg mt-2">
+                Reserva CoWorking
+              </Link>
             </div>
           </div>
         )}
