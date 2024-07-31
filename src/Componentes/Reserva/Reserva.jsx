@@ -4,25 +4,6 @@ import { supabase } from '../../supabase/supabase.config';
 import SeatSelection from './SeatSelection';
 import Auth from './Auth';  // Importar el componente Auth
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-import { Link } from 'react-router-dom';
-
-
-
-
-
 Modal.setAppElement('#root'); // Necesario para accesibilidad
 
 function Reserva() {
@@ -40,6 +21,7 @@ function Reserva() {
 
   const [availableSeats, setAvailableSeats] = useState([]);
   const [reservedSeats, setReservedSeats] = useState([]);
+  const [modalOpen, setModalOpen] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   useEffect(() => {
