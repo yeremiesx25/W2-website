@@ -26,7 +26,7 @@ function HeaderPower() {
     className="bg-cover font-dmsans flex justify-around w-full flex-wrap fixed z-10" style={{ height: '78px', backgroundImage: `url(${gradiantPower})` }}>
       <div className="container mx-auto px-4 py-6 flex justify-between items-center">
         {/* Logo */}
-        <div className="flex items-center">
+        <div className="flex items-center px-20 ">
           <a href="/Power">
             <img src={logo} alt="Power" className="w-20 h-auto" />
           </a>
