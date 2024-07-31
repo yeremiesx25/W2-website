@@ -19,18 +19,16 @@ function Reserva() {
   const [reservedSeats, setReservedSeats] = useState([]);
 
   useEffect(() => {
-    if (formData.fecha && formData.horaInicio && formData.horaFin) {
-      fetchAvailability(formData.fecha, formData.horaInicio, formData.horaFin);
+    if (formData.fecha) {
+      fetchAvailability(formData.fecha);
     }
-  }, [formData.fecha, formData.horaInicio, formData.horaFin]);
+  }, [formData.fecha]);
 
-  const fetchAvailability = async (fecha, horaInicio, horaFin) => {
+  const fetchAvailability = async (fecha) => {
     const { data, error } = await supabase
-      .from('Disponibilidad')
+      .from('asientos')
       .select('*')
-      .eq('fecha', fecha)
-      .gte('hora_inicio', horaInicio)
-      .lte('hora_fin', horaFin);
+      .eq('fecha_reserva', fecha);
 
     if (error) {
       console.error('Error fetching availability:', error);
@@ -38,7 +36,7 @@ function Reserva() {
     }
 
     setAvailableSeats(data);
-    setReservedSeats(data.filter(seat => seat.estado === 'reservado').map(seat => seat.asiento_id));
+    setReservedSeats(data.filter(seat => seat.estado === 'reservado').map(seat => `${seat.tipo_asiento}-${seat.id_asiento}`));
   };
 
   const handleChange = (e) => {
@@ -60,26 +58,31 @@ function Reserva() {
     e.preventDefault();
     const { fecha, horaInicio, horaFin, nombre, dni, celular, cantidad, medioPago, selectedSeats } = formData;
 
-    const { data, error } = await supabase
+    // Insert the reservation
+    const { data: reservaData, error: reservaError } = await supabase
       .from('Reserva')
-      .insert([{ fecha_reserva: fecha, hora_inicio: horaInicio, hora_fin: horaFin, nombre_user: nombre, dni_user: dni, celular, cantidad, pago: medioPago }]);
+      .insert([{ fecha_reserva: fecha, hora_inicio: horaInicio, hora_fin: horaFin, nombre_user: nombre, dni_user: dni, celular, cantidad, pago: medioPago }])
+      .single();
 
-    if (error) {
-      console.error('Error creating reservation:', error);
+    if (reservaError) {
+      console.error('Error creating reservation:', reservaError);
       return;
     }
 
     // Update seat availability
-    const updates = selectedSeats.map(seat => ({
-      fecha,
-      hora_inicio: horaInicio,
-      hora_fin: horaFin,
-      asiento_id: seat,
-      estado: 'reservado'
-    }));
+    const updates = selectedSeats.map(seatId => {
+      const [tipo_asiento, id_asiento] = seatId.split('-');
+      return {
+        fecha_reserva: fecha,
+        tipo_asiento,
+        id_asiento,
+        estado: 'reservado',
+        id_reserva: reservaId // Agregamos el id_reserva aquí
+      };
+    });
 
     const { error: updateError } = await supabase
-      .from('Disponibilidad')
+      .from('asientos')
       .upsert(updates);
 
     if (updateError) {
@@ -180,18 +183,16 @@ function Reserva() {
             required
           >
             <option value="yape">Yape</option>
-            <option value="efectivo">Efectivo</option>
+            <option value="plin">Plin</option>
             <option value="transferencia">Transferencia</option>
           </select>
         </div>
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-1">Seleccionar Asientos/Espacios</label>
-          <SeatSelection availableSeats={availableSeats} reservedSeats={reservedSeats} onSelect={handleSeatSelect} />
-        </div>
-        <button
-          type="submit"
-          className="w-full bg-blue-500 text-white py-2 rounded-lg hover:bg-blue-600 transition duration-200"
-        >
+        <SeatSelection
+          availableSeats={availableSeats}
+          reservedSeats={reservedSeats}
+          onSelect={handleSeatSelect}
+        />
+        <button type="submit" className="w-full py-2 px-4 bg-blue-500 text-white rounded-lg mt-4">
           Reservar
         </button>
       </form>
