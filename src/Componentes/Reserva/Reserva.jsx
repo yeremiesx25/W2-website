@@ -106,7 +106,7 @@ function Reserva() {
   return (
     <div className="max-w-md mx-auto mt-10 p-5 border rounded-lg shadow-lg font-dmsans">
       <div className='flex justify-between'>
-        <h1 className="text-2xl font-bold mb-5">Reserva</h1>
+        <h1 className="text-2xl font-bold mb-5 text-primarycolor">Reserva Cowgorking</h1>
         <button onClick={() => setModalOpen(true)} className='bg-yellowprimary flex justify-center items-center px-4 font-semibold text-primarycolor rounded-lg'>
           Ver reservas
         </button>
