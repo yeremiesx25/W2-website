@@ -2,6 +2,7 @@ import React from 'react'
 import HeroCoworking from './HeroCoworking'
 import Navbar from '../Principal/Navbar'
 import Reserva from '../Reserva/Reserva'
+import Footer from '../Principal/Footer'
 
 function Coworking() {
   return (
@@ -10,6 +11,7 @@ function Coworking() {
         <Navbar />
         <HeroCoworking />
         <Reserva />
+        <Footer />
     </div>
   )
 }
