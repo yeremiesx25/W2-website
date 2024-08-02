@@ -21,8 +21,8 @@ function Reserva() {
 
   const [availableSeats, setAvailableSeats] = useState([]);
   const [reservedSeats, setReservedSeats] = useState([]);
-  const [modalOpen, setModalOpen] = useState(false);
-  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false); // Para el modal de Auth
+  const [modalIsOpen, setModalIsOpen] = useState(false); // Para el modal de confirmación
 
   useEffect(() => {
     if (formData.fecha) {
@@ -106,7 +106,7 @@ function Reserva() {
   return (
     <div className="max-w-md mx-auto mt-10 p-5 border rounded-lg shadow-lg font-dmsans">
       <div className='flex justify-between'>
-        <h1 className="text-2xl font-bold mb-5 text-primarycolor">Reserva Cowgorking</h1>
+        <h1 className="text-2xl font-bold mb-5 text-primarycolor">Reserva Coworking</h1>
         <button onClick={() => setModalOpen(true)} className='bg-yellowprimary flex justify-center items-center px-4 font-semibold text-primarycolor rounded-lg'>
           Ver reservas
         </button>
@@ -197,37 +197,48 @@ function Reserva() {
             value={formData.medioPago}
             onChange={handleChange}
             className="w-full px-3 py-2 border rounded-lg"
-            required
           >
             <option value="yape">Yape</option>
             <option value="plin">Plin</option>
-            <option value="transferencia">Transferencia</option>
+            <option value="efectivo">Efectivo</option>
           </select>
         </div>
-        <SeatSelection
-          availableSeats={availableSeats}
-          reservedSeats={reservedSeats}
-          onSelect={handleSeatSelect}
-        />
-        <button type="submit" className="w-full py-2 px-4 bg-blue-500 text-white rounded-lg mt-4">
-          Reservar
+
+        <SeatSelection reservedSeats={reservedSeats} onSelect={handleSeatSelect} />
+        
+        <button
+          type="submit"
+          className="w-full py-2 px-4 mt-4 bg-yellowprimary text-primarycolor font-semibold rounded-lg hover:bg-yellow-600"
+        >
+          Confirmar Reserva
         </button>
       </form>
 
-      {modalOpen && <Auth onClose={() => setModalOpen(false)} />}
-      {/* Modal for success message */}
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
-        contentLabel="Reserva Exitosamente"
-        className="modal"
-        overlayClassName="modal-overlay"
+        contentLabel="Reserva Confirmada"
+        className="flex justify-center items-center inset-0 bg-black bg-opacity-50"
+        overlayClassName="fixed inset-0 bg-black bg-opacity-50"
       >
-        <div className="flex flex-col items-center justify-center">
-        <h2 className="text-xl font-bold mb-4">¡Reserva creada exitosamente!</h2>
-        <button onClick={closeModal} className="py-2 px-4 bg-primarycolor text-white rounded-lg">
-          Aceptar
-        </button>
+        <div className="bg-white p-6 rounded-lg shadow-lg">
+          <h2 className="text-2xl font-bold mb-4">¡Reserva Confirmada!</h2>
+          <p>Tu reserva se ha realizado con éxito.</p>
+          <button onClick={closeModal} className="mt-4 bg-yellowprimary text-primarycolor py-2 px-4 rounded-lg">
+            Cerrar
+          </button>
+        </div>
+      </Modal>
+
+      <Modal
+        isOpen={modalOpen}
+        onRequestClose={() => setModalOpen(false)}
+        contentLabel="Ver Reservas"
+        className="flex justify-center items-center inset-0 bg-black bg-opacity-50"
+        overlayClassName="fixed inset-0 bg-black bg-opacity-50"
+      >
+        <div className="bg-white p-6 rounded-lg shadow-lg">
+          <Auth onClose={() => setModalOpen(false)} />
         </div>
       </Modal>
     </div>
