@@ -81,7 +81,7 @@ function App() {
             }
           />
           <Route path="/Privacidad" element={<Privacidad />} />
-          <Route path="/Reserva" element={<Reserva />} />
+      
           <Route path="/ReservaAdmin" element={<ReservaAdmin/>} />
           <Route path="/auth" element={<Auth/>} />
           <Route path="/Coworking" element={<Coworking/>} />
