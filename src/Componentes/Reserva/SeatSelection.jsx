@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { PiChairDuotone } from "react-icons/pi";
 
 const seatTypes = {
   personal: { count: 26, label: "Asiento Personal" },
-  closedGroup: { count: 2, label: "Espacio Cerrado (6 personas)" },
-  openGroup: { count: 1, label: "Espacio Abierto (6-8 personas)" },
-  herradura: { count: 1, label: "Forma Herradura (13 personas)" },
-  colegio: { count: 1, label: "Forma Colegio (16 personas)" },
-  capacitacion: { count: 1, label: "Capacitación (26 personas)" },
+  openGroup: { count: 1, label: "Espacio grupal (3-8 personas)" },
+  capacitacion: { count: 1, label: "Taller o Capacitación (10-26 personas)" },
 };
 
 function SeatSelection({ reservedSeats = [], onSelect }) {
@@ -30,15 +28,28 @@ function SeatSelection({ reservedSeats = [], onSelect }) {
   };
 
   const renderSeats = (type, count) => {
-    return Array.from({ length: count }, (_, index) => (
-      <div 
-        key={`${type}-${index}`} 
-        className={`seat ${selectedSeats.includes(`${type}-${index}`) ? 'selected' : ''} ${reservedSeats.includes(`${type}-${index}`) ? 'reserved' : ''}`} 
-        onClick={() => handleSeatClick(type, index)}
-      >
-        {index + 1}
-      </div>
-    ));
+    return Array.from({ length: count }, (_, index) => {
+      const seatId = `${type}-${index}`;
+      const isSelected = selectedSeats.includes(seatId);
+      const isReserved = reservedSeats.includes(seatId);
+
+      const seatClass = `
+        seat
+        ${isSelected ? 'bg-green-500 text-white' : 'bg-white text-black'}
+        ${isReserved ? 'bg-red-500 text-white cursor-not-allowed' : 'cursor-pointer'}
+        border border-gray-300 flex items-center justify-center p-2
+      `;
+
+      return (
+        <div 
+          key={seatId} 
+          className={seatClass} 
+          onClick={() => handleSeatClick(type, index)}
+        >
+          <PiChairDuotone />
+        </div>
+      );
+    });
   };
 
   return (
