@@ -35,7 +35,7 @@
                 Power
               </NavLink>
               
-              <Link to='/Reserva' className="bg-primarycolor hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-xl">
+              <Link to='/Coworking' className="bg-primarycolor hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-xl">
                 Reserva CoWorking
               </Link>
             </div>
@@ -79,7 +79,7 @@
                 Power
               </NavLink>
               
-              <Link to='/Reserva' className="bg-primarycolor hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg mt-2">
+              <Link to='/Coworking' className="bg-primarycolor hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg mt-2">
                 Reserva CoWorking
               </Link>
             </div>

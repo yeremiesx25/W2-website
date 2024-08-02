@@ -20,6 +20,7 @@ import EditJob from "./Componentes/Form/EditJob.jsx";
 import Reserva from './Componentes/Reserva/Reserva.jsx'
 import ReservaAdmin from './Componentes/Reserva/ReservaAdmin.jsx'
 import Auth from './Componentes/Reserva/Auth.jsx'
+import Coworking from './Componentes/Coworking/Coworking.jsx'
 
 function App() {
   return (
@@ -83,6 +84,7 @@ function App() {
           <Route path="/Reserva" element={<Reserva />} />
           <Route path="/ReservaAdmin" element={<ReservaAdmin/>} />
           <Route path="/auth" element={<Auth/>} />
+          <Route path="/Coworking" element={<Coworking/>} />
          
           <Route path="/Share" element={<Share />} />{" "}
           {/* Añadir ruta para Share */}
