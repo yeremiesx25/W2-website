@@ -36,7 +36,7 @@ function SeatSelection({ reservedSeats = [], onSelect }) {
 
       const seatClass = `
         seat
-        ${isSelected ? 'bg-green-500 text-white' : 'bg-white text-black'}
+        ${isSelected ? 'bg-green-500 text-white' : 'bg-white'}
         ${isReserved ? 'bg-red-500 text-white cursor-not-allowed' : 'cursor-pointer'}
         border border-gray-300 flex items-center justify-center p-2
       `;
@@ -54,10 +54,10 @@ function SeatSelection({ reservedSeats = [], onSelect }) {
   };
 
   return (
-    <div className="seat-selection">
+    <div className="seat-selection text-gray-700 font-dmsans">
       {Object.entries(seatTypes).map(([type, { count, label }]) => (
         <div key={type} className="mb-4">
-          <h3 className="text-lg font-bold mb-2">{label}</h3>
+          <h3 className="text-md  mb-2">{label}</h3>
           <div className="grid grid-cols-6 gap-2">
             {renderSeats(type, count)}
           </div>
