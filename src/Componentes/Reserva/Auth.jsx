@@ -22,7 +22,7 @@ function Auth({ onClose }) {
   return (
     <div className="fixed inset-0 flex items-center justify-center z-50 bg-black bg-opacity-50">
       <div className="bg-white p-5 rounded-lg shadow-lg">
-        <h2 className="text-lg font-bold mb-4">Ingrese Contraseña</h2>
+        <h2 className="text-lg font-semibold text-gray-700 mb-4">Administrador de Coworking</h2>
         <form onSubmit={handlePasswordSubmit}>
           <input
             type="password"
@@ -32,13 +32,13 @@ function Auth({ onClose }) {
             placeholder="Contraseña"
             required
           />
-          <button type="submit" className="w-full py-2 px-4 bg-blue-500 text-white rounded-lg">
+          <button type="submit" className="w-full py-2 px-4 bg-primarycolor text-white rounded-lg">
             Confirmar
           </button>
           <button
             type="button"
             onClick={onClose}
-            className="w-full py-2 px-4 bg-gray-500 text-white rounded-lg mt-2"
+            className="w-full py-2 px-4 bg-primarytext text-white rounded-lg mt-2"
           >
             Cancelar
           </button>

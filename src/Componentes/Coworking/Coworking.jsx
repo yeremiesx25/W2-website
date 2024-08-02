@@ -1,6 +1,7 @@
 import React from 'react'
 import HeroCoworking from './HeroCoworking'
 import Navbar from '../Principal/Navbar'
+import Reserva from '../Reserva/Reserva'
 
 function Coworking() {
   return (
@@ -8,6 +9,7 @@ function Coworking() {
 
         <Navbar />
         <HeroCoworking />
+        <Reserva />
     </div>
   )
 }

@@ -14,9 +14,9 @@ const HeroCoworking = () => {
         <p className="text-sm md:text-lg text-gray-600">
         Desata tu potencial en nuestros espacios de trabajo diseñados cuidadosamente para inspirar creatividad y fomentar conexiones.
         </p>
-        <button className="bg-primarycolor text-white py-2 px-4 md:px-6 rounded-full font-semibold">
+        <a href='#reserva' className="bg-primarycolor text-white py-2 px-4 md:px-6 rounded-full font-semibold">
            Reserva Ahora
-        </button>
+        </a>
       </div>
       <div className="w-full md:w-1/2 flex justify-center items-center mt-8 md:mt-0">
         <img src={cw2_1} alt="Coworking Space" className="w-full h-auto rounded-lg shadow-lg" />
