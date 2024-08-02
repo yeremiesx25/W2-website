@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { PiChairDuotone } from "react-icons/pi";
+import { MdBlock } from "react-icons/md";  // Importar el icono de bloqueo
 
 const seatTypes = {
   personal: { count: 26, label: "Asiento Personal" },
-  openGroup: { count: 1, label: "Espacio grupal (3-8 personas)" },
+  openGroup: { count: 2, label: "Espacio grupal (3-8 personas)" },
   capacitacion: { count: 1, label: "Taller o Capacitación (10-26 personas)" },
 };
 
@@ -44,9 +45,9 @@ function SeatSelection({ reservedSeats = [], onSelect }) {
         <div 
           key={seatId} 
           className={seatClass} 
-          onClick={() => handleSeatClick(type, index)}
+          onClick={() => !isReserved && handleSeatClick(type, index)}
         >
-          <PiChairDuotone />
+          {isReserved ? <MdBlock className="text-red-500" /> : <PiChairDuotone />}
         </div>
       );
     });
