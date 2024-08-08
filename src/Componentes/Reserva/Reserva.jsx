@@ -146,10 +146,24 @@ function Reserva() {
                 <span className="ml-6">{`Total ${calculateDuration()}`}</span>
               </div>
             </div>
+            
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-700 mb-1">Cantidad de Personas</label>
+              <input
+                type="number"
+                name="cantidad"
+                value={formData.cantidad}
+                onChange={handleChange}
+                className="w-full px-3 py-2 border rounded-lg"
+                required
+              />
+            </div>
+            <SeatSelection />
+
             <button
               type="button"
               onClick={() => setCurrentStep(2)}
-              className="w-full py-2 px-4 bg-primarycolor text-white rounded-lg"
+              className="w-full py-2 px-4 bg-primarycolor text-white rounded-lg mt-6"
             >
               Siguiente
             </button>
@@ -209,39 +223,6 @@ function Reserva() {
               <button
                 type="button"
                 onClick={() => setCurrentStep(1)}
-                className="py-2 px-4 bg-gray-300 text-black rounded-lg"
-              >
-                Atrás
-              </button>
-              <button
-                type="button"
-                onClick={() => setCurrentStep(3)}
-                className="py-2 px-4 bg-primarycolor text-white rounded-lg"
-              >
-                Siguiente
-              </button>
-            </div>
-          </>
-        );
-      case 3:
-        return (
-          <>
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700 mb-1">Cantidad de Personas</label>
-              <input
-                type="number"
-                name="cantidad"
-                value={formData.cantidad}
-                onChange={handleChange}
-                className="w-full px-3 py-2 border rounded-lg"
-                required
-              />
-            </div>
-            <SeatSelection />
-            <div className="flex justify-between">
-              <button
-                type="button"
-                onClick={() => setCurrentStep(2)}
                 className="py-2 px-4 bg-gray-300 text-black rounded-lg"
               >
                 Atrás
