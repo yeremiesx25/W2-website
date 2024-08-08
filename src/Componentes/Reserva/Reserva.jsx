@@ -1,48 +1,51 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Modal from 'react-modal';
 import { supabase } from '../../supabase/supabase.config';
-import SeatSelection from './SeatSelection';
-import Auth from './Auth';  // Importar el componente Auth
+import Auth from './Auth';
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
+import SeatSelection from './SeatSelection'; // Importa el nuevo componente
 
-Modal.setAppElement('#root'); // Necesario para accesibilidad
+Modal.setAppElement('#root');
 
 function Reserva() {
   const [formData, setFormData] = useState({
-    fecha: '',
-    horaInicio: '',
-    horaFin: '',
+    fecha: new Date(),
+    horaInicio: '09:00',
+    horaFin: '12:00',
     nombre: '',
     dni: '',
     celular: '',
     cantidad: '',
     medioPago: 'yape',
-    selectedSeats: [],
   });
 
-  const [availableSeats, setAvailableSeats] = useState([]);
-  const [reservedSeats, setReservedSeats] = useState([]);
-  const [modalOpen, setModalOpen] = useState(false); // Para el modal de Auth
-  const [modalIsOpen, setModalIsOpen] = useState(false); // Para el modal de confirmación
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [authModalOpen, setAuthModalOpen] = useState(false);
+  const [currentStep, setCurrentStep] = useState(1);
 
-  useEffect(() => {
-    if (formData.fecha) {
-      fetchAvailability(formData.fecha);
-    }
-  }, [formData.fecha]);
+  const handleTimeChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
 
-  const fetchAvailability = async (fecha) => {
-    const { data, error } = await supabase
-      .from('asientos')
-      .select('*')
-      .eq('fecha_reserva', fecha);
+  const calculateDuration = () => {
+    const [startHours, startMinutes] = formData.horaInicio.split(':').map(Number);
+    const [endHours, endMinutes] = formData.horaFin.split(':').map(Number);
+    const startTime = new Date();
+    const endTime = new Date();
 
-    if (error) {
-      console.error('Error fetching availability:', error);
-      return;
-    }
+    startTime.setHours(startHours, startMinutes);
+    endTime.setHours(endHours, endMinutes);
 
-    setAvailableSeats(data);
-    setReservedSeats(data.filter(seat => seat.estado === 'reservado').map(seat => `${seat.tipo_asiento}-${seat.id_asiento}`));
+    const durationMs = endTime - startTime;
+    const durationHours = Math.floor(durationMs / 3600000);
+    const durationMinutes = Math.floor((durationMs % 3600000) / 60000);
+
+    return `${durationHours}h ${durationMinutes}m`;
   };
 
   const handleChange = (e) => {
@@ -53,21 +56,22 @@ function Reserva() {
     });
   };
 
-  const handleSeatSelect = (selectedSeats) => {
-    setFormData({
-      ...formData,
-      selectedSeats,
-    });
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { fecha, horaInicio, horaFin, nombre, dni, celular, cantidad, medioPago, selectedSeats } = formData;
+    const { fecha, horaInicio, horaFin, nombre, dni, celular, cantidad, medioPago } = formData;
 
-    // Insert the reservation
     const { data: reservaData, error: reservaError } = await supabase
       .from('Reserva')
-      .insert([{ fecha_reserva: fecha, hora_inicio: horaInicio, hora_fin: horaFin, nombre_user: nombre, dni_user: dni, celular, cantidad, pago: medioPago }])
+      .insert([{ 
+        fecha_reserva: fecha, 
+        hora_inicio: horaInicio, 
+        hora_fin: horaFin, 
+        nombre_user: nombre, 
+        dni_user: dni, 
+        celular, 
+        cantidad, 
+        pago: medioPago 
+      }])
       .single();
 
     if (reservaError) {
@@ -75,171 +79,216 @@ function Reserva() {
       return;
     }
 
-    // Update seat availability
-    const updates = selectedSeats.map(seatId => {
-      const [tipo_asiento, id_asiento] = seatId.split('-');
-      return {
-        fecha_reserva: fecha,
-        tipo_asiento,
-        id_asiento,
-        estado: 'reservado'
-      };
-    });
-
-    const { error: updateError } = await supabase
-      .from('asientos')
-      .upsert(updates);
-
-    if (updateError) {
-      console.error('Error updating availability:', updateError);
-    }
-
-    // Show success modal
     setModalIsOpen(true);
   };
 
   const closeModal = () => {
     setModalIsOpen(false);
-    window.location.reload(); // Reload the page after closing the modal
+    window.location.reload();
+  };
+
+  const openAuthModal = () => {
+    setAuthModalOpen(true);
+  };
+
+  const closeAuthModal = () => {
+    setAuthModalOpen(false);
+  };
+
+  const generateTimeOptions = () => {
+    const options = [];
+    for (let hour = 9; hour <= 22; hour++) {
+      for (let minutes = 0; minutes < 60; minutes += 15) {
+        const time = `${hour.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+        options.push(<option key={time} value={time}>{time}</option>);
+      }
+    }
+    return options;
+  };
+  const handleDateChange = (date) => {
+    setFormData({ ...formData, fecha: date });
+  };
+
+  const renderStep = () => {
+    switch (currentStep) {
+      case 1:
+        return (
+          <>
+            <div className="mb-4">
+             <label className="block text-sm font-medium text-gray-700 mb-1">Fecha de Reserva</label>
+        <Calendar
+          onChange={handleDateChange}
+          value={formData.fecha}
+        />
+            </div>
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-700 mb-1">Hora</label>
+              <div className="flex items-center">
+                <select
+                  name="horaInicio"
+                  value={formData.horaInicio}
+                  onChange={handleTimeChange}
+                  className="w-28 px-3 py-2 border rounded-lg"
+                  required
+                >
+                  {generateTimeOptions()}
+                </select>
+                <span className="mx-2">Hasta</span>
+                <select
+                  name="horaFin"
+                  value={formData.horaFin}
+                  onChange={handleTimeChange}
+                  className="w-28 px-3 py-2 border rounded-lg"
+                  required
+                >
+                  {generateTimeOptions()}
+                </select>
+                <span className="ml-6">{`Total ${calculateDuration()}`}</span>
+              </div>
+            </div>
+            <button
+              type="button"
+              onClick={() => setCurrentStep(2)}
+              className="w-full py-2 px-4 bg-primarycolor text-white rounded-lg"
+            >
+              Siguiente
+            </button>
+          </>
+        );
+      case 2:
+        return (
+          <>
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-700 mb-1">Nombre Completo</label>
+              <input
+                type="text"
+                name="nombre"
+                value={formData.nombre}
+                onChange={handleChange}
+                className="w-full px-3 py-2 border rounded-lg"
+                required
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-700 mb-1">DNI</label>
+              <input
+                type="text"
+                name="dni"
+                value={formData.dni}
+                onChange={handleChange}
+                className="w-full px-3 py-2 border rounded-lg"
+                required
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-700 mb-1">Celular</label>
+              <input
+                type="text"
+                name="celular"
+                value={formData.celular}
+                onChange={handleChange}
+                className="w-full px-3 py-2 border rounded-lg"
+                required
+              />
+            </div>
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-700 mb-1">Medio de Pago</label>
+              <select
+                name="medioPago"
+                value={formData.medioPago}
+                onChange={handleChange}
+                className="w-full px-3 py-2 border rounded-lg"
+              >
+                <option value="yape">Yape</option>
+                <option value="plin">Plin</option>
+                <option value="tarjeta">Transferencia</option>
+                <option value="efectivo">Efectivo</option>
+              </select>
+            </div>
+            <div className="flex justify-between">
+              <button
+                type="button"
+                onClick={() => setCurrentStep(1)}
+                className="py-2 px-4 bg-gray-300 text-black rounded-lg"
+              >
+                Atrás
+              </button>
+              <button
+                type="button"
+                onClick={() => setCurrentStep(3)}
+                className="py-2 px-4 bg-primarycolor text-white rounded-lg"
+              >
+                Siguiente
+              </button>
+            </div>
+          </>
+        );
+      case 3:
+        return (
+          <>
+            <div className="mb-4">
+              <label className="block text-sm font-medium text-gray-700 mb-1">Cantidad de Personas</label>
+              <input
+                type="number"
+                name="cantidad"
+                value={formData.cantidad}
+                onChange={handleChange}
+                className="w-full px-3 py-2 border rounded-lg"
+                required
+              />
+            </div>
+            <SeatSelection />
+            <div className="flex justify-between">
+              <button
+                type="button"
+                onClick={() => setCurrentStep(2)}
+                className="py-2 px-4 bg-gray-300 text-black rounded-lg"
+              >
+                Atrás
+              </button>
+              <button
+                type="submit"
+                className="py-2 px-4 bg-primarycolor text-white rounded-lg"
+              >
+                Reservar
+              </button>
+            </div>
+          </>
+        );
+      default:
+        return null;
+    }
   };
 
   return (
     <div id='reserva' className="max-w-md mx-auto mt-10 p-5 border rounded-lg shadow-lg font-dmsans mb-12">
       <div className='flex justify-between'>
         <h1 className="text-2xl font-bold mb-5 text-primarycolor">Reserva Coworking</h1>
-        <button onClick={() => setModalOpen(true)} className='bg-yellowprimary flex justify-center items-center px-4 font-semibold text-primarycolor rounded-lg'>
+        <button onClick={openAuthModal} className='bg-yellowprimary flex justify-center items-center px-4 font-semibold text-primarycolor rounded-lg'>
           Ver reservas
         </button>
       </div>
-      
+
       <form onSubmit={handleSubmit}>
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-1">Fecha de Reserva</label>
-          <input
-            type="date"
-            name="fecha"
-            value={formData.fecha}
-            onChange={handleChange}
-            className="w-full px-3 py-2 border rounded-lg"
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-1">Hora de Inicio</label>
-          <input
-            type="time"
-            name="horaInicio"
-            value={formData.horaInicio}
-            onChange={handleChange}
-            className="w-full px-3 py-2 border rounded-lg"
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-1">Hora de Fin</label>
-          <input
-            type="time"
-            name="horaFin"
-            value={formData.horaFin}
-            onChange={handleChange}
-            className="w-full px-3 py-2 border rounded-lg"
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
-          <input
-            type="text"
-            name="nombre"
-            value={formData.nombre}
-            onChange={handleChange}
-            className="w-full px-3 py-2 border rounded-lg"
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-1">DNI</label>
-          <input
-            type="text"
-            name="dni"
-            value={formData.dni}
-            onChange={handleChange}
-            className="w-full px-3 py-2 border rounded-lg"
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-1">Celular</label>
-          <input
-            type="text"
-            name="celular"
-            value={formData.celular}
-            onChange={handleChange}
-            className="w-full px-3 py-2 border rounded-lg"
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-1">Cantidad de Personas</label>
-          <input
-            type="number"
-            name="cantidad"
-            value={formData.cantidad}
-            onChange={handleChange}
-            className="w-full px-3 py-2 border rounded-lg"
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700 mb-1">Medio de Pago</label>
-          <select
-            name="medioPago"
-            value={formData.medioPago}
-            onChange={handleChange}
-            className="w-full px-3 py-2 border rounded-lg"
-          >
-            <option value="yape">Yape</option>
-            <option value="plin">Plin</option>
-            <option value="efectivo">Efectivo</option>
-          </select>
-        </div>
-        <SeatSelection
-          availableSeats={availableSeats}
-          reservedSeats={reservedSeats}
-          onSelect={handleSeatSelect}
-        />
-        <button type="submit" className="w-full py-2 px-4 bg-primarycolor font-semibold text-white rounded-lg mt-4">
-          Reservar
-        </button>
+        {renderStep()}
       </form>
 
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
         contentLabel="Reserva Confirmada"
-        className="flex justify-center items-center inset-0 bg-black bg-opacity-50"
-        overlayClassName="fixed inset-0 bg-black bg-opacity-50"
+        className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
       >
-        <div className="bg-white p-6 rounded-lg shadow-lg">
-          <h2 className="text-2xl font-bold mb-4">¡Reserva Confirmada!</h2>
-          <p>Tu reserva se ha realizado con éxito.</p>
-          <button onClick={closeModal} className="mt-4 bg-yellowprimary text-primarycolor py-2 px-4 rounded-lg">
+        <div className="bg-white p-5 rounded-lg shadow-lg">
+          <h2 className="text-lg font-semibold text-gray-700 mb-4">¡Reserva Confirmada!</h2>
+          <p>Tu reserva ha sido creada con éxito.</p>
+          <button onClick={closeModal} className="w-full py-2 px-4 bg-primarycolor text-white rounded-lg mt-4">
             Cerrar
           </button>
         </div>
       </Modal>
 
-      <Modal
-        isOpen={modalOpen}
-        onRequestClose={() => setModalOpen(false)}
-        contentLabel="Ver Reservas"
-        className="flex justify-center items-center inset-0 bg-black bg-opacity-50"
-        overlayClassName="fixed inset-0 bg-black bg-opacity-50"
-      >
-        <div className="bg-white p-6 rounded-lg shadow-lg">
-          <Auth onClose={() => setModalOpen(false)} />
-        </div>
-      </Modal>
+      {authModalOpen && <Auth onClose={closeAuthModal} />}
     </div>
   );
 }
