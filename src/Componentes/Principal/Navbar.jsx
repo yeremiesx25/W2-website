@@ -31,12 +31,15 @@
               <NavLink to="/DescubriendoTalentos" className={({isActive}) => isActive ? activeStyle : classDefault }>
                 Descubriendo Talentos
               </NavLink>
+              <NavLink to="/Coworking" className={({isActive}) => isActive ? activeStyle : classDefault }>
+                Coworking
+              </NavLink>
               <NavLink to="/Power" className={({isActive}) => isActive ? activeStyle : classDefault }>
                 Power
               </NavLink>
               
-              <Link to='/Coworking' className="bg-primarycolor hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-xl">
-                Reserva CoWorking
+              <Link to='/' className="bg-primarycolor hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-xl">
+                Contáctanos
               </Link>
             </div>
             {/* Botón de menú para dispositivos móviles */}
@@ -73,14 +76,20 @@
                 Descubriendo Talentos
               </NavLink>
               <NavLink
+                to="/Coworking"
+                className="text-gray-800 hover:text-gray-600 block px-3 py-2 rounded-md text-base font-medium"
+              >
+                Coworking
+              </NavLink>
+              <NavLink
                 to="/Power"
                 className="text-gray-800 hover:text-gray-600 block px-3 py-2 rounded-md text-base font-medium"
               >
                 Power
               </NavLink>
               
-              <Link to='/Coworking' className="bg-primarycolor hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg mt-2">
-                Reserva CoWorking
+              <Link to='/' className="bg-primarycolor hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg mt-2">
+                Contáctanos
               </Link>
             </div>
           </div>
