@@ -113,7 +113,7 @@ function Reserva() {
     switch (currentStep) {
       case 1:
         return (
-          <>
+          <div className='bg-white'>
             <div className="mb-4">
              <label className="block text-sm font-medium text-gray-700 mb-1">Fecha de Reserva</label>
         <Calendar
@@ -167,11 +167,11 @@ function Reserva() {
             >
               Siguiente
             </button>
-          </>
+          </div>
         );
       case 2:
         return (
-          <>
+          <div>
             <div className="mb-4">
               <label className="block text-sm font-medium text-gray-700 mb-1">Nombre Completo</label>
               <input
@@ -234,7 +234,7 @@ function Reserva() {
                 Reservar
               </button>
             </div>
-          </>
+          </div>
         );
       default:
         return null;
@@ -242,7 +242,7 @@ function Reserva() {
   };
 
   return (
-    <div id='reserva' className="max-w-md mx-auto mt-10 p-5 border rounded-lg shadow-lg font-dmsans mb-12">
+    <div id='reserva' className="max-w-md mx-auto mt-10 p-5 border rounded-lg shadow-lg font-dmsans mb-12 bg-white">
       <div className='flex justify-between'>
         <h1 className="text-2xl font-bold mb-5 text-primarycolor">Reserva Coworking</h1>
         <button onClick={openAuthModal} className='bg-yellowprimary flex justify-center items-center px-4 font-semibold text-primarycolor rounded-lg'>
