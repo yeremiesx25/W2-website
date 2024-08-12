@@ -228,42 +228,6 @@ function Reserva() {
                 Atrás
               </button>
               <button
-<<<<<<< HEAD
-                type="button"
-                onClick={() => setCurrentStep(3)}
-                className="py-2 px-4 bg-primarycolor text-white rounded-lg"
-              >
-                Siguiente
-              </button>
-            </div>
-          </div>
-        );
-      case 3:
-        return (
-          <div>
-            <div className="mb-4">
-              <label className="block text-sm font-medium text-gray-700 mb-1">Cantidad de Personas</label>
-              <input
-                type="number"
-                name="cantidad"
-                value={formData.cantidad}
-                onChange={handleChange}
-                className="w-full px-3 py-2 border rounded-lg"
-                required
-              />
-            </div>
-            <SeatSelection />
-            <div className="flex justify-between">
-              <button
-                type="button"
-                onClick={() => setCurrentStep(2)}
-                className="py-2 px-4 bg-gray-300 text-black rounded-lg"
-              >
-                Atrás
-              </button>
-              <button
-=======
->>>>>>> 20ca77351a8b24be562881971ef1c5d459d6dd81
                 type="submit"
                 className="py-2 px-4 bg-primarycolor text-white rounded-lg"
               >
