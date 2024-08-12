@@ -3,6 +3,8 @@ import HeroCoworking from './HeroCoworking'
 import Navbar from '../Principal/Navbar'
 import Reserva from '../Reserva/Reserva'
 import Footer from '../Principal/Footer'
+import Info from './Info'
+import Rooms from './Rooms'
 
 function Coworking() {
   return (
@@ -10,7 +12,8 @@ function Coworking() {
 
         <Navbar />
         <HeroCoworking />
-        <Reserva />
+        <Rooms />
+        <Info />
         <Footer />
     </div>
   )

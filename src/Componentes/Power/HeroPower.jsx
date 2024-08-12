@@ -31,11 +31,11 @@ function HeroPower() {
             allowFullScreen
           ></iframe>
         </div>
-        {/* <div className='flex justify-center gap-4  w-full'>
+        <div className='flex justify-center gap-4  w-full'>
           <CardOfertaPower />
           <CardOfertaPower />
           <CardOfertaPower />
-        </div> */}
+        </div>
         
     </div>
   );

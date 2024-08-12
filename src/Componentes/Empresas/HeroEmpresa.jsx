@@ -49,7 +49,7 @@ function HeroEmpresa() {
             href="https://meetings.hubspot.com/winy-tupayachi-cahuana" 
             className="bg-primarycolor p-2 text-white font-semibold rounded-lg w-64 h-14 text-lg flex items-center justify-center heartbeat"
           >
-            Agenda una reunión
+            Contáctanos
           </a>
         </div>
       </div>
