@@ -13,12 +13,9 @@ import gradiantPower from '../../assets/gradiantPower.svg'
 function Power() {
   return (
     <>
-    <div style={{ backgroundImage: `url(${gradiantPower})` }}
-    className='w-full bg-cover'>
+
       <HeaderPower />
       <HeroPower />
-    </div>
-    
     <BeneficiosPower />
     <TrabajosContainer />
     <CtaPower />

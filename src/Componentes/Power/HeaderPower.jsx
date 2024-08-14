@@ -23,8 +23,8 @@ function HeaderPower() {
 
   return (
     <header 
-    className="bg-cover font-dmsans flex justify-around w-full flex-wrap fixed z-10" style={{ height: '78px', backgroundImage: `url(${gradiantPower})` }}>
-      <div className="container mx-auto px-4 py-6 flex justify-between items-center">
+    className="bg-cover font-dmsans flex justify-around items-center w-full flex-wrap fixed z-10 bg-primarycolor h-20" >
+      <div className="container mx-auto px-4  flex justify-between items-center">
         {/* Logo */}
         <div className="flex items-center px-20 ">
           <a href="/Power">
@@ -41,11 +41,11 @@ function HeaderPower() {
         </div>
 
         {/* Opciones de navegación */}
-        <div className="md:flex w-96 text-sm justify-around hidden text-gray-700">
-          <Link to="/" className=" hover:text-primarycolor">Inicio</Link>
-          <Link to="/Empresas" className=" hover:text-primarycolor">Empresas</Link>
-          <Link to="/DescubriendoTalentos" className=" hover:text-primarycolor">Descubriendo Talentos</Link>
-          <Link to="/Power" className="font-semibold text-primarycolor hover:text-primarycolor underline decoration-primarycolor underline-offset-4">Power</Link>
+        <div className="md:flex w-96 text-sm justify-around hidden text-white">
+          <Link to="/" className=" hover:text-yellowprimary">Inicio</Link>
+          <Link to="/Empresas" className=" hover:text-yellowprimary">Empresas</Link>
+          <Link to="/DescubriendoTalentos" className=" hover:text-yellowprimary">Descubriendo Talentos</Link>
+          <Link to="/Power" className="font-semibold text-yellowprimary hover:text-white underline decoration-yellowprimary underline-offset-4">Power</Link>
         </div>
 
         {/* Botones de login y registro (solo en escritorio) */}
