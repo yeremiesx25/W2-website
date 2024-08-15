@@ -39,7 +39,7 @@
               </NavLink>
               
               
-            </div><Link to='/' className="bg-primarycolor hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-xl">
+            </div><Link to='/' className="bg-gray-700 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-xl">
                 Contáctanos
               </Link>
             {/* Botón de menú para dispositivos móviles */}
@@ -88,7 +88,7 @@
                 Power
               </NavLink>
               
-              <Link to='/' className="bg-primarycolor hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg mt-2">
+              <Link to='/' className="bg-gray-600 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg mt-2">
                 Contáctanos
               </Link>
             </div>

@@ -22,47 +22,48 @@ function HeaderPower() {
 
   return (
     <header 
-    className="bg-cover font-dmsans flex justify-around items-center w-full flex-wrap fixed z-10 bg-primarycolor h-16 shadow-lg" >
-      <div className="container mx-auto px-4  flex justify-between items-center">
+      className="bg-primarycolor fixed w-full z-10 shadow-lg font-dmsans">
+      <div className="container mx-auto px-8 flex justify-between items-center h-16">
         {/* Logo */}
         <div className="flex items-center">
           <a href="/Power">
-            <img src={logo} alt="Power" className="w-24 h-auto" /> {/* Aquí ajusté el tamaño del logo */}
+            <img src={logo} alt="Power" className="w-24 h-auto" /> 
           </a>
         </div>
 
         {/* Icono de menú para dispositivos móviles */}
-        <div className="md:hidden w-full flex justify-end flex-wrap">
-          <button onClick={toggleMenu} className="text-gray-800 hover:text-gray-600 focus:outline-none">
-            {/* Icono de hamburguesa */}
+        <div className="md:hidden flex items-center">
+          <button onClick={toggleMenu} className="focus:outline-none">
             <img src={menuMobilePower} alt="Menu" className="w-6 h-6" />
           </button>
         </div>
 
         {/* Opciones de navegación */}
-        <div className="md:flex w-96 text-md justify-around hidden text-white gap-4 font-dmsans">
-          <Link to="/" className=" hover:text-yellowprimary">Inicio</Link>
-          <Link to="/Empresas" className=" hover:text-yellowprimary">Empresas</Link>
-          <Link to="/DescubriendoTalentos" className=" hover:text-yellowprimary">Descubriendo Talentos</Link>
+        <div className="hidden md:flex justify-around items-center text-white text-md gap-4 font-dmsans">
+          <Link to="/" className="hover:text-yellowprimary">Inicio</Link>
+          <Link to="/Empresas" className="hover:text-yellowprimary">Empresas</Link>
+          <Link to="/DescubriendoTalentos" className="hover:text-yellowprimary">Descubriendo Talentos</Link>
+          <Link to="/Coworking" className="hover:text-yellowprimary">Coworking</Link>
           <Link to="/Power" className="font-semibold text-yellowprimary hover:text-white underline decoration-yellowprimary underline-offset-4">Power</Link>
         </div>
 
         {/* Botones de login y registro (solo en escritorio) */}
         <div className="hidden md:flex items-center">
-          <button onClick={handleModalOpen} className="text-md w-48 font-bold bg-yellowprimary hover:bg-yellow-200 text-primarycolor px-4 py-2 rounded-md ml-4">Iniciar sesión</button>
+          <button onClick={handleModalOpen} className="text-md font-bold bg-yellowprimary hover:bg-yellow-200 text-primarycolor px-4 py-2 rounded-md ml-4">Iniciar sesión</button>
         </div>
       </div>
 
       {/* Menú desplegable para dispositivos móviles */}
       {showMenu && (
         <div className="md:hidden bg-gray-900 w-full">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+          <div className="px-4 pt-2 pb-3 space-y-1">
             <Link to="/" className="text-white hover:text-gray-600 block px-3 py-2 rounded-md text-base font-medium">Inicio</Link>
             <Link to="/Empresas" className="text-white hover:text-gray-600 block px-3 py-2 rounded-md text-base font-medium">Empresas</Link>
-            <Link to="/Power" className="text-white hover:text-gray-600 block px-3 py-2 rounded-md text-base font-medium">Power</Link>
             <Link to="/DescubriendoTalentos" className="text-white hover:text-gray-600 block px-3 py-2 rounded-md text-base font-medium">Descubriendo Talentos</Link>
-            <button onClick={handleModalOpen} className="bg-amber-400 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg mt-2 mr-2">Iniciar Sesión</button>
-            <button className="bg-amber-400 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg mt-2">Registrar</button>
+            <Link to="/Coworking" className="text-white hover:text-gray-600 block px-3 py-2 rounded-md text-base font-medium">Coworking</Link>
+            <Link to="/Power" className="text-white hover:text-gray-600 block px-3 py-2 rounded-md text-base font-medium">Power</Link>
+            <button onClick={handleModalOpen} className="bg-amber-400 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg mt-2 w-full">Iniciar Sesión</button>
+            <button className="bg-amber-400 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg mt-2 w-full">Registrar</button>
           </div>
         </div>
       )}
