@@ -1,5 +1,5 @@
 import React from 'react'
-import logo from '../../assets/Logo Power.png';
+import logo from '../../assets/LogoPower.png';
 
 function FooterPower() {
   return (

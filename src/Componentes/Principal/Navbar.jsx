@@ -8,8 +8,8 @@
       setShowMenu(!showMenu);
     };
 
-    const activeStyle = 'underline underline-offset-4 text-blue-500 font-medium'
-    const classDefault = 'text-white hover:text-primarycolor font-light'
+    const activeStyle = 'underline underline-offset-4 text-white font-medium'
+    const classDefault = 'text-white hover:text-white font-light'
     return (
       <nav className="bg-primarycolor shadow z-10 top-0 fixed w-full justify-around font-dmsans">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -38,7 +38,7 @@
                 Power
               </NavLink>
               
-              <Link to='/' className="bg-primarycolor hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-xl">
+              <Link to='/' className="bg-gray-800 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-xl">
                 Contáctanos
               </Link>
             </div>

@@ -2,8 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import menuMobilePower from '../../assets/menu (4).png'; // Importa el icono de hamburguesa
 import Login from './Login';
-import logo from '../../assets/Logo Power.png';
-import gradiantPower from '../../assets/gradiantPower.svg'
+import logo from '../../assets/LogoPower.png';
 
 function HeaderPower() {
   const [showMenu, setShowMenu] = useState(false);
@@ -23,12 +22,13 @@ function HeaderPower() {
 
   return (
     <header 
-    className="bg-cover font-dmsans flex justify-around items-center w-full flex-wrap fixed z-10 bg-primarycolor h-20" >
-      <div className="container mx-auto px-4  flex justify-between items-center">
+      className="bg-cover font-dmsans flex justify-between items-center w-full fixed z-10 bg-primarycolor h-16 px-6" // Ajuste en la altura (h-16) y padding (px-6)
+    >
+      <div className="container mx-auto px-4 flex justify-between items-center">
         {/* Logo */}
-        <div className="flex items-center px-20 ">
+        <div className="flex items-center">
           <a href="/Power">
-            <img src={logo} alt="Power" className="w-20 h-auto" />
+            <img src={logo} alt="Power" className="w-24 h-auto" /> {/* Aquí ajusté el tamaño del logo */}
           </a>
         </div>
 
@@ -42,16 +42,15 @@ function HeaderPower() {
 
         {/* Opciones de navegación */}
         <div className="md:flex w-96 text-sm justify-around hidden text-white">
-          <Link to="/" className=" hover:text-yellowprimary">Inicio</Link>
-          <Link to="/Empresas" className=" hover:text-yellowprimary">Empresas</Link>
-          <Link to="/DescubriendoTalentos" className=" hover:text-yellowprimary">Descubriendo Talentos</Link>
+          <Link to="/" className="hover:text-yellowprimary">Inicio</Link>
+          <Link to="/Empresas" className="hover:text-yellowprimary">Empresas</Link>
+          <Link to="/DescubriendoTalentos" className="hover:text-yellowprimary">Descubriendo Talentos</Link>
           <Link to="/Power" className="font-semibold text-yellowprimary hover:text-white underline decoration-yellowprimary underline-offset-4">Power</Link>
         </div>
 
         {/* Botones de login y registro (solo en escritorio) */}
         <div className="hidden md:flex items-center">
           <button onClick={handleModalOpen} className="text-md w-48 font-bold bg-yellowprimary hover:bg-yellow-200 text-primarycolor px-4 py-2 rounded-md ml-4">Iniciar sesión</button>
-          {/* <button className="text-sm bg-amber-400 hover:bg-amber-600 text-white px-4 py-2 rounded-lg ml-4">Registrarse</button> */}
         </div>
       </div>
 
