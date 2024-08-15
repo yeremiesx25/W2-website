@@ -23,7 +23,7 @@ function HeaderPower() {
 
   return (
     <header 
-    className="bg-cover font-dmsans flex justify-around items-center w-full flex-wrap fixed z-10 bg-primarycolor h-20" >
+    className="bg-cover font-dmsans flex justify-around items-center w-full flex-wrap fixed z-10 bg-primarycolor h-16 shadow-lg" >
       <div className="container mx-auto px-4  flex justify-between items-center">
         {/* Logo */}
         <div className="flex items-center px-20 ">
@@ -41,7 +41,7 @@ function HeaderPower() {
         </div>
 
         {/* Opciones de navegación */}
-        <div className="md:flex w-96 text-sm justify-around hidden text-white">
+        <div className="md:flex w-96 text-md justify-around hidden text-white gap-4 font-dmsans">
           <Link to="/" className=" hover:text-yellowprimary">Inicio</Link>
           <Link to="/Empresas" className=" hover:text-yellowprimary">Empresas</Link>
           <Link to="/DescubriendoTalentos" className=" hover:text-yellowprimary">Descubriendo Talentos</Link>
