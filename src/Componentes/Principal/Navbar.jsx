@@ -11,7 +11,7 @@
     const activeStyle = 'underline underline-offset-4 text-blue-500 font-medium'
     const classDefault = 'text-white hover:text-primarycolor font-light'
     return (
-      <nav className="bg-primarytext shadow z-10 top-0 fixed w-full justify-around font-dmsans">
+      <nav className="bg-primarycolor shadow z-10 top-0 fixed w-full justify-around font-dmsans">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Logo o título */}
