@@ -22,9 +22,8 @@ function HeaderPower() {
 
   return (
     <header 
-      className="bg-cover font-dmsans flex justify-between items-center w-full fixed z-10 bg-primarycolor h-16 px-6" // Ajuste en la altura (h-16) y padding (px-6)
-    >
-      <div className="container mx-auto px-4 flex justify-between items-center">
+    className="bg-cover font-dmsans flex justify-around items-center w-full flex-wrap fixed z-10 bg-primarycolor h-16 shadow-lg" >
+      <div className="container mx-auto px-4  flex justify-between items-center">
         {/* Logo */}
         <div className="flex items-center">
           <a href="/Power">
@@ -41,10 +40,10 @@ function HeaderPower() {
         </div>
 
         {/* Opciones de navegación */}
-        <div className="md:flex w-96 text-sm justify-around hidden text-white">
-          <Link to="/" className="hover:text-yellowprimary">Inicio</Link>
-          <Link to="/Empresas" className="hover:text-yellowprimary">Empresas</Link>
-          <Link to="/DescubriendoTalentos" className="hover:text-yellowprimary">Descubriendo Talentos</Link>
+        <div className="md:flex w-96 text-md justify-around hidden text-white gap-4 font-dmsans">
+          <Link to="/" className=" hover:text-yellowprimary">Inicio</Link>
+          <Link to="/Empresas" className=" hover:text-yellowprimary">Empresas</Link>
+          <Link to="/DescubriendoTalentos" className=" hover:text-yellowprimary">Descubriendo Talentos</Link>
           <Link to="/Power" className="font-semibold text-yellowprimary hover:text-white underline decoration-yellowprimary underline-offset-4">Power</Link>
         </div>
 

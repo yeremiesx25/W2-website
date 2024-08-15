@@ -38,10 +38,10 @@
                 Power
               </NavLink>
               
-              <Link to='/' className="bg-gray-800 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-xl">
+              
+            </div><Link to='/' className="bg-primarycolor hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-xl">
                 Contáctanos
               </Link>
-            </div>
             {/* Botón de menú para dispositivos móviles */}
             <div className="md:hidden">
               <button
