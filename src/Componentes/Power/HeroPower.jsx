@@ -2,7 +2,7 @@ import React from 'react';
 import logo from '../../assets/Logo Power.png';
 import CardOfertaPower from './CardOfertaPower';
 import gradiantPower from '../../assets/gradiantPower.svg'
-import heroPowerImg from '../../assets/heroPowerImg.svg'
+import screenHeroPower from '../../assets/screenHeroPower.svg'
 import imgSaasPower from '../../assets/imgSaasPower.png'
 
 function HeroPower() {
@@ -36,7 +36,7 @@ function HeroPower() {
                             <div class="w-3 h-3 border-2 border-white rounded-full"></div>
                         </div>
                     </div>
-                    <img className='w-full' src="https://cdn-blog.novoresume.com/articles/job-search-sites/indeed-job-search.png"/>
+                    <img className='w-full' src={screenHeroPower}/>
                 </div>
             </div>
         </div>
