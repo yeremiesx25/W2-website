@@ -1,17 +1,34 @@
   import React, { useState } from 'react';
   import {NavLink, Link}from 'react-router-dom'
   import logo from '../../assets/Logo horizontal W2 WHITE.png'
+import Contacto from '../Contacto/Contacto'
+import { CgClose } from "react-icons/cg";
+
   function Navbar() {
     const [showMenu, setShowMenu] = useState(false);
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+     // Función para abrir el modal
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  // Función para cerrar el modal
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
     const toggleMenu = () => {
       setShowMenu(!showMenu);
     };
 
-    const activeStyle = 'underline underline-offset-4 text-white font-medium'
-    const classDefault = 'text-white hover:text-white font-light'
+
+    
+
+    const activeStyle = 'underline underline-offset-4 text-white font-regular text-sm'
+    const classDefault = 'text-white hover:text-primarycolor font-light text-sm'
     return (
-      <nav className="bg-primarycolor shadow z-10 top-0 fixed w-full justify-around font-dmsans">
+      <nav className="bg-primarytext shadow-md z-10 top-0 fixed w-full justify-around font-dmsans">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Logo o título */}
@@ -39,9 +56,22 @@
               </NavLink>
               
               
-            </div><Link to='/' className="bg-gray-700 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-xl">
-                Contáctanos
-              </Link>
+            </div>
+            <button
+        onClick={openModal}
+        className="bg-primarycolor hover:bg-blue-50 text-white font-semibold py-2 px-6 rounded-xl hidden md:block"
+      >
+        Contáctanos
+      </button>
+      {/* Modal */}
+      {isModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+          <div className="bg-white p-6 rounded-lg shadow-lg md:w-max-[500px] flex items-start justify-end">
+            
+            <Contacto closeModal={closeModal} /> {/* Pasa la función aquí */}
+          </div>
+        </div>
+      )}
             {/* Botón de menú para dispositivos móviles */}
             <div className="md:hidden">
               <button
@@ -88,7 +118,7 @@
                 Power
               </NavLink>
               
-              <Link to='/' className="bg-gray-600 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg mt-2">
+              <Link to='/Contacto' className="bg-gray-600 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg mt-2">
                 Contáctanos
               </Link>
             </div>
