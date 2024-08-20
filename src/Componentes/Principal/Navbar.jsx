@@ -118,9 +118,12 @@ import { CgClose } from "react-icons/cg";
                 Power
               </NavLink>
               
-              <Link to='/Contacto' className="bg-gray-600 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded-lg mt-2">
-                Contáctanos
-              </Link>
+              <button
+        onClick={openModal}
+        className="bg-primarycolor hover:bg-blue-50 text-white font-semibold py-2 px-6 rounded-xl block"
+      >
+        Contáctanos
+      </button>
             </div>
           </div>
         )}

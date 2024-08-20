@@ -8,7 +8,7 @@ function Contacto({ closeModal }) {
 
 
   return (
-    <div className='flex flex-col md:w-auto w-[100%] h-screen md:h-auto bg-white font-dmsans items-end transition-all duration-900'>
+    <div className='flex flex-col md:w-auto w-screen md:pt-0 md:pb-0 pb-16 py-10 h-screen md:h-auto bg-white font-dmsans items-end transition-all duration-900'>
         {/* <div className='text-center px-4'>
             <h1 className='text-3xl text-gray-700 my-4 font-semibold'>Hablemos</h1>
             <p className=' md:w-1/3 w-full text-gray-700 mx-auto'>Por favor complete el siguiente formulario para enviarnos un mensaje . Siéntase libre de agregar tantos detalles como sea necesario.</p>
