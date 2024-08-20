@@ -89,7 +89,7 @@ function App() {
           <Route path="/Share" element={<Share />} />{" "}
           {/* Añadir ruta para Share */}
           <Route path="/info-job-movil/:id" element={<InfoJobMovil />} />
-          
+          <Route path="/Profile" element={<Profile />} />
         </Routes>
       </JobsProvider>
     </AuthContextProvider>

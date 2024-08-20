@@ -116,32 +116,34 @@ function FormOferta() {
   };
 
   const saveFormDataToSupabase = async () => {
-    const {
-      name,
-      company,
-      location,
-      salary,
-      jobDescription,
-      requirements,
-      funciones,
-      horario,
-      celular,
-      preg_1,
-      preg_2,
-      preg_3,
-      preg_4,
-      preg_5,
-      user_id,
-      modalidad,
-    } = formData;
+  const {
+    name,
+    company,
+    location,
+    salary,
+    jobDescription,
+    requirements,
+    funciones,
+    horario,
+    celular,
+    preg_1,
+    preg_2,
+    preg_3,
+    preg_4,
+    preg_5,
+    user_id,
+    modalidad,
+  } = formData;
 
-    const whatsappMessage = `Hola, estoy interesado en el puesto de ${name}`;
-    const whatsappUrl = `https://wa.me/${celular}?text=${encodeURIComponent(
-      whatsappMessage
-    )}`;
+  const whatsappMessage = `Hola, estoy interesado en el puesto de ${name}`;
+  const whatsappUrl = `https://wa.me/${celular}?text=${encodeURIComponent(
+    whatsappMessage
+  )}`;
 
-    try {
-      const { data, error } = await supabase.from("Oferta").insert({
+  try {
+    const { data, error } = await supabase
+      .from("Oferta")
+      .insert({
         puesto: name,
         empresa: company,
         ubicacion: location,
@@ -158,21 +160,22 @@ function FormOferta() {
         preg_5: preg_5,
         user_id: user_id,
         modalidad: modalidad,
-      }).select('*'); // Selecciona todos los datos, incluyendo el id generado
+        estado: "abierto", // Añade este campo
+      })
+      .select("*"); // Selecciona todos los datos, incluyendo el id generado
 
-      if (error) {
-        console.error("Error inserting data:", error);
-        return null;
-      } else {
-        console.log("Data inserted successfully:", data);
-        return data[0]; // Devuelve el primer elemento del array de datos insertados
-      }
-    } catch (error) {
-      console.error("Error saving data to Supabase:", error);
+    if (error) {
+      console.error("Error inserting data:", error);
       return null;
+    } else {
+      console.log("Data inserted successfully:", data);
+      return data[0]; // Devuelve el primer elemento del array de datos insertados
     }
-  };
-
+  } catch (error) {
+    console.error("Error saving data to Supabase:", error);
+    return null;
+  }
+};
   const handleInputKeyDown = (e, nextInputName) => {
     if (e.key === "Enter") {
       e.preventDefault();
