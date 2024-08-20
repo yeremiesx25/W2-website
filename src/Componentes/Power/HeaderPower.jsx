@@ -39,7 +39,7 @@ function HeaderPower() {
         </div>
 
         {/* Opciones de navegación */}
-        <div className="hidden md:flex justify-around items-center text-white text-md gap-4 font-dmsans">
+        <div className="hidden md:flex justify-around items-center text-white text-sm gap-4 font-dmsans">
           <Link to="/" className="hover:text-yellowprimary">Inicio</Link>
           <Link to="/Empresas" className="hover:text-yellowprimary">Empresas</Link>
           <Link to="/DescubriendoTalentos" className="hover:text-yellowprimary">Descubriendo Talentos</Link>
