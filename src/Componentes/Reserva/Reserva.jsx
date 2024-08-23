@@ -5,13 +5,14 @@ import Auth from './Auth';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import SeatSelection from './SeatSelection'; // Importa el nuevo componente
+import { FaWhatsapp } from 'react-icons/fa';
 
 Modal.setAppElement('#root');
 
 function Reserva() {
   const [formData, setFormData] = useState({
     fecha: new Date(),
-    horaInicio: '09:00',
+    horaInicio: '08:00',
     horaFin: '12:00',
     nombre: '',
     dni: '',
@@ -97,7 +98,7 @@ function Reserva() {
 
   const generateTimeOptions = () => {
     const options = [];
-    for (let hour = 9; hour <= 22; hour++) {
+    for (let hour = 8; hour <= 18; hour++) {
       for (let minutes = 0; minutes < 60; minutes += 15) {
         const time = `${hour.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
         options.push(<option key={time} value={time}>{time}</option>);
@@ -244,7 +245,7 @@ function Reserva() {
   return (
     <div id='reserva' className="max-w-md mx-auto mt-10 p-5 border rounded-lg shadow-lg font-dmsans mb-12 bg-white">
       <div className='flex justify-between'>
-        <h1 className="text-2xl font-bold mb-5 text-primarycolor">Reserva Coworking</h1>
+        <h1 className="text-2xl font-bold mb-5 text-primarycolor text-center">Reserva Coworking</h1>
         <button onClick={openAuthModal} className='bg-yellowprimary flex justify-center items-center px-4 font-semibold text-primarycolor rounded-lg'>
           Ver reservas
         </button>
@@ -255,20 +256,26 @@ function Reserva() {
       </form>
 
       <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={closeModal}
-        contentLabel="Reserva Confirmada"
-        className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
-      >
-        <div className="bg-white p-5 rounded-lg shadow-lg">
-          <h2 className="text-lg font-semibold text-gray-700 mb-4">¡Reserva Confirmada!</h2>
-          <p>Tu reserva ha sido creada con éxito.</p>
-          <button onClick={closeModal} className="w-full py-2 px-4 bg-primarycolor text-white rounded-lg mt-4">
-            Cerrar
-          </button>
-        </div>
-      </Modal>
-
+  isOpen={modalIsOpen}
+  onRequestClose={closeModal}
+  contentLabel="Reserva Confirmada"
+  className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
+>
+  <div className="bg-white p-5 rounded-lg shadow-lg">
+    <h2 className="text-lg font-semibold text-gray-700 mb-4 text-center">¡Reserva Confirmada!</h2>
+    <p>Tu reserva ha sido creada con éxito.</p>
+    <button
+      onClick={() => {
+        closeModal();
+        window.location.href = "https://wa.me/51995667713?text=Buenas,%20acabo%20de%20realizar%20la%20reserva%20del%20Coworking%20de%20W2,%20quisiera%20que%20me%20brinde%20más%20información.";
+      }}
+      className="w-full py-2 px-4 bg-green-500 text-white rounded-lg mt-4 flex items-center justify-center"
+    >
+      <FaWhatsapp className="mr-2" />
+      Contactar por WhatsApp
+    </button>
+  </div>
+</Modal>
       {authModalOpen && <Auth onClose={closeAuthModal} />}
     </div>
   );

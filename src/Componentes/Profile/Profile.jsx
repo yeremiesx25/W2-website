@@ -179,7 +179,6 @@ function Profile() {
       console.error("Error guardando los datos:", error.message);
     }
   };
-
   const generatePdf = async () => {
     const doc = new jsPDF();
   
@@ -192,15 +191,18 @@ function Profile() {
       reader.onloadend = () => {
         const base64data = reader.result;
   
-        // Draw circular image
+        // Draw a circle to create the profile photo placeholder
         doc.setFillColor(255, 255, 255);
         doc.setDrawColor(0, 0, 0);
-        doc.circle(105, 40, 25, "FD");
-        doc.addImage(base64data, "PNG", 80, 15, 50, 50, undefined, 'FAST');
+        doc.circle(105, 40, 20, "FD");  // Reduced the radius of the circle
+  
+        // Add the profile photo with reduced size
+        doc.addImage(base64data, "PNG", 85, 20, 40, 40, undefined, 'FAST');  // Reduced the dimensions to 40x40
   
         // Add user name
         doc.setFontSize(18);
         doc.setFont("helvetica", "bold");
+        doc.setTextColor(85, 85, 85); // Dark gray color
         doc.text(nombre, 105, 80, { align: "center" });
   
         // Add contact icon
@@ -211,31 +213,40 @@ function Profile() {
         // Add contact details
         doc.setFontSize(14);
         doc.setFont("helvetica", "bold");
+        doc.setTextColor(85, 85, 85); // Dark gray color
         doc.text("CONTACTO:", 25, 100);
   
         doc.setFontSize(12);
         doc.setFont("helvetica", "normal");
-        doc.text(`Teléfono: ${telefono}`, 10, 110);
-        doc.text(`Email: ${email}`, 10, 120);
-        doc.text(`DNI: ${dni}`, 10, 130);
-        doc.text(`Fecha de Nacimiento: ${fechaNac}`, 10, 140);
-        doc.text(`Distrito: ${distrito}`, 10, 150);
+        doc.setTextColor(64, 64, 64); // Dark gray color
+        doc.text("Teléfono:", 25, 110);
+        doc.text(`${telefono}`, 25, 117); // Reduced space
+        doc.text("Email:", 25, 125);
+        doc.text(`${email}`, 25, 132); // Reduced space
+        doc.text("DNI:", 25, 140);
+        doc.text(`${dni}`, 25, 147); // Reduced space
+        doc.text("Fecha de Nacimiento:", 25, 155);
+        doc.text(`${fechaNac}`, 25, 162); // Reduced space
+        doc.text("Distrito:", 25, 170);
+        doc.text(`${distrito}`, 25, 177); // Reduced space
   
         // Add experience icon
         const maletinImg = new Image();
         maletinImg.src = Maletin;
-        doc.addImage(maletinImg, "PNG", 10, 165, 10, 10);
+        doc.addImage(maletinImg, "PNG", 10, 185, 10, 10);
   
         // Add experiences
         doc.setFontSize(14);
         doc.setFont("helvetica", "bold");
-        doc.text("EXPERIENCIA LABORAL:", 25, 170);
+        doc.setTextColor(85, 85, 85); // Dark gray color
+        doc.text("EXPERIENCIA LABORAL:", 25, 190);
   
         doc.setFontSize(12);
         doc.setFont("helvetica", "normal");
-        let yOffset = 180;
+        doc.setTextColor(64, 64, 64); // Dark gray color for experiences
+        let yOffset = 200;
         experiences.forEach((exp, index) => {
-          doc.text(`${index + 1}. ${exp}`, 10, yOffset);
+          doc.text(`${index + 1}. ${exp}`, 25, yOffset);
           yOffset += 10;
         });
   
@@ -245,7 +256,6 @@ function Profile() {
       reader.readAsDataURL(blob);
     }
   };
-  
   return (
     <div className="w-full font-dmsans flex">
       <HeaderPowerAuth />
@@ -294,7 +304,7 @@ function Profile() {
                     <span>Editar</span>
                   </button>
                   <button
-                    className="bg-blue-500 text-white text-lg px-4 py-2 rounded-full"
+                    className="bg-primarycolor text-white text-lg px-4 py-2 rounded-full"
                     onClick={generatePdf}
                   >
                     Genera tu CV
@@ -417,7 +427,6 @@ function Profile() {
                       className="block text-sm font-regular text-gray-700"
                       htmlFor={`exp_${index}`}
                     >
-                      {`Experiencia ${index + 1}`}
                     </label>
                     <input
                       type="text"
