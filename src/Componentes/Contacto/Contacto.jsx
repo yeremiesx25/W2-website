@@ -13,6 +13,8 @@ function Contacto({ closeModal }) {
             <h1 className='text-3xl text-gray-700 my-4 font-semibold'>Hablemos</h1>
             <p className=' md:w-1/3 w-full text-gray-700 mx-auto'>Por favor complete el siguiente formulario para enviarnos un mensaje . Siéntase libre de agregar tantos detalles como sea necesario.</p>
         </div> */}
+        
+        
         <button 
         onClick={closeModal} 
         className=" text-red-500 font-bold p-4 md:p-2 "
@@ -20,6 +22,7 @@ function Contacto({ closeModal }) {
       >
         <CgClose size={24} />
       </button>
+      <h2 className='text-2xl text-center w-full text-primarycolor font-regular'>Ponte en contacto...</h2>
         <div className='md:w-[500px] w-full h-full md:h-[500px] bg-white mx-auto  rounded-xl p-8'>
             <FormContacto />
         </div>
