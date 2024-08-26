@@ -23,14 +23,36 @@ function ReservaAdmin() {
     setReservas(data);
   };
 
-  const handleApprove = (id_reserva) => {
-    // Lógica para manejar la aprobación de la reserva
-    console.log('Aprobada la reserva con ID:', id_reserva);
+  const handleApprove = async (id_reserva) => {
+    const { error } = await supabase
+      .from('Reserva')
+      .update({ estado: 'Aceptado' })
+      .eq('id_reserva', id_reserva);
+
+    if (error) {
+      console.error('Error approving reserva:', error);
+      return;
+    }
+
+    setReservas(reservas.map(reserva => 
+      reserva.id_reserva === id_reserva ? { ...reserva, estado: 'Aceptado' } : reserva
+    ));
   };
 
-  const handleReject = (id_reserva) => {
-    // Lógica para manejar el rechazo de la reserva
-    console.log('Rechazada la reserva con ID:', id_reserva);
+  const handleReject = async (id_reserva) => {
+    const { error } = await supabase
+      .from('Reserva')
+      .update({ estado: 'Rechazado' })
+      .eq('id_reserva', id_reserva);
+
+    if (error) {
+      console.error('Error rejecting reserva:', error);
+      return;
+    }
+
+    setReservas(reservas.map(reserva => 
+      reserva.id_reserva === id_reserva ? { ...reserva, estado: 'Rechazado' } : reserva
+    ));
   };
 
   return (
@@ -47,7 +69,7 @@ function ReservaAdmin() {
             <th className="px-4 py-2 border">Celular</th>
             <th className="px-4 py-2 border text-center">Medio de Pago</th>
             <th className="px-4 py-2 border text-center">Cantidad de Personas</th>
-            <th className="px-4 py-2 border text-center">Tipo de Reserva</th>
+            <th className="px-4 py-2 border text-center">Estado de la Reserva</th>
             <th className="px-4 py-2 border text-center">Acciones</th>
           </tr>
         </thead>
@@ -62,7 +84,7 @@ function ReservaAdmin() {
               <td className="px-4 py-2 border">{reserva.celular}</td>
               <td className="px-4 py-2 border text-center">{reserva.pago}</td>
               <td className="px-4 py-2 border text-center">{reserva.cantidad}</td>
-              <td className="px-4 py-2 border text-center">{reserva.tipo_reserva}</td>
+              <td className="px-4 py-2 border text-center">{reserva.estado}</td>
               <td className="px-4 py-2 border text-center">
                 <button 
                   onClick={() => handleApprove(reserva.id_reserva)}
