@@ -5,6 +5,7 @@ import Reserva from '../Reserva/Reserva'
 import Footer from '../Principal/Footer'
 import Info from './Info'
 import Rooms from './Rooms'
+import Ubicacion from './Ubicacion'
 
 function Coworking() {
   return (
@@ -14,6 +15,7 @@ function Coworking() {
         <HeroCoworking />
         <Rooms />
         <Info />
+        <Ubicacion />
         <Footer />
     </div>
   )
