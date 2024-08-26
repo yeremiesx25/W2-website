@@ -5,32 +5,32 @@ function Ubicacion() {
     <section class="bg-gray-100">
     <div class="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:py-20 lg:px-8">
         <div class="max-w-2xl lg:max-w-4xl mx-auto text-center">
-            <h2 class="text-3xl font-extrabold text-gray-900">Visit Our Location</h2>
-            <p class="mt-4 text-lg text-gray-500">Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+            <h2 class="text-3xl font-semibold text-gray-800">Alquiler de Salas de Reunión en San Juan de Lurigancho: <br></br>El Lugar Perfecto para Tus Encuentros</h2>
+            <p class="mt-4 text-lg text-gray-500">Necesitas un lugar profesional para tus reuniones? Nuestras salas de reunión en San Juan de Lurigancho están diseñadas para ofrecerte privacidad, tecnología de punta y comodidad.</p>
         </div>
         <div class="mt-16 lg:mt-20">
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div class="rounded-lg overflow-hidden">
                     <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d11672.945750644447!2d-122.42107853750231!3d37.7730507907087!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80858070cc2fbd55%3A0xa71491d736f62d5c!2sGolden%20Gate%20Bridge!5e0!3m2!1sen!2sus!4v1619524992238!5m2!1sen!2sus"
+                        src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d15608.867979462078!2d-77.013269!3d-12.0285769!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9105cf582a17fa43%3A0x83b92ceaf0d841f2!2sSelecci%C3%B3n%20de%20Personal%20%7C%20W2%20Consultores%20%7C%20Head%20Huntig!5e0!3m2!1ses-419!2spe!4v1724678046398!5m2!1ses-419!2spe"
                         width="100%" height="480"  allowfullscreen="" loading="lazy"></iframe>
                 </div>
                 <div>
                     <div class="max-w-full mx-auto rounded-lg overflow-hidden">
                         <div class="px-6 py-4">
-                            <h3 class="text-lg font-medium text-gray-900">Our Address</h3>
-                            <p class="mt-1 text-gray-600">123 Main St, San Francisco, CA 94105</p>
+                            <h3 class="text-lg font-medium text-gray-900">Dirección</h3>
+                            <p class="mt-1 text-gray-600">Av. Perú 180, San Juan de Lurigancho 15404</p>
                         </div>
                         <div class="border-t border-gray-200 px-6 py-4">
-                            <h3 class="text-lg font-medium text-gray-900">Hours</h3>
-                            <p class="mt-1 text-gray-600">Monday - Friday: 9am - 5pm</p>
-                            <p class="mt-1 text-gray-600">Saturday: 10am - 4pm</p>
-                            <p class="mt-1 text-gray-600">Sunday: Closed</p>
+                            <h3 class="text-lg font-medium text-gray-900">Horario de Atención</h3>
+                            <p class="mt-1 text-gray-600">Lunes - Viernes: 8 am - 7 pm</p>
+                            <p class="mt-1 text-gray-600">Sábado: 10 a. m. - 4 p. m.</p>
+                            <p class="mt-1 text-gray-600">Domingo: Cerrado</p>
                         </div>
                         <div class="border-t border-gray-200 px-6 py-4">
-                            <h3 class="text-lg font-medium text-gray-900">Contact</h3>
-                            <p class="mt-1 text-gray-600">Email: info@example.com</p>
-                            <p class="mt-1 text-gray-600">Phone: +1 23494 34993</p>
+                            <h3 class="text-lg font-medium text-gray-900">Contacto</h3>
+                            <p class="mt-1 text-gray-600">Email: wtupayachi@w2asesoresyconsultores.com</p>
+                            <p class="mt-1 text-gray-600">Celular: +51 995 667 713</p>
                         </div>
                     </div>
                 </div>
