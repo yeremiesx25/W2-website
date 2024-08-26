@@ -4,7 +4,7 @@ import { supabase } from '../../supabase/supabase.config';
 import Auth from './Auth';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import SeatSelection from './SeatSelection'; // Importa el nuevo componente
+import SeatSelection from './SeatSelection';
 import { FaWhatsapp } from 'react-icons/fa';
 
 Modal.setAppElement('#root');
@@ -71,7 +71,8 @@ function Reserva() {
         dni_user: dni, 
         celular, 
         cantidad, 
-        pago: medioPago 
+        pago: medioPago,
+        estado: 'Pendiente'
       }])
       .single();
 
@@ -106,8 +107,17 @@ function Reserva() {
     }
     return options;
   };
+
   const handleDateChange = (date) => {
     setFormData({ ...formData, fecha: date });
+  };
+
+  const generateWhatsappLink = () => {
+    const { nombre, fecha, horaInicio, horaFin, cantidad } = formData;
+    const formattedDate = fecha.toLocaleDateString();
+    const message = `Hola! Soy ${nombre}. Quisiera confirmar mi reserva para el ${formattedDate} de ${horaInicio} a ${horaFin} para ${cantidad} personas.`;
+    const whatsappLink = `https://wa.me/?text=${encodeURIComponent(message)}`;
+    return whatsappLink;
   };
 
   const renderStep = () => {
@@ -116,11 +126,11 @@ function Reserva() {
         return (
           <div className='bg-white p-6'>
             <div className="mb-4">
-             <label className="block text-sm font-medium text-gray-700 mb-1">Fecha de Reserva</label>
-        <Calendar
-          onChange={handleDateChange}
-          value={formData.fecha}
-        />
+              <label className="block text-sm font-medium text-gray-700 mb-1">Fecha de Reserva</label>
+              <Calendar
+                onChange={handleDateChange}
+                value={formData.fecha}
+              />
             </div>
             <div className="mb-4">
               <label className="block text-sm font-medium text-gray-700 mb-1">Hora</label>
@@ -256,26 +266,26 @@ function Reserva() {
       </form>
 
       <Modal
-  isOpen={modalIsOpen}
-  onRequestClose={closeModal}
-  contentLabel="Reserva Confirmada"
-  className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
->
-  <div className="bg-white p-5 rounded-lg shadow-lg">
-    <h2 className="text-lg font-semibold text-gray-700 mb-4 text-center">¡Reserva Confirmada!</h2>
-    <p>Tu reserva ha sido creada con éxito.</p>
-    <button
-      onClick={() => {
-        closeModal();
-        window.location.href = "https://wa.me/51995667713?text=Buenas,%20acabo%20de%20realizar%20la%20reserva%20del%20Coworking%20de%20W2,%20quisiera%20que%20me%20brinde%20más%20información.";
-      }}
-      className="w-full py-2 px-4 bg-green-500 text-white rounded-lg mt-4 flex items-center justify-center"
-    >
-      <FaWhatsapp className="mr-2" />
-      Contactar por WhatsApp
-    </button>
-  </div>
-</Modal>
+        isOpen={modalIsOpen}
+        onRequestClose={closeModal}
+        contentLabel="Reserva Confirmada"
+        className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50"
+      >
+        <div className="bg-white p-5 rounded-lg shadow-lg">
+          <h2 className="text-lg font-semibold text-gray-700 mb-4 text-center">¡Reserva Confirmada!</h2>
+          <p>Tu reserva ha sido creada con éxito.</p>
+          <button
+            onClick={() => {
+              closeModal();
+              window.location.href = generateWhatsappLink();
+            }}
+            className="w-full py-2 px-4 bg-green-500 text-white rounded-lg mt-4 flex items-center justify-center"
+          >
+            <FaWhatsapp className="mr-2" />
+            Contactar por WhatsApp
+          </button>
+        </div>
+      </Modal>
       {authModalOpen && <Auth onClose={closeAuthModal} />}
     </div>
   );
