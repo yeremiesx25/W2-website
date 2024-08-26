@@ -4,24 +4,27 @@ import Talleres from '../../assets/coworking/Colegio.jpeg'
 import cw2_1 from '../../assets/coworking/cw2_1.jpg'
 import cw2_2 from '../../assets/coworking/Estrategia.jpeg'
 import Charla from '../../assets/coworking/Charla.jpg'
+import Equipo from '../../assets/coworking/equipo.jpg'
+import Eventos from '../../assets/coworking/eventos.jpg'
+import Individual from '../../assets/coworking/individual.jpg'
 
 const Rooms = () => {
   const rooms = [
     {
       id: 1,
-      imageUrl: 'https://via.placeholder.com/300', // Reemplaza con tus imágenes
+      imageUrl: Individual, // Reemplaza con tus imágenes
       title: 'Espacio Individual',
-      seats: 8,
+      seats: 26,
     },
     {
       id: 2,
-      imageUrl: 'https://via.placeholder.com/300',
+      imageUrl: Equipo,
       title: 'Trabajo en Equipo',
       seats: 5,
     },
     {
       id: 3,
-      imageUrl: 'https://via.placeholder.com/300',
+      imageUrl: cw2_2,
       title: 'Capacitaciones',
       seats: 3,
     },
@@ -39,7 +42,7 @@ const Rooms = () => {
     },
     {
       id: 6,
-      imageUrl: 'https://via.placeholder.com/300',
+      imageUrl: Eventos,
       title: 'Eventos Corporativos',
       seats: 7,
     },
