@@ -3,7 +3,7 @@ import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import Talleres from '../../assets/coworking/Colegio.jpeg'
 import cw2_1 from '../../assets/coworking/cw2_1.jpg'
 import cw2_2 from '../../assets/coworking/Estrategia.jpeg'
-import Charla from '../../assets/coworking/Charla.DNG'
+import Charla from '../../assets/coworking/Charla.jpg'
 
 const Rooms = () => {
   const rooms = [
