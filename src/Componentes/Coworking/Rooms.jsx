@@ -7,6 +7,7 @@ import Charla from '../../assets/coworking/Charla.jpg'
 import Equipo from '../../assets/coworking/equipo.jpg'
 import Eventos from '../../assets/coworking/eventos.jpg'
 import Individual from '../../assets/coworking/individual.jpg'
+import flecha from "../../assets/flecha.png";
 
 const Rooms = () => {
   const rooms = [
@@ -80,7 +81,13 @@ const Rooms = () => {
     <div className="w-full max-w-6xl mx-auto py-10 mt-6 font-dmsans">
       {/* Título y subtítulo */}
       <div className="text-center mb-8">
-        <h2 className="text-3xl font-semibold text-gray-800">Beneficios del Coworking</h2>
+      
+        <h2 className="text-4xl font-bold text-gray-800">
+          <img
+            src={flecha}
+            alt=""
+            className="inline-block w-16 h-12 mr-2"
+          ></img>Beneficios del <span className='text-primarycolor'>Coworking</span> </h2>
         <p className="text-gray-600 mt-2">
         Que los espacios no limiten tu crecimiento, si eres EMPRESARIO, EMPREDEDOR, PROFESIONAL, FREELANCE, ETC, este espacio es ideal para ti, adaptado a tus necesidades.
         </p>

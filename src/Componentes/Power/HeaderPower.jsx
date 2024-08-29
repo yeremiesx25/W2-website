@@ -48,8 +48,9 @@ function HeaderPower() {
         </div>
 
         {/* Botones de login y registro (solo en escritorio) */}
+        
         <div className="hidden md:flex items-center">
-          <button onClick={handleModalOpen} className="text-md font-bold bg-yellowprimary hover:bg-yellow-200 text-primarycolor px-4 py-2 rounded-md ml-4">Iniciar sesión</button>
+          <Link to="/Login" className="text-md font-bold bg-yellowprimary hover:bg-yellow-200 text-primarycolor px-4 py-2 rounded-md ml-4">Iniciar sesión</Link>
         </div>
       </div>
 
