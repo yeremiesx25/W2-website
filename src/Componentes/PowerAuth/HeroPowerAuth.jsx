@@ -25,7 +25,7 @@ function HeroPowerAuth() {
             <img src="https://images.pexels.com/photos/6170398/pexels-photo-6170398.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Auxiliar de reparto" className="h-full w-full object-cover" />
           </div>
           <div className="bg-white h-28 w-28 rounded-full overflow-hidden hover:scale-125 transition-all duration-300">
-            <img src="https://controlcombustible.pe/wp-content/uploads/2023/01/Cual-es-el-sueldo-de-un-conductor-de-transporte-pesado-1024x594.png" alt="Conductor de trailer" className="h-full w-full object-cover" />
+            <img src="https://www.esan.edu.pe/images/blog/2015/02/02/conductor-profesional.jpg" alt="Conductor de trailer" className="h-full w-full object-cover" />
           </div>
         </div>
         <div className="grid grid-cols-3 xl:grid-cols-3 gap-8 xl:gap-20">
@@ -33,7 +33,7 @@ function HeroPowerAuth() {
             <img src="https://www.shutterstock.com/image-photo/young-successful-sales-assistant-uniform-600nw-2110605533.jpg" alt="Asesor de ventas" className="h-full w-full object-cover" />
           </div>
           <div className="bg-white h-28 w-28 rounded-full overflow-hidden hover:scale-125 transition-all duration-300">
-            <img src="https://unicarriers.pe/wp-content/uploads/2018/05/5-consejos-para-trabajar-con-carga-elevada.jpg" alt="Operario de equipo" className="h-full w-full object-cover" />
+            <img src="https://i0.wp.com/grupocasalima.com/wp-content/uploads/2022/07/epp-maquinaria-portada.webp?fit=1000%2C706&ssl=1" alt="Operario de equipo" className="h-full w-full object-cover" />
           </div>
           <div className="bg-white h-28 w-28 rounded-full overflow-hidden hover:scale-125 transition-all duration-300">
             <img src="https://fundametal.edu.ve/webfundametal/wp-content/uploads/2021/12/curso-operario-almacen.jpg" alt="Operario de almacén" className="h-full w-full object-cover" />

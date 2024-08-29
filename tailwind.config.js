@@ -45,7 +45,7 @@ module.exports = withMT( {
         'secundarygradient': 'linear-gradient(0.25turn, #2563EB, #4D2EA4)',
       },
     },
-  },
+  },  
   plugins: [
   ],
 })

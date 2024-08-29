@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import Talleres from '../../assets/coworking/Colegio.jpeg'
-import cw2_1 from '../../assets/coworking/cw2_1.jpg'
+import Freelance from '../../assets/coworking/freelance.jpg'
 import cw2_2 from '../../assets/coworking/Estrategia.jpeg'
 import Charla from '../../assets/coworking/Charla.jpg'
 import Equipo from '../../assets/coworking/equipo.jpg'
@@ -20,37 +20,37 @@ const Rooms = () => {
       id: 2,
       imageUrl: Equipo,
       title: 'Trabajo en Equipo',
-      seats: 5,
+      seats: '2 - 26',
     },
     {
       id: 3,
       imageUrl: cw2_2,
       title: 'Capacitaciones',
-      seats: 3,
+      seats: 26,
     },
     {
       id: 4,
       imageUrl: Talleres,
       title: 'Talleres',
-      seats: 6,
+      seats: 26,
     },
     {
       id: 5,
       imageUrl: Charla,
       title: 'Charlas',
-      seats: 4,
+      seats: 26,
     },
     {
       id: 6,
       imageUrl: Eventos,
       title: 'Eventos Corporativos',
-      seats: 7,
+      seats: 30,
     },
     {
       id: 7,
-      imageUrl: 'https://via.placeholder.com/300',
-      title: 'Zona de Café',
-      seats: 2,
+      imageUrl: Freelance,
+      title: 'Oficina de Freelance',
+      seats: '1 - 26',
     },
   ];
 
