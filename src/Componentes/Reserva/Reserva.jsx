@@ -223,7 +223,7 @@ function Reserva() {
                 value={formData.medioPago}
                 onChange={handleChange}
                 className="w-full px-3 py-2 border rounded-lg"
-              >
+              > 
                 <option value="yape">Yape</option>
                 <option value="plin">Plin</option>
                 <option value="tarjeta">Transferencia</option>
