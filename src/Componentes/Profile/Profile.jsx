@@ -20,9 +20,13 @@ function Profile() {
   const [dni, setDni] = useState("");
   const [fechaNac, setFechaNac] = useState("");
   const [distrito, setDistrito] = useState("");
+  const [gradoAcademico, setGradoAcademico] = useState("");
+  const [institucion, setInstitucion] = useState("");
+  const [ultimoAnioEstudio, setUltimoAnioEstudio] = useState("");
   const [isEditing, setIsEditing] = useState(false);
   const [errorMessages, setErrorMessages] = useState({});
   const [experiences, setExperiences] = useState(["", "", "", "", ""]);
+  const [step, setStep] = useState(1);
 
   useEffect(() => {
     async function fetchUserData() {
@@ -46,6 +50,9 @@ function Profile() {
           setFechaNac(data.fecha_nac || "");
           setDistrito(data.distrito || "");
           setCvFileName(data.cv_file_name || "");
+          setGradoAcademico(data.estudio || "");
+          setInstitucion(data.institucion || "");
+          setUltimoAnioEstudio(data.año || "");
           setExperiences([
             data.exp_1 || "",
             data.exp_2 || "",
@@ -78,6 +85,9 @@ function Profile() {
     updatedExperiences[index] = value;
     setExperiences(updatedExperiences);
   };
+  const handleGradoAcademicoChange = (e) => setGradoAcademico(e.target.value);
+  const handleInstitucionChange = (e) => setInstitucion(e.target.value);
+  const handleUltimoAnioEstudioChange = (e) => setUltimoAnioEstudio(e.target.value);
 
   const handleEdit = () => setIsEditing(true);
 
@@ -90,6 +100,9 @@ function Profile() {
     if (!dni) errors.dni = "Campo Obligatorio";
     if (!fechaNac) errors.fechaNac = "Campo Obligatorio";
     if (!distrito) errors.distrito = "Campo Obligatorio";
+    if (!gradoAcademico) errors.gradoAcademico = "Campo Obligatorio";
+    if (!institucion) errors.institucion = "Campo Obligatorio";
+    if (!ultimoAnioEstudio) errors.ultimoAnioEstudio = "Campo Obligatorio";
 
     setErrorMessages(errors);
 
@@ -109,6 +122,9 @@ function Profile() {
         fecha_nac: fechaNac,
         distrito,
         cv_file_name: cvFileName,
+        estudio: gradoAcademico,
+        institucion,
+        año: ultimoAnioEstudio,
         exp_1: experiences[0] || null,
         exp_2: experiences[1] || null,
         exp_3: experiences[2] || null,
@@ -158,7 +174,6 @@ function Profile() {
 
       console.log("Datos guardados correctamente:", savedData);
 
-      // Display success message
       const savedMessage = document.createElement("div");
       savedMessage.textContent = "Guardado correctamente";
       savedMessage.style.backgroundColor = "rgba(0, 128, 0, 0.8)";
@@ -179,83 +194,76 @@ function Profile() {
       console.error("Error guardando los datos:", error.message);
     }
   };
+
   const generatePdf = async () => {
     const doc = new jsPDF();
-  
-    // Add user photo
+
     if (user.user_metadata.avatar_url) {
       const response = await fetch(user.user_metadata.avatar_url);
       const blob = await response.blob();
       const reader = new FileReader();
-  
+
       reader.onloadend = () => {
         const base64data = reader.result;
-  
-        // Draw a circle to create the profile photo placeholder
+
         doc.setFillColor(255, 255, 255);
         doc.setDrawColor(0, 0, 0);
-        doc.circle(105, 40, 20, "FD");  // Reduced the radius of the circle
-  
-        // Add the profile photo with reduced size
-        doc.addImage(base64data, "PNG", 85, 20, 40, 40, undefined, 'FAST');  // Reduced the dimensions to 40x40
-  
-        // Add user name
+        doc.circle(105, 40, 20, "FD");
+        doc.addImage(base64data, "PNG", 85, 20, 40, 40, undefined, 'FAST');
+
         doc.setFontSize(18);
         doc.setFont("helvetica", "bold");
-        doc.setTextColor(85, 85, 85); // Dark gray color
+        doc.setTextColor(85, 85, 85);
         doc.text(nombre, 105, 80, { align: "center" });
-  
-        // Add contact icon
+
         const agendaImg = new Image();
         agendaImg.src = Agenda;
         doc.addImage(agendaImg, "PNG", 10, 95, 10, 10);
-  
-        // Add contact details
+
         doc.setFontSize(14);
         doc.setFont("helvetica", "bold");
-        doc.setTextColor(85, 85, 85); // Dark gray color
+        doc.setTextColor(85, 85, 85);
         doc.text("CONTACTO:", 25, 100);
-  
+
         doc.setFontSize(12);
         doc.setFont("helvetica", "normal");
-        doc.setTextColor(64, 64, 64); // Dark gray color
+        doc.setTextColor(64, 64, 64);
         doc.text("Teléfono:", 25, 110);
-        doc.text(`${telefono}`, 25, 117); // Reduced space
+        doc.text(`${telefono}`, 25, 117);
         doc.text("Email:", 25, 125);
-        doc.text(`${email}`, 25, 132); // Reduced space
+        doc.text(`${email}`, 25, 132);
         doc.text("DNI:", 25, 140);
-        doc.text(`${dni}`, 25, 147); // Reduced space
+        doc.text(`${dni}`, 25, 147);
         doc.text("Fecha de Nacimiento:", 25, 155);
-        doc.text(`${fechaNac}`, 25, 162); // Reduced space
+        doc.text(`${fechaNac}`, 25, 162);
         doc.text("Distrito:", 25, 170);
-        doc.text(`${distrito}`, 25, 177); // Reduced space
-  
-        // Add experience icon
+        doc.text(`${distrito}`, 25, 177);
+
         const maletinImg = new Image();
         maletinImg.src = Maletin;
         doc.addImage(maletinImg, "PNG", 10, 185, 10, 10);
-  
-        // Add experiences
+
         doc.setFontSize(14);
         doc.setFont("helvetica", "bold");
-        doc.setTextColor(85, 85, 85); // Dark gray color
+        doc.setTextColor(85, 85, 85);
         doc.text("EXPERIENCIA LABORAL:", 25, 190);
-  
+
         doc.setFontSize(12);
         doc.setFont("helvetica", "normal");
-        doc.setTextColor(64, 64, 64); // Dark gray color for experiences
+        doc.setTextColor(64, 64, 64);
         let yOffset = 200;
         experiences.forEach((exp, index) => {
           doc.text(`${index + 1}. ${exp}`, 25, yOffset);
           yOffset += 10;
         });
-  
+
         doc.save("cv.pdf");
       };
-  
+
       reader.readAsDataURL(blob);
     }
   };
+
   return (
     <div className="w-full font-dmsans flex">
       <HeaderPowerAuth />
@@ -316,150 +324,269 @@ function Profile() {
             </div>
           </div>
 
-          <div className="flex w-full">
-            {/* Left side inputs */}
-            <div className="px-4 w-1/2 border-r">
-              <div className="w-full px-8 flex flex-col gap-4">
-                <div className="mb-4">
-                  <label className="block text-sm font-regular text-gray-700">
-                    DNI
-                  </label>
-                  <input
-                    type="text"
-                    className={`mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-gray-600 ${
-                      !isEditing ? "bg-gray-50" : "border-2 border-indigo-500"
-                    } py-2 px-3`}
-                    placeholder="Ingrese su DNI"
-                    value={dni}
-                    onChange={handleDniChange}
-                    disabled={!isEditing}
-                  />
-                </div>
-
-                <div className="mb-4">
-                  <label className="block text-sm font-regular text-gray-700">
-                    Celular
-                  </label>
-                  <input
-                    type="text"
-                    className={`mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-gray-600 ${
-                      !isEditing ? "bg-gray-50" : "border-2 border-indigo-500"
-                    } py-2 px-3`}
-                    placeholder="Ingrese su teléfono"
-                    value={telefono}
-                    onChange={handleTelefonoChange}
-                    disabled={!isEditing}
-                  />
-                </div>
-
-                <div className="mb-4">
-                  <label className="block text-sm font-regular text-gray-700">
-                    Fecha de Nacimiento
-                  </label>
-                  <input
-                    type="date"
-                    className={`mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-gray-600 ${
-                      !isEditing ? "bg-gray-50" : "border-2 border-indigo-500"
-                    } py-2 px-3`}
-                    value={fechaNac}
-                    onChange={handleFechaNacChange}
-                    disabled={!isEditing}
-                  />
-                </div>
-
-                <div className="mb-4">
-                  <label className="block text-sm font-regular text-gray-700">
-                    Distrito de residencia
-                  </label>
-                  <input
-                    type="text"
-                    className={`mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-gray-600 ${
-                      !isEditing ? "bg-gray-50" : "border-2 border-indigo-500"
-                    } py-2 px-3`}
-                    placeholder="Ingrese su distrito"
-                    value={distrito}
-                    onChange={handleDistritoChange}
-                    disabled={!isEditing}
-                  />
-                </div>
-
-                <div className="mb-4">
-                  <label className="block text-sm font-regular text-gray-700">
-                    Cv (Formato pdf)
-                  </label>
-                  {isEditing ? (
-                    <input
-                      type="file"
-                      className={`mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-gray-500 ${
-                        !isEditing ? "bg-gray-50" : "border-2 border-indigo-500"
-                      } py-2 px-3`}
-                      onChange={handleCvUpload}
-                    />
-                  ) : (
-                    <div className="mt-1 block w-full py-2 px-3 bg-gray-50 rounded-md">
-                      {cvFileName ? (
-                        <a
-                          href={existingRecord?.cv_url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-blue-600 underline"
-                        >
-                          {cvFileName}
-                        </a>
-                      ) : (
-                        "No se ha subido ningún CV"
-                      )}
-                    </div>
-                  )}
-                </div>
-              </div>
-            </div>
-
-            {/* Experiencia Laboral */}
-            <div className="px-4 w-1/2">
-              <div className="w-full px-8 flex flex-col gap-4">
-                <h3 className="text-lg font-medium text-gray-700">
-                  Experiencia Laboral
-                </h3>
-                {experiences.map((exp, index) => (
-                  <div className="mb-4" key={index}>
-                    <label
-                      className="block text-sm font-regular text-gray-700"
-                      htmlFor={`exp_${index}`}
-                    >
+          {step === 1 && (
+            <div className="flex w-full">
+              <div className="px-4 w-1/2 border-r">
+                <div className="w-full px-8 flex flex-col gap-4">
+                  <h3 className="text-lg font-medium text-gray-700">
+                    Datos Personales
+                  </h3>
+                  <div className="mb-2">
+                    <label className="block text-sm font-regular text-gray-700">
+                      DNI
                     </label>
                     <input
                       type="text"
-                      id={`exp_${index}`}
                       className={`mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-gray-600 ${
-                        !isEditing ? "bg-gray-50" : "border-2 border-indigo-500"
+                        !isEditing
+                          ? "bg-gray-50"
+                          : "border-2 border-indigo-500"
                       } py-2 px-3`}
-                      placeholder={`Ingrese experiencia ${index + 1}`}
-                      value={exp}
-                      onChange={(e) =>
-                        handleExperienceChange(index, e.target.value)
-                      }
+                      placeholder="Ingrese su DNI"
+                      value={dni}
+                      onChange={handleDniChange}
                       disabled={!isEditing}
                     />
                   </div>
-                ))}
+
+                  <div className="mb-2">
+                    <label className="block text-sm font-regular text-gray-700">
+                      Celular
+                    </label>
+                    <input
+                      type="text"
+                      className={`mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-gray-600 ${
+                        !isEditing
+                          ? "bg-gray-50"
+                          : "border-2 border-indigo-500"
+                      } py-2 px-3`}
+                      placeholder="Ingrese su teléfono"
+                      value={telefono}
+                      onChange={handleTelefonoChange}
+                      disabled={!isEditing}
+                    />
+                  </div>
+
+                  <div className="mb-2">
+                    <label className="block text-sm font-regular text-gray-700">
+                      Fecha de Nacimiento
+                    </label>
+                    <input
+                      type="date"
+                      className={`mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-gray-600 ${
+                        !isEditing
+                          ? "bg-gray-50"
+                          : "border-2 border-indigo-500"
+                      } py-2 px-3`}
+                      value={fechaNac}
+                      onChange={handleFechaNacChange}
+                      disabled={!isEditing}
+                    />
+                  </div>
+
+                  <div className="mb-4">
+                    <label className="block text-sm font-regular text-gray-700">
+                      Distrito de residencia
+                    </label>
+                    <input
+                      type="text"
+                      className={`mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-gray-600 ${
+                        !isEditing
+                          ? "bg-gray-50"
+                          : "border-2 border-indigo-500"
+                      } py-2 px-3`}
+                      placeholder="Ingrese su distrito"
+                      value={distrito}
+                      onChange={handleDistritoChange}
+                      disabled={!isEditing}
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="px-4 w-1/2">
+                <div className="w-full px-8 flex flex-col gap-4">
+                  <h3 className="text-lg font-medium text-gray-700">
+                    Grado Académico
+                  </h3>
+
+                  <div className="mb-2">
+                    <label className="block text-sm font-regular text-gray-700">
+                      Último Grado Académico
+                    </label>
+                    <select
+                      className={`mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-gray-600 ${
+                        !isEditing
+                          ? "bg-gray-50"
+                          : "border-2 border-indigo-500"
+                      } py-2 px-3`}
+                      value={gradoAcademico}
+                      onChange={handleGradoAcademicoChange}
+                      disabled={!isEditing}
+                    >
+                      <option value="">Seleccione</option>
+                      <option value="Secundaria Incompleta">
+                        Secundaria Incompleta
+                      </option>
+                      <option value="Secundaria Completa">
+                        Secundaria Completa
+                      </option>
+                      <option value="Técnico Incompleto">
+                        Técnico Incompleto
+                      </option>
+                      <option value="Técnico Completo">
+                        Técnico Completo
+                      </option>
+                      <option value="Universitario Incompleto">
+                        Universitario Incompleto
+                      </option>
+                      <option value="Universitario Completo">
+                        Universitario Completo
+                      </option>
+                      <option value="Postgrado">
+                        Postgrado
+                      </option>
+                    </select>
+                  </div>
+
+                  <div className="mb-2">
+                    <label className="block text-sm font-regular text-gray-700">
+                      Institución Educativa
+                    </label>
+                    <input
+                      type="text"
+                      className={`mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-gray-600 ${
+                        !isEditing
+                          ? "bg-gray-50"
+                          : "border-2 border-indigo-500"
+                      } py-2 px-3`}
+                      placeholder="Ingrese el nombre de la institución"
+                      value={institucion}
+                      onChange={handleInstitucionChange}
+                      disabled={!isEditing}
+                    />
+                  </div>
+
+                  <div className="mb-4">
+                    <label className="block text-sm font-regular text-gray-700">
+                      Último Año de Estudio
+                    </label>
+                    <input
+                      type="text"
+                      className={`mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-gray-600 ${
+                        !isEditing
+                          ? "bg-gray-50"
+                          : "border-2 border-indigo-500"
+                      } py-2 px-3`}
+                      placeholder="Ingrese el año"
+                      value={ultimoAnioEstudio}
+                      onChange={handleUltimoAnioEstudioChange}
+                      disabled={!isEditing}
+                    />
+                    </div>
+                  <div className="mb-2">
+                    <label className="block text-sm font-regular text-gray-700">
+                      Cv (Formato pdf)
+                    </label>
+                    {isEditing ? (
+                      <input
+                        type="file"
+                        className={`mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-gray-500 ${
+                          !isEditing
+                            ? "bg-gray-50"
+                            : "border-2 border-indigo-500"
+                        } py-2 px-3`}
+                        onChange={handleCvUpload}
+                      />
+                    ) : (
+                      <div className="mt-1 block w-full py-2 px-3 bg-gray-50 rounded-md">
+                        {cvFileName ? (
+                          <a
+                            href={existingRecord?.cv_url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-blue-600 underline"
+                          >
+                            {cvFileName}
+                          </a>
+                        ) : (
+                          "No se ha subido ningún CV"
+                        )}
+                      </div>
+                    )}
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
+          )}
 
-          <div className="flex justify-end px-4 py-3 bg-gray-50 text-right sm:px-6">
+          {step === 2 && (
+            <div className="flex w-full">
+              <div className="px-4 w-1/2">
+                <div className="w-full px-8 flex flex-col gap-4">
+                  <h3 className="text-lg font-medium text-gray-700">
+                    Experiencia Laboral
+                  </h3>
+                  {experiences.map((exp, index) => (
+                    <div className="mb-4" key={index}>
+                      <label
+                        className="block text-sm font-regular text-gray-700"
+                        htmlFor={`exp_${index}`}
+                      ></label>
+                      <input
+                        type="text"
+                        id={`exp_${index}`}
+                        className={`mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-gray-600 ${
+                          !isEditing
+                            ? "bg-gray-50"
+                            : "border-2 border-indigo-500"
+                        } py-2 px-3`}
+                        placeholder={`Ingrese experiencia ${index + 1}`}
+                        value={exp}
+                        onChange={(e) =>
+                          handleExperienceChange(index, e.target.value)
+                        }
+                        disabled={!isEditing}
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+
+          <div className="flex justify-center mt-6">
             {!isEditing ? (
-              <div></div>
+              <div className="flex space-x-2">
+                {step === 1 ? (
+                  <button
+                    className="bg-primarycolor text-white text-lg px-6 py-2 rounded-full mb-4 "
+                    onClick={() => setStep(2)}
+                  >
+                    Siguiente
+                  </button>
+                ) : (
+                  <>
+                    <button
+                      className="bg-gray-500 text-white text-lg px-6 py-2 rounded-full mb-4 "
+                      onClick={() => setStep(1)}
+                    >
+                      Atrás
+                    </button>
+                  
+                  </>
+                )}
+                 </div>
             ) : (
-              <div className="flex w-full">
+              <div className="flex justify-center space-x-2">
                 <button
-                  className="w-1/2 bg-gray-500 text-white p-2 rounded-md mr-2"
-                  onClick={() => setIsEditing(false)}
+                  className="bg-gray-500 text-white text-lg px-6 py-2 rounded-full mb-4"
+                  onClick={() => setStep(step === 1 ? 2 : 1)}
                 >
-                  Cancelar
+                  {step === 1 ? "Siguiente" : "Atrás"}
                 </button>
                 <button
-                  className="w-1/2 bg-green-500 text-white p-2 rounded-md"
+                  className="bg-primarycolor text-white text-lg px-6 py-2 rounded-full mb-4"
                   onClick={handleSave}
                 >
                   Guardar
