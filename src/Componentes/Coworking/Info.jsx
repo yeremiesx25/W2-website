@@ -21,7 +21,7 @@
         <div className="mx-auto max-w-7xl px-6 lg:px-8 flex">
           <div className='flex flex-col'>
             <div className="mx-auto max-w-2xl lg:mx-0">
-              <h2 className="text-4xl font-bold tracking-tight text-white sm:text-5xl">Oficina para Trabajo Remoto en San Juan de Lurigancho:  </h2><h2 className='text-4xl font-bold tracking-tight text-white sm:text-5xl mt-8'>TU OFICINA, TU RITMO</h2>
+              <h2  className="text-4xl font-bold tracking-tight text-white sm:text-5xl">Oficina para Trabajo Remoto en San Juan de Lurigancho:  </h2><h2 className='text-4xl font-bold tracking-tight text-white sm:text-5xl mt-8'>TU OFICINA, TU RITMO</h2>
               <p className="mt-6 text-lg leading-8 text-gray-300">Nuestra oficina de Coworking es el entorno perfecto para mantener la productividad fuera de casa. Un espacio diseñado para que trabajes sin interrupciones, nosotros nos encargamos de tu comodidad, TÚ de tu crecimiento.</p>
             </div>
             <div className="mx-auto mt-10 max-w-2xl lg:mx-0 lg:max-w-none">
