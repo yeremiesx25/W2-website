@@ -8,7 +8,7 @@ function Login({ closeModal }) {
   const { signInWithGoogle, signOut } = UserAuth();
 
   return (
-    <div className="fixed inset-0 flex  justify-center bg-gray-900 bg-opacity-0 z-50 font-dmsans">
+    <div className="fixed inset-0 flex  justify-center bg-gray-900 bg-opacity-0 z-50 font-dmsans flex-wrap">
       <HeaderPower />
       {/* <button
           className="self-start text-gray-600 dark:text-white"
@@ -29,7 +29,7 @@ function Login({ closeModal }) {
             />
           </svg>
         </button> */}
-        <div class="flex flex-col mb-8 animated fadeIn sm:flex-row bg-white w-1/2 h-full pl-20">
+        <div class="md:flex flex-col  mb-8 animated fadeIn sm:flex-row bg-white w-1/2 h-full pl-20 hidden">
             <div class="flex items-center mb-8 sm:w-1/2 md:w-5/12 sm:order-last font-dmsans">
                 <img class="rounded-lg" src="https://img.freepik.com/premium-vector/young-smiling-woman-jane-sitting-with-crossed-legs-holding-laptop-freelance-studying-online-education-work-home-work-concept-3d-vector-people-character-illustration-cartoon-minimal-style_365941-742.jpg " alt=""/>
             </div>

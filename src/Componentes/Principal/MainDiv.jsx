@@ -27,7 +27,7 @@ function MainDiv() {
       <div className="text-center px-4">
         <h1
           className="max-w-4xl mx-auto mb-4 text-4xl font-bold leading-tight text-primarytext sm:leading-tight sm:text-5xl lg:text-6xl lg:leading-tight animate-fade-up">
-          <span className='text-primarycolor'>Potenciamos talentos,</span> impulsamos resultados
+          <span className='text-primarycolor'>Inbound Recruiting,</span><br /> Atracción de Talento Humano
         </h1>
         <p className="max-w-2xl mx-auto px-6 text-lg text-primarytext font-inter animate-fade-up">
           Potenciamos tu éxito empresarial con soluciones de gestión humana y tecnología de vanguardia, incluso sin un departamento de recursos humanos.

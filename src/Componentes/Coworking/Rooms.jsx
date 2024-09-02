@@ -1,53 +1,57 @@
 import { useState, useEffect } from 'react';
 import { FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import Talleres from '../../assets/coworking/Colegio.jpeg'
-import cw2_1 from '../../assets/coworking/cw2_1.jpg'
+import Freelance from '../../assets/coworking/freelance.jpg'
 import cw2_2 from '../../assets/coworking/Estrategia.jpeg'
 import Charla from '../../assets/coworking/Charla.jpg'
+import Equipo from '../../assets/coworking/equipo.jpg'
+import Eventos from '../../assets/coworking/eventos.jpg'
+import Individual from '../../assets/coworking/individual.jpg'
+import flecha from "../../assets/flecha.png";
 
 const Rooms = () => {
   const rooms = [
     {
       id: 1,
-      imageUrl: 'https://via.placeholder.com/300', // Reemplaza con tus imágenes
+      imageUrl: Individual, // Reemplaza con tus imágenes
       title: 'Espacio Individual',
-      seats: 8,
+      seats: 26,
     },
     {
       id: 2,
-      imageUrl: 'https://via.placeholder.com/300',
+      imageUrl: Equipo,
       title: 'Trabajo en Equipo',
-      seats: 5,
+      seats: '2 - 26',
     },
     {
       id: 3,
-      imageUrl: 'https://via.placeholder.com/300',
+      imageUrl: cw2_2,
       title: 'Capacitaciones',
-      seats: 3,
+      seats: 26,
     },
     {
       id: 4,
       imageUrl: Talleres,
       title: 'Talleres',
-      seats: 6,
+      seats: 26,
     },
     {
       id: 5,
       imageUrl: Charla,
       title: 'Charlas',
-      seats: 4,
+      seats: 26,
     },
     {
       id: 6,
-      imageUrl: 'https://via.placeholder.com/300',
+      imageUrl: Eventos,
       title: 'Eventos Corporativos',
-      seats: 7,
+      seats: 30,
     },
     {
       id: 7,
-      imageUrl: 'https://via.placeholder.com/300',
-      title: 'Zona de Café',
-      seats: 2,
+      imageUrl: Freelance,
+      title: 'Oficina de Freelance',
+      seats: '1 - 26',
     },
   ];
 
@@ -77,7 +81,13 @@ const Rooms = () => {
     <div className="w-full max-w-6xl mx-auto py-10 mt-6 font-dmsans">
       {/* Título y subtítulo */}
       <div className="text-center mb-8">
-        <h2 className="text-3xl font-semibold text-gray-800">Beneficios del Coworking</h2>
+      
+        <h2 className="text-4xl font-bold text-gray-800">
+          <img
+            src={flecha}
+            alt=""
+            className="inline-block w-16 h-12 mr-2"
+          ></img>Beneficios del <span className='text-primarycolor'>Coworking</span> </h2>
         <p className="text-gray-600 mt-2">
         Que los espacios no limiten tu crecimiento, si eres EMPRESARIO, EMPREDEDOR, PROFESIONAL, FREELANCE, ETC, este espacio es ideal para ti, adaptado a tus necesidades.
         </p>

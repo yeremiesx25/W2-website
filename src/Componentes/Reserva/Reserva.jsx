@@ -223,7 +223,7 @@ function Reserva() {
                 value={formData.medioPago}
                 onChange={handleChange}
                 className="w-full px-3 py-2 border rounded-lg"
-              >
+              > 
                 <option value="yape">Yape</option>
                 <option value="plin">Plin</option>
                 <option value="tarjeta">Transferencia</option>
@@ -273,7 +273,7 @@ function Reserva() {
       >
         <div className="bg-white p-5 rounded-lg shadow-lg">
           <h2 className="text-lg font-semibold text-gray-700 mb-4 text-center">¡Reserva Confirmada!</h2>
-          <p>Tu reserva ha sido creada con éxito.</p>
+          <p>Tu reserva ha sido creada con éxito. <br /> Para confirmar tu reserva y hacer el pago </p>
           <button
             onClick={() => {
               closeModal();

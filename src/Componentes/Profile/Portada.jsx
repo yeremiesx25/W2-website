@@ -37,7 +37,7 @@ function Portada() {
   };
 
   return (
-    <div className='w-full relative h-28 hidden md:block bg-primarytext bg-cover bg-center'>
+    <div className='w-full  h-28 hidden md:block bg-primarytext bg-cover bg-center'>
       <img 
         className={`transition-opacity duration-300 ${fade ? 'opacity-0' : 'opacity-100'}`}
         src={images[currentImageIndex]} 
@@ -48,8 +48,8 @@ function Portada() {
         onClick={toggleMenu} 
         style={{
           position: 'absolute', 
-          top: '10px', 
-          right: '10px', 
+          top: '20px', 
+          right: '180px', 
           background: 'rgba(0, 0, 0, 0.5)', 
           color: 'white', 
           border: 'none', 
