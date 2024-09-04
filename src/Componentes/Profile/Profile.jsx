@@ -1,13 +1,10 @@
 import React, { useState, useEffect } from "react";
-import jsPDF from "jspdf";
-import html2canvas from "html2canvas";
 import HeaderPowerAuth from "../PowerAuth/HeaderPowerAuth";
 import { UserAuth } from "../../Context/AuthContext";
 import { supabase } from "../../supabase/supabase.config";
 import Portada from "./Portada";
 import { RiEditLine } from "react-icons/ri";
-import Agenda from "../../assets/agenda.png";
-import Maletin from "../../assets/maletin.png";
+import GeneratePdfButton from "./GeneratePdfButton";
 
 function Profile() {
   const { user } = UserAuth();
@@ -25,7 +22,10 @@ function Profile() {
   const [ultimoAnioEstudio, setUltimoAnioEstudio] = useState("");
   const [isEditing, setIsEditing] = useState(false);
   const [errorMessages, setErrorMessages] = useState({});
-  const [experiences, setExperiences] = useState(["", "", "", "", ""]);
+  const [experiences, setExperiences] = useState([
+    { cargo: "", empresa: "", tiempo: "", funcion: "" },
+    { cargo: "", empresa: "", tiempo: "", funcion: "" }
+  ]);
   const [step, setStep] = useState(1);
 
   useEffect(() => {
@@ -54,11 +54,18 @@ function Profile() {
           setInstitucion(data.institucion || "");
           setUltimoAnioEstudio(data.año || "");
           setExperiences([
-            data.exp_1 || "",
-            data.exp_2 || "",
-            data.exp_3 || "",
-            data.exp_4 || "",
-            data.exp_5 || "",
+            {
+              cargo: data.cargo_1 || "",
+              empresa: data.empresa_1 || "",
+              tiempo: data.tiempo_1 || "",
+              funcion: data.funcion_1 || ""
+            },
+            {
+              cargo: data.cargo_2 || "",
+              empresa: data.empresa_2 || "",
+              tiempo: data.tiempo_2 || "",
+              funcion: data.funcion_2 || ""
+            }
           ]);
         }
       } catch (error) {
@@ -80,9 +87,9 @@ function Profile() {
     setCvFile(file);
     setCvFileName(file.name);
   };
-  const handleExperienceChange = (index, value) => {
+  const handleExperienceChange = (index, field, value) => {
     const updatedExperiences = [...experiences];
-    updatedExperiences[index] = value;
+    updatedExperiences[index][field] = value;
     setExperiences(updatedExperiences);
   };
   const handleGradoAcademicoChange = (e) => setGradoAcademico(e.target.value);
@@ -90,6 +97,36 @@ function Profile() {
   const handleUltimoAnioEstudioChange = (e) => setUltimoAnioEstudio(e.target.value);
 
   const handleEdit = () => setIsEditing(true);
+
+  const handleCancel = () => {
+    if (existingRecord) {
+      setNombre(existingRecord.nombre || "");
+      setEmail(existingRecord.email || "");
+      setTelefono(existingRecord.telefono || "");
+      setDni(existingRecord.dni_user || "");
+      setFechaNac(existingRecord.fecha_nac || "");
+      setDistrito(existingRecord.distrito || "");
+      setCvFileName(existingRecord.cv_file_name || "");
+      setGradoAcademico(existingRecord.estudio || "");
+      setInstitucion(existingRecord.institucion || "");
+      setUltimoAnioEstudio(existingRecord.año || "");
+      setExperiences([
+        {
+          cargo: existingRecord.cargo_1 || "",
+          empresa: existingRecord.empresa_1 || "",
+          tiempo: existingRecord.tiempo_1 || "",
+          funcion: existingRecord.funcion_1 || ""
+        },
+        {
+          cargo: existingRecord.cargo_2 || "",
+          empresa: existingRecord.empresa_2 || "",
+          tiempo: existingRecord.tiempo_2 || "",
+          funcion: existingRecord.funcion_2 || ""
+        }
+      ]);
+    }
+    setIsEditing(false);
+  };
 
   const handleSave = async () => {
     let errors = {};
@@ -125,11 +162,14 @@ function Profile() {
         estudio: gradoAcademico,
         institucion,
         año: ultimoAnioEstudio,
-        exp_1: experiences[0] || null,
-        exp_2: experiences[1] || null,
-        exp_3: experiences[2] || null,
-        exp_4: experiences[3] || null,
-        exp_5: experiences[4] || null,
+        cargo_1: experiences[0].cargo || null,
+        empresa_1: experiences[0].empresa || null,
+        tiempo_1: experiences[0].tiempo || null,
+        funcion_1: experiences[0].funcion || null,
+        cargo_2: experiences[1].cargo || null,
+        empresa_2: experiences[1].empresa || null,
+        tiempo_2: experiences[1].tiempo || null,
+        funcion_2: experiences[1].funcion || null,
         profile_complete: true,
       };
 
@@ -195,75 +235,6 @@ function Profile() {
     }
   };
 
-  const generatePdf = async () => {
-    const doc = new jsPDF();
-
-    if (user.user_metadata.avatar_url) {
-      const response = await fetch(user.user_metadata.avatar_url);
-      const blob = await response.blob();
-      const reader = new FileReader();
-
-      reader.onloadend = () => {
-        const base64data = reader.result;
-
-        doc.setFillColor(255, 255, 255);
-        doc.setDrawColor(0, 0, 0);
-        doc.circle(105, 40, 20, "FD");
-        doc.addImage(base64data, "PNG", 85, 20, 40, 40, undefined, 'FAST');
-
-        doc.setFontSize(18);
-        doc.setFont("helvetica", "bold");
-        doc.setTextColor(85, 85, 85);
-        doc.text(nombre, 105, 80, { align: "center" });
-
-        const agendaImg = new Image();
-        agendaImg.src = Agenda;
-        doc.addImage(agendaImg, "PNG", 10, 95, 10, 10);
-
-        doc.setFontSize(14);
-        doc.setFont("helvetica", "bold");
-        doc.setTextColor(85, 85, 85);
-        doc.text("CONTACTO:", 25, 100);
-
-        doc.setFontSize(12);
-        doc.setFont("helvetica", "normal");
-        doc.setTextColor(64, 64, 64);
-        doc.text("Teléfono:", 25, 110);
-        doc.text(`${telefono}`, 25, 117);
-        doc.text("Email:", 25, 125);
-        doc.text(`${email}`, 25, 132);
-        doc.text("DNI:", 25, 140);
-        doc.text(`${dni}`, 25, 147);
-        doc.text("Fecha de Nacimiento:", 25, 155);
-        doc.text(`${fechaNac}`, 25, 162);
-        doc.text("Distrito:", 25, 170);
-        doc.text(`${distrito}`, 25, 177);
-
-        const maletinImg = new Image();
-        maletinImg.src = Maletin;
-        doc.addImage(maletinImg, "PNG", 10, 185, 10, 10);
-
-        doc.setFontSize(14);
-        doc.setFont("helvetica", "bold");
-        doc.setTextColor(85, 85, 85);
-        doc.text("EXPERIENCIA LABORAL:", 25, 190);
-
-        doc.setFontSize(12);
-        doc.setFont("helvetica", "normal");
-        doc.setTextColor(64, 64, 64);
-        let yOffset = 200;
-        experiences.forEach((exp, index) => {
-          doc.text(`${index + 1}. ${exp}`, 25, yOffset);
-          yOffset += 10;
-        });
-
-        doc.save("cv.pdf");
-      };
-
-      reader.readAsDataURL(blob);
-    }
-  };
-
   return (
     <div className="w-full font-dmsans flex">
       <HeaderPowerAuth />
@@ -311,12 +282,19 @@ function Profile() {
                     <RiEditLine className="text-xl" />
                     <span>Editar</span>
                   </button>
-                  <button
-                    className="bg-primarycolor text-white text-lg px-4 py-2 rounded-full"
-                    onClick={generatePdf}
-                  >
-                    Genera tu CV
-                  </button>
+                  <GeneratePdfButton
+  user={user}
+  nombre={nombre}
+  telefono={telefono}
+  email={email}
+  dni={dni}
+  fechaNac={fechaNac}
+  distrito={distrito}
+  experiences={experiences}
+  gradoAcademico={gradoAcademico}
+  institucion={institucion}
+  ultimoAnioEstudio={ultimoAnioEstudio}
+/>
                 </>
               ) : (
                 <div className="flex w-full"></div>
@@ -451,7 +429,7 @@ function Profile() {
 
                   <div className="mb-2">
                     <label className="block text-sm font-regular text-gray-700">
-                      Institución Educativa
+                      Institución
                     </label>
                     <input
                       type="text"
@@ -520,40 +498,174 @@ function Profile() {
             </div>
           )}
 
-          {step === 2 && (
-            <div className="flex w-full">
-              <div className="px-4 w-1/2">
-                <div className="w-full px-8 flex flex-col gap-4">
-                  <h3 className="text-lg font-medium text-gray-700">
-                    Experiencia Laboral
-                  </h3>
-                  {experiences.map((exp, index) => (
-                    <div className="mb-4" key={index}>
-                      <label
-                        className="block text-sm font-regular text-gray-700"
-                        htmlFor={`exp_${index}`}
-                      ></label>
-                      <input
-                        type="text"
-                        id={`exp_${index}`}
-                        className={`mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-gray-600 ${
-                          !isEditing
-                            ? "bg-gray-50"
-                            : "border-2 border-indigo-500"
-                        } py-2 px-3`}
-                        placeholder={`Ingrese experiencia ${index + 1}`}
-                        value={exp}
-                        onChange={(e) =>
-                          handleExperienceChange(index, e.target.value)
-                        }
-                        disabled={!isEditing}
-                      />
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          )}
+{step === 2 && (
+  <div className="flex w-full">
+    <div className="px-4 w-1/2">
+      <div className="w-full px-8 flex flex-col gap-4">
+        <h3 className="text-lg font-medium text-gray-700">Experiencia Laboral</h3>
+        <div className="mb-2">
+          <label
+            className="block text-sm font-regular text-gray-700"
+            htmlFor="cargo_1"
+          >
+            Nombre del Cargo
+          </label>
+          <input
+            type="text"
+            id="cargo_1"
+            className={`mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-gray-600 ${
+              !isEditing ? "bg-gray-50" : "border-2 border-indigo-500"
+            } py-2 px-3`}
+            placeholder="Ingrese nombre del cargo"
+            value={experiences[0]?.cargo || ''}
+            onChange={(e) => handleExperienceChange(0, 'cargo', e.target.value)}
+            disabled={!isEditing}
+          />
+        </div>
+        <div className="mb-2">
+          <label
+            className="block text-sm font-regular text-gray-700"
+            htmlFor="empresa_1"
+          >
+            Nombre de la Empresa
+          </label>
+          <input
+            type="text"
+            id="empresa_1"
+            className={`mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-gray-600 ${
+              !isEditing ? "bg-gray-50" : "border-2 border-indigo-500"
+            } py-2 px-3`}
+            placeholder="Ingrese nombre de la empresa"
+            value={experiences[0]?.empresa || ''}
+            onChange={(e) => handleExperienceChange(0, 'empresa', e.target.value)}
+            disabled={!isEditing}
+          />
+        </div>
+        <div className="mb-2">
+          <label
+            className="block text-sm font-regular text-gray-700"
+            htmlFor="tiempo_1"
+          >
+            Tiempo de Labor
+          </label>
+          <input
+            type="text"
+            id="tiempo_1"
+            className={`mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-gray-600 ${
+              !isEditing ? "bg-gray-50" : "border-2 border-indigo-500"
+            } py-2 px-3`}
+            placeholder="Ingrese tiempo de labor"
+            value={experiences[0]?.tiempo || ''}
+            onChange={(e) => handleExperienceChange(0, 'tiempo', e.target.value)}
+            disabled={!isEditing}
+          />
+        </div>
+        <div className="mb-3">
+          <label
+            className="block text-sm font-regular text-gray-700"
+            htmlFor="funcion_1"
+          >
+            Principales Funciones
+          </label>
+          <input
+            type="text"
+            id="funcion_1"
+            className={`mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-gray-600 ${
+              !isEditing ? "bg-gray-50" : "border-2 border-indigo-500"
+            } py-2 px-3`}
+            placeholder="Ingrese principales funciones"
+            value={experiences[0]?.funcion || ''}
+            onChange={(e) => handleExperienceChange(0, 'funcion', e.target.value)}
+            disabled={!isEditing}
+          />
+        </div>
+      </div>
+    </div>
+
+    <div className="border-l border-gray-300"></div>
+
+    <div className="px-4 w-1/2">
+      <div className="w-full px-8 flex flex-col gap-4 mt-11">
+        <div className="mb-2">
+          <label
+            className="block text-sm font-regular text-gray-700"
+            htmlFor="cargo_2"
+          >
+            Nombre del Cargo
+          </label>
+          <input
+            type="text"
+            id="cargo_2"
+            className={`mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-gray-600 ${
+              !isEditing ? "bg-gray-50" : "border-2 border-indigo-500"
+            } py-2 px-3`}
+            placeholder="Ingrese nombre del cargo"
+            value={experiences[1]?.cargo || ''}
+            onChange={(e) => handleExperienceChange(1, 'cargo', e.target.value)}
+            disabled={!isEditing}
+          />
+        </div>
+        <div className="mb-2">
+          <label
+            className="block text-sm font-regular text-gray-700"
+            htmlFor="empresa_2"
+          >
+            Nombre de la Empresa
+          </label>
+          <input
+            type="text"
+            id="empresa_2"
+            className={`mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-gray-600 ${
+              !isEditing ? "bg-gray-50" : "border-2 border-indigo-500"
+            } py-2 px-3`}
+            placeholder="Ingrese nombre de la empresa"
+            value={experiences[1]?.empresa || ''}
+            onChange={(e) => handleExperienceChange(1, 'empresa', e.target.value)}
+            disabled={!isEditing}
+          />
+        </div>
+        <div className="mb-2">
+          <label
+            className="block text-sm font-regular text-gray-700"
+            htmlFor="tiempo_2"
+          >
+            Tiempo de Labor
+          </label>
+          <input
+            type="text"
+            id="tiempo_2"
+            className={`mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-gray-600 ${
+              !isEditing ? "bg-gray-50" : "border-2 border-indigo-500"
+            } py-2 px-3`}
+            placeholder="Ejem: Nov. 2022 a Oct. 2023"
+            value={experiences[1]?.tiempo || ''}
+            onChange={(e) => handleExperienceChange(1, 'tiempo', e.target.value)}
+            disabled={!isEditing}
+          />
+        </div>
+        <div className="mb-3">
+          <label
+            className="block text-sm font-regular text-gray-700"
+            htmlFor="funcion_2"
+          >
+            Principales Funciones
+          </label>
+          <input
+            type="text"
+            id="funcion_2"
+            className={`mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-gray-600 ${
+              !isEditing ? "bg-gray-50" : "border-2 border-indigo-500"
+            } py-2 px-3`}
+            placeholder="Ingrese principales funciones"
+            value={experiences[1]?.funcion || ''}
+            onChange={(e) => handleExperienceChange(1, 'funcion', e.target.value)}
+            disabled={!isEditing}
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+)}
 
           <div className="flex justify-center mt-6">
             {!isEditing ? (
@@ -591,6 +703,12 @@ function Profile() {
                 >
                   Guardar
                 </button>
+                <button
+            className="bg-red-500 text-white text-lg px-6 py-2 rounded-full mb-4"
+            onClick={handleCancel}
+          >
+            Cancelar
+          </button>
               </div>
             )}
           </div>

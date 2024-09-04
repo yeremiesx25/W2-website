@@ -29,7 +29,7 @@ function Ubicacion() {
                         <div class="border-t border-gray-200 px-6 py-4">
                             <h3 class="text-lg font-medium text-gray-900">Horario de Atención</h3>
                             <p class="mt-1 text-gray-600">Lunes - Viernes: 8 am - 7 pm</p>
-                            <p class="mt-1 text-gray-600">Sábado: 10 a. m. - 4 p. m.</p>
+                            <p class="mt-1 text-gray-600">Sábado: 9 a. m. - 12 p. m.</p>
                             <p class="mt-1 text-gray-600">Domingo: Cerrado</p>
                         </div>
                         <div class="border-t border-gray-200 px-6 py-4">
