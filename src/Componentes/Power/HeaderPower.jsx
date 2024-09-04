@@ -23,7 +23,7 @@ function HeaderPower() {
   return (
     <header 
       className="bg-primarycolor fixed w-full z-10 shadow-lg font-dmsans">
-      <div className="container mx-auto px-8 flex justify-between items-center h-16">
+      <div className="container mx-auto px-8 flex justify-between items-center h-20">
         {/* Logo */}
         <div className="flex items-center">
           <a href="/Power">
@@ -39,7 +39,7 @@ function HeaderPower() {
         </div>
 
         {/* Opciones de navegación */}
-        <div className="hidden md:flex justify-around items-center text-white text-sm gap-4 font-dmsans">
+        <div className="hidden md:flex justify-around items-center text-white text-md gap-4 font-dmsans">
           <Link to="/" className="hover:text-yellowprimary">Inicio</Link>
           <Link to="/Empresas" className="hover:text-yellowprimary">Empresas</Link>
           <Link to="/DescubriendoTalentos" className="hover:text-yellowprimary">Descubriendo Talentos</Link>
@@ -48,10 +48,15 @@ function HeaderPower() {
         </div>
 
         {/* Botones de login y registro (solo en escritorio) */}
-        
+        <div className=' flex'>
+          <div className="hidden md:flex items-center">
+          <Link to="/Login" className="text-md font-bold bg-yellowprimary hover:bg-yellow-200 text-primarycolor px-4 py-2 rounded-md ml-4">Empresas</Link>
+        </div>
         <div className="hidden md:flex items-center">
           <Link to="/Login" className="text-md font-bold bg-yellowprimary hover:bg-yellow-200 text-primarycolor px-4 py-2 rounded-md ml-4">Iniciar sesión</Link>
         </div>
+        </div>
+        
       </div>
 
       {/* Menú desplegable para dispositivos móviles */}
