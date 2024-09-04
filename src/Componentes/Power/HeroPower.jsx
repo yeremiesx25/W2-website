@@ -8,7 +8,8 @@ import imgSaasPower from '../../assets/imgSaasPower.png'
 function HeroPower() {
   return (
     <div className='flex flex-col items-center justify-center w-full h-auto font-dmsans pt-28 md:pt-40 pb-12  text-gray-700 gap-6 bg-cover'
-    style={{ backgroundImage: `url(${gradiantPower})` }}>
+    // style={{ backgroundImage: `url(${gradiantPower})` }}
+    >
         <h1 className='text-3xl md:text-5xl font-semibold mb-4 text-center px-2 animate-fade-right'>
           Vive la experiencia <span className='text-primarycolor'>Power</span> y postula <br /> con nosotros
         </h1>

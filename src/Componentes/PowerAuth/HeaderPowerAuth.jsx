@@ -1,167 +1,83 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import menuMobilePower from '../../assets/menu (4).png'; // Importa el icono de hamburguesa
+import logo from '../../assets/LogoPower.png';
 import { UserAuth } from "../../Context/AuthContext";
 import { supabase } from "../../supabase/supabase.config";
-import { FiHome } from "react-icons/fi";
-import { FaSearchengin } from "react-icons/fa6";
-import { MdOutlineSettings } from "react-icons/md";
 import { MdOutlinePowerSettingsNew } from "react-icons/md";
-import { AiOutlineThunderbolt } from "react-icons/ai";
-import { LuFileSpreadsheet } from "react-icons/lu";
-import { RiMailSendLine } from "react-icons/ri";
-import { MdOutlineMenu } from "react-icons/md";
-import { RiAdminLine } from "react-icons/ri";
-import { IoIosClose } from "react-icons/io";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
-function HeaderPowerAuth() {
+function HeaderPower() {
+  const [showMenu, setShowMenu] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
   const { user, signOut } = UserAuth();
-  const [isExpanded, setIsExpanded] = useState(false);
-  const [isProfileComplete, setIsProfileComplete] = useState(true);
-  const navigate = useNavigate();
-
-  useEffect(() => {
-    async function checkUserProfile() {
-      if (user) {
-        const { data, error } = await supabase
-          .from("usuario")
-          .select("profile_complete")
-          .eq("user_id", user.id)
-          .single();
-
-        if (error) {
-          console.error("Error al verificar el perfil del usuario:", error.message);
-          return;
-        }
-
-        if (data) {
-          setIsProfileComplete(data.profile_complete);
-          if (!data.profile_complete) {
-            toast.warning("Completa tu perfil para obtener más oportunidad al postular.", {
-              position: "top-right",
-              autoClose: false,
-              hideProgressBar: true,
-              closeOnClick: true,
-              pauseOnHover: true,
-              draggable: true,
-              progress: undefined,
-              toastId: "profileIncomplete",
-              onClick: () => navigate('/Profile'),
-              className: 'border-primarycolor',
-              bodyClassName: 'text-black'
-            });
-          }
-        }
-      }
-    }
-
-    checkUserProfile();
-  }, [user, navigate]);
 
   const toggleMenu = () => {
-    setIsExpanded(!isExpanded);
+    setShowMenu(!showMenu);
+  };
+
+  const handleModalOpen = () => {
+    setModalOpen(true);
   };
 
   const handleModalClose = () => {
-    setIsExpanded(false);
+    setModalOpen(false);
   };
 
   return (
-    <div className="font-dmsans">
-      {/* Fixed Header for Mobile */}
-      <div className="fixed top-0 left-0 right-0 bg-primarycolor text-white z-50 flex justify-end items-center h-14 px-4 md:hidden">
-        <button onClick={toggleMenu} className="text-white">
-          <MdOutlineMenu size={32} />
-        </button>
-      </div>
-
-      {/* Sidebar Menu */}
-      <nav className={`bg-primarycolor text-white drop-shadow-xl ${isExpanded ? 'w-72' : 'w-20'} flex flex-col items-center justify-around py-4 px-2 fixed h-full transition-width duration-300 pt-8 ${isExpanded ? 'block' : 'hidden'} md:block`}>
-        <button onClick={toggleMenu} className={`text-white ml-4 flex ${isExpanded ? 'hidden' : 'block'}`}>
-          <MdOutlineMenu size={32} />
-        </button>
-        {isExpanded && (
-          <>
-            <button onClick={toggleMenu} className="md:hidden mb-4 text-white absolute top-2 right-2">
-              <IoIosClose size={40} />
-            </button>
-            <button onClick={toggleMenu} className="mb-4">
-              {isExpanded ? (
-                <IoIosClose size={40} className="absolute top-2 right-2 text-white" onClick={handleModalClose} />
-              ) : (
-                <MdOutlineMenu size={32} />
-              )}
-            </button>
-          </>
-        )}
-
-        {user && (
-          <div className={`flex items-center ${isExpanded ? 'px-4 w-full' : 'justify-center'}`}>
-            <Link to="/Profile" className='flex items-center'>
-              <div className="relative">
-                <img className="w-10 h-10 rounded-full my-8" src={user.user_metadata.avatar_url} alt="User" />
-                {!isProfileComplete && (
-                  <div className="absolute top-4 right-0 flex justify-center items-center">
-                    <div className="relative w-3 h-3">
-                      <div className="w-4 h-4 bg-red-500 rounded-full absolute top-1 right-0 left-1 animate-ping"></div>
-                      <div className="w-4 h-4 bg-red-600 rounded-full absolute top-1 right-0 left-1 animate-pulse"></div>
-                    </div>
-                  </div>
-                )}
-              </div>
-              {isExpanded && <span className="ml-2 overflow-hidden whitespace-nowrap overflow-ellipsis my-8">{user.user_metadata.full_name}</span>}
-            </Link>
-          </div>
-        )}
-
-        <div className="flex flex-col w-full">
-          <Link to="/PowerAuth" className={`my-2 flex items-center ${isExpanded ? 'px-4' : 'justify-center'} opacity-75 hover:opacity-100 transition-opacity duration-300`}>
-            <FiHome size={24} />
-            {isExpanded && <span className="ml-4">Inicio</span>}
-          </Link>
-          <Link to="/AdminLogin" className={`my-3 flex items-center ${isExpanded ? 'px-4' : 'justify-center'} opacity-75 hover:opacity-100 transition-opacity duration-300`}>
-            <RiAdminLine size={24} />
-            {isExpanded && <span className="ml-4">Reclutador</span>}
-          </Link>
-          <Link to="" className={`my-3 flex items-center ${isExpanded ? 'px-4' : 'justify-center'} opacity-75 hover:opacity-100 transition-opacity duration-300`}>
-            <MdOutlineSettings size={24} />
-            {isExpanded && <span className="ml-4">Configuración</span>}
-          </Link>
-          {isExpanded && <hr className="border-t border-gray-500 my-2 w-[90%] self-center" />}
+    <header 
+      className="bg-primarycolor fixed w-full z-10 shadow-lg font-dmsans">
+      <div className="container mx-auto px-8 flex justify-between items-center h-16">
+        {/* Logo */}
+        <div className="flex items-center">
+          <a href="/Power">
+            <img src={logo} alt="Power" className="w-24 h-auto" /> 
+          </a>
         </div>
 
-        <div className="flex flex-col mt-4 justify-center w-full">
-          <Link to="" className={`my-3 flex items-center ${isExpanded ? 'px-4' : 'justify-center'} opacity-75 hover:opacity-100 transition-opacity duration-300`}>
-            <LuFileSpreadsheet size={24} />
-            {isExpanded && <span className="ml-4">Mi CV</span>}
-          </Link>
-          <Link to="" className={`my-3 flex items-center ${isExpanded ? 'px-4' : 'justify-center'} opacity-75 hover:opacity-100 transition-opacity duration-300`}>
-            <FaSearchengin size={24} />
-            {isExpanded && <span className="ml-4">Buscar Ofertas</span>}
-          </Link>
-          <Link to="" className={`my-3 flex items-center ${isExpanded ? 'px-4' : 'justify-center'} opacity-75 hover:opacity-100 transition-opacity duration-300`}>
-            <RiMailSendLine size={24} />
-            {isExpanded && <span className="ml-4">Mis Postulaciones</span>}
-          </Link>
-          <Link to="/PowerAuth" className={`my-3 flex items-center ${isExpanded ? 'px-4' : 'justify-center'} opacity-75 hover:opacity-100 transition-opacity duration-300`}>
-            <AiOutlineThunderbolt size={24} />
-            {isExpanded && <span className="ml-4">Power</span>}
-          </Link>
-          {isExpanded && <hr className="border-t border-gray-500 my-2 w-[90%] self-center" />}
+        {/* Icono de menú para dispositivos móviles */}
+        <div className="md:hidden flex items-center">
+          <button onClick={toggleMenu} className="focus:outline-none">
+            <img src={menuMobilePower} alt="Menu" className="w-6 h-6" />
+          </button>
         </div>
-        <div className="flex flex-col mt-12 w-full">
-          {isExpanded && (
-            <button onClick={signOut} className="flex items-center px-4 opacity-75 hover:opacity-100 transition-opacity duration-300">
+
+        {/* Opciones de navegación */}
+        <div className="hidden md:flex justify-around items-center text-white text-sm gap-4 font-dmsans">
+          <Link to="/" className="hover:text-yellowprimary">Inicio</Link>
+          <Link to="/Empresas" className="hover:text-yellowprimary">Empresas</Link>
+          <Link to="/DescubriendoTalentos" className="hover:text-yellowprimary">Descubriendo Talentos</Link>
+          <Link to="/Coworking" className="hover:text-yellowprimary">Coworking</Link>
+          <Link to="/Power" className="font-semibold text-yellowprimary hover:text-white underline decoration-yellowprimary underline-offset-4">Power</Link>
+        </div>
+
+        {/* Botones de login y registro (solo en escritorio) */}
+        <button onClick={signOut} className="flex items-center px-4 opacity-75 hover:opacity-100 transition-opacity duration-300">
               <MdOutlinePowerSettingsNew size={24} />
               <span className="ml-4">Cerrar sesión</span>
             </button>
-          )}
+        <Link to="/Profile" className="hidden md:flex items-center">
+          
+        <span className="ml-2 overflow-hidden whitespace-nowrap overflow-ellipsis my-8 text-white font-base w-40">{user.user_metadata.full_name}</span>
+        <img className="w-10 h-10 rounded-full my-8" src={user.user_metadata.avatar_url} alt="User" />
+        </Link>
+      </div>
+
+      {/* Menú desplegable para dispositivos móviles */}
+      {showMenu && (
+        <div className="md:hidden bg-gray-900 w-full">
+          <div className="px-4 pt-2 pb-3 space-y-1">
+            <Link to="/" className="text-white hover:text-gray-600 block px-3 py-2 rounded-md text-base font-medium">Inicio</Link>
+            <Link to="/Empresas" className="text-white hover:text-gray-600 block px-3 py-2 rounded-md text-base font-medium">Empresas</Link>
+            <Link to="/DescubriendoTalentos" className="text-white hover:text-gray-600 block px-3 py-2 rounded-md text-base font-medium">Descubriendo Talentos</Link>
+            <Link to="/Coworking" className="text-white hover:text-gray-600 block px-3 py-2 rounded-md text-base font-medium">Coworking</Link>
+            <Link to="/Power" className="text-white hover:text-gray-600 block px-3 py-2 rounded-md text-base font-medium">Power</Link>
+            
+          </div>
         </div>
-      </nav>
-      <ToastContainer />
-    </div>
+      )}
+      {modalOpen && <Login closeModal={handleModalClose} />}
+    </header>
   );
 }
 
-export default HeaderPowerAuth;
+export default HeaderPower;
