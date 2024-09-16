@@ -1,4 +1,3 @@
-import React  from "react";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserAuth } from "../../Context/AuthContext";
@@ -56,7 +55,7 @@ function Login({ closeModal }) {
       </div>
     </div>  
 
-      <div className="md:flex flex-col mb-8 animated fadeIn sm:flex-row bg-white w-1/2 h-full pl-20 hidden">
+      {/* <div className="md:flex flex-col mb-8 animated fadeIn sm:flex-row bg-white w-1/2 h-full pl-20 hidden">
         <div className="flex items-center mb-8 sm:w-1/2 md:w-5/12 sm:order-last font-dmsans">
           <img
             className="rounded-lg"
@@ -77,7 +76,7 @@ function Login({ closeModal }) {
               : "Inicia sesión para encontrar tu próximo empleo. Si eres nuevo, empieza con 'Iniciar con Google'."}
           </p>
         </div>
-      </div>
+      </div> */}
 
       <div className="bg-white dark:bg-gray-800 w-1/2 p-8 relative h-full flex justify-center items-center">
         <div className="flex flex-col items-center">
