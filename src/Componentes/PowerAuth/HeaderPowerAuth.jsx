@@ -6,7 +6,7 @@ import { UserAuth } from "../../Context/AuthContext";
 import { supabase } from "../../supabase/supabase.config";
 import { MdOutlinePowerSettingsNew } from "react-icons/md";
 
-function HeaderPower() {
+function HeaderPowerAuth() {
   const [showMenu, setShowMenu] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const { user, signOut } = UserAuth();
@@ -80,4 +80,4 @@ function HeaderPower() {
   );
 }
 
-export default HeaderPower;
+export default HeaderPowerAuth;
