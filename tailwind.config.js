@@ -22,7 +22,8 @@ module.exports = withMT( {
         secundarycolor: '#407BFF',
         bgsecundary: '#F7F7FB',
         colorgreen: '#01C29E',
-        powercolor: '#111827'
+        powercolor: '#111827',
+        newprimarycolor: '#003E9D'
       },
       fontFamily: {
         'dmsans': ['"DM Sans", sans-serif']
@@ -43,6 +44,7 @@ module.exports = withMT( {
         'primarygradient': 'linear-gradient(0.25turn, #2563EB, #13337A)',
         'primarygradientmobile': 'linear-gradient(0.50turn, #2563EB, #13337A)',
         'secundarygradient': 'linear-gradient(0.25turn, #2563EB, #4D2EA4)',
+        'primarygradientdark': 'linear-gradient(0.50turn, #013E9A, #021B79)',
       },
     },
   },  

@@ -1,10 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import menuMobilePower from '../../assets/menu (4).png'; // Importa el icono de hamburguesa
 import logo from '../../assets/LogoPower.png';
 import { UserAuth } from "../../Context/AuthContext";
 import { supabase } from "../../supabase/supabase.config";
-import { MdOutlinePowerSettingsNew } from "react-icons/md";
+import { RxAvatar } from "react-icons/rx";
+import { BiLogOut } from "react-icons/bi";
+
 
 function HeaderPower() {
   const [showMenu, setShowMenu] = useState(false);
@@ -23,10 +25,33 @@ function HeaderPower() {
     setModalOpen(false);
   };
 
+  const [menuOpen, setMenuOpen] = useState(false);
+
+
+  const [hasShadow, setHasShadow] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setHasShadow(true);
+      } else {
+        setHasShadow(false);
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+
+    // Cleanup event listener on unmount
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
   return (
     <header 
-      className="bg-primarycolor fixed w-full z-10 shadow-lg font-dmsans">
-      <div className="container mx-auto px-8 flex justify-between items-center h-16">
+    className={`bg-newprimarycolor fixed w-full z-10 font-dmsans transition-shadow duration-300 ${
+      hasShadow ? 'shadow-lg' : ''
+    }`}>
+      <div className="container mx-auto px-8 flex justify-between items-center h-20">
         {/* Logo */}
         <div className="flex items-center">
           <a href="/Power">
@@ -35,14 +60,10 @@ function HeaderPower() {
         </div>
 
         {/* Icono de menú para dispositivos móviles */}
-        <div className="md:hidden flex items-center">
-          <button onClick={toggleMenu} className="focus:outline-none">
-            <img src={menuMobilePower} alt="Menu" className="w-6 h-6" />
-          </button>
-        </div>
+        
 
         {/* Opciones de navegación */}
-        <div className="hidden md:flex justify-around items-center text-white text-sm gap-4 font-dmsans">
+        <div className="hidden md:flex justify-around items-center text-white text-md gap-4 font-dmsans">
           <Link to="/" className="hover:text-yellowprimary">Inicio</Link>
           <Link to="/Empresas" className="hover:text-yellowprimary">Empresas</Link>
           <Link to="/DescubriendoTalentos" className="hover:text-yellowprimary">Descubriendo Talentos</Link>
@@ -51,15 +72,41 @@ function HeaderPower() {
         </div>
 
         {/* Botones de login y registro (solo en escritorio) */}
-        <button onClick={signOut} className="flex items-center px-4 opacity-75 hover:opacity-100 transition-opacity duration-300">
-              <MdOutlinePowerSettingsNew size={24} />
-              <span className="ml-4">Cerrar sesión</span>
-            </button>
-        <Link to="/Profile" className="hidden md:flex items-center">
-          
-        <span className="ml-2 overflow-hidden whitespace-nowrap overflow-ellipsis my-8 text-white font-base w-40">{user.user_metadata.full_name}</span>
-        <img className="w-10 h-10 rounded-full my-8" src={user.user_metadata.avatar_url} alt="User" />
-        </Link>
+        <div className="relative">
+      {/* Avatar Button */}
+      <button
+        onClick={() => setMenuOpen(!menuOpen)}
+        className="flex items-center focus:outline-none"
+      >
+        <span className="ml-2 overflow-hidden whitespace-nowrap overflow-ellipsis text-white font-base w-40">
+          {user.user_metadata.full_name}
+        </span>
+        <img
+          className="w-10 h-10 rounded-full my-2"
+          src={user.user_metadata.avatar_url}
+          alt="User"
+        />
+      </button>
+
+      {/* Dropdown Menu */}
+      {menuOpen && (
+        <div className="absolute right-0  w-48 bg-white rounded-md shadow-lg py-2 z-10">
+          <Link
+            to="/Profile"
+            className="flex px-4 py-2 text-newprimarycolor hover:bg-blue-50"
+          > <RxAvatar size={24} className='mr-2' />
+            Perfil
+          </Link>
+          <button
+            onClick={signOut}
+            className="flex items-center px-4 py-2 w-full text-red-600 hover:bg-blue-50"
+          >
+            <BiLogOut size={24} />
+            <span className="ml-2">Cerrar sesión</span>
+          </button>
+        </div>
+      )}
+    </div>
       </div>
 
       {/* Menú desplegable para dispositivos móviles */}

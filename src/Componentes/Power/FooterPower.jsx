@@ -4,7 +4,7 @@ import logo from '../../assets/LogoPower.png';
 function FooterPower() {
   return (
     <div>
-      <footer className="px-4 divide-y bg-[#1f2937] text-[#9ca3af] font-dmsans">
+      <footer className="px-4 divide-y bg-[#003E9D] text-[#9ca3af] font-dmsans">
         <div className="container flex flex-col justify-between py-10 mx-auto space-y-8 lg:flex-row lg:space-y-0">
           <div className="lg:w-1/3">
             <a

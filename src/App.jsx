@@ -60,9 +60,9 @@ function App() {
           <Route
             path="/AdminLogin"
             element={
-              <ProtectedRoute>
+              
                 <LoginAdmin />
-              </ProtectedRoute>
+              
             }
           />
           <Route

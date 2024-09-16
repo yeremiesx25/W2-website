@@ -3,6 +3,7 @@ import { Link, Navigate, useNavigate } from 'react-router-dom';
 import { UserAuth } from '../../Context/AuthContext'; 
 import LoginAdminImg from "../../assets/LoginAdminImg.svg";
 import HeaderPowerAuth from '../PowerAuth/HeaderPowerAuth';
+import HeaderPower from '../Power/HeaderPower';
 
 function LoginAdmin() {
     const navigate = useNavigate();
@@ -24,9 +25,12 @@ function LoginAdmin() {
 
     return (
         <div>
-            <HeaderPowerAuth />
-            <div className="lg:pl-20 w-[100%] h-screen flex font-dmsans items-center">
-                <div className="md:w-[calc(100%-600px)] h-full py-6 bg-white flex items-center mx-auto px-4     ">
+            <HeaderPower />
+            <div className=" w-[100%] h-screen flex font-dmsans items-center">
+                <div className="w-1/2 h-full bg-primarygradientdark hidden lg:block"> 
+                       
+                </div>
+                <div className="md:w-1/2 h-full py-6 bg-white flex items-center mx-auto px-4     ">
                     <div className="p-10 xs:p-0 md:mx-auto lg:w-full lg:max-w-md    ">
                         <h1 className="font-bold text-left text-2xl text-primarycolor">Te damos la bienvenida</h1>
                         <h1 className="font-regular text-left text-md mb-5 text-gray-700">Ingresa tus datos para iniciar sesión</h1>
@@ -52,10 +56,7 @@ function LoginAdmin() {
                         </div>
                     </div>
                 </div>
-                <div className="w-[600px] h-full bg-primarycolor hidden lg:block">
-                    
-                    <img src={LoginAdminImg} className="w-full h-full" alt="" />    
-                </div>
+                
             </div>
         </div>
     );

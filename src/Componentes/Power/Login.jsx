@@ -1,4 +1,4 @@
-import React from "react";
+import React  from "react";
 import { UserAuth } from "../../Context/AuthContext";
 import { FcGoogle } from "react-icons/fc";
 import logo from '../../assets/Logo Power.png';
@@ -10,35 +10,22 @@ function Login({ closeModal }) {
   return (
     <div className="fixed inset-0 flex  justify-center bg-gray-900 bg-opacity-0 z-50 font-dmsans flex-wrap">
       <HeaderPower />
-      {/* <button
-          className="self-start text-gray-600 dark:text-white"
-          onClick={closeModal}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
-        </button> */}
-        <div class="md:flex flex-col  mb-8 animated fadeIn sm:flex-row bg-white w-1/2 h-full pl-20 hidden">
-            <div class="flex items-center mb-8 sm:w-1/2 md:w-5/12 sm:order-last font-dmsans">
-                <img class="rounded-lg" src="https://img.freepik.com/premium-vector/young-smiling-woman-jane-sitting-with-crossed-legs-holding-laptop-freelance-studying-online-education-work-home-work-concept-3d-vector-people-character-illustration-cartoon-minimal-style_365941-742.jpg " alt=""/>
-            </div>
-            <div class="flex flex-col justify-center mt-5 mb-8 md:mt-0 sm:w-1/2 md:w-7/12 sm:pr-16">
-                <p class="mb-2 text-sm font-semibold leading-none text-left text-indigo-600 uppercase">Inicia sesión en</p>
-                <h3 class="mt-2 text-2xl sm:text-left md:text-4xl text-primarycolor font-semibold">Power</h3>
-                <p class="mt-5 text-lg text-gray-700 text md:text-left">Inicia sesión para encontrar tu próximo empleo. Si eres nuevo, empieza con 'Iniciar con Google'.</p>
-            </div>
-        </div>
+      <div className="h-screen w-1/2 mx-auto flex items-center justify-center bg-blue-50">
+      <div className="text-center">
+        <img
+          src="https://imgv3.fotor.com/images/side/%C2%BF-Como-hacer-una-imagen-PNG.png" // Cambia esto a la ruta de tu imagen
+          alt="Power Experience"
+          className=" bg-cover w-96"
+        />
+        <h1 className="text-2xl font-semibold text-gray-800 mt-4">
+          Vive la experiencia Power
+        </h1>
+        <p className="text-gray-500">
+          Encuentra un empleo ideal para ti.
+        </p>
+        
+      </div>
+    </div>  
 
       {/* segunda parte */}
       <div className="bg-white dark:bg-gray-800 w-1/2 p-8  relative h-full  flex justify-center items-center">
