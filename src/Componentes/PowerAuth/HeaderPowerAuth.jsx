@@ -8,7 +8,7 @@ import { RxAvatar } from "react-icons/rx";
 import { BiLogOut } from "react-icons/bi";
 
 
-function HeaderPower() {
+function HeaderPowerAuth() {
   const [showMenu, setShowMenu] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const { user, signOut } = UserAuth();
@@ -127,4 +127,4 @@ function HeaderPower() {
   );
 }
 
-export default HeaderPower;
+export default HeaderPowerAuth;

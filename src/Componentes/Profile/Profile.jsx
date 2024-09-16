@@ -238,7 +238,7 @@ function Profile() {
   return (
     <div className="w-full font-dmsans flex">
       <HeaderPowerAuth />
-      <div className="md:pl-20 md:p-4 w-full flex justify-center">
+      <div className="md:pl-20 md:p-4 w-full flex justify-center mt-12">
         <div className="md:w-4/5 w-full md:rounded-xl bg-white shadow overflow-hidden pt-12 md:pt-0">
           <Portada />
           <div className="flex w-full justify-start px-4 md:px-12 py-6 items-center">

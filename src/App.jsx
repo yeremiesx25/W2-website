@@ -14,7 +14,7 @@ import LoginAdmin from "./Componentes/Admin/LoginAdmin.jsx";
 import ProtectedRoute from "./ProtectedRoute.jsx";
 import Profile from "./Componentes/Profile/Profile.jsx";
 import Postulados from "./Componentes/Admin/Postulados.jsx";
-import Share from "./Componentes/PowerAuth/Share.jsx"; // Importar el componente Share
+import Share from "./Componentes/PowerAuth/Share.jsx";
 import InfoJobMovil from "./Componentes/PowerAuth/InfoJobMovil.jsx";
 import EditJob from "./Componentes/Form/EditJob.jsx";
 import Login from './Componentes/Power/Login.jsx'
@@ -22,6 +22,7 @@ import ReservaAdmin from './Componentes/Reserva/ReservaAdmin.jsx'
 import Auth from './Componentes/Reserva/Auth.jsx'
 import Coworking from './Componentes/Coworking/Coworking.jsx'
 import Contacto from './Componentes/Contacto/Contacto.jsx'
+import Register from './Componentes/Power/Register.jsx'; // Importar el componente de Register
 
 function App() {
   return (
@@ -82,16 +83,15 @@ function App() {
             }
           />
           <Route path="/Privacidad" element={<Privacidad />} />
-      
           <Route path="/ReservaAdmin" element={<ReservaAdmin/>} />
           <Route path="/auth" element={<Auth/>} />
           <Route path="/Coworking" element={<Coworking/>} />
           <Route path="/Contacto" element={<Contacto/>} />
-          <Route path="/Share" element={<Share />} />{" "}
-          {/* Añadir ruta para Share */}
+          <Route path="/Share" element={<Share />} />
           <Route path="/info-job-movil/:id" element={<InfoJobMovil />} />
           <Route path="/Profile" element={<Profile />} />
           <Route path="/Login" element={<Login/>} />
+          <Route path="Register" element={<Register />} /> {/* Nueva ruta para registro */}
         </Routes>
       </JobsProvider>
     </AuthContextProvider>
