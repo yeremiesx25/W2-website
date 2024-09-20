@@ -55,29 +55,6 @@ function Login({ closeModal }) {
       </div>
     </div>  
 
-      {/* <div className="md:flex flex-col mb-8 animated fadeIn sm:flex-row bg-white w-1/2 h-full pl-20 hidden">
-        <div className="flex items-center mb-8 sm:w-1/2 md:w-5/12 sm:order-last font-dmsans">
-          <img
-            className="rounded-lg"
-            src="https://img.freepik.com/premium-vector/young-smiling-woman-jane-sitting-with-crossed-legs-holding-laptop-freelance-studying-online-education-work-home-work-concept-3d-vector-people-character-illustration-cartoon-minimal-style_365941-742.jpg"
-            alt=""
-          />
-        </div>
-        <div className="flex flex-col justify-center mt-5 mb-8 md:mt-0 sm:w-1/2 md:w-7/12 sm:pr-16">
-          <p className="mb-2 text-sm font-semibold leading-none text-left text-indigo-600 uppercase">
-            {isRegistering ? "Crea tu cuenta en" : "Inicia sesión en"}
-          </p>
-          <h3 className="mt-2 text-2xl sm:text-left md:text-4xl text-primarycolor font-semibold">
-            Power
-          </h3>
-          <p className="mt-5 text-lg text-gray-700 text md:text-left">
-            {isRegistering
-              ? "Regístrate para acceder a más oportunidades laborales."
-              : "Inicia sesión para encontrar tu próximo empleo. Si eres nuevo, empieza con 'Iniciar con Google'."}
-          </p>
-        </div>
-      </div> */}
-
       <div className="bg-white dark:bg-gray-800 w-1/2 p-8 relative h-full flex justify-center items-center">
         <div className="flex flex-col items-center">
           <div className="text-center">
