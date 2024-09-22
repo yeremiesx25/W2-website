@@ -14,27 +14,52 @@ export const AuthContextProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
   const [justLoggedIn, setJustLoggedIn] = useState(false);
 
-  async function signInWithGoogle() {
+  const signInWithGoogle = async () => {
     try {
-      const { data, error } = await supabase.auth.signInWithOAuth({
-        provider: 'google',
-      });
+      const { data, error } = await supabase.auth.signInWithOAuth({ provider: 'google' });
       if (error) throw new Error("Ocurrió un error durante la autenticación");
-      setJustLoggedIn(true); // Marcar que el usuario acaba de iniciar sesión
+      setJustLoggedIn(true);
       return data;
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
-  }
+  };
 
-  async function signOut() {
-    const { error } = await supabase.auth.signOut();
-    if (error) throw new Error("Ocurrió un error durante el cierre de sesión");
-    setUser(null);
-    localStorage.removeItem('user');
-    setJustLoggedIn(false); // Resetear el estado
-    navigate("/", { replace: true });
-  }
+  const manualSignIn = async (email, password) => {
+    try {
+      const { data, error } = await supabase
+        .from('reclutador')
+        .select('*')
+        .eq('email', email)
+        .eq('contraseña', password)
+        .single();
+  
+      if (error || !data) {
+        throw new Error('Credenciales incorrectas');
+      }
+  
+      setUser(data);
+      localStorage.setItem('user', JSON.stringify(data));
+      console.log('Usuario autenticado:', data); // Verificar datos del usuario
+      navigate('/Admin');
+    } catch (error) {
+      console.error(error);
+      throw error; // Maneja esto en LoginAdmin
+    }
+  };
+
+  const signOut = async () => {
+    try {
+      const { error } = await supabase.auth.signOut();
+      if (error) throw new Error("Ocurrió un error durante el cierre de sesión");
+      setUser(null);
+      localStorage.removeItem('user');
+      setJustLoggedIn(false);
+      navigate("/", { replace: true });
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   useEffect(() => {
     const { data: authListener } = supabase.auth.onAuthStateChange(async (event, session) => {
@@ -46,10 +71,9 @@ export const AuthContextProvider = ({ children }) => {
         setUser(user);
         localStorage.setItem('user', JSON.stringify(user));
 
-        // Redirigir a PowerAuth solo si el usuario acaba de iniciar sesión
         if (justLoggedIn || location.pathname === '/') {
           navigate("/PowerAuth", { replace: true });
-          setJustLoggedIn(false); // Resetear el estado
+          setJustLoggedIn(false);
         }
       }
       setLoading(false);
@@ -61,7 +85,7 @@ export const AuthContextProvider = ({ children }) => {
   }, [navigate, justLoggedIn, location.pathname]);
 
   return (
-    <AuthContext.Provider value={{ signInWithGoogle, signOut, user, loading }}>
+    <AuthContext.Provider value={{ signInWithGoogle, manualSignIn, signOut, user, loading }}>
       {children}
     </AuthContext.Provider>
   );

@@ -21,41 +21,53 @@ function Register() {
   const handleRegister = async (e) => {
     e.preventDefault();
     setError(null);
-
+  
     if (!email || !password || !confirmPassword || !name || !phone || !dni || !birthdate || !district) {
       setError('Por favor, completa todos los campos obligatorios.');
       return;
     }
-
+  
     if (password !== confirmPassword) {
       setError('Las contraseñas no coinciden');
       return;
     }
-
+  
     try {
+      // Check if the email already exists
+      const { data: existingUser, error: existingUserError } = await supabase
+        .from('usuario')
+        .select('email')
+        .eq('email', email)
+        .single();
+  
+      if (existingUserError && existingUserError.code !== 'PGRST116') throw existingUserError;
+  
+      if (existingUser) {
+        setError('El correo electrónico ya está registrado.');
+        return;
+      }
+  
       const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
         email,
         password,
       });
-
+  
       if (signUpError) throw signUpError;
-
-      // Insertar en la tabla usuario usando el user.id
-      const { error: insertError } = await supabase
-        .from('usuario')
-        .insert([{
-          user_id: signUpData.user.id,  // Guardar el User UID en la columna user_id
-          email,
-          contraseña: password,
-          nombre: name,
-          telefono: phone,
-          distrito: district,
-          dni_user: dni,
-          fecha_nac: birthdate,
-        }]);
-
+  
+      // Insert into the usuario table using the user.id
+      const { error: insertError } = await supabase.from('usuario').insert([{
+        user_id: signUpData.user.id,  // Store the User UID in the user_id column
+        email,
+        contraseña: password,
+        nombre: name,
+        telefono: phone,
+        distrito: district,
+        dni_user: dni,
+        fecha_nac: birthdate,
+      }]);
+  
       if (insertError) throw insertError;
-
+  
       setIsRegistered(true);
     } catch (error) {
       setError(error.message);
