@@ -1,32 +1,40 @@
 import React from 'react';
+import { BsBarChartLine } from 'react-icons/bs';
+import AddButton from './AddButton'
 
 function BtnContainer() {
   return (
-    <div className="flex justify-between items-center bg-gray-100 p-4 rounded-lg shadow">
+    <div className="flex justify-between items-center bg-gray-100 py-4 ">
       <div className="flex space-x-8">
-        <div className="text-center">
-          <h2 className="text-2xl font-bold">Mis Ofertas</h2>
-          <p>10</p>
-        </div>
-        <div className="text-center">
-          <h2 className="text-2xl font-bold">Aplicantes</h2>
-          <p>1111</p>
-        </div>
-        <div className="text-center">
-          <h2 className="text-2xl font-bold">Ofertas Abiertas</h2>
-          <p>5</p>
-        </div>
-      </div>
+      <div className="flex justify-between items-center p-4 bg-white rounded-lg shadow-sm w-48">
       <div>
-        <input
-          type="text"
-          placeholder="Buscar oferta"
-          className="border rounded px-4 py-2"
-        />
+        <p className="text-sm text-[#A3AED0]">Mis ofertas</p>
+        <p className="text-3xl font-bold text-[#1B2559]">10</p>
       </div>
-      <button className="bg-blue-600 text-white py-2 px-6 rounded-lg">
-        Nueva Oferta +
-      </button>
+      <div className="text-primarycolor">
+        <BsBarChartLine size={32} />
+      </div>
+    </div>
+    <div className="flex justify-between items-center p-4 bg-white rounded-lg shadow-sm w-48">
+      <div>
+        <p className="text-sm text-[#A3AED0]">Mis ofertas</p>
+        <p className="text-3xl font-bold text-[#1B2559]">10</p>
+      </div>
+      <div className="text-primarycolor">
+        <BsBarChartLine size={32} />
+      </div>
+    </div>
+    <div className="flex justify-between items-center p-4 bg-white rounded-lg shadow-sm w-48">
+      <div>
+        <p className="text-sm text-[#A3AED0]">Mis ofertas</p>
+        <p className="text-3xl font-bold text-[#1B2559]">10</p>
+      </div>
+      <div className="text-primarycolor">
+        <BsBarChartLine size={32} />
+      </div>
+    </div>
+      </div>
+      <AddButton />
     </div>
   );
 }

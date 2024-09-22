@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css"; // Estilo por defecto de Quill
+
 import FormAdminImg from "../../assets/formAdminImg.svg";
 import { UserAuth } from "../../Context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../../supabase/supabase.config";
 import { MdDeleteForever } from "react-icons/md";
 import ShareModal from "./ShareModal"; // Importa el componente ShareModal
+import ChatAiOferta from '../Form/ChatAiOferta'
 
 function FormOferta() {
   const { user } = UserAuth();
@@ -187,9 +187,9 @@ function FormOferta() {
   };
 
   return (
-    <div className="pl-20 w-[100%] h-screen flex font-dmsans items-center ">
-      <div className="w-[600px] h-full bg-primarycolor bg-no-repeat">
-        <img src={FormAdminImg} className="w-full h-full" alt="" />
+    <div className=" w-[100%] h-screen flex font-dmsans items-center ">
+      <div className="w-[600px] h-full pt-28">
+        <ChatAiOferta />
       </div>
       <div className="w-[calc(100%-600px)] h-full py-2 overflow-y-scroll">
         <h2 className="text-gray-700 font-bold text-3xl text-center mt-8">
@@ -328,7 +328,7 @@ function FormOferta() {
                     >
                       Beneficios del trabajo
                     </label>
-                    <ReactQuill
+                    <input
                       name="jobDescription"
                       id="jobDescription"
                       value={formData.jobDescription}
@@ -345,7 +345,7 @@ function FormOferta() {
                     >
                       Requisitos
                     </label>
-                    <ReactQuill
+                    <input
                       name="requirements"
                       id="requirements"
                       value={formData.requirements}
@@ -362,7 +362,7 @@ function FormOferta() {
                     >
                       Funciones del puesto
                     </label>
-                    <ReactQuill
+                    <input
                       name="funciones"
                       id="funciones"
                       value={formData.funciones}
@@ -379,7 +379,7 @@ function FormOferta() {
                     >
                       Horario de trabajo
                     </label>
-                    <ReactQuill
+                    <input
                       name="horario"
                       id="horario"
                       value={formData.horario}

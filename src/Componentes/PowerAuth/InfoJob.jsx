@@ -8,6 +8,7 @@ import { IoLogoWhatsapp } from "react-icons/io";
 import { supabase } from "../../supabase/supabase.config"; // Importar cliente de Supabase
 import { UserAuth } from "../../Context/AuthContext"; // Importar contexto de autenticación
 import { MdOutlineVerifiedUser } from "react-icons/md";
+import { FaFileAlt } from "react-icons/fa";
 
 function InfoJob({ selectedJob }) {
   const { user } = UserAuth(); // Obtener información del usuario autenticado
@@ -157,148 +158,89 @@ function InfoJob({ selectedJob }) {
 
   return (
     <div
-      className="selected-job-info w-full sm:w-1/2 border rounded-lg md:flex flex-col p-4 mx-8 bg-white shadow-lg hidden transition-all duration-500"
-      style={{ height: "650px", overflowY: "auto", position: "relative" }}
+  className="selected-job-info w-full sm:w-3/5 rounded-lg md:flex flex-col p-8 mx-8 bg-white hidden transition-all duration-500 font-dmsans"
+  style={{ height: "650px", overflowY: "auto", position: "relative" }}
+>
+  <p className="text-gray-500 text-sm">{selectedJob.fecha_publicacion}</p>
+  <h2 className="font-semibold text-2xl mb-3 text-gray-800">
+    {selectedJob.puesto}
+  </h2>
+
+  <div className="flex items-center space-x-2 mb-4">
+    <span className="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded">Fulltime</span>
+    <span className="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded">Remote</span>
+  </div>
+
+  <div className="flex items-center justify-between mb-4">
+    <div className="flex items-center">
+      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ-VZFChSdUVY0DxlWQ0GG2yDwZIsQI4PUYZg&s" alt="Company Logo" className="w-10 h-10 rounded-full mr-2"/>
+      <div>
+        <p className="text-sm font-medium text-gray-800">{selectedJob.empresa}</p>
+        <p className="text-xs text-gray-500">Jonathan Tueas</p>
+      </div>
+    </div>
+  </div>
+
+  <div className="mb-4">
+    <h3 className="font-semibold text-lg text-gray-800">Descripción</h3>
+    <p className="text-gray-700 text-sm leading-relaxed">
+      {jobDetails.map((detail, index) => (
+        <div key={index} className="py-2">
+          <div>{detail.title}</div>
+          <div className="mt-2">{detail.content}</div>
+        </div>
+      ))}
+    </p>
+  </div>
+
+  <div className="mb-4">
+    <h3 className="font-semibold text-lg text-gray-800">Calificaciones</h3>
+    <ul className="list-disc pl-5 text-gray-700">
+      <li>12 Years experience in visual, and user Experience design</li>
+      <li>Excellent communication skills, including the ability to present complex concepts clearly</li>
+      <li>Have worked on projects using css systems, html for landing page</li>
+      <li>Understanding of responsive web design and development best practices</li>
+      <li>Excellent communication skills</li>
+    </ul>
+  </div>
+
+  <div className="mb-4">
+    <h3 className="font-semibold text-lg text-gray-800">Documentos</h3>
+    <div className="flex flex-col space-y-2">
+      <a href="/path-to-document" className="flex items-center text-blue-600 hover:underline">
+        <FaFileAlt className="mr-2" /> Documento para Front End Developer
+      </a>
+      <a href="/path-to-price-list" className="flex items-center text-blue-600 hover:underline">
+        <FaFileAlt className="mr-2" /> Lista de precios
+      </a>
+    </div>
+  </div>
+
+  <div className="flex justify-center mt-4">
+    <button
+      className={`font-bold py-2 px-4 rounded-full mr-4 ${hasApplied ? "bg-gray-500 text-white cursor-not-allowed" : "bg-[#0057c2] text-white"}`}
+      onClick={hasApplied ? null : handleApplyClick}
+      disabled={hasApplied}
     >
-      <h2 className="ml-1 mt-3 font-semibold text-2xl mb-3 text-gray-800">
-        {selectedJob.puesto}
-      </h2>
-      <div className="flex items-center justify-between mb-2 mt-2">
-        <div className="flex flex-col w-full">
-          <div className="flex items-center justify-start">
-            <span
-              className="text-blue-900 text-base uppercase font-regular tracking-wide"
-              style={{ display: "flex", alignItems: "center" }}
-            >
-              {selectedJob.empresa}<MdOutlineVerifiedUser className="flex text-green-500 ml-1 text-lg mb-0.5" />
-            </span>
-            <span className="inline-block mx-4 h-4 w-px bg-gray-400"></span>
-            <span
-              className="text-gray-700 text-base  font-regular tracking-wide"
-              style={{ display: "flex", alignItems: "center" }}
-            >
-              <FaLocationDot style={{ marginRight: "5px" }} />
-              {selectedJob.ubicacion}
-            </span>
-            <span className="inline-block mx-4 h-4 w-px bg-gray-400"></span>
-            <span
-              className="text-gray-700 text-base font-regular tracking-wide"
-              style={{ display: "flex", alignItems: "center" }}
-            >
-              S/. {selectedJob.sueldo}
-            </span>
-          </div>
-        </div>
-      </div>
-      <div className="flex justify-start mt-2 items-center">
-        <button
-          className={`font-bold py-2 px-4 rounded-full mb-4 ${
-            hasApplied ? "bg-[#0057c2] text-white" : "bg-[#0057c2] text-white"
-          }`}
-          onClick={hasApplied ? null : handleApplyClick}
-          disabled={hasApplied}
-        >
-          {hasApplied ? "YA HAS POSTULADO" : "POSTULARME"}
+      {hasApplied ? "YA HAS POSTULADO" : "POSTULARME"}
+    </button>
+    {whatsappBaseUrl && (
+      <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
+        <button className="bg-[#00d35e] text-white font-bold py-2 px-4 rounded-full flex items-center">
+          <IoLogoWhatsapp className="mr-2" size={24} />
+          WhatsApp
         </button>
-        <div
-          ref={shareButtonRef}
-          className="ml-2 flex items-center justify-center bg-[#eaf3fb] rounded-full cursor-pointer hover:bg-blue-100 mb-4 relative"
-          style={{ height: "40px", width: "40px" }}
-          onClick={handleShareClick}
-        >
-          <CiShare2 size={24} color="#005da9" />
+      </a>
+    )}
+  </div>
 
-          {isShareMenuOpen && (
-            <div className="absolute right-0 mt-2 w-48 bg-white border rounded shadow-lg z-50">
-              <div className="py-2">
-                <a
-                  href={`https://wa.me/?text=${encodeURIComponent(
-                    `Hola, te puede interesar este puesto de trabajo: ${selectedJob.puesto}. Aquí tienes el enlace: https://w2asesoresyconsultores.com/Share?id=${selectedJob.id_oferta}`
-                  )}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center px-4 py-2 text-gray-800 hover:bg-blue-50"
-                >
-                  <IoLogoWhatsapp className="mr-2" size={16} />
-                  <span>WhatsApp</span>
-                </a>
-
-                <a
-                  href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
-                    `https://w2asesoresyconsultores.com/Share?id=${selectedJob.id_oferta}`
-                  )}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center px-4 py-2 text-gray-800 hover:bg-blue-50"
-                >
-                  <FaFacebookF className="mr-2" size={16} />
-                  <span>Facebook</span>
-                </a>
-
-                <button
-                  onClick={handleCopyLink}
-                  className="flex items-center w-full px-4 py-2 text-gray-800 hover:bg-blue-50"
-                >
-                  <FaCopy className="mr-2" size={16} />
-                  <span>Copiar Enlace</span>
-                </button>
-              </div>
-            </div>
-          )}
-        </div>
-      </div>
-
-      <div
-        ref={contentRef}
-        className="overflow-y-auto pb-4 mt-3"
-        style={{ height: "420px" }}
-      >
-        <h3 className="font-semibold text-xl text-gray-800">Descripción del Empleo</h3>
-        {jobDetails.map((detail, index) => (
-          <div key={index} className="py-5 border-b border-gray-300">
-            <div className="font-semibold font-dmsans text-gray-800">
-              <div>{detail.title}</div>
-            </div>
-            <div
-              className="mt-3 text-gray-700 font-regular"
-              style={{
-                wordWrap: "break-word",
-                overflowWrap: "break-word",
-                width: "100%",
-              }}
-            >
-              {detail.content}
-            </div>
-          </div>
-        ))}
-      </div>
-
-      <div className="flex justify-center mt-4" style={{ opacity: atBottom ? 1 : 0, transition: "opacity 0.3s" }}>
-  <button
-    className={`font-bold py-2 px-4 rounded-full mr-4 ${
-      hasApplied ? "bg-[#0057c2] text-white" : "bg-[#0057c2] text-white"
-    }`}
-    onClick={hasApplied ? null : handleApplyClick}
-    disabled={hasApplied}
-  >
-    {hasApplied ? "YA HAS POSTULADO" : "POSTULARME"}
-  </button>
-  {whatsappBaseUrl && (
-    <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">
-      <button className="bg-[#00d35e] text-white font-bold py-2 px-4 rounded-full flex items-center">
-        <IoLogoWhatsapp className="mr-2" size={24} />
-        WhatsApp
-      </button>
-    </a>
-  )}
+  <QuestionsModal
+    isOpen={isQuestionsModalOpen}
+    onClose={() => setIsQuestionsModalOpen(false)}
+    selectedJob={selectedJob}
+  />
 </div>
 
-<QuestionsModal
-  isOpen={isQuestionsModalOpen}
-  onClose={() => setIsQuestionsModalOpen(false)}
-  selectedJob={selectedJob}
-/>
-    </div>
   );
 }
 

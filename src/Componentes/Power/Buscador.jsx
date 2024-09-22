@@ -85,7 +85,7 @@ function Buscador() {
     <div className=" md:w-[80%] mx-auto w-full">
       <form
         onSubmit={handleSubmit}
-        className=" bg-white flex flex-col md:flex-row items-center justify-center border py-2 px-2 rounded-3xl gap-2 shadow-2xl  w-full mt-12"
+        className="  flex flex-col md:flex-row items-center justify-center border py-2 px-2 rounded-full  w-full bg-white"
       >
         <div className=" flex items-center w-full border-r">
           <FaSearch className="ml-4 text-gray-500" />
