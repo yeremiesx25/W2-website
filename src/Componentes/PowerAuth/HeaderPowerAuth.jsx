@@ -26,8 +26,6 @@ function HeaderPowerAuth() {
   };
 
   const [menuOpen, setMenuOpen] = useState(false);
-
-
   const [hasShadow, setHasShadow] = useState(false);
 
   useEffect(() => {
@@ -46,6 +44,7 @@ function HeaderPowerAuth() {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+
   return (
     <header 
     className={`bg-newprimarycolor fixed w-full z-10 font-dmsans transition-shadow duration-300 ${
@@ -59,9 +58,6 @@ function HeaderPowerAuth() {
           </a>
         </div>
 
-        {/* Icono de menú para dispositivos móviles */}
-        
-
         {/* Opciones de navegación */}
         <div className="hidden md:flex justify-around items-center text-white text-md gap-4 font-dmsans">
           <Link to="/" className="hover:text-yellowprimary">Inicio</Link>
@@ -71,42 +67,46 @@ function HeaderPowerAuth() {
           <Link to="/Power" className="font-semibold text-yellowprimary hover:text-white underline decoration-yellowprimary underline-offset-4">Power</Link>
         </div>
 
-        {/* Botones de login y registro (solo en escritorio) */}
-        <div className="relative">
-      {/* Avatar Button */}
-      <button
-        onClick={() => setMenuOpen(!menuOpen)}
-        className="flex items-center focus:outline-none"
-      >
-        <span className="ml-2 overflow-hidden whitespace-nowrap overflow-ellipsis text-white font-base w-40">
-          {user.user_metadata.full_name}
-        </span>
-        <img
-          className="w-10 h-10 rounded-full my-2"
-          src={user.user_metadata.avatar_url}
-          alt="User"
-        />
-      </button>
-
-      {/* Dropdown Menu */}
-      {menuOpen && (
-        <div className="absolute right-0  w-48 bg-white rounded-md shadow-lg py-2 z-10">
-          <Link
-            to="/Profile"
-            className="flex px-4 py-2 text-newprimarycolor hover:bg-blue-50"
-          > <RxAvatar size={24} className='mr-2' />
-            Perfil
-          </Link>
-          <button
-            onClick={signOut}
-            className="flex items-center px-4 py-2 w-full text-red-600 hover:bg-blue-50"
-          >
-            <BiLogOut size={24} />
-            <span className="ml-2">Cerrar sesión</span>
+        {/* Avatar y menú desplegable */}
+        <div 
+          className="relative"
+          onMouseEnter={() => setMenuOpen(true)}
+          onMouseLeave={() => setMenuOpen(false)}
+        >
+          {/* Botón de avatar */}
+          <button className="flex items-center focus:outline-none">
+            <span className="ml-2 overflow-hidden whitespace-nowrap overflow-ellipsis text-white font-base w-40">
+              {user.user_metadata.full_name}
+            </span>
+            <img
+              className="w-10 h-10 rounded-full my-2"
+              src={user.user_metadata.avatar_url}
+              alt="User"
+            />
           </button>
+
+          {/* Menú desplegable con transición */}
+          <div 
+            className={`absolute right-0 w-48 bg-white rounded-md shadow-lg py-2 z-10 transition-opacity duration-300 ease-in-out transform ${
+              menuOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
+            }`}
+          >
+            <Link
+              to="/Profile"
+              className="flex px-4 py-2 text-newprimarycolor hover:bg-blue-50"
+            >
+              <RxAvatar size={24} className='mr-2' />
+              Perfil
+            </Link>
+            <button
+              onClick={signOut}
+              className="flex items-center px-4 py-2 w-full text-red-600 hover:bg-blue-50"
+            >
+              <BiLogOut size={24} />
+              <span className="ml-2">Cerrar sesión</span>
+            </button>
+          </div>
         </div>
-      )}
-    </div>
       </div>
 
       {/* Menú desplegable para dispositivos móviles */}
@@ -118,7 +118,6 @@ function HeaderPowerAuth() {
             <Link to="/DescubriendoTalentos" className="text-white hover:text-gray-600 block px-3 py-2 rounded-md text-base font-medium">Descubriendo Talentos</Link>
             <Link to="/Coworking" className="text-white hover:text-gray-600 block px-3 py-2 rounded-md text-base font-medium">Coworking</Link>
             <Link to="/Power" className="text-white hover:text-gray-600 block px-3 py-2 rounded-md text-base font-medium">Power</Link>
-            
           </div>
         </div>
       )}

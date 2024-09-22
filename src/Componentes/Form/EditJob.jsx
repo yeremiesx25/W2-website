@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { supabase } from '../../supabase/supabase.config';
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
 import FormAdminImg from "../../assets/formAdminImg.svg";
 import HeaderPowerAuth from '../PowerAuth/HeaderPowerAuth';
 
@@ -217,51 +215,64 @@ function EditJob() {
                       <label htmlFor="beneficios" className="mb-3 block text-base font-medium text-[#07074D]">
                         Beneficios del trabajo
                       </label>
-                      <ReactQuill
+                      <input
+                        type="text"
+                        id="beneficios"
+                        name="beneficios"
                         value={job.beneficios}
-                        onChange={(value) => handleChange({ target: { name: 'beneficios', value } })}
-                        className="rounded-md border border-[#e0e0e0] bg-white text-base font-medium text-black focus:border-[#6A64F1] focus:shadow-md"
+                        onChange={handleChange}
+                        className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#6A64F1] focus:shadow-md"
                       />
                     </div>
 
                     <div className="mb-5">
                       <label htmlFor="requisitos" className="mb-3 block text-base font-medium text-[#07074D]">
-                        Requisitos del trabajo
+                        Requisitos
                       </label>
-                      <ReactQuill
+                      <input
+                        type="text"
+                        id="requisitos"
+                        name="requisitos"
                         value={job.requisitos}
-                        onChange={(value) => handleChange({ target: { name: 'requisitos', value } })}
-                        className="rounded-md border border-[#e0e0e0] bg-white text-base font-medium text-black focus:border-[#6A64F1] focus:shadow-md"
+                        onChange={handleChange}
+                        className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#6A64F1] focus:shadow-md"
                       />
                     </div>
 
                     <div className="mb-5">
                       <label htmlFor="funciones" className="mb-3 block text-base font-medium text-[#07074D]">
-                        Funciones del trabajo
+                        Funciones
                       </label>
-                      <ReactQuill
+                      <input
+                        type="text"
+                        id="funciones"
+                        name="funciones"
                         value={job.funciones}
-                        onChange={(value) => handleChange({ target: { name: 'funciones', value } })}
-                        className="rounded-md border border-[#e0e0e0] bg-white text-base font-medium text-black focus:border-[#6A64F1] focus:shadow-md"
+                        onChange={handleChange}
+                        className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#6A64F1] focus:shadow-md"
                       />
                     </div>
 
                     <div className="mb-5">
                       <label htmlFor="horario" className="mb-3 block text-base font-medium text-[#07074D]">
-                        Horario del trabajo
+                        Horario
                       </label>
-                      <ReactQuill
+                      <input
+                        type="text"
+                        id="horario"
+                        name="horario"
                         value={job.horario}
-                        onChange={(value) => handleChange({ target: { name: 'horario', value } })}
-                        className="rounded-md border border-[#e0e0e0] bg-white text-base font-medium text-black focus:border-[#6A64F1] focus:shadow-md"
+                        onChange={handleChange}
+                        className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#6A64F1] focus:shadow-md"
                       />
                     </div>
-                    <button type="button" onClick={prevStep} className="mr-24 hover:shadow-form rounded-md w-56 bg-powercolor py-3 px-8 text-center text-base font-semibold text-white outline-none">
-              Atrás
-            </button>
-            <button type="button" onClick={nextStep} className="hover:shadow-form rounded-md w-56 bg-primarycolor py-3 px-8 text-center text-base font-semibold text-white outline-none">
-              Siguiente
-            </button>
+
+                    <button type="button" onClick={prevStep} className="mr-4 hover:shadow-form rounded-md w-28 bg-gray-300 py-3 px-8 text-center text-base font-semibold text-black outline-none">
+                      Anterior
+                    </button>
+                    <button type="button" onClick={nextStep} className="hover:shadow-form rounded-md w-56 bg-primarycolor py-3 px-8 text-center text-base font-semibold text-white outline-none">
+                      Siguiente
+                    </button>
                   </>
                 )}
 
@@ -273,10 +284,10 @@ function EditJob() {
                       </label>
                       <input
                         type="text"
+                        id="preg_1"
                         name="preg_1"
                         value={job.preg_1}
                         onChange={handleChange}
-                        onKeyDown={(e) => handleInputKeyDown(e, 'preg_2')}
                         className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#6A64F1] focus:shadow-md"
                       />
                     </div>
@@ -291,7 +302,6 @@ function EditJob() {
                         name="preg_2"
                         value={job.preg_2}
                         onChange={handleChange}
-                        onKeyDown={(e) => handleInputKeyDown(e, 'preg_3')}
                         className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#6A64F1] focus:shadow-md"
                       />
                     </div>
@@ -306,11 +316,21 @@ function EditJob() {
                         name="preg_3"
                         value={job.preg_3}
                         onChange={handleChange}
-                        onKeyDown={(e) => handleInputKeyDown(e, 'preg_4')}
                         className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#6A64F1] focus:shadow-md"
                       />
                     </div>
 
+                    <button type="button" onClick={prevStep} className="mr-4 hover:shadow-form rounded-md w-28 bg-gray-300 py-3 px-8 text-center text-base font-semibold text-black outline-none">
+                      Anterior
+                    </button>
+                    <button type="button" onClick={nextStep} className="hover:shadow-form rounded-md w-56 bg-primarycolor py-3 px-8 text-center text-base font-semibold text-white outline-none">
+                      Siguiente
+                    </button>
+                  </>
+                )}
+
+                {formStep === 4 && (
+                  <>
                     <div className="mb-5">
                       <label htmlFor="preg_4" className="mb-3 block text-base font-medium text-[#07074D]">
                         Pregunta 4
@@ -321,7 +341,6 @@ function EditJob() {
                         name="preg_4"
                         value={job.preg_4}
                         onChange={handleChange}
-                        onKeyDown={(e) => handleInputKeyDown(e, 'preg_5')}
                         className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#6A64F1] focus:shadow-md"
                       />
                     </div>
@@ -336,7 +355,6 @@ function EditJob() {
                         name="preg_5"
                         value={job.preg_5}
                         onChange={handleChange}
-                        onKeyDown={(e) => handleInputKeyDown(e, 'preg_6')}
                         className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-black outline-none focus:border-[#6A64F1] focus:shadow-md"
                       />
                     </div>
@@ -355,12 +373,12 @@ function EditJob() {
                       />
                     </div>
 
-                    <button type="button" onClick={prevStep} className="mr-24 hover:shadow-form rounded-md w-56 bg-powercolor py-3 px-8 text-center text-base font-semibold text-white outline-none">
-              Atrás
-            </button>
-            <button type="submit" className="hover:shadow-form rounded-md w-56 bg-primarycolor py-3 px-8 text-center text-base font-semibold text-white outline-none">
-              Editar
-            </button>
+                    <button type="button" onClick={prevStep} className="mr-4 hover:shadow-form rounded-md w-28 bg-gray-300 py-3 px-8 text-center text-base font-semibold text-black outline-none">
+                      Anterior
+                    </button>
+                    <button type="submit" className="hover:shadow-form rounded-md w-56 bg-primarycolor py-3 px-8 text-center text-base font-semibold text-white outline-none">
+                      Guardar
+                    </button>
                   </>
                 )}
               </form>
