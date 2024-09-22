@@ -29,11 +29,12 @@ const JobList = () => {
       postulados: "2 / 10",
       estado: "Abierto",
     },
+    
     // Agregar más trabajos según sea necesario
   ];
 
   return (
-    <div className="w-full bg-white p-6 rounded-lg shadow-lg font-dmsans">
+    <div className="w-full bg-white p-8 rounded-lg  font-dmsans">
       <div className="grid grid-cols-4 gap-4 text-gray-500 text-md font-semibold">
         <div>Puesto</div>
         <div>Fecha</div>
