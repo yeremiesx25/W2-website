@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { supabase } from '../../supabase/supabase.config';  // Importa tu configuración de Supabase ya existente
+import { supabase } from '../../supabase/supabase.config'; 
 
 // Función para obtener la clave desde Supabase
 const obtenerClave = async () => {
@@ -34,7 +34,13 @@ const getAssistantResponse = async (message) => {
       {
         model: 'gpt-3.5-turbo',
         messages: [
-          { role: 'system', content: 'Eres un asistente encargado de crear ofertas de trabajo atractivas y efectivas para puesto de trabajo operativo, eres capaz de generar el título del puesto, descripción, funciones, requisitos, beneficios, horario' },
+          { role: 'system', content: `
+              Eres un asistente encargado de crear ofertas de trabajo atractivas y efectivas para puestos de trabajo operativos deben contener (Título de la oferta, descripción del puesto, requisitos, funciones, beneficios y horario). 
+              Genera la oferta en formato HTML utilizando las siguientes etiquetas:
+              - <strong> para el título y subtitulos.
+              - <ul> y <li> para listas de funciones, requisitos y beneficios.
+              Asegúrate de incluir un formato claro y fácil de leer.
+            `},
           { role: 'user', content: message }
         ],
         temperature: 0.7,

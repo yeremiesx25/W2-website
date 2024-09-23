@@ -188,7 +188,7 @@ function FormOferta() {
 
   return (
     <div className=" w-[100%] h-screen flex font-dmsans items-center ">
-      <div className="w-[600px] h-full pt-28">
+      <div className="w-[600px] h-full">
         <ChatAiOferta />
       </div>
       <div className="w-[calc(100%-600px)] h-full py-2 overflow-y-scroll">
