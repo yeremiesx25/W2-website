@@ -18,7 +18,7 @@ function Postulados() {
         const { data: jobData, error: jobError } = await supabase
           .from('Oferta')
           .select('*, preg_1, preg_2, preg_3, preg_4, preg_5')
-          .eq('id_oferta', id)
+          .eq('id', id) // Cambié 'id_oferta' por 'id' para que coincida con la tabla
           .single();
 
         if (jobError) {
@@ -81,17 +81,12 @@ function Postulados() {
 
   const handleFilterClick = (filtro) => {
     setFiltroSeleccionado(filtro);
-
-    // Verifica si el postulante seleccionado está en la nueva sección filtrada
     const postulanteEnFiltro = filteredPostulados.find(postulado => postulado.id === selectedPostulado?.id);
-
     if (!postulanteEnFiltro) {
-      // Si el postulante seleccionado ya no está en la sección filtrada, restablece el estado
       setSelectedPostulado(null);
     }
   };
 
-  // Maneja el cambio de la casilla de verificación
   const handleCheckboxChange = (id) => {
     setPostulados((prevPostulados) =>
       prevPostulados.map((postulado) =>
@@ -125,7 +120,7 @@ function Postulados() {
   return (
     <div className="font-dmsans">
       <HeaderPowerAuth />
-      <div className="">
+      <div>
         <section className="pt-28 pb-10 md:py-8 bg-primarygradientmobile md:bg-primarygradient dark:bg-dark h-96 md:h-64 flex justify-center items-center">
           <div className="container mx-auto">
             <div className="overflow-hidden rounded bg-primary py-12 px-8 md:p-[70px]">
@@ -206,26 +201,9 @@ function Postulados() {
                             e.stopPropagation();
                             handleCheckboxChange(postulado.id);
                           }}
-                          className="mr-4"
+                          className="mr-2"
                         />
-                        <div className="flex-shrink-0 h-10 w-10">
-                          <img
-                            className="h-10 w-10 rounded-full"
-                            src={
-                              postulado.avatar_url ||
-                              "https://img.freepik.com/free-psd/3d-illustration-person-with-sunglasses_23-2149436188.jpg?size=338&ext=jpg&ga=GA1.1.1788068356.1719446400&semt=ais_user"
-                            }
-                            alt=""
-                          />
-                        </div>
-                        <div className="ml-4">
-                          <div className="text-sm font-medium text-gray-900">
-                            {postulado.name_user}
-                          </div>
-                          <div className="text-sm text-gray-500">
-                            {postulado.estado}
-                          </div>
-                        </div>
+                        {postulado.nombre_user} {/* Asumiendo que el nombre del postulante está en nombre_user */}
                       </div>
                     </td>
                   </tr>
@@ -233,9 +211,13 @@ function Postulados() {
               </tbody>
             </table>
           </div>
-          <div className="hidden md:block md:w-2/3">
+          <div className="ml-4 w-full md:w-2/3">
             {selectedPostulado && (
-              <InfoPostulante key={selectedPostulado.id} postulado={selectedPostulado} preguntas={preguntas} respuestas={respuestas} />
+              <InfoPostulante 
+                postulado={selectedPostulado} 
+                preguntas={preguntas} 
+                respuestas={respuestas} 
+              />
             )}
           </div>
         </div>

@@ -10,7 +10,7 @@ import HeaderDashboard from './HeaderDashboard'
 function Admin() {
   return (
     <div className="flex font-dmsans">
-      <HeaderPowerAuth />
+      
       <MenuAdmin />
       <div className="flex-1 p-8 bg-gray-100 pt-20">
       <HeaderDashboard />
