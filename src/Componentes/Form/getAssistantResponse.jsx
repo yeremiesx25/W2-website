@@ -8,7 +8,7 @@ const obtenerClave = async () => {
       .from('Claves')
       .select('clave')
       .single();
-
+      
     if (error) {
       throw error;
     }
