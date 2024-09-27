@@ -12,6 +12,7 @@ import { FaFileAlt } from "react-icons/fa";
 import dayjs from "dayjs"; 
 import relativeTime from 'dayjs/plugin/relativeTime';
 
+
 function InfoJob({ selectedJob }) {
   const { user } = UserAuth(); // Obtener información del usuario autenticado
   const [atBottom, setAtBottom] = useState(false);

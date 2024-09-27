@@ -75,14 +75,7 @@ function HeaderPowerAuth() {
         >
           {/* Botón de avatar */}
           <button className="flex items-center focus:outline-none">
-            <span className="ml-2 overflow-hidden whitespace-nowrap overflow-ellipsis text-white font-base w-40">
-              {user.user_metadata.full_name}
-            </span>
-            <img
-              className="w-10 h-10 rounded-full my-2"
-              src={user.user_metadata.avatar_url}
-              alt="User"
-            />
+            
           </button>
 
           {/* Menú desplegable con transición */}
