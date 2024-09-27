@@ -13,6 +13,7 @@ export const AuthContextProvider = ({ children }) => {
   });
   const [loading, setLoading] = useState(true);
   const [justLoggedIn, setJustLoggedIn] = useState(false);
+  const [manualLogin, setManualLogin] = useState(false); // Flag para detectar si es un login manual
 
   const signInWithGoogle = async () => {
     try {
@@ -38,10 +39,14 @@ export const AuthContextProvider = ({ children }) => {
         throw new Error('Credenciales incorrectas');
       }
   
+      // Autenticación exitosa, guardar id_reclutador en el estado y localStorage
       setUser(data);
       localStorage.setItem('user', JSON.stringify(data));
+      setManualLogin(true); // Indicamos que fue un login manual
       console.log('Usuario autenticado:', data); // Verificar datos del usuario
-      navigate('/Admin');
+      
+      // Redirigir a la página de admin
+      navigate('/Admin', { replace: true });
     } catch (error) {
       console.error(error);
       throw error; // Maneja esto en LoginAdmin
@@ -55,6 +60,7 @@ export const AuthContextProvider = ({ children }) => {
       setUser(null);
       localStorage.removeItem('user');
       setJustLoggedIn(false);
+      setManualLogin(false); // Resetear el flag de login manual
       navigate("/", { replace: true });
     } catch (error) {
       console.error(error);
@@ -63,6 +69,13 @@ export const AuthContextProvider = ({ children }) => {
 
   useEffect(() => {
     const { data: authListener } = supabase.auth.onAuthStateChange(async (event, session) => {
+      // Si el usuario hizo un login manual, no sobrescribir el estado de autenticación
+      if (manualLogin) {
+        setLoading(false);
+        return;
+      }
+
+      // Si la sesión está vacía, eliminar el usuario del localStorage
       if (session == null) {
         setUser(null);
         localStorage.removeItem('user');
@@ -71,6 +84,7 @@ export const AuthContextProvider = ({ children }) => {
         setUser(user);
         localStorage.setItem('user', JSON.stringify(user));
 
+        // Si el usuario acaba de iniciar sesión o está en la página raíz
         if (justLoggedIn || location.pathname === '/') {
           navigate("/PowerAuth", { replace: true });
           setJustLoggedIn(false);
@@ -82,7 +96,7 @@ export const AuthContextProvider = ({ children }) => {
     return () => {
       authListener?.subscription.unsubscribe();
     };
-  }, [navigate, justLoggedIn, location.pathname]);
+  }, [navigate, justLoggedIn, location.pathname, manualLogin]);
 
   return (
     <AuthContext.Provider value={{ signInWithGoogle, manualSignIn, signOut, user, loading }}>
