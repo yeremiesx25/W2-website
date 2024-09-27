@@ -3,7 +3,7 @@ import { MdOutlineVerifiedUser } from "react-icons/md";
 import { BsBookmark, BsArrowRightCircle } from "react-icons/bs";
 
 function CardTrabajo2({ job, onSelectJob, isSelected }) {
-  const { puesto, modalidad, ubicacion, empresa } = job;
+  const { puesto, modalidad, ubicacion, empresa, descripcion, reclutador } = job;
 
   return (
     <div className="w-full flex justify-center font-dmsans">
@@ -21,15 +21,13 @@ function CardTrabajo2({ job, onSelectJob, isSelected }) {
               </div>
               <div>
                 <h3 className="text-sm font-semibold text-gray-800">{empresa}</h3>
-                <p className="text-xs text-gray-500">Miracle De Lopez</p>
+                <p className="text-xs text-gray-500"> reclutador {reclutador}</p>
               </div>
             </div>
           </div>
-          <h4 className="font-bold text-lg leading-tight text-gray-900">{puesto}</h4>
+          <h4 className="font-bold text-lg leading-tight text-gray-800">{puesto}</h4>
           <p className="text-sm text-gray-600">
-            Oracle Blues: Empowering Businesses with Seamless Data Solutions.
-            Harness the Power of Lorinda Industry Cutting-Edge Technologies to
-            Drive Innovation and Success. <span className="text-blue-500">View More</span>
+            {descripcion} <span className="text-blue-500">Ver más</span>
           </p>
           <div className="flex space-x-2">
             {modalidad && (
