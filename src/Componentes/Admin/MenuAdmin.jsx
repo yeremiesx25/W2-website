@@ -1,6 +1,7 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaTachometerAlt, FaChartLine, FaComments, FaCalendarAlt, FaClipboard, FaCog, FaSignOutAlt } from 'react-icons/fa';
+import { supabase } from "../../supabase/supabase.config"; // Supongamos que usas Supabase para autenticación
 
 // Componente reutilizable para los items del menú
 const MenuItem = ({ to, icon: Icon, label }) => {
@@ -18,6 +19,20 @@ const MenuItem = ({ to, icon: Icon, label }) => {
 };
 
 function MenuAdmin() {
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    // Lógica de cierre de sesión (en este caso usando Supabase)
+    const { error } = await supabase.auth.signOut();
+    
+    if (!error) {
+      // Redirigir a la página /Power después de cerrar sesión
+      navigate('/Power');
+    } else {
+      console.error('Error cerrando sesión:', error.message);
+    }
+  };
+
   return (
     <div className="w-64 h-screen bg-white shadow-lg flex flex-col justify-between pt-20 font-dmsans">
       <ul className="space-y-4 p-6 mt-20">
@@ -41,7 +56,7 @@ function MenuAdmin() {
         </li>
       </ul>
       <div className="p-6">
-        <button className="flex items-center text-red-500">
+        <button onClick={handleLogout} className="flex items-center text-red-500">
           <FaSignOutAlt className="mr-3" /> Cerrar sesión
         </button>
       </div>

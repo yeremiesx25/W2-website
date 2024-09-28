@@ -1,142 +1,182 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { UserAuth } from "../../Context/AuthContext";
-import { FcGoogle } from "react-icons/fc";
+import { supabase } from "../../supabase/supabase.config"; // Importa tu configuración de Supabase
 import HeaderPower from "./HeaderPower";
-import { supabase } from "../../supabase/supabase.config";
-import Register from "./Register";
 
-function Login({ closeModal }) {
-  const { signInWithGoogle } = UserAuth();
-  const navigate = useNavigate();
-
+function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [name, setName] = useState(""); // Campo adicional para el perfil
   const [error, setError] = useState("");
-  const [isRegistering, setIsRegistering] = useState(false);
+  const [isLogin, setIsLogin] = useState(false); // Estado para alternar entre registro e inicio de sesión
+  const navigate = useNavigate();
+
+  const handleRegister = async (e) => {
+    e.preventDefault();
+    setError("");
+
+    try {
+      // Registrar nuevo usuario en Supabase Auth
+      const { data, error: signUpError } = await supabase.auth.signUp({
+        email: email,
+        password: password,
+      });
+
+      if (signUpError) {
+        console.error("Error de registro:", signUpError); // Log del error
+        setError("Hubo un problema al registrarse.");
+        return;
+      }
+
+      // Si el usuario se registra correctamente, añade su perfil a la tabla 'perfiles'
+      const user = data.user;
+      if (user) {
+        const perfilData = {
+          nombre: name, // El nombre que el usuario ingresó
+          correo: email, // El correo del usuario registrado
+          rol: "candidato", // Establecer rol automáticamente
+          user_id: user.id, // Agregar el user_id para relacionar con la tabla perfiles
+        };
+
+        console.log("Datos del perfil a insertar:", perfilData); // Log de datos a insertar
+
+        const { error: profileError } = await supabase.from("perfiles").insert(perfilData);
+
+        if (profileError) {
+          console.error("Error al crear perfil:", profileError); // Log del error
+          setError("Hubo un problema al crear el perfil.");
+          return;
+        }
+
+        // Redirige al usuario a la página deseada tras el registro exitoso
+        navigate("/PowerAuth");
+      }
+    } catch (error) {
+      console.error("Error de registro:", error); // Log del error
+      setError("Hubo un problema al registrarse. Inténtalo de nuevo.");
+    }
+  };
 
   const handleLogin = async (e) => {
     e.preventDefault();
     setError("");
 
     try {
-      const { error } = await supabase.auth.signInWithPassword({
+      const { error: loginError } = await supabase.auth.signInWithPassword({
         email: email,
         password: password,
       });
 
-      if (error) {
-        setError("Correo o contraseña incorrectos");
-      } else {
-        navigate("/PowerAuth");
+      if (loginError) {
+        console.error("Error de inicio de sesión:", loginError.message);
+        setError(loginError.message);
+        return;
       }
+
+      // Redirige al usuario a la página deseada tras el inicio de sesión exitoso
+      navigate("/PowerAuth");
     } catch (error) {
+      console.error("Error de inicio de sesión:", error.message);
       setError("Hubo un problema al iniciar sesión. Inténtalo de nuevo.");
     }
   };
 
+  const handleGoogleLogin = async () => {
+    setError("");
+    try {
+      // Iniciar sesión con Google
+      const { error: googleError } = await supabase.auth.signInWithOAuth({
+        provider: "google",
+      });
+
+      if (googleError) {
+        console.error("Error de inicio de sesión con Google:", googleError.message);
+        setError(googleError.message);
+        return;
+      }
+
+      // Redirige al usuario a la página deseada tras el inicio de sesión exitoso
+      navigate("/PowerAuth");
+    } catch (error) {
+      console.error("Error de inicio de sesión con Google:", error.message);
+      setError("Hubo un problema al iniciar sesión con Google. Inténtalo de nuevo.");
+    }
+  };
+
   return (
-    <div className="fixed inset-0 flex justify-center bg-gray-900 bg-opacity-0 z-50 font-dmsans flex-wrap">
+    <div className="flex justify-center min-h-screen">
       <HeaderPower />
-      <div className="h-screen w-1/2 mx-auto flex items-center justify-center bg-blue-50">
-      <div className="text-center">
-        <img
-          src="https://imgv3.fotor.com/images/side/%C2%BF-Como-hacer-una-imagen-PNG.png" // Cambia esto a la ruta de tu imagen
-          alt="Power Experience"
-          className=" bg-cover w-96"
-        />
-        <h1 className="text-2xl font-semibold text-gray-800 mt-4">
-          Vive la experiencia Power
-        </h1>
-        <p className="text-gray-500">
-          Encuentra un empleo ideal para ti.
-        </p>
-        
-      </div>
-    </div>  
-
-      <div className="bg-white dark:bg-gray-800 w-1/2 p-8 relative h-full flex justify-center items-center">
-        <div className="flex flex-col items-center">
-          <div className="text-center">
-            <p className="m-0 text-3xl font-semibold text-gray-700">
-              {isRegistering ? "Registro" : "Iniciar sesión"}
+      <div className="w-1/2 h-screen bg-primarygradientdark hidden lg:block"></div>
+      <div className="md:w-1/2 h-full py-6 bg-white flex items-center mx-auto px-4 pt-28">
+        {isLogin ? (
+          <form onSubmit={handleLogin} className="w-full">
+            <h2 className="font-bold text-center text-2xl text-primarycolor">Iniciar Sesión</h2>
+            <input
+              type="email"
+              placeholder="Correo electrónico"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-primarycolor focus:bg-white focus:outline-none mb-8"
+            />
+            <input
+              type="password"
+              placeholder="Contraseña"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-primarycolor focus:bg-white focus:outline-none mb-12"
+            />
+            {error && <p className="mb-4 text-red-500">{error}</p>}
+            <button type="submit" className="transition duration-200 bg-[#ffe946] hover:bg-[#fff084] focus:bg-blue-700 focus:shadow-sm focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 text-primarycolor h-10 flex py-2.5 rounded-lg text-md shadow-sm hover:shadow-md font-semibold text-center justify-center items-center mx-auto w-full">
+              Iniciar Sesión
+            </button>
+            <p onClick={handleGoogleLogin} className="mt-4 text-center text-blue-500 cursor-pointer hover:underline">
+              Iniciar sesión con Google
             </p>
-          </div>
-          <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-            {isRegistering ? (
-              <Register />
-            ) : (
-              <div className="flex items-center justify-center bg-gray-100">
-                <div className="w-full max-w-md bg-white rounded-lg">
-                  <form className="space-y-4" onSubmit={handleLogin}>
-                    <div>
-                      <input
-                        type="email"
-                        placeholder="Correo electrónico"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        className="w-full px-4 py-3 text-base text-blue-600 placeholder-blue-400 bg-blue-50 border focus:border-blue-200 rounded-lg focus:outline-none"
-                        required
-                      />
-                    </div>
-                    <div className="relative">
-                      <input
-                        type="password"
-                        placeholder="Contraseña"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        className="w-full px-4 py-3 text-base text-blue-600 placeholder-blue-400 bg-blue-50 border focus:border-blue-200 rounded-lg focus:outline-none"
-                        required
-                      />
-                    </div>
-                    {error && <p className="text-red-500 text-sm">{error}</p>}
-
-                    <div className="mt-4 text-center mb-4">
-                      <p className="text-gray-600">
-                        ¿No tienes cuenta?{" "}
-                        <button
-                          type="button"
-                          className="text-blue-600 hover:underline"
-                          onClick={() => setIsRegistering(true)}
-                        >
-                          Regístrate
-                        </button>
-                      </p>
-                    </div>
-
-                    <div>
-                      <button
-                        type="submit"
-                        className="w-full px-4 py-3 text-base font-semibold text-white bg-primarycolor rounded-lg shadow-md hover:bg-blue-700 focus:ring-blue-400"
-                      >
-                        Iniciar sesión
-                      </button>
-                    </div>
-                  </form>
-                </div>
-              </div>
-            )}
-
-            {!isRegistering && (
-              <div className="bg-white w-80 pb-4 pt-4 sm:rounded-lg sm:pb-6">
-                <div className="mt-2 max-w-md w-full">
-                  <button
-                    onClick={signInWithGoogle}
-                    type="button"
-                    className="inline-flex w-full max-w-md items-center justify-center rounded-lg bg-blue-100 px-6 py-3 text-base font-medium text-blue-600 shadow hover:bg-blue-200"
-                  >
-                    <span className="sr-only">Iniciar con Google</span>
-                    <FcGoogle className="h-6 w-6" />
-                    <span className="ml-4">Iniciar con Google</span>
-                  </button>
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
+            <p onClick={() => setIsLogin(false)} className="mt-4 text-center text-blue-500 cursor-pointer hover:underline">
+              ¿No tienes una cuenta? Regístrate
+            </p>
+          </form>
+        ) : (
+          <form onSubmit={handleRegister}>
+            <h2 className="font-bold text-2xl text-primarycolor text-center">Registrar</h2>
+            <input
+              type="text"
+              placeholder="Nombre"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              required
+              className="w-full p-2 mb-4 border rounded focus:outline-none focus:ring focus:ring-blue-300"
+            />
+            <input
+              type="email"
+              placeholder="Correo electrónico"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+              className="w-full p-2 mb-4 border rounded focus:outline-none focus:ring focus:ring-blue-300"
+            />
+            <input
+              type="password"
+              placeholder="Contraseña"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+              className="w-full p-2 mb-4 border rounded focus:outline-none focus:ring focus:ring-blue-300"
+            />
+            {error && <p className="mb-4 text-red-500">{error}</p>}
+            <button type="submit" className="w-full py-2 text-white bg-blue-600 rounded hover:bg-blue-700 transition duration-300">
+              Registrar
+            </button>
+            <p onClick={() => setIsLogin(true)} className="mt-4 text-center text-blue-500 cursor-pointer hover:underline">
+              ¿Ya tienes una cuenta? Inicia sesión
+            </p>
+          </form>
+        )}
       </div>
     </div>
   );
 }
 
-export default Login;
+export default Register;
