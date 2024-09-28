@@ -77,9 +77,9 @@ function App() {
           <Route
             path="/job/:id"
             element={
-              <ProtectedRoute>
+              
                 <Postulados />
-              </ProtectedRoute>
+              
             }
           />
           <Route path="/Privacidad" element={<Privacidad />} />
