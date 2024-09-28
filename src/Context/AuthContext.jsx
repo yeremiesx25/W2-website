@@ -8,8 +8,9 @@ export const AuthContextProvider = ({ children }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [user, setUser] = useState(() => {
+    // Intenta cargar el usuario desde localStorage al inicializar el estado
     const userData = localStorage.getItem('user');
-    return userData ? JSON.parse(userData) : null;
+    return userData ? JSON.parse(userData) : null; // Carga el usuario si existe
   });
   const [loading, setLoading] = useState(true);
   const [justLoggedIn, setJustLoggedIn] = useState(false);
@@ -34,17 +35,17 @@ export const AuthContextProvider = ({ children }) => {
         .eq('email', email)
         .eq('contraseña', password)
         .single();
-  
+
       if (error || !data) {
         throw new Error('Credenciales incorrectas');
       }
-  
+
       // Autenticación exitosa, guardar id_reclutador en el estado y localStorage
       setUser(data);
-      localStorage.setItem('user', JSON.stringify(data));
+      localStorage.setItem('user', JSON.stringify(data)); // Asegúrate de que aquí se guardan todos los datos del usuario
       setManualLogin(true); // Indicamos que fue un login manual
-      console.log('Usuario autenticado:', data); // Verificar datos del usuario
-      
+      console.log('Usuario autenticado:', data);
+
       // Redirigir a la página de admin
       navigate('/Admin', { replace: true });
     } catch (error) {
@@ -58,7 +59,7 @@ export const AuthContextProvider = ({ children }) => {
       const { error } = await supabase.auth.signOut();
       if (error) throw new Error("Ocurrió un error durante el cierre de sesión");
       setUser(null);
-      localStorage.removeItem('user');
+      localStorage.removeItem('user'); // Elimina el usuario del localStorage
       setJustLoggedIn(false);
       setManualLogin(false); // Resetear el flag de login manual
       navigate("/", { replace: true });
@@ -82,7 +83,7 @@ export const AuthContextProvider = ({ children }) => {
       } else {
         const user = session.user;
         setUser(user);
-        localStorage.setItem('user', JSON.stringify(user));
+        localStorage.setItem('user', JSON.stringify(user)); // Asegúrate de guardar el objeto correcto
 
         // Si el usuario acaba de iniciar sesión o está en la página raíz
         if (justLoggedIn || location.pathname === '/') {
