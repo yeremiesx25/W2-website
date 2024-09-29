@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { UserAuth } from '../../Context/AuthContext';
+import { UserAuth } from '../../Context/AuthContext'; // Asegúrate de que este hook esté bien implementado
 import { supabase } from '../../supabase/supabase.config'; // Asegúrate de importar supabase
 import HeaderPower from '../Power/HeaderPower';
 
 function LoginAdmin() {
     const navigate = useNavigate();
-    const { manualSignIn } = UserAuth();
+    const { manualSignIn } = UserAuth(); // Asegúrate de que manualSignIn esté definido
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [name, setName] = useState(''); // Nuevo estado para el nombre
@@ -17,7 +17,7 @@ function LoginAdmin() {
         try {
             const success = await manualSignIn(email, password);
             if (success) {
-                const userRole = await getUserRole(email);
+                const userRole = await getUserRole(email); // Asegúrate de que esta función esté definida
                 if (userRole === 'reclutador') {
                     navigate('/Admin');
                 } else {
@@ -34,20 +34,16 @@ function LoginAdmin() {
     // Función para registrar al usuario
     const handleRegister = async () => {
         try {
-            // Primero, registra al usuario en la tabla Users
-            const { data: user, error: userError } = await supabase
-                .auth
-                .signUp({ email, password });
+            const { data: user, error: userError } = await supabase.auth.signUp({ email, password });
 
             if (userError) {
                 setError(userError.message);
                 return;
             }
 
-            // Ahora, inserta el perfil del usuario en la tabla perfiles
             const { error: profileError } = await supabase
                 .from('perfiles')
-                .insert([{ correo: email, nombre: name, rol: 'reclutador', user_id: user.user.id }]); // Asegúrate de que el ID se obtenga correctamente
+                .insert([{ correo: email, nombre: name, rol: 'reclutador', user_id: user.user.id }]);
 
             if (profileError) {
                 setError(profileError.message);

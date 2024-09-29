@@ -15,6 +15,7 @@ export const AuthContextProvider = ({ children }) => {
   const [justLoggedIn, setJustLoggedIn] = useState(false);
   const [manualLogin, setManualLogin] = useState(false); // Flag para detectar si es un login manual
 
+  // SignIn con Google (sin rol específico)
   const signInWithGoogle = async () => {
     try {
       const { data, error } = await supabase.auth.signInWithOAuth({ provider: 'google' });
@@ -26,32 +27,50 @@ export const AuthContextProvider = ({ children }) => {
     }
   };
 
-  const manualSignIn = async (email, password) => {
-    try {
-      const { data, error } = await supabase
-        .from('reclutador')
-        .select('*')
-        .eq('email', email)
-        .eq('contraseña', password)
-        .single();
-  
-      if (error || !data) {
-        throw new Error('Credenciales incorrectas');
-      }
-  
-      // Autenticación exitosa, guardar id_reclutador en el estado y localStorage
-      setUser(data);
-      localStorage.setItem('user', JSON.stringify(data));
-      setManualLogin(true); // Indicamos que fue un login manual
-      console.log('Usuario autenticado:', data); // Verificar datos del usuario
-      
-      // Redirigir a la página de admin
-      navigate('/Admin', { replace: true });
-    } catch (error) {
-      console.error(error);
-      throw error; // Maneja esto en LoginAdmin
+  // Inicio de sesión manual para reclutadores
+const manualSignIn = async (email, password) => {
+  try {
+    // Utiliza el método de autenticación de Supabase
+    const { user: authUser, error: authError } = await supabase.auth.signInWithPassword({
+      email: email,
+      password: password,
+    });
+
+    if (authError) {
+      console.error('Error de autenticación:', authError.message); // Muestra el error de autenticación
+      throw new Error('Credenciales incorrectas');
     }
-  };
+
+    // Busca el usuario en la tabla 'reclutador' para obtener más información
+    const { data, error: userDataError } = await supabase
+      .from('perfiles')
+      .select('*')
+      .eq('correo', email)
+      .single();
+
+    if (userDataError) {
+      console.error('Error al buscar usuario en la base de datos:', userDataError.message);
+      throw new Error('No se encontró el usuario en la base de datos');
+    }
+
+    if (!data) {
+      throw new Error('No se encontró el usuario en la base de datos');
+    }
+
+    // Autenticación exitosa, guardar usuario y su rol
+    const userData = { ...data, rol: 'reclutador' }; // Añade el rol "reclutador" al usuario
+    setUser(userData);
+    localStorage.setItem('user', JSON.stringify(userData)); // Guardar en localStorage
+    setManualLogin(true); // Indicamos que fue un login manual
+    console.log('Usuario autenticado:', userData); // Verificar datos del usuario
+
+    // Redirigir a la página de admin
+    navigate('/Admin', { replace: true });
+  } catch (error) {
+    console.error('Error en el inicio de sesión manual:', error.message);
+    throw error; // Maneja esto en LoginAdmin
+  }
+};
 
   const signOut = async () => {
     try {
@@ -80,9 +99,11 @@ export const AuthContextProvider = ({ children }) => {
         setUser(null);
         localStorage.removeItem('user');
       } else {
+        // Mantener el usuario autenticado con Google, pero sin rol específico
         const user = session.user;
-        setUser(user);
-        localStorage.setItem('user', JSON.stringify(user));
+        const userData = { ...user, rol: 'usuario' }; // Usuario estándar si se loguea con Google
+        setUser(userData);
+        localStorage.setItem('user', JSON.stringify(userData));
 
         // Si el usuario acaba de iniciar sesión o está en la página raíz
         if (justLoggedIn || location.pathname === '/') {
