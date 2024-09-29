@@ -49,32 +49,9 @@ const FormOferta = () => {
         });
     };
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-
-        const { data, error } = await supabase.from("Oferta").insert([
-            {
-                puesto: formData.puesto,
-                descripcion: formData.descripcion,
-                requisitos: formData.requisitos,
-                ubicacion: formData.ubicacion,
-                sueldo: formData.sueldo,
-                funciones: formData.funciones,
-                horario: formData.horario,
-                empresa: formData.empresa,
-                wtsp_url: formData.wtsp_url,
-                beneficios: formData.beneficios,
-                modalidad: formData.modalidad,
-                estado: "activa", // Valor por defecto
-                id_reclutador: formData.id_reclutador, // Incluir el ID del reclutador
-                preg_1: formData.preg_1,
-                preg_2: formData.preg_2,
-                preg_3: formData.preg_3,
-                preg_4: formData.preg_4,
-                preg_5: formData.preg_5,
-                preg_6: formData.preg_6,
-            },
-        ]);
+    const handleSubmit = async (submittedData) => {
+        // Use the submitted data, which now includes the wtsp_url
+        const { data, error } = await supabase.from("Oferta").insert([submittedData]);
 
         if (error) {
             console.error('Error al insertar:', error);
@@ -112,10 +89,10 @@ const FormOferta = () => {
             </div>
             <div className="w-1/2 h-full bg-white flex flex-col p-8 font-dmsans overflow-y-scroll">
                 <h1 className="text-2xl font-semibold mb-4">Registrar Oferta</h1>
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={(e) => e.preventDefault()}>
                     {step === 1 && <Step1 data={formData} handleChange={handleChange} nextStep={nextStep} />}
                     {step === 2 && <Step2 data={formData} handleChange={handleChange} nextStep={nextStep} prevStep={prevStep} />}
-                    {step === 3 && <Step3 data={formData} handleChange={handleChange} prevStep={prevStep} onQuestionsChange={handleQuestionsChange} />}
+                    {step === 3 && <Step3 data={formData} handleChange={handleChange} prevStep={prevStep} onSubmit={handleSubmit} />}
                 </form>
             </div>
         </div>
