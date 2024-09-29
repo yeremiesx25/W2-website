@@ -85,71 +85,68 @@ function Register() {
   const handleGoogleLogin = async () => {
     setError("");
     try {
-      // Iniciar sesión con Google
-      const { data, error: googleError } = await supabase.auth.signInWithOAuth({
-        provider: "google",
-      });
-  
-      if (googleError) {
-        console.error("Error de inicio de sesión con Google:", googleError.message);
-        setError(googleError.message);
-        return;
-      }
-  
-      // Después de iniciar sesión, intenta obtener la sesión activa
-      const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
-  
-      if (sessionError || !sessionData?.session) {
-        console.error("Error al obtener la sesión:", sessionError?.message);
-        setError("No se pudo obtener el usuario después de iniciar sesión con Google.");
-        return;
-      }
-  
-      const user = sessionData.session.user;
-  
-      // Depuración: Mostrar el contenido del usuario para asegurarnos de que obtenemos los datos correctos
-      console.log("Usuario autenticado con Google:", user);
-  
-      // Verificar si el usuario tiene un perfil en la tabla 'perfiles'
-      const { data: perfilExistente, error: perfilError } = await supabase
-        .from("perfiles")
-        .select("*")
-        .eq("user_id", user.id)
-        .single();
-  
-      if (perfilError) {
-        console.error("Error al verificar perfil existente:", perfilError.message);
-        setError("Error al verificar el perfil.");
-        return;
-      }
-  
-      // Si el perfil no existe, creamos uno nuevo
-      if (!perfilExistente) {
-        const perfilData = {
-          nombre: user.user_metadata.full_name || user.user_metadata.name || "", // Obteniendo nombre de metadata de Google
-          correo: user.email,
-          rol: "candidato", // Rol por defecto
-          user_id: user.id, // Vincular con el ID del usuario autenticado
-        };
-  
-        console.log("Datos del perfil a insertar:", perfilData); // Depuración: Mostrar datos a insertar
-  
-        const { error: profileError } = await supabase.from("perfiles").insert(perfilData);
-  
-        if (profileError) {
-          console.error("Error al crear perfil con Google:", profileError.message);
-          setError("Hubo un problema al crear el perfil.");
-          return;
+        // Iniciar sesión con Google
+        const { data, error: googleError } = await supabase.auth.signInWithOAuth({
+            provider: "google",
+        });
+
+        if (googleError) {
+            console.error("Error de inicio de sesión con Google:", googleError.message);
+            setError(googleError.message);
+            return;
         }
-      }
-  
-      // Redirige al usuario a la página deseada tras el inicio de sesión exitoso
-      navigate("/PowerAuth");
+
+        // Espere a que el usuario se autentique y se establezca la sesión
+        const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
+
+        if (sessionError || !sessionData?.session) {
+            console.error("Error al obtener la sesión:", sessionError?.message);
+            setError("No se pudo obtener el usuario después de iniciar sesión con Google.");
+            return;
+        }
+
+        const user = sessionData.session.user;
+
+        // Verificar si el usuario tiene un perfil en la tabla 'perfiles'
+        const { data: perfilExistente, error: perfilError } = await supabase
+            .from("perfiles")
+            .select("*")
+            .eq("user_id", user.id)
+            .single();
+
+        if (perfilError) {
+            console.error("Error al verificar perfil existente:", perfilError.message);
+            setError("Error al verificar el perfil.");
+            return;
+        }
+
+        // Si el perfil no existe, creamos uno nuevo
+        if (!perfilExistente) {
+            const perfilData = {
+                nombre: user.user_metadata.full_name || user.user_metadata.name || "",
+                correo: user.email,
+                rol: "candidato",
+                user_id: user.id,
+            };
+
+            console.log("Datos del perfil a insertar:", perfilData);
+
+            const { error: profileError } = await supabase.from("perfiles").insert(perfilData);
+
+            if (profileError) {
+                console.error("Error al crear perfil con Google:", profileError.message);
+                setError("Hubo un problema al crear el perfil.");
+                return;
+            }
+        }
+
+        // Redirige al usuario a la página deseada tras el inicio de sesión exitoso
+        navigate("/PowerAuth");
     } catch (error) {
-      console.error("Error de inicio de sesión con Google:", error.message);
-      setError("Hubo un problema al iniciar sesión con Google. Inténtalo de nuevo.");
+        console.error("Error de inicio de sesión con Google:", error.message);
+        setError("Hubo un problema al iniciar sesión con Google. Inténtalo de nuevo.");
     }
-  };
+};
   
   return (
     <div className="flex justify-center min-h-screen">

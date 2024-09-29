@@ -10,7 +10,7 @@ function TrabajosContainer2() {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const navigate = useNavigate();
   const { id_oferta } = useParams();
-
+  console.log('Resultados de búsqueda de trabajos:', userSearchResults);
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
@@ -26,7 +26,7 @@ function TrabajosContainer2() {
   useEffect(() => {
     if (userSearchResults.length > 0) {
       const filteredResults = userSearchResults
-        .filter(job => job.estado === 'abierto') // Filtrar por estado "abierto"
+        .filter(job => job.estado === 'activa') // Filtrar por estado "abierto"
         .slice()
         .sort((a, b) => new Date(b.fecha_publicacion) - new Date(a.fecha_publicacion));
       
@@ -36,7 +36,7 @@ function TrabajosContainer2() {
 
   useEffect(() => {
     if (id_oferta && userSearchResults.length > 0) {
-      const foundJob = userSearchResults.find(job => job.id_oferta === parseInt(id_oferta) && job.estado === 'abierto');
+      const foundJob = userSearchResults.find(job => job.id_oferta === parseInt(id_oferta) && job.estado === 'activa');
       if (foundJob) {
         setSelectedJob(foundJob);
       } else {
@@ -64,7 +64,7 @@ function TrabajosContainer2() {
           }}
         >
           {userSearchResults
-            .filter(job => job.estado === 'abierto') // Filtrar por estado "abierto"
+            .filter(job => job.estado === 'activa') // Filtrar por estado "abierto"
             .slice()
             .sort((a, b) => new Date(b.fecha_publicacion) - new Date(a.fecha_publicacion))
             .map((job, index) => (

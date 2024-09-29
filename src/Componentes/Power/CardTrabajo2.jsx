@@ -1,9 +1,33 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { MdOutlineVerifiedUser } from "react-icons/md";
-import { BsBookmark, BsArrowRightCircle } from "react-icons/bs";
+import { BsArrowRightCircle } from "react-icons/bs";
+import { supabase } from "../../supabase/supabase.config";
 
 function CardTrabajo2({ job, onSelectJob, isSelected }) {
-  const { puesto, modalidad, ubicacion, empresa, descripcion, reclutador } = job;
+  const { puesto, modalidad, ubicacion, empresa, descripcion, id_reclutador } = job;
+
+  const [nombreReclutador, setNombreReclutador] = useState("");
+
+  // Función para obtener el nombre del reclutador desde la tabla perfiles
+  const fetchNombreReclutador = async () => {
+    const { data, error } = await supabase
+      .from('perfiles')
+      .select('nombre')
+      .eq('id', id_reclutador)
+      .single(); // Solo esperamos un resultado
+
+    if (error) {
+      console.error("Error fetching recruiter name:", error);
+    } else {
+      setNombreReclutador(data?.nombre || "Reclutador no encontrado");
+    }
+  };
+
+  useEffect(() => {
+    if (id_reclutador) {
+      fetchNombreReclutador();
+    }
+  }, [id_reclutador]);
 
   return (
     <div className="w-full flex justify-center font-dmsans">
@@ -21,7 +45,7 @@ function CardTrabajo2({ job, onSelectJob, isSelected }) {
               </div>
               <div>
                 <h3 className="text-sm font-semibold text-gray-800">{empresa}</h3>
-                <p className="text-xs text-gray-500">{reclutador}</p>
+                <p className="text-xs text-gray-500">{nombreReclutador}</p> {/* Aquí se muestra el nombre del reclutador */}
               </div>
             </div>
           </div>
@@ -41,9 +65,7 @@ function CardTrabajo2({ job, onSelectJob, isSelected }) {
           </div>
         </div>
         <BsArrowRightCircle
-          className={`text-3xl self-end ${
-            isSelected ? "text-blue-500" : "text-gray-500"
-          }`}
+          className={`text-3xl self-end ${isSelected ? "text-blue-500" : "text-gray-500"}`}
         />
       </button>
     </div>
