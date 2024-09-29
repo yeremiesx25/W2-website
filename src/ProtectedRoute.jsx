@@ -18,7 +18,7 @@ const ProtectedRoute = ({ children }) => {
 
   // Si no hay usuario y ya no está cargando, redirigir a la página de inicio
   if (!user) {
-    return <Navigate to="/" replace />;
+    return <Navigate to="/Power" replace />;
   }
 
   // Si el usuario está autenticado, renderizar el componente protegido

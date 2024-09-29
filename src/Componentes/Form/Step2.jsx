@@ -10,18 +10,27 @@ const Step2 = ({ data, handleChange, nextStep, prevStep }) => {
                     name="requisitos"
                     value={data.requisitos}
                     onChange={handleChange}
-                    className="w-full border p-2 rounded"
+                    className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-light text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                     required
                 />
             </div>
             <div className="mb-4">
-                <label className="block mb-2">Ubicación</label>
-                <input
-                    type="text"
-                    name="ubicacion"
-                    value={data.ubicacion}
+                <label className="block mb-2">Funciones</label>
+                <textarea
+                    name="funciones"
+                    value={data.funciones}
                     onChange={handleChange}
-                    className="w-full border p-2 rounded"
+                    className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-light text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                    required
+                />
+            </div>
+            <div className="mb-4">
+                <label className="block mb-2">Beneficios</label>
+                <textarea
+                    name="beneficios"
+                    value={data.beneficios}
+                    onChange={handleChange}
+                    className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-light text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
                     required
                 />
             </div>

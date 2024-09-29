@@ -21,7 +21,7 @@ function CardTrabajo2({ job, onSelectJob, isSelected }) {
               </div>
               <div>
                 <h3 className="text-sm font-semibold text-gray-800">{empresa}</h3>
-                <p className="text-xs text-gray-500"> reclutador {reclutador}</p>
+                <p className="text-xs text-gray-500">{reclutador}</p>
               </div>
             </div>
           </div>
