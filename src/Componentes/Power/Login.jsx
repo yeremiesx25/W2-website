@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { supabase } from "../../supabase/supabase.config"; // Importa tu configuración de Supabase
+import { supabase } from "../../supabase/supabase.config";
 import HeaderPower from "./HeaderPower";
+import { FcGoogle } from "react-icons/fc"; // Importar ícono de Google
 
 function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState(""); // Campo adicional para el perfil
   const [error, setError] = useState("");
-  const [isLogin, setIsLogin] = useState(false); // Estado para alternar entre registro e inicio de sesión
+  const [isLogin, setIsLogin] = useState(true); // Mostrar "Iniciar Sesión" por defecto
   const navigate = useNavigate();
 
   const handleRegister = async (e) => {
@@ -175,13 +176,28 @@ function Register() {
               className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-primarycolor focus:bg-white focus:outline-none mb-12"
             />
             {error && <p className="mb-4 text-red-500">{error}</p>}
-            <button type="submit" className="transition duration-200 bg-[#ffe946] hover:bg-[#fff084] focus:bg-blue-700 focus:shadow-sm focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 text-primarycolor h-10 flex py-2.5 rounded-lg text-md shadow-sm hover:shadow-md font-semibold text-center justify-center items-center mx-auto w-full">
+
+            <button
+              type="submit"
+              className="transition duration-200 bg-[#ffe946] hover:bg-[#fff084] focus:bg-blue-700 focus:shadow-sm focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 text-primarycolor h-10 flex py-2.5 rounded-lg text-md shadow-sm hover:shadow-md font-semibold text-center justify-center items-center mx-auto w-full"
+            >
               Iniciar Sesión
             </button>
-            <p onClick={handleGoogleLogin} className="mt-4 text-center text-blue-500 cursor-pointer hover:underline">
-              Iniciar sesión con Google
-            </p>
-            <p onClick={() => setIsLogin(false)} className="mt-4 text-center text-blue-500 cursor-pointer hover:underline">
+
+            {/* Botón de inicio de sesión con Google */}
+            <button
+              type="button"
+              onClick={handleGoogleLogin}
+              className="transition duration-200 bg-white border border-gray-300 hover:bg-gray-100 focus:bg-gray-200 flex items-center justify-center py-2 px-4 rounded-lg mt-4 w-full"
+            >
+              <FcGoogle className="mr-2" size={24} />
+              <span className="text-gray-600 font-semibold">Iniciar sesión con Google</span>
+            </button>
+
+            <p
+              onClick={() => setIsLogin(false)}
+              className="mt-4 text-center text-blue-500 cursor-pointer hover:underline"
+            >
               ¿No tienes una cuenta? Regístrate
             </p>
           </form>
@@ -213,10 +229,16 @@ function Register() {
               className="w-full p-2 mb-4 border rounded focus:outline-none focus:ring focus:ring-blue-300"
             />
             {error && <p className="mb-4 text-red-500">{error}</p>}
-            <button type="submit" className="w-full py-2 text-white bg-blue-600 rounded hover:bg-blue-700 transition duration-300">
+            <button
+              type="submit"
+              className="w-full py-2 text-white bg-blue-600 rounded hover:bg-blue-700 transition duration-300"
+            >
               Registrar
             </button>
-            <p onClick={() => setIsLogin(true)} className="mt-4 text-center text-blue-500 cursor-pointer hover:underline">
+            <p
+              onClick={() => setIsLogin(true)}
+              className="mt-4 text-center text-blue-500 cursor-pointer hover:underline"
+            >
               ¿Ya tienes una cuenta? Inicia sesión
             </p>
           </form>
