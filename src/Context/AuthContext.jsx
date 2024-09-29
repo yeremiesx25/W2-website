@@ -8,8 +8,9 @@ export const AuthContextProvider = ({ children }) => {
   const navigate = useNavigate();
   const location = useLocation();
   const [user, setUser] = useState(() => {
+    // Intenta cargar el usuario desde localStorage al inicializar el estado
     const userData = localStorage.getItem('user');
-    return userData ? JSON.parse(userData) : null;
+    return userData ? JSON.parse(userData) : null; // Carga el usuario si existe
   });
   const [loading, setLoading] = useState(true);
   const [justLoggedIn, setJustLoggedIn] = useState(false);
@@ -77,7 +78,7 @@ const manualSignIn = async (email, password) => {
       const { error } = await supabase.auth.signOut();
       if (error) throw new Error("Ocurrió un error durante el cierre de sesión");
       setUser(null);
-      localStorage.removeItem('user');
+      localStorage.removeItem('user'); // Elimina el usuario del localStorage
       setJustLoggedIn(false);
       setManualLogin(false); // Resetear el flag de login manual
       navigate("/", { replace: true });
