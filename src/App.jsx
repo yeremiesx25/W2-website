@@ -83,7 +83,7 @@ function App() {
             }
           />
           <Route
-            path="/job/:id"
+            path="/Postulados/:id"
             element={
               <ProtectedRoute>
                 <Postulados />

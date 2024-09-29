@@ -8,6 +8,10 @@ function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [name, setName] = useState(""); // Campo adicional para el perfil
+  const [dni, setDni] = useState(""); // Campo DNI
+  const [telefono, setTelefono] = useState(""); // Campo Teléfono
+  const [distrito, setDistrito] = useState(""); // Campo Distrito
+  const [fechaNac, setFechaNac] = useState(""); // Campo Fecha de Nacimiento
   const [error, setError] = useState("");
   const [isLogin, setIsLogin] = useState(true); // Mostrar "Iniciar Sesión" por defecto
   const navigate = useNavigate();
@@ -35,8 +39,13 @@ function Register() {
         const perfilData = {
           nombre: name, // El nombre que el usuario ingresó
           correo: email, // El correo del usuario registrado
+          id: user.id,
           rol: "candidato", // Establecer rol automáticamente
           user_id: user.id, // Agregar el user_id para relacionar con la tabla perfiles
+          dni: dni, // DNI del usuario
+          telefono: telefono, // Teléfono del usuario
+          distrito: distrito, // Distrito del usuario
+          fecha_nac: fechaNac, // Fecha de nacimiento del usuario
         };
 
         console.log("Datos del perfil a insertar:", perfilData); // Log de datos a insertar
@@ -85,69 +94,69 @@ function Register() {
   const handleGoogleLogin = async () => {
     setError("");
     try {
-        // Iniciar sesión con Google
-        const { data, error: googleError } = await supabase.auth.signInWithOAuth({
-            provider: "google",
-        });
+      // Iniciar sesión con Google
+      const { data, error: googleError } = await supabase.auth.signInWithOAuth({
+        provider: "google",
+      });
 
-        if (googleError) {
-            console.error("Error de inicio de sesión con Google:", googleError.message);
-            setError(googleError.message);
-            return;
+      if (googleError) {
+        console.error("Error de inicio de sesión con Google:", googleError.message);
+        setError(googleError.message);
+        return;
+      }
+
+      // Espere a que el usuario se autentique y se establezca la sesión
+      const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
+
+      if (sessionError || !sessionData?.session) {
+        console.error("Error al obtener la sesión:", sessionError?.message);
+        setError("No se pudo obtener el usuario después de iniciar sesión con Google.");
+        return;
+      }
+
+      const user = sessionData.session.user;
+
+      // Verificar si el usuario tiene un perfil en la tabla 'perfiles'
+      const { data: perfilExistente, error: perfilError } = await supabase
+        .from("perfiles")
+        .select("*")
+        .eq("user_id", user.id)
+        .single();
+
+      if (perfilError) {
+        console.error("Error al verificar perfil existente:", perfilError.message);
+        setError("Error al verificar el perfil.");
+        return;
+      }
+
+      // Si el perfil no existe, creamos uno nuevo
+      if (!perfilExistente) {
+        const perfilData = {
+          nombre: user.user_metadata.full_name || user.user_metadata.name || "",
+          correo: user.email,
+          rol: "candidato",
+          user_id: user.id,
+        };
+
+        console.log("Datos del perfil a insertar:", perfilData);
+
+        const { error: profileError } = await supabase.from("perfiles").insert(perfilData);
+
+        if (profileError) {
+          console.error("Error al crear perfil con Google:", profileError.message);
+          setError("Hubo un problema al crear el perfil.");
+          return;
         }
+      }
 
-        // Espere a que el usuario se autentique y se establezca la sesión
-        const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
-
-        if (sessionError || !sessionData?.session) {
-            console.error("Error al obtener la sesión:", sessionError?.message);
-            setError("No se pudo obtener el usuario después de iniciar sesión con Google.");
-            return;
-        }
-
-        const user = sessionData.session.user;
-
-        // Verificar si el usuario tiene un perfil en la tabla 'perfiles'
-        const { data: perfilExistente, error: perfilError } = await supabase
-            .from("perfiles")
-            .select("*")
-            .eq("user_id", user.id)
-            .single();
-
-        if (perfilError) {
-            console.error("Error al verificar perfil existente:", perfilError.message);
-            setError("Error al verificar el perfil.");
-            return;
-        }
-
-        // Si el perfil no existe, creamos uno nuevo
-        if (!perfilExistente) {
-            const perfilData = {
-                nombre: user.user_metadata.full_name || user.user_metadata.name || "",
-                correo: user.email,
-                rol: "candidato",
-                user_id: user.id,
-            };
-
-            console.log("Datos del perfil a insertar:", perfilData);
-
-            const { error: profileError } = await supabase.from("perfiles").insert(perfilData);
-
-            if (profileError) {
-                console.error("Error al crear perfil con Google:", profileError.message);
-                setError("Hubo un problema al crear el perfil.");
-                return;
-            }
-        }
-
-        // Redirige al usuario a la página deseada tras el inicio de sesión exitoso
-        navigate("/PowerAuth");
+      // Redirige al usuario a la página deseada tras el inicio de sesión exitoso
+      navigate("/PowerAuth");
     } catch (error) {
-        console.error("Error de inicio de sesión con Google:", error.message);
-        setError("Hubo un problema al iniciar sesión con Google. Inténtalo de nuevo.");
+      console.error("Error de inicio de sesión con Google:", error.message);
+      setError("Hubo un problema al iniciar sesión con Google. Inténtalo de nuevo.");
     }
-};
-  
+  };
+
   return (
     <div className="flex justify-center min-h-screen">
       <HeaderPower />
@@ -207,7 +216,39 @@ function Register() {
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
-              className="w-full p-2 mb-4 border rounded focus:outline-none focus:ring focus:ring-blue-300"
+              className="w-full p-2 mb-4 border rounded"
+            />
+            <input
+              type="text"
+              placeholder="DNI"
+              value={dni}
+              onChange={(e) => setDni(e.target.value)}
+              required
+              className="w-full p-2 mb-4 border rounded"
+            />
+            <input
+              type="text"
+              placeholder="Teléfono"
+              value={telefono}
+              onChange={(e) => setTelefono(e.target.value)}
+              required
+              className="w-full p-2 mb-4 border rounded"
+            />
+            <input
+              type="text"
+              placeholder="Distrito"
+              value={distrito}
+              onChange={(e) => setDistrito(e.target.value)}
+              required
+              className="w-full p-2 mb-4 border rounded"
+            />
+            <input
+              type="date"
+              placeholder="Fecha de Nacimiento"
+              value={fechaNac}
+              onChange={(e) => setFechaNac(e.target.value)}
+              required
+              className="w-full p-2 mb-4 border rounded"
             />
             <input
               type="email"
@@ -215,7 +256,7 @@ function Register() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="w-full p-2 mb-4 border rounded focus:outline-none focus:ring focus:ring-blue-300"
+              className="w-full p-2 mb-4 border rounded"
             />
             <input
               type="password"
@@ -223,14 +264,14 @@ function Register() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="w-full p-2 mb-4 border rounded focus:outline-none focus:ring focus:ring-blue-300"
+              className="w-full p-2 mb-4 border rounded"
             />
             {error && <p className="mb-4 text-red-500">{error}</p>}
             <button
               type="submit"
-              className="w-full py-2 text-white bg-blue-600 rounded hover:bg-blue-700 transition duration-300"
+              className="transition duration-200 bg-[#ffe946] hover:bg-[#fff084] focus:bg-blue-700 focus:shadow-sm focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 text-primarycolor h-10 flex py-2.5 rounded-lg text-md shadow-sm hover:shadow-md font-semibold text-center justify-center items-center mx-auto w-full"
             >
-              Registrar
+              Registrarse
             </button>
             <p
               onClick={() => setIsLogin(true)}

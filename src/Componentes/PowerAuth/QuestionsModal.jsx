@@ -8,9 +8,6 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(-1);
   const [loading, setLoading] = useState(true);
   const [answers, setAnswers] = useState([]);
-  const [phone, setPhone] = useState('');
-  const [phoneError, setPhoneError] = useState('');
-  const [answerErrors, setAnswerErrors] = useState([]);
   const [submissionSuccess, setSubmissionSuccess] = useState(false);
 
   useEffect(() => {
@@ -36,16 +33,37 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
       }
     };
 
+    const fetchProfileData = async () => {
+      try {
+        const { data: profileData, error: profileError } = await supabase
+          .from('perfiles')
+          .select('nombre, correo, telefono, avatar_url')
+          .eq('id', user.id)
+          .single();
+    
+        if (profileError) {
+          console.error('Error fetching profile:', profileError.message);
+          alert('Error al obtener el perfil. Verifique si el usuario está registrado.');
+          return;
+        } else if (!profileData) {
+          console.error('Profile not found for user ID:', user.id);
+          return;
+        }
+    
+    
+      } catch (error) {
+        console.error('Error fetching profile data:', error.message);
+      }
+    };
+
     if (isOpen && selectedJob) {
       fetchQuestions();
+      fetchProfileData();
       setCurrentQuestionIndex(-1);
       setAnswers(['', '', '', '', '']);
-      setPhone('');
-      setPhoneError('');
-      setAnswerErrors(['', '', '', '', '']);
       setSubmissionSuccess(false);
     }
-  }, [isOpen, selectedJob]);
+  }, [isOpen, selectedJob, user.id]);
 
   const handleClose = () => {
     onClose();
@@ -55,37 +73,41 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
     const newAnswers = [...answers];
     newAnswers[index] = e.target.value;
     setAnswers(newAnswers);
-
-    const newErrors = [...answerErrors];
-    newErrors[index] = '';
-    setAnswerErrors(newErrors);
-  };
-
-  const handlePhoneChange = (e) => {
-    const value = e.target.value;
-    setPhone(value);
-    if (!value.trim()) {
-      setPhoneError('Campo Obligatorio');
-    } else {
-      setPhoneError('');
-    }
   };
 
   const handleSubmit = async () => {
     try {
-      if (!phone.trim()) {
-        setPhoneError('Campo Obligatorio');
+      // Verificar que selectedJob es válido
+      if (!selectedJob || !selectedJob.id_oferta) {
+        console.error('Oferta no válida:', selectedJob);
+        alert('Oferta no válida.');
         return;
       }
 
+      // Obtener los datos del perfil del usuario
+      const { data: profileData, error: profileError } = await supabase
+        .from('perfiles')
+        .select('nombre, correo, avatar_url,telefono')
+        .eq('id', user.id)
+        .single();
+
+      if (profileError || !profileData) {
+        console.error('Error al obtener el perfil:', profileError ? profileError.message : 'Perfil no encontrado.');
+        alert('No se pudo obtener el perfil del usuario.');
+        return;
+      }
+
+      const { nombre, correo, avatar_url, telefono } = profileData;
+
+      // Insertar en la tabla de postulaciones
       const { error: insertError } = await supabase
         .from('Postulacion')
         .insert({
           id_oferta: selectedJob.id_oferta,
           user_id: user.id,
-          name_user: user.user_metadata.full_name,
-          correo: user.email,
-          telefono: phone,
+          name_user: nombre,
+          correo: correo,
+          telefono: telefono, // Usar el teléfono obtenido del perfil
           resp_1: answers[0],
           resp_2: answers[1],
           resp_3: answers[2],
@@ -93,27 +115,33 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
           resp_5: answers[4],
           fecha_postulacion: new Date(),
           estado: 'pendiente',
-          avatar_url: user.user_metadata.avatar_url,
+          avatar_url: avatar_url,
         });
 
       if (insertError) {
-        throw insertError;
+        console.error('Error al insertar en postulaciones:', insertError.message);
+        alert('Error al enviar la postulación.');
+        return;
       }
 
+      // Actualizar el conteo de postulados
       const { error: updateError } = await supabase
         .from('Oferta')
         .update({ count_postulados: selectedJob.count_postulados + 1 })
         .eq('id_oferta', selectedJob.id_oferta);
 
       if (updateError) {
-        throw updateError;
+        console.error('Error al actualizar el conteo de postulados:', updateError.message);
+        alert('Error al actualizar el conteo de postulados.');
+        return;
       }
 
+      // Si todo va bien
       setSubmissionSuccess(true);
-      setPhone('');
-      setAnswers(['', '', '', '', '']);
+      setAnswers(['', '', '', '', '']); // Limpiar respuestas
     } catch (error) {
       console.error('Error al enviar la postulación:', error.message);
+      alert(`Error: ${error.message}`);
     }
   };
 
@@ -137,27 +165,6 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
         <div className="flex flex-col items-center justify-center mt-4">
           <h2 className="text-2xl font-bold mb-4">Preguntas para el Postulante</h2>
           {currentQuestionIndex === -1 ? (
-            <>
-              <label className="w-full text-left">Ingrese su Celular</label>
-              <input
-                type="text"
-                placeholder="Número de celular"
-                value={phone}
-                onChange={handlePhoneChange}
-                className={`w-full mt-2 p-2 border rounded ${phoneError ? 'border-red-500' : ''}`}
-              />
-              {phoneError && <p className="text-red-500 text-sm">{phoneError}</p>}
-              <div className="flex justify-center mt-4">
-                <button
-                  className={`bg-[#0057c2] text-white font-bold py-2 px-4 rounded-full w-32 ${phone.trim() ? '' : 'opacity-50 cursor-not-allowed'}`}
-                  onClick={() => phone.trim() && setCurrentQuestionIndex(0)}
-                  disabled={!phone.trim()}
-                >
-                  Siguiente
-                </button>
-              </div>
-            </>
-          ) : (
             <div className="max-h-96 overflow-y-auto">
               {loading ? (
                 <div className="relative inline-flex">
@@ -178,9 +185,8 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
                         <textarea
                           value={answers[index]}
                           onChange={(e) => handleAnswerChange(e, index)}
-                          className={`w-full mt-2 p-2 border rounded ${answerErrors[index] ? 'border-red-500' : ''}`}
+                          className={`w-full mt-2 p-2 border rounded`}
                         />
-                        {answerErrors[index] && <p className="text-red-500 text-sm">{answerErrors[index]}</p>}
                       </div>
                     ))
                   )}
@@ -201,7 +207,7 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
                 </>
               )}
             </div>
-          )}
+          ) : null}
           {submissionSuccess && (
             <div className="absolute inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 z-50">
               <div className="bg-white rounded-lg p-6 w-full max-w-md text-center">
