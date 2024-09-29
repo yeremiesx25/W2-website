@@ -53,7 +53,7 @@ export const AuthContextProvider = ({ children }) => {
       const { error } = await supabase.auth.signOut();
       if (error) throw error;
       setUser(null);
-      navigate('/', { replace: true });
+      navigate('/Power', { replace: true });
     } catch (error) {
       console.error('Error al cerrar sesión:', error.message);
     }
