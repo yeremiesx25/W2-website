@@ -195,11 +195,11 @@ const timeAgo = dayjs(selectedJob.fecha_publicacion).fromNow();
   <div className="mb-4">
     
     <p className="text-gray-700 text-sm leading-relaxed">
-      <h3 className="font-semibold text-lg text-gray-700">Descripción</h3>
+      <h3 className="font-semibold text-lg text-gray-800">Descripción</h3>
           <p>{selectedJob.descripcion}</p>
       {jobDetails.map((detail, index) => (
         <div key={index} className="py-2">
-          <div className="font-semibold text-gray-700 text-lg">{detail.title}</div>
+          <div>{detail.title}</div>
           
           <div className="mt-2">{detail.content}</div>
         </div>
