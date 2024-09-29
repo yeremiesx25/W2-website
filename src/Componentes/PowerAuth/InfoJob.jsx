@@ -6,6 +6,7 @@ import { supabase } from "../../supabase/supabase.config"; // Importar cliente d
 import { UserAuth } from "../../Context/AuthContext"; // Importar contexto de autenticación
 import { MdOutlineVerifiedUser } from "react-icons/md";
 import dayjs from "dayjs"; 
+import 'dayjs/locale/es'; // Importar el idioma español
 import relativeTime from 'dayjs/plugin/relativeTime';
 import ShareButton from "./ShareButton"; // Import the ShareButton component
 import { IoLogoWhatsapp } from "react-icons/io";
@@ -67,23 +68,41 @@ function InfoJob({ selectedJob }) {
     
     const jobDetails = [
         {
-            title: "¿Por qué deberías unirte a nosotros?",
-            content: (selectedJob.beneficios),
+          title: "¿Por qué deberías unirte a nosotros?",
+          content: (
+            <ul>
+              {selectedJob.beneficios.split('.').map((beneficio, index) =>
+                beneficio.trim() && <li key={index}>{beneficio.trim()}</li>
+              )}
+            </ul>
+          ),
         },
         {
-            title: "¿Qué buscamos?",
-            content: (selectedJob.requisitos),
+          title: "¿Qué buscamos?",
+          content: (
+            <ul>
+              {selectedJob.requisitos.split('.').map((requisito, index) =>
+                requisito.trim() && <li key={index}>{requisito.trim()}</li>
+              )}
+            </ul>
+          ),
         },
         {
-            title: "¿Qué es lo que harás?",
-            content: (selectedJob.funciones),
+          title: "¿Qué es lo que harás?",
+          content: (
+            <ul>
+              {selectedJob.funciones.split('.').map((funcion, index) =>
+                funcion.trim() && <li key={index}>{funcion.trim()}</li>
+              )}
+            </ul>
+          ),
         },
         {
-            title: "Horario de Trabajo",
-            content: (selectedJob.horario),
+          title: "Horario de Trabajo",
+          content: selectedJob.horario, // El horario se mantiene como texto simple
         },
-    ];
-
+      ];
+      
     const whatsappBaseUrl = selectedJob.wtsp_url
       ? selectedJob.wtsp_url.split("?")[0]
       : "";
@@ -95,15 +114,23 @@ function InfoJob({ selectedJob }) {
     // Formatear la fecha de publicación a dd-mm-yyyy
     const formattedDate = dayjs(selectedJob.fecha_publicacion).format("DD-MM-YYYY");
     // Cargar el plugin
+    // Cargar el plugin y configurar el idioma español
     dayjs.extend(relativeTime);
+    dayjs.locale('es'); // Configurar dayjs para usar español
+    
+    // Obtener el tiempo en formato "hace X tiempo" y capitalizar la primera letra
     const timeAgo = dayjs(selectedJob.fecha_publicacion).fromNow();
+    const capitalizedTimeAgo = timeAgo.charAt(0).toUpperCase() + timeAgo.slice(1);
+    
+    console.log(capitalizedTimeAgo); // "Hace unos minutos"
+
 
     return (
         <div
             className="selected-job-info w-full sm:w-3/5 rounded-lg md:flex flex-col p-8 mx-8 bg-white hidden transition-all duration-500 font-dmsans"
             style={{ height: "650px", overflowY: "auto", position: "relative" }}
         >
-            <p className="text-gray-500 text-sm">{timeAgo}</p>
+            <p className="text-gray-500 text-sm">{capitalizedTimeAgo}</p>
             <h2 className="font-bold text-2xl mb-3 text-gray-800">
                 {selectedJob.puesto}
             </h2>
@@ -136,7 +163,7 @@ function InfoJob({ selectedJob }) {
             <div className="flex justify-between mb-4">
                 <button
                     className={`font-bold py-2 px-4 rounded-full w-48 ${
-                        hasApplied ? "bg-gray-500 text-white cursor-not-allowed" : "bg-[#0057c2] text-white"
+                        hasApplied ? "bg-yellow-200 text-primarycolor text-sm cursor-not-allowed" : "bg-[#0057c2] text-white"
                     }`}
                     onClick={hasApplied ? null : () => setIsQuestionsModalOpen(true)} // Mostrar el modal de preguntas
                     disabled={hasApplied}
@@ -156,7 +183,7 @@ function InfoJob({ selectedJob }) {
                     <p>{selectedJob.descripcion}</p>
                     {jobDetails.map((detail, index) => (
                         <div key={index} className="py-2">
-                            <div>{detail.title}</div>
+                            <div className="font-semibold ">{detail.title}</div>
                             <div className="mt-2">{detail.content}</div>
                         </div>
                     ))}

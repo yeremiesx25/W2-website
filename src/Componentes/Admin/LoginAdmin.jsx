@@ -65,7 +65,13 @@ function LoginAdmin() {
         <div>
             <HeaderPower />
             <div className="w-[100%] h-screen flex font-dmsans items-center">
-                <div className="w-1/2 h-full bg-primarygradientdark hidden lg:block"></div>
+            <div className="w-1/2 h-full  hidden md:flex items-center justify-center overflow-hidden rela"
+     style={{
+         backgroundImage: 'url(https://media.licdn.com/dms/image/D5612AQEp8eLVvJjp4g/article-cover_image-shrink_720_1280/0/1701667358138?e=2147483647&v=beta&t=VTBUxf1Yr-jtuKd_HKPxV6adgeRQBT5p45JAkyVbGJ8)',
+         backgroundSize: 'cover', // Para cubrir todo el div
+         backgroundPosition: 'center', // Para centrar la imagen
+     }}>
+</div>
                 <div className="md:w-1/2 h-full py-6 bg-white flex items-center mx-auto px-4">
                     <div className="p-10 xs:p-0 md:mx-auto lg:w-full lg:max-w-md">
                         <h1 className="font-bold text-left text-2xl text-primarycolor">

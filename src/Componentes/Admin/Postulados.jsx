@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom'; // Importa useNavigate
+import { useParams, useNavigate } from 'react-router-dom';
 import { supabase } from '../../supabase/supabase.config';
 import HeaderPowerAuth from '../PowerAuth/HeaderPowerAuth';
 import InfoPostulante from './InfoPostulante';
+import { UserAuth } from '../../Context/AuthContext';
 
 function Postulados() {
+  const { user } = UserAuth();
   const { id } = useParams();
-  const navigate = useNavigate(); // Inicializa useNavigate
+  const navigate = useNavigate();
   const [jobDetails, setJobDetails] = useState(null);
   const [postulados, setPostulados] = useState([]);
   const [selectedPostulado, setSelectedPostulado] = useState(null);
@@ -17,37 +19,45 @@ function Postulados() {
     const fetchJobDetails = async () => {
       try {
         const { data: jobData, error: jobError } = await supabase
-          .from('Oferta')
+          .from('Oferta') // Reemplaza 'Oferta' con el nombre correcto de tu tabla
           .select('*, preg_1, preg_2, preg_3, preg_4, preg_5')
-          .eq('id', id) 
-          .single();
-
+          .eq('id_oferta', id) // Asegúrate de que 'id' es la columna correcta
+          .single(); // Espera un solo objeto
+    
         if (jobError) {
           console.error('Error fetching job details:', jobError);
-        } else {
-          setJobDetails(jobData);
+          return; // Salir de la función si hay un error
         }
-
+    
+        if (!jobData) {
+          console.error('No job found with the given id');
+          return; // Salir si no hay datos
+        }
+    
+        setJobDetails(jobData);
+        
         const { data: postuladosData, error: postuladosError } = await supabase
           .from('Postulacion')
           .select('*, user_id')
           .eq('id_oferta', id);
-
+    
         if (postuladosError) {
           console.error('Error fetching postulados:', postuladosError);
-        } else {
-          const postuladosConChecked = postuladosData.map(postulado => ({
-            ...postulado,
-            checked: false
-          }));
-          setPostulados(postuladosConChecked);
-          setFilteredPostulados(postuladosConChecked);
-          if (postuladosConChecked.length > 0) {
-            setSelectedPostulado(postuladosConChecked[0]);
-          }
+          return; // Salir de la función si hay un error
+        }
+    
+        const postuladosConChecked = postuladosData.map(postulado => ({
+          ...postulado,
+          checked: false
+        }));
+        
+        setPostulados(postuladosConChecked);
+        setFilteredPostulados(postuladosConChecked);
+        if (postuladosConChecked.length > 0) {
+          setSelectedPostulado(postuladosConChecked[0]);
         }
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error('Error fetching job details:', error);
       }
     };
 
@@ -97,10 +107,9 @@ function Postulados() {
     );
   };
 
-  // Función para manejar el clic en el nombre del puesto
   const handlePuestoClick = () => {
     if (jobDetails) {
-      navigate(`/oferta/${jobDetails.id}`); // Navega a la ruta de oferta con el id
+      navigate(`/oferta/${jobDetails.id}`);
     }
   };
 
@@ -128,7 +137,7 @@ function Postulados() {
     <div className="font-dmsans">
       <HeaderPowerAuth />
       <div>
-        <section className="pt-28 pb-10 md:py-8 bg-primarygradientmobile md:bg-primarygradient dark:bg-dark h-96 md:h-64 flex justify-center items-center">
+        <section className="pt-28 pb-10 md:py-8 bg-primarygradientdark md:bg-primarygradientdark dark:bg-dark h-96 md:h-64 flex justify-center items-center">
           <div className="container mx-auto">
             <div className="overflow-hidden rounded bg-primary py-12 px-8 md:p-[70px]">
               <div className="flex flex-wrap items-center text-center md:text-left -mx-4">
@@ -136,9 +145,8 @@ function Postulados() {
                   <span className="block text-base font-medium text-white">
                     {jobDetails && jobDetails.ubicacion}
                   </span>
-                  {/* Aquí se aplica el evento de clic para redirigir */}
                   <h2 
-                    onClick={handlePuestoClick} // Se ejecuta al hacer clic
+                    onClick={handlePuestoClick}
                     className="mb-6 text-xl sm:text-3xl font-bold leading-tight text-white sm:mb-8 lg:mb-0 cursor-pointer"
                   >
                     <span className="xs:block"> {jobDetails && jobDetails.puesto} </span>
@@ -154,7 +162,7 @@ function Postulados() {
                 </div>
                 <div className="w-full px-4 lg:w-1/2">
                   {/* Filtros */}
-                  {/* El resto del código se mantiene igual */}
+                  {/* Aquí puedes agregar la lógica de filtros según tus necesidades */}
                 </div>
               </div>
             </div>
@@ -188,7 +196,7 @@ function Postulados() {
                           }}
                           className="mr-2"
                         />
-                        {postulado.nombre_user} 
+                        {postulado.name_user} 
                       </div>
                     </td>
                   </tr>

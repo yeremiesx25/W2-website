@@ -1,45 +1,66 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import menuMobilePower from '../../assets/menu (4).png'; // Importa el icono de hamburguesa
+import menuMobilePower from '../../assets/menu (4).png'; // Icono de hamburguesa
 import logo from '../../assets/LogoPower.png';
 import { UserAuth } from "../../Context/AuthContext";
 import { supabase } from "../../supabase/supabase.config";
 import { RxAvatar } from "react-icons/rx";
 import { BiLogOut } from "react-icons/bi";
 
-
 function HeaderPowerAuth() {
   const [showMenu, setShowMenu] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const { user, signOut } = UserAuth();
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [hasShadow, setHasShadow] = useState(false);
+
+  // Estado para los datos del perfil
+  const [profile, setProfile] = useState({
+    nombre: '',
+    avatar_url: ''
+  });
+
+  // Función para obtener el perfil desde la tabla 'perfiles'
+  const fetchProfile = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('perfiles') // Asegúrate de que el nombre de tu tabla es 'perfiles'
+        .select('nombre, avatar_url')
+        .eq('id', user.id) // Filtra por el id del usuario autenticado
+        .single(); // Obtiene solo un perfil
+
+      if (error) {
+        console.error("Error fetching profile:", error);
+        return;
+      }
+
+      if (data) {
+        setProfile({
+          nombre: data.nombre,
+          avatar_url: data.avatar_url,
+        });
+      }
+    } catch (error) {
+      console.error("Error fetching profile:", error);
+    }
+  };
+
+  useEffect(() => {
+    if (user) {
+      fetchProfile(); // Obtiene el perfil cuando el usuario esté disponible
+    }
+  }, [user]);
 
   const toggleMenu = () => {
     setShowMenu(!showMenu);
   };
 
-  const handleModalOpen = () => {
-    setModalOpen(true);
-  };
-
-  const handleModalClose = () => {
-    setModalOpen(false);
-  };
-
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [hasShadow, setHasShadow] = useState(false);
-
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 0) {
-        setHasShadow(true);
-      } else {
-        setHasShadow(false);
-      }
+      setHasShadow(window.scrollY > 0);
     };
 
     window.addEventListener('scroll', handleScroll);
-
-    // Cleanup event listener on unmount
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
@@ -47,9 +68,7 @@ function HeaderPowerAuth() {
 
   return (
     <header 
-    className={`bg-newprimarycolor fixed w-full z-10 font-dmsans transition-shadow duration-300 ${
-      hasShadow ? 'shadow-lg' : ''
-    }`}>
+    className={`bg-newprimarycolor fixed w-full z-10 font-dmsans transition-shadow duration-300 ${hasShadow ? 'shadow-lg' : ''}`}>
       <div className="container mx-auto px-8 flex justify-between items-center h-20">
         {/* Logo */}
         <div className="flex items-center">
@@ -76,11 +95,11 @@ function HeaderPowerAuth() {
           {/* Botón de avatar */}
           <button className="flex items-center focus:outline-none">
             <span className="ml-2 overflow-hidden whitespace-nowrap overflow-ellipsis text-white font-base w-40">
-              {user.user_metadata.full_name}
+              {profile.nombre || 'Usuario'}
             </span>
             <img
               className="w-10 h-10 rounded-full my-2"
-              src={user.user_metadata.avatar_url}
+              src={profile.avatar_url || 'https://icons.iconarchive.com/icons/papirus-team/papirus-status/512/avatar-default-icon.png'} // Puedes agregar una URL por defecto si no hay avatar
               alt="User"
             />
           </button>
