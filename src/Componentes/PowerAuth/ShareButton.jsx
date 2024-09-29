@@ -56,7 +56,7 @@ function ShareButton({ selectedJob }) {
   return (
     <div className="relative" ref={shareButtonRef}>
       <button
-        className="font-bold py-2 px-4 rounded-full w-48 bg-gray-100 text-gray-700 flex items-center justify-center"
+        className="font-bold py-2 px-4 rounded-full w-48 bg-blue-50 text-primarycolor flex items-center justify-center"
         onClick={handleShareClick}
       >
         <CiShare2 className="mr-2" />

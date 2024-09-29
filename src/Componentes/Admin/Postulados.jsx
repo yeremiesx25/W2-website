@@ -137,7 +137,7 @@ function Postulados() {
     <div className="font-dmsans">
       <HeaderPowerAuth />
       <div>
-        <section className="pt-28 pb-10 md:py-8 bg-primarygradientdark md:bg-primarygradientdark dark:bg-dark h-96 md:h-64 flex justify-center items-center">
+        <section className="pt-28 pb-10 md:pb-8 bg-primarygradientdark md:bg-primarygradientdark dark:bg-dark h-96 md:h-72 flex justify-center items-center">
           <div className="container mx-auto">
             <div className="overflow-hidden rounded bg-primary py-12 px-8 md:p-[70px]">
               <div className="flex flex-wrap items-center text-center md:text-left -mx-4">
