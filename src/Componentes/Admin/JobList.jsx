@@ -13,12 +13,25 @@ const formatDate = (isoString) => {
 
 const JobList = () => {
   const [jobs, setJobs] = useState([]);
+  const [user, setUser] = useState(null);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const { data } = await supabase.auth.getUser();
+      setUser(data.user);
+    };
+
+    fetchUser();
+  }, []);
 
   useEffect(() => {
     const fetchJobs = async () => {
+      if (!user) return; // Esperar a que el usuario esté cargado
+
       const { data, error } = await supabase
         .from('Oferta')
-        .select('id_oferta, puesto, fecha_publicacion, estado'); // Asegúrate de incluir la columna 'id'
+        .select('id_oferta, puesto, fecha_publicacion, estado')
+        .eq('id_reclutador', user.id); // Filtrar por user_id
 
       if (error) {
         console.error('Error fetching jobs:', error);
@@ -33,7 +46,7 @@ const JobList = () => {
     };
 
     fetchJobs();
-  }, []);
+  }, [user]); // Dependencia en user
 
   const handleChangeStatus = async (index, newStatus) => {
     const jobToUpdate = jobs[index];
@@ -41,7 +54,7 @@ const JobList = () => {
     const { error } = await supabase
       .from('Oferta')
       .update({ estado: newStatus })
-      .eq('id', jobToUpdate.id);
+      .eq('id_oferta', jobToUpdate.id_oferta); // Asegúrate de usar el ID correcto
 
     if (error) {
       console.error('Error updating job status:', error);
@@ -62,7 +75,7 @@ const JobList = () => {
       </div>
       <div className="mt-4 space-y-4 h-80 overflow-y-scroll">
         {jobs.map((job, index) => (
-          <div key={job.id} className="grid grid-cols-4 gap-4 items-center border-b pb-4">
+          <div key={job.id_oferta} className="grid grid-cols-4 gap-4 items-center border-b pb-4">
             {/* Puesto */}
             <Link to={`/postulados/${job.id_oferta}`}>
               <p className="text-black font-font-base">{job.puesto}</p>
