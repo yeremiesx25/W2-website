@@ -155,7 +155,7 @@ function Register() {
     <div className="flex justify-center min-h-screen">
       <HeaderPower />
       <div className="w-1/2 h-screen bg-primarygradientdark hidden lg:block"></div>
-      <div className="md:w-1/2 h-screen py-6 bg-white flex items-center mx-auto px-4 lg:px-40 justify-center">
+      <div className="md:w-1/2 h-screen py-6 bg-white flex items-center mx-auto px-4 lg:px-40 justify-center overflow-y-scroll">
         {isLogin ? (
           <form onSubmit={handleLogin} className="w-full p-10">
             <h2 className="font-bold text-center text-2xl text-primarycolor">Iniciar Sesión</h2>
@@ -195,7 +195,7 @@ function Register() {
             </p>
           </form>
         ) : (
-          <form onSubmit={handleRegister}>
+          <form className="pt-40" onSubmit={handleRegister}>
             <h2 className="font-bold text-2xl text-primarycolor text-center">Registrar</h2>
             <input
               type="text"

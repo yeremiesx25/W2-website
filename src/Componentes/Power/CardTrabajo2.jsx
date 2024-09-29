@@ -3,6 +3,9 @@ import { MdOutlineVerifiedUser } from "react-icons/md";
 import { BsArrowRightCircle } from "react-icons/bs";
 import { supabase } from "../../supabase/supabase.config";
 import { IoMdTime } from "react-icons/io";
+import { IoLocationOutline } from "react-icons/io5";
+import { MdOutlineMapsHomeWork } from "react-icons/md";
+
 import dayjs from "dayjs"; 
 import 'dayjs/locale/es'; // Importar el idioma español
 import relativeTime from 'dayjs/plugin/relativeTime';
@@ -80,8 +83,8 @@ function CardTrabajo2({ job, onSelectJob, isSelected }) {
                 {modalidad}
               </span>
             )}
-            <span className="bg-purple-50 text-gray-800 py-1 px-3 text-xs rounded-full font-regular tracking-wide">
-              {ubicacion}
+            <span className="bg-purple-50 text-gray-800 py-1 px-3 text-xs rounded-full font-regular tracking-wide flex items-center gap-1">
+            <IoLocationOutline />{ubicacion}
             </span>
           </div>
           <div className="text-md flex items-center text-gray-600 gap-1">
