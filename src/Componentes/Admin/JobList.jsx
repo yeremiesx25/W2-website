@@ -77,7 +77,7 @@ const JobList = () => {
         {jobs.map((job, index) => (
           <div key={job.id_oferta} className="grid grid-cols-4 gap-4 items-center border-b pb-4">
             {/* Puesto */}
-            <Link to={`/postulados/${job.id_oferta}`}>
+            <Link to={`/Postulados/${job.id_oferta}`}>
               <p className="text-black font-font-base">{job.puesto}</p>
             </Link>
 
