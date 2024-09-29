@@ -7,6 +7,7 @@ const Step3 = ({ data, handleChange, prevStep, onSubmit }) => {
     const [recruiterNumber, setRecruiterNumber] = useState('');
     const [questions, setQuestions] = useState(['']); // Initialize with an empty question
     const [isModalOpen, setModalOpen] = useState(false); // State to manage modal visibility
+    const [updatedData, setUpdatedData] = useState(null); // State to hold the updated data
 
     const handleRecruiterNumberChange = (e) => {
         setRecruiterNumber(e.target.value);
@@ -34,7 +35,7 @@ const Step3 = ({ data, handleChange, prevStep, onSubmit }) => {
         const wtspUrl = `https://wa.me/${recruiterNumber}?text=Hola,%20estoy%20interesado%20en%20el%20puesto%20de%20${encodeURIComponent(data.puesto)}`;
 
         // Store questions in the data object
-        const updatedData = {
+        const newData = {
             ...data,
             wtsp_url: wtspUrl,
             preg_1: questions[0] || '',
@@ -45,9 +46,17 @@ const Step3 = ({ data, handleChange, prevStep, onSubmit }) => {
             preg_6: questions[5] || '',
         };
 
-        // Open the share modal with updated data
+        // Verifica los datos actualizados antes de abrir el modal
+        console.log("Datos actualizados:", newData);
+        
+        // Almacena los datos actualizados en el estado
+        setUpdatedData(newData);
+        
+        // Abre el modal
         setModalOpen(true);
-        onSubmit(updatedData); // Call onSubmit with the updated data
+
+        // Llama a onSubmit con los datos actualizados
+        onSubmit(newData); // Si necesitas seguir usando esta función para otros propósitos
     };
 
     return (
@@ -118,10 +127,10 @@ const Step3 = ({ data, handleChange, prevStep, onSubmit }) => {
             </div>
 
             {/* Render ShareModal when isModalOpen is true */}
-            {isModalOpen && (
+            {isModalOpen && updatedData && ( // Asegúrate de que updatedData tenga datos
                 <ShareModal 
-                    selectedJob={data} // Pass the job data to ShareModal
-                    onClose={() => setModalOpen(false)} // Function to close the modal
+                    selectedJob={updatedData} // Pasa los datos actualizados a ShareModal
+                    onClose={() => setModalOpen(false)} // Función para cerrar el modal
                 />
             )}
         </div>

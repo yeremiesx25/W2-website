@@ -1,59 +1,97 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaFacebookF } from 'react-icons/fa';
 import { IoLogoWhatsapp, IoLogoLinkedin } from 'react-icons/io5';
 import { MdContentCopy } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
+import { supabase } from '../../supabase/supabase.config';
 
 const ShareModal = ({ selectedJob, onClose }) => {
   const navigate = useNavigate();
+  const [idOferta, setIdOferta] = useState(null); // Estado para almacenar el id_oferta
 
+  useEffect(() => {
+    console.log("Selected Job:", selectedJob);
+  }, [selectedJob]);
+  
+
+  // Consulta para obtener el id_oferta basado en el puesto o algún campo que tengas
+  const fetchIdOferta = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('Oferta') // Asegúrate de que el nombre de la tabla sea correcto
+        .select('id_oferta')
+        .eq('puesto', selectedJob.puesto) // O cambia esta parte según el identificador adecuado
+        .single(); // Esperamos un único resultado
+
+      if (error) {
+        console.error("Error obteniendo id_oferta:", error);
+        setIdOferta(null); // En caso de error, no hay id_oferta
+      } else {
+        setIdOferta(data?.id_oferta);
+      }
+    } catch (err) {
+      console.error("Error en la consulta de id_oferta:", err);
+    }
+  };
+
+  useEffect(() => {
+    if (selectedJob?.puesto) {
+      fetchIdOferta(); // Llamamos a la función para obtener el id_oferta
+    }
+  }, [selectedJob]);
+
+  // Función para compartir en WhatsApp
   const shareOnWhatsApp = (event) => {
     event.preventDefault();
-    window.open(`https://wa.me/?text=${encodeURIComponent(
-      `Hola, te puede interesar este puesto de trabajo: ${selectedJob.puesto}. Aquí tienes el enlace: https://w2asesoresyconsultores.com/Share?id=${selectedJob.id_oferta}`
-    )}`, '_blank');
+    window.open(
+      `https://wa.me/?text=${encodeURIComponent(
+        `Hola, te puede interesar este puesto de trabajo: ${selectedJob.puesto}. Aquí tienes el enlace: https://w2asesoresyconsultores.com/Share?id=${idOferta}`
+      )}`,
+      '_blank'
+    );
   };
 
   const shareOnFacebook = (event) => {
     event.preventDefault();
-    window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
-      `https://w2asesoresyconsultores.com/Share?id=${selectedJob.id_oferta}`
-    )}`, '_blank');
+    window.open(
+      `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+        `https://w2asesoresyconsultores.com/Share?id=${idOferta}`
+      )}`,
+      '_blank'
+    );
   };
 
   const shareOnLinkedIn = (event) => {
     event.preventDefault();
-    window.open(`https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(
-      `https://w2asesoresyconsultores.com/Share?id=${selectedJob.id_oferta}`
-    )}&title=${encodeURIComponent(
-      `Puesto de trabajo: ${selectedJob.puesto}`
-    )}`, '_blank');
+    window.open(
+      `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(
+        `https://w2asesoresyconsultores.com/Share?id=${idOferta}`
+      )}&title=${encodeURIComponent(`Puesto de trabajo: ${selectedJob.puesto}`)}`,
+      '_blank'
+    );
   };
 
   const copyLink = (event) => {
     event.preventDefault();
-    const link = `https://w2asesoresyconsultores.com/Share?id=${selectedJob.id_oferta}`;
+    const link = `https://w2asesoresyconsultores.com/Share?id=${idOferta}`;
     navigator.clipboard.writeText(link).then(() => {
-      // Create and display the confirmation message
-      const copiedMessage = document.createElement("div");
-      copiedMessage.textContent = "Enlace Copiado";
-      copiedMessage.style.backgroundColor = "rgba(0, 0, 0, 0.8)";
-      copiedMessage.style.color = "white";
-      copiedMessage.style.position = "fixed";
-      copiedMessage.style.bottom = "20px";
-      copiedMessage.style.left = "50%";
-      copiedMessage.style.transform = "translateX(-50%)";
-      copiedMessage.style.padding = "10px 20px";
-      copiedMessage.style.borderRadius = "5px";
-      copiedMessage.style.zIndex = "9999";
+      const copiedMessage = document.createElement('div');
+      copiedMessage.textContent = 'Enlace Copiado';
+      copiedMessage.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+      copiedMessage.style.color = 'white';
+      copiedMessage.style.position = 'fixed';
+      copiedMessage.style.bottom = '20px';
+      copiedMessage.style.left = '50%';
+      copiedMessage.style.transform = 'translateX(-50%)';
+      copiedMessage.style.padding = '10px 20px';
+      copiedMessage.style.borderRadius = '5px';
+      copiedMessage.style.zIndex = '9999';
       document.body.appendChild(copiedMessage);
-      
-      // Remove the message after 2 seconds
+
       setTimeout(() => {
         copiedMessage.remove();
       }, 2000);
     }).catch(() => {
-      // Handle copy error
       alert('Error al copiar el enlace');
     });
   };
@@ -80,6 +118,7 @@ const ShareModal = ({ selectedJob, onClose }) => {
               <button
                 className="bg-[#00d35e] text-white font-bold py-2 px-4 rounded-full flex items-center justify-center mb-4 w-48 h-12"
                 onClick={shareOnWhatsApp}
+                disabled={!idOferta} // Deshabilitar si no se tiene id_oferta
               >
                 <IoLogoWhatsapp className="mr-2" size={24} />
                 WhatsApp
@@ -87,6 +126,7 @@ const ShareModal = ({ selectedJob, onClose }) => {
               <button
                 className="bg-[#3b5998] text-white font-bold py-2 px-4 rounded-full flex items-center justify-center mb-4 w-48 h-12"
                 onClick={shareOnFacebook}
+                disabled={!idOferta}
               >
                 <FaFacebookF className="mr-2" size={24} />
                 Facebook
@@ -96,6 +136,7 @@ const ShareModal = ({ selectedJob, onClose }) => {
               <button
                 className="bg-[#0077b5] text-white font-bold py-2 px-4 rounded-full flex items-center justify-center mb-4 w-48 h-12"
                 onClick={shareOnLinkedIn}
+                disabled={!idOferta}
               >
                 <IoLogoLinkedin className="mr-2" size={24} />
                 LinkedIn
@@ -103,6 +144,7 @@ const ShareModal = ({ selectedJob, onClose }) => {
               <button
                 className="bg-gray-500 text-white font-bold py-2 px-4 rounded-full flex items-center justify-center mb-4 w-48 h-12"
                 onClick={copyLink}
+                disabled={!idOferta}
               >
                 <MdContentCopy className="mr-2" size={24} />
                 Copiar Enlace
