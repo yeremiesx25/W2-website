@@ -195,23 +195,30 @@ function Register() {
             </p>
           </form>
         ) : (
-          <form className="pt-40" onSubmit={handleRegister}>
-            <h2 className="font-bold text-2xl text-primarycolor text-center">Registrar</h2>
+          <form className="pt-12" onSubmit={handleRegister}>
+          <h2 className="font-bold text-2xl text-primarycolor text-center">Registrate en Power</h2>
+          
+          {/* Campo de nombre */}
+          <div className="mb-8">
             <input
               type="text"
               placeholder="Nombre"
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
-              className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-primarycolor focus:bg-white focus:outline-none mb-8"
+              className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-primarycolor focus:bg-white focus:outline-none"
             />
+          </div>
+        
+          {/* Campos en dos columnas */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
             <input
               type="email"
               placeholder="Correo electrónico"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-primarycolor focus:bg-white focus:outline-none mb-8"
+              className="w-full px-3 py-3 rounded-lg bg-gray-200 border focus:border-primarycolor focus:bg-white focus:outline-none"
             />
             <input
               type="password"
@@ -219,15 +226,18 @@ function Register() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-primarycolor focus:bg-white focus:outline-none mb-8"
+              className="w-full px-4 py-3 rounded-lg bg-gray-200 border focus:border-primarycolor focus:bg-white focus:outline-none"
             />
+          </div>
+        
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
             <input
               type="text"
               placeholder="DNI"
               value={dni}
               onChange={(e) => setDni(e.target.value)}
               required
-              className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-primarycolor focus:bg-white focus:outline-none mb-8"
+              className="w-full px-4 py-3 rounded-lg bg-gray-200 border focus:border-primarycolor focus:bg-white focus:outline-none"
             />
             <input
               type="text"
@@ -235,15 +245,18 @@ function Register() {
               value={telefono}
               onChange={(e) => setTelefono(e.target.value)}
               required
-              className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-primarycolor focus:bg-white focus:outline-none mb-8"
+              className="w-full px-4 py-3 rounded-lg bg-gray-200 border focus:border-primarycolor focus:bg-white focus:outline-none"
             />
+          </div>
+        
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
             <input
               type="text"
               placeholder="Distrito"
               value={distrito}
               onChange={(e) => setDistrito(e.target.value)}
               required
-              className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-primarycolor focus:bg-white focus:outline-none mb-8"
+              className="w-full px-4 py-3 rounded-lg bg-gray-200 border focus:border-primarycolor focus:bg-white focus:outline-none"
             />
             <input
               type="date"
@@ -251,22 +264,28 @@ function Register() {
               value={fechaNac}
               onChange={(e) => setFechaNac(e.target.value)}
               required
-              className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-primarycolor focus:bg-white focus:outline-none mb-8"
+              className="w-full px-4 py-3 rounded-lg bg-gray-200 border focus:border-primarycolor focus:bg-white focus:outline-none"
             />
-            {error && <p className="mb-4 text-red-500">{error}</p>}
-            <button
-              type="submit"
-              className="transition duration-200 bg-[#ffe946] hover:bg-[#fff084] focus:bg-blue-700 focus:shadow-sm focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 text-primarycolor h-10 flex py-2.5 rounded-lg text-md shadow-sm hover:shadow-md font-semibold text-center justify-center items-center mx-auto w-full"
-            >
-              Registrar
-            </button>
-            <p
-              onClick={() => setIsLogin(true)}
-              className="mt-4 text-center text-blue-500 cursor-pointer hover:underline"
-            >
-              ¿Ya tienes una cuenta? Inicia sesión
-            </p>
-          </form>
+          </div>
+        
+          {/* Mensaje de error */}
+          {error && <p className="mb-4 text-red-500">{error}</p>}
+        
+          {/* Botón de registrar */}
+          <button
+            type="submit"
+            className="transition duration-200 bg-[#ffe946] hover:bg-[#fff084] focus:bg-blue-700 focus:shadow-sm focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 text-primarycolor h-10 flex py-2.5 rounded-lg text-md shadow-sm hover:shadow-md font-semibold text-center justify-center items-center mx-auto w-full"
+          >
+            Registrar
+          </button>
+        
+          <p
+            onClick={() => setIsLogin(true)}
+            className="mt-4 text-center text-blue-500 cursor-pointer hover:underline"
+          >
+            ¿Ya tienes una cuenta? Inicia sesión
+          </p>
+        </form>
         )}
       </div>
     </div>
