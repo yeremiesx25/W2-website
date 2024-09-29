@@ -216,39 +216,7 @@ function Register() {
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
-              className="w-full p-2 mb-4 border rounded"
-            />
-            <input
-              type="text"
-              placeholder="DNI"
-              value={dni}
-              onChange={(e) => setDni(e.target.value)}
-              required
-              className="w-full p-2 mb-4 border rounded"
-            />
-            <input
-              type="text"
-              placeholder="Teléfono"
-              value={telefono}
-              onChange={(e) => setTelefono(e.target.value)}
-              required
-              className="w-full p-2 mb-4 border rounded"
-            />
-            <input
-              type="text"
-              placeholder="Distrito"
-              value={distrito}
-              onChange={(e) => setDistrito(e.target.value)}
-              required
-              className="w-full p-2 mb-4 border rounded"
-            />
-            <input
-              type="date"
-              placeholder="Fecha de Nacimiento"
-              value={fechaNac}
-              onChange={(e) => setFechaNac(e.target.value)}
-              required
-              className="w-full p-2 mb-4 border rounded"
+              className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-primarycolor focus:bg-white focus:outline-none mb-8"
             />
             <input
               type="email"
@@ -256,7 +224,7 @@ function Register() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="w-full p-2 mb-4 border rounded"
+              className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-primarycolor focus:bg-white focus:outline-none mb-8"
             />
             <input
               type="password"
@@ -264,7 +232,39 @@ function Register() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="w-full p-2 mb-4 border rounded"
+              className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-primarycolor focus:bg-white focus:outline-none mb-8"
+            />
+            <input
+              type="text"
+              placeholder="DNI"
+              value={dni}
+              onChange={(e) => setDni(e.target.value)}
+              required
+              className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-primarycolor focus:bg-white focus:outline-none mb-8"
+            />
+            <input
+              type="text"
+              placeholder="Teléfono"
+              value={telefono}
+              onChange={(e) => setTelefono(e.target.value)}
+              required
+              className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-primarycolor focus:bg-white focus:outline-none mb-8"
+            />
+            <input
+              type="text"
+              placeholder="Distrito"
+              value={distrito}
+              onChange={(e) => setDistrito(e.target.value)}
+              required
+              className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-primarycolor focus:bg-white focus:outline-none mb-8"
+            />
+            <input
+              type="date"
+              placeholder="Fecha de Nacimiento"
+              value={fechaNac}
+              onChange={(e) => setFechaNac(e.target.value)}
+              required
+              className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-primarycolor focus:bg-white focus:outline-none mb-8"
             />
             {error && <p className="mb-4 text-red-500">{error}</p>}
             <button
@@ -273,6 +273,7 @@ function Register() {
             >
               Registrarse
             </button>
+
             <p
               onClick={() => setIsLogin(true)}
               className="mt-4 text-center text-blue-500 cursor-pointer hover:underline"

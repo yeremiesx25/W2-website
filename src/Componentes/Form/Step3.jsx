@@ -32,7 +32,7 @@ const Step3 = ({ data, handleChange, prevStep, onSubmit }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        const wtspUrl = `https://wa.me/${recruiterNumber}?text=Hola,%20estoy%20interesado%20en%20el%20puesto%20de%20${encodeURIComponent(data.puesto)}`;
+        const wtspUrl = `https://wa.me/${recruiterNumber}?text=Hola,%20estoy%20interesado%20en%20el%20puesto%20de%20${encodeURIComponent(data.puesto)};`;
 
         // Store questions in the data object
         const newData = {
@@ -48,10 +48,10 @@ const Step3 = ({ data, handleChange, prevStep, onSubmit }) => {
 
         // Verifica los datos actualizados antes de abrir el modal
         console.log("Datos actualizados:", newData);
-        
+
         // Almacena los datos actualizados en el estado
         setUpdatedData(newData);
-        
+
         // Abre el modal
         setModalOpen(true);
 
@@ -62,7 +62,8 @@ const Step3 = ({ data, handleChange, prevStep, onSubmit }) => {
     return (
         <div>
             <h2 className="text-xl mb-4">Paso 3: Información Adicional</h2>
-            
+
+            {/* Modalidad */}
             <div className="mb-4">
                 <label className="block mb-2">Modalidad</label>
                 <select
@@ -79,6 +80,20 @@ const Step3 = ({ data, handleChange, prevStep, onSubmit }) => {
                 </select>
             </div>
 
+            {/* Horario */}
+            <div className="mb-4">
+                <label className="block mb-2">Horario</label>
+                <input
+                    type="text"
+                    name="horario"
+                    value={data.horario}
+                    onChange={handleChange}
+                    className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
+                    required
+                />
+            </div>
+
+            {/* Número de Reclutador */}
             <div className="mb-4">
                 <label className="block mb-2">Número de Reclutador</label>
                 <input
@@ -91,6 +106,7 @@ const Step3 = ({ data, handleChange, prevStep, onSubmit }) => {
                 />
             </div>
 
+            {/* Preguntas para el Postulante */}
             <div className="mb-4">
                 <label className="block mb-2">Preguntas para el Postulante</label>
                 {questions.map((question, index) => (
@@ -120,7 +136,8 @@ const Step3 = ({ data, handleChange, prevStep, onSubmit }) => {
                     </div>
                 ))}
             </div>
-            
+
+            {/* Botones de navegación */}
             <div className="flex justify-between">
                 <button type="button" onClick={prevStep} className="bg-gray-500 text-white p-2 rounded">Anterior</button>
                 <button type="submit" onClick={handleSubmit} className="bg-green-500 text-white p-2 rounded">Enviar</button>

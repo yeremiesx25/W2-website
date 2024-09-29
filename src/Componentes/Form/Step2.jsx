@@ -3,7 +3,7 @@ import React from 'react';
 const Step2 = ({ data, handleChange, nextStep, prevStep }) => {
     return (
         <div>
-            <h2 className="text-xl mb-4">Paso 2: Requisitos y Ubicación</h2>
+            <h2 className="text-xl mb-4">Paso 2: Requisitos</h2>
             <div className="mb-4">
                 <label className="block mb-2">Requisitos</label>
                 <textarea
