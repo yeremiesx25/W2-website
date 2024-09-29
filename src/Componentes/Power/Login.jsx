@@ -2,18 +2,18 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { supabase } from "../../supabase/supabase.config";
 import HeaderPower from "./HeaderPower";
-import { FcGoogle } from "react-icons/fc"; // Importar ícono de Google
+import { FcGoogle } from "react-icons/fc";
 
 function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [name, setName] = useState(""); // Campo adicional para el perfil
-  const [dni, setDni] = useState(""); // Campo DNI
-  const [telefono, setTelefono] = useState(""); // Campo Teléfono
-  const [distrito, setDistrito] = useState(""); // Campo Distrito
-  const [fechaNac, setFechaNac] = useState(""); // Campo Fecha de Nacimiento
+  const [name, setName] = useState("");
+  const [dni, setDni] = useState("");
+  const [telefono, setTelefono] = useState("");
+  const [distrito, setDistrito] = useState("");
+  const [fechaNac, setFechaNac] = useState("");
   const [error, setError] = useState("");
-  const [isLogin, setIsLogin] = useState(true); // Mostrar "Iniciar Sesión" por defecto
+  const [isLogin, setIsLogin] = useState(true);
   const navigate = useNavigate();
 
   const handleRegister = async (e) => {
@@ -21,48 +21,45 @@ function Register() {
     setError("");
 
     try {
-      // Registrar nuevo usuario en Supabase Auth
       const { data, error: signUpError } = await supabase.auth.signUp({
         email: email,
         password: password,
       });
 
       if (signUpError) {
-        console.error("Error de registro:", signUpError); // Log del error
+        console.error("Error de registro:", signUpError);
         setError("Hubo un problema al registrarse.");
         return;
       }
 
-      // Si el usuario se registra correctamente, añade su perfil a la tabla 'perfiles'
       const user = data.user;
       if (user) {
         const perfilData = {
-          nombre: name, // El nombre que el usuario ingresó
-          correo: email, // El correo del usuario registrado
+          nombre: name,
+          correo: email,
           id: user.id,
-          rol: "candidato", // Establecer rol automáticamente
-          user_id: user.id, // Agregar el user_id para relacionar con la tabla perfiles
-          dni: dni, // DNI del usuario
-          telefono: telefono, // Teléfono del usuario
-          distrito: distrito, // Distrito del usuario
-          fecha_nac: fechaNac, // Fecha de nacimiento del usuario
+          rol: "candidato",
+          user_id: user.id,
+          dni: dni,
+          telefono: telefono,
+          distrito: distrito,
+          fecha_nac: fechaNac,
         };
 
-        console.log("Datos del perfil a insertar:", perfilData); // Log de datos a insertar
+        console.log("Datos del perfil a insertar:", perfilData);
 
         const { error: profileError } = await supabase.from("perfiles").insert(perfilData);
 
         if (profileError) {
-          console.error("Error al crear perfil:", profileError); // Log del error
+          console.error("Error al crear perfil:", profileError);
           setError("Hubo un problema al crear el perfil.");
           return;
         }
 
-        // Redirige al usuario a la página deseada tras el registro exitoso
         navigate("/PowerAuth");
       }
     } catch (error) {
-      console.error("Error de registro:", error); // Log del error
+      console.error("Error de registro:", error);
       setError("Hubo un problema al registrarse. Inténtalo de nuevo.");
     }
   };
@@ -83,7 +80,6 @@ function Register() {
         return;
       }
 
-      // Redirige al usuario a la página deseada tras el inicio de sesión exitoso
       navigate("/PowerAuth");
     } catch (error) {
       console.error("Error de inicio de sesión:", error.message);
@@ -94,8 +90,7 @@ function Register() {
   const handleGoogleLogin = async () => {
     setError("");
     try {
-      // Iniciar sesión con Google
-      const { data, error: googleError } = await supabase.auth.signInWithOAuth({
+      const { error: googleError } = await supabase.auth.signInWithOAuth({
         provider: "google",
       });
 
@@ -105,9 +100,9 @@ function Register() {
         return;
       }
 
-      // Espere a que el usuario se autentique y se establezca la sesión
+      // Comprobar sesión después de iniciar sesión con Google
       const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
-
+      
       if (sessionError || !sessionData?.session) {
         console.error("Error al obtener la sesión:", sessionError?.message);
         setError("No se pudo obtener el usuario después de iniciar sesión con Google.");
@@ -116,11 +111,11 @@ function Register() {
 
       const user = sessionData.session.user;
 
-      // Verificar si el usuario tiene un perfil en la tabla 'perfiles'
+      // Verificar si el usuario ya tiene un perfil
       const { data: perfilExistente, error: perfilError } = await supabase
         .from("perfiles")
         .select("*")
-        .eq("user_id", user.id)
+        .eq("id", user.id)
         .single();
 
       if (perfilError) {
@@ -129,13 +124,13 @@ function Register() {
         return;
       }
 
-      // Si el perfil no existe, creamos uno nuevo
+      // Si no hay perfil, crear uno nuevo
       if (!perfilExistente) {
         const perfilData = {
           nombre: user.user_metadata.full_name || user.user_metadata.name || "",
           correo: user.email,
           rol: "candidato",
-          user_id: user.id,
+          user_id: user.id
         };
 
         console.log("Datos del perfil a insertar:", perfilData);
@@ -149,7 +144,6 @@ function Register() {
         }
       }
 
-      // Redirige al usuario a la página deseada tras el inicio de sesión exitoso
       navigate("/PowerAuth");
     } catch (error) {
       console.error("Error de inicio de sesión con Google:", error.message);
@@ -161,9 +155,9 @@ function Register() {
     <div className="flex justify-center min-h-screen">
       <HeaderPower />
       <div className="w-1/2 h-screen bg-primarygradientdark hidden lg:block"></div>
-      <div className="md:w-1/2 h-full py-6 bg-white flex items-center mx-auto px-4 pt-28">
+      <div className="md:w-1/2 h-screen py-6 bg-white flex items-center mx-auto px-4 lg:px-40 justify-center">
         {isLogin ? (
-          <form onSubmit={handleLogin} className="w-full">
+          <form onSubmit={handleLogin} className="w-full p-10">
             <h2 className="font-bold text-center text-2xl text-primarycolor">Iniciar Sesión</h2>
             <input
               type="email"
@@ -182,15 +176,12 @@ function Register() {
               className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-primarycolor focus:bg-white focus:outline-none mb-12"
             />
             {error && <p className="mb-4 text-red-500">{error}</p>}
-
             <button
               type="submit"
               className="transition duration-200 bg-[#ffe946] hover:bg-[#fff084] focus:bg-blue-700 focus:shadow-sm focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 text-primarycolor h-10 flex py-2.5 rounded-lg text-md shadow-sm hover:shadow-md font-semibold text-center justify-center items-center mx-auto w-full"
             >
               Iniciar Sesión
             </button>
-
-            {/* Botón de inicio de sesión con Google */}
             <button
               type="button"
               onClick={handleGoogleLogin}
@@ -199,11 +190,7 @@ function Register() {
               <FcGoogle className="mr-2" size={24} />
               <span className="text-gray-600 font-semibold">Iniciar sesión con Google</span>
             </button>
-
-            <p
-              onClick={() => setIsLogin(false)}
-              className="mt-4 text-center text-blue-500 cursor-pointer hover:underline"
-            >
+            <p onClick={() => setIsLogin(false)} className="mt-4 text-center text-blue-500 cursor-pointer hover:underline">
               ¿No tienes una cuenta? Regístrate
             </p>
           </form>
@@ -248,36 +235,25 @@ function Register() {
               value={fechaNac}
               onChange={(e) => setFechaNac(e.target.value)}
               required
-              className="w-full p-2 mb-4 border rounded"
-            />
-            <input
-              type="email"
-              placeholder="Correo electrónico"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              className="w-full p-2 mb-4 border rounded"
-            />
-            <input
-              type="password"
-              placeholder="Contraseña"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              className="w-full p-2 mb-4 border rounded"
+              className="w-full p-2 mb-4 border rounded text-gray-600"
             />
             {error && <p className="mb-4 text-red-500">{error}</p>}
             <button
               type="submit"
               className="transition duration-200 bg-[#ffe946] hover:bg-[#fff084] focus:bg-blue-700 focus:shadow-sm focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 text-primarycolor h-10 flex py-2.5 rounded-lg text-md shadow-sm hover:shadow-md font-semibold text-center justify-center items-center mx-auto w-full"
             >
-              Registrarse
+              Registrar
             </button>
-            <p
-              onClick={() => setIsLogin(true)}
-              className="mt-4 text-center text-blue-500 cursor-pointer hover:underline"
+            <button
+              type="button"
+              onClick={handleGoogleLogin}
+              className="transition duration-200 bg-white border border-gray-300 hover:bg-gray-100 focus:bg-gray-200 flex items-center justify-center py-2 px-4 rounded-lg mt-4 w-full"
             >
-              ¿Ya tienes una cuenta? Inicia sesión
+              <FcGoogle className="mr-2" size={24} />
+              <span className="text-gray-600 font-semibold">Registrarse con Google</span>
+            </button>
+            <p onClick={() => setIsLogin(true)} className="mt-4 text-center text-blue-500 cursor-pointer hover:underline">
+              ¿Ya tienes una cuenta? Iniciar sesión
             </p>
           </form>
         )}
