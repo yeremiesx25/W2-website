@@ -1,132 +1,90 @@
 import { createContext, useState, useContext, useEffect } from 'react';
 import { supabase } from '../supabase/supabase.config';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
   const navigate = useNavigate();
-  const location = useLocation();
-  const [user, setUser] = useState(() => {
-    // Intenta cargar el usuario desde localStorage al inicializar el estado
-    const userData = localStorage.getItem('user');
-    return userData ? JSON.parse(userData) : null; // Carga el usuario si existe
-  });
+  
+  // Estado para guardar el usuario autenticado
+  const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [justLoggedIn, setJustLoggedIn] = useState(false);
-  const [manualLogin, setManualLogin] = useState(false); // Flag para detectar si es un login manual
 
-  // SignIn con Google (sin rol específico)
+  // Función para iniciar sesión con Google
   const signInWithGoogle = async () => {
     try {
       const { data, error } = await supabase.auth.signInWithOAuth({ provider: 'google' });
-      if (error) throw new Error("Ocurrió un error durante la autenticación");
-      setJustLoggedIn(true);
-      return data;
+      if (error) throw error;
     } catch (error) {
-      console.error(error);
+      console.error('Error al iniciar sesión con Google:', error.message);
     }
   };
 
-  // Inicio de sesión manual para reclutadores
-const manualSignIn = async (email, password) => {
-  try {
-    // Utiliza el método de autenticación de Supabase
-    const { user: authUser, error: authError } = await supabase.auth.signInWithPassword({
-      email: email,
-      password: password,
-    });
+  // Función para iniciar sesión manualmente
+  const manualSignIn = async (email, password) => {
+    
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+      if (error) throw error;
 
-    if (authError) {
-      console.error('Error de autenticación:', authError.message); // Muestra el error de autenticación
-      throw new Error('Credenciales incorrectas');
+      const { data: userProfile, error: profileError } = await supabase
+        .from('perfiles')
+        .select('*')
+        .eq('correo', email)
+        .single();
+
+      if (profileError || !userProfile) throw new Error('Perfil no encontrado');
+      // Dentro de manualSignIn
+      setUser({ ...userProfile, rol: 'reclutador', id: userProfile.id }); // Asegúrate de que 'id' es el campo correcto
+      setUser({ ...userProfile, rol: 'reclutador' });
+      navigate('/Admin', { replace: true });
+    } catch (error) {
+      console.error('Error al iniciar sesión manualmente:', error.message);
     }
+  };
 
-    // Busca el usuario en la tabla 'reclutador' para obtener más información
-    const { data, error: userDataError } = await supabase
-      .from('perfiles')
-      .select('*')
-      .eq('correo', email)
-      .single();
-
-    if (userDataError) {
-      console.error('Error al buscar usuario en la base de datos:', userDataError.message);
-      throw new Error('No se encontró el usuario en la base de datos');
-    }
-
-    if (!data) {
-      throw new Error('No se encontró el usuario en la base de datos');
-    }
-
-    // Autenticación exitosa, guardar usuario y su rol
-    const userData = { ...data, rol: 'reclutador' }; // Añade el rol "reclutador" al usuario
-    setUser(userData);
-    localStorage.setItem('user', JSON.stringify(userData)); // Guardar en localStorage
-    setManualLogin(true); // Indicamos que fue un login manual
-    console.log('Usuario autenticado:', userData); // Verificar datos del usuario
-
-    // Redirigir a la página de admin
-    navigate('/Admin', { replace: true });
-  } catch (error) {
-    console.error('Error en el inicio de sesión manual:', error.message);
-    throw error; // Maneja esto en LoginAdmin
-  }
-};
-
+  // Función para cerrar sesión
   const signOut = async () => {
     try {
       const { error } = await supabase.auth.signOut();
-      if (error) throw new Error("Ocurrió un error durante el cierre de sesión");
+      if (error) throw error;
       setUser(null);
-      localStorage.removeItem('user'); // Elimina el usuario del localStorage
-      setJustLoggedIn(false);
-      setManualLogin(false); // Resetear el flag de login manual
-      navigate("/", { replace: true });
+      navigate('/', { replace: true });
     } catch (error) {
-      console.error(error);
+      console.error('Error al cerrar sesión:', error.message);
     }
   };
 
+  // Efecto para manejar la sesión actual
   useEffect(() => {
-    const { data: authListener } = supabase.auth.onAuthStateChange(async (event, session) => {
-      // Si el usuario hizo un login manual, no sobrescribir el estado de autenticación
-      if (manualLogin) {
-        setLoading(false);
-        return;
-      }
-
-      // Si la sesión está vacía, eliminar el usuario del localStorage
-      if (session == null) {
-        setUser(null);
-        localStorage.removeItem('user');
+    // Escucha los cambios de autenticación
+    const { data: subscription } = supabase.auth.onAuthStateChange((event, session) => {
+      if (session) {
+        // Si hay sesión, actualiza el estado del usuario
+        const loggedUser = session.user;
+        setUser({ ...loggedUser, rol: 'usuario' });
       } else {
-        // Mantener el usuario autenticado con Google, pero sin rol específico
-        const user = session.user;
-        const userData = { ...user, rol: 'usuario' }; // Usuario estándar si se loguea con Google
-        setUser(userData);
-        localStorage.setItem('user', JSON.stringify(userData));
-
-        // Si el usuario acaba de iniciar sesión o está en la página raíz
-        if (justLoggedIn || location.pathname === '/') {
-          navigate("/PowerAuth", { replace: true });
-          setJustLoggedIn(false);
-        }
+        // Si no hay sesión, resetea el usuario
+        setUser(null);
       }
-      setLoading(false);
+      setLoading(false); // Detiene el estado de carga cuando se obtiene la sesión
     });
 
+    // Cleanup al desmontar
     return () => {
-      authListener?.subscription.unsubscribe();
+      subscription?.subscription.unsubscribe();
     };
-  }, [navigate, justLoggedIn, location.pathname, manualLogin]);
+  }, []);
 
   return (
     <AuthContext.Provider value={{ signInWithGoogle, manualSignIn, signOut, user, loading }}>
-      {children}
+      {loading ? <div>Cargando...</div> : children}
     </AuthContext.Provider>
   );
 };
 
-export const UserAuth = () => {
-  return useContext(AuthContext);
-};
+export const UserAuth = () => useContext(AuthContext);

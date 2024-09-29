@@ -32,29 +32,30 @@ function LoginAdmin() {
     };
 
     // Función para registrar al usuario
-    const handleRegister = async () => {
-        try {
-            const { data: user, error: userError } = await supabase.auth.signUp({ email, password });
+  const handleRegister = async () => {
+    try {
+        const { data: user, error: userError } = await supabase.auth.signUp({ email, password });
 
-            if (userError) {
-                setError(userError.message);
-                return;
-            }
-
-            const { error: profileError } = await supabase
-                .from('perfiles')
-                .insert([{ correo: email, nombre: name, rol: 'reclutador', user_id: user.user.id }]);
-
-            if (profileError) {
-                setError(profileError.message);
-                return;
-            }
-
-            navigate('/Admin'); // Redirige después de un registro exitoso
-        } catch (err) {
-            setError('Ocurrió un error al registrarse');
+        if (userError) {
+            setError(userError.message);
+            return;
         }
-    };
+
+        // Crear perfil en la tabla 'perfiles' utilizando el id del usuario
+        const { error: profileError } = await supabase
+            .from('perfiles')
+            .insert([{ correo: email, nombre: name, rol: 'reclutador', id: user.user.id, user_id: user.user.id }]); // Se añade el id aquí
+
+        if (profileError) {
+            setError(profileError.message);
+            return;
+        }
+
+        navigate('/Admin');
+    } catch (err) {
+        setError('Ocurrió un error al registrarse');
+    }
+};
 
     const handleToggle = () => {
         setIsRegistering(!isRegistering);

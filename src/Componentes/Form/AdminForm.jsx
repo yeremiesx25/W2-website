@@ -7,7 +7,7 @@ import EditJob from './EditJob'
 function AdminForm() {
   return (
     <div>
-        <HeaderPowerAuth />
+        
         <FormOferta />
         <EditJob />
     </div>
