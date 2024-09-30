@@ -158,7 +158,7 @@ function Register() {
       <div className="md:w-1/2 h-screen py-6 bg-white flex items-center mx-auto px-4 lg:px-40 justify-center overflow-y-scroll">
         {isLogin ? (
           <form onSubmit={handleLogin} className="w-full p-10">
-            <h2 className="font-bold text-center text-2xl text-primarycolor">Iniciar Sesión</h2>
+            <h2 className="font-bold text-center text-2xl text-primarycolor mb-10 mt-7">Inicia Sesión en Power</h2>
             <input
               type="email"
               placeholder="Correo electrónico"
@@ -195,9 +195,9 @@ function Register() {
             </p>
           </form>
         ) : (
-          <form className="pt-12" onSubmit={handleRegister}>
-          <h2 className="font-bold text-2xl text-primarycolor text-center">Registrate en Power</h2>
-          
+          <form className="pt-20" onSubmit={handleRegister}>
+          <h2 className="font-bold text-2xl text-primarycolor text-center pb-6">Registrate en Power</h2>
+        
           {/* Campo de nombre */}
           <div className="mb-8">
             <input
@@ -210,15 +210,15 @@ function Register() {
             />
           </div>
         
-          {/* Campos en dos columnas */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+          {/* Campos en dos columnas usando flex */}
+          <div className="flex flex-col md:flex-row gap-6 mb-8">
             <input
               type="email"
               placeholder="Correo electrónico"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="w-full px-3 py-3 rounded-lg bg-gray-200 border focus:border-primarycolor focus:bg-white focus:outline-none"
+              className="flex-1 px-3 py-3 rounded-lg bg-gray-200 border focus:border-primarycolor focus:bg-white focus:outline-none"
             />
             <input
               type="password"
@@ -226,18 +226,18 @@ function Register() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="w-full px-4 py-3 rounded-lg bg-gray-200 border focus:border-primarycolor focus:bg-white focus:outline-none"
+              className="flex-1 px-4 py-3 rounded-lg bg-gray-200 border focus:border-primarycolor focus:bg-white focus:outline-none"
             />
           </div>
         
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+          <div className="flex flex-col md:flex-row gap-6 mb-8">
             <input
               type="text"
               placeholder="DNI"
               value={dni}
               onChange={(e) => setDni(e.target.value)}
               required
-              className="w-full px-4 py-3 rounded-lg bg-gray-200 border focus:border-primarycolor focus:bg-white focus:outline-none"
+              className="flex-1 px-4 py-3 rounded-lg bg-gray-200 border focus:border-primarycolor focus:bg-white focus:outline-none"
             />
             <input
               type="text"
@@ -245,18 +245,18 @@ function Register() {
               value={telefono}
               onChange={(e) => setTelefono(e.target.value)}
               required
-              className="w-full px-4 py-3 rounded-lg bg-gray-200 border focus:border-primarycolor focus:bg-white focus:outline-none"
+              className="flex-1 px-4 py-3 rounded-lg bg-gray-200 border focus:border-primarycolor focus:bg-white focus:outline-none"
             />
           </div>
         
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+          <div className="flex flex-col md:flex-row gap-6 mb-8">
             <input
               type="text"
               placeholder="Distrito"
               value={distrito}
               onChange={(e) => setDistrito(e.target.value)}
               required
-              className="w-full px-4 py-3 rounded-lg bg-gray-200 border focus:border-primarycolor focus:bg-white focus:outline-none"
+              className="flex-1 px-4 py-3 rounded-lg bg-gray-200 border focus:border-primarycolor focus:bg-white focus:outline-none"
             />
             <input
               type="date"
@@ -264,7 +264,7 @@ function Register() {
               value={fechaNac}
               onChange={(e) => setFechaNac(e.target.value)}
               required
-              className="w-full px-4 py-3 rounded-lg bg-gray-200 border focus:border-primarycolor focus:bg-white focus:outline-none"
+              className="flex-1 px-4 py-3 rounded-lg bg-gray-200 border focus:border-primarycolor focus:bg-white focus:outline-none"
             />
           </div>
         
