@@ -21,48 +21,62 @@ function Register() {
     setError("");
 
     try {
-      const { data, error: signUpError } = await supabase.auth.signUp({
-        email: email,
-        password: password,
-      });
+        const { data, error: signUpError } = await supabase.auth.signUp({
+            email: email,
+            password: password,
+        });
 
-      if (signUpError) {
-        console.error("Error de registro:", signUpError);
-        setError("Hubo un problema al registrarse.");
-        return;
-      }
-
-      const user = data.user;
-      if (user) {
-        const perfilData = {
-          nombre: name,
-          correo: email,
-          id: user.id,
-          rol: "candidato",
-          user_id: user.id,
-          dni: dni,
-          telefono: telefono,
-          distrito: distrito,
-          fecha_nac: fechaNac,
-        };
-
-        console.log("Datos del perfil a insertar:", perfilData);
-
-        const { error: profileError } = await supabase.from("perfiles").insert(perfilData);
-
-        if (profileError) {
-          console.error("Error al crear perfil:", profileError);
-          setError("Hubo un problema al crear el perfil.");
-          return;
+        if (signUpError) {
+            console.error("Error de registro:", signUpError);
+            setError("Hubo un problema al registrarse.");
+            return;
         }
 
-        navigate("/PowerAuth");
-      }
+        const user = data.user;
+        if (user) {
+            const perfilData = {
+                nombre: name,
+                correo: email,
+                id: user.id,
+                rol: "candidato",
+                user_id: user.id,
+                dni: dni,
+                telefono: telefono,
+                distrito: distrito,
+                fecha_nac: fechaNac,
+            };
+
+            console.log("Datos del perfil a insertar:", perfilData);
+
+            const { error: profileError } = await supabase.from("perfiles").insert(perfilData);
+
+            if (profileError) {
+                console.error("Error al crear perfil:", profileError);
+                setError("Hubo un problema al crear el perfil.");
+                return;
+            }
+
+            // Crear una entrada en la tabla Experiencia
+            const experienciaData = {
+                user_id: user.id, // Usar el user_id del nuevo usuario
+                // Puedes agregar otros campos necesarios para la tabla Experiencia
+            };
+
+            const { error: experienciaError } = await supabase.from("Experiencia").insert(experienciaData);
+
+            if (experienciaError) {
+                console.error("Error al crear experiencia:", experienciaError);
+                setError("Hubo un problema al crear la experiencia.");
+                return;
+            }
+
+            navigate("/PowerAuth");
+        }
     } catch (error) {
-      console.error("Error de registro:", error);
-      setError("Hubo un problema al registrarse. Inténtalo de nuevo.");
+        console.error("Error de registro:", error);
+        setError("Hubo un problema al registrarse. Inténtalo de nuevo.");
     }
-  };
+};
 
   const handleLogin = async (e) => {
     e.preventDefault();

@@ -7,7 +7,6 @@ const Profile1 = () => {
   const { user } = UserAuth(); // Asegúrate de que UserAuth esté bien implementado
   const [perfil, setPerfil] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
   const [editMode, setEditMode] = useState(false); // Estado para controlar el modo de edición
   const [formData, setFormData] = useState({
     nombre: '',
@@ -35,13 +34,13 @@ const Profile1 = () => {
   useEffect(() => {
     const fetchPerfil = async () => {
       const { data: { session }, error: sessionError } = await supabase.auth.getSession();
-
+    
       if (sessionError) {
-        setError(sessionError.message);
+        console.error(sessionError.message); // Log error instead of showing
         setLoading(false);
         return;
       }
-
+    
       const user = session?.user;
       if (user) {
         try {
@@ -50,31 +49,29 @@ const Profile1 = () => {
             .from('perfiles')
             .select('*')
             .eq('user_id', user.id)
-            .maybeSingle(); // Cambiar a maybeSingle para evitar el error cuando no hay registros
-
+            .maybeSingle();
+    
           // Obtener datos de la tabla experiencia
           const { data: experienciaData, error: experienciaError } = await supabase
             .from('Experiencia')
             .select('*')
-            .eq('user_id', user.id)
-            .maybeSingle(); // Cambiar a maybeSingle aquí también
-
+            .eq('user_id', user.id); // Removed maybeSingle()
+    
           if (perfilError || experienciaError) {
-            setError(perfilError?.message || experienciaError?.message);
+            console.error(perfilError?.message || experienciaError?.message); // Log errors
           } else {
             setPerfil(perfilData);
-            // Unir los datos de las dos tablas en un solo estado
             setFormData({ ...perfilData, ...experienciaData });
           }
         } catch (error) {
-          setError('Error al obtener los datos: ' + error.message);
+          console.error('Error al obtener los datos:', error.message);
         }
       } else {
-        setError('No se encontró el usuario autenticado.');
+        console.error('No se encontró el usuario autenticado.');
       }
       setLoading(false);
     };
-
+    
     fetchPerfil();
   }, []);
 
@@ -147,7 +144,7 @@ const Profile1 = () => {
               institucion: formData.institucion,
               año: formData.año
             })
-            .eq('user_id', user.id); // Asegúrate de que solo actualizas la fila del usuario actual
+            .eq('user_id', user.id);
         } else {
           // Insertar una nueva experiencia si no existe
           await supabase
@@ -172,10 +169,10 @@ const Profile1 = () => {
   
         alert('Datos guardados correctamente.');
       } catch (error) {
-        setError('Error al guardar los datos: ' + error.message);
+        console.error('Error al guardar los datos:', error.message);
       }
     } else {
-      setError('No se encontró el usuario autenticado.');
+      console.error('No se encontró el usuario autenticado.');
     }
   };
 
@@ -185,13 +182,11 @@ const Profile1 = () => {
   };
 
   if (loading) return <p>Cargando...</p>;
-  if (error) return <p>Error: {error}</p>;
 
   return (
     <div>
       <h1>Perfil</h1>
 
-      {/* Mostrar el botón Editar cuando no esté en modo de edición */}
       {!editMode && (
         <button onClick={() => setEditMode(true)}>Editar</button>
       )}
@@ -261,7 +256,6 @@ const Profile1 = () => {
         {/* Renderizar campos de experiencia */}
         <ExperienciaForm formData={formData} handleChange={handleChange} editMode={editMode} />
 
-        {/* Mostrar botones de Guardar y Cancelar solo en modo edición */}
         {editMode && (
           <>
             <button type="submit">Guardar</button>
