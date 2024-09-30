@@ -12,7 +12,7 @@ import Privacidad from "./Componentes/Principal/Privacidad.jsx";
 import AdminForm from "./Componentes/Form/AdminForm.jsx";
 import LoginAdmin from "./Componentes/Admin/LoginAdmin.jsx";
 import ProtectedRoute from "./ProtectedRoute.jsx";
-import Profile from "./Componentes/Profile/Profile.jsx";
+import Profile1 from "./Componentes/Profile/Profile1.jsx";
 import Postulados from "./Componentes/Admin/Postulados.jsx";
 import Share from "./Componentes/PowerAuth/Share.jsx";
 import InfoJobMovil from "./Componentes/PowerAuth/InfoJobMovil.jsx";
@@ -22,7 +22,7 @@ import ReservaAdmin from './Componentes/Reserva/ReservaAdmin.jsx';
 import Auth from './Componentes/Reserva/Auth.jsx';
 import Coworking from './Componentes/Coworking/Coworking.jsx';
 import Contacto from './Componentes/Contacto/Contacto.jsx';
-import Register from './Componentes/Power/Register.jsx'; // Importar el componente de Register
+
 
 function App() {
   return (
@@ -38,7 +38,6 @@ function App() {
           <Route path="/Privacidad" element={<Privacidad />} />
           <Route path="/Contacto" element={<Contacto />} />
           <Route path="/Login" element={<Login />} />
-          <Route path="/Register" element={<Register />} />
           <Route path="/Share" element={<Share />} />
           <Route path="/info-job-movil/:id" element={<InfoJobMovil />} />
           <Route path="/ReservaAdmin" element={<ReservaAdmin />} /> {/* Ruta pública */}
@@ -91,10 +90,10 @@ function App() {
             }
           />
           <Route
-            path="/Profile"
+            path="/Profile1"
             element={
               <ProtectedRoute>
-                <Profile />
+                <Profile1 />
               </ProtectedRoute>
             }
           />
