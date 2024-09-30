@@ -30,7 +30,7 @@ const JobList = () => {
 
       const { data, error } = await supabase
         .from('Oferta')
-        .select('id_oferta, puesto, fecha_publicacion, estado')
+        .select('id_oferta, puesto, fecha_publicacion, estado, count_postulados')
         .eq('id_reclutador', user.id); // Filtrar por user_id
 
       if (error) {
@@ -39,7 +39,7 @@ const JobList = () => {
         const jobsWithPostulados = data.map(job => ({
           ...job,
           fecha_publicacion: formatDate(job.fecha_publicacion),
-          postulados: "0 / 0"
+          postulados: job.count_postulados
         }));
         setJobs(jobsWithPostulados);
       }
@@ -67,37 +67,46 @@ const JobList = () => {
 
   return (
     <div className="w-full bg-white p-8 rounded-lg font-dmsans">
-      <div className="grid grid-cols-4 gap-4 text-gray-500 text-md font-semibold">
+      <div className="grid grid-cols-4 gap-4 text-gray-500 text-md font-semibold bg-gray-200 p-4 rounded-lg">
         <div>Puesto</div>
         <div>Fecha</div>
         <div>Postulados</div>
         <div>Estado</div>
       </div>
-      <div className="mt-4 space-y-4 h-80 overflow-y-scroll">
+      <div className="mt-4 space-y-4 h-80 overflow-y-scroll px-4">
         {jobs.map((job, index) => (
-          <div key={job.id_oferta} className="grid grid-cols-4 gap-4 items-center border-b pb-4">
+          <div
+            key={job.id_oferta}
+            className="grid grid-cols-4 gap-4 items-center border-b pb-4"
+          >
             {/* Puesto */}
             <Link to={`/Postulados/${job.id_oferta}`}>
-              <p className="text-black font-font-base">{job.puesto}</p>
+              <p className="text-gray-600 font-base">{job.puesto}</p>
             </Link>
 
             {/* Fecha */}
             <div>
-              <p className="text-black">{job.fecha_publicacion}</p>
+              <p className="text-gray-600 font-base">{job.fecha_publicacion}</p>
             </div>
 
             {/* Postulados */}
-            <div className="text-black font-font-base">{job.postulados}</div>
+            <div className="text-gray-600 font-base">{job.postulados}</div>
 
             {/* Estado */}
             <div>
               <select
                 value={job.estado}
                 onChange={(e) => handleChangeStatus(index, e.target.value)}
-                className="px-2 py-1 text-sm font-bold border rounded-full"
+                className={`px-4 py-1 text-sm border border-gray-400 rounded-full font-base outline-none transition-all duration-300 font-semibold ${
+                  job.estado === "activa" ? "text-green-500" : "text-red-500"
+                }`}
               >
-                <option value="Abierto">Abierto</option>
-                <option value="Cerrado">Cerrado</option>
+                <option value="activa" className="text-green-500">
+                  Abierto
+                </option>
+                <option value="cerrada" className="text-red-500">
+                  Cerrado
+                </option>
               </select>
             </div>
           </div>
