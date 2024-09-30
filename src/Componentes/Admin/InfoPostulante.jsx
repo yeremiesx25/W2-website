@@ -1,30 +1,24 @@
 import React, { useState, useEffect } from "react";
 import { supabase } from "../../supabase/supabase.config";
-import { FaWhatsapp } from "react-icons/fa";
-import { FaCheck } from "react-icons/fa";
-import { FaQuestion } from "react-icons/fa";
+import { FaWhatsapp, FaCheck, FaQuestion } from "react-icons/fa";
 import { IoMdClose } from "react-icons/io";
-import { IoClose } from "react-icons/io5";
 
-const InfoPostulante = ({ 
-  postulado,
-  preguntas,
-  respuestas,
-  onEstadoChange,
-}) => {
+const InfoPostulante = ({ postulado, onEstadoChange }) => {
   const [estadoActual, setEstadoActual] = useState(postulado.estado);
   const [userData, setUserData] = useState(null);
+  const [preguntas, setPreguntas] = useState([]);
+  const [respuestas, setRespuestas] = useState([]);
 
   useEffect(() => {
     setEstadoActual(postulado.estado);
 
-    // Fetch additional user data from 'Usuario' table
+    // Fetch additional user data from 'Perfiles' table
     const fetchUserData = async () => {
       try {
         const { data, error } = await supabase
-          .from("usuario")
-          .select("dni_user, fecha_nac, distrito, cv_url") // Include cv_url in the selection
-          .eq("user_id", postulado.user_id)
+          .from("perfiles")
+          .select("dni, distrito, fecha_nac") // Cambiado a la tabla perfiles
+          .eq("id", postulado.user_id) // Asegúrate de usar el campo correcto para el ID
           .single();
 
         if (error) {
@@ -39,16 +33,53 @@ const InfoPostulante = ({
       }
     };
 
+    // Fetch questions and answers
+    const fetchQuestionsAndAnswers = async () => {
+      try {
+        // Obtén la oferta relacionada usando el ID de la postulacion
+        const { data: ofertaData, error: ofertaError } = await supabase
+          .from("Oferta")
+          .select("preg_1, preg_2, preg_3, preg_4, preg_5, preg_6")
+          .eq("id_oferta", postulado.id_oferta)
+          .single();
+
+        if (ofertaError) {
+          throw ofertaError;
+        }
+
+        if (ofertaData) {
+          setPreguntas([
+            ofertaData.preg_1,
+            ofertaData.preg_2,
+            ofertaData.preg_3,
+            ofertaData.preg_4,
+            ofertaData.preg_5,
+            ofertaData.preg_6,
+          ]);
+        }
+
+        // Obtener respuestas de la tabla Postulacion
+        setRespuestas([
+          postulado.resp_1,
+          postulado.resp_2,
+          postulado.resp_3,
+          postulado.resp_4,
+          postulado.resp_5,
+          postulado.resp_6,
+        ]);
+      } catch (error) {
+        console.error("Error fetching questions and answers:", error.message);
+      }
+    };
+
     fetchUserData();
+    fetchQuestionsAndAnswers();
   }, [postulado]);
 
   const whatsappLink = `https://wa.me/${postulado.telefono}`;
 
   const handleEstadoClick = async (estadoNuevo) => {
     try {
-      console.log("Estado nuevo:", estadoNuevo);
-
-      // Actualizar el estado en Supabase
       const { data, error } = await supabase
         .from("Postulacion")
         .update({ estado: estadoNuevo })
@@ -59,19 +90,20 @@ const InfoPostulante = ({
       }
 
       if (data) {
-        // Llamar a la función callback para actualizar el estado en el componente padre
         setEstadoActual(estadoNuevo);
-        onEstadoChange(); // Llamar al callback
-      } else {
-        console.warn("La respuesta de actualización es null o undefined");
+        onEstadoChange();
       }
     } catch (error) {
       console.error("Error actualizando estado:", error.message);
     }
   };
 
-  // Agregar parámetros para visualizar solo el documento
   const cvUrl = postulado.cv_link ? `${postulado.cv_link}#view=fitH` : '';
+
+  // Combina preguntas y respuestas en un solo array de objetos
+  const preguntasYRespuestas = preguntas
+    .map((pregunta, index) => ({ pregunta, respuesta: respuestas[index] }))
+    .filter(({ pregunta, respuesta }) => pregunta && respuesta); // Filtra las que no tienen pregunta o respuesta
 
   return (
     <div className="border border-primarycolor overflow-hidden sm:rounded-lg p-12">
@@ -98,93 +130,62 @@ const InfoPostulante = ({
           <div className="flex items-center space-x-2">
             <button
               onClick={() => handleEstadoClick("seleccionado")}
-              className={`px-4 py-2 ${
-                estadoActual === "seleccionado"
-                  ? "bg-green-500 text-white"
-                  : "bg-green-300 text-white"
-              } rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400`}
+              className={`px-4 py-2 ${estadoActual === "seleccionado" ? "bg-green-500 text-white" : "bg-green-300 text-white"} rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400`}
             >
-              <FaCheck size={24}/>
+              <FaCheck size={24} />
             </button>
             <button
               onClick={() => handleEstadoClick("pendiente")}
-              className={`px-4 py-2 ${
-                estadoActual === "pendiente"
-                  ? "bg-yellow-500 text-white"
-                  : "bg-gray-300 text-gray-700"
-              } rounded-md hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-400`}
+              className={`px-4 py-2 ${estadoActual === "pendiente" ? "bg-yellow-500 text-white" : "bg-gray-300 text-gray-700"} rounded-md hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-400`}
             >
-              <FaQuestion size={24}/>
+              <FaQuestion size={24} />
             </button>
             <button
               onClick={() => handleEstadoClick("descartado")}
-              className={`px-4 py-2 ${
-                estadoActual === "descartado"
-                  ? "bg-red-500 text-white"
-                  : "bg-red-300 text-white"
-              } rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400`}
+              className={`px-4 py-2 ${estadoActual === "descartado" ? "bg-red-500 text-white" : "bg-red-300 text-white"} rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400`}
             >
-              <IoMdClose size={24
-              } />
+              <IoMdClose size={24} />
             </button>
-            
           </div>
         </div>
       </div>
       <div className="border-t border-gray-200 pt-4">
         <div className="mb-2">
           <span className="font-semibold">Teléfono:</span>{" "}
-          <span>{postulado.telefono}</span> <p></p>{" "}
+          <span>{postulado.telefono}</span>
         </div>
-
         {userData && (
           <>
-            <div>
-              <div className="mb-2">
-                <span className="font-semibold">DNI:</span>{" "}
-                <span>{userData.dni_user}</span>
-              </div>
-
-              <div className="mb-2">
-                <span className="font-semibold">Edad:</span>{" "}
-                <span>{userData && calculateAge(userData.fecha_nac)}</span>
-              </div>
-
-              <div className="mb-2">
-                <span className="font-semibold">Fecha de Nacimiento:</span>{" "}
-                <span>{userData.fecha_nac}</span>
-              </div>
-
-              <div className="mb-2">
-                <span className="font-semibold">Distrito:</span>{" "}
-                <span>{userData.distrito}</span>
-              </div>
-              <p className="text-lg font-semibold mt-4">Respuestas:</p>
-              <ul className="divide-y divide-gray-200">
-                {preguntas.map((pregunta, index) => (
-                  <li key={index} className="py-2">
-                    <p className="text-gray-500">{pregunta}</p>
-                    <p className="mt-1">{respuestas[index]}</p>
-                  </li>
-                ))}
-              </ul>
-
-              {userData.cv_url && ( // Check if cv_url exists before displaying
-                <div className="mt-4">
-                  <p className="text-lg font-semibold mb-2">Currículum Vitae:</p>
-                  <iframe
-                    src={userData.cv_url}
-                    title="CV"
-                    width="100%"
-                    height="500px"
-                    className="border border-gray-300 rounded-lg"
-                  />
-                </div>
-              )}
+            <div className="mb-2">
+              <span className="font-semibold">DNI:</span>{" "}
+              <span>{userData.dni}</span>
+            </div>
+            <div className="mb-2">
+              <span className="font-semibold">Distrito:</span>{" "}
+              <span>{userData.distrito}</span>
+            </div>
+            <div className="mb-2">
+              <span className="font-semibold">Fecha de Nacimiento:</span>{" "}
+              <span>{userData.fecha_nac}</span>
+            </div>
+            <div className="mb-2">
+              <span className="font-semibold">Edad:</span>{" "}
+              <span>{calculateAge(userData.fecha_nac)}</span>
             </div>
           </>
         )}
       </div>
+      <div className="mt-4">
+  <h3 className="text-lg font-semibold">Respuestas:</h3>
+  {preguntasYRespuestas.map(({ pregunta, respuesta }, index) => (
+    <div key={index} className="mb-4"> {/* Increased margin bottom for better separation */}
+      <span className="font-semibold">{pregunta}</span>
+      <div className="mt-1"> {/* Add margin top for separation */}
+        <span>{respuesta}</span>
+      </div>
+    </div>
+  ))}
+</div>
     </div>
   );
 };

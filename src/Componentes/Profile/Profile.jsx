@@ -32,7 +32,7 @@ function Profile() {
     async function fetchUserData() {
       try {
         const { data, error } = await supabase
-          .from("usuario")
+          .from("perfiles")
           .select("*")
           .eq("user_id", user.id)
           .single();

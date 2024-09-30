@@ -74,10 +74,10 @@ function LoginAdmin() {
 </div>
                 <div className="md:w-1/2 h-full py-6 bg-white flex items-center mx-auto px-4">
                     <div className="p-10 xs:p-0 md:mx-auto lg:w-full lg:max-w-md">
-                        <h1 className="font-bold text-left text-2xl text-primarycolor">
+                        <h1 className="font-bold text-left text-2xl text-primarycolor mt-20">
                             {isRegistering ? 'Regístrate' : 'Te damos la bienvenida'}
                         </h1>
-                        <h1 className="font-regular text-left text-md mb-5 text-gray-700">
+                        <h1 className="font-regular text-left text-md  text-gray-700 mt-2">
                             {isRegistering ? 'Ingresa tus datos para registrarte' : 'Ingresa tus datos para iniciar sesión'}
                         </h1>
                         <div className="bg-white w-full rounded-lg divide-y divide-gray-200">
@@ -127,7 +127,7 @@ function LoginAdmin() {
                                         </svg>
                                     </button>
                                 </div>
-                                <button onClick={handleToggle} className="text-blue-500 mt-4">
+                                <button onClick={handleToggle} className="text-blue-500 mt-4 ml-24">
                                     {isRegistering ? 'Ya tengo cuenta. Iniciar sesión' : 'No tengo cuenta. Registrarme'}
                                 </button>
                             </div>
