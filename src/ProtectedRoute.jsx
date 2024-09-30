@@ -6,13 +6,13 @@ const ProtectedRoute = ({ children }) => {
 
   if (loading) {
     return (
-      <div className="flex justify-center items-center h-screen">
-        <div className="relative inline-flex">
-          <div className="w-8 h-8 bg-amber-400 rounded-full"></div>
-          <div className="w-8 h-8 bg-amber-400 rounded-full absolute top-0 left-0 animate-ping"></div>
-          <div className="w-8 h-8 bg-amber-400 rounded-full absolute top-0 left-0 animate-pulse"></div>
-        </div>
-      </div>
+      <div class="flex justify-center items-center h-screen">
+<div class="flex flex-row gap-2">
+  <div class="w-4 h-4 rounded-full bg-blue-700 animate-bounce"></div>
+  <div class="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:-.3s]"></div>
+  <div class="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:-.5s]"></div>
+</div>
+</div>
     ); // Pantalla de carga personalizada
   }
 

@@ -5,18 +5,15 @@ import MenuAdmin from './MenuAdmin'
 import JobList from './JobList'
 import BtnContainer from './BtnContainer'
 import HeaderDashboard from './HeaderDashboard'
+import HeaderAdmin from './HeaderAdmin'
 
 
 function Admin() {
   return (
-    <div className="flex font-dmsans">
-  
+    <div className="flex font-dmsans flex-col">
+      <HeaderAdmin />
       <MenuAdmin />
-      <div className="flex-1 p-8 bg-gray-100 pt-20">
-      <HeaderDashboard />
-        <BtnContainer />
-        <JobList />
-      </div>
+      <AdminLayout />
     </div>
   )
 }

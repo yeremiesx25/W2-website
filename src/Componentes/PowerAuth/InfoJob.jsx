@@ -10,6 +10,7 @@ import 'dayjs/locale/es'; // Importar el idioma español
 import relativeTime from 'dayjs/plugin/relativeTime';
 import ShareButton from "./ShareButton"; // Import the ShareButton component
 import { IoLogoWhatsapp } from "react-icons/io";
+import { IoLocationOutline } from "react-icons/io5";
 
 function InfoJob({ selectedJob }) {
     const { user } = UserAuth(); // Obtener información del usuario autenticado
@@ -128,7 +129,7 @@ function InfoJob({ selectedJob }) {
     return (
         <div
             className="selected-job-info w-full sm:w-3/5 rounded-lg md:flex flex-col p-8 mx-8 bg-white hidden transition-all duration-500 font-dmsans"
-            style={{ height: "650px", overflowY: "auto", position: "relative" }}
+            style={{ height: "650px", overflowY: "auto", }}
         >
             <p className="text-gray-500 text-sm">{capitalizedTimeAgo}</p>
             <h2 className="font-bold text-2xl mb-3 text-gray-800">
@@ -136,10 +137,10 @@ function InfoJob({ selectedJob }) {
             </h2>
 
             <div className="flex items-center space-x-2 mb-4">
-                <span className="bg-blue-100 text-blue-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded">
-                    {selectedJob.ubicacion}
+                <span className="bg-purple-50 text-gray-700 py-1 px-3 text-xs rounded-full font-regular tracking-wide flex items-center gap-1">
+                <IoLocationOutline />{selectedJob.ubicacion}
                 </span>
-                <span className="bg-green-100 text-green-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded">
+                <span className="bg-green-50 text-gray-700 py-1 px-3 text-xs rounded-full font-regular tracking-wide gap-1 flex items-center">
                     S/. {selectedJob.sueldo}
                 </span>
             </div>
@@ -163,12 +164,12 @@ function InfoJob({ selectedJob }) {
             <div className="flex justify-between mb-4">
                 <button
                     className={`font-bold py-2 px-4 rounded-full w-48 ${
-                        hasApplied ? "bg-yellow-200 text-primarycolor text-sm cursor-not-allowed" : "bg-[#0057c2] text-white"
+                        hasApplied ? "bg-yellow-200 text-primarycolor cursor-not-allowed" : "bg-[#0057c2] text-white"
                     }`}
                     onClick={hasApplied ? null : () => setIsQuestionsModalOpen(true)} // Mostrar el modal de preguntas
                     disabled={hasApplied}
                 >
-                    {hasApplied ? "YA HAS POSTULADO" : "POSTULARME"}
+                    {hasApplied ? "Ya has postulado" : "Postularme"}
                 </button>
 
                 {/* Replace the old share button with ShareButton */}

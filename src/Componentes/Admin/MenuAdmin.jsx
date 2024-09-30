@@ -34,7 +34,7 @@ function MenuAdmin() {
   };
 
   return (
-    <div className="w-64 h-screen bg-white shadow-lg flex flex-col justify-between pt-20 font-dmsans">
+    <div className="w-64 h-screen bg-white shadow flex flex-col justify-between pt-20 font-dmsans fixed">
       <ul className="space-y-4 p-6 mt-20">
         <li>
           <MenuItem to="/Admin" icon={FaTachometerAlt} label="Dashboard" />

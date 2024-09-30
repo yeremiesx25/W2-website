@@ -125,7 +125,7 @@ function Buscador() {
         </button>
       </form>
       {showKeywordSuggestions && (
-        <ul ref={keywordSuggestionsRef} className=" bg-white border border-gray-200 rounded-b-md shadow-md w-full max-h-[200px] overflow-y-auto">
+        <ul ref={keywordSuggestionsRef} className=" bg-white border border-gray-200 rounded-b-md shadow-md w-96 max-h-[200px]  overflow-y-auto absolute ">
           {keywordSuggestions.map((suggestion, index) => (
             <li key={index} className="px-4 py-2 cursor-pointer hover:bg-gray-100" onClick={() => handleSelectKeywordSuggestion(suggestion)}>
               {suggestion}
