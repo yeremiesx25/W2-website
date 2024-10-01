@@ -15,7 +15,7 @@ function AdminLayout() {
 
 
   return (
-    <div className="w-full h-screen flex flex-col  pl-80 pr-10 pt-20">
+    <div className="w-full h-screen flex flex-col bg-gray-50 pl-80 pr-10 pt-20">
       <BtnContainer />
       <JobList />
     </div>

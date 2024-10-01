@@ -16,43 +16,49 @@ function Postulados() {
   const [selectedPostulado, setSelectedPostulado] = useState(null);
   const [filteredPostulados, setFilteredPostulados] = useState([]);
   const [filtroSeleccionado, setFiltroSeleccionado] = useState('total');
+  const [selectedId, setSelectedId] = useState(null);
+
+  const handleDivClick = (postulado) => {
+    setSelectedId(postulado.id);
+    handlePostuladoClick(postulado);
+  };
 
   useEffect(() => {
     const fetchJobDetails = async () => {
       try {
         const { data: jobData, error: jobError } = await supabase
-          .from('Oferta') // Reemplaza 'Oferta' con el nombre correcto de tu tabla
+          .from('Oferta')
           .select('*, preg_1, preg_2, preg_3, preg_4, preg_5')
-          .eq('id_oferta', id) // Asegúrate de que 'id' es la columna correcta
-          .single(); // Espera un solo objeto
-    
+          .eq('id_oferta', id)
+          .single();
+
         if (jobError) {
           console.error('Error fetching job details:', jobError);
-          return; // Salir de la función si hay un error
+          return;
         }
-    
+
         if (!jobData) {
           console.error('No job found with the given id');
-          return; // Salir si no hay datos
+          return;
         }
-    
+
         setJobDetails(jobData);
-        
+
         const { data: postuladosData, error: postuladosError } = await supabase
           .from('Postulacion')
           .select('*, user_id')
           .eq('id_oferta', id);
-    
+
         if (postuladosError) {
           console.error('Error fetching postulados:', postuladosError);
-          return; // Salir de la función si hay un error
+          return;
         }
-    
+
         const postuladosConChecked = postuladosData.map(postulado => ({
           ...postulado,
           checked: false
         }));
-        
+
         setPostulados(postuladosConChecked);
         setFilteredPostulados(postuladosConChecked);
         if (postuladosConChecked.length > 0) {
@@ -136,9 +142,9 @@ function Postulados() {
     : [];
 
   return (
-    <div className="font-dmsans">
+    <div className="font-dmsans py-2 px-4">
       <div>
-        <section className="pt-28 pb-10 md:pb-8 bg-primarygradientdark md:bg-primarygradientdark dark:bg-dark h-96 md:h-72 flex justify-center items-center">
+        <section className="bg-primarycolor md:bg-newprimarycolor rounded-lg dark:bg-dark h-96 md:h-40 flex justify-center items-center max-h-screen">
           <div className="container mx-auto">
             <div className="overflow-hidden rounded bg-primary py-12 px-8 md:p-[70px]">
               <div className="flex flex-wrap items-center text-center md:text-left -mx-4">
@@ -169,41 +175,26 @@ function Postulados() {
             </div>
           </div>
         </section>
-        <div className="flex mt-8 pl-20">
+        <div className="flex mt-8 px-0">
           <div className="overflow-x-auto w-full md:w-1/3">
-            <table className="w-full divide-y divide-gray-200">
-              <thead className="bg-gray-50">
-                <tr>
-                  <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Postulantes
-                  </th>
-                </tr>
-              </thead>
-              <tbody className="bg-white divide-y divide-gray-200">
-                {filteredPostulados.map((postulado) => (
-                  <tr
-                    key={postulado.id}
-                    className="cursor-pointer"
-                    onClick={() => handlePostuladoClick(postulado)}
-                  >
-                    <td className="px-6 py-4 whitespace-nowrap">
-                      <div className="flex items-center">
-                        <input
-                          type="checkbox"
-                          checked={postulado.checked}
-                          onChange={(e) => {
-                            e.stopPropagation();
-                            handleCheckboxChange(postulado.id);
-                          }}
-                          className="mr-2"
-                        />
-                        {postulado.name_user} 
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+            <div className="flex flex-col space-y-4">
+              {filteredPostulados.map((postulado) => (
+                <div
+                  key={postulado.id}
+                  className={`flex items-center p-4 border rounded-lg shadow-sm bg-white cursor-pointer hover:bg-gray-100 ${
+                    selectedId === postulado.id ? 'bg-blue-100' : ''
+                  }`}
+                  onClick={() => handleDivClick(postulado)}
+                >
+                  <div className="flex items-center">
+                    <div className="w-8 h-8 rounded-full overflow-hidden bg-blue-300 flex items-center justify-center text-white mr-2">
+                      <img src={postulado.avatar_url} alt="" />
+                    </div>
+                    <span className="font-medium">{postulado.name_user}</span>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
           <div className="ml-4 w-full md:w-2/3">
             {selectedPostulado && (

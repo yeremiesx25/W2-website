@@ -6,12 +6,12 @@ import MenuAdmin from './MenuAdmin'
 
 function PgPostulados() {
   return (
-    <div className='w-full h-screen'>
+    <div className='w-full h-screen max-h-screen'>
         
             <HeaderAdmin />
         <MenuAdmin />
         
-        <div className='w-full h-screen flex flex-col  pl-64 pr-10 pt-20'>
+        <div className='w-full h-screen flex flex-col  pl-64  pt-20'>
         <Postulados /></div>
     </div>
   )

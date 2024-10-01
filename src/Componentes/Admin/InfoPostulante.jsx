@@ -106,87 +106,88 @@ const InfoPostulante = ({ postulado, onEstadoChange }) => {
     .filter(({ pregunta, respuesta }) => pregunta && respuesta); // Filtra las que no tienen pregunta o respuesta
 
   return (
-    <div className="border border-primarycolor overflow-hidden sm:rounded-lg p-12">
-      <div className="flex justify-between items-center mb-4">
-        <div className="flex items-center space-x-4">
-          <img
-            className="w-20 rounded-full object-cover"
-            src={postulado.avatar_url || "https://via.placeholder.com/150"}
-            alt=""
-          />
-          <div>
-            <p className="text-lg font-semibold text-gray-700">{postulado.name_user}</p>
-            <p className="text-gray-500">{postulado.correo}</p> 
-            <p className="text-gray-500">{postulado.fecha_postulacion}</p>
-          </div>
-          <a
-            href={whatsappLink}
-            className="w-12 h-12 bg-green-500 rounded-full flex justify-center items-center text-white text-3xl"
-          >
-            <FaWhatsapp />
-          </a>
-        </div>
-        <div>
-          <div className="flex items-center space-x-2">
-            <button
-              onClick={() => handleEstadoClick("seleccionado")}
-              className={`px-4 py-2 ${estadoActual === "seleccionado" ? "bg-green-500 text-white" : "bg-green-300 text-white"} rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400`}
-            >
-              <FaCheck size={24} />
-            </button>
-            <button
-              onClick={() => handleEstadoClick("pendiente")}
-              className={`px-4 py-2 ${estadoActual === "pendiente" ? "bg-yellow-500 text-white" : "bg-gray-300 text-gray-700"} rounded-md hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-400`}
-            >
-              <FaQuestion size={24} />
-            </button>
-            <button
-              onClick={() => handleEstadoClick("descartado")}
-              className={`px-4 py-2 ${estadoActual === "descartado" ? "bg-red-500 text-white" : "bg-red-300 text-white"} rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400`}
-            >
-              <IoMdClose size={24} />
-            </button>
-          </div>
-        </div>
+    <div className=" text-white rounded-lg shadow-md">
+ <div className="flex items-center w-full p-6 bg-white rounded-lg shadow-md space-x-6">
+      <img
+        className="w-24 h-24 rounded-full object-cover border-2 border-gray-200"
+        src={postulado.avatar_url}
+        alt=""
+      />
+      <div>
+        <h2 className="text-xl font-semibold text-gray-800">{postulado.name_user}</h2>
+        <p className="text-sm text-gray-500">Full stack web developer</p>
+        <p className="text-sm text-blue-500">@Epic Coders</p>
       </div>
-      <div className="border-t border-gray-200 pt-4">
+      <div className="ml-auto flex space-x-4">
+        <a
+          href={whatsappLink}
+          className="px-4 py-2 bg-green-500 text-white text-sm font-semibold rounded-md hover:bg-green-600"
+        >
+          Contact
+        </a>
+        <button className="px-4 py-2 border border-gray-300 text-gray-700 text-sm font-semibold rounded-md hover:bg-gray-100">
+          Resume
+        </button>
+      </div>
+    </div>
+  
+  <div className="flex items-center space-x-2 mb-6">
+    <button
+      onClick={() => handleEstadoClick("seleccionado")}
+      className={`px-4 py-2 ${estadoActual === "seleccionado" ? "bg-green-500 text-white" : "bg-green-300 text-white"} rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400`}
+    >
+      <FaCheck size={24} />
+    </button>
+    <button
+      onClick={() => handleEstadoClick("pendiente")}
+      className={`px-4 py-2 ${estadoActual === "pendiente" ? "bg-yellow-500 text-white" : "bg-gray-300 text-gray-700"} rounded-md hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-400`}
+    >
+      <FaQuestion size={24} />
+    </button>
+    <button
+      onClick={() => handleEstadoClick("descartado")}
+      className={`px-4 py-2 ${estadoActual === "descartado" ? "bg-red-500 text-white" : "bg-red-300 text-white"} rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400`}
+    >
+      <IoMdClose size={24} />
+    </button>
+  </div>
+  
+  <div className="bg-white p-6 rounded-lg shadow-md text-gray-800">
+    <h3 className="text-xl font-bold text-purple-700">Detalles del Postulante</h3>
+    <div className="mb-2">
+      <span className="font-semibold">Teléfono:</span> <span>{postulado.telefono}</span>
+    </div>
+    {userData && (
+      <>
         <div className="mb-2">
-          <span className="font-semibold">Teléfono:</span>{" "}
-          <span>{postulado.telefono}</span>
+          <span className="font-semibold">DNI:</span> <span>{userData.dni}</span>
         </div>
-        {userData && (
-          <>
-            <div className="mb-2">
-              <span className="font-semibold">DNI:</span>{" "}
-              <span>{userData.dni}</span>
-            </div>
-            <div className="mb-2">
-              <span className="font-semibold">Distrito:</span>{" "}
-              <span>{userData.distrito}</span>
-            </div>
-            <div className="mb-2">
-              <span className="font-semibold">Fecha de Nacimiento:</span>{" "}
-              <span>{userData.fecha_nac}</span>
-            </div>
-            <div className="mb-2">
-              <span className="font-semibold">Edad:</span>{" "}
-              <span>{calculateAge(userData.fecha_nac)}</span>
-            </div>
-          </>
-        )}
+        <div className="mb-2">
+          <span className="font-semibold">Distrito:</span> <span>{userData.distrito}</span>
+        </div>
+        <div className="mb-2">
+          <span className="font-semibold">Fecha de Nacimiento:</span> <span>{userData.fecha_nac}</span>
+        </div>
+        <div className="mb-2">
+          <span className="font-semibold">Edad:</span> <span>{calculateAge(userData.fecha_nac)}</span>
+        </div>
+      </>
+    )}
+  </div>
+  
+  <div className="mt-4 bg-white p-6 rounded-lg shadow-md">
+    <h3 className="text-xl font-bold text-purple-700">Respuestas</h3>
+    {preguntasYRespuestas.map(({ pregunta, respuesta }, index) => (
+      <div key={index} className="mb-4">
+        <span className="font-semibold">{pregunta}</span>
+        <div className="mt-1">
+          <span>{respuesta}</span>
+        </div>
       </div>
-      <div className="mt-4">
-  <h3 className="text-lg font-semibold">Respuestas:</h3>
-  {preguntasYRespuestas.map(({ pregunta, respuesta }, index) => (
-    <div key={index} className="mb-4"> {/* Increased margin bottom for better separation */}
-      <span className="font-semibold">{pregunta}</span>
-      <div className="mt-1"> {/* Add margin top for separation */}
-        <span>{respuesta}</span>
-      </div>
-    </div>
-  ))}
+    ))}
+  </div>
 </div>
-    </div>
+  
   );
 };
 
