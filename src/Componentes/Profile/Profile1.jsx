@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { supabase } from '../../supabase/supabase.config';
 import ExperienciaForm from './ExperienciaForm'; // Importar el componente
 import { UserAuth } from "../../Context/AuthContext"; // Importar autenticación de usuario
+import HeaderPowerAuth from '../PowerAuth/HeaderPowerAuth'
 
 const Profile1 = () => {
   const { user } = UserAuth(); // Asegúrate de que UserAuth esté bien implementado
@@ -181,88 +182,130 @@ const Profile1 = () => {
     setEditMode(false); // Desactivar modo de edición si se cancela
   };
 
-  if (loading) return <p>Cargando...</p>;
+  if (loading) return <div class="flex justify-center items-center h-screen">
+  <div class="flex flex-row gap-2">
+    <div class="w-4 h-4 rounded-full bg-blue-700 animate-bounce"></div>
+    <div class="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:-.3s]"></div>
+    <div class="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:-.5s]"></div>
+  </div>
+  </div>;
 
   return (
-    <div>
-      <h1>Perfil</h1>
-
-      {!editMode && (
-        <button onClick={() => setEditMode(true)}>Editar</button>
-      )}
-
-      <form onSubmit={handleSubmit}>
+    <div className='w-full h-screen font-dmsans'>
+      <HeaderPowerAuth />
+    <div className="max-w-4xl mx-auto p-6  pt-32 rounded-lg">
+      <div className="flex items-center space-x-4 mb-6">
+        <img src={formData.avatar_url} alt="profile" className="w-24 h-24 rounded-full" />
         <div>
-          <label>Nombre:</label>
+          <h1 className="text-xl font-semibold text-gray-700">{formData.nombre}</h1>
+          <p className="text-gray-500">{formData.correo}</p>
+        </div>
+        {!editMode && (
+          <button
+            onClick={() => setEditMode(true)}
+            className="ml-auto px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-500"
+          >
+            Editar
+          </button>
+        )}
+      </div>
+
+        <div className='w-full flex'>
+          
+      <form onSubmit={handleSubmit} className="space-y-4 w-1/2 p-4">
+      <h2 className="text-lg font-medium mb-4">Información Personal</h2>
+        <div>
+          <label className="block text-sm font-medium text-gray-700">Nombre</label>
           <input
             type="text"
             name="nombre"
             value={formData.nombre}
             onChange={handleChange}
-            readOnly={!editMode} // Solo editable en modo edición
+            readOnly={!editMode}
+            className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none sm:text-sm ${
+              editMode ? 'border-gray-300' : 'bg-gray-100'
+            }`}
           />
         </div>
+
         <div>
-          <label>Correo:</label>
+          <label className="block text-sm font-medium text-gray-700">Correo</label>
           <input
             type="email"
             name="correo"
             value={formData.correo}
             onChange={handleChange}
             readOnly={!editMode}
+            className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none sm:text-sm ${
+              editMode ? 'border-gray-300' : 'bg-gray-100'
+            }`}
           />
         </div>
+
         <div>
-          <label>DNI:</label>
+          <label className="block text-sm font-medium text-gray-700">DNI</label>
           <input
             type="text"
             name="dni"
             value={formData.dni}
             onChange={handleChange}
             readOnly={!editMode}
+            className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none sm:text-sm ${
+              editMode ? 'border-gray-300' : 'bg-gray-100'
+            }`}
           />
         </div>
+
         <div>
-          <label>Distrito:</label>
+          <label className="block text-sm font-medium text-gray-700">Distrito</label>
           <input
             type="text"
             name="distrito"
             value={formData.distrito}
             onChange={handleChange}
             readOnly={!editMode}
+            className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none sm:text-sm ${
+              editMode ? 'border-gray-300' : 'bg-gray-100'
+            }`}
           />
         </div>
+
         <div>
-          <label>Teléfono:</label>
+          <label className="block text-sm font-medium text-gray-700">Teléfono</label>
           <input
             type="text"
             name="telefono"
             value={formData.telefono}
             onChange={handleChange}
             readOnly={!editMode}
+            className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none sm:text-sm ${
+              editMode ? 'border-gray-300' : 'bg-gray-100'
+            }`}
           />
         </div>
-        <div>
-          <label>Fecha de Nacimiento:</label>
-          <input
-            type="date"
-            name="fecha_nac"
-            value={formData.fecha_nac}
-            onChange={handleChange}
-            readOnly={!editMode}
-          />
-        </div>
-
-        {/* Renderizar campos de experiencia */}
-        <ExperienciaForm formData={formData} handleChange={handleChange} editMode={editMode} />
 
         {editMode && (
-          <>
-            <button type="submit">Guardar</button>
-            <button type="button" onClick={handleCancel}>Cancelar</button>
-          </>
+          <div className="flex justify-end space-x-4">
+            <button
+              type="submit"
+              className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-500"
+            >
+              Guardar
+            </button>
+            <button
+              type="button"
+              onClick={handleCancel}
+              className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-500"
+            >
+              Cancelar
+            </button>
+          </div>
         )}
       </form>
+
+      <ExperienciaForm formData={formData} handleChange={handleChange} editMode={editMode} />
+      </div>
+    </div>
     </div>
   );
 };
