@@ -10,7 +10,6 @@ function QuestionsModalPower({ isOpen, onClose, selectedJob }) {
   const [phone, setPhone] = useState(''); // Estado para almacenar el número de celular
   const [phoneError, setPhoneError] = useState(''); // Estado para el error del teléfono
   const [answerErrors, setAnswerErrors] = useState([]); // Estado para los errores de las respuestas
-  const [cvFile, setCvFile] = useState(null); // Estado para almacenar el archivo CV
   const [showIniciarSesion, setShowIniciarSesion] = useState(false); // Estado para controlar la visibilidad de IniciarSesion
 
   useEffect(() => {
@@ -43,7 +42,6 @@ function QuestionsModalPower({ isOpen, onClose, selectedJob }) {
       setPhone(''); // Restablece el número de celular cuando el modal se abre
       setPhoneError(''); // Limpia cualquier error anterior del número de celular
       setAnswerErrors(['', '', '', '', '']); // Limpia cualquier error anterior de respuestas
-      setCvFile(null); // Reinicia el archivo CV
     }
   }, [isOpen, selectedJob]);
 
@@ -72,11 +70,6 @@ function QuestionsModalPower({ isOpen, onClose, selectedJob }) {
     }
   };
 
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    setCvFile(file);
-  };
-
   const handleBack = () => {
     setCurrentQuestionIndex(-1); // Vuelve al paso del número de celular
   };
@@ -84,6 +77,7 @@ function QuestionsModalPower({ isOpen, onClose, selectedJob }) {
   const handleSubmit = () => {
     setShowIniciarSesion(true); // Muestra el componente IniciarSesion al hacer clic en "Enviar"
   };
+
   const handleIniciarSesionClose = () => {
     setShowIniciarSesion(false); // Restablece el estado showIniciarSesion a false cuando el modal se cierra
   };
@@ -111,18 +105,11 @@ function QuestionsModalPower({ isOpen, onClose, selectedJob }) {
                   className={`w-full mt-2 p-2 border rounded ${phoneError ? 'border-red-500' : ''}`}
                 />
                 {phoneError && <p className="text-red-500 text-sm">{phoneError}</p>}
-                <label className="w-full text-left mt-4">Subir CV</label>
-                <input
-                  type="file"
-                  accept=".pdf,.doc,.docx"
-                  onChange={handleFileChange}
-                  className="w-full mt-2 p-2 border rounded"
-                />
                 <div className="flex justify-center mt-4">
                   <button
-                    className={`bg-[#0057c2] text-white font-bold py-2 px-4 rounded-full w-32 ${phone.trim() && cvFile ? '' : 'opacity-50 cursor-not-allowed'}`}
-                    onClick={() => phone.trim() && cvFile && setCurrentQuestionIndex(0)} // Cambia el índice a 0 para mostrar las preguntas si el teléfono y el archivo CV no están vacíos
-                    disabled={!phone.trim() || !cvFile}
+                    className={`bg-[#0057c2] text-white font-bold py-2 px-4 rounded-full w-32 ${phone.trim() ? '' : 'opacity-50 cursor-not-allowed'}`}
+                    onClick={() => phone.trim() && setCurrentQuestionIndex(0)} // Cambia el índice a 0 para mostrar las preguntas si el teléfono no está vacío
+                    disabled={!phone.trim()}
                   >
                     Siguiente
                   </button>

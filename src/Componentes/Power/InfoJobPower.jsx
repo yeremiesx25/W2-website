@@ -1,317 +1,229 @@
 import React, { useState, useEffect, useRef } from "react";
 import { FaLocationDot } from "react-icons/fa6";
-import { CiShare2 } from "react-icons/ci";
 import { useNavigate } from "react-router-dom";
-import { FaCopy, FaFacebookF } from "react-icons/fa";
-import { IoLogoWhatsapp } from "react-icons/io";
+import QuestionsModalPower from "./QuestionsModalPower"; // Importar el componente QuestionsModal
 import { supabase } from "../../supabase/supabase.config"; // Importar cliente de Supabase
 import { UserAuth } from "../../Context/AuthContext"; // Importar contexto de autenticación
 import { MdOutlineVerifiedUser } from "react-icons/md";
-import QuestionsModalPower from "./QuestionsModalPower";
+import dayjs from "dayjs"; 
+import 'dayjs/locale/es'; // Importar el idioma español
+import relativeTime from 'dayjs/plugin/relativeTime';
+import ShareButton from "../PowerAuth/ShareButton"; // Import the ShareButton component
+import { IoLogoWhatsapp } from "react-icons/io";
+import { IoLocationOutline } from "react-icons/io5";
 import InicioWhatsapp from './InicioWhatsapp'; 
 
 function InfoJobPower({ selectedJob }) {
-  const { user } = UserAuth(); // Obtener información del usuario autenticado
-  const [atBottom, setAtBottom] = useState(false);
-  const [isQuestionsModalOpen, setIsQuestionsModalOpen] = useState(false);
-  const [isShareMenuOpen, setIsShareMenuOpen] = useState(false);
-  const [hasApplied, setHasApplied] = useState(false); // Estado para rastrear si el usuario ya se postuló
-  const [isInicioWhatsappOpen, setIsInicioWhatsappOpen] = useState(false); 
-  const contentRef = useRef(null);
-  const shareButtonRef = useRef(null);
-  const navigate = useNavigate();
+    const { user } = UserAuth(); // Obtener información del usuario autenticado
+    const [atBottom, setAtBottom] = useState(false);
+    const [isQuestionsModalOpen, setIsQuestionsModalOpen] = useState(false);
+    const [hasApplied, setHasApplied] = useState(false); // Estado para rastrear si el usuario ya se postuló
+    const [nombreReclutador, setNombreReclutador] = useState(""); // Estado para el nombre del reclutador
+    const [isInicioWhatsappOpen, setIsInicioWhatsappOpen] = useState(false); 
+    const contentRef = useRef(null);
+    const navigate = useNavigate();
 
-  useEffect(() => {
-    const handleScroll = () => {
-      if (contentRef.current) {
-        const { scrollTop, scrollHeight, clientHeight } = contentRef.current;
-        if (scrollTop + clientHeight >= scrollHeight - 1) {
-          setAtBottom(true);
-        } else {
-          setAtBottom(false);
+    // Función para obtener el nombre del reclutador desde la tabla perfiles
+    const fetchNombreReclutador = async () => {
+        if (selectedJob) {
+            const { data, error } = await supabase
+                .from('perfiles')
+                .select('nombre')
+                .eq('id', selectedJob.id_reclutador)
+                .single(); // Solo esperamos un resultado
+
+            if (error) {
+                console.error("Error fetching recruiter name:", error);
+            } else {
+                setNombreReclutador(data?.nombre || "Reclutador no encontrado");
+            }
         }
-      }
     };
 
-    if (contentRef.current) {
-      contentRef.current.addEventListener("scroll", handleScroll);
+    useEffect(() => {
+        fetchNombreReclutador(); // Llamar la función cuando selectedJob cambia
+    }, [selectedJob]);
+
+    useEffect(() => {
+        const checkIfApplied = async () => {
+            if (user && selectedJob) {
+                const { data, error } = await supabase
+                    .from("Postulacion")
+                    .select("id_postulacion")
+                    .eq("user_id", user.id)
+                    .eq("id_oferta", selectedJob.id_oferta)
+                    .single();
+
+                if (error && error.code !== "PGRST116") {
+                    console.error("Error checking if user has applied:", error.message);
+                } else {
+                    setHasApplied(!!data); // Si hay datos, el usuario ya se ha postulado
+                }
+            }
+        };
+
+        checkIfApplied();
+    }, [user, selectedJob]);
+
+    if (!selectedJob) {
+        return null; // Evitar renderizar si selectedJob es null
     }
+    
+    const jobDetails = [
+        {
+          title: "¿Por qué deberías unirte a nosotros?",
+          content: (
+            <ul>
+              {selectedJob.beneficios.split('.').map((beneficio, index) =>
+                beneficio.trim() && <li key={index}>{beneficio.trim()}</li>
+              )}
+            </ul>
+          ),
+        },
+        {
+          title: "¿Qué buscamos?",
+          content: (
+            <ul>
+              {selectedJob.requisitos.split('.').map((requisito, index) =>
+                requisito.trim() && <li key={index}>{requisito.trim()}</li>
+              )}
+            </ul>
+          ),
+        },
+        {
+          title: "¿Qué es lo que harás?",
+          content: (
+            <ul>
+              {selectedJob.funciones.split('.').map((funcion, index) =>
+                funcion.trim() && <li key={index}>{funcion.trim()}</li>
+              )}
+            </ul>
+          ),
+        },
+        {
+          title: "Horario de Trabajo",
+          content: selectedJob.horario, // El horario se mantiene como texto simple
+        },
+      ];
+      
+    const whatsappBaseUrl = selectedJob.wtsp_url
+      ? selectedJob.wtsp_url.split("?")[0]
+      : "";
+    const whatsappMessage = `Hola, estoy interesado en el puesto de ${selectedJob.puesto}`;
+    const whatsappUrl = `${whatsappBaseUrl}?text=${encodeURIComponent(
+      whatsappMessage
+    )}`;
 
-    return () => {
-      if (contentRef.current) {
-        contentRef.current.removeEventListener("scroll", handleScroll);
-      }
-    };
-  }, []);
+    // Formatear la fecha de publicación a dd-mm-yyyy
+    const formattedDate = dayjs(selectedJob.fecha_publicacion).format("DD-MM-YYYY");
+    // Cargar el plugin
+    // Cargar el plugin y configurar el idioma español
+    dayjs.extend(relativeTime);
+    dayjs.locale('es'); // Configurar dayjs para usar español
+    
+    // Obtener el tiempo en formato "hace X tiempo" y capitalizar la primera letra
+    const timeAgo = dayjs(selectedJob.fecha_publicacion).fromNow();
+    const capitalizedTimeAgo = timeAgo.charAt(0).toUpperCase() + timeAgo.slice(1);
+    
+    console.log(capitalizedTimeAgo); // "Hace unos minutos"
 
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (
-        shareButtonRef.current &&
-        !shareButtonRef.current.contains(event.target)
-      ) {
-        setIsShareMenuOpen(false);
-      }
-    };
 
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
-
-  useEffect(() => {
-    const checkIfApplied = async () => {
-      if (user && selectedJob) {
-        const { data, error } = await supabase
-          .from("Postulacion")
-          .select("id_postulacion")
-          .eq("user_id", user.id)
-          .eq("id_oferta", selectedJob.id_oferta)
-          .single();
-
-        if (error && error.code !== "PGRST116") {
-          console.error("Error checking if user has applied:", error.message);
-        } else {
-          setHasApplied(!!data); // Si hay datos, el usuario ya se ha postulado
-        }
-      }
-    };
-
-    checkIfApplied();
-  }, [user, selectedJob]);
-
-  if (!selectedJob) {
-    return null; // Evitar renderizar si selectedJob es null
-  }
-
-  // Función para formatear el contenido con react-quill
-  const formatContent = (content) => {
-    if (!content) return null;
     return (
-      <div
-        dangerouslySetInnerHTML={{
-          __html: content.replaceAll('<ul>', '<ul class="list-disc pl-6">')
-                          .replaceAll('<ol>', '<ol class="list-decimal pl-6">')
-        }}
-      />
-    );
-  };
-  
-  const jobDetails = [
-    {
-      title: "¿Por qué deberías unirte a nosotros?",
-      content: formatContent(selectedJob.beneficios),
-    },
-    {
-      title: "¿Qué buscamos?",
-      content: formatContent(selectedJob.requisitos),
-    },
-    {
-      title: "¿Qué es lo que harás?",
-      content: formatContent(selectedJob.funciones),
-    },
-    {
-      title: "Horario de Trabajo",
-      content: formatContent(selectedJob.horario),
-    },
-  ];
-
-  const whatsappBaseUrl = selectedJob.wtsp_url
-    ? selectedJob.wtsp_url.split("?")[0]
-    : "";
-  const whatsappMessage = `Hola, estoy interesado en el puesto de ${selectedJob.puesto}`;
-  const whatsappUrl = `${whatsappBaseUrl}?text=${encodeURIComponent(
-    whatsappMessage
-  )}`;
-
-  const handleApplyClick = () => {
-    setIsQuestionsModalOpen(true); // Mostrar el modal de preguntas directamente
-  };
-
-  const handleShareClick = () => {
-    setIsShareMenuOpen(!isShareMenuOpen);
-  };
-
-  const handleCopyLink = () => {
-    const shareUrl = `https://w2asesoresyconsultores.com/Share?id=${selectedJob.id_oferta}`;
-    navigator.clipboard.writeText(shareUrl);
-
-    const copiedMessage = document.createElement("div");
-    copiedMessage.textContent = "Enlace Copiado";
-    copiedMessage.style.backgroundColor = "rgba(0, 0, 0, 0.8)";
-    copiedMessage.style.color = "white";
-    copiedMessage.style.position = "fixed";
-    copiedMessage.style.bottom = "20px";
-    copiedMessage.style.left = "50%";
-    copiedMessage.style.transform = "translateX(-50%)";
-    copiedMessage.style.padding = "10px 20px";
-    copiedMessage.style.borderRadius = "5px";
-    copiedMessage.style.zIndex = "9999";
-    document.body.appendChild(copiedMessage);
-
-    setTimeout(() => {
-      copiedMessage.remove();
-    }, 3000);
-
-    setIsShareMenuOpen(false);
-  };
-
-  const handleWhatsappClick = () => {
-    setIsInicioWhatsappOpen(true);
-  };
- 
-
-  return (
-    <div
-      className="selected-job-info w-full sm:w-1/2 border rounded-lg md:flex flex-col p-4 mx-8 bg-white shadow-lg hidden"
-      style={{ height: "650px", overflowY: "auto", position: "relative" }}
-    >
-      <h2 className="ml-1 mt-3 font-semibold text-2xl mb-3 text-gray-800">
-        {selectedJob.puesto}
-      </h2>
-      <div className="flex items-center justify-between mb-2 mt-2">
-        <div className="flex flex-col w-full">
-          <div className="flex items-center justify-start">
-            <span
-              className="text-blue-900 text-base uppercase font-regular tracking-wide"
-              style={{ display: "flex", alignItems: "center" }}
-            >
-              {selectedJob.empresa}<MdOutlineVerifiedUser className="flex text-green-500 ml-1 text-lg mb-0.5" />
-            </span>
-            <span className="inline-block mx-4 h-4 w-px bg-gray-400"></span>
-            <span
-              className="text-gray-700 text-base  font-regular tracking-wide"
-              style={{ display: "flex", alignItems: "center" }}
-            >
-              <FaLocationDot style={{ marginRight: "5px" }} />
-              {selectedJob.ubicacion}
-            </span>
-            <span className="inline-block mx-4 h-4 w-px bg-gray-400"></span>
-            <span
-              className="text-gray-700 text-base font-regular tracking-wide"
-              style={{ display: "flex", alignItems: "center" }}
-            >
-              S/. {selectedJob.sueldo}
-            </span>
-          </div>
-        </div>
-      </div>
-      <div className="flex justify-start mt-2 items-center">
-        <button
-          className={`font-bold py-2 px-4 rounded-full mb-4 ${
-            hasApplied ? "bg-[#0057c2] text-white" : "bg-[#0057c2] text-white"
-          }`}
-          onClick={hasApplied ? null : handleApplyClick}
-          disabled={hasApplied}
-        >
-          {hasApplied ? "YA HAS POSTULADO" : "POSTULARME"}
-        </button>
         <div
-          ref={shareButtonRef}
-          className="ml-2 flex items-center justify-center bg-[#eaf3fb] rounded-full cursor-pointer hover:bg-blue-100 mb-4 relative"
-          style={{ height: "40px", width: "40px" }}
-          onClick={handleShareClick}
+            className="selected-job-info w-full sm:w-3/5 rounded-lg md:flex flex-col p-8 mx-8 bg-white hidden transition-all duration-500 font-dmsans"
+            style={{ height: "650px", overflowY: "auto", }}
         >
-          <CiShare2 size={24} color="#005da9" />
+            <p className="text-gray-500 text-sm">{capitalizedTimeAgo}</p>
+            <h2 className="font-bold text-2xl mb-3 text-gray-800">
+                {selectedJob.puesto}
+            </h2>
 
-          {isShareMenuOpen && (
-            <div className="absolute right-0 mt-2 w-48 bg-white border rounded shadow-lg z-50">
-              <div className="py-2">
-                <a
-                  href={`https://wa.me/?text=${encodeURIComponent(
-                    `Hola, te puede interesar este puesto de trabajo: ${selectedJob.puesto}. Aquí tienes el enlace: https://w2asesoresyconsultores.com/Share?id=${selectedJob.id_oferta}`
-                  )}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center px-4 py-2 text-gray-800 hover:bg-blue-50"
-                >
-                  <IoLogoWhatsapp className="mr-2" size={16} />
-                  <span>WhatsApp</span>
-                </a>
+            <div className="flex items-center space-x-2 mb-4">
+                <span className="bg-purple-50 text-gray-700 py-1 px-3 text-xs rounded-full font-regular tracking-wide flex items-center gap-1">
+                <IoLocationOutline />{selectedJob.ubicacion}
+                </span>
+                <span className="bg-green-50 text-gray-700 py-1 px-3 text-xs rounded-full font-regular tracking-wide gap-1 flex items-center">
+                    S/. {selectedJob.sueldo}
+                </span>
+            </div>
 
-                <a
-                  href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
-                    `https://w2asesoresyconsultores.com/Share?id=${selectedJob.id_oferta}`
-                  )}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center px-4 py-2 text-gray-800 hover:bg-blue-50"
-                >
-                  <FaFacebookF className="mr-2" size={16} />
-                  <span>Facebook</span>
-                </a>
+            <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center">
+                    <div className="bg-primarycolor p-2 rounded-lg mr-2">
+                        <MdOutlineVerifiedUser className="text-white text-xl" />
+                    </div>
+                    <div>
+                        <p className="text-sm font-medium text-gray-800">
+                            {selectedJob.empresa}
+                        </p>
+                        <p className="text-xs text-gray-500">
+                            {nombreReclutador}
+                        </p>
+                    </div>
+                </div>
+            </div>
 
+            <div className="flex justify-between mb-4">
                 <button
-                  onClick={handleCopyLink}
-                  className="flex items-center w-full px-4 py-2 text-gray-800 hover:bg-blue-50"
+                    className={`font-bold py-2 px-4 rounded-full w-48 ${
+                        hasApplied ? "bg-yellow-200 text-primarycolor cursor-not-allowed" : "bg-[#0057c2] text-white"
+                    }`}
+                    onClick={hasApplied ? null : () => setIsQuestionsModalOpen(true)} // Mostrar el modal de preguntas
+                    disabled={hasApplied}
                 >
-                  <FaCopy className="mr-2" size={16} />
-                  <span>Copiar Enlace</span>
+                    {hasApplied ? "Ya has postulado" : "Postularme"}
                 </button>
-              </div>
-            </div>
-          )}
-        </div>
-      </div>
 
-      <div
-        ref={contentRef}
-        className="overflow-y-auto pb-4 mt-3"
-        style={{ height: "420px" }}
-      >
-        <h3 className="font-semibold text-xl text-gray-800">Descripción del Empleo</h3>
-        {jobDetails.map((detail, index) => (
-          <div key={index} className="py-5 border-b border-gray-300">
-            <div className="font-semibold font-dmsans text-gray-800">
-              <div>{detail.title}</div>
-            </div>
-            <div
-              className="mt-3 text-gray-700 font-regular"
-              style={{
-                wordWrap: "break-word",
-                overflowWrap: "break-word",
-                width: "100%",
-              }}
-            >
-              {detail.content}
-            </div>
-          </div>
-        ))}
-      </div>
-
-      <div className="flex justify-center mt-4" style={{ opacity: atBottom ? 1 : 0, transition: "opacity 0.3s" }}>
-        <button
-          className={`font-bold py-2 px-4 rounded-full mr-4 ${
-            hasApplied ? "bg-[#0057c2] text-white" : "bg-[#0057c2] text-white"
-          }`}
-          onClick={hasApplied ? null : handleApplyClick}
-          disabled={hasApplied}
-        >
-          {hasApplied ? "YA HAS POSTULADO" : "POSTULARME"}
-        </button>
-        {whatsappBaseUrl && (
-          <button
-            className="bg-[#00d35e] text-white font-bold py-2 px-4 rounded-full flex items-center"
-            onClick={handleWhatsappClick}
-          >
-            <IoLogoWhatsapp className="mr-2" size={24} />
-            WhatsApp
-          </button>
-        )}
-      </div>
-
-      <QuestionsModalPower
-        isOpen={isQuestionsModalOpen}
-        onClose={() => setIsQuestionsModalOpen(false)}
-        selectedJob={selectedJob}
-      />
-
-      {isInicioWhatsappOpen && (
-        <InicioWhatsapp onClose={() => setIsInicioWhatsappOpen(false)} />
-      )}
+                {/* Replace the old share button with ShareButton */}
+                <div className="mr-60">
+        <ShareButton selectedJob={selectedJob} />
     </div>
-  );
+            </div>
+
+            <div className="mb-4">
+                <p className="text-gray-700 text-sm leading-relaxed">
+                    <h3 className="font-semibold text-lg text-gray-800">Descripción</h3>
+                    <p>{selectedJob.descripcion}</p>
+                    {jobDetails.map((detail, index) => (
+                        <div key={index} className="py-2">
+                            <div className="font-semibold ">{detail.title}</div>
+                            <div className="mt-2">{detail.content}</div>
+                        </div>
+                    ))}
+                </p>
+            </div>
+
+            <div className="flex justify-center mt-4">
+                <button
+                    className={`font-bold py-2 px-4 rounded-full mr-4 ${
+                        hasApplied
+                            ? "bg-gray-500 text-white cursor-not-allowed"
+                            : "bg-[#0057c2] text-white"
+                    }`}
+                    onClick={hasApplied ? null : () => setIsQuestionsModalOpen(true)} // Mostrar el modal de preguntas
+                    disabled={hasApplied}
+                >
+                    {hasApplied ? "Ya has postulado" : "Postularme"}
+                </button>
+                <button
+        className="bg-[#00d35e] text-white font-bold py-2 px-4 rounded-full flex items-center"
+        onClick={() => setIsInicioWhatsappOpen(true)} // Abrir el componente InicioWhatsapp
+    >
+        <IoLogoWhatsapp className="mr-2" size={24} />
+        WhatsApp
+    </button>
+</div>
+
+            <QuestionsModalPower
+                isOpen={isQuestionsModalOpen}
+                onClose={() => setIsQuestionsModalOpen(false)}
+                selectedJob={selectedJob}
+            />
+                  {isInicioWhatsappOpen && (
+        <InicioWhatsapp onClose={() => setIsInicioWhatsappOpen(false)} />
+      )}  
+        </div>
+    );
 }
 
 export default InfoJobPower;
