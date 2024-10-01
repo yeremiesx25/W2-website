@@ -13,7 +13,7 @@ import AdminForm from "./Componentes/Form/AdminForm.jsx";
 import LoginAdmin from "./Componentes/Admin/LoginAdmin.jsx";
 import ProtectedRoute from "./ProtectedRoute.jsx";
 import Profile1 from "./Componentes/Profile/Profile1.jsx";
-import Postulados from "./Componentes/Admin/Postulados.jsx";
+import PgPostulados from "./Componentes/Admin/PgPostulados.jsx";
 import Share from "./Componentes/PowerAuth/Share.jsx";
 import InfoJobMovil from "./Componentes/PowerAuth/InfoJobMovil.jsx";
 import EditJob from "./Componentes/Form/EditJob.jsx";
@@ -85,7 +85,7 @@ function App() {
             path="/Postulados/:id"
             element={
               <ProtectedRoute>
-                <Postulados />
+                <PgPostulados />
               </ProtectedRoute>
             }
           />

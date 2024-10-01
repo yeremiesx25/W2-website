@@ -4,6 +4,8 @@ import { supabase } from '../../supabase/supabase.config';
 import HeaderPowerAuth from '../PowerAuth/HeaderPowerAuth';
 import InfoPostulante from './InfoPostulante';
 import { UserAuth } from '../../Context/AuthContext';
+import HeaderAdmin from './HeaderAdmin';
+import MenuAdmin from './MenuAdmin';
 
 function Postulados() {
   const { user } = UserAuth();
@@ -135,7 +137,6 @@ function Postulados() {
 
   return (
     <div className="font-dmsans">
-      <HeaderPowerAuth />
       <div>
         <section className="pt-28 pb-10 md:pb-8 bg-primarygradientdark md:bg-primarygradientdark dark:bg-dark h-96 md:h-72 flex justify-center items-center">
           <div className="container mx-auto">

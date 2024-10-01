@@ -11,7 +11,7 @@ const MenuItem = ({ to, icon: Icon, label }) => {
   return (
     <Link
       to={to}
-      className={`flex items-center ${isActive ? 'text-white font-semibold bg-primarycolor p-2 rounded-lg' : 'text-[#8B9DD7] hover:text-primarycolor p-2 font-light'}`}
+      className={`flex items-center ${isActive ? 'text-white  bg-primarycolor p-2 rounded-lg' : 'text-[#8B9DD7] hover:text-primarycolor p-2 font-light'}`}
     >
       <Icon className="mr-3" /> {label}
     </Link>
@@ -34,13 +34,13 @@ function MenuAdmin() {
   };
 
   return (
-    <div className="w-64 h-screen bg-white shadow flex flex-col justify-between pt-20 font-dmsans fixed">
+    <div className="w-64 h-screen bg-g   shadow flex flex-col justify-between pt-20 font-dmsans fixed">
       <ul className="space-y-4 p-6 mt-20">
         <li>
-          <MenuItem to="/Admin" icon={FaTachometerAlt} label="Dashboard" />
+          <MenuItem to="/Admin" icon={FaTachometerAlt} label="Ofertas" />
         </li>
         <li>
-          <MenuItem to="/ofertas" icon={FaChartLine} label="Ofertas" />
+          <MenuItem to="/Postulados" icon={FaChartLine} label="Postulantes" />
         </li>
         <li>
           <MenuItem to="/conversaciones" icon={FaComments} label="Conversaciones" />

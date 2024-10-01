@@ -83,7 +83,7 @@ function HeaderPowerAuth() {
           <Link to="/Empresas" className="hover:text-yellowprimary">Empresas</Link>
           <Link to="/DescubriendoTalentos" className="hover:text-yellowprimary">Descubriendo Talentos</Link>
           <Link to="/Coworking" className="hover:text-yellowprimary">Coworking</Link>
-          <Link to="/Power" className="font-semibold text-yellowprimary hover:text-white underline decoration-yellowprimary underline-offset-4">Power</Link>
+          <Link to="/PowerAuth" className="font-semibold text-yellowprimary hover:text-white underline decoration-yellowprimary underline-offset-4">Power</Link>
         </div>
 
         {/* Avatar y menú desplegable */}

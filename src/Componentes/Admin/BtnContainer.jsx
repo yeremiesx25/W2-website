@@ -41,28 +41,46 @@ function BtnContainer() {
   }, []); // Ejecuta solo una vez al montar el componente
 
   return (
-    <div className="flex w-full justify-between items-center py-4 px-10 ">
-      <div className="flex space-x-8">
-        <div className="flex justify-between items-center p-4 bg-white rounded-lg border w-48">
-          <div>
-            <p className="text-sm text-[#A3AED0]">Mis ofertas</p>
-            <p className="text-3xl font-bold text-[#1B2559]">{ofertasCount}</p>
-          </div>
-          <div className="text-primarycolor">
-            <BsBarChartLine size={32} />
-          </div>
+    <div className='pr-8'>
+    <div
+      style={{
+        backgroundImage: `url(https://masterbundles.com/wp-content/uploads/2023/02/wave-background-23-992.jpg)`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
+      className="flex w-full justify-between items-center py-4 px-10 my-4 rounded-xl "
+    >
+      <div className="flex space-x-6">
+        {/* Card 1 */}
+        <div className="flex flex-col justify-center items-start p-6 bg-white rounded-lg shadow-lg w-48">
+          <p className="text-sm text-[#A3AED0]">Mis Ofertas</p>
+          <p className="text-3xl font-bold text-[#1B2559]">5</p>
         </div>
-        <div className="flex justify-between items-center p-4 bg-white rounded-lg border w-48">
-          <div>
-            <p className="text-sm text-[#A3AED0]"></p>
-            <p className="text-3xl font-bold text-[#1B2559]">10</p>
-          </div>
-          <div className="text-primarycolor">
-            <BsBarChartLine size={32} />
-          </div>
+
+        {/* Card 2 */}
+        <div className="flex flex-col justify-center items-start p-6 bg-white rounded-lg shadow-lg w-48">
+          <p className="text-sm text-[#A3AED0]">Ofertas Abiertas</p>
+          <p className="text-3xl font-bold text-[#1B2559]">3</p>
+          <p className="text-sm text-[#A3AED0]">(40%)</p>
+        </div>
+
+        {/* Card 3 */}
+        <div className="flex flex-col justify-center items-start p-6 bg-white rounded-lg shadow-lg w-48">
+          <p className="text-sm text-[#A3AED0]">Ofertas Cerradas</p>
+          <p className="text-3xl font-bold text-[#1B2559]">2</p>
+          <p className="text-sm text-[#A3AED0]">(25%)</p>
+        </div>
+
+        {/* Card 4 */}
+        <div className="flex flex-col justify-center items-start p-6 bg-white rounded-lg shadow-lg w-48">
+          <p className="text-sm text-[#A3AED0]">Meta Mensual</p>
+          <p className="text-3xl font-bold text-[#1B2559]">13</p>
+          <p className="text-sm text-[#A3AED0]">(20%)</p>
         </div>
       </div>
+
       <AddButton />
+    </div>
     </div>
   );
 }

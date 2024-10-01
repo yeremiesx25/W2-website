@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { supabase } from '../../supabase/supabase.config';
 import { Link } from 'react-router-dom';
+import { FaEdit } from "react-icons/fa";
+import JobsContext from '../../Context/JobsContext'; // Importa el contexto
 
 // Función para formatear la fecha a dd-mm-yyyy
 const formatDate = (isoString) => {
@@ -12,7 +14,7 @@ const formatDate = (isoString) => {
 };
 
 const JobList = () => {
-  const [jobs, setJobs] = useState([]);
+  const { userSearchResults, jobs, setJobs } = useContext(JobsContext); // Obtén los trabajos filtrados y el estado original
   const [user, setUser] = useState(null);
 
   useEffect(() => {
@@ -31,7 +33,7 @@ const JobList = () => {
       const { data, error } = await supabase
         .from('Oferta')
         .select('id_oferta, puesto, fecha_publicacion, estado, count_postulados')
-        .eq('id_reclutador', user.id); // Filtrar por user_id
+        .eq('id_reclutador', user.id); // Filtrar por id_reclutador
 
       if (error) {
         console.error('Error fetching jobs:', error);
@@ -41,43 +43,44 @@ const JobList = () => {
           fecha_publicacion: formatDate(job.fecha_publicacion),
           postulados: job.count_postulados
         }));
-        setJobs(jobsWithPostulados);
+        setJobs(jobsWithPostulados); // Actualiza los trabajos en el contexto
       }
     };
 
     fetchJobs();
-  }, [user]); // Dependencia en user
+  }, [user, setJobs]); // Agrega setJobs como dependencia
 
   const handleChangeStatus = async (index, newStatus) => {
-    const jobToUpdate = jobs[index];
+    const jobToUpdate = userSearchResults[index]; // Usamos userSearchResults para cambiar el estado
 
     const { error } = await supabase
       .from('Oferta')
       .update({ estado: newStatus })
-      .eq('id_oferta', jobToUpdate.id_oferta); // Asegúrate de usar el ID correcto
+      .eq('id_oferta', jobToUpdate.id_oferta);
 
     if (error) {
       console.error('Error updating job status:', error);
     } else {
-      const updatedJobs = [...jobs];
+      const updatedJobs = [...userSearchResults];
       updatedJobs[index].estado = newStatus;
-      setJobs(updatedJobs);
+      setJobs(updatedJobs); // Actualiza tanto userSearchResults como jobs
     }
   };
 
   return (
-    <div className="w-full bg-white p-8 rounded-lg font-dmsans">
-      <div className="grid grid-cols-4 gap-4 text-gray-500 text-md font-semibold bg-gray-200 p-4 rounded-lg">
+    <div className="w-full bg-white pr-8 rounded-lg font-dmsans">
+      <div className="grid grid-cols-5 gap-4 text-gray-500 text-md font-semibold bg-gray-200 p-4 rounded-lg">
         <div>Puesto</div>
         <div>Fecha</div>
         <div>Postulados</div>
         <div>Estado</div>
+        <div>Acciones</div>
       </div>
       <div className="mt-4 space-y-4 h-80 overflow-y-scroll px-4">
-        {jobs.map((job, index) => (
+        {userSearchResults.map((job, index) => ( // Mostrar trabajos filtrados
           <div
             key={job.id_oferta}
-            className="grid grid-cols-4 gap-4 items-center border-b pb-4"
+            className="grid grid-cols-5 gap-4 items-center border-b pb-4"
           >
             {/* Puesto */}
             <Link to={`/Postulados/${job.id_oferta}`}>
@@ -108,6 +111,9 @@ const JobList = () => {
                   Cerrado
                 </option>
               </select>
+            </div>
+            <div>
+              <button className='flex items-center gap-2 bg- px-4 py-1 rounded-full text-primarycolor'><FaEdit /></button>
             </div>
           </div>
         ))}
