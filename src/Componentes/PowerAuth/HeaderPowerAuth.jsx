@@ -79,7 +79,7 @@ function HeaderPowerAuth() {
 
         {/* Opciones de navegación */}
         <div className="hidden md:flex justify-around items-center text-white text-md gap-4 font-dmsans">
-          <Link to="/" className="hover:text-yellowprimary">Inicio</Link>
+          <Link to="/PowerAuth" className="hover:text-yellowprimary">Inicio</Link>
           <Link to="/Empresas" className="hover:text-yellowprimary">Empresas</Link>
           <Link to="/DescubriendoTalentos" className="hover:text-yellowprimary">Descubriendo Talentos</Link>
           <Link to="/Coworking" className="hover:text-yellowprimary">Coworking</Link>
@@ -132,7 +132,7 @@ function HeaderPowerAuth() {
       {showMenu && (
         <div className="md:hidden bg-gray-900 w-full">
           <div className="px-4 pt-2 pb-3 space-y-1">
-            <Link to="/" className="text-white hover:text-gray-600 block px-3 py-2 rounded-md text-base font-medium">Inicio</Link>
+            <Link to="/PowerAuth" className="text-white hover:text-gray-600 block px-3 py-2 rounded-md text-base font-medium">Inicio</Link>
             <Link to="/Empresas" className="text-white hover:text-gray-600 block px-3 py-2 rounded-md text-base font-medium">Empresas</Link>
             <Link to="/DescubriendoTalentos" className="text-white hover:text-gray-600 block px-3 py-2 rounded-md text-base font-medium">Descubriendo Talentos</Link>
             <Link to="/Coworking" className="text-white hover:text-gray-600 block px-3 py-2 rounded-md text-base font-medium">Coworking</Link>

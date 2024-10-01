@@ -74,7 +74,7 @@ function App() {
             element={<LoginAdmin />} /> {/* Ruta pública */}
           
           <Route
-            path="/edit-job/:id_oferta"
+            path="/EditJob/:id_oferta"
             element={
               <ProtectedRoute>
                 <EditJob />
