@@ -112,8 +112,14 @@ const JobList = () => {
                 </option>
               </select>
             </div>
+
+            {/* Acciones */}
             <div>
-              <button className='flex items-center gap-2 bg- px-4 py-1 rounded-full text-primarycolor'><FaEdit /></button>
+              <Link to={`/EditJob/${job.id_oferta}`}>
+                <button className='flex items-center gap-2 px-4 py-1 rounded-full text-primarycolor'>
+                  <FaEdit />
+                </button>
+              </Link>
             </div>
           </div>
         ))}

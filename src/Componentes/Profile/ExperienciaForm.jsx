@@ -7,11 +7,12 @@ const ExperienciaForm = ({ formData, handleChange, editMode }) => {
 
       {/* Cargo 1 */}
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700">Cargo 1</label>
+        <label className="block text-sm font-medium text-gray-700">Nombre del Cargo</label>
         <input
           type="text"
           name="cargo_1"
-          value={formData.cargo_1}
+          placeholder="Ingrese el nombre del Puesto"
+          value={formData.cargo_1 || ''}
           onChange={handleChange}
           readOnly={!editMode}
           className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none sm:text-sm ${
@@ -22,11 +23,12 @@ const ExperienciaForm = ({ formData, handleChange, editMode }) => {
 
       {/* Empresa 1 */}
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700">Empresa 1</label>
+        <label className="block text-sm font-medium text-gray-700">Nombre de la Empresa</label>
         <input
           type="text"
           name="empresa_1"
-          value={formData.empresa_1}
+          placeholder="Ingrese el nombre de la Empresa"
+          value={formData.empresa_1 || ''}
           onChange={handleChange}
           readOnly={!editMode}
           className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none sm:text-sm ${
@@ -37,11 +39,12 @@ const ExperienciaForm = ({ formData, handleChange, editMode }) => {
 
       {/* Tiempo 1 */}
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700">Tiempo 1</label>
+        <label className="block text-sm font-medium text-gray-700">Tiempo de Labor</label>
         <input
           type="text"
           name="tiempo_1"
-          value={formData.tiempo_1}
+          placeholder="Ejem: Nov. 2022 a Oct. 2023"
+          value={formData.tiempo_1 || ''}
           onChange={handleChange}
           readOnly={!editMode}
           className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none sm:text-sm ${
@@ -52,11 +55,12 @@ const ExperienciaForm = ({ formData, handleChange, editMode }) => {
 
       {/* Función 1 */}
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700">Función 1</label>
+        <label className="block text-sm font-medium text-gray-700">Principales Funciones</label>
         <input
           type="text"
           name="funcion_1"
-          value={formData.funcion_1}
+          placeholder="Ingrese sus principales Funciones"
+          value={formData.funcion_1 || ''}
           onChange={handleChange}
           readOnly={!editMode}
           className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none sm:text-sm ${
@@ -67,11 +71,12 @@ const ExperienciaForm = ({ formData, handleChange, editMode }) => {
 
       {/* Cargo 2 */}
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700">Cargo 2</label>
+        <label className="block text-sm font-medium text-gray-700">Nombre del Cargo</label>
         <input
           type="text"
           name="cargo_2"
-          value={formData.cargo_2}
+          placeholder="Ingrese el nombre del Puesto"
+          value={formData.cargo_2 || ''}
           onChange={handleChange}
           readOnly={!editMode}
           className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none sm:text-sm ${
@@ -82,11 +87,12 @@ const ExperienciaForm = ({ formData, handleChange, editMode }) => {
 
       {/* Empresa 2 */}
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700">Empresa 2</label>
+        <label className="block text-sm font-medium text-gray-700">Nombre de la Empresa</label>
         <input
           type="text"
           name="empresa_2"
-          value={formData.empresa_2}
+          placeholder="Ingrese el nombre de la Empresa"
+          value={formData.empresa_2 || ''}
           onChange={handleChange}
           readOnly={!editMode}
           className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none sm:text-sm ${
@@ -97,11 +103,12 @@ const ExperienciaForm = ({ formData, handleChange, editMode }) => {
 
       {/* Tiempo 2 */}
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700">Tiempo 2</label>
+        <label className="block text-sm font-medium text-gray-700">Tiempo de Labor</label>
         <input
           type="text"
           name="tiempo_2"
-          value={formData.tiempo_2}
+          placeholder="Ejem: Nov. 2022 a Oct. 2023"
+          value={formData.tiempo_2 || ''}
           onChange={handleChange}
           readOnly={!editMode}
           className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none sm:text-sm ${
@@ -112,11 +119,12 @@ const ExperienciaForm = ({ formData, handleChange, editMode }) => {
 
       {/* Función 2 */}
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700">Función 2</label>
+        <label className="block text-sm font-medium text-gray-700">Principales Funciones</label>
         <input
           type="text"
           name="funcion_2"
-          value={formData.funcion_2}
+          placeholder="Ingrese sus principales Funciones"
+          value={formData.funcion_2 || ''}
           onChange={handleChange}
           readOnly={!editMode}
           className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none sm:text-sm ${
@@ -125,21 +133,29 @@ const ExperienciaForm = ({ formData, handleChange, editMode }) => {
         />
       </div>
 
-      <h2 className="text-lg font-medium mt-6 mb-4">Estudios</h2>
+      <h2 className="text-lg font-medium mt-6 mb-4">Grado Académico</h2>
 
       {/* Estudio */}
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700">Estudio</label>
-        <input
-          type="text"
+        <label className="block text-sm font-medium text-gray-700">Último Grado Académico</label>
+        <select
           name="estudio"
-          value={formData.estudio}
+          value={formData.estudio || ''}
           onChange={handleChange}
-          readOnly={!editMode}
-          className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none sm:text-sm ${
-            editMode ? 'border-gray-300' : 'bg-gray-100'
-          }`}
-        />
+          disabled={!editMode}
+          className={`mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-gray-600 ${
+            editMode ? 'border-2 border-indigo-500' : 'bg-gray-50'
+          } py-2 px-3`}
+        >
+          <option value="">Seleccione</option>
+          <option value="Secundaria Incompleta">Secundaria Incompleta</option>
+          <option value="Secundaria Completa">Secundaria Completa</option>
+          <option value="Técnico Incompleto">Técnico Incompleto</option>
+          <option value="Técnico Completo">Técnico Completo</option>
+          <option value="Universitario Incompleto">Universitario Incompleto</option>
+          <option value="Universitario Completo">Universitario Completo</option>
+          <option value="Postgrado">Postgrado</option>
+        </select>
       </div>
 
       {/* Institución */}
@@ -148,7 +164,7 @@ const ExperienciaForm = ({ formData, handleChange, editMode }) => {
         <input
           type="text"
           name="institucion"
-          value={formData.institucion}
+          value={formData.institucion || ''}
           onChange={handleChange}
           readOnly={!editMode}
           className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none sm:text-sm ${
@@ -159,11 +175,11 @@ const ExperienciaForm = ({ formData, handleChange, editMode }) => {
 
       {/* Año */}
       <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700">Año</label>
+        <label className="block text-sm font-medium text-gray-700">Ultimo Año de Estudio</label>
         <input
           type="text"
           name="año"
-          value={formData.año}
+          value={formData.año || ''}
           onChange={handleChange}
           readOnly={!editMode}
           className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none sm:text-sm ${
@@ -180,7 +196,7 @@ const ExperienciaForm = ({ formData, handleChange, editMode }) => {
         <input
           type="text"
           name="cv_url"
-          value={formData.cv_url}
+          value={formData.cv_url || ''}
           onChange={handleChange}
           readOnly={!editMode}
           className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none sm:text-sm ${
@@ -195,7 +211,7 @@ const ExperienciaForm = ({ formData, handleChange, editMode }) => {
         <input
           type="text"
           name="cv_file_name"
-          value={formData.cv_file_name}
+          value={formData.cv_file_name || ''}
           onChange={handleChange}
           readOnly={!editMode}
           className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none sm:text-sm ${

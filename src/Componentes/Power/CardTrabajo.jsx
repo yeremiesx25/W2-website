@@ -1,72 +1,106 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { MdOutlineVerifiedUser } from "react-icons/md";
-import { IoHomeOutline } from "react-icons/io5";
-import { MdOutlineHomeWork } from "react-icons/md";
+import { BsArrowRightCircle } from "react-icons/bs";
+import { supabase } from "../../supabase/supabase.config";
+import { IoMdTime } from "react-icons/io";
 import { IoLocationOutline } from "react-icons/io5";
+import { MdOutlineMapsHomeWork } from "react-icons/md";
+import { FaBookmark } from "react-icons/fa6";
+import dayjs from "dayjs"; 
+import 'dayjs/locale/es'; // Importar el idioma español
+import relativeTime from 'dayjs/plugin/relativeTime';
 
 function CardTrabajo({ job, onSelectJob, isSelected }) {
-  const { puesto, modalidad, ubicacion, sueldo, fecha_publicacion, empresa } =
+  const { puesto, modalidad, ubicacion, empresa, descripcion, id_reclutador, fecha_publicacion } =
     job;
 
-  const calcularTiempoTranscurrido = (fecha) => {
-    const fechaPublicacion = new Date(fecha);
-    const fechaActual = new Date();
-    const diferencia = fechaActual.getTime() - fechaPublicacion.getTime();
-    const diasTranscurridos = Math.floor(diferencia / (1000 * 60 * 60 * 24));
+  const [nombreReclutador, setNombreReclutador] = useState("");
 
-    if (diasTranscurridos < 1) {
-      return "Publicado Ahora";
-    } else if (diasTranscurridos === 1) {
-      return "Publicado hace 1 día";
+  // Función para obtener el nombre del reclutador desde la tabla perfiles
+  const fetchNombreReclutador = async () => {
+    const { data, error } = await supabase
+      .from("perfiles")
+      .select("nombre")
+      .eq("id", id_reclutador)
+      .single(); // Solo esperamos un resultado
+
+    if (error) {
+      console.error("Error fetching recruiter name:", error);
     } else {
-      return `Publicado hace ${diasTranscurridos} días`;
+      setNombreReclutador(data?.nombre || "Reclutador no encontrado");
     }
   };
+
+  useEffect(() => {
+    if (id_reclutador) {
+      fetchNombreReclutador();
+    }
+  }, [id_reclutador]);
+
+  dayjs.extend(relativeTime);
+  dayjs.locale('es'); // Configurar dayjs para usar español
+  
+  // Obtener el tiempo en formato "hace X tiempo" y capitalizar la primera letra
+  const timeAgo = dayjs(job.fecha_publicacion).fromNow();
+  const capitalizedTimeAgo = timeAgo.charAt(0).toUpperCase() + timeAgo.slice(1);
+  
+  console.log(capitalizedTimeAgo); // "Hace unos minutos"
 
   return (
     <div className="w-full flex justify-center font-dmsans">
       <button
         onClick={() => onSelectJob(job)}
-        className={`w-full md:w-[90%] bg-white text-left border hover:shadow-md hover:transition-all hover:duration-200 rounded-lg p-4 overflow-hidden ${
-          isSelected ? "border-primarycolor" : "border-gray-300"
+        className={`w-full md:w-[90%] text-left border hover:shadow-sm hover:transition-all hover:duration-200 rounded-lg p-6 overflow-hidden flex justify-between items-center ${
+          isSelected ? "bg-gray-200" : "bg-white"
         }`}
       >
-        <div>
-          <h4
-            className="font-semibold text-xl leading-tight text-gray-800"
-            style={{ marginBottom: "6px" }}
-          >
+        <div className="flex flex-col space-y-2 w-full">
+          <div className="flex items-center justify-between w-full">
+            <div className="flex items-center justify-between w-full text-primarycolor">
+              <div className="flex items-center space-x-2">
+                <div className="bg-primarycolor p-2 rounded-lg">
+                <MdOutlineVerifiedUser className="text-white text-xl" />
+              </div>
+              <div>
+                <h3 className="text-sm font-semibold text-gray-800">
+                  {empresa}
+                </h3>
+                <p className="text-xs text-gray-500">{nombreReclutador}</p>{" "}
+                {/* Aquí se muestra el nombre del reclutador */}
+              </div>
+              </div>
+              <FaBookmark size={20} />
+            </div>
+          </div>
+          <h4 className="font-bold text-lg leading-tight text-gray-800">
             {puesto}
           </h4>
-          <div className=" text-xs  font-regular tracking-wide text-gray-700 flex items-center py-1  rounded-full mx-1">
-            {empresa}
-            <MdOutlineVerifiedUser className="flex text-green-500 ml-1 text-sm mb-0.5" />
-          </div>
-          <div className="my-2 text-xs  font-regular tracking-wide text-gray-700 flex rounded-full mx-1">
-            <IoLocationOutline className="mr-1 text-sm mb-0.5" />
-            {ubicacion}
-          </div>
-          <div
-            className={`my-2 text-xs font-regular tracking-wide text-gray-700 ${
-              modalidad ? "" : ""
-            } flex rounded-full mx-1`}
-          >
-            {modalidad && <MdOutlineHomeWork className="mr-1 text-sm mb-0.5" />}
-            {modalidad}
-          </div>
-
-          <div className="flex justify-between items-center mt-2">
-            <div className="text-sm font-regular text-gray-600">
-              {calcularTiempoTranscurrido(fecha_publicacion)}
-            </div>
-            <span
-              className="inline-block bg-gray-200 text-gray-800 py-1 px-3 text-xs rounded-full font-regular tracking-wide"
-              style={{ backgroundColor: "#f5f5f5", color: "#333" }}
-            >
-              S/. {sueldo}
+          <p className="text-sm text-gray-600">
+            {descripcion} <span className="text-blue-500">Ver más</span>
+          </p>
+          <div className="flex space-x-2 justify-between">
+            <div className="flex space-x-2">
+              {modalidad && (
+              <span className="bg-blue-50 text-gray-700 py-1 px-3 text-xs rounded-full font-regular tracking-wide gap-1 flex items-center">
+                <MdOutlineMapsHomeWork /> {modalidad}
+              </span>
+            )}
+            <span className="bg-purple-50 text-gray-700 py-1 px-3 text-xs rounded-full font-regular tracking-wide flex items-center gap-1">
+            <IoLocationOutline />{ubicacion}
             </span>
+            </div>
+            
+            <BsArrowRightCircle
+          className={`text-3xl self-end ${
+            isSelected ? "text-primarycolor" : "text-gray-400"
+          }`}
+        />
           </div>
+          <div className="text-md flex items-center justify-between text-gray-600 gap-1">
+              <span className="text-[12px]">{capitalizedTimeAgo}</span> 
+              </div>
         </div>
+        
       </button>
     </div>
   );
