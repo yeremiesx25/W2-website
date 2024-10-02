@@ -94,7 +94,7 @@ function HeaderPowerAuth() {
         >
           {/* Botón de avatar */}
           <button className="flex items-center focus:outline-none">
-            <span className="ml-2 overflow-hidden whitespace-nowrap overflow-ellipsis text-white font-base w-40">
+            <span className="ml-2 overflow-hidden whitespace-nowrap overflow-ellipsis text-white font-regular w-40">
               {profile.nombre || 'Usuario'}
             </span>
             <img

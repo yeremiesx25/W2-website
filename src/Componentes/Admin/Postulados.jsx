@@ -142,7 +142,7 @@ function Postulados() {
     : [];
 
   return (
-    <div className="font-dmsans py-2 px-4">
+    <div className="font-dmsans py-2 px-4 bg-gray-50">
       <div>
         <section className="bg-primarycolor md:bg-newprimarycolor rounded-lg dark:bg-dark h-96 md:h-40 flex justify-center items-center max-h-screen">
           <div className="container mx-auto">
@@ -181,7 +181,7 @@ function Postulados() {
               {filteredPostulados.map((postulado) => (
                 <div
                   key={postulado.id}
-                  className={`flex items-center p-4 border rounded-lg shadow-sm bg-white cursor-pointer hover:bg-gray-100 ${
+                  className={`flex items-center p-4 border rounded-lg  bg-white cursor-pointer hover:bg-gray-100 ${
                     selectedId === postulado.id ? 'bg-blue-100' : ''
                   }`}
                   onClick={() => handleDivClick(postulado)}
