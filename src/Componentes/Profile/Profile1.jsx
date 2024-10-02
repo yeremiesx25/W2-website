@@ -20,6 +20,7 @@ const Profile1 = () => {
     cv_file_name: '',
     cargo_1: '',
     empresa_1: '',
+    avatar_url: '',  // Avatar URL
     tiempo_1: '',
     funcion_1: '',
     cargo_2: '',
@@ -30,6 +31,42 @@ const Profile1 = () => {
     institucion: '',
     año: ''
   });
+
+  // Función para subir imagen a Supabase Storage
+  const uploadAvatar = async (file) => {
+    try {
+      const filePath = `${user.id}/${file.name}`;
+      const { data, error } = await supabase.storage
+        .from('avatar_user')
+        .upload(filePath, file);
+  
+      if (error) throw error;
+  
+      const avatarUrl = supabase.storage
+        .from('avatar_user')
+        .getPublicUrl(filePath).data.publicUrl;
+  
+      setFormData({ ...formData, avatar_url: avatarUrl });
+  
+      // Update the avatar_url in the perfiles table
+      const { error: updateError } = await supabase
+        .from('perfiles')
+        .update({ avatar_url: avatarUrl })
+        .eq('user_id', user.id);
+  
+      if (updateError) throw updateError;
+  
+      console.log("Avatar updated successfully");
+    } catch (error) {
+      console.error("Error uploading avatar:", error.message);
+    }
+  };
+  
+  // Función para manejar la selección de archivo
+  const handleAvatarChange = (e) => {
+    const file = e.target.files[0];
+    if (file) uploadAvatar(file);
+  };
 
   useEffect(() => {
     const fetchPerfil = async () => {
@@ -96,6 +133,7 @@ const Profile1 = () => {
           nombre: formData.nombre,
           correo: formData.correo,
           dni: formData.dni,
+          avatar_url: formData.avatar_url,  // Incluir avatar_url
           distrito: formData.distrito,
           telefono: formData.telefono,
           fecha_nac: formData.fecha_nac,
@@ -261,7 +299,19 @@ const Profile1 = () => {
                 className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none sm:text-sm ${editMode ? 'border-gray-300' : 'bg-gray-100'}`}
               />
             </div>
-  
+  {/* Campo para subir avatar */}
+  {editMode && (
+              <div>
+                <label className="block text-sm font-medium text-gray-700">Foto de perfil</label>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleAvatarChange}
+                  className="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none sm:text-sm"
+                />
+              </div>
+            )}
+
             {/* Mostrar botones solo en modo de edición */}
             {editMode && (
               <div className="flex justify-end space-x-4">
