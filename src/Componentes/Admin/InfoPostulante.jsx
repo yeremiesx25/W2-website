@@ -106,8 +106,8 @@ const InfoPostulante = ({ postulado, onEstadoChange }) => {
     .filter(({ pregunta, respuesta }) => pregunta && respuesta); // Filtra las que no tienen pregunta o respuesta
 
   return (
-    <div className=" text-white rounded-lg shadow-md">
- <div className="flex items-center w-full p-6 bg-white rounded-lg shadow-md space-x-6">
+    <div className=" text-white rounded-lg border transition-all duration-900">
+ <div className="flex items-center w-full p-6 bg-white rounded-lg space-x-6">
       <img
         className="w-24 h-24 rounded-full object-cover border-2 border-gray-200"
         src={postulado.avatar_url}
@@ -115,23 +115,23 @@ const InfoPostulante = ({ postulado, onEstadoChange }) => {
       />
       <div>
         <h2 className="text-xl font-semibold text-gray-800">{postulado.name_user}</h2>
-        <p className="text-sm text-gray-500">Full stack web developer</p>
-        <p className="text-sm text-blue-500">@Epic Coders</p>
+        <p className="text-sm text-gray-500">{postulado.correo}</p>
+        <p className="text-sm text-blue-500">{postulado.telefono}</p>
       </div>
       <div className="ml-auto flex space-x-4">
         <a
           href={whatsappLink}
-          className="px-4 py-2 bg-green-500 text-white text-sm font-semibold rounded-md hover:bg-green-600"
+          className="px-4 py-2 bg-green-500 text-white text-sm font-semibold rounded-md hover:bg-green-600 flex items-center gap-2"
         >
-          Contact
+          <FaWhatsapp size={20} /> Contacto
         </a>
         <button className="px-4 py-2 border border-gray-300 text-gray-700 text-sm font-semibold rounded-md hover:bg-gray-100">
-          Resume
+          Abrir CV
         </button>
       </div>
     </div>
   
-  <div className="flex items-center space-x-2 mb-6">
+  {/* <div className="flex items-center space-x-2 mb-6">
     <button
       onClick={() => handleEstadoClick("seleccionado")}
       className={`px-4 py-2 ${estadoActual === "seleccionado" ? "bg-green-500 text-white" : "bg-green-300 text-white"} rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400`}
@@ -150,9 +150,9 @@ const InfoPostulante = ({ postulado, onEstadoChange }) => {
     >
       <IoMdClose size={24} />
     </button>
-  </div>
+  </div> */}
   
-  <div className="bg-white p-6 rounded-lg shadow-md text-gray-800">
+  <div className="bg-white p-6 rounded-lg text-gray-800">
     <h3 className="text-xl font-bold text-purple-700">Detalles del Postulante</h3>
     <div className="mb-2">
       <span className="font-semibold">Teléfono:</span> <span>{postulado.telefono}</span>
@@ -175,7 +175,7 @@ const InfoPostulante = ({ postulado, onEstadoChange }) => {
     )}
   </div>
   
-  <div className="mt-4 bg-white p-6 rounded-lg shadow-md">
+  <div className="mt-4 bg-white p-6 rounded-lg">
     <h3 className="text-xl font-bold text-purple-700">Respuestas</h3>
     {preguntasYRespuestas.map(({ pregunta, respuesta }, index) => (
       <div key={index} className="mb-4">

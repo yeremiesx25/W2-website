@@ -235,7 +235,7 @@ const Profile1 = () => {
         <div className="flex items-center space-x-4 mb-6">
           <img src={formData.avatar_url} alt="profile" className="w-24 h-24 rounded-full" />
           <div>
-            <h1 className="text-xl font-semibold text-gray-700">{formData.nombre}</h1>
+            <h1 className="text-xl text-gray-800">{formData.nombre}</h1>
             <p className="text-gray-500">{formData.correo}</p>
           </div>
           {!editMode && (
