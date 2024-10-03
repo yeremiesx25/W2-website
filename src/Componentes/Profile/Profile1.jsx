@@ -21,7 +21,7 @@ const Profile1 = () => {
     cv_file_name: '',
     cargo_1: '',
     empresa_1: '',
-    avatar_url: '',  // Avatar URL
+    avatar_url: '',
     tiempo_1: '',
     funcion_1: '',
     cargo_2: '',
@@ -33,7 +33,6 @@ const Profile1 = () => {
     año: ''
   });
 
-  // Función para subir imagen a Supabase Storage
   const uploadAvatar = async (file) => {
     try {
       const filePath = `${user.id}/${file.name}`;
@@ -49,7 +48,6 @@ const Profile1 = () => {
   
       setFormData({ ...formData, avatar_url: avatarUrl });
   
-      // Update the avatar_url in the perfiles table
       const { error: updateError } = await supabase
         .from('perfiles')
         .update({ avatar_url: avatarUrl })
@@ -62,11 +60,43 @@ const Profile1 = () => {
       console.error("Error uploading avatar:", error.message);
     }
   };
-  
-  // Función para manejar la selección de archivo
+
   const handleAvatarChange = (e) => {
     const file = e.target.files[0];
     if (file) uploadAvatar(file);
+  };
+
+  const uploadCV = async (file) => {
+    try {
+      const filePath = `${user.id}/${file.name}`;
+      const { data, error } = await supabase.storage
+        .from('cv_user')
+        .upload(filePath, file);
+
+      if (error) throw error;
+
+      const cvUrl = supabase.storage
+        .from('cv_user')
+        .getPublicUrl(filePath).data.publicUrl;
+
+      setFormData({ ...formData, cv_url: cvUrl, cv_file_name: file.name });
+
+      const { error: updateError } = await supabase
+        .from('Experiencia')
+        .update({ cv_url: cvUrl, cv_file_name: file.name })
+        .eq('user_id', user.id);
+
+      if (updateError) throw updateError;
+
+      console.log("CV uploaded successfully");
+    } catch (error) {
+      console.error("Error uploading CV:", error.message);
+    }
+  };
+
+  const handleCVChange = (e) => {
+    const file = e.target.files[0];
+    if (file) uploadCV(file);
   };
 
   useEffect(() => {
@@ -134,7 +164,7 @@ const Profile1 = () => {
           nombre: formData.nombre,
           correo: formData.correo,
           dni: formData.dni,
-          avatar_url: formData.avatar_url,  // Incluir avatar_url
+          avatar_url: formData.avatar_url,
           distrito: formData.distrito,
           telefono: formData.telefono,
           fecha_nac: formData.fecha_nac,
@@ -185,7 +215,6 @@ const Profile1 = () => {
 
         console.log("Datos guardados correctamente:", experienciaData);
 
-        // Mostrar el mensaje de "Guardado correctamente"
         const savedMessage = document.createElement("div");
         savedMessage.textContent = "Guardado correctamente";
         savedMessage.style.backgroundColor = "rgba(0, 128, 0, 0.8)";
@@ -203,7 +232,6 @@ const Profile1 = () => {
           document.body.removeChild(savedMessage);
         }, 2000);
 
-        // Cambiar el modo de edición a falso después de guardar
         setEditMode(false);
 
       } catch (error) {
@@ -235,7 +263,7 @@ const Profile1 = () => {
       <div className="max-w-4xl mx-auto p-6  pt-32 rounded-lg">
         <div className="flex items-center justify-between  mb-6 w-full bg-primarycolor px-10 py-6 rounded-lg flex-wrap">
           <div className="flex items-center flex-wrap">
-            <div className="w-40">
+          <div className="relative">
               {/* Imagen de perfil */}
               <img
                 src={formData.avatar_url}
@@ -361,6 +389,7 @@ const Profile1 = () => {
             editMode={editMode}
           />
         </div>
+        
       </div>
     </div>
   );
