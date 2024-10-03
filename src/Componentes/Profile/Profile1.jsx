@@ -235,7 +235,7 @@ const Profile1 = () => {
       <div className="max-w-4xl mx-auto p-6  pt-32 rounded-lg">
         <div className="flex items-center justify-between  mb-6 w-full bg-primarycolor px-10 py-6 rounded-lg flex-wrap">
           <div className="flex items-center flex-wrap">
-            <div className="w-40">
+            <div className="relative">
               {/* Imagen de perfil */}
               <img
                 src={formData.avatar_url}
