@@ -1,7 +1,8 @@
 import React from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { FaTachometerAlt, FaChartLine, FaComments, FaCalendarAlt, FaClipboard, FaCog, FaSignOutAlt } from 'react-icons/fa';
+import {  FaChartLine, FaComments, FaCalendarAlt, FaClipboard, FaCog, FaSignOutAlt, FaThList } from 'react-icons/fa';
 import { supabase } from "../../supabase/supabase.config"; // Supongamos que usas Supabase para autenticación
+import Advice from './Advice';
 
 // Componente reutilizable para los items del menú
 const MenuItem = ({ to, icon: Icon, label }) => {
@@ -11,7 +12,7 @@ const MenuItem = ({ to, icon: Icon, label }) => {
   return (
     <Link
       to={to}
-      className={`flex items-center ${isActive ? 'text-white  bg-primarycolor p-2 rounded-lg' : 'text-[#8B9DD7] hover:text-primarycolor p-2 font-light'}`}
+      className={`flex items-center py-2 px-6 ${isActive ? 'text-white  bg-primarycolor rounded-lg' : 'text-[#A3AED0] hover:text-primarycolor font-light'}`}
     >
       <Icon className="mr-3" /> {label}
     </Link>
@@ -34,10 +35,11 @@ function MenuAdmin() {
   };
 
   return (
-    <div className="w-64 h-screen bg-gray-50   shadow flex flex-col justify-between pt-20 font-dmsans fixed">
-      <ul className="space-y-4 p-6 mt-20">
+    <div className="w-64 h-screen bg-white  px-2 shadow flex flex-col justify-around pt-24 font-dmsans fixed">
+      
+      <ul className="space-y-4 p-4 mt-12">
         <li>
-          <MenuItem to="/Admin" icon={FaTachometerAlt} label="Ofertas" />
+          <MenuItem to="/Admin" icon={FaThList} label="Ofertas" />
         </li>
         <li>
           <MenuItem to="/Postulados" icon={FaChartLine} label="Postulantes" />
@@ -54,12 +56,13 @@ function MenuAdmin() {
         <li>
           <MenuItem to="/ajustes" icon={FaCog} label="Ajustes" />
         </li>
-      </ul>
+      </ul><Advice />
       <div className="p-6">
         <button onClick={handleLogout} className="flex items-center text-red-500">
           <FaSignOutAlt className="mr-3" /> Cerrar sesión
         </button>
       </div>
+      
     </div>
   );
 }

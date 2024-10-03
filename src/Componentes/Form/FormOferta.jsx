@@ -5,6 +5,8 @@ import ChatAiOferta from './ChatAiOferta';
 import Step1 from './Step1';
 import Step2 from './Step2';
 import Step3 from './Step3';
+import HeaderAdmin from '../Admin/HeaderAdmin';
+import MenuAdmin from '../Admin/MenuAdmin'
 
 const FormOferta = () => {
     const { user } = UserAuth(); // Obtener el usuario del contexto
@@ -84,10 +86,10 @@ const FormOferta = () => {
 
     return (
         <div className="w-full h-screen flex">
-            <div className="w-1/2 h-full bg-primarygradientdark hidden lg:block">
-                <ChatAiOferta />
-            </div>
-            <div className="w-1/2 h-full bg-white flex flex-col p-8 font-dmsans overflow-y-scroll">
+            <HeaderAdmin />
+            <MenuAdmin />
+            
+            <div className="w-full h-full bg-white flex flex-col p-8 font-dmsans overflow-y-scroll pl-72 pt-24">
                 <h1 className="text-2xl font-semibold mb-4">Registrar Oferta</h1>
                 <form onSubmit={(e) => e.preventDefault()}>
                     {step === 1 && <Step1 data={formData} handleChange={handleChange} nextStep={nextStep} />}

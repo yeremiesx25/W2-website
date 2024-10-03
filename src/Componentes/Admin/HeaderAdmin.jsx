@@ -41,7 +41,7 @@ function HeaderAdmin() {
   }, [user]);
 
   return (
-    <div className="flex items-center justify-between p-4 bg-gray-50 shadow-sm px-14 fixed w-full z-10">
+    <div className="flex items-center justify-between p-4 bg-white shadow-sm px-14 fixed w-full z-10">
       {/* Logo de la empresa */}
       <div className="flex items-center space-x-4">
         {/* <img

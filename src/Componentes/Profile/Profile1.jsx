@@ -3,6 +3,7 @@ import { supabase } from '../../supabase/supabase.config';
 import ExperienciaForm from './ExperienciaForm';
 import { UserAuth } from "../../Context/AuthContext";
 import HeaderPowerAuth from '../PowerAuth/HeaderPowerAuth';
+import { GrEdit } from "react-icons/gr";
 
 const Profile1 = () => {
   const { user } = UserAuth();
@@ -229,110 +230,136 @@ const Profile1 = () => {
 
 
   return (
-    <div className='w-full h-screen font-dmsans'>
+    <div className="w-full h-screen font-dmsans bg-gray-50">
       <HeaderPowerAuth />
       <div className="max-w-4xl mx-auto p-6  pt-32 rounded-lg">
-        <div className="flex items-center space-x-4 mb-6">
-          <img src={formData.avatar_url} alt="profile" className="w-24 h-24 rounded-full" />
-          <div>
-            <h1 className="text-xl text-gray-800">{formData.nombre}</h1>
-            <p className="text-gray-500">{formData.correo}</p>
+        <div className="flex items-center justify-between  mb-6 w-full bg-primarycolor px-10 py-6 rounded-lg flex-wrap">
+          <div className="flex items-center flex-wrap">
+            <div className="w-40">
+              {/* Imagen de perfil */}
+              <img
+                src={formData.avatar_url}
+                alt="profile"
+                className="w-24 h-24 rounded-full border-2 border-white"
+              />
+
+              {/* Campo para subir avatar */}
+              {editMode && (
+                <div className="absolute inset-0 flex items-center justify-center bg-gray-300 bg-opacity-80 rounded-full">
+                  <label
+                    htmlFor="avatar"
+                    className="flex flex-col items-center cursor-pointer text-primarycolor bg-opacity-80 bg-white h-8 w-8 justify-center rounded-full"
+                  >
+                    <GrEdit className="text-xl" />
+                  </label>
+                  <input
+                    id="avatar"
+                    type="file"
+                    accept="image/*"
+                    onChange={handleAvatarChange}
+                    className="absolute inset-0 opacity-0 cursor-pointer"
+                  />
+                </div>
+              )}
+            </div>
+            <div className='w-auto'>
+              <div>
+                <input
+                  type="text"
+                  name="nombre"
+                  value={formData.nombre}
+                  onChange={handleChange}
+                  readOnly={!editMode}
+                  className={`mt-1 block w-full px-2 py-1  rounded-md focus:outline-none md:text-xl ${
+                    editMode
+                      ? "border-gray-300 text-gray-800"
+                      : "bg-transparent text-white"
+                  }`}
+                />
+              </div>
+              <div>
+                <input
+                  type="text"
+                  name="telefono"
+                  value={formData.telefono}
+                  onChange={handleChange}
+                  readOnly={!editMode}
+                  className={`text-gray-300 text-sm px-2 font-extralight ${
+                    editMode
+                      ? "border-gray-300 text-gray-800"
+                      : "bg-transparent text-white"
+                  }`}
+                />
+              </div>
+              <div>
+                <input
+                  type="text"
+                  name="dni"
+                  value={formData.dni}
+                  onChange={handleChange}
+                  readOnly={!editMode}
+                  className={`text-gray-300 text-sm px-2 font-extralight ${
+                    editMode
+                      ? "border-gray-300 text-gray-800"
+                      : "bg-transparent text-white"
+                  }`}
+                />
+              </div>
+              <div>
+                <input
+                  type="text"
+                  name="distrito"
+                  value={formData.distrito}
+                  onChange={handleChange}
+                  readOnly={!editMode}
+                  className={`text-gray-300 text-sm px-2 font-extralight ${
+                    editMode
+                      ? "border-gray-300 text-gray-800"
+                      : "bg-transparent text-white"
+                  }`}
+                />
+              </div>
+              <p className="text-gray-300 text-sm px-2 font-extralight">
+                {formData.correo}
+              </p>
+            </div>
+            {/* Mostrar botones solo en modo de edición */}
+            {editMode && (
+              <form onSubmit={handleSubmit} className="space-y-4 w-1/2 p-4">
+                <div className="flex justify-end space-x-4">
+                  <button
+                    type="submit"
+                    className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-500"
+                  >
+                    Guardar
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleCancel}
+                    className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-500"
+                  >
+                    Cancelar
+                  </button>
+                </div>{" "}
+              </form>
+            )}
           </div>
           {!editMode && (
             <button
               onClick={() => setEditMode(true)}
-              className="ml-auto px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-500"
+              className="ml-auto px-4 py-2 bg-white text-primarycolor rounded-md hover:bg-blue-100 transition-colors duration-100 flex items-center gap-2"
             >
-              Editar
+              Editar <GrEdit />
             </button>
           )}
         </div>
-  
-        <div className='w-full flex'>
-          <form onSubmit={handleSubmit} className="space-y-4 w-1/2 p-4">
-            <h2 className="text-lg font-medium mb-4">Información Personal</h2>
-            
-            <div>
-              <label className="block text-sm font-medium text-gray-700">Nombre</label>
-              <input
-                type="text"
-                name="nombre"
-                value={formData.nombre}
-                onChange={handleChange}
-                readOnly={!editMode}
-                className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none sm:text-sm ${editMode ? 'border-gray-300' : 'bg-gray-100'}`}
-              />
-            </div>
-  
-            <div>
-              <label className="block text-sm font-medium text-gray-700">DNI</label>
-              <input
-                type="text"
-                name="dni"
-                value={formData.dni}
-                onChange={handleChange}
-                readOnly={!editMode}
-                className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none sm:text-sm ${editMode ? 'border-gray-300' : 'bg-gray-100'}`}
-              />
-            </div>
-  
-            <div>
-              <label className="block text-sm font-medium text-gray-700">Distrito</label>
-              <input
-                type="text"
-                name="distrito"
-                value={formData.distrito}
-                onChange={handleChange}
-                readOnly={!editMode}
-                className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none sm:text-sm ${editMode ? 'border-gray-300' : 'bg-gray-100'}`}
-              />
-            </div>
-  
-            <div>
-              <label className="block text-sm font-medium text-gray-700">Teléfono</label>
-              <input
-                type="text"
-                name="telefono"
-                value={formData.telefono}
-                onChange={handleChange}
-                readOnly={!editMode}
-                className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none sm:text-sm ${editMode ? 'border-gray-300' : 'bg-gray-100'}`}
-              />
-            </div>
-  {/* Campo para subir avatar */}
-  {editMode && (
-              <div>
-                <label className="block text-sm font-medium text-gray-700">Foto de perfil</label>
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={handleAvatarChange}
-                  className="mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none sm:text-sm"
-                />
-              </div>
-            )}
 
-            {/* Mostrar botones solo en modo de edición */}
-            {editMode && (
-              <div className="flex justify-end space-x-4">
-                <button
-                  type="submit"
-                  className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-500"
-                >
-                  Guardar
-                </button>
-                <button
-                  type="button"
-                  onClick={handleCancel}
-                  className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-500"
-                >
-                  Cancelar
-                </button>
-              </div>
-            )}
-          </form>
-  
-          <ExperienciaForm formData={formData} handleChange={handleChange} editMode={editMode} />
+        <div className="w-full flex">
+          <ExperienciaForm
+            formData={formData}
+            handleChange={handleChange}
+            editMode={editMode}
+          />
         </div>
       </div>
     </div>

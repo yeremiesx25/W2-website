@@ -41,45 +41,46 @@ function BtnContainer() {
   }, []); // Ejecuta solo una vez al montar el componente
 
   return (
-    <div className='pr-8'>
+    <div className='px-6 flex'>
     <div
       style={{
         backgroundImage: `url(https://masterbundles.com/wp-content/uploads/2023/02/wave-background-23-992.jpg)`,
         backgroundSize: "cover",
         backgroundPosition: "center",
       }}
-      className="flex w-full justify-between items-center py-4 px-10 my-4 rounded-xl "
+      className="flex w-full justify-between items-center py-4 px-10 my-4 rounded-xl"
     >
-      <div className="flex space-x-6">
+      <div className="flex space-x-4 px-4 justify-between">
         {/* Card 1 */}
-        <div className="flex flex-col justify-center items-start p-6 bg-white rounded-lg shadow-lg w-48">
+        <div className="flex flex-col justify-center items-center p-6 bg-white rounded-lg shadow-lg min-w-32">
           <p className="text-sm text-[#A3AED0]">Mis Ofertas</p>
           <p className="text-3xl font-bold text-[#1B2559]">5</p>
         </div>
 
         {/* Card 2 */}
-        <div className="flex flex-col justify-center items-start p-6 bg-white rounded-lg shadow-lg w-48">
-          <p className="text-sm text-[#A3AED0]">Ofertas Abiertas</p>
+        <div className="flex flex-col justify-center items-center p-6 bg-white rounded-lg shadow-lg min-w-32">
+          <p className="text-sm text-[#A3AED0]">Abiertas</p>
           <p className="text-3xl font-bold text-[#1B2559]">3</p>
           <p className="text-sm text-[#A3AED0]">(40%)</p>
         </div>
 
         {/* Card 3 */}
-        <div className="flex flex-col justify-center items-start p-6 bg-white rounded-lg shadow-lg w-48">
-          <p className="text-sm text-[#A3AED0]">Ofertas Cerradas</p>
+        <div className="flex flex-col justify-center items-center p-6 bg-white rounded-lg shadow-lg min-w-32">
+          <p className="text-sm text-[#A3AED0]">Cerradas</p>
           <p className="text-3xl font-bold text-[#1B2559]">2</p>
           <p className="text-sm text-[#A3AED0]">(25%)</p>
         </div>
 
         {/* Card 4 */}
-        <div className="flex flex-col justify-center items-start p-6 bg-white rounded-lg shadow-lg w-48">
-          <p className="text-sm text-[#A3AED0]">Meta Mensual</p>
+        <div className="flex flex-col justify-center items-center p-6 bg-white rounded-lg shadow-lg min-w-32">
+          <p className="text-sm text-[#A3AED0]">Objetivo Mensual</p>
           <p className="text-3xl font-bold text-[#1B2559]">13</p>
           <p className="text-sm text-[#A3AED0]">(20%)</p>
-        </div>
+        </div> 
+        
       </div>
-
-      <AddButton />
+<AddButton />
+     
     </div>
     </div>
   );

@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { supabase } from '../../supabase/supabase.config';
 import { Link } from 'react-router-dom';
-import { FaEdit } from "react-icons/fa";
+import { GrEdit } from "react-icons/gr";
 import JobsContext from '../../Context/JobsContext'; // Importa el contexto
 
 // Función para formatear la fecha a dd-mm-yyyy
@@ -68,62 +68,60 @@ const JobList = () => {
   };
 
   return (
-    <div className="w-full bg-gray-50 pr-8 rounded-lg font-dmsans">
-      <div className="grid grid-cols-5 gap-4 text-gray-500 text-md font-semibold bg-gray-200 p-4 rounded-lg">
+    <div className="w-full bg-transparent px-6  rounded-lg font-dmsans">
+      <div className="grid grid-cols-5 gap-4 text-white text-md font-regular bg-newprimarycolor px-4 py-3 rounded-lg">
         <div>Puesto</div>
         <div>Fecha</div>
         <div>Postulados</div>
         <div>Estado</div>
         <div>Acciones</div>
       </div>
-      <div className="mt-4 space-y-4 h-80 overflow-y-scroll">
-        {userSearchResults.map((job, index) => ( // Mostrar trabajos filtrados
-          <div
-            key={job.id_oferta}
-            className="grid grid-cols-5 gap-4 items-center pb-4 bg-white p-4 rounded-lg"
-          >
-            {/* Puesto */}
-            <Link to={`/Postulados/${job.id_oferta}`}>
-              <p className="text-newprimarycolor font-base">{job.puesto}</p>
-            </Link>
+      <div className="mt-2 h-96 overflow-y-scroll">
+  {userSearchResults.map((job, index) => (
+    <div
+      key={job.id_oferta}
+      className={`grid grid-cols-5 gap-4 items-center py-5 px-4  
+        ${index % 2 === 0 ? 'bg-white' : 'bg-[#edf6ff]'}`} // Alterna los fondos
+    >
+      {/* Puesto */}
+      <Link to={`/Postulados/${job.id_oferta}`}>
+        <p className="text-newprimarycolor font-light">{job.puesto}</p>
+      </Link>
 
-            {/* Fecha */}
-            <div>
-              <p className="text-gray-600 font-base">{job.fecha_publicacion}</p>
-            </div>
-
-            {/* Postulados */}
-            <div className="text-gray-600 font-base">{job.postulados}</div>
-
-            {/* Estado */}
-            <div>
-              <select
-                value={job.estado}
-                onChange={(e) => handleChangeStatus(index, e.target.value)}
-                className={`px-4 py-1 text-sm border border-gray-400 rounded-full font-base outline-none transition-all duration-300 font-semibold ${
-                  job.estado === "activa" ? "text-green-500" : "text-red-500"
-                }`}
-              >
-                <option value="activa" className="text-green-500">
-                  Abierto
-                </option>
-                <option value="cerrada" className="text-red-500">
-                  Cerrado
-                </option>
-              </select>
-            </div>
-
-            {/* Acciones */}
-            <div>
-              <Link to={`/EditJob/${job.id_oferta}`}>
-                <button className='flex items-center gap-2 px-4 py-1 rounded-full text-primarycolor'>
-                  <FaEdit />
-                </button>
-              </Link>
-            </div>
-          </div>
-        ))}
+      {/* Fecha */}
+      <div>
+        <p className="text-gray-600 font-light">{job.fecha_publicacion}</p>
       </div>
+
+      {/* Postulados */}
+      <div className="text-gray-600 font-light">{job.postulados}</div>
+
+      {/* Estado */}
+      <div>
+        <select
+          value={job.estado}
+          onChange={(e) => handleChangeStatus(index, e.target.value)}
+          className={`px-4 py-1 text-sm border border-gray-400 rounded-full font-light outline-none transition-all duration-300  ${
+            job.estado === 'activa' ? 'text-green-500' : 'text-red-500'
+          }`}
+        >
+          <option value="activa" className="text-green-500">Abierto</option>
+          <option value="cerrada" className="text-red-500">Cerrado</option>
+        </select>
+      </div>
+
+      {/* Acciones */}
+      <div>
+        <Link to={`/EditJob/${job.id_oferta}`}>
+          <button className="flex items-center gap-2 px-4 py-1 rounded-full border border-primarycolor text-primarycolor text-sm font-light">
+            Editar <GrEdit />
+          </button>
+        </Link>
+      </div>
+    </div>
+  ))}
+</div>
+
     </div>
   );
 };

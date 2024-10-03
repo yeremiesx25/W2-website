@@ -4,17 +4,15 @@ import { FaPlus } from "react-icons/fa";
 
 function AddButton() {
   return (
-    <div className='w-48 h-32 p-6  rounded-lg flex flex-col justify-center items-center'>
-      <div className='text-sm'>
-        
-      </div>
-      <Link to="/AdminForm">
+    <div className='rounded-md border border-indigo-500 bg-newprimarycolor shadow-md w-36'>
+
+      <Link className='w-full h-full p-6 flex justify-center' to="/AdminForm">
         <button
-          className='w-full h-12 bg-primarycolor text-white font-bold  rounded-lg flex justify-center items-center gap-2 px-2'
+          className='flex flex-col items-center justify-center cursor-pointer text-white'
           aria-label="Crear Oferta"
         >
           <FaPlus size={20} /> 
-          <p className=''>Crear Oferta </p>
+          <p className=''>Crear Oferta</p>
         </button>
       </Link>
     </div>

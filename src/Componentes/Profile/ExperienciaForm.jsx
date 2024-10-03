@@ -2,12 +2,13 @@ import React from 'react';
 
 const ExperienciaForm = ({ formData, handleChange, editMode }) => {
   return (
-    <div className="w-full lg:w-1/2 p-4">
-      <h2 className="text-lg font-medium mb-4">Experiencia Laboral</h2>
-
-      {/* Cargo 1 */}
-      <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700">Nombre del Cargo</label>
+    <div className="w-full lg:full bg-white border border-primarycolor border-opacity-30 p-6 rounded-lg">
+      <h2 className="text-xl text-gray-800  mb-4">Experiencia Laboral</h2>
+      <h3 className='text-lg text-gray-800  mb-4'>Experiencia 1</h3>
+      <div className='w-full flex justify-between flex-wrap'>
+        {/* Cargo 1 */}
+        <div className="mb-4 w-full md:w-2/5">
+        <label className="block text-sm  text-gray-700">Nombre del Cargo</label>
         <input
           type="text"
           name="cargo_1"
@@ -15,15 +16,14 @@ const ExperienciaForm = ({ formData, handleChange, editMode }) => {
           value={formData.cargo_1 || ''}
           onChange={handleChange}
           readOnly={!editMode}
-          className={`mt-1 block w-full px-3 py-2 border rounded-md shadow-sm focus:outline-none sm:text-sm ${
+          className={`mt-1 block w-full px-3 py-2 border border-primarycolor border-opacity-40 rounded-md shadow-sm focus:outline-none text-gray-800 sm:text-sm ${
             editMode ? 'border-gray-300' : 'bg-gray-100'
           }`}
         />
       </div>
-
       {/* Empresa 1 */}
-      <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700">Nombre de la Empresa</label>
+      <div className="mb-4 w-full md:w-2/5">
+        <label className="block text-sm text-gray-700">Nombre de la Empresa</label>
         <input
           type="text"
           name="empresa_1"
@@ -36,10 +36,11 @@ const ExperienciaForm = ({ formData, handleChange, editMode }) => {
           }`}
         />
       </div>
-
-      {/* Tiempo 1 */}
-      <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700">Tiempo de Labor</label>
+      </div> 
+      <div className='w-full flex justify-between flex-wrap'>
+         {/* Tiempo 1 */}
+      <div className="mb-4 w-full md:w-2/5">
+        <label className="block text-sm text-gray-700">Tiempo de Labor</label>
         <input
           type="text"
           name="tiempo_1"
@@ -52,10 +53,9 @@ const ExperienciaForm = ({ formData, handleChange, editMode }) => {
           }`}
         />
       </div>
-
       {/* Función 1 */}
-      <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700">Principales Funciones</label>
+      <div className="mb-4 w-full md:w-2/5">
+        <label className="block text-sm  text-gray-700">Principales Funciones</label>
         <input
           type="text"
           name="funcion_1"
@@ -68,10 +68,12 @@ const ExperienciaForm = ({ formData, handleChange, editMode }) => {
           }`}
         />
       </div>
-
+      </div>
+      <h3 className='text-lg text-gray-800  mb-4'>Experiencia 2</h3>
+      <div className='w-full flex justify-between flex-wrap'>
       {/* Cargo 2 */}
-      <div className="mb-4">
-        <label className="block text-sm font-medium text-gray-700">Nombre del Cargo</label>
+      <div className="mb-4 w-full md:w-2/5">
+        <label className="block text-sm  text-gray-700">Nombre del Cargo</label>
         <input
           type="text"
           name="cargo_2"
@@ -86,7 +88,7 @@ const ExperienciaForm = ({ formData, handleChange, editMode }) => {
       </div>
 
       {/* Empresa 2 */}
-      <div className="mb-4">
+      <div className="mb-4 w-full md:w-2/5">
         <label className="block text-sm font-medium text-gray-700">Nombre de la Empresa</label>
         <input
           type="text"
@@ -100,9 +102,10 @@ const ExperienciaForm = ({ formData, handleChange, editMode }) => {
           }`}
         />
       </div>
-
+      </div>
+      <div className='w-full flex justify-between flex-wrap'>
       {/* Tiempo 2 */}
-      <div className="mb-4">
+      <div className="mb-4 w-full md:w-2/5">
         <label className="block text-sm font-medium text-gray-700">Tiempo de Labor</label>
         <input
           type="text"
@@ -118,7 +121,7 @@ const ExperienciaForm = ({ formData, handleChange, editMode }) => {
       </div>
 
       {/* Función 2 */}
-      <div className="mb-4">
+      <div className="mb-4 w-full md:w-2/5">
         <label className="block text-sm font-medium text-gray-700">Principales Funciones</label>
         <input
           type="text"
@@ -132,7 +135,7 @@ const ExperienciaForm = ({ formData, handleChange, editMode }) => {
           }`}
         />
       </div>
-
+      </div>
       <h2 className="text-lg font-medium mt-6 mb-4">Grado Académico</h2>
 
       {/* Estudio */}
