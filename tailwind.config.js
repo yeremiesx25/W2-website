@@ -45,6 +45,7 @@ module.exports = withMT( {
         'primarygradientmobile': 'linear-gradient(0.50turn, #2563EB, #13337A)',
         'secundarygradient': 'linear-gradient(0.25turn, #2563EB, #4D2EA4)',
         'primarygradientdark': 'linear-gradient(0.50turn, #013E9A, #021B79)',
+        'bgpowergradient': 'linear-gradient(0.25turn, #ebf4ff  , #ffffff )',
       },
     },
   },  

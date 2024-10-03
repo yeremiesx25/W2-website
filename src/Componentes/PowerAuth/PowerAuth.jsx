@@ -6,13 +6,13 @@ import TrabajosContainer2 from '../Power/TrabajosContainer2'
 
 function PowerAuth() {
   return (
-    <>
+    <div className='bg-bgpowergradient'>
     <HeaderPowerAuth />
     <HeroPowerAuth />
     <TrabajosContainer2 />
 
     <Outlet />
-    </>
+    </div>
   )
 }
 
