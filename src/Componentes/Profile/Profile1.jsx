@@ -66,6 +66,7 @@ const Profile1 = () => {
     if (file) uploadAvatar(file);
   };
 
+  // Función para subir el CV ahora en la tabla "perfiles"
   const uploadCV = async (file) => {
     try {
       const filePath = `${user.id}/${file.name}`;
@@ -82,7 +83,7 @@ const Profile1 = () => {
       setFormData({ ...formData, cv_url: cvUrl, cv_file_name: file.name });
 
       const { error: updateError } = await supabase
-        .from('Experiencia')
+        .from('perfiles') // Ahora se guarda en la tabla "perfiles"
         .update({ cv_url: cvUrl, cv_file_name: file.name })
         .eq('user_id', user.id);
 
@@ -168,6 +169,8 @@ const Profile1 = () => {
           distrito: formData.distrito,
           telefono: formData.telefono,
           fecha_nac: formData.fecha_nac,
+          cv_url: formData.cv_url, // Se guarda el URL del CV
+          cv_file_name: formData.cv_file_name, // Se guarda el nombre del archivo del CV
           user_id: user.id
         };
 
@@ -178,42 +181,7 @@ const Profile1 = () => {
 
         if (perfilError) throw new Error('Error updating profile: ' + perfilError.message);
 
-        const { data: experienciaExistente, error: experienciaCheckError } = await supabase
-          .from('Experiencia')
-          .select('*')
-          .eq('user_id', user.id)
-          .single();
-
-        if (experienciaCheckError && experienciaCheckError.code !== 'PGRST116') {
-          throw new Error('Error checking experience: ' + experienciaCheckError.message);
-        }
-
-        const experienciaOperation = experienciaExistente ? 'update' : 'insert';
-        const experienciaData = {
-          user_id: user.id,
-          cv_url: formData.cv_url,
-          cv_file_name: formData.cv_file_name,
-          cargo_1: formData.cargo_1,
-          empresa_1: formData.empresa_1,
-          tiempo_1: formData.tiempo_1,
-          funcion_1: formData.funcion_1,
-          cargo_2: formData.cargo_2,
-          empresa_2: formData.empresa_2,
-          tiempo_2: formData.tiempo_2,
-          funcion_2: formData.funcion_2,
-          estudio: formData.estudio,
-          institucion: formData.institucion,
-          año: formData.año
-        };
-
-        const { error: experienciaError } = await supabase
-          .from('Experiencia')
-          [experienciaOperation](experienciaData)
-          .eq('user_id', user.id);
-
-        if (experienciaError) throw new Error('Error saving experience: ' + experienciaError.message);
-
-        console.log("Datos guardados correctamente:", experienciaData);
+        console.log("Perfil actualizado correctamente:", perfilData);
 
         const savedMessage = document.createElement("div");
         savedMessage.textContent = "Guardado correctamente";
@@ -256,22 +224,18 @@ const Profile1 = () => {
     </div>
   );
 
-
   return (
     <div className="w-full h-screen font-dmsans bg-gray-50">
       <HeaderPowerAuth />
-      <div className="max-w-4xl mx-auto p-6  pt-32 rounded-lg">
-        <div className="flex items-center justify-between  mb-6 w-full bg-primarycolor px-10 py-6 rounded-lg flex-wrap">
+      <div className="max-w-4xl mx-auto p-6 pt-32 rounded-lg">
+        <div className="flex items-center justify-between mb-6 w-full bg-primarycolor px-10 py-6 rounded-lg flex-wrap">
           <div className="flex items-center flex-wrap">
-          <div className="relative">
-              {/* Imagen de perfil */}
+            <div className="relative">
               <img
                 src={formData.avatar_url}
                 alt="profile"
                 className="w-24 h-24 rounded-full border-2 border-white"
               />
-
-              {/* Campo para subir avatar */}
               {editMode && (
                 <div className="absolute inset-0 flex items-center justify-center bg-gray-300 bg-opacity-80 rounded-full">
                   <label
@@ -298,7 +262,7 @@ const Profile1 = () => {
                   value={formData.nombre}
                   onChange={handleChange}
                   readOnly={!editMode}
-                  className={`mt-1 block w-full px-2 py-1  rounded-md focus:outline-none md:text-xl ${
+                  className={`mt-1 block w-full px-2 py-1 rounded-md focus:outline-none md:text-xl ${
                     editMode
                       ? "border-gray-300 text-gray-800"
                       : "bg-transparent text-white"
@@ -351,7 +315,6 @@ const Profile1 = () => {
                 {formData.correo}
               </p>
             </div>
-            {/* Mostrar botones solo en modo de edición */}
             {editMode && (
               <form onSubmit={handleSubmit} className="space-y-4 w-1/2 p-4">
                 <div className="flex justify-end space-x-4">
@@ -368,7 +331,7 @@ const Profile1 = () => {
                   >
                     Cancelar
                   </button>
-                </div>{" "}
+                </div>
               </form>
             )}
           </div>
@@ -389,7 +352,35 @@ const Profile1 = () => {
             editMode={editMode}
           />
         </div>
-        
+
+        <div className="mb-2">
+          <label className="block text-sm font-regular text-gray-700">
+            CV (Formato PDF)
+          </label>
+          {editMode ? (
+            <input
+              type="file"
+              accept=".pdf"
+              className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-gray-500 py-2 px-3"
+              onChange={handleCVChange}
+            />
+          ) : (
+            <div className="mt-1 block w-full py-2 px-3 bg-gray-50 rounded-md">
+              {formData.cv_file_name ? (
+                <a
+                  href={formData.cv_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-600 underline"
+                >
+                  {formData.cv_file_name}
+                </a>
+              ) : (
+                "No se ha subido ningún CV"
+              )}
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
