@@ -9,47 +9,36 @@ import { LuMail } from "react-icons/lu";
 
 const InfoPostulante = ({ postulado, onEstadoChange }) => {
   const [estadoActual, setEstadoActual] = useState(postulado.estado);
-  const [userData, setUserData] = useState([]);
+  const [userData, setUserData] = useState(null); // Iniciar con null
   const [preguntas, setPreguntas] = useState([]);
   const [respuestas, setRespuestas] = useState([]);
-console.log(postulado.user_id)
-  useEffect(() => {
-    
+  const [loading, setLoading] = useState(true); // Estado de cargando
 
-    // Fetch additional user data from 'Perfiles' table
+  useEffect(() => {
     const fetchUserData = async () => {
       try {
         const { data, error } = await supabase
           .from("perfiles")
-          .select("*") // Cambiado a la tabla perfiles
-          .eq("id", postulado.user_id) // Asegúrate de usar el campo correcto para el ID
+          .select("*")
+          .eq("id", postulado.user_id)
           .single();
 
-        if (error) {
-          throw error;
-        }
-
-        if (data) {
-          setUserData(data);
-        }
+        if (error) throw error;
+        if (data) setUserData(data);
       } catch (error) {
         console.error("Error fetching user data:", error.message);
       }
     };
 
-    // Fetch questions and answers
     const fetchQuestionsAndAnswers = async () => {
       try {
-        // Obtén la oferta relacionada usando el ID de la postulacion
         const { data: ofertaData, error: ofertaError } = await supabase
           .from("Oferta")
           .select("preg_1, preg_2, preg_3, preg_4, preg_5, preg_6")
           .eq("id_oferta", postulado.id_oferta)
           .single();
 
-        if (ofertaError) {
-          throw ofertaError;
-        }
+        if (ofertaError) throw ofertaError;
 
         if (ofertaData) {
           setPreguntas([
@@ -62,7 +51,6 @@ console.log(postulado.user_id)
           ]);
         }
 
-        // Obtener respuestas de la tabla Postulacion
         setRespuestas([
           postulado.resp_1,
           postulado.resp_2,
@@ -76,19 +64,28 @@ console.log(postulado.user_id)
       }
     };
 
-    fetchUserData();
-    fetchQuestionsAndAnswers();
-  }, [postulado, userData]);
+    // Función para manejar la carga de los datos
+    const fetchData = async () => {
+      await fetchUserData();
+      await fetchQuestionsAndAnswers();
+      setLoading(false); // Dejar de cargar una vez que se obtengan los datos
+    };
 
-  const whatsappLink = `https://wa.me/${postulado.telefono}`;
+    fetchData();
+  }, [postulado]);
 
 
-  const cvUrl = postulado.cv_link ? `${postulado.cv_link}#view=fitH` : '';
-
-  // Combina preguntas y respuestas en un solo array de objetos
   const preguntasYRespuestas = preguntas
     .map((pregunta, index) => ({ pregunta, respuesta: respuestas[index] }))
-    .filter(({ pregunta, respuesta }) => pregunta && respuesta); // Filtra las que no tienen pregunta o respuesta
+    .filter(({ pregunta, respuesta }) => pregunta && respuesta);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-full">
+        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-purple-500"></div>
+      </div>
+    ); // Spinner de carga
+  }
 
   return (
     <div className="bg-white text-white rounded-lg border transition-all duration-900 h-[100%] border-primarycolor">
@@ -102,52 +99,44 @@ console.log(postulado.user_id)
           <div className="flex flex-col gap-3">
             <div>
               <h2 className="text-xl font-medium text-gray-700">
-              {userData.nombre}
-            </h2>
-            <p className="text-sm text-gray-600">{calculateAge(userData.fecha_nac)} años</p>
+                {userData.nombre}
+              </h2>
+              <p className="text-sm text-gray-600">
+                {calculateAge(userData.fecha_nac)} años
+              </p>
             </div>
             <div className="flex space-x-4">
               <a
-                href={whatsappLink}
+                href="#"
                 className="px-4 py-2 bg-green-400 text-white text-sm font-semibold rounded-lg hover:bg-green-600 flex items-center gap-2"
               >
                 <FaWhatsapp size={20} />
               </a>
-              <button className="px-4 py-2 bg-red-400  text-whitetext-sm font-semibold rounded-md hover:bg-red-300">
-              <FaFilePdf size={20} /> {userData.cv_url}
-              </button>
+              <a href={userData.cv_url} target="_blank" className="px-4 py-2 bg-red-400 text-whitetext-sm font-semibold rounded-md hover:bg-red-300">
+                <FaFilePdf size={20} /> 
+              </a>
             </div>
           </div>
           <div className="flex flex-col gap-3">
-            <p className="text-sm text-gray-600 flex gap-2 items-center"><HiOutlineIdentification size={18}/>{userData.dni}</p>
-            <p className="text-sm text-gray-600 flex gap-2 items-center"><FiPhone size={18} />{userData.telefono}</p>
-            <p className="text-sm text-gray-600 flex gap-2 items-center"><BiHome size={18} />{userData.distrito}</p>
-            <p className="text-sm text-gray-600 flex gap-2 items-center"><LuMail size={18} />{userData.correo}</p> 
+            <p className="text-sm text-gray-600 flex gap-2 items-center">
+              <HiOutlineIdentification size={18} />
+              {userData.dni}
+            </p>
+            <p className="text-sm text-gray-600 flex gap-2 items-center">
+              <FiPhone size={18} />
+              {userData.telefono}
+            </p>
+            <p className="text-sm text-gray-600 flex gap-2 items-center">
+              <BiHome size={18} />
+              {userData.distrito}
+            </p>
+            <p className="text-sm text-gray-600 flex gap-2 items-center">
+              <LuMail size={18} />
+              {userData.correo}
+            </p>
           </div>
         </div>
       </div>
-
-      {/* <div className="flex items-center space-x-2 mb-6">
-    <button
-      onClick={() => handleEstadoClick("seleccionado")}
-      className={`px-4 py-2 ${estadoActual === "seleccionado" ? "bg-green-500 text-white" : "bg-green-300 text-white"} rounded-lg hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400`}
-    >
-      <FaCheck size={24} />
-    </button>
-    <button
-      onClick={() => handleEstadoClick("pendiente")}
-      className={`px-4 py-2 ${estadoActual === "pendiente" ? "bg-yellow-500 text-white" : "bg-gray-300 text-gray-700"} rounded-md hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-yellow-400`}
-    >
-      <FaQuestion size={24} />
-    </button>
-    <button
-      onClick={() => handleEstadoClick("descartado")}
-      className={`px-4 py-2 ${estadoActual === "descartado" ? "bg-red-500 text-white" : "bg-red-300 text-white"} rounded-md hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-400`}
-    >
-      <IoMdClose size={24} />
-    </button>
-  </div> */}
-
 
       <div className="mt-4 bg-white p-6 rounded-lg">
         <h3 className="text-xl font-bold text-purple-700">Respuestas</h3>
