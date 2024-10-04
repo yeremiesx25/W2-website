@@ -22,6 +22,7 @@ import ReservaAdmin from './Componentes/Reserva/ReservaAdmin.jsx';
 import Auth from './Componentes/Reserva/Auth.jsx';
 import Coworking from './Componentes/Coworking/Coworking.jsx';
 import Contacto from './Componentes/Contacto/Contacto.jsx';
+import RegisterAdmin from "./Componentes/Admin/RegisterAdmin.jsx";
 
 
 function App() {
@@ -72,6 +73,8 @@ function App() {
           <Route
             path="/AdminLogin"
             element={<LoginAdmin />} /> {/* Ruta pública */}
+
+             <Route path="/550e8400-e29b-41d4-a716-446655440000" element={<RegisterAdmin />} />
           
           <Route
             path="/EditJob/:id_oferta"
