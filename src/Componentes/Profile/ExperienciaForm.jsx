@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ExperienciaForm = ({ formData, handleChange, handleCVChange, editMode }) => {
+const ExperienciaForm = ({ formData, handleChange, editMode }) => {
   return (
     <div className="w-full lg:full bg-white border border-primarycolor border-opacity-30 p-6 rounded-lg">
       <h2 className="text-xl text-gray-800 mb-4">Experiencia Laboral</h2>
@@ -187,35 +187,6 @@ const ExperienciaForm = ({ formData, handleChange, handleCVChange, editMode }) =
             editMode ? 'border-gray-300' : 'bg-gray-100'
           }`}
         />
-      </div>
-
-      {/* Subir CV */}
-      <h2 className="text-lg font-medium mt-6 mb-4">Subir CV</h2>
-      <div className="mb-2">
-        <label className="block text-sm font-regular text-gray-700">CV (Formato PDF)</label>
-        {editMode ? (
-          <input
-            type="file"
-            accept=".pdf"
-            className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:border-indigo-500 focus:ring focus:ring-indigo-200 focus:ring-opacity-50 text-gray-500 py-2 px-3"
-            onChange={handleCVChange}
-          />
-        ) : (
-          <div className="mt-1 block w-full py-2 px-3 bg-gray-50 rounded-md">
-            {formData.cv_file_name ? (
-              <a
-                href={formData.cv_url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-600 underline"
-              >
-                {formData.cv_file_name}
-              </a>
-            ) : (
-              "No se ha subido ningún CV"
-            )}
-          </div>
-        )}
       </div>
     </div>
   );
