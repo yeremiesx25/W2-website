@@ -142,7 +142,7 @@ function Postulados() {
     : [];
 
   return (
-    <div className="font-dmsans py-2 px-4 bg-gray-50">
+    <div className="font-dmsans py-2 px-4 bg-gray-50 h-screen">
       <div>
         <section className="bg-primarycolor md:bg-newprimarycolor rounded-lg dark:bg-dark h-96 md:h-40 flex justify-center items-center max-h-screen">
           <div className="container mx-auto">
@@ -196,7 +196,7 @@ function Postulados() {
               ))}
             </div>
           </div>
-          <div className="ml-4 w-full md:w-2/3">
+          <div className="ml-4 w-full h-[420px] md:w-2/3">
             {selectedPostulado && (
               <InfoPostulante 
                 postulado={selectedPostulado} 
