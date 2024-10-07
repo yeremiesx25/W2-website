@@ -45,7 +45,7 @@ const HeroCoworking = () => {
                 Descubre cómo una oficina compartida puede transformar tu forma de trabajar. Ofrecemos un entorno dinámico y profesional que favorece la colaboración y la eficiencia.
                 </p>
                 <div class="flex justify-center md:justify-start">
-                    <a href="#" class="bg-primarycolor hover:bg-indigo-600 text-white font-bold py-3 px-6 rounded-md">
+                <a href="#info-section" className="bg-primarycolor hover:bg-indigo-600 text-white font-bold py-3 px-6 rounded-md">
                         Reserva tu espacio ahora
                     </a>
                 </div>

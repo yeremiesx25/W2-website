@@ -137,17 +137,17 @@ const Rooms = () => {
           <FaChevronRight />
         </button>
 
-        {/* Paginación */}
-        <div className="flex justify-center space-x-2 mt-4">
-          {rooms.map((_, index) => (
-            <button
-              key={index}
-              className={`h-2 w-2 rounded-full ${
-                index === currentIndex ? 'bg-black' : 'bg-gray-400'
-              }`}
-              onClick={() => setCurrentIndex(index)}
-            />
-          ))}
+    {/* Paginación */}
+<div className="flex justify-center space-x-2 mt-4">
+  {rooms.slice(0, 4).map((_, index) => (
+    <button
+      key={index}
+      className={`h-2 w-2 rounded-full ${
+        index === currentIndex ? 'bg-black' : 'bg-gray-400'
+      }`}
+      onClick={() => setCurrentIndex(index)}
+    />
+  ))}
         </div>
       </div>
     </div>
