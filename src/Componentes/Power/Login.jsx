@@ -168,7 +168,9 @@ function Register() {
   return (
     <div className="flex justify-center min-h-screen">
       <HeaderPower />
-      <div className="w-1/2 h-screen bg-primarygradientdark hidden lg:block"></div>
+      <div className="w-1/2 h-screen bg-primarygradientdark hidden md:flex justify-center">
+        <img src="" alt="" />
+      </div>
       <div className="md:w-1/2 h-screen py-6 bg-white flex items-center mx-auto px-4 lg:px-40 justify-center overflow-y-scroll">
         {isLogin ? (
           <form onSubmit={handleLogin} className="w-full p-10">

@@ -82,14 +82,8 @@ export const AuthContextProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider value={{ signInWithGoogle, manualSignIn, signOut, user, loading }}>
-      {loading ? <div>
-        <div className="flex justify-center items-center h-screen">
-<div className="flex flex-row gap-2">
-  <div className="w-4 h-4 rounded-full bg-blue-700 animate-bounce"></div>
-  <div className="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:-.3s]"></div>
-  <div className="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:-.5s]"></div>
-</div>
-</div>
+      {loading ? <div className="flex justify-center items-center h-screen w-full">
+        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-primarycolor"></div>
       </div> : children}
     </AuthContext.Provider>
   );

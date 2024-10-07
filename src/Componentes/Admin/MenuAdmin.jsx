@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import {  FaChartLine, FaComments, FaCalendarAlt, FaClipboard, FaCog, FaSignOutAlt, FaThList } from 'react-icons/fa';
+import { FaComments, FaCalendarAlt, FaClipboard, FaCog, FaSignOutAlt, FaThList } from 'react-icons/fa';
+import { RxAvatar } from "react-icons/rx";
 import { supabase } from "../../supabase/supabase.config"; // Supongamos que usas Supabase para autenticación
 import Advice from './Advice';
 
@@ -42,19 +43,16 @@ function MenuAdmin() {
           <MenuItem to="/Admin" icon={FaThList} label="Ofertas" />
         </li>
         <li>
-          <MenuItem to="/Postulados" icon={FaChartLine} label="Postulantes" />
+          <MenuItem to="/Conversaciones" icon={FaComments} label="Conversaciones" />
         </li>
         <li>
-          <MenuItem to="/conversaciones" icon={FaComments} label="Conversaciones" />
+          <MenuItem to="/Programa" icon={FaCalendarAlt} label="Programar entrevistas" />
         </li>
         <li>
-          <MenuItem to="/entrevistas" icon={FaCalendarAlt} label="Programar entrevistas" />
+          <MenuItem to="/Estadisticas" icon={FaClipboard} label="Estadísticas" />
         </li>
         <li>
-          <MenuItem to="/estadisticas" icon={FaClipboard} label="Estadísticas" />
-        </li>
-        <li>
-          <MenuItem to="/ajustes" icon={FaCog} label="Ajustes" />
+          <MenuItem to="/AdminProfile" icon={RxAvatar} label="Mi Perfil" />
         </li>
       </ul><Advice />
       <div className="p-6">

@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import menuMobilePower from '../../assets/menu (4).png'; // Icono de hamburguesa
+import { motion } from 'framer-motion'; // Importar framer motion
 import logo from '../../assets/LogoPower.png';
 import { UserAuth } from "../../Context/AuthContext";
 import { supabase } from "../../supabase/supabase.config";
 import { RxAvatar } from "react-icons/rx";
 import { BiLogOut } from "react-icons/bi";
+import { TiArrowSortedDown } from "react-icons/ti";
 
 function HeaderPowerAuth() {
   const [showMenu, setShowMenu] = useState(false);
@@ -24,10 +25,10 @@ function HeaderPowerAuth() {
   const fetchProfile = async () => {
     try {
       const { data, error } = await supabase
-        .from('perfiles') // Asegúrate de que el nombre de tu tabla es 'perfiles'
+        .from('perfiles')
         .select('nombre, avatar_url')
-        .eq('id', user.id) // Filtra por el id del usuario autenticado
-        .single(); // Obtiene solo un perfil
+        .eq('id', user.id)
+        .single();
 
       if (error) {
         console.error("Error fetching profile:", error);
@@ -47,7 +48,7 @@ function HeaderPowerAuth() {
 
   useEffect(() => {
     if (user) {
-      fetchProfile(); // Obtiene el perfil cuando el usuario esté disponible
+      fetchProfile();
     }
   }, [user]);
 
@@ -66,14 +67,18 @@ function HeaderPowerAuth() {
     };
   }, []);
 
+  const handleToggleMenu = () => {
+    setMenuOpen((prevState) => !prevState);
+  };
+
   return (
-    <header 
-    className={`bg-newprimarycolor fixed w-full z-10 font-dmsans transition-shadow duration-300 ${hasShadow ? 'shadow-lg' : ''}`}>
-      <div className="container mx-auto px-8 flex justify-between items-center h-20">
+    <header className={`bg-newprimarycolor fixed w-full z-10 font-dmsans transition-shadow duration-300 ${hasShadow ? 'shadow-lg' : ''}`}>
+      <div className="container mx-auto px-8 flex justify-between items-center md:h-20 h-16">
         {/* Logo */}
         <div className="flex items-center">
-          <a href="/Power">
-            <img src={logo} alt="Power" className="w-24 h-auto" /> 
+          <a className='text-yellowprimary text-2xl font-medium' href="/PowerAuth">
+            {/* <img src={logo} alt="Power" className="w-24 h-auto" />  */}
+            Power
           </a>
         </div>
 
@@ -87,44 +92,46 @@ function HeaderPowerAuth() {
         </div>
 
         {/* Avatar y menú desplegable */}
-        <div 
-          className="relative"
-          onMouseEnter={() => setMenuOpen(true)}
-          onMouseLeave={() => setMenuOpen(false)}
-        >
-          {/* Botón de avatar */}
-          <button className="flex items-center focus:outline-none">
-            <span className="ml-2 overflow-hidden whitespace-nowrap overflow-ellipsis text-white font-regular w-40">
+        <div className="relative">
+          <button 
+            className="flex items-center justify-between focus:outline-none gap-2"
+            onClick={handleToggleMenu}
+          >
+            <span className="overflow-hidden whitespace-nowrap overflow-ellipsis text-white font-regular w-auto hidden md:flex items-center">
               {profile.nombre || 'Usuario'}
             </span>
+            <TiArrowSortedDown className='text-white ml-1' />
             <img
               className="w-10 h-10 rounded-full my-2"
-              src={profile.avatar_url || 'https://icons.iconarchive.com/icons/papirus-team/papirus-status/512/avatar-default-icon.png'} // Puedes agregar una URL por defecto si no hay avatar
+              src={profile.avatar_url || 'https://icons.iconarchive.com/icons/papirus-team/papirus-status/512/avatar-default-icon.png'}
               alt="User"
             />
           </button>
 
-          {/* Menú desplegable con transición */}
-          <div 
-            className={`absolute right-0 w-48 bg-white rounded-md shadow-lg py-2 z-10 transition-opacity duration-300 ease-in-out transform ${
-              menuOpen ? 'opacity-100 scale-100' : 'opacity-0 scale-95'
-            }`}
-          >
-            <Link
-              to="/Profile1"
-              className="flex px-4 py-2 text-newprimarycolor hover:bg-blue-50"
+          {/* Menú desplegable con animación de Framer Motion */}
+          {menuOpen && (
+            <motion.div 
+              initial={{ opacity: 0, y: -10 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -10 }}
+              className="absolute right-0 w-48 bg-white rounded-md shadow-lg py-2 z-10"
             >
-              <RxAvatar size={24} className='mr-2' />
-              Perfil
-            </Link>
-            <button
-              onClick={signOut}
-              className="flex items-center px-4 py-2 w-full text-red-600 hover:bg-blue-50"
-            >
-              <BiLogOut size={24} />
-              <span className="ml-2">Cerrar sesión</span>
-            </button>
-          </div>
+              <Link
+                to="/Profile1"
+                className="flex px-4 py-2 text-newprimarycolor hover:bg-blue-50"
+              >
+                <RxAvatar size={24} className='mr-2' />
+                Perfil
+              </Link>
+              <button
+                onClick={signOut}
+                className="flex items-center px-4 py-2 w-full text-red-600 hover:bg-blue-50"
+              >
+                <BiLogOut size={24} />
+                <span className="ml-2">Cerrar sesión</span>
+              </button>
+            </motion.div>
+          )}
         </div>
       </div>
 

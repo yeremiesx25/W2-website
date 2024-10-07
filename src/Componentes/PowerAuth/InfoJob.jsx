@@ -122,13 +122,10 @@ function InfoJob({ selectedJob }) {
     // Obtener el tiempo en formato "hace X tiempo" y capitalizar la primera letra
     const timeAgo = dayjs(selectedJob.fecha_publicacion).fromNow();
     const capitalizedTimeAgo = timeAgo.charAt(0).toUpperCase() + timeAgo.slice(1);
-    
-    console.log(capitalizedTimeAgo); // "Hace unos minutos"
-
 
     return (
         <div
-            className="selected-job-info w-full sm:w-3/5 rounded-lg md:flex flex-col p-8 mx-8 bg-white hidden transition-all duration-500 font-dmsans"
+            className="selected-job-info w-full sm:w-3/5 border border-gray-300 rounded-lg md:flex flex-col p-8 mx-8 bg-white hidden transition-all duration-500 font-dmsans"
             style={{ height: "650px", overflowY: "auto", }}
         >
             <p className="text-gray-500 text-sm">{capitalizedTimeAgo}</p>
@@ -179,7 +176,7 @@ function InfoJob({ selectedJob }) {
             </div>
 
             <div className="mb-4">
-                <p className="text-gray-700 text-sm leading-relaxed">
+                <div className="text-gray-700 text-sm leading-relaxed">
                     <h3 className="font-semibold text-lg text-gray-800">Descripción</h3>
                     <p>{selectedJob.descripcion}</p>
                     {jobDetails.map((detail, index) => (
@@ -188,7 +185,7 @@ function InfoJob({ selectedJob }) {
                             <div className="mt-2">{detail.content}</div>
                         </div>
                     ))}
-                </p>
+                </div>
             </div>
 
             <div className="flex justify-center mt-4">

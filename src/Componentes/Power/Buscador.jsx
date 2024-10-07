@@ -1,9 +1,11 @@
 import React, { useState, useContext, useEffect, useRef } from 'react';
 import { FaSearch, FaMapMarkerAlt } from 'react-icons/fa';
 import JobsContext from '../../Context/JobsContext'; // Ajusta la ruta según sea necesario
+import { motion, AnimatePresence } from 'framer-motion';
+import { supabase } from '../../supabase/supabase.config'; // Importa tu cliente de Supabase
 
 function Buscador() {
-  const { searchJobs, resetSearchResults, userSearchResults } = useContext(JobsContext);
+  const { resetSearchResults, searchJobs } = useContext(JobsContext);
   const [keyword, setKeyword] = useState('');
   const [location, setLocation] = useState('');
   const [showKeywordSuggestions, setShowKeywordSuggestions] = useState(false);
@@ -12,47 +14,103 @@ function Buscador() {
   const [locationSuggestions, setLocationSuggestions] = useState([]);
   const keywordSuggestionsRef = useRef(null);
   const locationSuggestionsRef = useRef(null);
+  
 
   const handleKeywordChange = (e) => {
     const value = e.target.value;
     setKeyword(value);
-    setShowKeywordSuggestions(true);
-    updateKeywordSuggestions(value);
+    if (value) {
+      setShowKeywordSuggestions(true);
+    } else {
+      setShowKeywordSuggestions(false);
+      setKeywordSuggestions([]);
+    }
   };
 
   const handleLocationChange = (e) => {
     const value = e.target.value;
     setLocation(value);
-    setShowLocationSuggestions(true);
-    updateLocationSuggestions(value);
+    if (value) {
+      setShowLocationSuggestions(true);
+    } else {
+      setShowLocationSuggestions(false);
+      setLocationSuggestions([]);
+    }
   };
 
-  const updateKeywordSuggestions = (value) => {
-    const suggestions = uniqueSuggestions(userSearchResults.map((job) => job.puesto)).filter((suggestion) => suggestion.toLowerCase().includes(value.toLowerCase()));
-    setKeywordSuggestions(suggestions);
+  // Realiza la búsqueda de trabajos en Supabase donde estado = 'activa'
+  const searchJobsInSupabase = async (keyword, location) => {
+    try {
+      const { data: jobs, error } = await supabase
+        .from('Oferta')
+        .select('*')
+        .ilike('puesto', `%${keyword}%`) // Búsqueda por coincidencia en el título del empleo
+        .ilike('ubicacion', `%${location}%`) // Búsqueda por coincidencia en la ubicación
+        .eq('estado', 'activa'); // Solo trabajos con estado 'activa'
+
+      if (error) throw error;
+
+      resetSearchResults(jobs); // Actualiza los resultados en el contexto
+    } catch (error) {
+      console.error('Error fetching jobs:', error.message);
+    }
   };
 
-  const updateLocationSuggestions = (value) => {
-    const suggestions = uniqueSuggestions(userSearchResults.map((job) => job.ubicacion)).filter((suggestion) => suggestion.toLowerCase().includes(value.toLowerCase()));
-    setLocationSuggestions(suggestions);
+  // Actualiza sugerencias de palabras clave en Supabase
+  const fetchKeywordSuggestions = async (value) => {
+    try {
+      const { data: keywordSuggestions, error } = await supabase
+        .from('Oferta')
+        .select('puesto') // Selecciona solo el campo del título
+        .ilike('puesto', `%${value}%`) // Coincidencias parciales
+        .eq('estado', 'activa')
+        .limit(5); // Limita la cantidad de sugerencias
+
+      if (error) throw error;
+
+      setKeywordSuggestions(keywordSuggestions.map((job) => job.puesto)); // Solo extrae los títulos de los trabajos
+    } catch (error) {
+      console.error('Error fetching keyword suggestions:', error.message);
+    }
   };
 
-  const handleSelectKeywordSuggestion = (suggestion) => {
-    setKeyword(suggestion);
-    setShowKeywordSuggestions(false);
-  };
+  // Actualiza sugerencias de ubicación en Supabase
+  const fetchLocationSuggestions = async (value) => {
+    try {
+      const { data: locationSuggestions, error } = await supabase
+        .from('Oferta')
+        .select('ubicacion') // Selecciona solo el campo de la ubicación
+        .ilike('ubicacion', `%${value}%`) // Coincidencias parciales
+        .eq('estado', 'activa')
+        .limit(5); // Limita la cantidad de sugerencias
 
-  const handleSelectLocationSuggestion = (suggestion) => {
-    setLocation(suggestion);
-    setShowLocationSuggestions(false);
+      if (error) throw error;
+
+      setLocationSuggestions(locationSuggestions.map((job) => job.ubicacion)); // Solo extrae las ubicaciones
+    } catch (error) {
+      console.error('Error fetching location suggestions:', error.message);
+    }
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    // Llama a la función de búsqueda en Supabase
     searchJobs(keyword, location);
     setShowKeywordSuggestions(false);
     setShowLocationSuggestions(false);
   };
+
+  useEffect(() => {
+    if (keyword) {
+      fetchKeywordSuggestions(keyword);
+    }
+  }, [keyword]);
+
+  useEffect(() => {
+    if (location) {
+      fetchLocationSuggestions(location);
+    }
+  }, [location]);
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -70,45 +128,34 @@ function Buscador() {
     };
   }, []);
 
-  const uniqueSuggestions = (suggestions) => {
-    const uniqueSet = new Set();
-    return suggestions.filter((suggestion) => {
-      if (!uniqueSet.has(suggestion)) {
-        uniqueSet.add(suggestion);
-        return true;
-      }
-      return false;
-    });
-  };
-
   return (
-    <div className=" md:w-[80%] mx-auto w-full">
+    <div className="md:w-[80%] md:mx-auto w-full mx-2">
       <form
         onSubmit={handleSubmit}
-        className="  flex flex-col md:flex-row items-center justify-center border py-2 px-2 rounded-full  w-full bg-white"
+        className="md:shadow flex flex-col md:flex-row items-center justify-center md:border border-gray-400 py-2 px-2 md:rounded-full rounded-lg  w-full bg-white"
       >
-        <div className=" flex items-center w-full border-r">
-          <FaSearch className="ml-4 text-gray-500" />
+        <div className="flex items-center w-full md:border-0 border border-gray-600 rounded-full pr-6 md:pr-0 shadow-md md:shadow-none mb-2 md:mb-0">
+          <FaSearch className="ml-4 text-gray-700" />
           <input
             type="text"
             value={keyword}
             onChange={handleKeywordChange}
             placeholder="Título del empleo"
-            className="px-6 py-2 w-full rounded-md flex-1 outline-none bg-white pl-2"
+            className="px-6 py-4 w-full outline-none bg-white pl-2"
             onClick={() => {
               setShowKeywordSuggestions(true);
               setShowLocationSuggestions(false);
             }}
           />
         </div>
-        <div className="flex items-center w-full border-r">
-          <FaMapMarkerAlt className=" text-gray-500" />
+        <div className="md:flex items-center w-full border-r hidden">
+          <FaMapMarkerAlt className="text-gray-500" />
           <input
             type="text"
             value={location}
             onChange={handleLocationChange}
             placeholder="Ciudad o Lugar"
-            className=" py-2 w-full rounded-md flex-1 outline-none bg-white pl-2"
+            className="py-2 w-full rounded-md flex-1 outline-none bg-white pl-2"
             onClick={() => {
               setShowLocationSuggestions(true);
               setShowKeywordSuggestions(false);
@@ -117,31 +164,66 @@ function Buscador() {
         </div>
         <button
           type="submit"
-          className="w-full md:w-auto min-w-[48px] h-12 bg-primarycolor text-white rounded-full flex justify-center items-center gap-4"
-        ><span className='block md:hidden text-white font-semibold text-lg'>Buscar</span>
+          className="w-full md:w-auto min-w-[48px] h-12 bg-newprimarycolor text-white rounded-full flex justify-center items-center gap-4"
+        >
+          <span className="block md:hidden text-white font-semibold text-lg">Buscar</span>
           <div className="flex items-center justify-center">
-            <span className="text-sm font-semibold whitespace-nowrap"><FaSearch className=" text-white" /></span>
+            <span className="text-sm font-semibold whitespace-nowrap">
+              <FaSearch className="text-white" />
+            </span>
           </div>
         </button>
       </form>
-      {showKeywordSuggestions && (
-        <ul ref={keywordSuggestionsRef} className=" bg-white border border-gray-200 rounded-b-md shadow-md w-96 max-h-[200px]  overflow-y-auto absolute ">
-          {keywordSuggestions.map((suggestion, index) => (
-            <li key={index} className="px-4 py-2 cursor-pointer hover:bg-gray-100" onClick={() => handleSelectKeywordSuggestion(suggestion)}>
-              {suggestion}
-            </li>
-          ))}
-        </ul>
-      )}
-      {showLocationSuggestions && (
-        <ul ref={locationSuggestionsRef} className=" bg-white border border-gray-200 rounded-b-md shadow-md w-full max-h-[200px] overflow-y-auto">
-          {locationSuggestions.map((suggestion, index) => (
-            <li key={index} className="px-4 py-2 cursor-pointer hover:bg-gray-100" onClick={() => handleSelectLocationSuggestion(suggestion)}>
-              {suggestion}
-            </li>
-          ))}
-        </ul>
-      )}
+
+      <AnimatePresence>
+        {showKeywordSuggestions && keywordSuggestions.length > 0 && (
+          <motion.ul
+            ref={keywordSuggestionsRef}
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            className="bg-white border border-gray-200 rounded-b-md shadow-md w-96 max-h-[200px] overflow-y-auto absolute"
+          >
+            {keywordSuggestions.map((suggestion, index) => (
+              <li
+                key={index}
+                className="px-4 py-2 cursor-pointer hover:bg-gray-100"
+                onClick={() => {
+                  setKeyword(suggestion);
+                  setShowKeywordSuggestions(false);
+                }}
+              >
+                {suggestion}
+              </li>
+            ))}
+          </motion.ul>
+        )}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {showLocationSuggestions && locationSuggestions.length > 0 && (
+          <motion.ul
+            ref={locationSuggestionsRef}
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            className="bg-white border border-gray-200 rounded-b-md shadow-md w-full max-h-[200px] overflow-y-auto"
+          >
+            {locationSuggestions.map((suggestion, index) => (
+              <li
+                key={index}
+                className="px-4 py-2 cursor-pointer hover:bg-gray-100"
+                onClick={() => {
+                  setLocation(suggestion);
+                  setShowLocationSuggestions(false);
+                }}
+              >
+                {suggestion}
+              </li>
+            ))}
+          </motion.ul>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

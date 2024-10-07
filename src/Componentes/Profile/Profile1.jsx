@@ -215,13 +215,9 @@ const Profile1 = () => {
   };
 
   if (loading) return (
-    <div className="flex justify-center items-center h-screen">
-      <div className="flex flex-row gap-2">
-        <div className="w-4 h-4 rounded-full bg-blue-700 animate-bounce"></div>
-        <div className="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:-.3s]"></div>
-        <div className="w-4 h-4 rounded-full bg-blue-700 animate-bounce [animation-delay:-.5s]"></div>
+    <div className="flex justify-center items-center h-screen w-full">
+        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-primarycolor"></div>
       </div>
-    </div>
   );
 
   return (
@@ -316,8 +312,8 @@ const Profile1 = () => {
               </p>
             </div>
             {editMode && (
-              <form onSubmit={handleSubmit} className="space-y-4 w-1/2 p-4">
-                <div className="flex justify-end space-x-4">
+              <form onSubmit={handleSubmit} className="space-y-4 p-4 justify-center w-full">
+                <div className="flex justify-center space-x-4 w-full">
                   <button
                     type="submit"
                     className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-500"

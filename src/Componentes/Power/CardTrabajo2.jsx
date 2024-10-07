@@ -44,15 +44,14 @@ function CardTrabajo2({ job, onSelectJob, isSelected }) {
   // Obtener el tiempo en formato "hace X tiempo" y capitalizar la primera letra
   const timeAgo = dayjs(job.fecha_publicacion).fromNow();
   const capitalizedTimeAgo = timeAgo.charAt(0).toUpperCase() + timeAgo.slice(1);
-  
-  console.log(capitalizedTimeAgo); // "Hace unos minutos"
+
 
   return (
     <div className="w-full flex justify-center font-dmsans">
       <button
         onClick={() => onSelectJob(job)}
-        className={`w-full md:w-[90%] text-left border hover:shadow-sm hover:transition-all hover:duration-200 rounded-lg p-6 overflow-hidden flex justify-between items-center ${
-          isSelected ? "bg-gray-200" : "bg-white"
+        className={`w-full md:w-[90%] text-left border md:border-gray-300 border-gray-400 hover:shadow-sm hover:transition-all hover:duration-200 rounded-lg p-6 overflow-hidden flex justify-between items-center ${
+          isSelected ? "bg-gray-100" : "bg-white"
         }`}
       >
         <div className="flex flex-col space-y-2 w-full">
@@ -66,7 +65,7 @@ function CardTrabajo2({ job, onSelectJob, isSelected }) {
                 <h3 className="text-sm font-semibold text-gray-800">
                   {empresa}
                 </h3>
-                <p className="text-xs text-gray-500">{nombreReclutador}</p>{" "}
+                <p className="text-xs text-gray-600">{nombreReclutador}</p>{" "}
                 {/* Aquí se muestra el nombre del reclutador */}
               </div>
               </div>
@@ -76,17 +75,17 @@ function CardTrabajo2({ job, onSelectJob, isSelected }) {
           <h4 className="font-bold text-lg leading-tight text-gray-800">
             {puesto}
           </h4>
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-gray-700">
             {descripcion} <span className="text-blue-500">Ver más</span>
           </p>
           <div className="flex space-x-2 justify-between">
             <div className="flex space-x-2">
               {modalidad && (
-              <span className="bg-blue-50 text-gray-700 py-1 px-3 text-xs rounded-full font-regular tracking-wide gap-1 flex items-center">
+              <span className="bg-blue-50 text-gray-700 py-1 px-3 text-xs rounded-full font-medium tracking-wide gap-1 flex items-center">
                 <MdOutlineMapsHomeWork /> {modalidad}
               </span>
             )}
-            <span className="bg-purple-50 text-gray-700 py-1 px-3 text-xs rounded-full font-regular tracking-wide flex items-center gap-1">
+            <span className="bg-purple-50 text-gray-700 py-1 px-3 text-xs rounded-full font-medium tracking-wide flex items-center gap-1">
             <IoLocationOutline />{ubicacion}
             </span>
             </div>

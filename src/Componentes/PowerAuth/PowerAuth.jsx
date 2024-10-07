@@ -6,7 +6,7 @@ import TrabajosContainer2 from '../Power/TrabajosContainer2'
 
 function PowerAuth() {
   return (
-    <div className='bg-bgpowergradient'>
+    <div className='bg-white'>
     <HeaderPowerAuth />
     <HeroPowerAuth />
     <TrabajosContainer2 />

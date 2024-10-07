@@ -82,13 +82,13 @@ const InfoPostulante = ({ postulado, onEstadoChange }) => {
   if (loading) {
     return (
       <div className="flex justify-center items-center h-full">
-        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-purple-500"></div>
+        <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-primarycolor"></div>
       </div>
     ); // Spinner de carga
   }
 
   return (
-    <div className="bg-white text-white rounded-lg border transition-all duration-900 h-[100%] border-primarycolor">
+    <div className="bg-white pb-6 text-white rounded-lg border transition-all duration-900 h-full mb-4">
       <div className="flex items-center justify-around w-full p-6 bg-white rounded-lg space-x-6">
         <div className="flex space-x-20 justify-center w-full">
           <img
@@ -149,6 +149,14 @@ const InfoPostulante = ({ postulado, onEstadoChange }) => {
           </div>
         ))}
       </div>
+      <div className="mt-4 px-10">
+          <iframe
+            src={userData.cv_url} // URL del CV
+            style={{ width: "100%", height: "500px" }} // Ajusta el tamaño según sea necesario
+            frameBorder="0"
+            title="CV"
+          ></iframe>
+        </div>
     </div>
   );
 };

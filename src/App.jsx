@@ -23,7 +23,10 @@ import Auth from './Componentes/Reserva/Auth.jsx';
 import Coworking from './Componentes/Coworking/Coworking.jsx';
 import Contacto from './Componentes/Contacto/Contacto.jsx';
 import RegisterAdmin from "./Componentes/Admin/RegisterAdmin.jsx";
-
+import Conversaciones from "./Componentes/Admin/Conversaciones.jsx";
+import Programa from "./Componentes/Admin/Programa.jsx";
+import Estadisticas from "./Componentes/Admin/Estadisticas.jsx";
+import AdminProfile from "./Componentes/Admin/AdminProfile.jsx";
 
 function App() {
   return (
@@ -67,6 +70,38 @@ function App() {
             element={
               <ProtectedRoute>
                 <AdminForm />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/Conversaciones"
+            element={
+              <ProtectedRoute>
+                <Conversaciones />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/Programa"
+            element={
+              <ProtectedRoute>
+                <Programa />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/Estadisticas"
+            element={
+              <ProtectedRoute>
+                <Estadisticas />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/AdminProfile"
+            element={
+              <ProtectedRoute>
+                <AdminProfile />
               </ProtectedRoute>
             }
           />

@@ -108,12 +108,12 @@ function InfoJobMovil() {
     <div className='w-full h-screen font-dmsans flex flex-col'>
       <HeaderPowerAuth />
       <div className='selected-job-info flex-1 p-4 pt-16 pb-20 bg-white overflow-y-auto'>
-      <button
+      {/* <button
   className='text-black mb-2  mt-2 border border-gray-400 bg-white hover:bg-gray-200 rounded-full p-2'
   onClick={handleBackToList}
 >
   <FaArrowLeft className='text-black' size={20} />
-</button>
+</button> */}
         <h2 className='ml-1 mt-3 font-bold text-3xl text-center text-primarytext break-words whitespace-normal'>
           {selectedJob?.puesto}
         </h2>
@@ -141,7 +141,7 @@ function InfoJobMovil() {
           {selectedJob?.requisitos && (
             <div className='mb-4'>
               <h3 className='font-semibold'>REQUISITOS</h3>
-              {formatContent(selectedJob.requisitos)}
+              <p className='text-md'>{formatContent(selectedJob.requisitos)}</p>
             </div>
           )}
           {selectedJob?.funciones && (
@@ -158,18 +158,18 @@ function InfoJobMovil() {
           )}
         </div>
       </div>
-      <div className='fixed bottom-0 left-0 right-0 bg-white py-2 z-10'>
-        <div className='w-full flex justify-center'>
+      <div className='fixed bottom-0 left-0 right-0 bg-transparent py-4 z-10'>
+        <div className='w-full flex justify-center px-8'>
           <button
-            className={`font-bold py-2 px-4 rounded-full ${
+            className={`font-bold py-2 px-4 rounded-full w-full ${
               hasApplied ? 'bg-[#0057c2] text-white' : 'bg-[#0057c2] text-white'
             }`}
             onClick={hasApplied ? null : handleApplyClick}
             disabled={hasApplied}
           >
-            {hasApplied ? 'YA HAS POSTULADO' : 'POSTULARME'}
+            {hasApplied ? 'Ya has postulado' : 'Postularte'}
           </button>
-          {whatsappBaseUrl && (
+          {/* {whatsappBaseUrl && (
             <a
               href={whatsappUrl}
               target='_blank'
@@ -181,7 +181,7 @@ function InfoJobMovil() {
                 WhatsApp
               </button>
             </a>
-          )}
+          )} */}
         </div>
       </div>
       <QuestionsModal

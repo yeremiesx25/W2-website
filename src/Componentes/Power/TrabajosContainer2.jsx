@@ -10,37 +10,33 @@ function TrabajosContainer2() {
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
   const navigate = useNavigate();
   const { id_oferta } = useParams();
-  console.log('Resultados de búsqueda de trabajos:', userSearchResults);
+  
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth <= 768);
     };
 
     window.addEventListener('resize', handleResize);
-
     return () => {
       window.removeEventListener('resize', handleResize);
     };
   }, []);
 
   useEffect(() => {
-    if (userSearchResults.length > 0) {
-      const filteredResults = userSearchResults
-        .filter(job => job.estado === 'activa') // Filtrar por estado "abierto"
-        .slice()
-        .sort((a, b) => new Date(b.fecha_publicacion) - new Date(a.fecha_publicacion));
-      
-      setSelectedJob(filteredResults[0]);
-    }
+    const filteredResults = userSearchResults
+      .filter(job => job.estado === 'activa')
+      .sort((a, b) => new Date(b.fecha_publicacion) - new Date(a.fecha_publicacion));
+
+    setSelectedJob(filteredResults[0] || null); // Manejo de trabajos filtrados vacíos
   }, [userSearchResults]);
 
   useEffect(() => {
     if (id_oferta && userSearchResults.length > 0) {
-      const foundJob = userSearchResults.find(job => job.id_oferta === parseInt(id_oferta) && job.estado === 'activa');
+      const foundJob = userSearchResults.find(job => job.id_oferta === parseInt(id_oferta, 10) && job.estado === 'activa');
       if (foundJob) {
         setSelectedJob(foundJob);
       } else {
-        navigate('/');
+        navigate('/Power'); // Redirigir si no se encuentra el trabajo
       }
     }
   }, [id_oferta, userSearchResults, navigate]);
@@ -64,12 +60,11 @@ function TrabajosContainer2() {
           }}
         >
           {userSearchResults
-            .filter(job => job.estado === 'activa') // Filtrar por estado "abierto"
-            .slice()
+            .filter(job => job.estado === 'activa')
             .sort((a, b) => new Date(b.fecha_publicacion) - new Date(a.fecha_publicacion))
-            .map((job, index) => (
+            .map(job => (
               <CardTrabajo2
-                key={index}
+                key={job.id_oferta} // Usar id_oferta como clave
                 job={job}
                 onSelectJob={() => handleCardClick(job)}
                 isSelected={selectedJob === job}
