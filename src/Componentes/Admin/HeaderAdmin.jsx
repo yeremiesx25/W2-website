@@ -67,7 +67,7 @@ function HeaderAdmin() {
         <img
           src={profile.avatar_url || 'https://static-00.iconduck.com/assets.00/user-avatar-happy-icon-2048x2048-ssmbv1ou.png'} // Usa una imagen por defecto si no hay avatar
           alt="User Avatar"
-          className="w-8 h-8 rounded-full"
+          className="w-10 h-10 rounded-full"
         />
         <span className="text-gray-800 text-base font-medium">{profile.nombre}</span>
       </div>
