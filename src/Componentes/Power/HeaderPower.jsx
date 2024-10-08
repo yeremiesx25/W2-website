@@ -42,7 +42,7 @@ function HeaderPower() {
 
   return (
     <header 
-      className={`bg-[#003E9D] fixed w-full z-10  font-dmsans  ${
+      className={`bg-yellowprimary fixed w-full z-10  font-dmsans  ${
         hasShadow ? 'shadow-lg' : ''
       }`}>
       <div className=" mx-auto px-4 flex justify-between md:justify-around items-center h-20">
