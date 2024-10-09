@@ -150,16 +150,17 @@ const Profile1 = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { data: { session }, error: sessionError } = await supabase.auth.getSession();
-
+  
     if (sessionError) {
       console.error('Error obtaining session:', sessionError.message);
       return;
     }
-
+  
     const user = session?.user;
-
+  
     if (user) {
       try {
+        // Update or insert into 'perfiles' table
         const perfilOperation = perfil ? 'update' : 'insert';
         const perfilData = {
           nombre: formData.nombre,
@@ -169,20 +170,46 @@ const Profile1 = () => {
           distrito: formData.distrito,
           telefono: formData.telefono,
           fecha_nac: formData.fecha_nac,
-          cv_url: formData.cv_url, // Se guarda el URL del CV
-          cv_file_name: formData.cv_file_name, // Se guarda el nombre del archivo del CV
+          cv_url: formData.cv_url,
+          cv_file_name: formData.cv_file_name,
           user_id: user.id
         };
-
+  
         const { error: perfilError } = await supabase
           .from('perfiles')
           [perfilOperation](perfilData)
           .eq('user_id', user.id);
-
+  
         if (perfilError) throw new Error('Error updating profile: ' + perfilError.message);
-
-        console.log("Perfil actualizado correctamente:", perfilData);
-
+  
+        // Update or insert into 'Experiencia' table
+        const experienciaData = {
+          cargo_1: formData.cargo_1,
+          empresa_1: formData.empresa_1,
+          tiempo_1: formData.tiempo_1,
+          funcion_1: formData.funcion_1,
+          cargo_2: formData.cargo_2,
+          empresa_2: formData.empresa_2,
+          tiempo_2: formData.tiempo_2,
+          funcion_2: formData.funcion_2,
+          estudio: formData.estudio,
+          institucion: formData.institucion,
+          año: formData.año,
+          user_id: user.id
+        };
+  
+        // Assuming you want to update or insert, depending on whether the record exists
+        const experienciaOperation = perfil ? 'update' : 'insert';
+        const { error: experienciaError } = await supabase
+          .from('Experiencia')
+          [experienciaOperation](experienciaData)
+          .eq('user_id', user.id);
+  
+        if (experienciaError) throw new Error('Error updating experience: ' + experienciaError.message);
+  
+        console.log("Datos actualizados correctamente");
+  
+        // Display saved message
         const savedMessage = document.createElement("div");
         savedMessage.textContent = "Guardado correctamente";
         savedMessage.style.backgroundColor = "rgba(0, 128, 0, 0.8)";
@@ -195,13 +222,13 @@ const Profile1 = () => {
         savedMessage.style.borderRadius = "5px";
         savedMessage.style.zIndex = "9999";
         document.body.appendChild(savedMessage);
-
+  
         setTimeout(() => {
           document.body.removeChild(savedMessage);
         }, 2000);
-
+  
         setEditMode(false);
-
+  
       } catch (error) {
         console.error("Error guardando los datos:", error.message);
       }
@@ -209,7 +236,7 @@ const Profile1 = () => {
       console.error('No se encontró el usuario autenticado.');
     }
   };
-
+  
   const handleCancel = () => {
     setEditMode(false);
   };
