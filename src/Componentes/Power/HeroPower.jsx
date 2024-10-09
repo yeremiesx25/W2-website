@@ -2,7 +2,7 @@ import React from 'react';
 import logo from '../../assets/Logo Power.png';
 import CardOfertaPower from './CardOfertaPower';
 import gradiantPower from '../../assets/gradiantPower.svg'
-import DashboardContent from '../../assets/DashboardContent.png'
+import DashboardContent from '../../assets/BGPOWER.svg'
 import imgSaasPower from '../../assets/imgSaasPower.png'
 
 function HeroPower() {
