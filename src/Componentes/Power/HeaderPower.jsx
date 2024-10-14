@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom'; // Importa el icono de hamburguesa
 import Login from './Login';
-import logo from '../../assets/LogoPower.png';
+import logo from '../../assets/Logo newPower.svg';
 import { IoMenu } from "react-icons/io5";
 
 function HeaderPower() {
@@ -47,7 +47,7 @@ function HeaderPower() {
       }`}>
       <div className=" mx-auto px-4 flex justify-between md:justify-around items-center h-20">
         {/* Logo */}
-        <div className="flex items-center md:justify-center">
+        <div className="flex items-center justify-center md:justify-center">
           <a href="/Power">
             <img src={logo} alt="Power" className="w-24 h-auto" /> 
           </a>

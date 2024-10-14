@@ -132,16 +132,16 @@ function Buscador() {
     <div className="md:w-[80%] md:mx-auto w-full mx-2">
       <form
         onSubmit={handleSubmit}
-        className="md:shadow flex flex-col md:flex-row items-center justify-center md:border border-gray-400 py-2 px-2 md:rounded-full rounded-lg  w-full bg-white"
+        className="md:shadow-[0_4px_20px_rgba(0,0,0,0.1)] md:border flex flex-col md:flex-row items-center justify-center  py-2 px-2 md:rounded-lg rounded-lg  w-full bg-white"
       >
         <div className="flex items-center w-full md:border-0 border border-gray-600 rounded-full pr-6 md:pr-0 shadow-md md:shadow-none mb-2 md:mb-0">
-          <FaSearch className="ml-4 text-gray-700" />
+          <FaSearch className="ml-4 text-primarycolor " />
           <input
             type="text"
             value={keyword}
             onChange={handleKeywordChange}
             placeholder="Título del empleo"
-            className="px-6 py-4 w-full outline-none bg-white pl-2"
+            className="px-6 py-4 w-full outline-none bg-white pl-2 placeholder:text-gray-600"
             onClick={() => {
               setShowKeywordSuggestions(true);
               setShowLocationSuggestions(false);
@@ -149,13 +149,13 @@ function Buscador() {
           />
         </div>
         <div className="md:flex items-center w-full border-r hidden">
-          <FaMapMarkerAlt className="text-gray-500" />
+          <FaMapMarkerAlt className="text-primarycolor" />
           <input
             type="text"
             value={location}
             onChange={handleLocationChange}
             placeholder="Ciudad o Lugar"
-            className="py-2 w-full rounded-md flex-1 outline-none bg-white pl-2"
+            className="py-2 w-full rounded-md flex-1 outline-none bg-white pl-2 placeholder:text-gray-600"
             onClick={() => {
               setShowLocationSuggestions(true);
               setShowKeywordSuggestions(false);

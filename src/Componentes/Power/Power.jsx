@@ -20,7 +20,6 @@ function Power() {
     <TrabajosContainer />
     <CtaPower />
     <ContainerVideos />
-    <FooterPower />
     <BtnWsp />
     </>
   )
