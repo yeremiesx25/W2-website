@@ -99,6 +99,16 @@ function Postulados() {
 
   const handleFilterClick = (filtro) => {
     setFiltroSeleccionado(filtro);
+  
+    // Filtrado de postulados según el estado seleccionado
+    if (filtro === 'total') {
+      setFilteredPostulados(postulados); // Mostrar todos si se selecciona 'total'
+    } else {
+      const filtered = postulados.filter(postulado => postulado.estado.toLowerCase() === filtro.toLowerCase());
+      setFilteredPostulados(filtered);
+    }
+  
+    // Si el postulado seleccionado no está en los filtrados, deseleccionar
     const postulanteEnFiltro = filteredPostulados.find(postulado => postulado.id === selectedPostulado?.id);
     if (!postulanteEnFiltro) {
       setSelectedPostulado(null);
@@ -168,8 +178,33 @@ function Postulados() {
                   </div>
                 </div>
                 <div className="w-full px-4 lg:w-1/2">
-                  {/* Filtros */}
-                  {/* Aquí puedes agregar la lógica de filtros según tus necesidades */}
+                  {/* Filtros de estado */}
+                  <div className="flex justify-center md:justify-end space-x-4">
+                    <button 
+                      onClick={() => handleFilterClick('total')} 
+                      className={`py-2 px-4 ${filtroSeleccionado === 'total' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-800'}`}
+                    >
+                      Todos
+                    </button>
+                    <button 
+                      onClick={() => handleFilterClick('apto')} 
+                      className={`py-2 px-4 ${filtroSeleccionado === 'apto' ? 'bg-green-500 text-white' : 'bg-gray-200 text-gray-800'}`}
+                    >
+                      Apto
+                    </button>
+                    <button 
+                      onClick={() => handleFilterClick('no apto')} 
+                      className={`py-2 px-4 ${filtroSeleccionado === 'no apto' ? 'bg-red-500 text-white' : 'bg-gray-200 text-gray-800'}`}
+                    >
+                      No Apto
+                    </button>
+                    <button 
+                      onClick={() => handleFilterClick('pendiente')} 
+                      className={`py-2 px-4 ${filtroSeleccionado === 'pendiente' ? 'bg-yellow-500 text-white' : 'bg-gray-200 text-gray-800'}`}
+                    >
+                      Pendiente
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -196,13 +231,9 @@ function Postulados() {
               ))}
             </div>
           </div>
-          <div className="ml-4 w-full pb-6 md:w-2/3">
+          <div className="ml-4 w-full pb-2">
             {selectedPostulado && (
-              <InfoPostulante 
-                postulado={selectedPostulado} 
-                preguntas={preguntas} 
-                respuestas={respuestas} 
-              />
+              <InfoPostulante postulado={selectedPostulado} preguntas={preguntas} respuestas={respuestas} />
             )}
           </div>
         </div>
