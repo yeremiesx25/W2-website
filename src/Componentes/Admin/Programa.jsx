@@ -10,6 +10,7 @@ function Programa() {
   const [interviewDetails, setInterviewDetails] = useState({ postulante: null, date: '' });
   const [interviews, setInterviews] = useState([]);
 
+  // Obtener el usuario actual
   useEffect(() => {
     const fetchUser = async () => {
       const { data } = await supabase.auth.getUser();
@@ -19,6 +20,7 @@ function Programa() {
     fetchUser();
   }, []);
 
+  // Obtener ofertas activas del reclutador
   useEffect(() => {
     const fetchOfertasYPostulantes = async () => {
       if (!user) return;
@@ -40,6 +42,7 @@ function Programa() {
     fetchOfertasYPostulantes();
   }, [user]);
 
+  // Obtener entrevistas programadas
   useEffect(() => {
     const fetchInterviews = async () => {
       if (!user) return;
@@ -60,6 +63,7 @@ function Programa() {
     fetchInterviews();
   }, [user]);
 
+  // Manejar clic en oferta seleccionada
   const handleOfertaClick = async (oferta) => {
     const { data: postulantesData, error: postulantesError } = await supabase
       .from('Postulacion')
@@ -75,10 +79,10 @@ function Programa() {
     setSelectedOferta({ ...oferta, postulantes: postulantesData });
   };
 
+  // Manejar la programación de entrevista
   const handleScheduleInterview = async () => {
     const { postulante, date } = interviewDetails;
 
-    // Guardar la entrevista en la base de datos
     const { error } = await supabase
       .from('Entrevistas')
       .insert([{ nombre_postulante: postulante, fecha: date, id_reclutador: user.id }]);
@@ -90,92 +94,96 @@ function Programa() {
 
     // Actualizar la lista de entrevistas
     setInterviews([...interviews, { nombre_postulante: postulante, fecha: date }]);
-    // Resetear estado después de programar
     setInterviewDetails({ postulante: null, date: '' });
   };
 
   return (
-    <div className='w-full h-screen'>
+    <div className="min-h-screen bg-gray-100">
       <HeaderAdmin />
       <MenuAdmin />
-      <div className='w-full h-screen pl-64 pt-20 flex flex-col items-center'>
-        <div className='grid grid-cols-2 gap-4 w-3/4'>
+      <div className="pl-64 pt-20 flex flex-col items-center">
+        <div className="grid grid-cols-2 gap-6 w-3/4">
           {/* Columna de Ofertas */}
-          <div className='bg-white shadow-md rounded-lg p-4'>
-            <h2 className='text-xl font-bold'>Ofertas</h2>
+          <div className="bg-white shadow-lg rounded-lg p-6">
+            <h2 className="text-2xl font-bold text-gray-800 mb-4">Ofertas Disponibles</h2>
             {ofertas.map((oferta) => (
               <div 
                 key={oferta.id_oferta} 
-                className='mb-4 cursor-pointer hover:bg-gray-100 p-2 rounded'
+                className="mb-4 p-4 border rounded-lg hover:bg-gray-50 transition duration-300 ease-in-out cursor-pointer"
                 onClick={() => handleOfertaClick(oferta)}
               >
-                <h3 className='text-lg font-semibold'>{oferta.puesto}</h3>
+                <h3 className="text-xl font-semibold text-gray-700">{oferta.puesto}</h3>
               </div>
             ))}
           </div>
 
           {/* Columna de Postulantes Aptos */}
-          <div className='bg-white shadow-md rounded-lg p-4'>
-            <h2 className='text-xl font-bold'>Postulantes Apto</h2>
+          <div className="bg-white shadow-lg rounded-lg p-6">
+            <h2 className="text-2xl font-bold text-gray-800 mb-4">Postulantes Aptos</h2>
             {selectedOferta ? (
               <>
-                <h3 className='text-lg font-semibold'>{selectedOferta.puesto}</h3>
+                <h3 className="text-xl font-semibold text-gray-700 mb-4">{selectedOferta.puesto}</h3>
                 {selectedOferta.postulantes.length > 0 ? (
-                  <ul className='list-disc pl-5'>
-                    {selectedOferta.postulantes.map(postulante => (
-                      <li key={postulante.id_postulacion} className='flex justify-between items-center text-gray-700'>
-                        {postulante.name_user}
+                  <ul className="space-y-3">
+                    {selectedOferta.postulantes.map((postulante) => (
+                      <li 
+                        key={postulante.id_postulacion} 
+                        className="flex justify-between items-center bg-gray-50 p-3 rounded-lg"
+                      >
+                        <span className="text-gray-700">{postulante.name_user}</span>
                         <button 
-                          className='ml-4 bg-blue-500 text-white px-2 py-1 rounded'
+                          className="bg-blue-600 text-white px-4 py-2 rounded-lg shadow hover:bg-blue-500 transition duration-300 ease-in-out"
                           onClick={() => setInterviewDetails({ postulante: postulante.name_user, date: '' })}
                         >
-                          Programar Entrevista
+                          Programar
                         </button>
                       </li>
                     ))}
                   </ul>
                 ) : (
-                  <p>No hay postulantes aptos para esta oferta.</p>
+                  <p className="text-gray-600">No hay postulantes aptos para esta oferta.</p>
                 )}
               </>
             ) : (
-              <p>Selecciona un trabajo para ver los postulantes.</p>
+              <p className="text-gray-600">Selecciona una oferta para ver los postulantes.</p>
             )}
           </div>
         </div>
 
         {/* Modal o sección para programar entrevista */}
         {interviewDetails.postulante && (
-          <div className='mt-4 p-4 bg-gray-100 rounded-lg'>
-            <h3 className='text-lg font-bold'>Programar Entrevista con: {interviewDetails.postulante}</h3>
-            <input 
-              type='date' 
-              value={interviewDetails.date} 
-              onChange={(e) => setInterviewDetails({ ...interviewDetails, date: e.target.value })}
-              className='mt-2 border p-2 rounded'
-            />
-            <button 
-              className='ml-2 bg-green-500 text-white px-2 py-1 rounded'
-              onClick={handleScheduleInterview}
-            >
-              Confirmar
-            </button>
+          <div className="mt-8 w-3/4 p-6 bg-gray-50 shadow-lg rounded-lg">
+            <h3 className="text-xl font-bold text-gray-800">Programar Entrevista con {interviewDetails.postulante}</h3>
+            <div className="mt-4 flex items-center space-x-4">
+              <input 
+                type="date" 
+                value={interviewDetails.date} 
+                onChange={(e) => setInterviewDetails({ ...interviewDetails, date: e.target.value })}
+                className="border-gray-300 p-3 rounded-lg shadow-sm w-full"
+              />
+              <button 
+                className="bg-green-600 text-white px-6 py-2 rounded-lg shadow hover:bg-green-500 transition duration-300 ease-in-out"
+                onClick={handleScheduleInterview}
+              >
+                Confirmar
+              </button>
+            </div>
           </div>
         )}
 
         {/* Sección para mostrar entrevistas programadas */}
-        <div className='mt-8 bg-white shadow-md rounded-lg p-4 w-3/4'>
-          <h2 className='text-xl font-bold'>Entrevistas Programadas</h2>
+        <div className="mt-8 w-3/4 bg-white shadow-lg rounded-lg p-6">
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">Entrevistas Programadas</h2>
           {interviews.length > 0 ? (
-            <ul className='list-disc pl-5'>
+            <ul className="space-y-2">
               {interviews.map((interview, index) => (
-                <li key={index} className='text-gray-700'>
+                <li key={index} className="text-gray-700 bg-gray-50 p-3 rounded-lg">
                   {interview.nombre_postulante} - {new Date(interview.fecha).toLocaleDateString()}
                 </li>
               ))}
             </ul>
           ) : (
-            <p>No hay entrevistas programadas.</p>
+            <p className="text-gray-600">No hay entrevistas programadas.</p>
           )}
         </div>
       </div>

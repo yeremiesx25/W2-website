@@ -43,7 +43,7 @@ function HeaderAdmin() {
   return (
     <div className="flex items-center justify-between p-4 bg-white shadow-sm px-14 fixed w-full z-10">
       {/* Logo de la empresa */}
-      <div className="flex items-center bg-newprimarycolor h-full ">
+      <div className="flex items-center h-full ">
         {/* <img
           src="logo.png" // Reemplaza con la ruta de tu logo
           alt="Logo"
