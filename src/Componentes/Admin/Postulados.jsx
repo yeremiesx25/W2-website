@@ -232,10 +232,15 @@ function Postulados() {
             </div>
           </div>
           <div className="ml-4 w-full pb-2">
-            {selectedPostulado && (
-              <InfoPostulante postulado={selectedPostulado} preguntas={preguntas} respuestas={respuestas} />
-            )}
-          </div>
+  {selectedPostulado &&
+    filteredPostulados.some(postulado => postulado.id === selectedPostulado.id) && (
+      <InfoPostulante
+        postulado={selectedPostulado}
+        preguntas={preguntas}
+        respuestas={respuestas}
+      />
+    )}
+</div>
         </div>
       </div>
     </div>
