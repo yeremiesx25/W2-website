@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { supabase } from "../../supabase/supabase.config";
-import { FaWhatsapp } from "react-icons/fa";
+import { FaWhatsapp, FaCheck, FaTimes, FaQuestion } from "react-icons/fa"; // Agregar íconos
 import { FaFilePdf } from "react-icons/fa6";
 import { HiOutlineIdentification } from "react-icons/hi2";
 import { FiPhone } from "react-icons/fi";
@@ -64,7 +64,6 @@ const InfoPostulante = ({ postulado, onEstadoChange }) => {
       }
     };
 
-    // Función para manejar la carga de los datos
     const fetchData = async () => {
       await fetchUserData();
       await fetchQuestionsAndAnswers();
@@ -74,6 +73,22 @@ const InfoPostulante = ({ postulado, onEstadoChange }) => {
     fetchData();
   }, [postulado]);
 
+  // Función para actualizar el estado en la tabla Postulacion
+const actualizarEstado = async (nuevoEstado) => {
+  try {
+    const { error } = await supabase
+      .from("Postulacion")
+      .update({ estado: nuevoEstado })
+      .eq("id_postulacion", postulado.id_postulacion); // Cambiado 'id' a 'id_postulacion'
+
+    if (error) throw error;
+
+    setEstadoActual(nuevoEstado); // Actualizar estado en la UI
+    if (onEstadoChange) onEstadoChange(nuevoEstado); // Notificar cambios si es necesario
+  } catch (error) {
+    console.error("Error updating state:", error.message);
+  }
+};
 
   const preguntasYRespuestas = preguntas
     .map((pregunta, index) => ({ pregunta, respuesta: respuestas[index] }))
@@ -149,14 +164,37 @@ const InfoPostulante = ({ postulado, onEstadoChange }) => {
           </div>
         ))}
       </div>
+      
       <div className="mt-4 px-10">
-          <iframe
-            src={userData.cv_url} // URL del CV
-            style={{ width: "100%", height: "500px" }} // Ajusta el tamaño según sea necesario
-            frameBorder="0"
-            title="CV"
-          ></iframe>
-        </div>
+        <iframe
+          src={userData.cv_url} // URL del CV
+          style={{ width: "100%", height: "500px" }} // Ajusta el tamaño según sea necesario
+          frameBorder="0"
+          title="CV"
+        ></iframe>
+      </div>
+
+      {/* Botones para cambiar el estado */}
+      <div className="flex justify-center mt-6 gap-4">
+        <button
+          className={`px-4 py-2 rounded-lg ${estadoActual === "apto" ? "bg-green-500" : "bg-gray-300"}`}
+          onClick={() => actualizarEstado("apto")}
+        >
+          <FaCheck />
+        </button>
+        <button
+          className={`px-4 py-2 rounded-lg ${estadoActual === "no apto" ? "bg-red-500" : "bg-gray-300"}`}
+          onClick={() => actualizarEstado("no apto")}
+        >
+          <FaTimes /> 
+        </button>
+        <button
+          className={`px-4 py-2 rounded-lg ${estadoActual === "pendiente" ? "bg-yellow-500" : "bg-gray-300"}`}
+          onClick={() => actualizarEstado("pendiente")}
+        >
+          <FaQuestion />
+        </button>
+      </div>
     </div>
   );
 };
