@@ -1,11 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { supabase } from '../../supabase/supabase.config';
-import HeaderPowerAuth from '../PowerAuth/HeaderPowerAuth';
 import InfoPostulante from './InfoPostulante';
 import { UserAuth } from '../../Context/AuthContext';
-import HeaderAdmin from './HeaderAdmin';
-import MenuAdmin from './MenuAdmin';
 
 function Postulados() {
   const { user } = UserAuth();
@@ -100,15 +97,13 @@ function Postulados() {
   const handleFilterClick = (filtro) => {
     setFiltroSeleccionado(filtro);
   
-    // Filtrado de postulados según el estado seleccionado
     if (filtro === 'total') {
-      setFilteredPostulados(postulados); // Mostrar todos si se selecciona 'total'
+      setFilteredPostulados(postulados);
     } else {
       const filtered = postulados.filter(postulado => postulado.estado.toLowerCase() === filtro.toLowerCase());
       setFilteredPostulados(filtered);
     }
   
-    // Si el postulado seleccionado no está en los filtrados, deseleccionar
     const postulanteEnFiltro = filteredPostulados.find(postulado => postulado.id === selectedPostulado?.id);
     if (!postulanteEnFiltro) {
       setSelectedPostulado(null);
@@ -152,7 +147,7 @@ function Postulados() {
     : [];
 
   return (
-    <div className="font-dmsans py-2 px-4 bg-gray-50 ">
+    <div className="font-dmsans py-2 px-4 bg-gray-50">
       <div>
         <section className="bg-primarycolor md:bg-newprimarycolor rounded-lg dark:bg-dark h-96 md:h-40 flex justify-center items-center max-h-screen">
           <div className="container mx-auto">
@@ -168,55 +163,69 @@ function Postulados() {
                   >
                     <span className="xs:block"> {jobDetails && jobDetails.puesto} </span>
                   </h2>
-                  <div className="flex gap-8 justify-center md:justify-start">
-                    <span className="block mb-4 text-base font-medium text-white">
+                  <div className="flex gap-8 justify-center md:justify-start mb-4">
+                    <span className="block text-base font-medium text-white">
                       {jobDetails && jobDetails.modalidad}
                     </span>
-                    <span className="block mb-4 text-base font-medium text-white">
+                    <span className="block text-base font-medium text-white">
                       S/. {jobDetails && jobDetails.sueldo}
                     </span>
-                  </div>
-                </div>
-                <div className="w-full px-4 lg:w-1/2">
-                  {/* Filtros de estado */}
-                  <div className="flex justify-center md:justify-end space-x-4">
-                    <button 
-                      onClick={() => handleFilterClick('total')} 
-                      className={`py-2 px-4 ${filtroSeleccionado === 'total' ? 'bg-blue-500 text-white' : 'bg-gray-200 text-gray-800'}`}
-                    >
-                      Todos
-                    </button>
-                    <button 
-                      onClick={() => handleFilterClick('apto')} 
-                      className={`py-2 px-4 ${filtroSeleccionado === 'apto' ? 'bg-green-500 text-white' : 'bg-gray-200 text-gray-800'}`}
-                    >
-                      Apto
-                    </button>
-                    <button 
-                      onClick={() => handleFilterClick('no apto')} 
-                      className={`py-2 px-4 ${filtroSeleccionado === 'no apto' ? 'bg-red-500 text-white' : 'bg-gray-200 text-gray-800'}`}
-                    >
-                      No Apto
-                    </button>
-                    <button 
-                      onClick={() => handleFilterClick('pendiente')} 
-                      className={`py-2 px-4 ${filtroSeleccionado === 'pendiente' ? 'bg-yellow-500 text-white' : 'bg-gray-200 text-gray-800'}`}
-                    >
-                      Pendiente
-                    </button>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </section>
+        {/* Pestañas de filtro */}
+        <div className="flex justify-center md:justify-start space-x-4 mt-4 mb-4">
+          <button
+            onClick={() => handleFilterClick('total')}
+            className={`py-2 px-4 border-b-2 ${
+              filtroSeleccionado === 'total'
+                ? 'border-gray-600 text-gray-600'
+                : 'border-transparent text-gray-800'
+            }`}
+          >
+            Todos
+          </button>
+          <button
+            onClick={() => handleFilterClick('apto')}
+            className={`py-2 px-4 border-b-2 ${
+              filtroSeleccionado === 'apto'
+                ? 'border-green-600 text-green-600'
+                : 'border-transparent text-gray-800'
+            }`}
+          >
+            Apto
+          </button>
+          <button
+            onClick={() => handleFilterClick('no apto')}
+            className={`py-2 px-4 border-b-2 ${
+              filtroSeleccionado === 'no apto'
+                ? 'border-red-600 text-red-600'
+                : 'border-transparent text-gray-800'
+            }`}
+          >
+            No Apto
+          </button>
+          <button
+            onClick={() => handleFilterClick('pendiente')}
+            className={`py-2 px-4 border-b-2 ${
+              filtroSeleccionado === 'pendiente'
+                ? 'border-yellow-600 text-yellow-600'
+                : 'border-transparent text-gray-800'
+            }`}
+          >
+            Pendiente
+          </button>
+        </div>
         <div className="flex mt-8 px-0">
           <div className="overflow-x-auto w-full md:w-1/3">
             <div className="flex flex-col space-y-4">
               {filteredPostulados.map((postulado) => (
                 <div
                   key={postulado.id}
-                  className={`flex items-center p-4 border rounded-lg  bg-white cursor-pointer hover:bg-gray-100 ${
+                  className={`flex items-center p-4 border rounded-lg bg-white cursor-pointer hover:bg-gray-100 ${
                     selectedId === postulado.id ? 'bg-blue-100' : ''
                   }`}
                   onClick={() => handleDivClick(postulado)}
@@ -232,15 +241,15 @@ function Postulados() {
             </div>
           </div>
           <div className="ml-4 w-full pb-2">
-  {selectedPostulado &&
-    filteredPostulados.some(postulado => postulado.id === selectedPostulado.id) && (
-      <InfoPostulante
-        postulado={selectedPostulado}
-        preguntas={preguntas}
-        respuestas={respuestas}
-      />
-    )}
-</div>
+            {selectedPostulado &&
+              filteredPostulados.some(postulado => postulado.id === selectedPostulado.id) && (
+                <InfoPostulante
+                  postulado={selectedPostulado}
+                  preguntas={preguntas}
+                  respuestas={respuestas}
+                />
+              )}
+          </div>
         </div>
       </div>
     </div>
