@@ -151,6 +151,27 @@ const actualizarEstado = async (nuevoEstado) => {
             </p>
           </div>
         </div>
+        {/* Botones para cambiar el estado */}
+      <div className="flex justify-center mt-6 gap-4">
+        <button
+          className={`px-4 py-2 rounded-lg ${estadoActual === "apto" ? "bg-green-500" : "bg-gray-300"}`}
+          onClick={() => actualizarEstado("apto")}
+        >
+          <FaCheck />
+        </button>
+        <button
+          className={`px-4 py-2 rounded-lg ${estadoActual === "no apto" ? "bg-red-500" : "bg-gray-300"}`}
+          onClick={() => actualizarEstado("no apto")}
+        >
+          <FaTimes /> 
+        </button>
+        <button
+          className={`px-4 py-2 rounded-lg ${estadoActual === "pendiente" ? "bg-yellow-500" : "bg-gray-300"}`}
+          onClick={() => actualizarEstado("pendiente")}
+        >
+          <FaQuestion />
+        </button>
+      </div>
       </div>
 
       <div className="mt-4 bg-white p-6 rounded-lg">
@@ -174,27 +195,7 @@ const actualizarEstado = async (nuevoEstado) => {
         ></iframe>
       </div>
 
-      {/* Botones para cambiar el estado */}
-      <div className="flex justify-center mt-6 gap-4">
-        <button
-          className={`px-4 py-2 rounded-lg ${estadoActual === "apto" ? "bg-green-500" : "bg-gray-300"}`}
-          onClick={() => actualizarEstado("apto")}
-        >
-          <FaCheck />
-        </button>
-        <button
-          className={`px-4 py-2 rounded-lg ${estadoActual === "no apto" ? "bg-red-500" : "bg-gray-300"}`}
-          onClick={() => actualizarEstado("no apto")}
-        >
-          <FaTimes /> 
-        </button>
-        <button
-          className={`px-4 py-2 rounded-lg ${estadoActual === "pendiente" ? "bg-yellow-500" : "bg-gray-300"}`}
-          onClick={() => actualizarEstado("pendiente")}
-        >
-          <FaQuestion />
-        </button>
-      </div>
+      
     </div>
   );
 };
