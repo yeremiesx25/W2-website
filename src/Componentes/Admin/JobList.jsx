@@ -114,7 +114,7 @@ const JobList = () => {
           >
             {/* Puesto */}
             <Link to={`/Postulados/${job.id_oferta}`}>
-              <p className="text-newprimarycolor font-light">{job.puesto}</p>
+              <p className="text-newprimarycolor font-regular">{job.puesto}</p>
             </Link>
 
             {/* Fecha */}

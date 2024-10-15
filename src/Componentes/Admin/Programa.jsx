@@ -101,7 +101,7 @@ function Programa() {
     <div className="min-h-screen bg-gray-100">
       <HeaderAdmin />
       <MenuAdmin />
-      <div className="pl-64 pt-20 flex flex-col items-center">
+      <div className="pl-64 pt-24 flex flex-col items-center">
         <div className="grid grid-cols-2 gap-6 w-3/4">
           {/* Columna de Ofertas */}
           <div className="bg-white shadow-lg rounded-lg p-6">
