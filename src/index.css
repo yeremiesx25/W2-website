@@ -472,3 +472,46 @@
   margin: auto;
   position: relative;
 }
+
+
+/* Estilos para el calendario */
+.react-calendar {
+  border: none;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.react-calendar__month-view__weekdays {
+  background: #f7f7f7;
+  font-weight: bold;
+}
+
+.react-calendar__month-view__days__day {
+  padding: 10px;
+  text-align: center;
+  border-radius: 4px;
+  transition: background 0.3s, color 0.3s;
+}
+
+.react-calendar__month-view__days__day--neighboringMonth {
+  color: #b0b0b0; /* Color gris para días del mes anterior/siguiente */
+}
+
+.react-calendar__month-view__days__day--weekend {
+  color: #ff6b6b; /* Color para los fines de semana */
+}
+
+.react-calendar__month-view__days__day--active {
+  background: #007bff; /* Color azul para el día seleccionado */
+  color: white;
+}
+
+.react-calendar__month-view__days__day--today {
+  border: 2px solid #007bff; /* Borde azul para el día de hoy */
+  border-radius: 50%;
+}
+
+.react-calendar__month-view__days__day:hover {
+  background: #e7f3ff; /* Color de fondo al pasar el mouse */
+  cursor: pointer;
+}

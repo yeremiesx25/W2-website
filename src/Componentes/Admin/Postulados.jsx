@@ -3,6 +3,9 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { supabase } from '../../supabase/supabase.config';
 import InfoPostulante from './InfoPostulante';
 import { UserAuth } from '../../Context/AuthContext';
+import { FaUserCheck, FaUserClock } from "react-icons/fa6";
+import { FaUserTimes } from "react-icons/fa";
+
 
 function Postulados() {
   const { user } = UserAuth();
@@ -14,9 +17,19 @@ function Postulados() {
   const [filteredPostulados, setFilteredPostulados] = useState([]);
   const [filtroSeleccionado, setFiltroSeleccionado] = useState('total');
   const [selectedId, setSelectedId] = useState(null);
+  // Estado para almacenar las cantidades por estado
+  const [counts, setCounts] = useState({
+    apto: 0,
+    noApto: 0,
+    pendiente: 0,
+    total: 0
+  });
 
   const handleDivClick = (postulado) => {
-    setSelectedId(postulado.id);
+    console.log('Postulado clickeado:', postulado);  // Verifica el postulado clickeado
+  console.log('ID seleccionado antes:', selectedId);
+    setSelectedId(postulado.id_postulacion);
+    console.log('ID seleccionado después:', postulado.id_postulacion);  // Verifica el ID seleccionado
     handlePostuladoClick(postulado);
   };
 
@@ -61,6 +74,18 @@ function Postulados() {
         if (postuladosConChecked.length > 0) {
           setSelectedPostulado(postuladosConChecked[0]);
         }
+
+        const aptoCount = postuladosConChecked.filter(p => p.estado === 'apto').length;
+        const noAptoCount = postuladosConChecked.filter(p => p.estado === 'no apto').length;
+        const pendienteCount = postuladosConChecked.filter(p => p.estado === 'pendiente').length;
+        const totalCount = postuladosConChecked.length;
+
+        setCounts({
+          apto: aptoCount,
+          noApto: noAptoCount,
+          pendiente: pendienteCount,
+          total: totalCount
+        });
       } catch (error) {
         console.error('Error fetching job details:', error);
       }
@@ -146,8 +171,10 @@ function Postulados() {
     ]
     : [];
 
+    
+
   return (
-    <div className="font-dmsans py-2 px-4 bg-gray-50">
+    <div className="font-lato py-2 px-4 bg-gray-50">
       <div>
         <section className="bg-primarycolor md:bg-newprimarycolor rounded-lg dark:bg-dark h-96 md:h-40 flex justify-center items-center max-h-screen">
           <div className="container mx-auto">
@@ -176,65 +203,66 @@ function Postulados() {
             </div>
           </div>
         </section>
-        {/* Pestañas de filtro */}
-        <div className="flex justify-center md:justify-start space-x-4 mt-4 mb-4">
+        
+        <div className="flex mt-8 px-0">
+          <div className="overflow-x-auto w-full md:w-1/3 border rounded-lg">
+          {/* Pestañas de filtro */}
+        <div className="flex justify-center md:justify-start space-x-4 overflow-hidden bg-gray-200 mb-4">
           <button
             onClick={() => handleFilterClick('total')}
-            className={`py-2 px-4 border-b-2 ${
+            className={`py-2 px-4 border-b-2 text-primarycolor ${
               filtroSeleccionado === 'total'
-                ? 'border-gray-600 text-gray-600'
+                ? 'border-primarycolor text-primarycolor transition-colors duration-200'
                 : 'border-transparent text-gray-800'
             }`}
           >
-            Todos
+            Todos {counts.total}
           </button>
           <button
             onClick={() => handleFilterClick('apto')}
-            className={`py-2 px-4 border-b-2 ${
+            className={`py-2 px-4 border-b-2 text-green-600 ${
               filtroSeleccionado === 'apto'
-                ? 'border-green-600 text-green-600'
+                ? 'border-green-600 text-green-600 transition-colors duration-200'
                 : 'border-transparent text-gray-800'
             }`}
           >
-            Apto
+            <FaUserCheck size={23} /> {counts.apto}
           </button>
           <button
             onClick={() => handleFilterClick('no apto')}
-            className={`py-2 px-4 border-b-2 ${
+            className={`py-2 px-4 border-b-2 text-red-600 ${
               filtroSeleccionado === 'no apto'
-                ? 'border-red-600 text-red-600'
+                ? 'border-red-600 text-red-600 transition-colors duration-200'
                 : 'border-transparent text-gray-800'
             }`}
           >
-            No Apto
+            <FaUserTimes size={23} /> {counts.noApto}
           </button>
           <button
             onClick={() => handleFilterClick('pendiente')}
             className={`py-2 px-4 border-b-2 ${
               filtroSeleccionado === 'pendiente'
-                ? 'border-yellow-600 text-yellow-600'
-                : 'border-transparent text-gray-800'
+                ? 'border-gray-600 text-gray-600 transition-colors duration-200'
+                : 'border-transparent text-gray-600'
             }`}
           >
-            Pendiente
+            <FaUserClock size={23} /> {counts.pendiente}
           </button>
         </div>
-        <div className="flex mt-8 px-0">
-          <div className="overflow-x-auto w-full md:w-1/3">
-            <div className="flex flex-col space-y-4">
+            <div className="flex flex-col space-y-0">
               {filteredPostulados.map((postulado) => (
                 <div
-                  key={postulado.id}
-                  className={`flex items-center p-4 border rounded-lg bg-white cursor-pointer hover:bg-gray-100 ${
-                    selectedId === postulado.id ? 'bg-blue-100' : ''
+                  key={postulado.id_postulacion}
+                  className={`flex items-center p-4 border  cursor-pointer transition-colors duration-50 ${
+                    selectedId === postulado.id_postulacion ? 'bg-newprimarycolor text-white border border-primarycolor' : ''
                   }`}
                   onClick={() => handleDivClick(postulado)}
                 >
                   <div className="flex items-center">
-                    <div className="w-8 h-8 rounded-full overflow-hidden bg-blue-300 flex items-center justify-center text-white mr-2">
+                    <div className="w-10 h-10 rounded-full overflow-hidden bg-blue-300 flex items-center justify-center text-white mr-2">
                       <img src={postulado.avatar_url} alt="" />
                     </div>
-                    <span className="font-medium">{postulado.name_user}</span>
+                    <span className="font-medium ">{postulado.name_user}</span>
                   </div>
                 </div>
               ))}

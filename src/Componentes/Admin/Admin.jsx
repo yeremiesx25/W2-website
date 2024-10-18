@@ -10,7 +10,7 @@ import HeaderAdmin from './HeaderAdmin'
 
 function Admin() {
   return (
-    <div className="flex font-dmsans flex-col">
+    <div className="flex flex-col">
       <HeaderAdmin />
       <MenuAdmin />
       <AdminLayout />

@@ -26,7 +26,8 @@ module.exports = withMT( {
         newprimarycolor: '#003E9D'
       },
       fontFamily: {
-        'dmsans': ['"Poppins", sans-serif']
+        'dmsans': ['"Poppins", sans-serif'],
+        'lato' : ['"Lato", sans-serif']
       },
       keyframes: {
         spinIn: {

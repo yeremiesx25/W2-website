@@ -9,9 +9,9 @@ function BuscadorJob() {
       
       <form className="bg-white border border-gray-300 rounded-full flex items-center pl-2 text-gray-700 w-96">
         <IoSearch className='ml-2' />
-            <div class="sm:flex items-center  overflow-hidden px-2 py-2 justify-between w-3/5">
+            <div className="sm:flex items-center  overflow-hidden px-2 py-2 justify-between w-3/5">
               <input
-                class="text-base text-gray-700 placeholder:text-gray-600 flex-grow outline-none px-2 "
+                className="text-base text-gray-700 placeholder:text-gray-600 flex-grow outline-none px-2 "
                 type="text"
                 placeholder="Buscar por puesto"
                 value={searchTerm}
