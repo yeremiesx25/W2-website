@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { supabase } from '../../supabase/supabase.config';
+import { v4 as uuidv4 } from 'uuid';
+import * as XLSX from 'xlsx';
 import HeaderAdmin from './HeaderAdmin';
 import MenuAdmin from './MenuAdmin';
 
@@ -10,7 +12,6 @@ function Programa() {
   const [interviewDetails, setInterviewDetails] = useState({ postulante: null, date: '' });
   const [interviews, setInterviews] = useState([]);
 
-  // Obtener el usuario actual
   useEffect(() => {
     const fetchUser = async () => {
       const { data } = await supabase.auth.getUser();
@@ -20,7 +21,6 @@ function Programa() {
     fetchUser();
   }, []);
 
-  // Obtener ofertas activas del reclutador
   useEffect(() => {
     const fetchOfertasYPostulantes = async () => {
       if (!user) return;
@@ -42,7 +42,6 @@ function Programa() {
     fetchOfertasYPostulantes();
   }, [user]);
 
-  // Obtener entrevistas programadas
   useEffect(() => {
     const fetchInterviews = async () => {
       if (!user) return;
@@ -63,7 +62,6 @@ function Programa() {
     fetchInterviews();
   }, [user]);
 
-  // Manejar clic en oferta seleccionada
   const handleOfertaClick = async (oferta) => {
     const { data: postulantesData, error: postulantesError } = await supabase
       .from('Postulacion')
@@ -79,7 +77,6 @@ function Programa() {
     setSelectedOferta({ ...oferta, postulantes: postulantesData });
   };
 
-  // Manejar la programación de entrevista
   const handleScheduleInterview = async () => {
     const { postulante, date } = interviewDetails;
 
@@ -92,9 +89,55 @@ function Programa() {
       return;
     }
 
-    // Actualizar la lista de entrevistas
     setInterviews([...interviews, { nombre_postulante: postulante, fecha: date }]);
     setInterviewDetails({ postulante: null, date: '' });
+  };
+
+  const handleFileUpload = async (event) => {
+    const file = event.target.files[0];
+    if (!file) return;
+  
+    const reader = new FileReader();
+    reader.onload = async (e) => {
+      const data = new Uint8Array(e.target.result);
+      const workbook = XLSX.read(data, { type: 'array' });
+      const sheetName = workbook.SheetNames[0];
+      const worksheet = workbook.Sheets[sheetName];
+      const jsonData = XLSX.utils.sheet_to_json(worksheet);
+  
+      const perfilesData = jsonData.map((row) => ({
+        id: uuidv4(),
+        // user_id: uuidv4(), // Remove or adjust this line if user_id is not needed
+        nombre: row.Nombre,
+        dni: row.DNI,
+        telefono: row.Celular,
+        rol: 'candidato',
+        estado: true,
+        correo: row.Email,
+      }));
+  
+      const { error } = await supabase.from('perfiles').insert(perfilesData);
+  
+      if (error) {
+        console.error('Error uploading profiles:', error);
+        return;
+      }
+  
+      if (selectedOferta) {
+        setSelectedOferta((prev) => ({
+          ...prev,
+          postulantes: [
+            ...prev.postulantes,
+            ...perfilesData.map((perfil) => ({
+              id_postulacion: perfil.id,
+              name_user: perfil.nombre,
+            })),
+          ],
+        }));
+      }
+    };
+  
+    reader.readAsArrayBuffer(file);
   };
 
   return (
@@ -103,7 +146,6 @@ function Programa() {
       <MenuAdmin />
       <div className="pl-64 pt-20 flex flex-col items-center">
         <div className="grid grid-cols-2 gap-6 w-3/4">
-          {/* Columna de Ofertas */}
           <div className="bg-white shadow-lg rounded-lg p-6">
             <h2 className="text-2xl font-bold text-gray-800 mb-4">Ofertas Disponibles</h2>
             {ofertas.map((oferta) => (
@@ -117,7 +159,6 @@ function Programa() {
             ))}
           </div>
 
-          {/* Columna de Postulantes Aptos */}
           <div className="bg-white shadow-lg rounded-lg p-6">
             <h2 className="text-2xl font-bold text-gray-800 mb-4">Postulantes Aptos</h2>
             {selectedOferta ? (
@@ -150,7 +191,6 @@ function Programa() {
           </div>
         </div>
 
-        {/* Modal o sección para programar entrevista */}
         {interviewDetails.postulante && (
           <div className="mt-8 w-3/4 p-6 bg-gray-50 shadow-lg rounded-lg">
             <h3 className="text-xl font-bold text-gray-800">Programar Entrevista con {interviewDetails.postulante}</h3>
@@ -171,7 +211,6 @@ function Programa() {
           </div>
         )}
 
-        {/* Sección para mostrar entrevistas programadas */}
         <div className="mt-8 w-3/4 bg-white shadow-lg rounded-lg p-6">
           <h2 className="text-2xl font-bold text-gray-800 mb-4">Entrevistas Programadas</h2>
           {interviews.length > 0 ? (
@@ -185,6 +224,17 @@ function Programa() {
           ) : (
             <p className="text-gray-600">No hay entrevistas programadas.</p>
           )}
+        </div>
+
+        {/* File Upload Section */}
+        <div className="mt-8 w-3/4 bg-white shadow-lg rounded-lg p-6">
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">Subir Archivo Excel</h2>
+          <input 
+            type="file" 
+            accept=".xlsx, .xls" 
+            onChange={handleFileUpload} 
+            className="w-full p-3 border border-gray-300 rounded-lg"
+          />
         </div>
       </div>
     </div>
