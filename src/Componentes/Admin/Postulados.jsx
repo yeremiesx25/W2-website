@@ -5,6 +5,7 @@ import InfoPostulante from './InfoPostulante';
 import { UserAuth } from '../../Context/AuthContext';
 import { FaUserCheck, FaUserClock } from "react-icons/fa6";
 import { FaUserTimes } from "react-icons/fa";
+import { Tabs, Tab, Badge } from '@mui/material';
 
 
 function Postulados() {
@@ -25,6 +26,9 @@ function Postulados() {
     total: 0
   });
 
+  const handleChange = (event, newValue) => {
+    handleFilterClick(newValue);
+  }
   const handleDivClick = (postulado) => {
     console.log('Postulado clickeado:', postulado);  // Verifica el postulado clickeado
   console.log('ID seleccionado antes:', selectedId);
@@ -184,11 +188,14 @@ function Postulados() {
                   <span className="block text-base font-medium text-white">
                     {jobDetails && jobDetails.ubicacion}
                   </span>
-                  <h2 
+                  <h2
                     onClick={handlePuestoClick}
                     className="mb-6 text-xl sm:text-3xl font-bold leading-tight text-white sm:mb-8 lg:mb-0 cursor-pointer"
                   >
-                    <span className="xs:block"> {jobDetails && jobDetails.puesto} </span>
+                    <span className="xs:block">
+                      {" "}
+                      {jobDetails && jobDetails.puesto}{" "}
+                    </span>
                   </h2>
                   <div className="flex gap-8 justify-center md:justify-start mb-4">
                     <span className="block text-base font-medium text-white">
@@ -203,74 +210,95 @@ function Postulados() {
             </div>
           </div>
         </section>
-        
+
         <div className="flex mt-8 px-0">
-          <div className="overflow-x-auto w-full md:w-1/3 border rounded-lg">
-          {/* Pestañas de filtro */}
-        <div className="flex justify-center md:justify-start space-x-4 overflow-hidden bg-gray-200 mb-4">
-          <button
-            onClick={() => handleFilterClick('total')}
-            className={`py-2 px-4 border-b-2 text-primarycolor ${
-              filtroSeleccionado === 'total'
-                ? 'border-primarycolor text-primarycolor transition-colors duration-200'
-                : 'border-transparent text-gray-800'
-            }`}
-          >
-            Todos {counts.total}
-          </button>
-          <button
-            onClick={() => handleFilterClick('apto')}
-            className={`py-2 px-4 border-b-2 text-green-600 ${
-              filtroSeleccionado === 'apto'
-                ? 'border-green-600 text-green-600 transition-colors duration-200'
-                : 'border-transparent text-gray-800'
-            }`}
-          >
-            <FaUserCheck size={23} /> {counts.apto}
-          </button>
-          <button
-            onClick={() => handleFilterClick('no apto')}
-            className={`py-2 px-4 border-b-2 text-red-600 ${
-              filtroSeleccionado === 'no apto'
-                ? 'border-red-600 text-red-600 transition-colors duration-200'
-                : 'border-transparent text-gray-800'
-            }`}
-          >
-            <FaUserTimes size={23} /> {counts.noApto}
-          </button>
-          <button
-            onClick={() => handleFilterClick('pendiente')}
-            className={`py-2 px-4 border-b-2 ${
-              filtroSeleccionado === 'pendiente'
-                ? 'border-gray-600 text-gray-600 transition-colors duration-200'
-                : 'border-transparent text-gray-600'
-            }`}
-          >
-            <FaUserClock size={23} /> {counts.pendiente}
-          </button>
-        </div>
-            <div className="flex flex-col space-y-0">
-              {filteredPostulados.map((postulado) => (
-                <div
-                  key={postulado.id_postulacion}
-                  className={`flex items-center p-4 border  cursor-pointer transition-colors duration-50 ${
-                    selectedId === postulado.id_postulacion ? 'bg-newprimarycolor text-white border border-primarycolor' : ''
-                  }`}
-                  onClick={() => handleDivClick(postulado)}
-                >
-                  <div className="flex items-center">
-                    <div className="w-10 h-10 rounded-full overflow-hidden bg-blue-300 flex items-center justify-center text-white mr-2">
-                      <img src={postulado.avatar_url} alt="" />
-                    </div>
-                    <span className="font-medium ">{postulado.name_user}</span>
+          <div className='flex flex-col w-full md:w-2/5 border rounded-lg'>
+            <div className=" w-full md:w-full bg-gray-100">
+            {/* Pestañas de filtro */}
+            <Tabs
+              value={filtroSeleccionado}
+              onChange={handleChange}
+              variant="scrollable"
+              scrollButtons="auto"
+              aria-label="filtro tabs"
+            >
+              <Tab
+                label={
+                  <Badge
+                    className="p-1 w-20"
+                    badgeContent={counts.total}
+                    color="primary"
+                  >
+                    Todos
+                  </Badge>
+                }
+                value="total"
+                wrapped
+              />
+              <Tab
+                label={
+                  <Badge
+                    className="p-1"
+                    badgeContent={counts.apto}
+                    color="success"
+                  >
+                    <FaUserCheck size={23} />
+                  </Badge>
+                }
+                value="apto"
+              />
+              <Tab
+                label={
+                  <Badge
+                    className="p-1"
+                    badgeContent={counts.noApto}
+                    color="error"
+                  >
+                    <FaUserTimes size={23} />
+                  </Badge>
+                }
+                value="no apto"
+              />
+              <Tab
+                label={
+                  <Badge
+                    className="p-1"
+                    badgeContent={counts.pendiente}
+                    color="info"
+                  >
+                    <FaUserClock size={23} />
+                  </Badge>
+                }
+                value="pendiente"
+              />
+            </Tabs>
+          </div>
+          <div className="flex flex-col space-y-0">
+            {filteredPostulados.map((postulado) => (
+              <div
+                key={postulado.id_postulacion}
+                className={`flex items-center p-4 border  cursor-pointer transition-colors duration-50 ${
+                  selectedId === postulado.id_postulacion
+                    ? "bg-newprimarycolor text-white border border-primarycolor"
+                    : ""
+                }`}
+                onClick={() => handleDivClick(postulado)}
+              >
+                <div className="flex items-center">
+                  <div className="w-10 h-10 rounded-full overflow-hidden bg-blue-300 flex items-center justify-center text-white mr-2">
+                    <img src={postulado.avatar_url} alt="" />
                   </div>
+                  <span className="font-medium ">{postulado.name_user}</span>
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
+          </div>
           </div>
           <div className="ml-4 w-full pb-2">
             {selectedPostulado &&
-              filteredPostulados.some(postulado => postulado.id === selectedPostulado.id) && (
+              filteredPostulados.some(
+                (postulado) => postulado.id === selectedPostulado.id
+              ) && (
                 <InfoPostulante
                   postulado={selectedPostulado}
                   preguntas={preguntas}
