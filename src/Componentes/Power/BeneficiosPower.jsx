@@ -1,100 +1,66 @@
 import React from 'react';
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-import CardBeneficioPower from './CardBeneficioPower';
-import icon1 from '../../assets/cv.png';
-import icon2 from '../../assets/entrevista.png';
-import icon3 from '../../assets/blandas.png';
-import icon4 from '../../assets/retro.png';
-import icon5 from '../../assets/suport.png';
-import flecha from "../../assets/flechasFalabella.png";
+import { FaChartLine, FaUsers, FaLock, FaPuzzlePiece, FaSyncAlt, FaRobot, FaFileAlt, FaBolt } from 'react-icons/fa';
 
 function BeneficiosPower() {
-    const settings = {
-        dots: true,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 3, // Mostrar tres tarjetas a la vez
-        slidesToScroll: 1, // Avanzar una tarjeta a la vez
-        initialSlide: 0,
-        autoplay: true,
-        autoplaySpeed: 1500, // Avanzar cada 3 segundos
-        responsive: [
-          {
-            breakpoint: 1024,
-            settings: {
-              slidesToShow: 1,
-              slidesToScroll: 1,
-              infinite: true,
-              dots: true
-            }
-          },
-          {
-            breakpoint: 600,
-            settings: {
-              slidesToShow: 1,
-              slidesToScroll: 1,
-              initialSlide: 0
-            }
-          },
-          {
-            breakpoint: 480,
-            settings: {
-              slidesToShow: 1,
-              slidesToScroll: 1
-            }
-          }
-        ]
-    };
+  return (
+    <div className="bg-gray-50 py-16 font-dmsans">
+      <div className="container mx-auto px-4 text-center">
+        {/* Header Section */}
+        <div className="mb-12">
+          <h2 className="text-5xl font-bold text-gray-800 mt-2">Beneficios Power</h2>
+          <p className="text-gray-600 mt-4">
+            We are self-service data analytics software that lets you create visually appealing data visualizations and insightful dashboards in minutes.
+          </p>
+        </div>
 
-    const beneficios = [
-      {
-        nombreBeneficio: "Asesoría y orientación de CV",
-        iconBeneficio: icon1
-      },
-      {
-        nombreBeneficio: "Preparación para la entrevista",
-        iconBeneficio: icon2
-      },
-      {
-        nombreBeneficio: "Desarrollo de habilidades blandas",
-        iconBeneficio: icon3
-      },
-      {
-        nombreBeneficio: "Retroalimentación",
-        iconBeneficio: icon4
-      },
-      {
-        nombreBeneficio: "Soporte",
-        iconBeneficio: icon5
-      }
-    ];
+        {/* Features Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {/* Feature 1 */}
+          <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+            <FaBolt className="text-yellow-500 text-3xl mb-4 mx-auto" />
+            <h3 className="text-xl font-semibold text-gray-800">Realtime analytics</h3>
+            <p className="text-gray-600 mt-2">Create reports with an easy-to-use drag-and-drop designer.</p>
+          </div>
 
-    return (
-        <section className="py-12 bg-newprimarycolor text-gray-100 sm:py-12 lg:py-16 font-dmsans">
-            <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-                <div className="max-w-xl mx-auto text-center xl:max-w-2xl">
-                    <h2 className="text-3xl font-bold leading-tight text-gray-50 sm:text-5xl xl:text-5xl mb-6"> <img src={flecha} alt="" className="inline-block w-16 h-12 mr-2"></img>
-                        Beneficios <span className="text-yellowprimary xl:inline"> Power</span>
-                    </h2>
-                    <p className="mb-4">Conectamos talentos con grandes empresas</p>
-                </div>
-                <div className="mt-8 sm:mt-12 lg:mt-20 flex justify-center">
-                    <Slider {...settings} className='w-72 md:w-[90%]'>
-                        {beneficios.map((beneficio, index) => (
-                            <div key={index} className="px-2">
-                                <CardBeneficioPower 
-                                    nombreBeneficio={beneficio.nombreBeneficio} 
-                                    iconBeneficio={beneficio.iconBeneficio} 
-                                />
-                            </div>
-                        ))}
-                    </Slider>
-                </div>
-            </div>
-        </section>
-    );
+          {/* Feature 2 */}
+          <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+            <FaUsers className="text-pink-500 text-3xl mb-4 mx-auto" />
+            <h3 className="text-xl font-semibold text-gray-800">Collaborate securely</h3>
+            <p className="text-gray-600 mt-2">Share/publish your reports with your colleagues.</p>
+          </div>
+
+          {/* Feature 3 */}
+          <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+            <FaPuzzlePiece className="text-red-500 text-3xl mb-4 mx-auto" />
+            <h3 className="text-xl font-semibold text-gray-800">Embedded analytics</h3>
+            <p className="text-gray-600 mt-2">Get a personalized analytics tool in your own brand voice.</p>
+          </div>
+
+          {/* Feature 4 */}
+          <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+            <FaLock className="text-purple-500 text-3xl mb-4 mx-auto" />
+            <h3 className="text-xl font-semibold text-gray-800">Easy and intuitive</h3>
+            <p className="text-gray-600 mt-2">Create complex models with simple everyday language.</p>
+          </div>
+
+          {/* Feature 5 */}
+          <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+            <FaSyncAlt className="text-blue-500 text-3xl mb-4 mx-auto" />
+            <h3 className="text-xl font-semibold text-gray-800">Seamless data sync</h3>
+            <p className="text-gray-600 mt-2">Synchronize your reports with your team.</p>
+          </div>
+
+          {/* Feature 6 */}
+          <div className="bg-white p-6 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
+            <FaRobot className="text-green-500 text-3xl mb-4 mx-auto" />
+            <h3 className="text-xl font-semibold text-gray-800">AI data predictions</h3>
+            <p className="text-gray-600 mt-2">Get automated analytics results with AI-driven tools.</p>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default BeneficiosPower;

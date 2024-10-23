@@ -3,6 +3,7 @@ import { supabase } from '../../supabase/supabase.config';
 import { Link } from 'react-router-dom';
 import { GrEdit } from "react-icons/gr";
 import { UserAuth } from '../../Context/AuthContext'; // Usa el hook personalizado
+import JobsContext from '../../Context/JobsContext'; // Importar el contexto para la búsqueda
 
 // Función para formatear la fecha a dd-mm-yyyy
 const formatDate = (isoString) => {
@@ -15,7 +16,7 @@ const formatDate = (isoString) => {
 
 const JobList = () => {
   const { user } = UserAuth(); // Usa el hook personalizado para acceder al usuario
-
+  const { searchTerm } = useContext(JobsContext); // Usa el contexto para obtener el término de búsqueda
   const [jobs, setJobs] = useState([]);
   
   // Obtener el reclutador (id_reclutador) usando el user.id del perfil
@@ -55,6 +56,11 @@ const JobList = () => {
     fetchJobs();
   }, [user]);
 
+  // Filtrar los trabajos según el término de búsqueda
+  const filteredJobs = jobs.filter((job) =>
+    job.puesto.toLowerCase().includes(searchTerm.toLowerCase())
+  );
+
   // Función para manejar el cambio de estado de las ofertas
   const handleChangeStatus = async (index, newStatus) => {
     const jobToUpdate = jobs[index];
@@ -84,49 +90,53 @@ const JobList = () => {
         <div>Acciones</div>
       </div>
       <div className="mt-2 h-96 overflow-y-scroll">
-        {jobs.map((job, index) => (
-          <div
-            key={job.id_oferta}
-            className={`grid grid-cols-5 justify-center justify-items-center gap-4 py-5 px-4  
-              ${index % 2 === 0 ? 'bg-white' : 'bg-[#edf6ff]'}`} // Alterna los fondos
-          >
-            {/* Puesto */}
-            <Link to={`/Postulados/${job.id_oferta}`}>
-              <p className="text-newprimarycolor font-regular">{job.puesto}</p>
-            </Link>
-
-            {/* Fecha */}
-            <div>
-              <p className="text-gray-600 font-regular">{formatDate(job.fecha_publicacion)}</p>
-            </div>
-
-            {/* Postulados */}
-            <div className="text-gray-600 font-regular pl-8">{job.count_postulados}</div>
-
-            {/* Estado */}
-            <div>
-              <select
-                value={job.estado}
-                onChange={(e) => handleChangeStatus(index, e.target.value)}
-                className={`px-4 py-1 text-sm border border-gray-400 rounded-full font-regular outline-none transition-all duration-300  ${
-                  job.estado === 'activa' ? 'text-green-500' : 'text-red-500'
-                }`}
-              >
-                <option value="activa" className="text-green-500">Abierto</option>
-                <option value="cerrada" className="text-red-500">Cerrado</option>
-              </select>
-            </div>
-
-            {/* Acciones */}
-            <div>
-              <Link to={`/EditJob/${job.id_oferta}`}>
-                <button className="flex items-center gap-2 px-4 py-1 rounded-full border border-primarycolor text-primarycolor text-sm font-regular">
-                  Editar <GrEdit />
-                </button>
+        {filteredJobs.length > 0 ? (
+          filteredJobs.map((job, index) => (
+            <div
+              key={job.id_oferta}
+              className={`grid grid-cols-5 justify-center justify-items-center gap-4 py-5 px-4  
+                ${index % 2 === 0 ? 'bg-white' : 'bg-[#edf6ff]'}`} // Alterna los fondos
+            >
+              {/* Puesto */}
+              <Link to={`/Postulados/${job.id_oferta}`}>
+                <p className="text-newprimarycolor font-regular">{job.puesto}</p>
               </Link>
+
+              {/* Fecha */}
+              <div>
+                <p className="text-gray-600 font-regular">{formatDate(job.fecha_publicacion)}</p>
+              </div>
+
+              {/* Postulados */}
+              <div className="text-gray-600 font-regular pl-8">{job.count_postulados}</div>
+
+              {/* Estado */}
+              <div>
+                <select
+                  value={job.estado}
+                  onChange={(e) => handleChangeStatus(index, e.target.value)}
+                  className={`px-4 py-1 text-sm border border-gray-400 rounded-full font-regular outline-none transition-all duration-300  ${
+                    job.estado === 'activa' ? 'text-green-500' : 'text-red-500'
+                  }`}
+                >
+                  <option value="activa" className="text-green-500">Abierto</option>
+                  <option value="cerrada" className="text-red-500">Cerrado</option>
+                </select>
+              </div>
+
+              {/* Acciones */}
+              <div>
+                <Link to={`/EditJob/${job.id_oferta}`}>
+                  <button className="flex items-center gap-2 px-4 py-1 rounded-full border border-primarycolor text-primarycolor text-sm font-regular">
+                    Editar <GrEdit />
+                  </button>
+                </Link>
+              </div>
             </div>
-          </div>
-        ))}
+          ))
+        ) : (
+          <p className="text-center text-gray-600">No se encontraron trabajos</p>
+        )}
       </div>
     </div>
   );

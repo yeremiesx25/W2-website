@@ -85,11 +85,7 @@ function HeaderAdmin() {
   }, [user?.id]);
 
   return (
-    <div className="flex items-center justify-between p-4 bg-white shadow-sm px-14 fixed w-full z-10 font-lato">
-      {/* Logo de la empresa */}
-      <div className="flex items-center h-full">
-        <span className="text-xl font-bold text-primarycolor">Power</span>
-      </div>
+    <div className="flex items-center pl-72  justify-between p-4   bg-white shadow-sm fixed w-full z-10 font-lato">
 
       {/* Saludo al reclutador */}
       <div className="text-gray-800">

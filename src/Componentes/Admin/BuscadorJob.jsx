@@ -7,7 +7,7 @@ function BuscadorJob() {
 
   return (
       
-      <form className="bg-white border border-gray-300 rounded-full flex items-center pl-2 text-gray-700 w-96">
+      <form className="bg-white border border-gray-300 rounded-full flex items-center pl-2 text-gray-700  lg:w-96 md:w-64">
         <IoSearch className='ml-2' />
             <div className="sm:flex items-center  overflow-hidden px-2 py-2 justify-between w-3/5">
               <input

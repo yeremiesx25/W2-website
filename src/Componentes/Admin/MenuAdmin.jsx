@@ -45,13 +45,23 @@ function MenuAdmin() {
   };
 
   const handleLogout = async () => {
-    const { error } = await supabase.auth.signOut();
-    if (!error) {
+    try {
+      const { error } = await supabase.auth.signOut();
+      if (error) {
+        console.error('Error cerrando sesión:', error.message);
+        return;
+      }
+  
+      // Limpiar el localStorage al cerrar sesión
+      localStorage.clear();
+  
+      // Navegar a la página de inicio o login
       navigate('/Power');
-    } else {
-      console.error('Error cerrando sesión:', error.message);
+    } catch (error) {
+      console.error('Error cerrando sesión:', error);
     }
   };
+  
 
   // Memoriza el menú para evitar renders innecesarios
   const menuItems = useMemo(() => [
