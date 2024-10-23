@@ -95,24 +95,17 @@ const handleLogin = async (e) => {
       return;
     }
 
-    // Obtener la sesión del usuario después de iniciar sesión
-    const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
+    // Obtener la sesión y el perfil del usuario en paralelo
+    const [{ data: sessionData, error: sessionError }, { data: perfil, error: perfilError }] = await Promise.all([
+      supabase.auth.getSession(),
+      supabase.from("perfiles").select("rol").eq("user_id", sessionData?.session?.user?.id).single()
+    ]);
 
     if (sessionError) {
       console.error("Error al obtener la sesión:", sessionError.message);
       setError("No se pudo obtener la sesión.");
       return;
     }
-
-    const user = sessionData.session.user;
-
-    // Consultar el perfil del usuario para obtener su rol
-    const { data: perfil, error: perfilError } = await supabase
-      .from("perfiles")
-      .select("rol")
-      .eq("user_id", user.id)
-      .single();
-
     if (perfilError) {
       console.error("Error al obtener el perfil:", perfilError.message);
       setError("Error al verificar el perfil.");
@@ -123,7 +116,6 @@ const handleLogin = async (e) => {
     if (perfil) {
       if (perfil.rol === "candidato") {
         navigate("/PowerAuth"); // Cambia a la ruta del candidato
-        
       } else if (perfil.rol === "reclutador") {
         setError("Email o contraseña invalida.");
       }
@@ -135,6 +127,7 @@ const handleLogin = async (e) => {
     setError("Hubo un problema al iniciar sesión. Inténtalo de nuevo.");
   }
 };
+
 
 
   const handleGoogleLogin = async () => {
