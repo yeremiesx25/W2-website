@@ -22,30 +22,73 @@ export const AuthContextProvider = ({ children }) => {
   };
 
   // Función para iniciar sesión manualmente
-  const manualSignIn = async (email, password) => {
-    
+  const manualSignInCandidato = async (email, password) => {
     try {
-      const { data, error } = await supabase.auth.signInWithPassword({
+      // Iniciar sesión con Supabase usando email y contraseña
+      const { data: signInData, error: signInError } = await supabase.auth.signInWithPassword({
         email,
         password,
       });
-      if (error) throw error;
-
+      if (signInError) throw signInError;
+  
+      // Obtener el perfil del usuario desde la tabla de 'perfiles'
       const { data: userProfile, error: profileError } = await supabase
         .from('perfiles')
-        .select('*')
+        .select('rol')
         .eq('correo', email)
         .single();
-
+  
       if (profileError || !userProfile) throw new Error('Perfil no encontrado');
-      // Dentro de manualSignIn
-      setUser({ ...userProfile, rol: 'reclutador', id: userProfile.id }); // Asegúrate de que 'id' es el campo correcto
-      setUser({ ...userProfile, rol: 'reclutador' });
-      navigate('/Admin', { replace: true });
+  
+      // Verificar si el usuario tiene el rol de "reclutador"
+      if (userProfile.rol !== 'candidato') {
+        throw new Error('No tienes permisos para iniciar sesión como reclutador');
+      }
+  
+      // Si el rol es correcto, establece el estado del usuario y redirige
+      setUser(userProfile);
+      navigate('/PowerAuth', { replace: true });
+      
     } catch (error) {
       console.error('Error al iniciar sesión manualmente:', error.message);
     }
   };
+  
+  //inicio en candidato
+  const manualSignIn = async (email, password) => {
+    try {
+      // Iniciar sesión con Supabase usando email y contraseña
+      const { data: signInData, error: signInError } = await supabase.auth.signInWithPassword({
+        email,
+        password,
+      });
+      if (signInError) throw signInError;
+  
+      // Obtener el perfil del usuario desde la tabla de 'perfiles'
+      const { data: userProfile, error: profileError } = await supabase
+        .from('perfiles')
+        .select('rol')
+        .eq('correo', email)
+        .single();
+  
+      if (profileError || !userProfile) throw new Error('Perfil no encontrado');
+  
+      // Verificar si el usuario tiene el rol de "reclutador"
+      if (userProfile.rol !== 'reclutador') {
+        throw new Error('No tienes permisos para iniciar sesión como reclutador');
+      }
+  
+      // Si el rol es correcto, establece el estado del usuario y redirige
+      setUser(userProfile);
+      navigate('/Admin', { replace: true });
+      
+    } catch (error) {
+      console.error('Error al iniciar sesión manualmente:', error.message);
+    }
+  };
+  
+
+
 
   // Función para cerrar sesión
   const signOut = async () => {
@@ -81,7 +124,7 @@ export const AuthContextProvider = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ signInWithGoogle, manualSignIn, signOut, user, loading }}>
+    <AuthContext.Provider value={{ signInWithGoogle, manualSignIn,manualSignInCandidato, signOut, user, loading }}>
       {loading ? <div className="flex justify-center items-center h-screen w-full">
         <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-primarycolor"></div>
       </div> : children}
