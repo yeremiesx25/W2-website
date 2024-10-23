@@ -79,28 +79,63 @@ function Register() {
     }
 };
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    setError("");
+const handleLogin = async (e) => {
+  e.preventDefault();
+  setError("");
 
-    try {
-      const { error: loginError } = await supabase.auth.signInWithPassword({
-        email: email,
-        password: password,
-      });
+  try {
+    const { error: loginError } = await supabase.auth.signInWithPassword({
+      email: email,
+      password: password,
+    });
 
-      if (loginError) {
-        console.error("Error de inicio de sesión:", loginError.message);
-        setError(loginError.message);
-        return;
-      }
-
-      navigate("/PowerAuth");
-    } catch (error) {
-      console.error("Error de inicio de sesión:", error.message);
-      setError("Hubo un problema al iniciar sesión. Inténtalo de nuevo.");
+    if (loginError) {
+      console.error("Error de inicio de sesión:", loginError.message);
+      setError(loginError.message);
+      return;
     }
-  };
+
+    // Obtener la sesión del usuario después de iniciar sesión
+    const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
+
+    if (sessionError) {
+      console.error("Error al obtener la sesión:", sessionError.message);
+      setError("No se pudo obtener la sesión.");
+      return;
+    }
+
+    const user = sessionData.session.user;
+
+    // Consultar el perfil del usuario para obtener su rol
+    const { data: perfil, error: perfilError } = await supabase
+      .from("perfiles")
+      .select("rol")
+      .eq("user_id", user.id)
+      .single();
+
+    if (perfilError) {
+      console.error("Error al obtener el perfil:", perfilError.message);
+      setError("Error al verificar el perfil.");
+      return;
+    }
+
+    // Redirigir según el rol
+    if (perfil) {
+      if (perfil.rol === "candidato") {
+        navigate("/PowerAuth"); // Cambia a la ruta del candidato
+        
+      } else if (perfil.rol === "reclutador") {
+        setError("Email o contraseña invalida.");
+      }
+    } else {
+      setError("Perfil no encontrado.");
+    }
+  } catch (error) {
+    console.error("Error de inicio de sesión:", error.message);
+    setError("Hubo un problema al iniciar sesión. Inténtalo de nuevo.");
+  }
+};
+
 
   const handleGoogleLogin = async () => {
     setError("");
