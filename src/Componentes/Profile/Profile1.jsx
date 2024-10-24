@@ -35,7 +35,7 @@ const Profile1 = () => {
 
   const uploadAvatar = async (file) => {
     try {
-      const filePath = `${user.id}/${file.name}`;
+      const filePath = `Candidatos/${user.id}/${file.name}`;
       const { data, error } = await supabase.storage
         .from('avatar_user')
         .upload(filePath, file);
@@ -60,7 +60,7 @@ const Profile1 = () => {
       console.error("Error uploading avatar:", error.message);
     }
   };
-
+  
   const handleAvatarChange = (e) => {
     const file = e.target.files[0];
     if (file) uploadAvatar(file);
