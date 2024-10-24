@@ -5,6 +5,7 @@ import HeaderPower from "./HeaderPower";
 import { FcGoogle } from "react-icons/fc";
 import DashboardContent from '../../assets/BGPOWER.svg'
 
+
 function Register() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -95,29 +96,45 @@ const handleLogin = async (e) => {
       return;
     }
 
-    // Obtener la sesión y el perfil del usuario en paralelo
-    const [{ data: sessionData, error: sessionError }, { data: perfil, error: perfilError }] = await Promise.all([
-      supabase.auth.getSession(),
-      supabase.from("perfiles").select("rol").eq("user_id", sessionData?.session?.user?.id).single()
-    ]);
+    // Obtener la sesión del usuario después de iniciar sesión
+    const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
 
     if (sessionError) {
       console.error("Error al obtener la sesión:", sessionError.message);
       setError("No se pudo obtener la sesión.");
       return;
     }
+
+    const user = sessionData.session.user;
+
+    // Consultar el perfil del usuario para obtener su rol
+    const { data: perfil, error: perfilError } = await supabase
+      .from("perfiles")
+      .select("rol")
+      .eq("user_id", user.id)
+      .single();
+
     if (perfilError) {
       console.error("Error al obtener el perfil:", perfilError.message);
       setError("Error al verificar el perfil.");
       return;
     }
 
-    // Redirigir según el rol
+    console.log("Perfil obtenido:", perfil); // Registro del perfil obtenido
+
+    // Verificar la ruta actual
+    const currentPath = window.location.pathname;
+
+    // Redirigir según el rol y la ruta
     if (perfil) {
-      if (perfil.rol === "candidato") {
+      if (currentPath === "/AdminLogin" && perfil.rol === "reclutador") {
+        // Permitir acceso solo a reclutadores en /AdminLogin
+        navigate("/Admin"); // Cambia a la ruta del reclutador
+      } else if (currentPath === "/Login" && perfil.rol === "candidato") {
+        // Permitir acceso solo a candidatos en /Login
         navigate("/PowerAuth"); // Cambia a la ruta del candidato
-      } else if (perfil.rol === "reclutador") {
-        setError("Email o contraseña invalida.");
+      } else {
+        setError("No tienes permiso para acceder a esta sección."); // Error de permisos
       }
     } else {
       setError("Perfil no encontrado.");
@@ -127,73 +144,82 @@ const handleLogin = async (e) => {
     setError("Hubo un problema al iniciar sesión. Inténtalo de nuevo.");
   }
 };
-
-
-
-  const handleGoogleLogin = async () => {
-    setError("");
-    try {
+//parte google
+const handleGoogleLogin = async () => {
+  setError("");
+  try {
+      // Iniciar sesión con Google
       const { error: googleError } = await supabase.auth.signInWithOAuth({
-        provider: "google",
+          provider: "google"
       });
 
       if (googleError) {
-        console.error("Error de inicio de sesión con Google:", googleError.message);
-        setError(googleError.message);
-        return;
+          console.error("Error de inicio de sesión con Google:", googleError.message);
+          setError(googleError.message);
+          return;
       }
 
-      // Comprobar sesión después de iniciar sesión con Google
+      // Obtener la sesión después del inicio de sesión
       const { data: sessionData, error: sessionError } = await supabase.auth.getSession();
-      
+
       if (sessionError || !sessionData?.session) {
-        console.error("Error al obtener la sesión:", sessionError?.message);
-        setError("No se pudo obtener el usuario después de iniciar sesión con Google.");
-        return;
+          console.error("Error al obtener la sesión:", sessionError?.message);
+          setError("No se pudo obtener el usuario después de iniciar sesión con Google.");
+          return;
       }
 
       const user = sessionData.session.user;
 
-      // Verificar si el usuario ya tiene un perfil
-      const { data: perfilExistente, error: perfilError } = await supabase
-        .from("perfiles")
-        .select("*")
-        .eq("id", user.id)
-        .single();
+      // Verificar si el usuario ya existe en la base de datos
+      const { data: existingUser, error: userError } = await supabase
+          .from('users')
+          .select('*')
+          .eq('email', user.email)
+          .single();
 
-      if (perfilError) {
-        console.error("Error al verificar perfil existente:", perfilError.message);
-        setError("Error al verificar el perfil.");
-        return;
-      }
-
-      // Si no hay perfil, crear uno nuevo
-      if (!perfilExistente) {
-        const perfilData = {
-          nombre: user.user_metadata.full_name || user.user_metadata.name || "",
-          correo: user.email,
-          rol: "candidato",
-          user_id: user.id
-        };
-
-        console.log("Datos del perfil a insertar:", perfilData);
-
-        const { error: profileError } = await supabase.from("perfiles").insert(perfilData);
-
-        if (profileError) {
-          console.error("Error al crear perfil con Google:", profileError.message);
-          setError("Hubo un problema al crear el perfil.");
+      // Manejar errores de verificación de usuario
+      if (userError && userError.code !== '23503') { // '23503' indica que no se encontró el usuario
+          console.error("Error al verificar el usuario:", userError.message);
+          setError("Error al verificar el usuario.");
           return;
-        }
       }
 
+      // Si no existe el usuario, crearlo
+      if (!existingUser) {
+          const { error: createUserError } = await supabase
+              .from('users')
+              .insert([
+                  {
+                      email: user.email,
+                  }
+              ]);
+
+          if (createUserError) {
+              console.error("Error al registrar el nuevo usuario:", createUserError.message);
+              setError("Error al registrar el nuevo usuario.");
+              return;
+          }
+
+          // Enviar el correo de verificación
+          const { error: verificationError } = await supabase.auth.api.sendVerificationEmail(user.email);
+          if (verificationError) {
+              console.error("Error al enviar el correo de verificación:", verificationError.message);
+              setError("Error al enviar el correo de verificación.");
+              return;
+          }
+      }
+
+      // Redirigir al usuario si ya existe el perfil
       navigate("/PowerAuth");
-    } catch (error) {
+  } catch (error) {
       console.error("Error de inicio de sesión con Google:", error.message);
       setError("Hubo un problema al iniciar sesión con Google. Inténtalo de nuevo.");
-    }
-  };
+  }
+};
 
+
+
+  
   return (
     <div className="flex justify-center min-h-screen font-dmsans">
       <HeaderPower />
@@ -208,7 +234,7 @@ const handleLogin = async (e) => {
     className="absolute w-auto h-96"
     alt="Dashboard Content"
   />
-</div>
+  </div>
 
       <div className="md:w-1/2 h-screen py-6 bg-white flex items-center mx-auto px-4 lg:px-40 justify-center overflow-y-scroll">
         {isLogin ? (
