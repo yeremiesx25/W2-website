@@ -2,10 +2,13 @@ import React, { useEffect, useState, useContext } from 'react';
 import { supabase } from '../../supabase/supabase.config';
 import { Link } from 'react-router-dom';
 import { GrEdit } from "react-icons/gr";
-import { UserAuth } from '../../Context/AuthContext'; // Usa el hook personalizado
-import JobsContext from '../../Context/JobsContext'; // Importar el contexto para la búsqueda
+import { FaRegCalendarAlt, FaUserFriends } from 'react-icons/fa';
+import { FaBriefcase, FaClock, FaDollarSign, FaUserTie } from 'react-icons/fa';
+import { MdOutlineVerifiedUser } from "react-icons/md";
+import { UserAuth } from '../../Context/AuthContext';
+import JobsContext from '../../Context/JobsContext';
+import { Select, MenuItem } from '@mui/material';
 
-// Función para formatear la fecha a dd-mm-yyyy
 const formatDate = (isoString) => {
   const date = new Date(isoString);
   const day = String(date.getDate()).padStart(2, '0');
@@ -15,21 +18,19 @@ const formatDate = (isoString) => {
 };
 
 const JobList = () => {
-  const { user } = UserAuth(); // Usa el hook personalizado para acceder al usuario
-  const { searchTerm } = useContext(JobsContext); // Usa el contexto para obtener el término de búsqueda
+  const { user } = UserAuth();
+  const { searchTerm } = useContext(JobsContext);
   const [jobs, setJobs] = useState([]);
-  
-  // Obtener el reclutador (id_reclutador) usando el user.id del perfil
+
   useEffect(() => {
     const fetchJobs = async () => {
       if (user) {
-        // Consulta la tabla perfiles para obtener el id_reclutador del usuario logueado
         const { data: profileData, error: profileError } = await supabase
           .from('perfiles')
           .select('id')
           .eq('id', user.id)
           .single();
-        
+
         if (profileError) {
           console.error('Error fetching profile:', profileError);
           return;
@@ -37,18 +38,16 @@ const JobList = () => {
 
         const idReclutador = profileData.id;
 
-        // Ahora consulta las ofertas filtradas por id_reclutador
         const { data: jobsData, error: jobsError } = await supabase
           .from('Oferta')
           .select('*')
-          .eq('id_reclutador', idReclutador); // Filtra las ofertas por el reclutador
+          .eq('id_reclutador', idReclutador);
 
         if (jobsError) {
           console.error('Error fetching jobs:', jobsError);
         } else {
-          // Ordenar las ofertas por fecha de publicación (más reciente primero)
           const sortedJobs = jobsData.sort((a, b) => new Date(b.fecha_publicacion) - new Date(a.fecha_publicacion));
-          setJobs(sortedJobs); // Guarda los trabajos filtrados en el estado
+          setJobs(sortedJobs);
         }
       }
     };
@@ -56,12 +55,10 @@ const JobList = () => {
     fetchJobs();
   }, [user]);
 
-  // Filtrar los trabajos según el término de búsqueda
   const filteredJobs = jobs.filter((job) =>
     job.puesto.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  // Función para manejar el cambio de estado de las ofertas
   const handleChangeStatus = async (index, newStatus) => {
     const jobToUpdate = jobs[index];
     
@@ -73,7 +70,6 @@ const JobList = () => {
     if (error) {
       console.error('Error updating job status:', error);
     } else {
-      // Actualiza el estado local para reflejar el cambio
       const updatedJobs = [...jobs];
       updatedJobs[index].estado = newStatus;
       setJobs(updatedJobs);
@@ -81,61 +77,83 @@ const JobList = () => {
   };
 
   return (
-    <div className="w-full bg-transparent px-6 rounded-lg font-lato">
-      <div className="grid grid-cols-5 gap-4 justify-items-center text-white text-md font-regular bg-newprimarycolor px-4 py-3 rounded-lg">
-        <div>Puesto</div>
-        <div>Fecha</div>
-        <div>Postulados</div>
-        <div>Estado</div>
-        <div>Acciones</div>
-      </div>
-      <div className="mt-2 h-96 overflow-y-scroll">
+    <div className="w-full bg-transparent px-6 rounded-lg font-dmsans">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredJobs.length > 0 ? (
           filteredJobs.map((job, index) => (
             <div
               key={job.id_oferta}
-              className={`grid grid-cols-5 justify-center justify-items-center gap-4 py-5 px-4  
-                ${index % 2 === 0 ? 'bg-white' : 'bg-[#edf6ff]'}`} // Alterna los fondos
+              className="bg-white rounded-lg border shadow-sm p-6 flex flex-col justify-between"
             >
-              {/* Puesto */}
-              <Link to={`/Postulados/${job.id_oferta}`}>
-                <p className="text-newprimarycolor font-regular">{job.puesto}</p>
-              </Link>
-
-              {/* Fecha */}
-              <div>
-                <p className="text-gray-600 font-regular">{formatDate(job.fecha_publicacion)}</p>
+              <div className="flex items-center justify-between mb-4">
+                <div className="flex items-center justify-between w-full">
+                  <div className="w-14 h-14 rounded-lg bg-primarycolor  flex items-center justify-center">
+                  <MdOutlineVerifiedUser className="text-white text-2xl" />
+                  </div>
+                  <Link to={`/EditJob/${job.id_oferta}`}>
+                    <button className="text-primarycolor hover:text-gray-700">
+                      <GrEdit />
+                    </button>
+                  </Link>
+                </div>
               </div>
-
-              {/* Postulados */}
-              <div className="text-gray-600 font-regular pl-8">{job.count_postulados}</div>
-
-              {/* Estado */}
-              <div>
-                <select
+              <div className="mb-2">
+                <Link to={`/Postulados/${job.id_oferta}`}>
+                  <h3 className="text-lg font-medium">{job.puesto}</h3>
+                </Link>
+                <p className="text-sm text-gray-500">
+                  Publicado: {formatDate(job.fecha_publicacion)}
+                </p>
+              </div>
+              <div className="text-[#00a76f] font-medium text-sm mb-2 flex items-center gap-2">
+                <FaUserFriends />
+                <p className="">{job.count_postulados} candidatos</p>
+              </div>
+              <hr className='mb-2' />
+              <div className="text-gray-500 grid grid-cols-2 gap-4 mb-4 text-sm font-light">
+                <div className="flex items-center gap-2">
+                  <FaBriefcase />
+                  <p>{job.modalidad}</p>
+                </div>
+                <div className="flex items-center gap-2">
+                  <FaClock />
+                  <p>{job.ubicacion}</p>
+                </div>
+                <div className="flex items-center gap-2">
+                  <FaDollarSign />
+                  <p>{job.sueldo}</p>
+                </div>
+                {/* <div className="flex items-center gap-2">
+                  <FaUserTie />
+                  <p>{job.ubicacion}</p>
+                </div> */}
+              </div>
+              <div className="flex justify-end w-full">
+              <Select
                   value={job.estado}
                   onChange={(e) => handleChangeStatus(index, e.target.value)}
-                  className={`px-4 py-1 text-sm border border-gray-400 rounded-full font-regular outline-none transition-all duration-300  ${
-                    job.estado === 'activa' ? 'text-green-500' : 'text-red-500'
-                  }`}
+                  sx={{
+                    width: 120,
+                    color: job.estado === 'activa' ? 'green' : 'red',
+                    '.MuiOutlinedInput-notchedOutline': {
+                      borderColor: job.estado === 'activa' ? 'green' : 'red',
+                    },
+                    '&:hover .MuiOutlinedInput-notchedOutline': {
+                      borderColor: job.estado === 'activa' ? 'darkgreen' : 'darkred',
+                    },
+                    '.MuiSvgIcon-root': {
+                      color: job.estado === 'activa' ? 'green' : 'red',
+                    },
+                  }}
                 >
-                  <option value="activa" className="text-green-500">Abierto</option>
-                  <option value="cerrada" className="text-red-500">Cerrado</option>
-                </select>
-              </div>
-
-              {/* Acciones */}
-              <div>
-                <Link to={`/EditJob/${job.id_oferta}`}>
-                  <button className="flex items-center gap-2 px-4 py-1 rounded-full border border-primarycolor text-primarycolor text-sm font-regular">
-                    Editar <GrEdit />
-                  </button>
-                </Link>
+                  <MenuItem value="activa">Abierto</MenuItem>
+                  <MenuItem value="cerrada">Cerrado</MenuItem>
+                </Select>
               </div>
             </div>
           ))
         ) : (
-          <p className="text-center text-gray-600">No se encontraron trabajos</p>
+          <p className="text-center text-gray-600">No jobs found</p>
         )}
       </div>
     </div>
