@@ -27,6 +27,7 @@ import Conversaciones from "./Componentes/Admin/Conversaciones.jsx";
 import Programa from "./Componentes/Admin/Programa.jsx";
 import Estadisticas from "./Componentes/Admin/Estadisticas.jsx";
 import AdminProfile from "./Componentes/Admin/AdminProfile.jsx";
+import Proceso from "./Componentes/Admin/Proceso.jsx";
 
 function App() {
   return (
@@ -86,6 +87,14 @@ function App() {
             element={
               <ProtectedRoute>
                 <Programa />
+              </ProtectedRoute>
+            }
+          />
+                <Route
+            path="/Proceso"
+            element={
+              <ProtectedRoute>
+                <Proceso />
               </ProtectedRoute>
             }
           />
