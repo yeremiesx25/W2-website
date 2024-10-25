@@ -1,26 +1,47 @@
 import React, { useContext } from 'react';
 import JobsContext from '../../Context/JobsContext';
 import { IoSearch } from "react-icons/io5";
+import { TextField, InputAdornment } from '@mui/material';
 
 function BuscadorJob() {
   const { searchTerm, setSearchTerm } = useContext(JobsContext);
 
   return (
-      
-      <form className="bg-white border border-gray-300 rounded-full flex items-center pl-2 text-gray-700  lg:w-96 md:w-64">
-        <IoSearch className='ml-2' />
-            <div className="sm:flex items-center  overflow-hidden px-2 py-2 justify-between w-3/5">
-              <input
-                className="text-base text-gray-700 placeholder:text-gray-600 flex-grow outline-none px-2 "
-                type="text"
-                placeholder="Buscar por puesto"
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-              />
-              
-            </div>
-          </form>
-
+    <TextField
+      variant="outlined"
+      fullWidth
+      value={searchTerm}
+      onChange={(e) => setSearchTerm(e.target.value)}
+      placeholder="Buscar por puesto"
+      InputProps={{
+        startAdornment: (
+          <InputAdornment position="start">
+            <IoSearch style={{ color: 'gray' }} />
+          </InputAdornment>
+        ),
+        sx: {
+          borderRadius: '50px',  // Redondeado similar a tu diseño original
+          backgroundColor: '#fff',
+        }
+      }}
+      sx={{
+        width: {
+          lg: '24rem',  // Ancho en pantallas grandes
+          md: '16rem',  // Ancho en pantallas medianas
+        },
+        '& .MuiOutlinedInput-root': {
+          '& fieldset': {
+            borderColor: 'gray',  // Color del borde
+          },
+          '&:hover fieldset': {
+            borderColor: '#6366F1',  // Color del borde en hover (indigo)
+          },
+          '&.Mui-focused fieldset': {
+            borderColor: 'primary',  // Color del borde cuando está enfocado
+          },
+        },
+      }}
+    />
   );
 }
 

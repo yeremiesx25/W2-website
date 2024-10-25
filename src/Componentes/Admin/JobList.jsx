@@ -8,6 +8,8 @@ import { MdOutlineVerifiedUser } from "react-icons/md";
 import { UserAuth } from '../../Context/AuthContext';
 import JobsContext from '../../Context/JobsContext';
 import { Select, MenuItem } from '@mui/material';
+import { IconButton, Tooltip } from '@mui/material';
+import EditIcon from "@mui/icons-material/Edit";
 
 const formatDate = (isoString) => {
   const date = new Date(isoString);
@@ -78,7 +80,7 @@ const JobList = () => {
 
   return (
     <div className="w-full bg-transparent px-6 rounded-lg font-dmsans">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
         {filteredJobs.length > 0 ? (
           filteredJobs.map((job, index) => (
             <div
@@ -87,30 +89,38 @@ const JobList = () => {
             >
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center justify-between w-full">
-                  <div className="w-14 h-14 rounded-lg bg-primarycolor  flex items-center justify-center">
-                  <MdOutlineVerifiedUser className="text-white text-2xl" />
+                  <div className="w-14 h-14 rounded-xl bg-primarycolor  flex items-center justify-center">
+                    <MdOutlineVerifiedUser className="text-white text-2xl" />
                   </div>
                   <Link to={`/EditJob/${job.id_oferta}`}>
-                    <button className="text-primarycolor hover:text-gray-700">
-                      <GrEdit />
-                    </button>
+                  <Tooltip title="Editar">
+      <IconButton
+        color="primary"
+        sx={{
+          "&:hover": { color: "gray" }, // Cambia el color al hacer hover
+        }}
+      >
+        <EditIcon />
+      </IconButton>
+    </Tooltip>
                   </Link>
                 </div>
               </div>
               <div className="mb-2">
                 <Link to={`/Postulados/${job.id_oferta}`}>
-                  <h3 className="text-lg font-medium">{job.puesto}</h3>
+                  <h3 className="text-md font-medium hover:underline">{job.puesto}</h3>
                 </Link>
-                <p className="text-sm text-gray-500">
+                <p className="text-xs text-gray-500">
                   Publicado: {formatDate(job.fecha_publicacion)}
                 </p>
               </div>
-              <div className="text-[#00a76f] font-medium text-sm mb-2 flex items-center gap-2">
+              <div className="text-[#00a76f] font-medium text-xs mb-2 flex items-center gap-2">
                 <FaUserFriends />
                 <p className="">{job.count_postulados} candidatos</p>
               </div>
-              <hr className='mb-2' />
-              <div className="text-gray-500 grid grid-cols-2 gap-4 mb-4 text-sm font-light">
+              <hr className="mb-2 border-t-2 border-gray-300 border-dotted" />
+
+              <div className="text-gray-500 grid grid-cols-3 gap-4 mb-4 text-xs font-light">
                 <div className="flex items-center gap-2">
                   <FaBriefcase />
                   <p>{job.modalidad}</p>
@@ -129,20 +139,21 @@ const JobList = () => {
                 </div> */}
               </div>
               <div className="flex justify-end w-full">
-              <Select
+                <Select
                   value={job.estado}
                   onChange={(e) => handleChangeStatus(index, e.target.value)}
                   sx={{
                     width: 120,
-                    color: job.estado === 'activa' ? 'green' : 'red',
-                    '.MuiOutlinedInput-notchedOutline': {
-                      borderColor: job.estado === 'activa' ? 'green' : 'red',
+                    color: job.estado === "activa" ? "green" : "red",
+                    ".MuiOutlinedInput-notchedOutline": {
+                      borderColor: job.estado === "activa" ? "green" : "red",
                     },
-                    '&:hover .MuiOutlinedInput-notchedOutline': {
-                      borderColor: job.estado === 'activa' ? 'darkgreen' : 'darkred',
+                    "&:hover .MuiOutlinedInput-notchedOutline": {
+                      borderColor:
+                        job.estado === "activa" ? "darkgreen" : "darkred",
                     },
-                    '.MuiSvgIcon-root': {
-                      color: job.estado === 'activa' ? 'green' : 'red',
+                    ".MuiSvgIcon-root": {
+                      color: job.estado === "activa" ? "green" : "red",
                     },
                   }}
                 >

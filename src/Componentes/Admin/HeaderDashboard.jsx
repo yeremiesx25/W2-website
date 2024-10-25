@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import BuscadorJob from './BuscadorJob';
 import { UserAuth } from '../../Context/AuthContext'; // Importa tu contexto de autenticación
 import { supabase } from '../../supabase/supabase.config'; // Importa la configuración de Supabase
+import AddButton from './AddButton';
 
 function HeaderDashboard() {
   const { user } = UserAuth(); // Obtén el usuario desde el contexto
@@ -40,14 +41,9 @@ function HeaderDashboard() {
   }, [user]);
 
   return (
-    <div className="flex justify-between items-center pt-8">
-      <div>
-        <p className="text-sm text-gray-500">Hola {reclutadorNombre}</p>
-        <h1 className="text-3xl font-bold text-blue-900">Bienvenido a Power</h1>
-      </div>
-      <div className="w-1/4">
+    <div className="flex w-full gap-8 px-6 items-center py-8">
         <BuscadorJob />
-      </div>
+        <AddButton />
     </div>
   );
 }

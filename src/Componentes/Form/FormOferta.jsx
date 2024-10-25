@@ -6,10 +6,11 @@ import Step1 from './Step1';
 import Step2 from './Step2';
 import Step3 from './Step3';
 import HeaderAdmin from '../Admin/HeaderAdmin';
-import MenuAdmin from '../Admin/MenuAdmin'
+import MenuAdmin from '../Admin/MenuAdmin';
+import { Box, Stepper, Step, StepLabel } from '@mui/material';
 
 const FormOferta = () => {
-    const { user } = UserAuth(); // Obtener el usuario del contexto
+    const { user } = UserAuth();
     const [step, setStep] = useState(1);
     const [formData, setFormData] = useState({
         puesto: '',
@@ -52,14 +53,12 @@ const FormOferta = () => {
     };
 
     const handleSubmit = async (submittedData) => {
-        // Use the submitted data, which now includes the wtsp_url
         const { data, error } = await supabase.from("Oferta").insert([submittedData]);
 
         if (error) {
             console.error('Error al insertar:', error);
         } else {
             console.log('Oferta creada:', data);
-            // Opcional: Resetear el formulario o redirigir
             setFormData({
                 puesto: '',
                 descripcion: '',
@@ -80,7 +79,6 @@ const FormOferta = () => {
                 preg_6: '',
                 id_reclutador: user?.id || null,
             });
-            // Aquí puedes redirigir a otra página o mostrar un mensaje de éxito
         }
     };
 
@@ -89,13 +87,25 @@ const FormOferta = () => {
             <HeaderAdmin />
             <MenuAdmin />
             
-            <div className="w-full h-full bg-white flex flex-col p-8 font-dmsans overflow-y-scroll pl-72 pt-24">
-                <h1 className="text-2xl font-semibold mb-4">Registrar Oferta</h1>
-                <form onSubmit={(e) => e.preventDefault()}>
-                    {step === 1 && <Step1 data={formData} handleChange={handleChange} nextStep={nextStep} />}
-                    {step === 2 && <Step2 data={formData} handleChange={handleChange} nextStep={nextStep} prevStep={prevStep} />}
-                    {step === 3 && <Step3 data={formData} handleChange={handleChange} prevStep={prevStep} onSubmit={handleSubmit} />}
-                </form>
+            <div className="w-full h-full bg-white flex flex-col font-dmsans overflow-y-scroll pl-72 pt-24">
+                <Box sx={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'center', gap: '7%', fontFamily: 'sans-serif'}}>
+                    <Stepper activeStep={step - 1} orientation="vertical" sx={{ mr: 4 }}>
+                        <Step>
+                            <StepLabel>Información general</StepLabel>
+                        </Step>
+                        <Step>
+                            <StepLabel>Sobre el trabajo</StepLabel>
+                        </Step>
+                        <Step>
+                            <StepLabel>Información adicional</StepLabel>
+                        </Step>
+                    </Stepper>
+                    <form onSubmit={(e) => e.preventDefault()}>
+                        {step === 1 && <Step1 data={formData} handleChange={handleChange} nextStep={nextStep} />}
+                        {step === 2 && <Step2 data={formData} handleChange={handleChange} nextStep={nextStep} prevStep={prevStep} />}
+                        {step === 3 && <Step3 data={formData} handleChange={handleChange} prevStep={prevStep} onSubmit={handleSubmit} />}
+                    </form>
+                </Box>
             </div>
         </div>
     );

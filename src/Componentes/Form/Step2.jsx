@@ -1,44 +1,66 @@
 import React from 'react';
+import { TextField, Button, Typography, Box } from '@mui/material';
 
 const Step2 = ({ data, handleChange, nextStep, prevStep }) => {
     return (
-        <div>
-            <h2 className="text-xl mb-4">Paso 2: Requisitos</h2>
-            <div className="mb-4">
-                <label className="block mb-2">Requisitos</label>
-                <textarea
-                    name="requisitos"
-                    value={data.requisitos}
-                    onChange={handleChange}
-                    className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-light text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                    required
-                />
-            </div>
-            <div className="mb-4">
-                <label className="block mb-2">Funciones</label>
-                <textarea
-                    name="funciones"
-                    value={data.funciones}
-                    onChange={handleChange}
-                    className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-light text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                    required
-                />
-            </div>
-            <div className="mb-4">
-                <label className="block mb-2">Beneficios</label>
-                <textarea
-                    name="beneficios"
-                    value={data.beneficios}
-                    onChange={handleChange}
-                    className="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-light text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md"
-                    required
-                />
-            </div>
-            <div className="flex justify-between">
-                <button type="button" onClick={prevStep} className="bg-gray-500 text-white p-2 rounded">Anterior</button>
-                <button type="button" onClick={nextStep} className="bg-blue-500 text-white p-2 rounded">Siguiente</button>
-            </div>
-        </div>
+        <Box sx={{ maxWidth: 600, mx: 'auto', mt: 0, p: 3, bgcolor: 'background.paper', borderRadius: 2, boxShadow: 1 }}>
+            
+            <TextField
+                label="Requisitos"
+                variant="outlined"
+                name="requisitos"
+                value={data.requisitos}
+                onChange={handleChange}
+                fullWidth
+                required
+                multiline
+                rows={4}
+                margin="normal"
+                helperText="Use viñetas separando por líneas para cada requisito"
+            />
+            <TextField
+                label="Funciones"
+                variant="outlined"
+                name="funciones"
+                value={data.funciones}
+                onChange={handleChange}
+                fullWidth
+                required
+                multiline
+                rows={4}
+                margin="normal"
+                helperText="Use viñetas separando por líneas para cada función"
+            />
+            <TextField
+                label="Beneficios"
+                variant="outlined"
+                name="beneficios"
+                value={data.beneficios}
+                onChange={handleChange}
+                fullWidth
+                required
+                multiline
+                rows={4}
+                margin="normal"
+                helperText="Use viñetas separando por líneas para cada beneficio"
+            />
+            <Box mt={3} display="flex" justifyContent="space-between">
+                <Button 
+                    variant="contained" 
+                    color="secondary" 
+                    onClick={prevStep}
+                >
+                    Anterior
+                </Button>
+                <Button 
+                    variant="contained" 
+                    color="primary" 
+                    onClick={nextStep}
+                >
+                    Siguiente
+                </Button>
+            </Box>
+        </Box>
     );
 };
 
