@@ -4,14 +4,15 @@ import { v4 as uuidv4 } from 'uuid';
 import * as XLSX from 'xlsx';
 import HeaderAdmin from './HeaderAdmin';
 import MenuAdmin from './MenuAdmin';
-import { useNavigate } from 'react-router-dom'; // Asegúrate de que este import esté aquí
+import { useNavigate } from 'react-router-dom'; 
+import JobProceso from "./JobProceso";
 
 function Programa() {
   const [user, setUser] = useState(null);
   const [interviewDetails, setInterviewDetails] = useState({ postulante: null, date: '' });
   const [interviews, setInterviews] = useState([]);
 
-  const navigate = useNavigate(); // Inicializa useNavigate
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -112,24 +113,10 @@ function Programa() {
             className="p-3 border border-gray-300 rounded-lg"
           />
         </div>
-
-        {/* Scheduled Interviews Section */}
-        <div className="w-3/4 bg-white shadow-lg rounded-lg p-6">
-          <h2 className="text-2xl font-bold text-gray-800 mb-4">Entrevistas Programadas</h2>
-          {interviews.length > 0 ? (
-            <ul className="space-y-2">
-              {interviews.map((interview, index) => (
-                <li key={index} className="text-gray-700 bg-gray-50 p-3 rounded-lg">
-                  {interview.nombre_postulante} - {new Date(interview.fecha).toLocaleDateString()}
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p className="text-gray-600">No hay entrevistas programadas.</p>
-          )}
+        <JobProceso />
         </div>
       </div>
-    </div>
+  
   );
 }
 

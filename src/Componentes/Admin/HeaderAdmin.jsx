@@ -98,7 +98,7 @@ function HeaderAdmin() {
       </div>
 
       {/* Barra de búsqueda */}
-      <BuscadorJob />
+      
 
       {/* Nombre y foto del logueado */}
       <div className="flex items-center space-x-4 min-w-64">

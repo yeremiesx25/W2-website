@@ -4,7 +4,7 @@ import JobList from "./JobList";
 import { UserAuth } from "../../Context/AuthContext";
 import BuscadorJob from "./BuscadorJob";
 import Postulados from "./Postulados";
-import MenuAdmin from "./MenuAdmin";
+import HeaderDashboard from "./HeaderDashboard";
 
 function AdminLayout() {
   const { user, signOut } = UserAuth();
@@ -16,7 +16,8 @@ function AdminLayout() {
 
   return (
     <div className="w-full h-screen flex flex-col bg-gray-50 pl-72 pr-10 pt-20">
-      <BtnContainer />
+      
+      <HeaderDashboard />
       <JobList />
     </div>
   );

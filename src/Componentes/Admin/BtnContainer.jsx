@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import AddButton from './AddButton';
 import { supabase } from "../../supabase/supabase.config"; // Asegúrate de que la importación sea correcta
+import { Card, CardContent, Typography, Box, Avatar } from '@mui/material';
+import { CloudDownload } from '@mui/icons-material';
 
 function BtnContainer() {
   const [ofertasCount, setOfertasCount] = useState(0);  // Estado para la cantidad total de ofertas
@@ -84,19 +86,34 @@ function BtnContainer() {
   return (
     <div className='px-6 flex'>
       <div
-        style={{
-          backgroundImage: `url(https://masterbundles.com/wp-content/uploads/2023/02/wave-background-23-992.jpg)`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-        }}
-        className="flex w-full justify-between items-center py-4 px-10 my-4 rounded-xl"
+        className="flex w-full justify-between items-center py-4  mt-4 rounded-xl"
       >
-        <div className="flex space-x-4 px-4 justify-between">
+        <div className="flex space-x-4  justify-between">
           {/* Card 1: Total de ofertas */}
-          <div className="flex flex-col justify-center items-center p-6 bg-white rounded-lg shadow-lg min-w-32">
-            <p className="text-sm text-[#A3AED0]">Mis Ofertas</p>
-            <p className="text-3xl font-bold text-[#1B2559]">{ofertasCount}</p>
-          </div>
+          <Card sx={{ display: 'flex', alignItems: 'center', p: 2, boxShadow: 3, borderRadius: '16px' }}>
+      <CardContent sx={{ display: 'flex', alignItems: 'center' }}>
+        {/* Icon with background */}
+        <Avatar
+          sx={{
+            bgcolor: '#FEE2E2', // Fondo suave similar al color de la imagen
+            width: 50,
+            height: 50,
+          }}
+        >
+          <CloudDownload sx={{ color: '#1B2559' }} /> {/* Ícono personalizado */}
+        </Avatar>
+
+        {/* Text content */}
+        <Box ml={2}>
+          <Typography variant="h4" sx={{ fontWeight: 'bold', color: '#1B2559' }}>
+            {ofertasCount}
+          </Typography>
+          <Typography variant="body2" color="textSecondary">
+            Mis Ofertas
+          </Typography>
+        </Box>
+      </CardContent>
+    </Card>
 
           {/* Card 2: Ofertas abiertas */}
           <div className="flex flex-col justify-center items-center p-6 bg-white rounded-lg shadow-lg min-w-32">

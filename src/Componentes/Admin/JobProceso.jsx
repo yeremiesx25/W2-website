@@ -1,15 +1,11 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { supabase } from '../../supabase/supabase.config';
 import { Link } from 'react-router-dom';
-import { GrEdit } from "react-icons/gr";
-import { FaRegCalendarAlt, FaUserFriends } from 'react-icons/fa';
-import { FaBriefcase, FaClock, FaDollarSign, FaUserTie } from 'react-icons/fa';
+import { FaUserFriends } from 'react-icons/fa';
+import { FaBriefcase, FaClock, FaDollarSign } from 'react-icons/fa';
 import { MdOutlineVerifiedUser } from "react-icons/md";
 import { UserAuth } from '../../Context/AuthContext';
 import JobsContext from '../../Context/JobsContext';
-import { Select, MenuItem } from '@mui/material';
-import { IconButton, Tooltip } from '@mui/material';
-import EditIcon from "@mui/icons-material/Edit";
 
 const formatDate = (isoString) => {
   const date = new Date(isoString);
@@ -19,7 +15,7 @@ const formatDate = (isoString) => {
   return `${day}-${month}-${year}`;
 };
 
-const JobList = () => {
+const JobProceso = () => {
   const { user } = UserAuth();
   const { searchTerm } = useContext(JobsContext);
   const [jobs, setJobs] = useState([]);
@@ -61,66 +57,36 @@ const JobList = () => {
     job.puesto.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const handleChangeStatus = async (index, newStatus) => {
-    const jobToUpdate = jobs[index];
-    
-    const { error } = await supabase
-      .from('Oferta')
-      .update({ estado: newStatus })
-      .eq('id_oferta', jobToUpdate.id_oferta);
-
-    if (error) {
-      console.error('Error updating job status:', error);
-    } else {
-      const updatedJobs = [...jobs];
-      updatedJobs[index].estado = newStatus;
-      setJobs(updatedJobs);
-    }
-  };
-
   return (
     <div className="w-full bg-transparent px-6 rounded-lg font-dmsans">
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {filteredJobs.length > 0 ? (
-          filteredJobs.map((job, index) => (
+          filteredJobs.map((job) => (
             <div
               key={job.id_oferta}
               className="bg-white rounded-lg border shadow-sm p-6 flex flex-col justify-between"
             >
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center justify-between w-full">
-                  <div className="w-14 h-14 rounded-xl bg-primarycolor  flex items-center justify-center">
+                  <div className="w-14 h-14 rounded-lg bg-primarycolor flex items-center justify-center">
                     <MdOutlineVerifiedUser className="text-white text-2xl" />
                   </div>
-                  <Link to={`/EditJob/${job.id_oferta}`}>
-                  <Tooltip title="Editar">
-      <IconButton
-        color="primary"
-        sx={{
-          "&:hover": { color: "gray" }, // Cambia el color al hacer hover
-        }}
-      >
-        <EditIcon />
-      </IconButton>
-    </Tooltip>
-                  </Link>
                 </div>
               </div>
               <div className="mb-2">
-                <Link to={`/Postulados/${job.id_oferta}`}>
-                  <h3 className="text-md font-medium hover:underline">{job.puesto}</h3>
+                <Link to={`/Entrevistas}`}>
+                  <h3 className="text-lg font-medium">{job.puesto}</h3>
                 </Link>
-                <p className="text-xs text-gray-500">
+                <p className="text-sm text-gray-500">
                   Publicado: {formatDate(job.fecha_publicacion)}
                 </p>
               </div>
-              <div className="text-[#00a76f] font-medium text-xs mb-2 flex items-center gap-2">
+              <div className="text-[#00a76f] font-medium text-sm mb-2 flex items-center gap-2">
                 <FaUserFriends />
-                <p className="">{job.count_postulados} candidatos</p>
+                <p>{job.count_postulados} candidatos</p>
               </div>
-              <hr className="mb-2 border-t-2 border-gray-300 border-dotted" />
-
-              <div className="text-gray-500 grid grid-cols-3 gap-4 mb-4 text-xs font-light">
+              <hr className='mb-2' />
+              <div className="text-gray-500 grid grid-cols-3 gap-4 mb-4 text-sm font-light">
                 <div className="flex items-center gap-2">
                   <FaBriefcase />
                   <p>{job.modalidad}</p>
@@ -133,33 +99,6 @@ const JobList = () => {
                   <FaDollarSign />
                   <p>{job.sueldo}</p>
                 </div>
-                {/* <div className="flex items-center gap-2">
-                  <FaUserTie />
-                  <p>{job.ubicacion}</p>
-                </div> */}
-              </div>
-              <div className="flex justify-end w-full">
-                <Select
-                  value={job.estado}
-                  onChange={(e) => handleChangeStatus(index, e.target.value)}
-                  sx={{
-                    width: 120,
-                    color: job.estado === "activa" ? "green" : "red",
-                    ".MuiOutlinedInput-notchedOutline": {
-                      borderColor: job.estado === "activa" ? "green" : "red",
-                    },
-                    "&:hover .MuiOutlinedInput-notchedOutline": {
-                      borderColor:
-                        job.estado === "activa" ? "darkgreen" : "darkred",
-                    },
-                    ".MuiSvgIcon-root": {
-                      color: job.estado === "activa" ? "green" : "red",
-                    },
-                  }}
-                >
-                  <MenuItem value="activa">Abierto</MenuItem>
-                  <MenuItem value="cerrada">Cerrado</MenuItem>
-                </Select>
               </div>
             </div>
           ))
@@ -171,4 +110,4 @@ const JobList = () => {
   );
 };
 
-export default JobList;
+export default JobProceso;

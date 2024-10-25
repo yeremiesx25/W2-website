@@ -38,12 +38,6 @@ function MenuAdmin() {
     setTheme(savedTheme);
   }, []);
 
-  const toggleTheme = () => {
-    const newTheme = theme === 'dark' ? 'light' : 'dark';
-    setTheme(newTheme);
-    localStorage.setItem('theme', newTheme);
-  };
-
   const handleLogout = async () => {
     try {
       const { error } = await supabase.auth.signOut();
@@ -74,20 +68,6 @@ function MenuAdmin() {
 
   return (
     <div className={`w-64 h-screen ${theme === 'dark' ? 'bg-newprimarycolor' : 'bg-white'} px-2 shadow flex flex-col justify-around pt-24  z-10 fixed`}>
-      {/* <div className="p-4 flex justify-center">
-        <div
-          onClick={toggleTheme}
-          className={`w-14 h-7 flex items-center bg-gray-800 border-white rounded-full p-1 cursor-pointer ${theme === 'light' ? 'bg-yellow-300' : ''}`}
-        >
-          <div className={`icon w-4 h-4 rounded-full shadow-md transform duration-300 ease-in-out flex items-center ${theme === 'light' ? 'translate-x-7' : ''}`}>
-            {theme === 'light' ? (
-              <span role="img" aria-label="sun" className="text-yellow-600">☀️</span>
-            ) : (
-              <span role="img" aria-label="moon" className="text-gray-00">🌙</span>
-            )}
-          </div>
-        </div>
-      </div> */}
 
       <ul className="space-y-4 p-4 mt-12">
         {menuItems.map(({ to, icon, label }) => (
