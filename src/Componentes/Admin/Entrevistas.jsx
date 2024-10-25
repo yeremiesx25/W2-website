@@ -18,20 +18,23 @@ function Entrevistas() {
       const worksheet = workbook.Sheets[sheetName];
       const jsonData = XLSX.utils.sheet_to_json(worksheet);
 
-      const perfilesData = jsonData.map((row) => ({
-        id: uuidv4(),
+      const idReclutador = 'your-reclutador-id'; // Replace with actual ID
+      const idOferta = 123; // Replace with actual ID
+
+      const candidatosData = jsonData.map((row) => ({
+        id_user: uuidv4(),
+        id_reclutador: idReclutador,
+        id_oferta: idOferta,
         nombre: row.Nombre,
         dni: row.DNI,
         telefono: row.Celular,
-        rol: 'candidato',
-        estado: true,
-        correo: row.Email,
+        estado_etapas: [] // Initialize as an empty array
       }));
 
-      const { error } = await supabase.from('perfiles').insert(perfilesData);
+      const { error } = await supabase.from('CandidatosNoAuth').insert(candidatosData);
 
       if (error) {
-        console.error('Error uploading profiles:', error);
+        console.error('Error uploading candidates:', error);
         return;
       }
 
@@ -43,17 +46,17 @@ function Entrevistas() {
 
   return (
     <div className="w-full h-screen flex">
-    <HeaderAdmin />
-    <MenuAdmin />
-    <div className="w-full h-full bg-white flex flex-col p-8 font-dmsans overflow-y-scroll pl-72 pt-28">
-      <h2 className="text-2xl mb-4">Subir Candidatos</h2>
-      <input
-        type="file"
-        accept=".xlsx, .xls"
-        onChange={handleFileUpload}
-        className="p-3 border border-gray-300 rounded-lg"
-      />
-    </div>
+      <HeaderAdmin />
+      <MenuAdmin />
+      <div className="w-full h-full bg-white flex flex-col p-8 font-dmsans overflow-y-scroll pl-72 pt-28">
+        <h2 className="text-2xl mb-4">Subir Candidatos</h2>
+        <input
+          type="file"
+          accept=".xlsx, .xls"
+          onChange={handleFileUpload}
+          className="p-3 border border-gray-300 rounded-lg"
+        />
+      </div>
     </div>
   );
 }
