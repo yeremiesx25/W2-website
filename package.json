@@ -14,11 +14,7 @@
     "@emotion/styled": "^11.13.0",
     "@material-tailwind/react": "^2.1.10",
     "@mui/icons-material": "^6.1.5",
-<<<<<<< HEAD
     "@mui/material": "^6.1.4",
-=======
-    "@mui/material": "^6.1.5",
->>>>>>> 6d2250f78ccd92e300813bd2d0572e2c98a2bac7
     "@react-pdf-viewer/core": "^3.12.0",
     "@react-pdf-viewer/default-layout": "^3.12.0",
     "@react-spring/web": "^9.7.5",
