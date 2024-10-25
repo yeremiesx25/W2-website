@@ -1,69 +1,250 @@
-import React from 'react'
-import HeaderAdmin from './HeaderAdmin'
-import MenuAdmin from './MenuAdmin'
+import React, { useEffect, useState } from 'react';
+import { supabase } from '../../supabase/supabase.config';
+import { UserAuth } from "../../Context/AuthContext";
+import HeaderAdmin from './HeaderAdmin';
+import MenuAdmin from './MenuAdmin';
+import { GrEdit } from "react-icons/gr";
 
-function AdminProfile() {
-  return (
-    <div className='w-full h-screen'>
-        <HeaderAdmin />
-        <MenuAdmin />
-        <div className='w-full h-screen pl-64  pt-20 flex justify-center items-center'>
-        <div class="relative mt-6 flex w-96 flex-col rounded-xl bg-white bg-clip-border text-gray-700 shadow-md">
-  <div class="p-6">
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      viewBox="0 0 24 24"
-      fill="currentColor"
-      aria-hidden="true"
-      class="mb-4 h-12 w-12 text-primarycolor"
-    >
-      <path
-        fill-rule="evenodd"
-        d="M9.315 7.584C12.195 3.883 16.695 1.5 21.75 1.5a.75.75 0 01.75.75c0 5.056-2.383 9.555-6.084 12.436A6.75 6.75 0 019.75 22.5a.75.75 0 01-.75-.75v-4.131A15.838 15.838 0 016.382 15H2.25a.75.75 0 01-.75-.75 6.75 6.75 0 017.815-6.666zM15 6.75a2.25 2.25 0 100 4.5 2.25 2.25 0 000-4.5z"
-        clip-rule="evenodd"
-      ></path>
-      <path d="M5.26 17.242a.75.75 0 10-.897-1.203 5.243 5.243 0 00-2.05 5.022.75.75 0 00.625.627 5.243 5.243 0 005.022-2.051.75.75 0 10-1.202-.897 3.744 3.744 0 01-3.008 1.51c0-1.23.592-2.323 1.51-3.008z"></path>
-    </svg>
-    <h5 class="mb-2 block font-sans text-xl font-semibold leading-snug tracking-normal text-blue-gray-900 antialiased">
-      Próximamente...
-    </h5>
-    <p class="block font-sans text-md font-light leading-relaxed text-inherit antialiased">
-      Estamos trabajando para brindarte la mejor experiencia
-    </p>
-  </div>
-  <div class="p-6 pt-0">
-    <a
-      class="!font-medium !text-blue-gray-900 !transition-colors hover:!text-primarycolor"
-      href="#"
-    >
-      <a href="#"
-        class="flex select-none items-center gap-2 rounded-lg py-2 px-4 text-center align-middle font-sans text-xs font-bold uppercase text-primarycolor transition-all hover:bg-primarycolor/10 active:bg-primarycolor/30 disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
-        type="button"
-        data-ripple-dark="true"
-      >
-        Equipo de TI - Tech Lab
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="2"
-          stroke="currentColor"
-          aria-hidden="true"
-          class="h-4 w-4"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
-          ></path>
-        </svg>
-      </a>
-    </a>
-  </div>
-</div>
-        </div>
+const AdminProfile = () => {
+  const { user } = UserAuth();
+  const [loading, setLoading] = useState(true);
+  const [editMode, setEditMode] = useState(false);
+  const [formData, setFormData] = useState({
+    nombre: '',
+    telefono: '',
+    avatar_url: ''
+  });
+
+  const uploadAvatar = async (file) => {
+    try {
+      const filePath = `Reclutadores/${user.id}/${file.name}`;
+      const { data, error } = await supabase.storage
+        .from('avatar_user')
+        .upload(filePath, file);
+
+      if (error) throw error;
+
+      const avatarUrl = supabase.storage
+        .from('avatar_user')
+        .getPublicUrl(filePath).data.publicUrl;
+
+      setFormData({ ...formData, avatar_url: avatarUrl });
+
+      const { error: updateError } = await supabase
+        .from('perfiles')
+        .update({ avatar_url: avatarUrl })
+        .eq('id', user.id); // Utiliza el user_id para identificar al usuario correcto
+
+      if (updateError) throw updateError;
+
+      console.log("Avatar updated successfully");
+    } catch (error) {
+      console.error("Error uploading avatar:", error.message);
+    }
+  };
+
+  const handleAvatarChange = (e) => {
+    const file = e.target.files[0];
+    if (file) uploadAvatar(file);
+  };
+
+  useEffect(() => {
+    const fetchPerfil = async () => {
+      if (!user) {
+        console.error('No authenticated user found.');
+        setLoading(false);
+        return;
+      }
+
+      try {
+        // Cargar los datos de perfil del usuario específico usando su user_id
+        const { data: perfilData, error: perfilError } = await supabase
+          .from('perfiles')
+          .select('nombre, telefono, avatar_url')
+          .eq('id', user.id) // Filtra por user_id
+          .maybeSingle();
+
+        if (perfilError) {
+          console.error(perfilError.message);
+        } else {
+          setFormData(perfilData || {}); // Asegúrate de manejar casos donde no haya datos
+        }
+      } catch (error) {
+        console.error('Error fetching profile data:', error.message);
+      }
+      
+      setLoading(false);
+    };
+
+    fetchPerfil();
+  }, [user]);
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    if (!user) {
+      console.error('No authenticated user found.');
+      return;
+    }
+
+    try {
+      const { data: existingProfile, error: fetchError } = await supabase
+        .from('perfiles')
+        .select('id')
+        .eq('id', user.id)
+        .maybeSingle();
+
+      if (fetchError) throw new Error('Error fetching existing profile: ' + fetchError.message);
+
+      // Decide si debes hacer update o insert basado en la existencia del perfil
+      if (existingProfile) {
+        // Actualiza el perfil existente
+        const { error: updateError } = await supabase
+          .from('perfiles')
+          .update({
+            nombre: formData.nombre,
+            telefono: formData.telefono,
+            avatar_url: formData.avatar_url
+          })
+          .eq('user_id', user.id);
+
+        if (updateError) throw new Error('Error updating profile: ' + updateError.message);
+      } else {
+        // Crea un nuevo perfil si no existe
+        const { error: insertError } = await supabase
+          .from('perfiles')
+          .insert({
+            user_id: user.id,
+            nombre: formData.nombre,
+            telefono: formData.telefono,
+            avatar_url: formData.avatar_url
+          });
+
+        if (insertError) throw new Error('Error inserting profile: ' + insertError.message);
+      }
+
+      console.log("Datos actualizados correctamente");
+
+      setEditMode(false);
+    } catch (error) {
+      console.error("Error saving data:", error.message);
+    }
+  };
+
+  const handleCancel = () => {
+    setEditMode(false);
+  };
+
+  if (loading) return (
+    <div className="flex justify-center items-center h-screen w-full">
+      <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-primarycolor"></div>
     </div>
-  )
-}
+  );
 
-export default AdminProfile
+  return (
+    <div className="min-h-screen bg-gray-100">
+    <HeaderAdmin />
+    <MenuAdmin />
+      <div className="max-w-4xl mx-auto p-6 pt-32 rounded-lg">
+      <div
+  className="flex items-center justify-between mb-6 w-full px-10 py-6 rounded-lg flex-wrap"
+  style={{
+    backgroundImage: `url('https://imagenes.20minutos.es/files/image_990_556/uploads/imagenes/2024/06/14/cielo-estrellado.jpeg')`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center'
+  }}
+>
+          <div className="flex items-center flex-wrap">
+            <div className="relative">
+              <img
+                src={formData.avatar_url}
+                alt="profile"
+                className="w-24 h-24 rounded-full border-2 border-white"
+              />
+              {editMode && (
+                <div className="absolute inset-0 flex items-center justify-center bg-gray-300 bg-opacity-80 rounded-full">
+                  <label
+                    htmlFor="avatar"
+                    className="flex flex-col items-center cursor-pointer text-primarycolor bg-opacity-80 bg-white h-8 w-8 justify-center rounded-full"
+                  >
+                    <GrEdit className="text-xl" />
+                  </label>
+                  <input
+                    id="avatar"
+                    type="file"
+                    accept="image/*"
+                    onChange={handleAvatarChange}
+                    className="absolute inset-0 opacity-0 cursor-pointer"
+                  />
+                </div>
+              )}
+            </div>
+            <div className='w-auto'>
+              <div>
+                <input
+                  type="text"
+                  name="nombre"
+                  value={formData.nombre}
+                  onChange={handleChange}
+                  readOnly={!editMode}
+                  className={`mt-1 block w-full px-2 py-1 ml-5 rounded-md focus:outline-none md:text-xl ${
+                    editMode
+                      ? "border-gray-300 text-gray-800"
+                      : "bg-transparent text-white"
+                  }`}
+                />
+              </div>
+              <div>
+                <input
+                  type="text"
+                  name="telefono"
+                  value={formData.telefono}
+                  onChange={handleChange}
+                  readOnly={!editMode}
+                  className={`mt-1 block w-full px-2 py-1 ml-5 rounded-md focus:outline-none md:text-xl ${
+                    editMode
+                      ? "border-gray-300 text-gray-800"
+                      : "bg-transparent text-white"
+                  }`}
+                />
+              </div>
+            </div>
+            {editMode && (
+              <form onSubmit={handleSubmit} className="space-y-4 p-4 justify-center w-full">
+                <div className="flex justify-center space-x-4 w-full">
+                  <button
+                    type="submit"
+                    className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-500"
+                  >
+                    Guardar
+                  </button>
+                  <button
+                    type="button"
+                    onClick={handleCancel}
+                    className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-500"
+                  >
+                    Cancelar
+                  </button>
+                </div>
+              </form>
+            )}
+          </div>
+          {!editMode && (
+            <button
+              onClick={() => setEditMode(true)}
+              className="ml-auto px-4 py-2 bg-white text-primarycolor rounded-md hover:bg-blue-100 transition-colors duration-100 flex items-center gap-2"
+            >
+              Editar <GrEdit />
+            </button>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default AdminProfile;
