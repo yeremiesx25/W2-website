@@ -74,7 +74,7 @@ const JobProceso = () => {
                 </div>
               </div>
               <div className="mb-2">
-                <Link to={`/Entrevistas}`}>
+              <Link to={`/Entrevistas/${job.id_oferta}`}>
                   <h3 className="text-lg font-medium">{job.puesto}</h3>
                 </Link>
                 <p className="text-sm text-gray-500">

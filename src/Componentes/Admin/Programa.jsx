@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { supabase } from '../../supabase/supabase.config';
-import { v4 as uuidv4 } from 'uuid';
-import * as XLSX from 'xlsx';
 import HeaderAdmin from './HeaderAdmin';
 import MenuAdmin from './MenuAdmin';
 import { useNavigate } from 'react-router-dom'; 
 import JobProceso from "./JobProceso";
+
 
 function Programa() {
   const [user, setUser] = useState(null);
@@ -59,64 +58,24 @@ function Programa() {
     setInterviewDetails({ postulante: null, date: '' });
   };
 
-  const handleFileUpload = async (event) => {
-    const file = event.target.files[0];
-    if (!file) return;
-
-    const reader = new FileReader();
-    reader.onload = async (e) => {
-      const data = new Uint8Array(e.target.result);
-      const workbook = XLSX.read(data, { type: 'array' });
-      const sheetName = workbook.SheetNames[0];
-      const worksheet = workbook.Sheets[sheetName];
-      const jsonData = XLSX.utils.sheet_to_json(worksheet);
-
-      const perfilesData = jsonData.map((row) => ({
-        id: uuidv4(),
-        nombre: row.Nombre,
-        dni: row.DNI,
-        telefono: row.Celular,
-        rol: 'candidato',
-        estado: true,
-        correo: row.Email,
-      }));
-
-      const { error } = await supabase.from('perfiles').insert(perfilesData);
-
-      if (error) {
-        console.error('Error uploading profiles:', error);
-        return;
-      }
-    };
-
-    reader.readAsArrayBuffer(file);
-  };
-
   return (
     <div className="min-h-screen bg-gray-100">
       <HeaderAdmin />
       <MenuAdmin />
       <div className="pl-64 pt-20 flex flex-col items-center">
-        {/* Schedule Interview and File Upload Buttons */}
+        {/* Schedule Interview Button */}
         <div className="flex justify-between items-center w-3/4 mb-8 mt-8">
           <button 
             className="bg-blue-600 text-white px-6 py-3 rounded-lg shadow hover:bg-blue-500 transition duration-300 ease-in-out"
-            onClick={() => navigate('/Proceso')} // Cambia aquí para navegar a /Proceso
+            onClick={() => navigate('/Proceso')}
           >
             Programar Entrevista
           </button>
-          
-          <input 
-            type="file" 
-            accept=".xlsx, .xls" 
-            onChange={handleFileUpload} 
-            className="p-3 border border-gray-300 rounded-lg"
-          />
         </div>
+
         <JobProceso />
-        </div>
       </div>
-  
+    </div>
   );
 }
 
