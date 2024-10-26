@@ -62,7 +62,7 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
       // Fetch user profile data
       const { data: profileData, error: profileError } = await supabase
         .from('perfiles')
-        .select('nombre, correo, avatar_url, telefono')
+        .select('nombre, correo, avatar_url, telefono, dni')
         .eq('id', user.id)
         .single();
   
@@ -72,7 +72,7 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
         return;
       }
   
-      const { nombre, correo, avatar_url, telefono } = profileData;
+      const { nombre, correo, avatar_url, telefono, dni } = profileData;
   
       // Insert application into the Postulacion table
       const { error: insertError } = await supabase
@@ -91,6 +91,7 @@ function QuestionsModal({ isOpen, onClose, selectedJob }) {
           fecha_postulacion: new Date(),
           estado: 'pendiente',
           avatar_url: avatar_url,
+          dni: dni,
         });
   
       if (insertError) {

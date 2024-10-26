@@ -12,6 +12,7 @@ function Entrevistas() {
   const [idOferta, setIdOferta] = useState(null);
   const [candidatos, setCandidatos] = useState([]);
   const [candidatosNoAuth, setCandidatosNoAuth] = useState([]);
+  const [programaData, setProgramaData] = useState([]); // State to hold Programa data
 
   useEffect(() => {
     const fetchData = async () => {
@@ -49,7 +50,7 @@ function Entrevistas() {
       // Obtener candidatos en estado "apto"
       const { data: postulacionData, error: postulacionError } = await supabase
         .from('Postulacion')
-        .select('name_user, telefono,fecha_postulacion')
+        .select('name_user, telefono, dni')
         .eq('id_oferta', ofertaData.id_oferta)
         .eq('estado', 'apto');
 
@@ -63,7 +64,7 @@ function Entrevistas() {
       // Obtener candidatos de CandidatosNoAuth en estado "apto"
       const { data: noAuthData, error: noAuthError } = await supabase
         .from('CandidatosNoAuth')
-        .select('nombre,telefono')
+        .select('nombre, telefono, dni')
         .eq('id_oferta', ofertaData.id_oferta)
         .eq('estado', 'apto');
 
@@ -73,10 +74,33 @@ function Entrevistas() {
       }
 
       setCandidatosNoAuth(noAuthData);
+
+      // Fetch data from the Programa table
+      const programaData = await fetchProgramaData();
+      setProgramaData(programaData);
     };
 
     fetchData();
   }, [user]);
+
+  // Function to fetch Programa data
+  const fetchProgramaData = async () => {
+    try {
+      const { data: programaData, error } = await supabase
+        .from('Programa')
+        .select('id_programa, proceso, empresa, lugar, etapa_1, etapa_2, etapa_3, etapa_4');
+
+      if (error) {
+        console.error('Error al obtener datos del Programa:', error);
+        return;
+      }
+
+      console.log('Programa Data:', programaData);
+      return programaData;
+    } catch (err) {
+      console.error('Error en la solicitud:', err);
+    }
+  };
 
   const handleFileUpload = async (event) => {
     const file = event.target.files[0];
@@ -121,51 +145,77 @@ function Entrevistas() {
       <div className="w-full h-full bg-white flex flex-col p-8 font-dmsans overflow-y-scroll pl-72 pt-28">
         <h2 className="text-2xl mb-4">Subir Candidatos</h2>
         <input type="file" accept=".xlsx, .xls" onChange={handleFileUpload} className="p-3 border border-gray-300 rounded-lg" />
-        
+
         <h2 className="text-2xl mt-6 mb-4">Candidatos Aptos</h2>
-        {candidatos.length > 0 ? (
+        {candidatos.length > 0 || candidatosNoAuth.length > 0 ? (
           <table className="min-w-full border-collapse border border-gray-300">
             <thead>
               <tr>
-                <th className="border border-gray-300 p-1">Fecha de Postulacion</th>
-                <th className="border border-gray-300 p-1">Nombre</th>
-                <th className="border border-gray-300 p-1">Telefono</th>
+                <th
+                  className="border border-gray-300 p-4 text-lg font-semibold bg-gray-100 text-center"
+                  colSpan="9"
+                >
+                  Proceso - {programaData[0]?.proceso || 'Proceso Desconocido'} - {programaData[0]?.empresa || 'Empresa Desconocida'}
+                </th>
+              </tr>
+              <tr>
+                <th className="border border-gray-300 p-2">Nombre</th>
+                <th className="border border-gray-300 p-2">Telefono</th>
+                <th className="border border-gray-300 p-2">DNI</th>
+                <th className="border border-gray-300 p-2">{programaData[0]?.etapa_1 || 'Etapa 1'}</th>
+                <th className="border border-gray-300 p-2">Resultados</th>
+                <th className="border border-gray-300 p-2">{programaData[0]?.etapa_2 || 'Etapa 2'}</th>
+                <th className="border border-gray-300 p-2">Resultados</th>
+                <th className="border border-gray-300 p-2">{programaData[0]?.etapa_3 || 'Etapa 3'}</th>
+                <th className="border border-gray-300 p-2">Resultados</th>
               </tr>
             </thead>
             <tbody>
               {candidatos.map((candidato, index) => (
                 <tr key={index}>
-                  <td className="border border-gray-300 p-2">{candidato.fecha_postulacion}</td>
                   <td className="border border-gray-300 p-2">{candidato.name_user}</td>
-                  <td className="border border-gray-300 p-2">{candidato.telefono}</td>
+                  <td className="border border-gray-300 p-2 text-center">{candidato.telefono}</td>
+                  <td className="border border-gray-300 p-2 text-center">{candidato.dni}</td>
+                  {/* Checkbox for Etapa 1 */}
+                  <td className="border border-gray-300 p-2 text-center">
+                    <input type="checkbox" />
+                  </td>
+                  {/* Dropdown for Etapa 1 Results */}
+                  <td className="border border-gray-300 p-2 text-center">
+                    <select>
+                      <option value="Apto">Apto</option>
+                      <option value="No Apto">No Apto</option>
+                    </select>
+                  </td>
+                  {/* Checkbox for Etapa 2 */}
+                  <td className="border border-gray-300 p-2 text-center">
+                    <input type="checkbox" />
+                  </td>
+                  {/* Dropdown for Etapa 2 Results */}
+                  <td className="border border-gray-300 p-2 text-center">
+                    <select>
+                      <option value="Apto">Apto</option>
+                      <option value="No Apto">No Apto</option>
+                    </select>
+                  </td>
+                  {/* Checkbox for Etapa 3 */}
+                  <td className="border border-gray-300 p-2 text-center">
+                    <input type="checkbox" />
+                  </td>
+                  {/* Dropdown for Etapa 3 Results */}
+                  <td className="border border-gray-300 p-2 text-center">
+                    <select>
+                      <option value="Apto">Apto</option>
+                      <option value="No Apto">No Apto</option>
+                    </select>
+                  </td>
                 </tr>
               ))}
+              {/* Repeat similar rows for candidatosNoAuth if needed */}
             </tbody>
           </table>
         ) : (
-          <p>No hay candidatos aptos para mostrar.</p>
-        )}
-
-        <h2 className="text-2xl mt-6 mb-4">Candidatos No Autenticados Aptos</h2>
-        {candidatosNoAuth.length > 0 ? (
-          <table className="min-w-full border-collapse border border-gray-300">
-            <thead>
-              <tr>
-                <th className="border border-gray-300 p-2">Nombre</th>
-                <th className="border border-gray-300 p-2">Telefono</th>
-              </tr>
-            </thead>
-            <tbody>
-              {candidatosNoAuth.map((candidato, index) => (
-                <tr key={index}>
-                  <td className="border border-gray-300 p-2">{candidato.nombre}</td>
-                  <td className="border border-gray-300 p-2">{candidato.telefono}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        ) : (
-          <p>No hay candidatos no autenticados aptos para mostrar.</p>
+          <p>No hay candidatos disponibles.</p>
         )}
       </div>
     </div>
