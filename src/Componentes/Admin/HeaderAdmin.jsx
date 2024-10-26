@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { supabase } from '../../supabase/supabase.config';
 import { UserAuth } from "../../Context/AuthContext";
-import BuscadorJob from './BuscadorJob';
 
 function HeaderAdmin() {
   const { user } = UserAuth();
@@ -84,13 +83,18 @@ function HeaderAdmin() {
     }
   }, [user?.id]);
 
+  // Función para obtener solo el primer nombre
+  const getFirstName = (nombreCompleto) => {
+    return nombreCompleto.split(' ')[0]; // Divide por espacios y obtiene el primer elemento
+  };
+
   return (
-    <div className="flex items-center pl-72  justify-between p-4   bg-white shadow-sm fixed w-full z-10 font-lato">
+    <div className="flex items-center pl-72  justify-between p-4   bg-white border-b fixed w-full z-10 font-lato">
 
       {/* Saludo al reclutador */}
       <div className="text-gray-800">
         <span className="text-lg font-semibold">
-          Hola, {profile.nombre}!
+          Hola, {getFirstName(profile.nombre)} 👋
         </span>
         <div className="text-sm text-gray-600">
           Echemos un vistazo a tu actividad hoy.
@@ -109,14 +113,15 @@ function HeaderAdmin() {
           </div>
         ) : (
           <>
+          <span className="text-gray-800 text-base font-medium w-44 truncate">
+              {profile.nombre}
+            </span>
             <img
               src={profile.avatar_url || 'https://static-00.iconduck.com/assets.00/user-avatar-happy-icon-2048x2048-ssmbv1ou.png'} // Usa una imagen por defecto si no hay avatar
               alt="User Avatar"
               className="w-10 h-10 rounded-full"
             />
-            <span className="text-gray-800 text-base font-medium">
-              {profile.nombre || 'Reclutador'}
-            </span>
+            
           </>
         )}
       </div>

@@ -2,18 +2,21 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UserAuth } from '../../Context/AuthContext';
 import HeaderPower from '../Power/HeaderPower';
-import { GrFormNextLink } from "react-icons/gr";
+import { Box, Grid, Typography, TextField, Button, Link, IconButton, InputAdornment } from '@mui/material';
+import { GrFormNextLink } from 'react-icons/gr';
+import { Visibility, VisibilityOff } from '@mui/icons-material';
 
 function LoginAdmin() {
     const navigate = useNavigate();
     const { manualSignIn } = UserAuth();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
     const [error, setError] = useState('');
 
     const handleLogin = async (e) => {
         e.preventDefault();
-    setError("");
+        setError('');
         try {
             const success = await manualSignIn(email, password);
             if (success) {
@@ -31,61 +34,117 @@ function LoginAdmin() {
         }
     };
 
+    const handleClickShowPassword = () => {
+        setShowPassword(!showPassword);
+    };
+
     return (
         <div>
             <HeaderPower />
-            <div className="w-[100%] h-screen flex font-dmsans items-center">
-                <div className="w-1/2 h-full hidden md:flex flex-col gap-8 items-center justify-center overflow-hidden">
-                <img className='h-96' src="https://keenthemes.com/assets/media/illustrations/customerservice.svg" alt="" />
-                <p className='text-gray-700 font-light px-2 text-center'>"La pasión por conectar personas con su potencial impulsa tu éxito."</p>
-                </div>
-                <div className="md:w-1/2 w-full justify-center h-full py-6 bg-newprimarycolor flex items-center mx-auto px-4">
-                    <div className="p-10 xs:p-0 md:mx-auto lg:w-full lg:max-w-md">
-                        <h1 className="font-bold text-center text-2xl text-white mt-20">
+            <Grid container height="100vh">
+                <Grid item md={6} className="hidden md:flex flex-col gap-8 items-center justify-center overflow-hidden">
+                    <img
+                        src="https://keenthemes.com/assets/media/illustrations/customerservice.svg"
+                        alt=""
+                        style={{ maxHeight: '28rem' }}
+                    />
+                    <Typography variant="body1" color="text.secondary" align="center" maxWidth="lg">
+                        "La pasión por conectar personas con su potencial impulsa tu éxito."
+                    </Typography>
+                </Grid>
+                <Grid item xs={12} md={6} className="flex items-center justify-center px-4">
+                    <Box padding={6} maxWidth="md" width="100%">
+                        <Typography variant="h4" align="center" color="primary" gutterBottom>
                             Te damos la bienvenida
-                        </h1>
-                        <h1 className="font-normal text-center text-md text-gray-300 mt-2">
+                        </Typography>
+                        <Typography variant="subtitle1" align="center" color="gray.300" gutterBottom>
                             Ingresa tus datos para iniciar sesión
-                        </h1>
-                        <div className="w-full">
-                            <div className="py-7 w-full">
-                                <label className="font-light text-md text-gray-300 block">Correo electrónico</label>
-                                <input
-                                    type="email"
-                                    placeholder="Ingresa tu correo"
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                    className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-primarycolor focus:bg-white focus:outline-none mb-8"
-                                    required
-                                />
-                                <label className="font-light text-md text-gray-300 block">Contraseña</label>
-                                <input
-                                    type="password"
-                                    placeholder="Ingresa tu contraseña"
-                                    value={password}
-                                    onChange={(e) => setPassword(e.target.value)}
-                                    className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-primarycolor focus:bg-white focus:outline-none mb-2"
-                                    required
-                                />
-                                {error && <p className="text-red-500 text-sm mb-3">{error}</p>}
-                                <div className='flex md:justify-between items-center flex-wrap gap-8 justify-center'>
-                                    <a href="https://wa.me/51970632448?text=Hola%2C%20me%20gustar%C3%ADa%20que%20me%20pueda%20ayudar%20a%20recuperar%20mi%20contrase%C3%B1a" className='text-colorgreen font-light text-sm flex ml-auto underline underline-offset-4'>Olvidé mi contraseña</a>
-                                    <button
-                                        type="button"
-                                        onClick={handleLogin}
-                                        className="transition duration-200 bg-[#ffe946] hover:bg-[#fff084] focus:bg-blue-700 focus:shadow-sm focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 text-primarycolor w-full h-12 flex py-2 rounded-lg shadow-sm hover:shadow-md text-center justify-center items-center"
-                                    >
-                                        <span className="inline-block font-semibold text-lg">Iniciar Sesión</span>
-                                    </button>
-                                </div>
-                                <a href="https://wa.me/51970632448?text=Hola%20vengo%20de%20Power.%20Quiero%20solicitar%20mi%20cuenta%20de%20Reclutador." className="text-yellowprimary hover:text-white mt-4  flex items-center text-center">
-                                    Solicitar cuenta de Reclutador <GrFormNextLink size={20} />
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+                        </Typography>
+                        <Box mt={4} component="form" onSubmit={handleLogin}>
+                            <TextField
+                                label="Correo electrónico"
+                                variant="outlined"
+                                fullWidth
+                                type="email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                                margin="normal"
+                                InputProps={{
+                                    style: {
+                                        backgroundColor: 'white',
+                                        borderRadius: '8px',
+                                    },
+                                }}
+                            />
+                            <TextField
+                                label="Contraseña"
+                                variant="outlined"
+                                fullWidth
+                                type={showPassword ? 'text' : 'password'}
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
+                                margin="normal"
+                                InputProps={{
+                                    style: {
+                                        backgroundColor: 'white',
+                                        borderRadius: '8px',
+                                    },
+                                    endAdornment: (
+                                        <InputAdornment position="end">
+                                            <IconButton onClick={handleClickShowPassword} edge="end">
+                                                {showPassword ? <VisibilityOff /> : <Visibility />}
+                                            </IconButton>
+                                        </InputAdornment>
+                                    ),
+                                }}
+                            />
+                            {error && (
+                                <Typography color="error" variant="body2" gutterBottom>
+                                    {error}
+                                </Typography>
+                            )}
+                            <Box
+                                display="flex"
+                                flexDirection={{ xs: 'column', md: 'column' }}
+                                justifyContent="space-between"
+                                alignItems="center"
+                                gap={2}
+                                mt={2}
+                            >
+                                <Link
+                                    href="https://wa.me/51970632448?text=Hola%2C%20me%20gustar%C3%ADa%20que%20me%20pueda%20ayudar%20a%20recuperar%20mi%20contrase%C3%B1a"
+                                    color="secondary"
+                                    underline="always"
+                                >
+                                    Olvidé mi contraseña
+                                </Link>
+                                <Button
+                                    type="submit"
+                                    variant="contained"
+                                    color="warning"
+                                    fullWidth
+                                    sx={{ py: 2, borderRadius: '8px' }}
+                                >
+                                    <Typography variant="button" fontWeight="bold">
+                                        Iniciar Sesión
+                                    </Typography>
+                                </Button>
+                            </Box>
+                            <Link
+                                href="https://wa.me/51970632448?text=Hola%20vengo%20de%20Power.%20Quiero%20solicitar%20mi%20cuenta%20de%20Reclutador."
+                                color="warning"
+                                underline="always"
+                                display="flex"
+                                alignItems="center"
+                                justifyContent="center"
+                                mt={2}
+                            >
+                                Solicitar cuenta de Reclutador <GrFormNextLink size={20} />
+                            </Link>
+                        </Box>
+                    </Box>
+                </Grid>
+            </Grid>
         </div>
     );
 }

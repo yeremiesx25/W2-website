@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { supabase } from '../../supabase/supabase.config';
 import { UserAuth } from "../../Context/AuthContext";
+import { Box, Avatar, IconButton, TextField, Button, CircularProgress, Typography } from '@mui/material';
+import { GrEdit } from "react-icons/gr";
+import { FiEdit3 } from "react-icons/fi";
 import HeaderAdmin from './HeaderAdmin';
 import MenuAdmin from './MenuAdmin';
-import { GrEdit } from "react-icons/gr";
 
 const AdminProfile = () => {
   const { user } = UserAuth();
@@ -33,7 +35,7 @@ const AdminProfile = () => {
       const { error: updateError } = await supabase
         .from('perfiles')
         .update({ avatar_url: avatarUrl })
-        .eq('id', user.id); // Utiliza el user_id para identificar al usuario correcto
+        .eq('id', user.id);
 
       if (updateError) throw updateError;
 
@@ -57,22 +59,21 @@ const AdminProfile = () => {
       }
 
       try {
-        // Cargar los datos de perfil del usuario específico usando su user_id
         const { data: perfilData, error: perfilError } = await supabase
           .from('perfiles')
           .select('nombre, telefono, avatar_url')
-          .eq('id', user.id) // Filtra por user_id
+          .eq('id', user.id)
           .maybeSingle();
 
         if (perfilError) {
           console.error(perfilError.message);
         } else {
-          setFormData(perfilData || {}); // Asegúrate de manejar casos donde no haya datos
+          setFormData(perfilData || {});
         }
       } catch (error) {
         console.error('Error fetching profile data:', error.message);
       }
-      
+
       setLoading(false);
     };
 
@@ -100,9 +101,7 @@ const AdminProfile = () => {
 
       if (fetchError) throw new Error('Error fetching existing profile: ' + fetchError.message);
 
-      // Decide si debes hacer update o insert basado en la existencia del perfil
       if (existingProfile) {
-        // Actualiza el perfil existente
         const { error: updateError } = await supabase
           .from('perfiles')
           .update({
@@ -114,7 +113,6 @@ const AdminProfile = () => {
 
         if (updateError) throw new Error('Error updating profile: ' + updateError.message);
       } else {
-        // Crea un nuevo perfil si no existe
         const { error: insertError } = await supabase
           .from('perfiles')
           .insert({
@@ -128,7 +126,6 @@ const AdminProfile = () => {
       }
 
       console.log("Datos actualizados correctamente");
-
       setEditMode(false);
     } catch (error) {
       console.error("Error saving data:", error.message);
@@ -140,110 +137,95 @@ const AdminProfile = () => {
   };
 
   if (loading) return (
-    <div className="flex justify-center items-center h-screen w-full">
-      <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-primarycolor"></div>
-    </div>
+    <Box display="flex" justifyContent="center" alignItems="center" height="100vh">
+      <CircularProgress />
+    </Box>
   );
 
   return (
-    <div className="min-h-screen bg-gray-100">
-    <HeaderAdmin />
-    <MenuAdmin />
-      <div className="max-w-4xl mx-auto p-6 pt-32 rounded-lg">
-      <div
-  className="flex items-center justify-between mb-6 w-full px-10 py-6 rounded-lg flex-wrap"
-  style={{
-    backgroundImage: `url('https://imagenes.20minutos.es/files/image_990_556/uploads/imagenes/2024/06/14/cielo-estrellado.jpeg')`,
-    backgroundSize: 'cover',
-    backgroundPosition: 'center'
-  }}
->
-          <div className="flex items-center flex-wrap">
-            <div className="relative">
-              <img
-                src={formData.avatar_url}
-                alt="profile"
-                className="w-24 h-24 rounded-full border-2 border-white"
-              />
-              {editMode && (
-                <div className="absolute inset-0 flex items-center justify-center bg-gray-300 bg-opacity-80 rounded-full">
-                  <label
-                    htmlFor="avatar"
-                    className="flex flex-col items-center cursor-pointer text-primarycolor bg-opacity-80 bg-white h-8 w-8 justify-center rounded-full"
-                  >
-                    <GrEdit className="text-xl" />
-                  </label>
-                  <input
-                    id="avatar"
-                    type="file"
-                    accept="image/*"
-                    onChange={handleAvatarChange}
-                    className="absolute inset-0 opacity-0 cursor-pointer"
-                  />
-                </div>
-              )}
-            </div>
-            <div className='w-auto'>
-              <div>
-                <input
-                  type="text"
-                  name="nombre"
-                  value={formData.nombre}
-                  onChange={handleChange}
-                  readOnly={!editMode}
-                  className={`mt-1 block w-full px-2 py-1 ml-5 rounded-md focus:outline-none md:text-xl ${
-                    editMode
-                      ? "border-gray-300 text-gray-800"
-                      : "bg-transparent text-white"
-                  }`}
-                />
-              </div>
-              <div>
-                <input
-                  type="text"
-                  name="telefono"
-                  value={formData.telefono}
-                  onChange={handleChange}
-                  readOnly={!editMode}
-                  className={`mt-1 block w-full px-2 py-1 ml-5 rounded-md focus:outline-none md:text-xl ${
-                    editMode
-                      ? "border-gray-300 text-gray-800"
-                      : "bg-transparent text-white"
-                  }`}
-                />
-              </div>
-            </div>
-            {editMode && (
-              <form onSubmit={handleSubmit} className="space-y-4 p-4 justify-center w-full">
-                <div className="flex justify-center space-x-4 w-full">
-                  <button
-                    type="submit"
-                    className="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-500"
-                  >
-                    Guardar
-                  </button>
-                  <button
-                    type="button"
-                    onClick={handleCancel}
-                    className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-500"
-                  >
-                    Cancelar
-                  </button>
-                </div>
-              </form>
-            )}
-          </div>
-          {!editMode && (
-            <button
-              onClick={() => setEditMode(true)}
-              className="ml-auto px-4 py-2 bg-white text-primarycolor rounded-md hover:bg-blue-100 transition-colors duration-100 flex items-center gap-2"
+    <Box minHeight="100vh" bgcolor="gray.100">
+      <HeaderAdmin />
+      <MenuAdmin />
+      <Box display="flex" justifyContent="center" alignItems="center" flexDirection="column" pt={20} pl={28}>
+        <Box position="relative" display="flex" justifyContent="center" alignItems="center">
+          <Avatar
+            src={formData.avatar_url}
+            alt="profile"
+            sx={{ width: 120, height: 120, border: "2px solid white" }}
+          />
+          {editMode && (
+            <IconButton
+              color="primary"
+              component="label"
+              sx={{
+                position: 'absolute',
+                bottom: -10,
+                right: -10,
+                backgroundColor: 'white',
+                borderRadius: '50%',
+                boxShadow: 3,
+              }}
             >
-              Editar <GrEdit />
-            </button>
+              <FiEdit3 />
+              <input
+                type="file"
+                accept="image/*"
+                hidden
+                onChange={handleAvatarChange}
+              />
+            </IconButton>
           )}
-        </div>
-      </div>
-    </div>
+        </Box>
+        
+        <Box mt={3} width="100%" maxWidth={500}>
+          <Box display="flex" flexDirection="column" alignItems="center">
+            <TextField
+              name="nombre"
+              value={formData.nombre}
+              onChange={handleChange}
+              InputProps={{
+                readOnly: !editMode,
+              }}
+              variant={editMode ? "outlined" : "standard"}
+              fullWidth
+              label="Nombre"
+              InputLabelProps={{ shrink: true }}
+              sx={{ mb: 2 }}
+            />
+            <TextField
+              name="telefono"
+              value={formData.telefono}
+              onChange={handleChange}
+              InputProps={{
+                readOnly: !editMode,
+              }}
+              variant={editMode ? "outlined" : "standard"}
+              fullWidth
+              label="Teléfono"
+              InputLabelProps={{ shrink: true }}
+              sx={{ mb: 2 }}
+            />
+          </Box>
+        </Box>
+
+        <Box mt={3} display="flex" gap={2}>
+          {!editMode ? (
+            <Button variant="contained" xs={{backgroundColor: '#2563eb'}} onClick={() => setEditMode(true)}>
+              Editar Perfil
+            </Button>
+          ) : (
+            <>
+              <Button variant="contained" color="success" onClick={handleSubmit}>
+                Guardar
+              </Button>
+              <Button variant="contained" color="error" onClick={handleCancel}>
+                Cancelar
+              </Button>
+            </>
+          )}
+        </Box>
+      </Box>
+    </Box>
   );
 };
 

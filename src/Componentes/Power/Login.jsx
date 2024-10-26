@@ -4,7 +4,8 @@ import { supabase } from "../../supabase/supabase.config";
 import HeaderPower from "./HeaderPower";
 import { FcGoogle } from "react-icons/fc";
 import DashboardContent from '../../assets/BGPOWER.svg'
-
+import { Button, TextField, Typography, Checkbox, FormControlLabel, Box, Divider } from '@mui/material';
+import AppleIcon from '@mui/icons-material/Apple';
 
 function Register() {
   const [email, setEmail] = useState("");
@@ -238,43 +239,78 @@ const handleGoogleLogin = async () => {
 
       <div className="md:w-1/2 h-screen py-6 bg-white flex items-center mx-auto px-4 lg:px-40 justify-center overflow-y-scroll">
         {isLogin ? (
-          <form onSubmit={handleLogin} className="w-full p-10">
-            <h2 className="font-bold text-center text-2xl text-primarycolor mb-10 mt-7">Inicia Sesión en Power</h2>
-            <input
-              type="email"
-              placeholder="Correo electrónico"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-primarycolor focus:bg-white focus:outline-none mb-8"
-            />
-            <input
-              type="password"
-              placeholder="Contraseña"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              className="w-full px-4 py-3 rounded-lg bg-gray-200 mt-2 border focus:border-primarycolor focus:bg-white focus:outline-none mb-12"
-            />
-            {error && <p className="mb-4 text-red-500">{error}</p>}
-            <button
-              type="submit"
-              className="transition duration-200 bg-[#ffe946] hover:bg-[#fff084] focus:bg-blue-700 focus:shadow-sm focus:ring-4 focus:ring-blue-500 focus:ring-opacity-50 text-primarycolor h-10 flex py-2.5 rounded-lg text-md shadow-sm hover:shadow-md font-semibold text-center justify-center items-center mx-auto w-full"
-            >
-              Iniciar Sesión
-            </button>
-            <button
-              type="button"
-              onClick={handleGoogleLogin}
-              className="transition duration-200 bg-white border border-gray-300 hover:bg-gray-100 focus:bg-gray-200 flex items-center justify-center py-2 px-4 rounded-lg mt-4 w-full"
-            >
-              <FcGoogle className="mr-2" size={24} />
-              <span className="text-gray-600 font-semibold">Iniciar sesión con Google</span>
-            </button>
-            <p onClick={() => setIsLogin(false)} className="mt-4 text-center text-blue-500 cursor-pointer hover:underline">
-              ¿No tienes una cuenta? Regístrate
-            </p>
-          </form>
+          <Box component="form" onSubmit={handleLogin} sx={{ maxWidth: 400, mx: 'auto', p: 3 }}>
+          <Typography variant="h5" component="h2" textAlign="center" mb={2}>
+            Sign in to Overpay
+          </Typography>
+          <Typography variant="body2" textAlign="center" color="textSecondary" mb={3}>
+            Send, spend and save smarter
+          </Typography>
+    
+          <Button
+            variant="outlined"
+            startIcon={<FcGoogle />}
+            fullWidth
+            sx={{ mb: 1 }}
+            onClick={handleGoogleLogin}
+          >
+            Sign in with Google
+          </Button>
+          
+          <Button
+            variant="outlined"
+            startIcon={<AppleIcon />}
+            fullWidth
+            sx={{ mb: 3 }}
+          >
+            Sign in with Apple
+          </Button>
+    
+          <Divider>Or with email</Divider>
+    
+          <TextField
+            type="email"
+            label="Email"
+            variant="outlined"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            fullWidth
+            margin="normal"
+            required
+          />
+    
+          <TextField
+            type="password"
+            label="Password"
+            variant="outlined"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            fullWidth
+            margin="normal"
+            required
+          />
+    
+          {error && <Typography color="error" mb={2}>{error}</Typography>}
+    
+          
+    
+          <Box textAlign="right" mb={3}>
+            <Typography variant="body2" color="primary" component="a" href="#" sx={{ textDecoration: 'none' }}>
+              Forgot Password?
+            </Typography>
+          </Box>
+    
+          <Button type="submit" variant="contained" color="primary" fullWidth>
+            Sign In
+          </Button>
+    
+          <Typography textAlign="center" mt={2}>
+            Don't have an account?{' '}
+            <Typography variant="body2" color="primary" component="span" onClick={() => setIsLogin(false)} sx={{ cursor: 'pointer' }}>
+              Sign Up
+            </Typography>
+          </Typography>
+        </Box>
         ) : (
           <form className="pt-20" onSubmit={handleRegister}>
           <h2 className="font-bold text-2xl text-primarycolor text-center pb-6">Registrate en Power</h2>

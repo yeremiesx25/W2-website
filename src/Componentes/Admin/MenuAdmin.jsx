@@ -1,42 +1,32 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { FaSignOutAlt } from 'react-icons/fa';
 import { IoChatbubbleOutline, IoCalendarClearOutline, IoStatsChartOutline } from "react-icons/io5";
 import { RxAvatar, RxDashboard } from "react-icons/rx";
 import { useSpring, animated } from '@react-spring/web';
 import { supabase } from "../../supabase/supabase.config";
-import Advice from './Advice'
 
 // Componente reutilizable para los items del menú
-const MenuItem = ({ to, icon: Icon, label, theme }) => {
+const MenuItem = ({ to, icon: Icon, label }) => {
   const location = useLocation();
   const isActive = location.pathname === to;
 
   const styles = useSpring({
-    backgroundColor: isActive ? 'rgba(255, 255, 255, 0.35)' : 'transparent',
-    color: isActive ? (theme === 'dark' ? 'white' : 'black') : (theme === 'dark' ? '#fff' : '#000'),
+    backgroundColor: isActive ? 'rgba(0, 123, 255, 0.2)' : 'transparent', // Azul claro cuando está activo
+    color: isActive ? '#007bff' : '#555', // Azul en activo, gris en inactivo
   });
 
   return (
-    <animated.div style={styles} className="rounded-lg">
-      <Link
-        to={to}
-        className="flex items-center py-2 px-6 font-lato font-regular"
-      >
-        <Icon className="mr-3" /> {label}
+    <animated.div style={styles} className="rounded-lg hover:bg-opacity-20">
+      <Link to={to} className="flex items-center py-3 px-6 transition duration-300 ease-in-out font-medium">
+        <Icon className="mr-4 text-xl" /> {label}
       </Link>
     </animated.div>
   );
 };
 
 function MenuAdmin() {
-  const [theme, setTheme] = useState('dark');
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const savedTheme = localStorage.getItem('theme') || 'dark';
-    setTheme(savedTheme);
-  }, []);
 
   const handleLogout = async () => {
     try {
@@ -45,17 +35,12 @@ function MenuAdmin() {
         console.error('Error cerrando sesión:', error.message);
         return;
       }
-  
-      // Limpiar el localStorage al cerrar sesión
       localStorage.clear();
-  
-      // Navegar a la página de inicio o login
       navigate('/Power');
     } catch (error) {
       console.error('Error cerrando sesión:', error);
     }
   };
-  
 
   // Memoriza el menú para evitar renders innecesarios
   const menuItems = useMemo(() => [
@@ -67,19 +52,25 @@ function MenuAdmin() {
   ], []);
 
   return (
-    <div className={`w-64 h-screen ${theme === 'dark' ? 'bg-newprimarycolor' : 'bg-white'} px-2 shadow flex flex-col justify-around pt-24  z-10 fixed`}>
+    <div className="w-64 h-screen z-10 font-lato bg-white text-gray-800 px-4 border-r flex flex-col justify-between pt-8 fixed transition duration-500">
+      {/* Header del menú */}
+      <div className="flex justify-between items-center px-6 mb-8">
+        <h2 className="text-2xl font-semibold font-lato text-primarycolor">Panel Admin</h2>
+      </div>
 
-      <ul className="space-y-4 p-4 mt-12">
+      {/* Menú de navegación */}
+      <ul className="space-y-4">
         {menuItems.map(({ to, icon, label }) => (
           <li key={to}>
-            <MenuItem to={to} icon={icon} label={label} theme={theme} />
+            <MenuItem to={to} icon={icon} label={label} />
           </li>
         ))}
       </ul>
-      {/* <Advice /> */}
-      <div className="p-6">
-        <button onClick={handleLogout} className="flex items-center text-red-500">
-          <FaSignOutAlt className="mr-3" /> Cerrar sesión
+
+      {/* Botón de cerrar sesión */}
+      <div className="px-6 py-4">
+        <button onClick={handleLogout} className="flex items-center text-red-500 hover:text-red-600 transition duration-300 ease-in-out">
+          <FaSignOutAlt className="mr-3 text-xl" /> Cerrar sesión
         </button>
       </div>
     </div>
