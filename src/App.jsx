@@ -28,6 +28,7 @@ import Programa from "./Componentes/Admin/Programa.jsx";
 import Estadisticas from "./Componentes/Admin/Estadisticas.jsx";
 import AdminProfile from "./Componentes/Admin/AdminProfile.jsx";
 import Proceso from "./Componentes/Admin/Proceso.jsx";
+import Entrevistas from "./Componentes/Admin/Entrevistas.jsx";
 
 function App() {
   return (
@@ -128,6 +129,16 @@ function App() {
               </ProtectedRoute>
             }
           />
+
+<Route
+            path="/Entrevistas/:id_oferta"
+            element={
+              <ProtectedRoute>
+                <Entrevistas />
+              </ProtectedRoute>
+            }
+          />
+
           <Route
             path="/Postulados/:id"
             element={

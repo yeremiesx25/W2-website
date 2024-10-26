@@ -293,11 +293,18 @@ const Profile1 = () => {
                 />
               </div>
               <div>
-                <input
+              <input
                   type="text"
                   name="telefono"
-                  value={formData.telefono}
-                  onChange={handleChange}
+                  value={formData.telefono || ""} // Muestra el valor o vacío
+                  onChange={(e) => {
+                    const newValue = e.target.value;
+                    // Solo actualiza el estado si no es "Agregar teléfono"
+                    if (newValue !== "Agregar teléfono") {
+                      handleChange(e);
+                    }
+                  }}
+                  placeholder="Agregar teléfono" // Muestra un texto en el placeholder
                   readOnly={!editMode}
                   className={`text-gray-300 text-sm px-2 font-extralight ${
                     editMode
@@ -305,13 +312,21 @@ const Profile1 = () => {
                       : "bg-transparent text-white"
                   }`}
                 />
+
               </div>
               <div>
                 <input
                   type="text"
                   name="dni"
                   value={formData.dni}
-                  onChange={handleChange}
+                  onChange={(e) => {
+                    const newValue = e.target.value;
+                    // Solo actualiza el estado si no es "Agregar teléfono"
+                    if (newValue !== "Agregar DNI") {
+                      handleChange(e);
+                    }
+                  }}
+                  placeholder="Agregar DNI" // Muestra un texto en el placeholder
                   readOnly={!editMode}
                   className={`text-gray-300 text-sm px-2 font-extralight ${
                     editMode
@@ -325,7 +340,14 @@ const Profile1 = () => {
                   type="text"
                   name="distrito"
                   value={formData.distrito}
-                  onChange={handleChange}
+                  onChange={(e) => {
+                    const newValue = e.target.value;
+                    // Solo actualiza el estado si no es "Agregar teléfono"
+                    if (newValue !== "Agregar Distrito") {
+                      handleChange(e);
+                    }
+                  }}
+                  placeholder="Agregar Distrito" // Muestra un texto en el placeholder
                   readOnly={!editMode}
                   className={`text-gray-300 text-sm px-2 font-extralight ${
                     editMode
