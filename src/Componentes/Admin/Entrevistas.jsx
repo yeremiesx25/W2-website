@@ -12,7 +12,7 @@ function Entrevistas() {
   const [idOferta, setIdOferta] = useState(null);
   const [candidatos, setCandidatos] = useState([]);
   const [candidatosNoAuth, setCandidatosNoAuth] = useState([]);
-  const [programaData, setProgramaData] = useState([]); // State to hold Programa data
+  const [programaData, setProgramaData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -47,7 +47,6 @@ function Entrevistas() {
 
       setIdOferta(ofertaData.id_oferta);
 
-      // Obtener candidatos en estado "apto"
       const { data: postulacionData, error: postulacionError } = await supabase
         .from('Postulacion')
         .select('name_user, telefono, dni')
@@ -61,7 +60,6 @@ function Entrevistas() {
 
       setCandidatos(postulacionData);
 
-      // Obtener candidatos de CandidatosNoAuth en estado "apto"
       const { data: noAuthData, error: noAuthError } = await supabase
         .from('CandidatosNoAuth')
         .select('nombre, telefono, dni')
@@ -75,7 +73,6 @@ function Entrevistas() {
 
       setCandidatosNoAuth(noAuthData);
 
-      // Fetch data from the Programa table
       const programaData = await fetchProgramaData();
       setProgramaData(programaData);
     };
@@ -83,7 +80,6 @@ function Entrevistas() {
     fetchData();
   }, [user]);
 
-  // Function to fetch Programa data
   const fetchProgramaData = async () => {
     try {
       const { data: programaData, error } = await supabase
@@ -92,13 +88,13 @@ function Entrevistas() {
 
       if (error) {
         console.error('Error al obtener datos del Programa:', error);
-        return;
+        return [];
       }
 
-      console.log('Programa Data:', programaData);
       return programaData;
     } catch (err) {
       console.error('Error en la solicitud:', err);
+      return [];
     }
   };
 
@@ -133,10 +129,13 @@ function Entrevistas() {
       }
 
       alert('Candidatos subidos exitosamente');
+      setCandidatosNoAuth(prev => [...prev, ...candidatosData]);
     };
 
     reader.readAsArrayBuffer(file);
   };
+
+  const allCandidatos = [...candidatos, ...candidatosNoAuth];
 
   return (
     <div className="w-full h-screen flex">
@@ -147,7 +146,7 @@ function Entrevistas() {
         <input type="file" accept=".xlsx, .xls" onChange={handleFileUpload} className="p-3 border border-gray-300 rounded-lg" />
 
         <h2 className="text-2xl mt-6 mb-4">Candidatos Aptos</h2>
-        {candidatos.length > 0 || candidatosNoAuth.length > 0 ? (
+        {allCandidatos.length > 0 ? (
           <table className="min-w-full border-collapse border border-gray-300">
             <thead>
               <tr>
@@ -171,53 +170,46 @@ function Entrevistas() {
               </tr>
             </thead>
             <tbody>
-              {candidatos.map((candidato, index) => (
+              {allCandidatos.map((candidato, index) => (
                 <tr key={index}>
-                  <td className="border border-gray-300 p-2">{candidato.name_user}</td>
+                  <td className="border border-gray-300 p-2">{candidato.name_user || candidato.nombre}</td>
                   <td className="border border-gray-300 p-2 text-center">{candidato.telefono}</td>
                   <td className="border border-gray-300 p-2 text-center">{candidato.dni}</td>
-                  {/* Checkbox for Etapa 1 */}
                   <td className="border border-gray-300 p-2 text-center">
                     <input type="checkbox" />
                   </td>
-             {/* Dropdown for Etapa 1 Results */}
-<td className="border border-gray-300 p-2 text-center">
-  <select>
-    <option value="" disabled selected>Seleccionar</option>
-    <option value="Apto">Apto</option>
-    <option value="No Apto">No Apto</option>
-    <option value="No Apto">Reprogramar</option>
-  </select>
-</td>
-{/* Checkbox for Etapa 2 */}
-<td className="border border-gray-300 p-2 text-center">
-  <input type="checkbox" />
-</td>
-{/* Dropdown for Etapa 2 Results */}
-<td className="border border-gray-300 p-2 text-center">
-  <select>
-    <option value="" disabled selected>Seleccionar</option>
-    <option value="Apto">Apto</option>
-    <option value="No Apto">No Apto</option>
-    <option value="No Apto">Reprogramar</option>
-  </select>
-</td>
-{/* Checkbox for Etapa 3 */}
-<td className="border border-gray-300 p-2 text-center">
-  <input type="checkbox" />
-</td>
-{/* Dropdown for Etapa 3 Results */}
-<td className="border border-gray-300 p-2 text-center">
-  <select>
-    <option value="" disabled selected>Seleccionar</option>
-    <option value="Apto">Apto</option>
-    <option value="No Apto">No Apto</option>
-    <option value="No Apto">Reprogramar</option>
-  </select>
-</td>
+                  <td className="border border-gray-300 p-2 text-center">
+                    <select>
+                      <option value="" disabled selected>Seleccionar</option>
+                      <option value="Apto">Apto</option>
+                      <option value="No Apto">No Apto</option>
+                      <option value="Reprogramar">Reprogramar</option>
+                    </select>
+                  </td>
+                  <td className="border border-gray-300 p-2 text-center">
+                    <input type="checkbox" />
+                  </td>
+                  <td className="border border-gray-300 p-2 text-center">
+                    <select>
+                      <option value="" disabled selected>Seleccionar</option>
+                      <option value="Apto">Apto</option>
+                      <option value="No Apto">No Apto</option>
+                      <option value="Reprogramar">Reprogramar</option>
+                    </select>
+                  </td>
+                  <td className="border border-gray-300 p-2 text-center">
+                    <input type="checkbox" />
+                  </td>
+                  <td className="border border-gray-300 p-2 text-center">
+                    <select>
+                      <option value="" disabled selected>Seleccionar</option>
+                      <option value="Apto">Apto</option>
+                      <option value="No Apto">No Apto</option>
+                      <option value="Reprogramar">Reprogramar</option>
+                    </select>
+                  </td>
                 </tr>
               ))}
-              {/* Repeat similar rows for candidatosNoAuth if needed */}
             </tbody>
           </table>
         ) : (
