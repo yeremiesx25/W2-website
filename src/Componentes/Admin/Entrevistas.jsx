@@ -180,35 +180,41 @@ function Entrevistas() {
                   <td className="border border-gray-300 p-2 text-center">
                     <input type="checkbox" />
                   </td>
-                  {/* Dropdown for Etapa 1 Results */}
-                  <td className="border border-gray-300 p-2 text-center">
-                    <select>
-                      <option value="Apto">Apto</option>
-                      <option value="No Apto">No Apto</option>
-                    </select>
-                  </td>
-                  {/* Checkbox for Etapa 2 */}
-                  <td className="border border-gray-300 p-2 text-center">
-                    <input type="checkbox" />
-                  </td>
-                  {/* Dropdown for Etapa 2 Results */}
-                  <td className="border border-gray-300 p-2 text-center">
-                    <select>
-                      <option value="Apto">Apto</option>
-                      <option value="No Apto">No Apto</option>
-                    </select>
-                  </td>
-                  {/* Checkbox for Etapa 3 */}
-                  <td className="border border-gray-300 p-2 text-center">
-                    <input type="checkbox" />
-                  </td>
-                  {/* Dropdown for Etapa 3 Results */}
-                  <td className="border border-gray-300 p-2 text-center">
-                    <select>
-                      <option value="Apto">Apto</option>
-                      <option value="No Apto">No Apto</option>
-                    </select>
-                  </td>
+             {/* Dropdown for Etapa 1 Results */}
+<td className="border border-gray-300 p-2 text-center">
+  <select>
+    <option value="" disabled selected>Seleccionar</option>
+    <option value="Apto">Apto</option>
+    <option value="No Apto">No Apto</option>
+    <option value="No Apto">Reprogramar</option>
+  </select>
+</td>
+{/* Checkbox for Etapa 2 */}
+<td className="border border-gray-300 p-2 text-center">
+  <input type="checkbox" />
+</td>
+{/* Dropdown for Etapa 2 Results */}
+<td className="border border-gray-300 p-2 text-center">
+  <select>
+    <option value="" disabled selected>Seleccionar</option>
+    <option value="Apto">Apto</option>
+    <option value="No Apto">No Apto</option>
+    <option value="No Apto">Reprogramar</option>
+  </select>
+</td>
+{/* Checkbox for Etapa 3 */}
+<td className="border border-gray-300 p-2 text-center">
+  <input type="checkbox" />
+</td>
+{/* Dropdown for Etapa 3 Results */}
+<td className="border border-gray-300 p-2 text-center">
+  <select>
+    <option value="" disabled selected>Seleccionar</option>
+    <option value="Apto">Apto</option>
+    <option value="No Apto">No Apto</option>
+    <option value="No Apto">Reprogramar</option>
+  </select>
+</td>
                 </tr>
               ))}
               {/* Repeat similar rows for candidatosNoAuth if needed */}
