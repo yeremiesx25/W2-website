@@ -43,17 +43,10 @@ function LoginAdmin() {
             <HeaderPower />
             <Grid container height="100vh">
                 <Grid item md={6} className="hidden md:flex flex-col gap-8 items-center justify-center overflow-hidden">
-                    <img
-                        src="https://keenthemes.com/assets/media/illustrations/customerservice.svg"
-                        alt=""
-                        style={{ maxHeight: '28rem' }}
-                    />
-                    <Typography variant="body1" color="text.secondary" align="center" maxWidth="lg">
-                        "La pasión por conectar personas con su potencial impulsa tu éxito."
-                    </Typography>
+                    
                 </Grid>
-                <Grid item xs={12} md={6} className="flex items-center justify-center px-4">
-                    <Box padding={6} maxWidth="md" width="100%">
+                <Grid item xs={12} md={6} className="flex items-center justify-center px-6 md:px-28 bg-newprimarycolor">
+                    <Box padding={2} maxWidth="md" width="100%">
                         <Typography variant="h4" align="center" color="primary" gutterBottom>
                             Te damos la bienvenida
                         </Typography>
@@ -107,7 +100,7 @@ function LoginAdmin() {
                                 display="flex"
                                 flexDirection={{ xs: 'column', md: 'column' }}
                                 justifyContent="space-between"
-                                alignItems="center"
+                                alignItems="start"
                                 gap={2}
                                 mt={2}
                             >
@@ -115,15 +108,15 @@ function LoginAdmin() {
                                     href="https://wa.me/51970632448?text=Hola%2C%20me%20gustar%C3%ADa%20que%20me%20pueda%20ayudar%20a%20recuperar%20mi%20contrase%C3%B1a"
                                     color="secondary"
                                     underline="always"
+                                    sx={{ color: '#01C29E', textDecorationColor: '#01C29E'}}
                                 >
                                     Olvidé mi contraseña
                                 </Link>
                                 <Button
                                     type="submit"
-                                    variant="contained"
-                                    color="warning"
+                                    variant="contained"                  
                                     fullWidth
-                                    sx={{ py: 2, borderRadius: '8px' }}
+                                    sx={{ py: 2, borderRadius: '8px', backgroundColor: '#ffe946', color: '#2563eb' }}
                                 >
                                     <Typography variant="button" fontWeight="bold">
                                         Iniciar Sesión
@@ -132,7 +125,7 @@ function LoginAdmin() {
                             </Box>
                             <Link
                                 href="https://wa.me/51970632448?text=Hola%20vengo%20de%20Power.%20Quiero%20solicitar%20mi%20cuenta%20de%20Reclutador."
-                                color="warning"
+                                color="secondary"
                                 underline="always"
                                 display="flex"
                                 alignItems="center"

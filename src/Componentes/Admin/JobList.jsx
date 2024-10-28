@@ -2,7 +2,8 @@ import { LinearProgress, Select, MenuItem, IconButton, Tooltip, TablePagination 
 import React, { useEffect, useState, useContext } from 'react';
 import { supabase } from '../../supabase/supabase.config';
 import { Link } from 'react-router-dom';
-import { FaUserFriends, FaBriefcase, FaClock, FaDollarSign } from 'react-icons/fa';
+import { FaUserFriends, FaDollarSign } from 'react-icons/fa';
+import { FaLocationDot, FaBuildingUser } from "react-icons/fa6";
 import { MdOutlineVerifiedUser } from "react-icons/md";
 import { UserAuth } from '../../Context/AuthContext';
 import JobsContext from '../../Context/JobsContext';
@@ -152,13 +153,14 @@ const JobList = () => {
 
                   <div className="text-gray-500 grid grid-cols-3 gap-4 mb-4 text-xs font-light">
                     <div className="flex items-center gap-2">
-                      <FaBriefcase />
-                      <p>{job.modalidad}</p>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <FaClock />
+                      <FaLocationDot />
                       <p>{job.ubicacion}</p>
                     </div>
+                    <div className="flex items-center gap-2">
+                      <FaBuildingUser />
+                      <p>{job.modalidad}</p>
+                    </div>
+                    
                     <div className="flex items-center gap-2">
                       <FaDollarSign />
                       <p>{job.sueldo}</p>

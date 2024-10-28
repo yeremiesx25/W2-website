@@ -254,23 +254,14 @@ const handleGoogleLogin = async () => {
             sx={{ mb: 1 }}
             onClick={handleGoogleLogin}
           >
-            Sign in with Google
-          </Button>
-          
-          <Button
-            variant="outlined"
-            startIcon={<AppleIcon />}
-            fullWidth
-            sx={{ mb: 3 }}
-          >
-            Sign in with Apple
+            Iniciar con Google
           </Button>
     
-          <Divider>Or with email</Divider>
+          <Divider>O usar email</Divider>
     
           <TextField
             type="email"
-            label="Email"
+            label="Correo"
             variant="outlined"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
@@ -281,7 +272,7 @@ const handleGoogleLogin = async () => {
     
           <TextField
             type="password"
-            label="Password"
+            label="Contraseña"
             variant="outlined"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
