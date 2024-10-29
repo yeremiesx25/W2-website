@@ -136,7 +136,7 @@ const FormContacto = () => {
   };
 
   return (
-    <div className="w-full max-w-lg mx-auto h-full flex flex-col justify-center">
+    <div className="w-full max-w-lg mx-auto h-full flex flex-col justify-center overflow-auto py-4">
       <Progreso steps={steps} currentStep={currentStep} />
       {isSuccessModalOpen && <SuccessModal onClose={closeModal} />}
 

@@ -64,7 +64,7 @@ function HeaderPower() {
   return (
     <header 
       className={`bg-newprimarycolor w-full z-10 font-dmsans fixed top-0 transition-transform duration-300 ${
-        hasShadow ? 'shadow-none' : 'shadow-lg'
+        hasShadow ? 'shadow-none' : 'shadow-sm'
       } ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}>
       <div className="mx-auto px-4 flex justify-between md:justify-around items-center h-20">
         {/* Logo */}

@@ -15,9 +15,22 @@ import habil from "../../assets/Habilidades.png";
 import taller from "../../assets/Talleres.png";
 import capacitacion from "../../assets/Capacitaciones.png";
 import { motion } from "framer-motion";
+import Contacto from '../Contacto/Contacto'
 
 function Intermedio() {
   const [activeContent, setActiveContent] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // Función para abrir el modal
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  // Función para cerrar el modal
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
 
   const content = [
     <div>
@@ -75,12 +88,19 @@ function Intermedio() {
 
             <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
               <div class="rounded-lg shadow">
-                <a
-                  href="https://b24-0nhd36.bitrix24.site/crm_form_pn9nk/"
+                <button
+                  onClick={openModal} 
                   class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gray-800 hover:bg-gray-600 md:py-4 md:text-lg md:px-10 "
                 >
                   Descubre el talento ideal
-                </a>
+                </button>
+                {isModalOpen && (
+            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+              <div className="bg-white p-6 rounded-lg shadow-lg md:w-max-[500px] flex items-start justify-end">
+                <Contacto closeModal={closeModal} />{" "}
+              </div>
+            </div>
+          )}
               </div>
             </div>
           </div>
@@ -153,12 +173,19 @@ function Intermedio() {
 
             <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
               <div class="rounded-lg shadow">
-                <a
-                  href="https://b24-0nhd36.bitrix24.site/crm_form_pn9nk/"
+                <button
+                  onClick={openModal} 
                   class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gray-800 hover:bg-gray-600 md:py-4 md:text-lg md:px-10 "
                 >
                   Encuentra a tu próximo líder
-                </a>
+                </button>
+                {isModalOpen && (
+            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+              <div className="bg-white p-6 rounded-lg shadow-lg md:w-max-[500px] flex items-start justify-end">
+                <Contacto closeModal={closeModal} />{" "}
+              </div>
+            </div>
+          )}
               </div>
             </div>
           </div>
@@ -242,12 +269,19 @@ function Intermedio() {
 
             <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
               <div class="rounded-lg shadow">
-                <a
-                  href="https://b24-0nhd36.bitrix24.site/crm_form_pn9nk/"
+                <button
+                  onClick={openModal} 
                   class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gray-800 hover:bg-gray-600 md:py-4 md:text-lg md:px-10 "
                 >
                   Evalúa tu equipo ahora
-                </a>
+                </button>
+                {isModalOpen && (
+            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+              <div className="bg-white p-6 rounded-lg shadow-lg md:w-max-[500px] flex items-start justify-end">
+                <Contacto closeModal={closeModal} />{" "}
+              </div>
+            </div>
+          )}
               </div>
             </div>
           </div>
@@ -310,12 +344,19 @@ function Intermedio() {
 
             <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
               <div class="rounded-lg shadow">
-                <a
-                  href="https://b24-0nhd36.bitrix24.site/crm_form_pn9nk/"
+                <button
+                  onClick={openModal} 
                   class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-gray-800 hover:bg-gray-600 md:py-4 md:text-lg md:px-10 text-center"
                 >
                   Fortalece tu marca empleadora
-                </a>
+                </button>
+                {isModalOpen && (
+            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+              <div className="bg-white p-6 rounded-lg shadow-lg md:w-max-[500px] flex items-start justify-end">
+                <Contacto closeModal={closeModal} />{" "}
+              </div>
+            </div>
+          )}
               </div>
             </div>
           </div>
