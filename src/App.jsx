@@ -24,11 +24,11 @@ import Coworking from './Componentes/Coworking/Coworking.jsx';
 import Contacto from './Componentes/Contacto/Contacto.jsx';
 import RegisterAdmin from "./Componentes/Admin/RegisterAdmin.jsx";
 import Conversaciones from "./Componentes/Admin/Conversaciones.jsx";
-import Programa from "./Componentes/Admin/Programa.jsx";
+import Programa from "./Componentes/Entrevistas/Programa.jsx";
 import Estadisticas from "./Componentes/Admin/Estadisticas.jsx";
 import AdminProfile from "./Componentes/Admin/AdminProfile.jsx";
-import Proceso from "./Componentes/Admin/Proceso.jsx";
-import Entrevistas from "./Componentes/Admin/Entrevistas.jsx";
+import Proceso from "./Componentes/Entrevistas/Proceso.jsx";
+import Entrevistas from "./Componentes/Entrevistas/Entrevistas.jsx";
 
 function App() {
   return (

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { supabase } from '../../supabase/supabase.config';
-import HeaderAdmin from './HeaderAdmin';
-import MenuAdmin from './MenuAdmin';
+import HeaderAdmin from '../Admin/HeaderAdmin';
+import MenuAdmin from '../Admin/MenuAdmin';
 import { useNavigate } from 'react-router-dom'; 
 import JobProceso from "./JobProceso";
 

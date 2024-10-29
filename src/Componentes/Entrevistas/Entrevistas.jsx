@@ -5,6 +5,7 @@ import * as XLSX from 'xlsx';
 import HeaderAdmin from '../Admin/HeaderAdmin';
 import MenuAdmin from '../Admin/MenuAdmin';
 import { UserAuth } from '../../Context/AuthContext';
+import Filter from './Filter'; // Import the Filter component
 
 function Entrevistas() {
   const { user } = UserAuth();
@@ -14,6 +15,7 @@ function Entrevistas() {
   const [candidatosNoAuth, setCandidatosNoAuth] = useState([]);
   const [programaData, setProgramaData] = useState([]);
   const [puesto, setPuesto] = useState('');
+  const [filteredCandidatos, setFilteredCandidatos] = useState([]);
 
   const formatDate = (isoString) => {
     const date = new Date(isoString);
@@ -93,6 +95,14 @@ function Entrevistas() {
     }
   }, [idOferta]);
 
+  useEffect(() => {
+    setFilteredCandidatos([...candidatos, ...candidatosNoAuth].sort((a, b) => {
+      const dateA = new Date(a.fecha_postulacion || a.fecha);
+      const dateB = new Date(b.fecha_postulacion || b.fecha);
+      return dateB - dateA; // Orden descendente
+    }));
+  }, [candidatos, candidatosNoAuth]);
+
   const fetchProgramaData = async () => {
     try {
       const { data: programaData, error } = await supabase
@@ -149,7 +159,18 @@ function Entrevistas() {
     reader.readAsArrayBuffer(file);
   };
 
-  const allCandidatos = [...candidatos, ...candidatosNoAuth];
+  const handleFilter = (query) => {
+    const lowerCaseQuery = query.toLowerCase();
+    const filtered = [...candidatos, ...candidatosNoAuth].filter((candidato) => {
+      return (
+        (candidato.name_user && candidato.name_user.toLowerCase().includes(lowerCaseQuery)) ||
+        (candidato.nombre && candidato.nombre.toLowerCase().includes(lowerCaseQuery)) ||
+        (candidato.telefono && candidato.telefono.includes(lowerCaseQuery)) ||
+        (candidato.dni && candidato.dni.includes(lowerCaseQuery))
+      );
+    });
+    setFilteredCandidatos(filtered);
+  };
 
   const activeStages = programaData.length > 0 ? Object.entries(programaData[0])
     .filter(([key, value]) => key.startsWith('etapa') && value)
@@ -163,8 +184,10 @@ function Entrevistas() {
         <h2 className="text-2xl mb-4">Subir Candidatos</h2>
         <input type="file" accept=".xlsx, .xls" onChange={handleFileUpload} className="p-3 border border-gray-300 rounded-lg" />
 
+        <Filter onFilter={handleFilter} /> {/* Add the Filter component */}
+
         <h2 className="text-2xl mt-6 mb-4">Candidatos Aptos</h2>
-        {allCandidatos.length > 0 ? (
+        {filteredCandidatos.length > 0 ? (
           <table className="min-w-full border-collapse border border-gray-300">
             <thead>
               <tr>
@@ -189,7 +212,7 @@ function Entrevistas() {
               </tr>
             </thead>
             <tbody>
-              {allCandidatos.map((candidato, index) => (
+              {filteredCandidatos.map((candidato, index) => (
                 <tr key={index}>
                   <td className="border border-gray-300 p-2">{formatDate(candidato.fecha_postulacion || candidato.fecha)}</td>
                   <td className="border border-gray-300 p-2">{candidato.name_user || candidato.nombre}</td>
