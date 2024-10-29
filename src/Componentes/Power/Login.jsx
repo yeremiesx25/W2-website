@@ -241,10 +241,10 @@ const handleGoogleLogin = async () => {
         {isLogin ? (
           <Box component="form" onSubmit={handleLogin} sx={{ maxWidth: 400, mx: 'auto', p: 3 }}>
           <Typography variant="h5" component="h2" textAlign="center" mb={2}>
-            Sign in to Overpay
+            Inicia sesión en Power
           </Typography>
           <Typography variant="body2" textAlign="center" color="textSecondary" mb={3}>
-            Send, spend and save smarter
+            Descrubre los puestos disponibles
           </Typography>
     
           <Button
@@ -287,18 +287,18 @@ const handleGoogleLogin = async () => {
     
           <Box textAlign="right" mb={3}>
             <Typography variant="body2" color="primary" component="a" href="#" sx={{ textDecoration: 'none' }}>
-              Forgot Password?
+              Olvidaste tu contraseña?
             </Typography>
           </Box>
     
-          <Button type="submit" variant="contained" color="primary" fullWidth>
-            Sign In
+          <Button type="submit" variant="contained" sx={{backgroundColor: '#2563eb', borderRadius: ''}} fullWidth>
+            Iniciar sesión
           </Button>
     
           <Typography textAlign="center" mt={2}>
-            Don't have an account?{' '}
+            No tienes una cuenta?{' '}
             <Typography variant="body2" color="primary" component="span" onClick={() => setIsLogin(false)} sx={{ cursor: 'pointer' }}>
-              Sign Up
+              Resgístrate
             </Typography>
           </Typography>
         </Box>

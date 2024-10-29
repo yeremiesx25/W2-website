@@ -1,6 +1,20 @@
 import React, { useState, useEffect } from 'react';
+import Contacto from '../Contacto/Contacto'
 
 function HeroEmpresa() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // Función para abrir el modal
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  // Función para cerrar el modal
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
+
   const [backgroundImages, setBackgroundImages] = useState([
     'https://images.unsplash.com/photo-1573496130407-57329f01f769?q=80&w=2069&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
     'https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', 
@@ -45,12 +59,19 @@ function HeroEmpresa() {
             </h1>
           </p>
 
-          <a 
-            href="https://meetings.hubspot.com/winy-tupayachi-cahuana" 
+          <button 
+            onClick={openModal} 
             className="bg-primarycolor p-2 text-white font-semibold rounded-lg w-64 h-14 text-lg flex items-center justify-center heartbeat"
           >
             Contáctanos
-          </a>
+          </button>
+          {isModalOpen && (
+            <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center">
+              <div className="bg-white p-6 rounded-lg shadow-lg md:w-max-[500px] flex items-start justify-end">
+                <Contacto closeModal={closeModal} />{" "}
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </section>

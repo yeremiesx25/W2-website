@@ -380,7 +380,7 @@
 
 
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 12px;
 }
 
 /* Track */
@@ -391,8 +391,8 @@
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #DEDEDE;
-  border-radius: 5px;
+  background: #b8b8b8;
+  border-radius: 3px;
 }
 
 /* Handle on hover */
