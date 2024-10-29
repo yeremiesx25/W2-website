@@ -13,6 +13,15 @@ function Entrevistas() {
   const [candidatos, setCandidatos] = useState([]);
   const [candidatosNoAuth, setCandidatosNoAuth] = useState([]);
   const [programaData, setProgramaData] = useState([]);
+  const [puesto, setPuesto] = useState('');
+
+  const formatDate = (isoString) => {
+    const date = new Date(isoString);
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day}-${month}-${year}`;
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -34,7 +43,7 @@ function Entrevistas() {
 
       const { data: ofertaData, error: ofertaError } = await supabase
         .from('Oferta')
-        .select('id_oferta')
+        .select('id_oferta, puesto, empresa')
         .eq('id_reclutador', idReclutador)
         .order('fecha_publicacion', { ascending: false })
         .limit(1)
@@ -46,10 +55,11 @@ function Entrevistas() {
       }
 
       setIdOferta(ofertaData.id_oferta);
+      setPuesto(ofertaData.puesto);
 
       const { data: postulacionData, error: postulacionError } = await supabase
         .from('Postulacion')
-        .select('name_user, telefono, dni')
+        .select('name_user, telefono, dni, fecha_postulacion')
         .eq('id_oferta', ofertaData.id_oferta)
         .eq('estado', 'apto');
 
@@ -62,7 +72,7 @@ function Entrevistas() {
 
       const { data: noAuthData, error: noAuthError } = await supabase
         .from('CandidatosNoAuth')
-        .select('nombre, telefono, dni')
+        .select('nombre, telefono, dni, fecha')
         .eq('id_oferta', ofertaData.id_oferta)
         .eq('estado', 'apto');
 
@@ -72,19 +82,23 @@ function Entrevistas() {
       }
 
       setCandidatosNoAuth(noAuthData);
-
-      const programaData = await fetchProgramaData();
-      setProgramaData(programaData);
     };
 
     fetchData();
   }, [user]);
 
+  useEffect(() => {
+    if (idOferta) {
+      fetchProgramaData().then(data => setProgramaData(data));
+    }
+  }, [idOferta]);
+
   const fetchProgramaData = async () => {
     try {
       const { data: programaData, error } = await supabase
         .from('Programa')
-        .select('id_programa, proceso, empresa, lugar, etapa_1, etapa_2, etapa_3, etapa_4');
+        .select('id_programa, proceso, empresa, lugar, etapa_1, etapa_2, etapa_3, etapa_4')
+        .eq('id_oferta', idOferta);
 
       if (error) {
         console.error('Error al obtener datos del Programa:', error);
@@ -137,6 +151,10 @@ function Entrevistas() {
 
   const allCandidatos = [...candidatos, ...candidatosNoAuth];
 
+  const activeStages = programaData.length > 0 ? Object.entries(programaData[0])
+    .filter(([key, value]) => key.startsWith('etapa') && value)
+    .map(([key, value]) => ({ key, value })) : [];
+
   return (
     <div className="w-full h-screen flex">
       <HeaderAdmin />
@@ -152,62 +170,46 @@ function Entrevistas() {
               <tr>
                 <th
                   className="border border-gray-300 p-4 text-lg font-semibold bg-gray-100 text-center"
-                  colSpan="9"
+                  colSpan={5 + activeStages.length * 2}
                 >
-                  Proceso - {programaData[0]?.proceso || 'Proceso Desconocido'} - {programaData[0]?.empresa || 'Empresa Desconocida'}
+                  Proceso - {puesto || 'Proceso Desconocido'} - {programaData[0]?.empresa || 'Empresa Desconocida'}
                 </th>
               </tr>
               <tr>
+                <th className="border border-gray-300 p-2">Fecha</th>
                 <th className="border border-gray-300 p-2">Nombre</th>
                 <th className="border border-gray-300 p-2">Telefono</th>
                 <th className="border border-gray-300 p-2">DNI</th>
-                <th className="border border-gray-300 p-2">{programaData[0]?.etapa_1 || 'Etapa 1'}</th>
-                <th className="border border-gray-300 p-2">Resultados</th>
-                <th className="border border-gray-300 p-2">{programaData[0]?.etapa_2 || 'Etapa 2'}</th>
-                <th className="border border-gray-300 p-2">Resultados</th>
-                <th className="border border-gray-300 p-2">{programaData[0]?.etapa_3 || 'Etapa 3'}</th>
-                <th className="border border-gray-300 p-2">Resultados</th>
+                {activeStages.map(stage => (
+                  <>
+                    <th key={stage.key} className="border border-gray-300 p-2">{stage.value}</th>
+                    <th className="border border-gray-300 p-2">Resultados</th>
+                  </>
+                ))}
               </tr>
             </thead>
             <tbody>
               {allCandidatos.map((candidato, index) => (
                 <tr key={index}>
+                  <td className="border border-gray-300 p-2">{formatDate(candidato.fecha_postulacion || candidato.fecha)}</td>
                   <td className="border border-gray-300 p-2">{candidato.name_user || candidato.nombre}</td>
                   <td className="border border-gray-300 p-2 text-center">{candidato.telefono}</td>
                   <td className="border border-gray-300 p-2 text-center">{candidato.dni}</td>
-                  <td className="border border-gray-300 p-2 text-center">
-                    <input type="checkbox" />
-                  </td>
-                  <td className="border border-gray-300 p-2 text-center">
-                    <select>
-                      <option value="" disabled selected>Seleccionar</option>
-                      <option value="Apto">Apto</option>
-                      <option value="No Apto">No Apto</option>
-                      <option value="Reprogramar">Reprogramar</option>
-                    </select>
-                  </td>
-                  <td className="border border-gray-300 p-2 text-center">
-                    <input type="checkbox" />
-                  </td>
-                  <td className="border border-gray-300 p-2 text-center">
-                    <select>
-                      <option value="" disabled selected>Seleccionar</option>
-                      <option value="Apto">Apto</option>
-                      <option value="No Apto">No Apto</option>
-                      <option value="Reprogramar">Reprogramar</option>
-                    </select>
-                  </td>
-                  <td className="border border-gray-300 p-2 text-center">
-                    <input type="checkbox" />
-                  </td>
-                  <td className="border border-gray-300 p-2 text-center">
-                    <select>
-                      <option value="" disabled selected>Seleccionar</option>
-                      <option value="Apto">Apto</option>
-                      <option value="No Apto">No Apto</option>
-                      <option value="Reprogramar">Reprogramar</option>
-                    </select>
-                  </td>
+                  {activeStages.map(stage => (
+                    <>
+                      <td key={`${stage.key}-${index}`} className="border border-gray-300 p-2 text-center">
+                        <input type="checkbox" />
+                      </td>
+                      <td className="border border-gray-300 p-2 text-center">
+                        <select>
+                          <option value="" disabled selected>Seleccionar</option>
+                          <option value="Apto">Apto</option>
+                          <option value="No Apto">No Apto</option>
+                          <option value="Reprogramar">Reprogramar</option>
+                        </select>
+                      </td>
+                    </>
+                  ))}
                 </tr>
               ))}
             </tbody>
