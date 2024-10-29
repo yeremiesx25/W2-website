@@ -14,6 +14,14 @@ function Entrevistas() {
   const [candidatosNoAuth, setCandidatosNoAuth] = useState([]);
   const [programaData, setProgramaData] = useState([]);
 
+  const formatDate = (isoString) => {
+    const date = new Date(isoString);
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day}-${month}-${year}`;
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       if (!user) return;
@@ -49,7 +57,7 @@ function Entrevistas() {
 
       const { data: postulacionData, error: postulacionError } = await supabase
         .from('Postulacion')
-        .select('name_user, telefono, dni')
+        .select('name_user, telefono, dni, fecha_postulacion')
         .eq('id_oferta', ofertaData.id_oferta)
         .eq('estado', 'apto');
 
@@ -62,7 +70,7 @@ function Entrevistas() {
 
       const { data: noAuthData, error: noAuthError } = await supabase
         .from('CandidatosNoAuth')
-        .select('nombre, telefono, dni')
+        .select('nombre, telefono, dni, fecha')
         .eq('id_oferta', ofertaData.id_oferta)
         .eq('estado', 'apto');
 
@@ -152,12 +160,13 @@ function Entrevistas() {
               <tr>
                 <th
                   className="border border-gray-300 p-4 text-lg font-semibold bg-gray-100 text-center"
-                  colSpan="9"
+                  colSpan="10"
                 >
                   Proceso - {programaData[0]?.proceso || 'Proceso Desconocido'} - {programaData[0]?.empresa || 'Empresa Desconocida'}
                 </th>
               </tr>
               <tr>
+                <th className="border border-gray-300 p-2">Fecha</th>
                 <th className="border border-gray-300 p-2">Nombre</th>
                 <th className="border border-gray-300 p-2">Telefono</th>
                 <th className="border border-gray-300 p-2">DNI</th>
@@ -172,6 +181,7 @@ function Entrevistas() {
             <tbody>
               {allCandidatos.map((candidato, index) => (
                 <tr key={index}>
+                  <td className="border border-gray-300 p-2">{formatDate(candidato.fecha_postulacion || candidato.fecha)}</td>
                   <td className="border border-gray-300 p-2">{candidato.name_user || candidato.nombre}</td>
                   <td className="border border-gray-300 p-2 text-center">{candidato.telefono}</td>
                   <td className="border border-gray-300 p-2 text-center">{candidato.dni}</td>
