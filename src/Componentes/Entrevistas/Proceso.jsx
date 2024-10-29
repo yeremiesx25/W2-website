@@ -12,7 +12,7 @@ function Proceso() {
   const [ofertas, setOfertas] = useState([]);
   const [filteredOfertas, setFilteredOfertas] = useState([]);
   const [selectedOferta, setSelectedOferta] = useState(null);
-  const [stages, setStages] = useState([{ etapa: '', recomendacion: '', modalidad: '', plataforma: '' }]);
+  const [stages, setStages] = useState([{ etapa: '', recomendacion: '', modalidad: '', plataforma: '', direccion: '', mapsURL: '' }]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
@@ -62,7 +62,7 @@ function Proceso() {
 
   const handleAddStage = () => {
     if (stages.length < 4) {
-      setStages([...stages, { etapa: '', recomendacion: '', modalidad: '', plataforma: '' }]);
+      setStages([...stages, { etapa: '', recomendacion: '', modalidad: '', plataforma: '', direccion: '', mapsURL: '' }]);
     }
   };
 
@@ -100,7 +100,11 @@ function Proceso() {
       data[`etapa_${etapaIndex}`] = stage.etapa;
       data[`recomendacion_${etapaIndex}`] = stage.recomendacion;
       data[`modalidad_${etapaIndex}`] = stage.modalidad;
-      data[`plataforma_${etapaIndex}`] = stage.plataforma;
+
+      // Concatenar dirección y URL en el campo plataforma para "Presencial"
+      data[`plataforma_${etapaIndex}`] = stage.modalidad === 'Presencial' 
+        ? `${stage.direccion} | URL: ${stage.mapsURL}`
+        : stage.plataforma;
     });
 
     const { error } = await supabase.from('Programa').insert([data]);
@@ -212,38 +216,51 @@ function Proceso() {
                       <option value="Presencial">Presencial</option>
                     </select>
                   </div>
-                  {stage.modalidad === 'Virtual' && (
-                    <div className="mb-2">
-                      <label className="block text-sm font-medium text-gray-700">Plataforma</label>
-                      <input
-                        type="text"
-                        value={stage.plataforma}
-                        onChange={(e) => handleStageChange(index, 'plataforma', e.target.value)}
-                        className="mt-1 p-2 border border-gray-300 rounded-lg w-full"
-                      />
-                    </div>
+
+                  {/* Campos adicionales para modalidad presencial */}
+                  {stage.modalidad === 'Presencial' && (
+                    <>
+                      <div className="mb-2">
+                        <label className="block text-sm font-medium text-gray-700">Dirección</label>
+                        <input
+                          type="text"
+                          value={stage.direccion || ''}
+                          onChange={(e) => handleStageChange(index, 'direccion', e.target.value)}
+                          className="mt-1 p-2 border border-gray-300 rounded-lg w-full"
+                        />
+                      </div>
+                      <div className="mb-2">
+                        <label className="block text-sm font-medium text-gray-700">URL de Maps</label>
+                        <input
+                          type="text"
+                          value={stage.mapsURL || ''}
+                          onChange={(e) => handleStageChange(index, 'mapsURL', e.target.value)}
+                          className="mt-1 p-2 border border-gray-300 rounded-lg w-full"
+                        />
+                      </div>
+                    </>
                   )}
                 </div>
               ))}
               {stages.length < 4 && (
                 <button
                   onClick={handleAddStage}
-                  className="bg-green-600 text-white px-4 py-2 rounded-lg shadow hover:bg-green-500 transition duration-300 ease-in-out"
+                  className="bg-blue-500 text-white p-2 rounded-lg mt-2"
                 >
-                  + Añadir Etapa
+                  Agregar Etapa
                 </button>
               )}
             </div>
 
-            {/* Botón para guardar el proceso */}
             <button
               onClick={handleSubmit}
-              className="bg-blue-600 text-white px-6 py-3 rounded-lg shadow hover:bg-blue-500 transition duration-300 ease-in-out"
+              className="bg-green-500 text-white p-2 rounded-lg mt-4"
             >
-              Guardar Proceso
+              Crear Proceso
             </button>
           </>
         )}
+
         <ToastContainer />
       </div>
     </div>
