@@ -245,8 +245,7 @@ const handleGoogleLogin = async () => {
           </Typography>
           <Typography variant="body2" textAlign="center" color="textSecondary" mb={3}>
             Descrubre los puestos disponibles
-          </Typography>
-    
+          </Typography>  
           <Button
             variant="outlined"
             startIcon={<FcGoogle />}
@@ -258,7 +257,6 @@ const handleGoogleLogin = async () => {
           </Button>
     
           <Divider>O usar email</Divider>
-    
           <TextField
             type="email"
             label="Correo"
