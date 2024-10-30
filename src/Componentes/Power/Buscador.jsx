@@ -1,9 +1,10 @@
 import React, { useState, useContext, useEffect, useRef } from 'react';
-import { FaSearch, FaMapMarkerAlt } from 'react-icons/fa';
+import { FaSearch, FaMapMarkerAlt,  FaSlidersH } from 'react-icons/fa';
 import JobsContext from '../../Context/JobsContext';
 import { motion, AnimatePresence } from 'framer-motion';
 import { supabase } from '../../supabase/supabase.config';
-import { Box, TextField, Button, List, ListItem, InputAdornment } from '@mui/material';
+import { Box, TextField, Button, List, ListItem, InputAdornment, IconButton } from '@mui/material';
+
 
 function Buscador() {
   const { resetSearchResults, searchJobs } = useContext(JobsContext);
@@ -115,42 +116,46 @@ function Buscador() {
   }, []);
 
   return (
-    <Box component="form" onSubmit={handleSubmit} sx={{ maxWidth: '80%', mx: 'auto', p: 2 }}>
-      <Box display="flex" flexDirection={{ xs: 'column', md: 'row' }} gap={2} alignItems="center">
+      <Box component="form" pt={10} onSubmit={handleSubmit} sx={{ minWidth: '80%', mx: 'auto',pb: '8px', pt: '0px' }} md={{width: '70%',}}>
+        <Box display="flex" gap={1} alignItems="center" md={{width: '100%'}}>
+      <Box
+        display="flex"
+        alignItems="center"
+        borderRadius={5}
+        bgcolor="#f3f4f6"
+        px={2}
+        py={2}
+        sx={{ width: '100%' }}
+      >
+        <FaSearch size={20} style={{ marginRight: '10px', color: '#555' }} />
         <TextField
           fullWidth
-          variant="outlined"
+          variant="standard"
           value={keyword}
           onChange={handleKeywordChange}
-          placeholder="Título del empleo"
+          placeholder="Buscar por puesto"
           InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <FaSearch />
-              </InputAdornment>
-            ),
+            disableUnderline: true,
+            style: { fontSize: '1rem' },
           }}
-          onClick={() => setShowKeywordSuggestions(true)}
-        />
-        <TextField
-          fullWidth
-          variant="outlined"
-          value={location}
-          onChange={handleLocationChange}
-          placeholder="Ciudad o Lugar"
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="start">
-                <FaMapMarkerAlt />
-              </InputAdornment>
-            ),
+          sx={{
+            backgroundColor: 'transparent',
           }}
-          onClick={() => setShowLocationSuggestions(true)}
         />
-        <Button type="submit" variant="contained" color="primary">
-          Buscar
-        </Button>
       </Box>
+
+      <IconButton
+      type='submit'
+        sx={{
+          backgroundColor: '#2563eb',
+          borderRadius: '50%',
+          padding: '10px',
+          boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
+        }}
+      >
+        <FaSearch size={20} style={{ color: 'white' }} />
+      </IconButton>
+    </Box>
 
       <AnimatePresence>
         {showKeywordSuggestions && keywordSuggestions.length > 0 && (
