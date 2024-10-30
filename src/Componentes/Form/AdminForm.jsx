@@ -9,7 +9,6 @@ function AdminForm() {
     <div>
         
         <FormOferta />
-        <EditJob />
     </div>
     
   )
