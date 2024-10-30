@@ -68,8 +68,14 @@ const JobProceso = () => {
             >
               <div className="flex items-center justify-between mb-4">
                 <div className="flex items-center justify-between w-full">
-                  <div className="w-14 h-14 rounded-lg bg-primarycolor flex items-center justify-center">
-                    <MdOutlineVerifiedUser className="text-white text-2xl" />
+                  <div className="w-14 h-14 rounded-lg flex items-center justify-center">
+                  <div className="w-14 h-14 rounded-xl flex items-center justify-center">
+                        <img
+                          src={job.empresa_img_url}
+                          alt="profile"
+                          className="w-12 h-12 rounded-lg border-2 border-white"
+                        />
+                      </div>
                   </div>
                 </div>
               </div>
