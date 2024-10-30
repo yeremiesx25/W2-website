@@ -1,0 +1,6 @@
+---
+deployment:
+  tasks:
+    - export DEPLOYPATH=/home/w2asesores/public_html
+    - /usr/local/bin/npm run build
+    - /bin/cp -R dist/* $DEPLOYPATH
