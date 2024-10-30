@@ -125,7 +125,7 @@ function Entrevistas() {
   const handleFileUpload = async (event) => {
     const file = event.target.files[0];
     if (!file || !idReclutador || !idOferta) return;
-
+  
     const reader = new FileReader();
     reader.onload = async (e) => {
       const data = new Uint8Array(e.target.result);
@@ -133,7 +133,9 @@ function Entrevistas() {
       const sheetName = workbook.SheetNames[0];
       const worksheet = workbook.Sheets[sheetName];
       const jsonData = XLSX.utils.sheet_to_json(worksheet);
-
+  
+      const fechaActual = new Date().toISOString(); // Fecha actual en formato ISO
+  
       const candidatosData = jsonData.map((row) => ({
         id_user: uuidv4(),
         id_reclutador: idReclutador,
@@ -141,21 +143,22 @@ function Entrevistas() {
         nombre: row.Nombre,
         dni: row.DNI,
         telefono: row.Celular,
+        fecha: fechaActual, // Usamos la fecha actual en lugar de una fecha del archivo
         estado_etapas: [],
         estado: 'apto',
       }));
-
+  
       const { error } = await supabase.from('CandidatosNoAuth').insert(candidatosData);
-
+  
       if (error) {
         console.error('Error al subir candidatos:', error);
         return;
       }
-
+  
       alert('Candidatos subidos exitosamente');
       setCandidatosNoAuth(prev => [...prev, ...candidatosData]);
     };
-
+  
     reader.readAsArrayBuffer(file);
   };
 

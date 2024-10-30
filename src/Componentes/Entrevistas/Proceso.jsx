@@ -28,35 +28,36 @@ function Proceso() {
   useEffect(() => {
     const fetchOfertas = async () => {
       if (!user) return;
-
+  
       const { data: ofertasData, error: ofertasError } = await supabase
         .from('Oferta')
         .select('*')
-        .eq('id_reclutador', user.id);
-
+        .eq('id_reclutador', user.id)
+        .eq('estado', 'activa'); // Add this line to filter by "activa" offers
+  
       if (ofertasError) {
         console.error('Error fetching ofertas:', ofertasError);
         return;
       }
-
+  
       const { data: programasData, error: programasError } = await supabase
         .from('Programa')
         .select('id_oferta');
-
+  
       if (programasError) {
         console.error('Error fetching programas:', programasError);
         return;
       }
-
+  
       const usedOfertaIds = programasData.map(programa => programa.id_oferta);
-
+  
       const availableOfertas = ofertasData.filter(oferta => !usedOfertaIds.includes(oferta.id_oferta));
-
+  
       setOfertas(ofertasData);
       setFilteredOfertas(availableOfertas);
       setLoading(false);
     };
-
+  
     fetchOfertas();
   }, [user]);
 

@@ -13,12 +13,14 @@ import {
   MenuItem,
   IconButton,
 } from "@mui/material";
+import { supabase } from '../../supabase/supabase.config';
 
 const Step3 = ({ data, handleChange, prevStep, onSubmit }) => {
   const [recruiterNumber, setRecruiterNumber] = useState("");
   const [questions, setQuestions] = useState([""]);
   const [isModalOpen, setModalOpen] = useState(false);
   const [updatedData, setUpdatedData] = useState(null);
+  const [companyImage, setCompanyImage] = useState(null);
 
   const handleRecruiterNumberChange = (e) => setRecruiterNumber(e.target.value);
 
@@ -39,11 +41,15 @@ const Step3 = ({ data, handleChange, prevStep, onSubmit }) => {
     setQuestions(newQuestions);
   };
 
-  const handleSubmit = (e) => {
+  const handleImageChange = (e) => {
+    setCompanyImage(e.target.files[0]);
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const wtspUrl = `https://wa.me/${recruiterNumber}?text=Hola,%20estoy%20interesado%20en%20el%20puesto%20de%20${encodeURIComponent(
-      data.puesto
-    )};`;
+
+    // Crear URL de WhatsApp
+    const wtspUrl = `https://wa.me/${recruiterNumber}?text=Hola,%20estoy%20interesado%20en%20el%20puesto%20de%20${encodeURIComponent(data.puesto)}`;
     const newData = {
       ...data,
       wtsp_url: wtspUrl,
@@ -54,11 +60,53 @@ const Step3 = ({ data, handleChange, prevStep, onSubmit }) => {
       preg_5: questions[4] || "",
       preg_6: questions[5] || "",
     };
-    setUpdatedData(newData);
-    setModalOpen(true);
-    onSubmit(newData);
-  };
 
+    // Crear la oferta y obtener su ID
+    const { data: ofertaData, error: ofertaError } = await supabase
+      .from("Oferta")
+      .insert([{ ...data, wtsp_url: wtspUrl }])
+      .select(); // Obtén la oferta creada
+
+    if (ofertaError) {
+      console.error("Error al crear la oferta:", ofertaError);
+      return;
+    }
+
+    const ofertaId = ofertaData[0].id_oferta;
+
+    // Subir la imagen de la empresa al bucket
+    if (companyImage) {
+      const { data: imageData, error: imageError } = await supabase.storage
+        .from("empresa_img")
+        .upload(`${ofertaId}/${companyImage.name}`, companyImage);
+
+      if (imageError) {
+        console.error("Error al subir la imagen:", imageError);
+        return;
+      }
+
+      // Obtener la URL pública de la imagen
+      const { data: publicUrlData } = supabase.storage
+        .from("empresa_img")
+        .getPublicUrl(`${ofertaId}/${companyImage.name}`);
+
+      // Actualizar la columna empresa_img_url con el URL de la imagen
+      const { error: updateError } = await supabase
+        .from("Oferta")
+        .update({ empresa_img_url: publicUrlData.publicUrl })
+        .eq("id_oferta", ofertaId);
+
+      if (updateError) {
+        console.error("Error al actualizar la URL de la imagen:", updateError);
+        return;
+      }
+    }
+
+    setUpdatedData(ofertaData[0]);
+    setModalOpen(true);
+    onSubmit(ofertaData[0]);
+  };
+  
   return (
     <Box
       fullWidth
@@ -73,8 +121,6 @@ const Step3 = ({ data, handleChange, prevStep, onSubmit }) => {
         boxShadow: 1,
       }}
     >
-      
-
       {/* Modalidad */}
       <Box mb={3}>
         <Typography variant="body1" gutterBottom>
@@ -95,16 +141,17 @@ const Step3 = ({ data, handleChange, prevStep, onSubmit }) => {
       </Box>
 
       {/* Horario */}
-        <TextField
-            label="Horario"
-            variant="outlined"
-            name="horario"
-            value={data.horario}
-            onChange={handleChange}
-            fullWidth
-            required
-            margin="normal"
-        />
+      <TextField
+        label="Horario"
+        variant="outlined"
+        name="horario"
+        value={data.horario}
+        onChange={handleChange}
+        fullWidth
+        required
+        margin="normal"
+      />
+
       {/* Número de Reclutador */}
       <TextField
         label="Número de Reclutador"
@@ -116,28 +163,31 @@ const Step3 = ({ data, handleChange, prevStep, onSubmit }) => {
         required
         margin="normal"
       />
+
+      {/* Imagen de la empresa */}
       <Box mb={3}>
-      <Typography variant="body1" gutterBottom>
-        Imagen de la empresa
-      </Typography>
-      <label htmlFor="upload-image">
-        <Input
-          id="upload-image"
-          type="file"
-          accept="image/*"
-          onChange={handleChange}
-          style={{ display: 'none' }}
-        />
-        <IconButton
-          color="primary"
-          aria-label="upload picture"
-          component="span"
-          sx={{ width: '100%', height: 'auto', border: '1px solid #ccc', padding: '16px', borderRadius: '4px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}
-        >
-          <PhotoCamera fontSize="large" />
-        </IconButton>
-      </label>
-    </Box>
+        <Typography variant="body1" gutterBottom>
+          Imagen de la empresa
+        </Typography>
+        <label htmlFor="upload-image">
+          <Input
+            id="upload-image"
+            type="file"
+            accept="image/*"
+            onChange={handleImageChange}
+            style={{ display: 'none' }}
+          />
+          <IconButton
+            color="primary"
+            aria-label="upload picture"
+            component="span"
+            sx={{ width: '100%', height: 'auto', border: '1px solid #ccc', padding: '16px', borderRadius: '4px', display: 'flex', justifyContent: 'center', alignItems: 'center' }}
+          >
+            <PhotoCamera fontSize="large" />
+          </IconButton>
+        </label>
+      </Box>
+
       {/* Preguntas para el Postulante */}
       <Box mb={3}>
         <Typography variant="body1" gutterBottom>
