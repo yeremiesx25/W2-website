@@ -16,7 +16,7 @@ function Power() {
 
       <HeaderPower />
       <HeroPower />
-    <BeneficiosPower />
+    
     <TrabajosContainer />
     <CtaPower />
     <ContainerVideos />
