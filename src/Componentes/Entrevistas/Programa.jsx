@@ -1,62 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { supabase } from '../../supabase/supabase.config';
+import React from 'react';
 import HeaderAdmin from '../Admin/HeaderAdmin';
 import MenuAdmin from '../Admin/MenuAdmin';
 import { useNavigate } from 'react-router-dom'; 
 import JobProceso from "./JobProceso";
 
-
 function Programa() {
-  const [user, setUser] = useState(null);
-  const [interviewDetails, setInterviewDetails] = useState({ postulante: null, date: '' });
-  const [interviews, setInterviews] = useState([]);
-
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      const { data } = await supabase.auth.getUser();
-      setUser(data.user);
-    };
-
-    fetchUser();
-  }, []);
-
-  useEffect(() => {
-    const fetchInterviews = async () => {
-      if (!user) return;
-
-      const { data: interviewsData, error: interviewsError } = await supabase
-        .from('Entrevistas')
-        .select('*')
-        .eq('id_reclutador', user.id);
-
-      if (interviewsError) {
-        console.error('Error fetching interviews:', interviewsError);
-        return;
-      }
-
-      setInterviews(interviewsData);
-    };
-
-    fetchInterviews();
-  }, [user]);
-
-  const handleScheduleInterview = async () => {
-    const { postulante, date } = interviewDetails;
-
-    const { error } = await supabase
-      .from('Entrevistas')
-      .insert([{ nombre_postulante: postulante, fecha: date, id_reclutador: user.id }]);
-
-    if (error) {
-      console.error('Error scheduling interview:', error);
-      return;
-    }
-
-    setInterviews([...interviews, { nombre_postulante: postulante, fecha: date }]);
-    setInterviewDetails({ postulante: null, date: '' });
-  };
 
   return (
     <div className="min-h-screen bg-gray-100">

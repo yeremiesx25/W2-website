@@ -1,14 +1,17 @@
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 import { supabase } from '../../supabase/supabase.config';
 import { v4 as uuidv4 } from 'uuid';
 import * as XLSX from 'xlsx';
 import HeaderAdmin from '../Admin/HeaderAdmin';
 import MenuAdmin from '../Admin/MenuAdmin';
 import { UserAuth } from '../../Context/AuthContext';
-import Filter from './Filter'; // Import the Filter component
+import Filter from './Filter';
+import EnviarMensaje from './EnviarMensaje';
 
 function Entrevistas() {
   const { user } = UserAuth();
+  const { id_oferta } = useParams();
   const [idReclutador, setIdReclutador] = useState(null);
   const [idOferta, setIdOferta] = useState(null);
   const [candidatos, setCandidatos] = useState([]);
@@ -62,7 +65,7 @@ function Entrevistas() {
       const { data: postulacionData, error: postulacionError } = await supabase
         .from('Postulacion')
         .select('name_user, telefono, dni, fecha_postulacion')
-        .eq('id_oferta', ofertaData.id_oferta)
+        .eq('id_oferta', id_oferta)
         .eq('estado', 'apto');
 
       if (postulacionError) {
@@ -75,7 +78,7 @@ function Entrevistas() {
       const { data: noAuthData, error: noAuthError } = await supabase
         .from('CandidatosNoAuth')
         .select('nombre, telefono, dni, fecha')
-        .eq('id_oferta', ofertaData.id_oferta)
+        .eq('id_oferta', id_oferta)
         .eq('estado', 'apto');
 
       if (noAuthError) {
@@ -107,8 +110,8 @@ function Entrevistas() {
     try {
       const { data: programaData, error } = await supabase
         .from('Programa')
-        .select('id_programa, proceso, empresa, lugar, etapa_1, etapa_2, etapa_3, etapa_4')
-        .eq('id_oferta', idOferta);
+        .select('id_programa, plataforma_1, empresa, lugar, etapa_1, etapa_2, etapa_3, etapa_4')
+        .eq('id_oferta', id_oferta);
 
       if (error) {
         console.error('Error al obtener datos del Programa:', error);
@@ -125,7 +128,7 @@ function Entrevistas() {
   const handleFileUpload = async (event) => {
     const file = event.target.files[0];
     if (!file || !idReclutador || !idOferta) return;
-  
+
     const reader = new FileReader();
     reader.onload = async (e) => {
       const data = new Uint8Array(e.target.result);
@@ -133,9 +136,7 @@ function Entrevistas() {
       const sheetName = workbook.SheetNames[0];
       const worksheet = workbook.Sheets[sheetName];
       const jsonData = XLSX.utils.sheet_to_json(worksheet);
-  
-      const fechaActual = new Date().toISOString(); // Fecha actual en formato ISO
-  
+
       const candidatosData = jsonData.map((row) => ({
         id_user: uuidv4(),
         id_reclutador: idReclutador,
@@ -143,22 +144,21 @@ function Entrevistas() {
         nombre: row.Nombre,
         dni: row.DNI,
         telefono: row.Celular,
-        fecha: fechaActual, // Usamos la fecha actual en lugar de una fecha del archivo
         estado_etapas: [],
         estado: 'apto',
       }));
-  
+
       const { error } = await supabase.from('CandidatosNoAuth').insert(candidatosData);
-  
+
       if (error) {
         console.error('Error al subir candidatos:', error);
         return;
       }
-  
+
       alert('Candidatos subidos exitosamente');
       setCandidatosNoAuth(prev => [...prev, ...candidatosData]);
     };
-  
+
     reader.readAsArrayBuffer(file);
   };
 
@@ -187,7 +187,7 @@ function Entrevistas() {
         <h2 className="text-2xl mb-4">Subir Candidatos</h2>
         <input type="file" accept=".xlsx, .xls" onChange={handleFileUpload} className="p-3 border border-gray-300 rounded-lg" />
 
-        <Filter onFilter={handleFilter} /> {/* Add the Filter component */}
+        <Filter onFilter={handleFilter} />
 
         <h2 className="text-2xl mt-6 mb-4">Candidatos Aptos</h2>
         {filteredCandidatos.length > 0 ? (
@@ -206,6 +206,7 @@ function Entrevistas() {
                 <th className="border border-gray-300 p-2">Nombre</th>
                 <th className="border border-gray-300 p-2">Telefono</th>
                 <th className="border border-gray-300 p-2">DNI</th>
+                <th className="border border-gray-300 p-2">Contactar</th>
                 {activeStages.map(stage => (
                   <>
                     <th key={stage.key} className="border border-gray-300 p-2">{stage.value}</th>
@@ -221,6 +222,9 @@ function Entrevistas() {
                   <td className="border border-gray-300 p-2">{candidato.name_user || candidato.nombre}</td>
                   <td className="border border-gray-300 p-2 text-center">{candidato.telefono}</td>
                   <td className="border border-gray-300 p-2 text-center">{candidato.dni}</td>
+                  <td className="border border-gray-300 p-2 text-center">
+                    <EnviarMensaje candidato={candidato} puesto={puesto} programaData={programaData} />
+                  </td>
                   {activeStages.map(stage => (
                     <>
                       <td key={`${stage.key}-${index}`} className="border border-gray-300 p-2 text-center">
