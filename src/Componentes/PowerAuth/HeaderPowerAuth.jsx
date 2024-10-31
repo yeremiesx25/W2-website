@@ -72,25 +72,27 @@ function HeaderPowerAuth() {
   }, [menuOpen]);
 
   return (
-    <header className={`bg-newprimarycolor fixed w-full z-10 font-dmsans transition-shadow duration-300 ${hasShadow ? 'shadow-lg' : ''}`}>
-      <div className="container mx-auto px-8 flex justify-between items-center md:h-20 h-16">
+    <header className={`bg-white border py-2 fixed w-full z-10 font-lato transition-shadow duration-300 ${hasShadow ? 'shadow-sm' : ''}`}>
+      <div className="container mx-auto px-8 flex justify-between items-center">
         {/* Logo */}
         <div className="flex items-center">
-          <a className='text-yellowprimary text-2xl font-medium' href="/PowerAuth">
+          <a className='text-primarycolor text-2xl font-bold' href="/PowerAuth">
             Power
           </a>
         </div>
 
         {/* Avatar y menú desplegable */}
         <div className="relative">
-          <button 
+        <button
             className="flex items-center justify-between focus:outline-none gap-2"
             onClick={() => setMenuOpen(!menuOpen)}
           >
-            <span className="overflow-hidden whitespace-nowrap overflow-ellipsis text-white font-regular w-auto hidden md:flex items-center">
+            <span className="overflow-hidden whitespace-nowrap overflow-ellipsis text-gray-800 font-regular w-auto hidden md:flex items-center">
               {profile.nombre || 'Usuario'}
             </span>
-            <TiArrowSortedDown className='text-white ml-1' />
+            <svg className="w-4 -h-4 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+            </svg>
             <img
               className="w-10 h-10 rounded-full my-2"
               src={profile.avatar_url || 'https://icons.iconarchive.com/icons/papirus-team/papirus-status/512/avatar-default-icon.png'}
