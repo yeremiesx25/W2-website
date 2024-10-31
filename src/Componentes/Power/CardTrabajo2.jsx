@@ -50,16 +50,16 @@ function CardTrabajo2({ job, onSelectJob, isSelected }) {
     <div className="w-full flex justify-center font-dmsans">
       <button
         onClick={() => onSelectJob(job)}
-        className={`w-full md:w-[90%] text-left border md:border-gray-300 border-gray-400 hover:shadow-sm hover:transition-all hover:duration-200 rounded-lg p-6 overflow-hidden flex justify-between items-center ${
-          isSelected ? "bg-gray-100" : "bg-white"
+        className={`w-full md:w-[90%] text-left border  border-gray-400 hover:shadow-sm hover:transition-all hover:duration-200 rounded-lg p-6 overflow-hidden flex justify-between items-center ${
+          isSelected ? "bg-[#ffffff] md:border-newprimarycolor" : "bg-[#f8fafc] border-white"
         }`}
       >
         <div className="flex flex-col space-y-2 w-full">
           <div className="flex items-center justify-between w-full">
             <div className="flex items-center justify-between w-full text-primarycolor">
               <div className="flex items-center space-x-2">
-                <div className="bg-primarycolor p-2 rounded-lg">
-                <MdOutlineVerifiedUser className="text-white text-xl" />
+                <div className="rounded-lg w-12 h-12">
+                <img src={job.empresa_img_url} className="w-full h-full rounded-lg" alt="" />
               </div>
               <div>
                 <h3 className="text-sm font-semibold text-gray-800">
