@@ -111,13 +111,13 @@ function Entrevistas() {
 
         <Filter onFilter={handleFilter} />
 
-        <h2 className="text-2xl mt-6 mb-4">Candidatos Aptos</h2>
+        <h2 className="text-2xl mt-2 mb-1">Candidatos Aptos</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredCandidatos.length > 0 ? (
             filteredCandidatos.map((candidato, index) => (
               <div
                 key={index}
-                className="bg-white rounded-lg border shadow-sm p-6 flex flex-col justify-between"
+                className="bg-white  rounded-lg border shadow-sm p-6 flex flex-col justify-between"
               >
                 <h3 className="text-lg font-medium">{candidato.name_user || candidato.nombre}</h3>
                 <p className="text-sm text-gray-500">DNI: {candidato.dni}</p>
