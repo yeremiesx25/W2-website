@@ -1,4 +1,3 @@
-// CargarExcel.jsx
 import React from 'react';
 import { supabase } from '../../supabase/supabase.config';
 import { v4 as uuidv4 } from 'uuid';
@@ -17,6 +16,9 @@ function CargarExcel({ idReclutador, idOferta, setCandidatosNoAuth }) {
       const worksheet = workbook.Sheets[sheetName];
       const jsonData = XLSX.utils.sheet_to_json(worksheet);
 
+      const today = new Date();
+      const formattedDate = today.toISOString().split('T')[0]; // YYYY-MM-DD
+
       const candidatosData = jsonData.map((row) => ({
         id_user: uuidv4(),
         id_reclutador: idReclutador,
@@ -26,6 +28,7 @@ function CargarExcel({ idReclutador, idOferta, setCandidatosNoAuth }) {
         telefono: row.Celular,
         estado_etapas: [],
         estado: 'apto',
+        fecha: formattedDate,
       }));
 
       const { error } = await supabase.from('CandidatosNoAuth').insert(candidatosData);
