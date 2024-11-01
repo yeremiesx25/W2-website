@@ -89,7 +89,7 @@ function HeaderAdmin() {
   };
 
   return (
-    <div className="flex items-center pl-72  justify-between p-4   bg-white border-b fixed w-full z-10 font-lato">
+    <div className="flex items-center pl-72  justify-between p-4   bg-white shadow-sm fixed w-full z-10 font-lato">
 
       {/* Saludo al reclutador */}
       <div className="text-gray-800">
