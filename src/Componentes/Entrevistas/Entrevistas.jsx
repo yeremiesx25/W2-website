@@ -123,43 +123,6 @@ function Entrevistas() {
     }
   };
 
-  const handleFileUpload = async (event) => {
-    const file = event.target.files[0];
-    if (!file || !idReclutador || !id_oferta) return;
-
-    const reader = new FileReader();
-    reader.onload = async (e) => {
-      const data = new Uint8Array(e.target.result);
-      const workbook = XLSX.read(data, { type: 'array' });
-      const sheetName = workbook.SheetNames[0];
-      const worksheet = workbook.Sheets[sheetName];
-      const jsonData = XLSX.utils.sheet_to_json(worksheet);
-
-      const candidatosData = jsonData.map((row) => ({
-        id_user: uuidv4(),
-        id_reclutador: idReclutador,
-        id_oferta: id_oferta,
-        nombre: row.Nombre,
-        dni: row.DNI,
-        telefono: row.Celular,
-        estado_etapas: [],
-        estado: 'apto',
-      }));
-
-      const { error } = await supabase.from('CandidatosNoAuth').insert(candidatosData);
-
-      if (error) {
-        console.error('Error al subir candidatos:', error);
-        return;
-      }
-
-      alert('Candidatos subidos exitosamente');
-      setCandidatosNoAuth(prev => [...prev, ...candidatosData]);
-    };
-
-    reader.readAsArrayBuffer(file);
-  };
-
   const handleFilter = (query) => {
     const lowerCaseQuery = query.toLowerCase();
     const filtered = [...candidatos, ...candidatosNoAuth].filter((candidato) => {
