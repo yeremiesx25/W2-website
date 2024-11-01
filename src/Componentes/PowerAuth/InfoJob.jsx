@@ -136,8 +136,8 @@ function InfoJob({ selectedJob }) {
 
   return (
     <div
-      className="selected-job-info w-full sm:w-3/5 rounded-lg md:flex flex-col p-8 mx-8 bg-[#f8fafc] hidden transition-all duration-500 font-dmsans"
-      style={{ height: "650px", overflowY: "auto" }}
+      className="selected-job-info w-full sm:w-3/5 rounded-lg md:flex flex-col px-8 py-4 mx-8 bg-[#f8fafc] hidden transition-all duration-500 font-dmsans"
+      style={{ height: "610px", overflowY: "auto" }}
     >
       <div className="flex gap-4">
         <img src={selectedJob.empresa_img_url} alt="" className="w-16" />
@@ -226,7 +226,6 @@ function InfoJob({ selectedJob }) {
           </a>
         )}
       </div>
-prueba
       <QuestionsModal
         isOpen={isQuestionsModalOpen}
         onClose={() => setIsQuestionsModalOpen(false)}

@@ -116,7 +116,7 @@ const JobList = () => {
               filteredJobs.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((job, index) => (
                 <div
                   key={job.id_oferta}
-                  className="bg-white rounded-lg border shadow-sm p-6 flex flex-col justify-between"
+                  className="bg-white rounded-lg border border-[#e2e8f0] shadow-sm p-6 flex flex-col justify-between"
                 >
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center justify-between w-full">
