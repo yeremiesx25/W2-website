@@ -52,7 +52,7 @@ function MenuAdmin() {
   ], []);
 
   return (
-    <div className="w-64 h-screen z-10 font-lato bg-white text-gray-800 px-4 border-r flex flex-col justify-between pt-8 fixed transition duration-500">
+    <div className="w-64 h-screen z-10 font-lato bg-white text-gray-800 px-4 shadow-sm flex flex-col justify-between pt-8 fixed transition duration-500">
       {/* Header del menú */}
       <div className="flex justify-between items-center px-6 mb-8">
         <h2 className="text-2xl font-semibold font-lato text-primarycolor">Panel Admin</h2>

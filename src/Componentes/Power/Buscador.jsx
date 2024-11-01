@@ -147,13 +147,13 @@ function Buscador() {
       <IconButton
       type='submit'
         sx={{
-          backgroundColor: '#2563eb',
+          backgroundColor: '#ffffff',
           borderRadius: '50%',
           padding: '10px',
           boxShadow: '0 2px 8px rgba(0,0,0,0.1)',
         }}
       >
-        <FaSearch size={20} style={{ color: 'white' }} />
+        <FaSearch size={20} style={{ color: '#2563EB' }} />
       </IconButton>
     </Box>
 
