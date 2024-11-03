@@ -1,11 +1,10 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { supabase } from '../../supabase/supabase.config';
 import { Link } from 'react-router-dom';
-import { FaUserFriends } from 'react-icons/fa';
 import { FaBriefcase, FaClock, FaDollarSign } from 'react-icons/fa';
-import { MdOutlineVerifiedUser } from "react-icons/md";
 import { UserAuth } from '../../Context/AuthContext';
 import JobsContext from '../../Context/JobsContext';
+import { Card, CardContent, CardActions, Button, Typography, Avatar, CircularProgress, Chip } from '@mui/material';
 
 const formatDate = (isoString) => {
   const date = new Date(isoString);
@@ -19,6 +18,7 @@ const JobProceso = () => {
   const { user } = UserAuth();
   const { searchTerm } = useContext(JobsContext);
   const [jobs, setJobs] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchJobs = async () => {
@@ -47,6 +47,7 @@ const JobProceso = () => {
           const sortedJobs = jobsData.sort((a, b) => new Date(b.fecha_publicacion) - new Date(a.fecha_publicacion));
           setJobs(sortedJobs);
         }
+        setLoading(false);
       }
     };
 
@@ -57,59 +58,47 @@ const JobProceso = () => {
     job.puesto.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  if (loading) {
+    return <CircularProgress />;
+  }
+
   return (
-    <div className="w-full bg-transparent px-6 rounded-lg font-dmsans">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className="w-full max-w-3/4 bg-transparent px-6 rounded-lg font-dmsans">
+      <Typography variant="h6" className="mb-4">
+        We've found {filteredJobs.length} jobs!
+      </Typography>
+      <div className="flex flex-col gap-4">
         {filteredJobs.length > 0 ? (
           filteredJobs.map((job) => (
-            <div
-              key={job.id_oferta}
-              className="bg-white rounded-lg border shadow-sm p-6 flex flex-col justify-between"
-            >
-              <div className="flex items-center justify-between mb-4">
-                <div className="flex items-center justify-between w-full">
-                  <div className="w-14 h-14 rounded-lg flex items-center justify-center">
-                  <div className="w-14 h-14 rounded-xl flex items-center justify-center">
-                        <img
-                          src={job.empresa_img_url}
-                          alt="profile"
-                          className="w-12 h-12 rounded-lg border-2 border-white"
-                        />
-                      </div>
-                  </div>
+            <Card key={job.id_oferta} variant="outlined" className="flex items-center p-4">
+              <Avatar src={job.empresa_img_url} alt="profile" className="w-16 h-16 mr-4" />
+              <CardContent className="flex-1">
+                <div className="flex justify-between items-center mb-2">
+                  <Typography variant="h6">{job.puesto}</Typography>
                 </div>
-              </div>
-              <div className="mb-2">
-              <Link to={`/Entrevistas/${job.id_oferta}`}>
-                  <h3 className="text-lg font-medium">{job.puesto}</h3>
-                </Link>
-                <p className="text-sm text-gray-500">
-                  Publicado: {formatDate(job.fecha_publicacion)}
-                </p>
-              </div>
-              <div className="text-[#00a76f] font-medium text-sm mb-2 flex items-center gap-2">
-                <FaUserFriends />
-                <p>{job.count_postulados} candidatos</p>
-              </div>
-              <hr className='mb-2' />
-              <div className="text-gray-500 grid grid-cols-3 gap-4 mb-4 text-sm font-light">
-                <div className="flex items-center gap-2">
-                  <FaBriefcase />
-                  <p>{job.modalidad}</p>
-                </div>
-                <div className="flex items-center gap-2">
-                  <FaClock />
-                  <p>{job.ubicacion}</p>
-                </div>
-                <div className="flex items-center gap-2">
+                <Typography variant="body2" color="textSecondary">
+                  {job.ubicacion}
+                </Typography>
+                <Typography variant="body2" color="textSecondary">
+                  {job.modalidad}
+                </Typography>
+                <Typography variant="body2" color="textSecondary" className="flex items-center gap-2 mt-1">
                   <FaDollarSign />
-                  <p>{job.sueldo}</p>
-                </div>
-              </div>
-            </div>
+                  {job.sueldo}
+                </Typography>
+                <Typography variant="body2" color="textSecondary" className="mt-1">
+                  Posted on: {formatDate(job.fecha_publicacion)}
+                </Typography>
+              </CardContent>
+              <CardActions>
+                <Button size="small" color="primary" component={Link} to={`/Entrevistas/${job.id_oferta}`}>
+                  Details
+                </Button>
+              </CardActions>
+            </Card>
           ))
         ) : (
-          <p className="text-center text-gray-600">No jobs found</p>
+          <Typography className="text-center text-gray-600">No jobs found</Typography>
         )}
       </div>
     </div>

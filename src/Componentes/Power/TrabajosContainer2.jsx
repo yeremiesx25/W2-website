@@ -50,7 +50,7 @@ function TrabajosContainer2() {
   };
 
   return (
-    <div id='ofertas' className='w-full flex flex-col items-center font-dmsans pt-4 px-4 justify-center pb-6'>
+    <div id='ofertas' className='w-full flex flex-col items-center font-dmsans pt-4 px-4 justify-center pb-6 bg-[#f8fafc]'>
       <div className='flex w-full justify-center items-center'>
         <div
           className='flex flex-col w-full md:w-1/2 justify-start items-center gap-4 h-[620px] overflow-auto'

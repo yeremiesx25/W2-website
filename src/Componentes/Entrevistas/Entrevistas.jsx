@@ -5,7 +5,7 @@ import HeaderAdmin from '../Admin/HeaderAdmin';
 import MenuAdmin from '../Admin/MenuAdmin';
 import { UserAuth } from '../../Context/AuthContext';
 import Filter from './Filter';
-import UploadExcel from './CargarExcel';
+import CargarExcel from './CargarExcel';
 
 function Entrevistas() {
   const { user } = UserAuth();
@@ -144,8 +144,8 @@ function Entrevistas() {
     <div className="w-full h-screen flex">
       <HeaderAdmin />
       <MenuAdmin />
-      <div className="w-full h-full bg-white flex flex-col p-8 font-dmsans overflow-x-auto pl-72 pt-28">
-        <UploadExcel idReclutador={idReclutador} idOferta={idOferta} setCandidatosNoAuth={setCandidatosNoAuth} />
+      <div className="w-full h-full bg-[#fafbff] flex flex-col p-8 font-dmsans overflow-x-auto pl-72 pt-28">
+        <CargarExcel idReclutador={idReclutador} idOferta={idOferta} setCandidatosNoAuth={setCandidatosNoAuth} />
 
         <Filter onFilter={handleFilter} />
         <h2 className="text-2xl mt-7 mb-4 font-bold">
@@ -153,11 +153,11 @@ function Entrevistas() {
         </h2>
 
         <div className="flex space-x-4">
-        <div className="bg-gray-50 rounded-lg shadow-md p-8 mt-5 max-w-sm ml-0">
-            <h2 className="mb-4 font-medium text-gray-600">Candidatos</h2>
+        <div className="bg-white rounded-lg border p-8 mt-5 max-w-sm ml-0">
+            <h2 className="mb-4 font-medium text-gray-600 ">Candidatos</h2>
             {filteredCandidatos.length > 0 ? (
               filteredCandidatos.map((candidato, index) => (
-                <div key={index} className="bg-white rounded-lg border shadow-sm p-6 mb-4">
+                <div key={index} className="bg-white rounded-lg border p-6 mb-2">
                   <h3 className="text-lg font-medium">{candidato.name_user || candidato.nombre}</h3>
                   <p className="text-sm text-gray-500">DNI: {candidato.dni}</p>
                   <p className="text-sm text-gray-500 mt-1">Celular: {candidato.telefono}</p>
@@ -170,7 +170,7 @@ function Entrevistas() {
           </div>
 
           {activeStages.map((stage, index) => (
-            <div key={index} className="bg-gray-50 rounded-lg shadow-md p-8 mt-5 min-w-[300px]">
+            <div key={index} className="bg-gray-200 rounded-lg shadow-md p-8 mt-5 min-w-[300px]">
               <h2 className="mb-4 font-medium text-gray-600">{stage.value}</h2>
               {/* Additional data for each stage can be added here */}
             </div>
