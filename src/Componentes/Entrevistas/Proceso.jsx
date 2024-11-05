@@ -12,7 +12,7 @@ function Proceso() {
   const [ofertas, setOfertas] = useState([]);
   const [filteredOfertas, setFilteredOfertas] = useState([]);
   const [selectedOferta, setSelectedOferta] = useState(null);
-  const [stages, setStages] = useState([{ etapa: '', recomendacion: '', modalidad: '', plataforma: '', direccion: '', mapsURL: '' }]);
+  const [stages, setStages] = useState([{ etapa: '', recomendacion: '', modalidad: '', direccion: '', mapsURL: '' }]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
@@ -28,42 +28,41 @@ function Proceso() {
   useEffect(() => {
     const fetchOfertas = async () => {
       if (!user) return;
-  
+
       const { data: ofertasData, error: ofertasError } = await supabase
         .from('Oferta')
         .select('*')
         .eq('id_reclutador', user.id)
-        .eq('estado', 'activa'); // Add this line to filter by "activa" offers
-  
+        .eq('estado', 'activa');
+
       if (ofertasError) {
         console.error('Error fetching ofertas:', ofertasError);
         return;
       }
-  
+
       const { data: programasData, error: programasError } = await supabase
         .from('Programa')
         .select('id_oferta');
-  
+
       if (programasError) {
         console.error('Error fetching programas:', programasError);
         return;
       }
-  
+
       const usedOfertaIds = programasData.map(programa => programa.id_oferta);
-  
       const availableOfertas = ofertasData.filter(oferta => !usedOfertaIds.includes(oferta.id_oferta));
-  
+
       setOfertas(ofertasData);
       setFilteredOfertas(availableOfertas);
       setLoading(false);
     };
-  
+
     fetchOfertas();
   }, [user]);
 
   const handleAddStage = () => {
     if (stages.length < 4) {
-      setStages([...stages, { etapa: '', recomendacion: '', modalidad: '', plataforma: '', direccion: '', mapsURL: '' }]);
+      setStages([...stages, { etapa: '', recomendacion: '', modalidad: '', direccion: '', mapsURL: '' }]);
     }
   };
 
@@ -94,19 +93,14 @@ function Proceso() {
       empresa: selectedOferta.empresa,
       lugar: selectedOferta.ubicacion,
       fecha_public: new Date().toISOString(),
+      etapas: stages.map(stage => ({
+        etapa: stage.etapa,
+        recomendacion: stage.recomendacion,
+        modalidad: stage.modalidad,
+        direccion: stage.direccion,
+        mapsURL: stage.mapsURL,
+      })),
     };
-
-    stages.forEach((stage, index) => {
-      const etapaIndex = index + 1;
-      data[`etapa_${etapaIndex}`] = stage.etapa;
-      data[`recomendacion_${etapaIndex}`] = stage.recomendacion;
-      data[`modalidad_${etapaIndex}`] = stage.modalidad;
-
-      // Concatenar dirección y URL en el campo plataforma para "Presencial"
-      data[`plataforma_${etapaIndex}`] = stage.modalidad === 'Presencial' 
-        ? `${stage.direccion} | URL: ${stage.mapsURL}`
-        : stage.plataforma;
-    });
 
     const { error } = await supabase.from('Programa').insert([data]);
 
@@ -217,6 +211,29 @@ function Proceso() {
                       <option value="Presencial">Presencial</option>
                     </select>
                   </div>
+
+                  {stage.modalidad === 'Virtual' && (
+                    <>
+                      <div className="mb-2">
+                        <label className="block text-sm font-medium text-gray-700">Plataforma</label>
+                        <input
+                          type="text"
+                          value={stage.direccion || ''}
+                          onChange={(e) => handleStageChange(index, 'direccion', e.target.value)}
+                          className="mt-1 p-2 border border-gray-300 rounded-lg w-full"
+                        />
+                      </div>
+                      <div className="mb-2">
+                        <label className="block text-sm font-medium text-gray-700">URL de Plataforma</label>
+                        <input
+                          type="text"
+                          value={stage.mapsURL || ''}
+                          onChange={(e) => handleStageChange(index, 'mapsURL', e.target.value)}
+                          className="mt-1 p-2 border border-gray-300 rounded-lg w-full"
+                        />
+                      </div>
+                    </>
+                  )}
 
                   {/* Campos adicionales para modalidad presencial */}
                   {stage.modalidad === 'Presencial' && (

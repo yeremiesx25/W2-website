@@ -88,7 +88,7 @@ function Entrevistas() {
     };
 
     fetchData();
-  }, [user]);
+  }, [user, id_oferta]);
 
   useEffect(() => {
     if (id_oferta) {
@@ -108,7 +108,7 @@ function Entrevistas() {
     try {
       const { data: programaData, error } = await supabase
         .from('Programa')
-        .select('id_programa, plataforma_1, empresa, lugar, etapa_1, etapa_2, etapa_3, etapa_4')
+        .select('id_programa, empresa, lugar, etapas')
         .eq('id_oferta', id_oferta);
 
       if (error) {
@@ -136,10 +136,6 @@ function Entrevistas() {
     setFilteredCandidatos(filtered);
   };
 
-  const activeStages = programaData.length > 0 ? Object.entries(programaData[0])
-    .filter(([key, value]) => key.startsWith('etapa') && value)
-    .map(([key, value]) => ({ key, value })) : [];
-
   return (
     <div className="w-full h-screen flex">
       <HeaderAdmin />
@@ -153,7 +149,7 @@ function Entrevistas() {
         </h2>
 
         <div className="flex space-x-4">
-        <div className="bg-white rounded-lg border p-8 mt-5 max-w-sm ml-0">
+          <div className="bg-white rounded-lg border p-8 mt-5 max-w-sm ml-0">
             <h2 className="mb-4 font-medium text-gray-600 ">Candidatos</h2>
             {filteredCandidatos.length > 0 ? (
               filteredCandidatos.map((candidato, index) => (
@@ -169,12 +165,18 @@ function Entrevistas() {
             )}
           </div>
 
-          {activeStages.map((stage, index) => (
-            <div key={index} className="bg-gray-200 rounded-lg shadow-md p-8 mt-5 min-w-[300px]">
-              <h2 className="mb-4 font-medium text-gray-600">{stage.value}</h2>
-              {/* Additional data for each stage can be added here */}
+          {programaData.length > 0 && (
+            <div className="flex space-x-4 flex-grow">
+              {programaData[0].etapas?.map((etapa, index) => (
+                <div key={index} className="bg-gray-200 rounded-lg shadow-md p-8 mt-5 flex-grow">
+                  <h2 className="mb-4 font-medium text-gray-600">{etapa.etapa}</h2>
+                  <div className="space-y-4">
+
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
+          )}
         </div>
       </div>
     </div>
