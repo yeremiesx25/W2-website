@@ -100,7 +100,7 @@ function Entrevistas() {
     setFilteredCandidatos([...candidatos, ...candidatosNoAuth].sort((a, b) => {
       const dateA = new Date(a.fecha_postulacion || a.fecha);
       const dateB = new Date(b.fecha_postulacion || b.fecha);
-      return dateB - dateA; // Orden descendente que existe
+      return dateB - dateA; // Orden descendente que existe si
     }));
   }, [candidatos, candidatosNoAuth]);
 
